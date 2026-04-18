@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.logging.no-console-error
+  title: Avoid console.error outside catch blocks
+  summary: Route runtime error logging through the project logger.
+  rationale: console.error should not leak into normal control flow.
+  tags:
+    - logging
+    - starter-pack
+scope:
+  languages:
+    - typescript
+match:
+  all:
+    - node:
+        kind: CallExpression
+        bind: call
+        where:
+          - path: callee.object.text
+            equals: console
+          - path: callee.property.text
+            equals: error
+    - not:
+        ancestor:
+          kind: CatchClause
+emit:
+  finding:
+    category: maintainability
+    severity: medium
+    confidence: high
+  message:
+    title: Avoid `${captures.call.text}`
+    summary: Use the project logger for runtime errors outside catch blocks.

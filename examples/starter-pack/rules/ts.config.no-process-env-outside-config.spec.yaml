@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ./ts.config.no-process-env-outside-config.rule.yaml
+fixtures:
+  - name: process.env in services is flagged
+    sourcePath: ../fixtures/ts.config.no-process-env-outside-config/src/service/consumer.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.config.no-process-env-outside-config
+      allSeverities:
+        - medium
+      titleContains:
+        - process.env
+  - name: process.env in config modules is allowed
+    sourcePath: ../fixtures/ts.config.no-process-env-outside-config/src/config/settings.ts
+    expect:
+      findingCount: 0

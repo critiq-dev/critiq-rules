@@ -1,0 +1,23 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ./ts.logging.no-console-log.rule.yaml
+fixtures:
+  - name: console.log is flagged
+    sourcePath: ../fixtures/ts.logging.no-console-log/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.logging.no-console-log
+      allSeverities:
+        - low
+      titleContains:
+        - Avoid
+      summaryContains:
+        - project logger
+      primaryLocation:
+        line: 1
+        column: 1
+  - name: logger usage is allowed
+    sourcePath: ../fixtures/ts.logging.no-console-log/valid.ts
+    expect:
+      findingCount: 0

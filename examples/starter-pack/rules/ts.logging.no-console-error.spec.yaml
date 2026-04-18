@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ./ts.logging.no-console-error.rule.yaml
+fixtures:
+  - name: console.error outside catch is flagged
+    sourcePath: ../fixtures/ts.logging.no-console-error/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.logging.no-console-error
+      allSeverities:
+        - medium
+      titleContains:
+        - console.error
+  - name: console.error inside catch is allowed
+    sourcePath: ../fixtures/ts.logging.no-console-error/valid.ts
+    expect:
+      findingCount: 0

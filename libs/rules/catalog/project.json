@@ -1,0 +1,29 @@
+{
+  "name": "rules",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/rules/catalog/src",
+  "projectType": "library",
+  "tags": ["scope:oss-rules", "type:rules"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/rules/catalog",
+        "main": "libs/rules/catalog/src/index.ts",
+        "tsConfig": "libs/rules/catalog/tsconfig.lib.json",
+        "assets": [
+          "libs/rules/catalog/*.md",
+          "libs/rules/catalog/catalog.yaml",
+          "libs/rules/catalog/rules/*.yaml"
+        ]
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --pretty false --noEmit -p libs/rules/catalog/tsconfig.lib.json"
+      }
+    }
+  }
+}

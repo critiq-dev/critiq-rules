@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.quality.missing-error-context.rule.yaml
+fixtures:
+  - name: flags catch blocks that log without the original error
+    sourcePath: ./fixtures/ts.quality.missing-error-context/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.missing-error-context
+      allSeverities:
+        - low
+  - name: ignores catch blocks that include the original error
+    sourcePath: ./fixtures/ts.quality.missing-error-context/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

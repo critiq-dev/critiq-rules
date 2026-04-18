@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.quality.swallowed-error.rule.yaml
+fixtures:
+  - name: flags catch blocks that silently drop failures
+    sourcePath: ./fixtures/ts.quality.swallowed-error/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.swallowed-error
+      allSeverities:
+        - medium
+  - name: ignores catch blocks that preserve failure visibility
+    sourcePath: ./fixtures/ts.quality.swallowed-error/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

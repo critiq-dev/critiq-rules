@@ -1,0 +1,29 @@
+{
+  "name": "starter-pack",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "examples/starter-pack/src",
+  "projectType": "library",
+  "tags": ["scope:oss-rules", "type:example"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/examples/starter-pack",
+        "main": "examples/starter-pack/src/index.ts",
+        "tsConfig": "examples/starter-pack/tsconfig.lib.json",
+        "assets": [
+          "examples/starter-pack/*.md",
+          "examples/starter-pack/rules/*.yaml",
+          "examples/starter-pack/fixtures/**/*"
+        ]
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --pretty false --noEmit -p examples/starter-pack/tsconfig.lib.json"
+      }
+    }
+  }
+}

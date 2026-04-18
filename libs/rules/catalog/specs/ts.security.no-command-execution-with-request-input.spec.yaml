@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.no-command-execution-with-request-input.rule.yaml
+fixtures:
+  - name: flags request-controlled exec call
+    sourcePath: ./fixtures/ts.security.no-command-execution-with-request-input/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.no-command-execution-with-request-input
+      allSeverities:
+        - critical
+  - name: ignores allowlisted command execution
+    sourcePath: ./fixtures/ts.security.no-command-execution-with-request-input/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

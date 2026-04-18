@@ -1,0 +1,65 @@
+{
+  "name": "critiq-rules",
+  "version": "0.0.0",
+  "description": "Public OSS Critiq rule catalog and example starter pack.",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "nx": "nx",
+    "build": "nx run-many -t build --all",
+    "lint": "nx run-many -t lint --all",
+    "test": "nx run-many -t test --all",
+    "typecheck": "nx run-many -t typecheck --all",
+    "verify": "npm run lint && npm run test && npm run build && npm run typecheck"
+  },
+  "workspaces": [
+    "examples/*",
+    "libs/*/*"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.30.0",
+    "@eslint/js": "^9.39.1",
+    "@nx/esbuild": "22.6.4",
+    "@nx/eslint": "^22.6.4",
+    "@nx/eslint-plugin": "^22.6.4",
+    "@nx/jest": "^22.6.4",
+    "@nx/js": "22.6.4",
+    "@nx/node": "^22.6.4",
+    "@nx/workspace": "22.6.4",
+    "@swc-node/register": "~1.11.1",
+    "@swc/core": "~1.15.5",
+    "@swc/helpers": "~0.5.18",
+    "@types/jest": "^30.0.0",
+    "@types/node": "20.19.9",
+    "@critiq/testing-harness": "file:../critiq-core/dist/tools/testing/harness",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.0.0",
+    "jest": "^30.3.0",
+    "jest-environment-node": "^30.0.2",
+    "jest-util": "^30.0.2",
+    "jsonc-eslint-parser": "^2.1.0",
+    "nx": "22.6.4",
+    "prettier": "~3.6.2",
+    "ts-jest": "^29.4.0",
+    "ts-node": "10.9.1",
+    "tslib": "^2.3.0",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "^8.58.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "overrides": {
+    "@critiq/check-runner": "file:../critiq-core/dist/libs/runtime/check-runner",
+    "@critiq/adapter-typescript": "file:../critiq-core/dist/libs/adapters/typescript",
+    "@critiq/core-diagnostics": "file:../critiq-core/dist/libs/core/diagnostics",
+    "@critiq/core-finding-schema": "file:../critiq-core/dist/libs/core/finding-schema",
+    "@critiq/core-ir": "file:../critiq-core/dist/libs/core/ir",
+    "@critiq/core-rules-dsl": "file:../critiq-core/dist/libs/core/rules-dsl",
+    "@critiq/core-rules-engine": "file:../critiq-core/dist/libs/core/rules-engine",
+    "@critiq/util-yaml-loader": "file:../critiq-core/dist/libs/utils/yaml-loader"
+  }
+}

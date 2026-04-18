@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.random.no-math-random-in-core
+  title: Avoid Math.random in core code
+  summary: Core code should use the deterministic random provider.
+  rationale: Deterministic randomness keeps core workflows testable.
+  tags:
+    - randomness
+    - starter-pack
+scope:
+  languages:
+    - typescript
+  paths:
+    include:
+      - "**/src/core/**"
+match:
+  node:
+    kind: CallExpression
+    bind: call
+    where:
+      - path: callee.object.text
+        equals: Math
+      - path: callee.property.text
+        equals: random
+emit:
+  finding:
+    category: maintainability
+    severity: medium
+    confidence: high
+  message:
+    title: Avoid `${captures.call.text}`
+    summary: Use the deterministic random provider instead of `${captures.call.text}`.

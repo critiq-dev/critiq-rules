@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.config.no-process-env-outside-config
+  title: Avoid process.env outside config modules
+  summary: Read environment variables from dedicated config modules.
+  rationale: Centralized config keeps runtime settings auditable and testable.
+  tags:
+    - config
+    - starter-pack
+scope:
+  languages:
+    - typescript
+  paths:
+    include:
+      - "**/src/**/*.ts"
+    exclude:
+      - "**/src/config/**"
+match:
+  node:
+    kind: MemberExpression
+    bind: env
+    where:
+      - path: object.text
+        equals: process.env
+emit:
+  finding:
+    category: maintainability
+    severity: medium
+    confidence: high
+  message:
+    title: Avoid `${captures.env.text}`
+    summary: Read environment variables from the config layer instead of `${captures.env.text}`.

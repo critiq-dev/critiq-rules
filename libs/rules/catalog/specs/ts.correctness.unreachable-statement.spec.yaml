@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.correctness.unreachable-statement.rule.yaml
+fixtures:
+  - name: flags statements after return
+    sourcePath: ./fixtures/ts.correctness.unreachable-statement/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.unreachable-statement
+      allSeverities:
+        - low
+  - name: ignores reachable statements
+    sourcePath: ./fixtures/ts.correctness.unreachable-statement/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

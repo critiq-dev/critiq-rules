@@ -1,0 +1,25 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.runtime.no-debugger-statement
+  title: Remove debugger statements
+  summary: Debugger statements should not ship in committed code.
+  rationale: They interrupt execution and are easy to miss in review.
+  tags:
+    - runtime
+    - starter-pack
+scope:
+  languages:
+    - typescript
+match:
+  node:
+    kind: DebuggerStatement
+    bind: statement
+emit:
+  finding:
+    category: correctness
+    severity: medium
+    confidence: high
+  message:
+    title: Remove `${captures.statement.text}`
+    summary: Remove the debugger statement before committing the file.
