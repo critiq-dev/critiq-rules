@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.quality.logic-change-without-test-updates.rule.yaml
+fixtures:
+  - name: flags changed critical logic without changed tests
+    observationPath: ./fixtures/ts.quality.logic-change-without-test-updates/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.logic-change-without-test-updates
+      allSeverities:
+        - medium
+  - name: skips when no changed lines are present
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

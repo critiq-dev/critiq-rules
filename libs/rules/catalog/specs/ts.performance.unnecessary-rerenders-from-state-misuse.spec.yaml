@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.performance.unnecessary-rerenders-from-state-misuse.rule.yaml
+fixtures:
+  - name: flags state setters invoked during render
+    sourcePath: ./fixtures/ts.performance.unnecessary-rerenders-from-state-misuse/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.performance.unnecessary-rerenders-from-state-misuse
+      allSeverities:
+        - medium
+  - name: ignores state setters used in handlers
+    sourcePath: ./fixtures/ts.performance.unnecessary-rerenders-from-state-misuse/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

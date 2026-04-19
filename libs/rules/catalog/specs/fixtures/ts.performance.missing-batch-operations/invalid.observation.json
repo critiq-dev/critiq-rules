@@ -1,0 +1,30 @@
+{
+  "path": "src/services/invites.ts",
+  "language": "typescript",
+  "text": "sendInvite(userId);\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "performance.missing-batch-operations",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 19
+          },
+          "text": "sendInvite(userId)",
+          "props": {
+            "batchHelperName": "sendInviteBatch"
+          }
+        }
+      ]
+    }
+  }
+}

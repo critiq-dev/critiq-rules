@@ -1,0 +1,14 @@
+{
+  "path": "src/example.ts",
+  "language": "typescript",
+  "text": "export const ok = true;\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

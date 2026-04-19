@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.correctness.unchecked-map-key-access.rule.yaml
+fixtures:
+  - name: flags map lookups without a presence check
+    sourcePath: ./fixtures/ts.correctness.unchecked-map-key-access/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.unchecked-map-key-access
+      allSeverities:
+        - medium
+  - name: ignores lookups guarded by has checks
+    sourcePath: ./fixtures/ts.correctness.unchecked-map-key-access/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.runtime.no-debugger-statement.rule.yaml
+fixtures:
+  - name: flags debugger statements
+    sourcePath: ./fixtures/ts.runtime.no-debugger-statement/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.runtime.no-debugger-statement
+      allSeverities:
+        - medium
+  - name: ignores ordinary statements
+    sourcePath: ./fixtures/ts.runtime.no-debugger-statement/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

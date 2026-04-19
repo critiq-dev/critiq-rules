@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.unsafe-deserialization.rule.yaml
+fixtures:
+  - name: flags deserialization of request-derived payloads
+    sourcePath: ./fixtures/ts.security.unsafe-deserialization/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.unsafe-deserialization
+      allSeverities:
+        - high
+  - name: ignores deserialization of trusted literals
+    sourcePath: ./fixtures/ts.security.unsafe-deserialization/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

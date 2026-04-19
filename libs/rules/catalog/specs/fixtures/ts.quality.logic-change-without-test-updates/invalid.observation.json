@@ -1,0 +1,36 @@
+{
+  "path": "src/services/payment-service.ts",
+  "language": "typescript",
+  "text": "export async function charge() {}\n",
+  "nodes": [],
+  "changedRanges": [
+    {
+      "startLine": 1,
+      "startColumn": 1,
+      "endLine": 1,
+      "endColumn": 33
+    }
+  ],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "quality.logic-change-without-test-updates",
+          "appliesTo": "project",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 33
+          },
+          "text": "payment-service.ts",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

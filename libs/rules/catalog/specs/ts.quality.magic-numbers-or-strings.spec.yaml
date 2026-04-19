@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.quality.magic-numbers-or-strings.rule.yaml
+fixtures:
+  - name: flags unexplained literals in logic
+    sourcePath: ./fixtures/ts.quality.magic-numbers-or-strings/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.magic-numbers-or-strings
+      allSeverities:
+        - low
+  - name: ignores named constants
+    sourcePath: ./fixtures/ts.quality.magic-numbers-or-strings/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

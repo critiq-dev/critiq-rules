@@ -1,0 +1,28 @@
+{
+  "path": "src/api/refunds.ts",
+  "language": "typescript",
+  "text": "refund(req.params.invoiceId);\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.missing-authorization-before-sensitive-action",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 28
+          },
+          "text": "refund(req.params.invoiceId)",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

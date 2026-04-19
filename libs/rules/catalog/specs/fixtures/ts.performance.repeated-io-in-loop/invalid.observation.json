@@ -1,0 +1,28 @@
+{
+  "path": "src/services/sync.ts",
+  "language": "typescript",
+  "text": "await fetchProfile(id);\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "performance.repeated-io-in-loop",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 23
+          },
+          "text": "await fetchProfile(id)",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

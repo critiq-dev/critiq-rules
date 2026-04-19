@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.performance.large-payload-without-streaming.rule.yaml
+fixtures:
+  - name: flags whole-payload reads of likely large files
+    sourcePath: ./fixtures/ts.performance.large-payload-without-streaming/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.performance.large-payload-without-streaming
+      allSeverities:
+        - medium
+  - name: ignores streaming file reads
+    sourcePath: ./fixtures/ts.performance.large-payload-without-streaming/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

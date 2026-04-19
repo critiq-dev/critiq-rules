@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.correctness.constant-condition.rule.yaml
+fixtures:
+  - name: flags constant control-flow conditions
+    sourcePath: ./fixtures/ts.correctness.constant-condition/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.constant-condition
+      allSeverities:
+        - medium
+  - name: ignores runtime-dependent conditions
+    sourcePath: ./fixtures/ts.correctness.constant-condition/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

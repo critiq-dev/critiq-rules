@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.missing-ownership-validation.rule.yaml
+fixtures:
+  - name: flags missing ownership checks on caller-supplied ids
+    observationPath: ./fixtures/ts.security.missing-ownership-validation/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.missing-ownership-validation
+      allSeverities:
+        - high
+  - name: ignores observations without matching project facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

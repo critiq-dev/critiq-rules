@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.correctness.missing-await-on-async-call.rule.yaml
+fixtures:
+  - name: flags dropped direct async calls in async functions
+    sourcePath: ./fixtures/ts.correctness.missing-await-on-async-call/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.missing-await-on-async-call
+      allSeverities:
+        - high
+  - name: ignores awaited async calls
+    sourcePath: ./fixtures/ts.correctness.missing-await-on-async-call/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

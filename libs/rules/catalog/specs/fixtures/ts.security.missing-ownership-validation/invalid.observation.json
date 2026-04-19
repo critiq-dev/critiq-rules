@@ -1,0 +1,28 @@
+{
+  "path": "src/api/accounts.ts",
+  "language": "typescript",
+  "text": "req.params.userId;\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.missing-ownership-validation",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 18
+          },
+          "text": "req.params.userId",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

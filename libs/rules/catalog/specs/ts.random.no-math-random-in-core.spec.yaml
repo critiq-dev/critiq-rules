@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.random.no-math-random-in-core.rule.yaml
+fixtures:
+  - name: flags Math.random in core modules
+    sourcePath: ./fixtures/ts.random.no-math-random-in-core/core/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.random.no-math-random-in-core
+      allSeverities:
+        - medium
+  - name: ignores Math.random outside core modules
+    sourcePath: ./fixtures/ts.random.no-math-random-in-core/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

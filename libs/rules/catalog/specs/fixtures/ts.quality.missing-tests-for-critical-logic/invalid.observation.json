@@ -1,0 +1,28 @@
+{
+  "path": "src/services/payment-service.ts",
+  "language": "typescript",
+  "text": "export async function charge() {}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "quality.missing-tests-for-critical-logic",
+          "appliesTo": "project",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 33
+          },
+          "text": "payment-service.ts",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

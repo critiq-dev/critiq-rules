@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.performance.repeated-expensive-computation.rule.yaml
+fixtures:
+  - name: flags duplicated expensive computations in one block
+    sourcePath: ./fixtures/ts.performance.repeated-expensive-computation/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.performance.repeated-expensive-computation
+      allSeverities:
+        - medium
+  - name: ignores cached expensive computations
+    sourcePath: ./fixtures/ts.performance.repeated-expensive-computation/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

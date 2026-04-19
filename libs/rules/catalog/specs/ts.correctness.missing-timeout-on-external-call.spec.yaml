@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.correctness.missing-timeout-on-external-call.rule.yaml
+fixtures:
+  - name: flags fetch calls without explicit cancellation or timeout config
+    sourcePath: ./fixtures/ts.correctness.missing-timeout-on-external-call/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.missing-timeout-on-external-call
+      allSeverities:
+        - high
+  - name: ignores external calls with timeout-bearing config
+    sourcePath: ./fixtures/ts.correctness.missing-timeout-on-external-call/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

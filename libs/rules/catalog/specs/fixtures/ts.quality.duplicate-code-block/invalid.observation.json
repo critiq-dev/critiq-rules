@@ -1,0 +1,30 @@
+{
+  "path": "src/services/duplicate-a.ts",
+  "language": "typescript",
+  "text": "function duplicate() {}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "quality.duplicate-code-block",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 23
+          },
+          "text": "duplicateServiceTotals",
+          "props": {
+            "duplicateCount": 2
+          }
+        }
+      ]
+    }
+  }
+}

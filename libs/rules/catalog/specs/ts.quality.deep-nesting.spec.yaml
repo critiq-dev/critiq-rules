@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.quality.deep-nesting.rule.yaml
+fixtures:
+  - name: flags deeply nested control flow
+    sourcePath: ./fixtures/ts.quality.deep-nesting/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.deep-nesting
+      allSeverities:
+        - low
+  - name: ignores flattened control flow
+    sourcePath: ./fixtures/ts.quality.deep-nesting/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

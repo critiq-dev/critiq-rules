@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.logging.no-console-error.rule.yaml
+fixtures:
+  - name: flags console error calls
+    sourcePath: ./fixtures/ts.logging.no-console-error/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.logging.no-console-error
+      allSeverities:
+        - medium
+  - name: ignores logger error calls
+    sourcePath: ./fixtures/ts.logging.no-console-error/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

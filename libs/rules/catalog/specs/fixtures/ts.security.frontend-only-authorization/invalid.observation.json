@@ -1,0 +1,30 @@
+{
+  "path": "src/api/admin.ts",
+  "language": "typescript",
+  "text": "router.get('/admin/users', handler);\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.frontend-only-authorization",
+          "appliesTo": "project",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 35
+          },
+          "text": "/admin/users",
+          "props": {
+            "frontendPath": "src/frontend/admin.tsx"
+          }
+        }
+      ]
+    }
+  }
+}
