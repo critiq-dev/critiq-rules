@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.sensitive-data-egress
+  title: Sensitive data egress to third-party processors
+  summary: Sensitive values should not be sent to external processors or outbound SDKs without minimization or redaction.
+  rationale: Sending regulated or secret data to third-party services increases privacy exposure and creates downstream processor risk.
+  tags:
+    - security
+    - privacy
+    - data-exposure
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.sensitive-data-egress
+    bind: issue
+emit:
+  finding:
+    category: security.privacy
+    severity: high
+    confidence: 0.82
+    tags:
+      - security
+      - privacy
+      - data-exposure
+  message:
+    title: Avoid sending sensitive data through `${captures.issue.text}`
+    summary: "`${captures.issue.text}` sends sensitive fields to an outbound processor or external service."
+  remediation:
+    summary: Minimize the payload, redact the sensitive fields, or route the data only to approved processors.
+

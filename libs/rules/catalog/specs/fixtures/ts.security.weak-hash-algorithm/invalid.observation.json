@@ -1,0 +1,31 @@
+{
+  "path": "src/crypto/hash.ts",
+  "language": "typescript",
+  "text": "createHash(\"md5\").update(payload).digest(\"hex\");\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.weak-hash-algorithm",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 48
+          },
+          "text": "createHash(\"md5\").update(payload).digest(\"hex\")",
+          "props": {
+            "algorithm": "md5",
+            "sink": "createHash"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.open-redirect.rule.yaml
+fixtures:
+  - name: flags request-controlled redirect targets
+    sourcePath: ./fixtures/ts.security.open-redirect/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.open-redirect
+      allSeverities:
+        - high
+  - name: ignores redirects after internal normalization
+    sourcePath: ./fixtures/ts.security.open-redirect/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

@@ -1,0 +1,15 @@
+{
+  "path": "src/transport.ts",
+  "language": "typescript",
+  "text": "fetch('https://example.com/api');\nfetch('http://localhost:3000/health');\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}
+

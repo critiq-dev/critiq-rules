@@ -1,0 +1,30 @@
+{
+  "path": "src/app/page.tsx",
+  "language": "typescript",
+  "text": "export default function Page() {\n  return <button onClick={() => window.location.reload()}>Reload</button>;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "framework.next-server-client-boundary-leak",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 2,
+            "startColumn": 32,
+            "endLine": 2,
+            "endColumn": 39
+          },
+          "text": "window",
+          "props": {
+            "filePath": "src/app/page.tsx"
+          }
+        }
+      ]
+    }
+  }
+}

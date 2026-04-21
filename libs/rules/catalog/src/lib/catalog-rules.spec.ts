@@ -89,9 +89,29 @@ describe('rules catalog rule specs', () => {
       '../../specs/ts.security.frontend-only-authorization.spec.yaml',
     ),
     resolve(__dirname, '../../specs/ts.security.token-or-session-not-validated.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.insecure-auth-cookie-flags.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.jwt-sensitive-claims.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.browser-token-storage.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.tls-verification-disabled.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.insecure-http-transport.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.open-redirect.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.sensitive-data-egress.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.no-sensitive-data-in-logs-and-telemetry.spec.yaml',
+    ),
+    resolve(__dirname, '../../specs/ts.security.ssrf.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.weak-hash-algorithm.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.weak-cipher-or-mode.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.predictable-token-generation.spec.yaml',
+    ),
     resolve(__dirname, '../../specs/ts.security.unvalidated-external-input.spec.yaml'),
     resolve(__dirname, '../../specs/ts.security.unsafe-deserialization.spec.yaml'),
     resolve(__dirname, '../../specs/ts.security.missing-request-timeout-or-retry.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.react.no-cascaded-effect-fetches.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.next.no-server-client-boundary-leaks.spec.yaml'),
   ];
 
   it.each(specPaths)('passes %s', (specPath) => {

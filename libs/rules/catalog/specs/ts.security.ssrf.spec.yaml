@@ -1,0 +1,26 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.ssrf.rule.yaml
+fixtures:
+  - name: flags request-controlled outbound fetch targets
+    sourcePath: ./fixtures/ts.security.ssrf/request-controlled-fetch.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.ssrf
+      allSeverities:
+        - high
+  - name: flags private-host request targets
+    sourcePath: ./fixtures/ts.security.ssrf/private-host.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.ssrf
+      allSeverities:
+        - high
+  - name: ignores safe outbound wrappers and public targets
+    sourcePath: ./fixtures/ts.security.ssrf/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

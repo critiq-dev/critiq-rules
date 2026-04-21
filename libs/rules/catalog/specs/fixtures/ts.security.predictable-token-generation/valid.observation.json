@@ -1,0 +1,15 @@
+{
+  "path": "src/auth/tokens.ts",
+  "language": "typescript",
+  "text": "const resetToken = randomBytes(32).toString(\"hex\");\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}
+

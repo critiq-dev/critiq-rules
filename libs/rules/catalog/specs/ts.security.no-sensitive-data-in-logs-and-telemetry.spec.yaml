@@ -1,0 +1,20 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.no-sensitive-data-in-logs-and-telemetry.rule.yaml
+fixtures:
+  - name: flags sensitive values in logging and telemetry sinks
+    sourcePath: ./fixtures/ts.security.no-sensitive-data-in-logs-and-telemetry/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.no-sensitive-data-in-logs-and-telemetry
+        - ts.security.no-sensitive-data-in-logs-and-telemetry
+      allSeverities:
+        - high
+        - high
+  - name: ignores redacted logging
+    sourcePath: ./fixtures/ts.security.no-sensitive-data-in-logs-and-telemetry/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

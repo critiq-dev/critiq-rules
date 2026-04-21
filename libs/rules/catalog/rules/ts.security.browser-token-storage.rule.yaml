@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.browser-token-storage
+  title: Avoid browser token storage
+  summary: Access and session tokens should not be stored in long-lived browser storage.
+  rationale: Long-lived browser storage exposes tokens to script access and increases the impact of XSS or device compromise.
+  tags:
+    - security
+    - authentication
+    - storage
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ts.security.browser-token-storage
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: medium
+    confidence: 0.88
+    tags:
+      - security
+      - authentication
+      - storage
+  message:
+    title: Avoid storing tokens in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` stores an access or session token in browser storage."
+  remediation:
+    summary: Keep tokens in HttpOnly cookies or in memory, and avoid long-lived cleartext browser storage.
+

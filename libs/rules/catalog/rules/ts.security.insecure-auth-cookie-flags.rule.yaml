@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.insecure-auth-cookie-flags
+  title: Harden auth-bearing cookies
+  summary: Auth and session cookies should set HttpOnly, Secure, and SameSite.
+  rationale: Cookie flags prevent browser scripts, mixed transport, and cross-site requests from exposing session-bearing values.
+  tags:
+    - security
+    - authentication
+    - cookies
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ts.security.insecure-auth-cookie-flags
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - authentication
+      - cookies
+  message:
+    title: Harden `${captures.issue.text}` for auth cookies
+    summary: "`${captures.issue.text}` sets an auth-bearing cookie without the expected protections."
+  remediation:
+    summary: Add `HttpOnly`, `Secure`, and an explicit `SameSite` policy before the cookie is used for session or auth state.
+

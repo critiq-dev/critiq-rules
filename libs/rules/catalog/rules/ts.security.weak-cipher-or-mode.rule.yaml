@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.weak-cipher-or-mode
+  title: Avoid weak cipher algorithms and modes
+  summary: Cryptographic ciphers should use modern authenticated modes and approved algorithms.
+  rationale: Weak modes such as ECB and legacy ciphers such as DES or RC4 do not provide adequate confidentiality.
+  tags:
+    - security
+    - crypto
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.weak-cipher-or-mode
+    bind: issue
+emit:
+  finding:
+    category: security.secrets
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - crypto
+      - cipher
+  message:
+    title: Avoid weak cipher algorithms and modes
+    summary: "`${captures.issue.text}` uses a weak cipher algorithm or mode."
+  remediation:
+    summary: Use modern authenticated encryption such as AES-GCM with approved key sizes and IV handling.

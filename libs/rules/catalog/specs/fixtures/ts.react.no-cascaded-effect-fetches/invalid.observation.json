@@ -1,0 +1,31 @@
+{
+  "path": "src/components/Profile.tsx",
+  "language": "typescript",
+  "text": "import { useEffect } from 'react';\n\nexport function Profile() {\n  useEffect(() => {\n    const load = async () => {\n      const user = await fetch('/api/user');\n      const posts = await fetch(`/api/posts?user=${user.id}`);\n      return { user, posts };\n    };\n\n    void load();\n  }, []);\n\n  return null;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "performance.react-effect-fetch-waterfall",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 6,
+            "startColumn": 20,
+            "endLine": 6,
+            "endColumn": 43
+          },
+          "text": "await fetch('/api/user')",
+          "props": {
+            "effectHook": "useEffect",
+            "fetchCount": 2
+          }
+        }
+      ]
+    }
+  }
+}

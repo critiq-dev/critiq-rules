@@ -1,0 +1,31 @@
+{
+  "path": "src/transport.ts",
+  "language": "typescript",
+  "text": "fetch('http://example.com/api');\naxios.get('http://api.example.com/v1/users');\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.insecure-http-transport",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 32
+          },
+          "text": "fetch('http://example.com/api')",
+          "props": {
+            "sink": "fetch",
+            "url": "http://example.com/api"
+          }
+        }
+      ]
+    }
+  }
+}

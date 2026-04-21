@@ -1,0 +1,34 @@
+{
+  "path": "src/auth/tokens.ts",
+  "language": "typescript",
+  "text": "const resetToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.predictable-token-generation",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 74
+          },
+          "text": "const resetToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`",
+          "props": {
+            "predictableSources": [
+              "Date.now",
+              "Math.random"
+            ],
+            "target": "resetToken"
+          }
+        }
+      ]
+    }
+  }
+}

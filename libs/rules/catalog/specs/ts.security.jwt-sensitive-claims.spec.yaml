@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.jwt-sensitive-claims.rule.yaml
+fixtures:
+  - name: flags sensitive jwt payload claims
+    sourcePath: ./fixtures/ts.security.jwt-sensitive-claims/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.jwt-sensitive-claims
+      allSeverities:
+        - high
+  - name: ignores minimal jwt claims
+    sourcePath: ./fixtures/ts.security.jwt-sensitive-claims/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.weak-hash-algorithm.rule.yaml
+fixtures:
+  - name: flags weak hash usage
+    observationPath: ./fixtures/ts.security.weak-hash-algorithm/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.weak-hash-algorithm
+      allSeverities:
+        - high
+  - name: ignores strong hash usage
+    observationPath: ./fixtures/ts.security.weak-hash-algorithm/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

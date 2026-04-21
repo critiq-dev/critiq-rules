@@ -1,0 +1,14 @@
+{
+  "path": "src/app/page.tsx",
+  "language": "typescript",
+  "text": "'use client';\n\nexport default function Page() {\n  return <button onClick={() => window.location.reload()}>Reload</button>;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.predictable-token-generation
+  title: Avoid predictable token generation
+  summary: Tokens, reset links, and session secrets should be generated from cryptographically strong randomness.
+  rationale: Predictable token material makes it easier to guess reset links, invite codes, and session secrets.
+  tags:
+    - security
+    - authentication
+    - crypto
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.predictable-token-generation
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - authentication
+      - crypto
+  message:
+    title: Avoid predictable token generation
+    summary: "`${captures.issue.text}` builds a token-like value from predictable inputs."
+  remediation:
+    summary: Generate the value with `crypto.randomBytes`, `crypto.randomUUID`, or an approved secure token source.

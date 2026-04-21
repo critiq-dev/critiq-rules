@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.jwt-sensitive-claims
+  title: Remove sensitive claims from JWT payloads
+  summary: JWT payloads should avoid embedding PII or secrets unless absolutely required.
+  rationale: Client-visible tokens often outlive a single request and can leak more data than intended.
+  tags:
+    - security
+    - privacy
+    - jwt
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ts.security.jwt-sensitive-claims
+    bind: issue
+emit:
+  finding:
+    category: security.privacy
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - privacy
+      - jwt
+  message:
+    title: Remove sensitive claims from `${captures.issue.text}`
+    summary: "`${captures.issue.text}` includes claims that expose personal or secret data in a token payload."
+  remediation:
+    summary: Keep JWT claims minimal. Prefer stable identifiers, not direct PII or secret-bearing fields.
+

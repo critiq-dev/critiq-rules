@@ -1,0 +1,14 @@
+{
+  "path": "src/components/Profile.tsx",
+  "language": "typescript",
+  "text": "import { useEffect } from 'react';\n\nexport function Profile() {\n  useEffect(() => {\n    void Promise.all([fetch('/api/user'), fetch('/api/posts')]);\n  }, []);\n\n  return null;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

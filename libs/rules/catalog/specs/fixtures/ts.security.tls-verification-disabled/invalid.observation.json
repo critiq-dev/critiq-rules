@@ -1,0 +1,32 @@
+{
+  "path": "src/transport.ts",
+  "language": "typescript",
+  "text": "const agent = new https.Agent({ rejectUnauthorized: false });\nprocess.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.tls-verification-disabled",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 15,
+            "endLine": 1,
+            "endColumn": 60
+          },
+          "text": "new https.Agent({ rejectUnauthorized: false })",
+          "props": {
+            "option": "rejectUnauthorized",
+            "sink": "tls-agent",
+            "value": false
+          }
+        }
+      ]
+    }
+  }
+}

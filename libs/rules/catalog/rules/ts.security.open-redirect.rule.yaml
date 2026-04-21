@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.open-redirect
+  title: Open redirect via request-controlled target
+  summary: Redirect and navigation sinks should not use request-controlled destinations without validation.
+  rationale: Redirect targets that are derived from user input can send authenticated users to attacker-controlled destinations.
+  tags:
+    - security
+    - input-validation
+    - redirect
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.open-redirect
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - redirect
+      - input-validation
+  message:
+    title: Validate redirect target before using `${captures.issue.text}`
+    summary: "`${captures.issue.text}` redirects to a request-controlled destination without a strict allowlist or internal-path check."
+  remediation:
+    summary: Normalize the target to an internal path or validate it against a trusted origin allowlist before redirecting.
+

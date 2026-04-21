@@ -189,6 +189,14 @@ rules:
     rulePath: ./rules/ts.performance.unnecessary-rerenders-from-state-misuse.rule.yaml
     presets:
       - experimental
+  - id: ts.react.no-cascaded-effect-fetches
+    rulePath: ./rules/ts.react.no-cascaded-effect-fetches.rule.yaml
+    presets:
+      - strict
+  - id: ts.next.no-server-client-boundary-leaks
+    rulePath: ./rules/ts.next.no-server-client-boundary-leaks.rule.yaml
+    presets:
+      - strict
   - id: ts.security.no-sql-interpolation
     rulePath: ./rules/ts.security.no-sql-interpolation.rule.yaml
     presets:
@@ -241,6 +249,76 @@ rules:
       - experimental
   - id: ts.security.token-or-session-not-validated
     rulePath: ./rules/ts.security.token-or-session-not-validated.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.insecure-auth-cookie-flags
+    rulePath: ./rules/ts.security.insecure-auth-cookie-flags.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.jwt-sensitive-claims
+    rulePath: ./rules/ts.security.jwt-sensitive-claims.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.browser-token-storage
+    rulePath: ./rules/ts.security.browser-token-storage.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.tls-verification-disabled
+    rulePath: ./rules/ts.security.tls-verification-disabled.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.insecure-http-transport
+    rulePath: ./rules/ts.security.insecure-http-transport.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.open-redirect
+    rulePath: ./rules/ts.security.open-redirect.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.sensitive-data-egress
+    rulePath: ./rules/ts.security.sensitive-data-egress.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.no-sensitive-data-in-logs-and-telemetry
+    rulePath: ./rules/ts.security.no-sensitive-data-in-logs-and-telemetry.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.ssrf
+    rulePath: ./rules/ts.security.ssrf.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.weak-hash-algorithm
+    rulePath: ./rules/ts.security.weak-hash-algorithm.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.weak-cipher-or-mode
+    rulePath: ./rules/ts.security.weak-cipher-or-mode.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.predictable-token-generation
+    rulePath: ./rules/ts.security.predictable-token-generation.rule.yaml
     presets:
       - recommended
       - strict

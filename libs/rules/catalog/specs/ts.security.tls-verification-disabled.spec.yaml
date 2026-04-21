@@ -1,0 +1,20 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.tls-verification-disabled.rule.yaml
+fixtures:
+  - name: flags disabled tls verification
+    observationPath: ./fixtures/ts.security.tls-verification-disabled/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.tls-verification-disabled
+      allSeverities:
+        - high
+      titleContains:
+        - TLS verification disabled
+  - name: ignores safe tls config
+    observationPath: ./fixtures/ts.security.tls-verification-disabled/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []
+
