@@ -15,3 +15,13 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: ignores keyed writes that do not read from the collection
+    sourcePath: ./fixtures/ts.correctness.unchecked-map-key-access/indexed-write.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores map lookups protected by logical has guards
+    sourcePath: ./fixtures/ts.correctness.unchecked-map-key-access/logical-has.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

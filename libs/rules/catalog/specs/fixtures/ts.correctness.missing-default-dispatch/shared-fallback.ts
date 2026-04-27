@@ -5,4 +5,6 @@ export function statusCode(status: string): number {
     case 'closed':
       return 2;
   }
+
+  return 0;
 }

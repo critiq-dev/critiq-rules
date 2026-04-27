@@ -15,3 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: ignores dispatches that share a fallback after the switch
+    sourcePath: ./fixtures/ts.correctness.missing-default-dispatch/shared-fallback.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

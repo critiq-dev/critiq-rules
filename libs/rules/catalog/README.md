@@ -96,14 +96,14 @@ pattern it checks.
 ### Quality, Config, And Determinism
 
 - `ts.quality.swallowed-error` (`recommended`, `strict`): `catch` blocks that drop errors silently.
-- `ts.quality.function-too-large-or-complex` (`recommended`, `strict`): oversized or high-complexity functions.
+- `ts.quality.function-too-large-or-complex` (`strict`): oversized or high-complexity functions.
 - `ts.quality.duplicate-code-block` (`strict`): large near-identical function bodies duplicated across files.
-- `ts.quality.deep-nesting` (`recommended`, `strict`): deeply nested control flow.
+- `ts.quality.deep-nesting` (`strict`): deeply nested control flow.
 - `ts.quality.missing-error-context` (`strict`): `catch` paths that log or rethrow without preserving the original error.
 - `ts.quality.tight-module-coupling` (`strict`): direct local import cycles between modules.
 - `ts.quality.hardcoded-configuration-values` (`recommended`, `strict`): top-level config-like identifiers or properties bound to literals.
 - `ts.quality.magic-numbers-or-strings` (`strict`): non-trivial literals embedded directly in logic.
-- `ts.quality.missing-tests-for-critical-logic` (`recommended`, `strict`): critical auth or payment-like logic without a matching test file.
+- `ts.quality.missing-tests-for-critical-logic` (`strict`): critical auth or payment-like logic without a matching test file.
 - `ts.quality.logic-change-without-test-updates` (`strict`): changed critical logic in a diff without a changed matching test file.
 - `ts.config.no-process-env-outside-config` (`strict`): `process.env.*` access outside config modules.
 - `ts.random.no-math-random-in-core` (`strict`): `Math.random()` under `**/core/**`.

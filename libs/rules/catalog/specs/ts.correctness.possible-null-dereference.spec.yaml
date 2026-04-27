@@ -15,3 +15,13 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: ignores dereferences after an early-return null guard
+    sourcePath: ./fixtures/ts.correctness.possible-null-dereference/guarded-return.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores dereferences protected by logical short-circuit guards
+    sourcePath: ./fixtures/ts.correctness.possible-null-dereference/logical-guard.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
