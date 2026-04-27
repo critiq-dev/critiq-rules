@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.express-missing-helmet.rule.yaml
+fixtures:
+  - name: flags Express apps without helmet
+    sourcePath: ./fixtures/public-security/render-express.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-missing-helmet
+      allSeverities:
+        - medium
+  - name: ignores Express apps with helmet
+    sourcePath: ./fixtures/public-security/render-express.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

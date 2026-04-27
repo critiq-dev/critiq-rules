@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.express-missing-helmet
+  title: Apply Helmet to Express apps
+  summary: Express apps should use Helmet or equivalent header hardening middleware.
+  rationale: Helmet packages several response-header protections that are easy to miss or drift when managed ad hoc.
+  tags:
+    - security
+    - express
+    - headers
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.express-missing-helmet
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.82
+    tags:
+      - security
+      - express
+      - headers
+  message:
+    title: Add Helmet or equivalent header hardening to this Express app
+    summary: This Express app is initialized without visible Helmet-style header hardening.
+  remediation:
+    summary: Apply `helmet()` or an equivalent set of header protections near application startup.
+

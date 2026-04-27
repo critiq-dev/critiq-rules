@@ -110,6 +110,75 @@ describe('rules catalog rule specs', () => {
     resolve(__dirname, '../../specs/ts.security.unvalidated-external-input.spec.yaml'),
     resolve(__dirname, '../../specs/ts.security.unsafe-deserialization.spec.yaml'),
     resolve(__dirname, '../../specs/ts.security.missing-request-timeout-or-retry.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.datadog-browser-track-user-interactions.spec.yaml',
+    ),
+    resolve(__dirname, '../../specs/ts.security.dynamodb-query-injection.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.hardcoded-auth-secret.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.import-using-user-input.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.insecure-allow-origin.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.express-insecure-cookie.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.express-cookie-missing-http-only.spec.yaml',
+    ),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.insecure-password-hash-configuration.spec.yaml',
+    ),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.insecure-websocket-transport.spec.yaml',
+    ),
+    resolve(__dirname, '../../specs/ts.security.jwt-not-revoked.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.manual-html-sanitization.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.missing-message-origin-check.spec.yaml',
+    ),
+    resolve(__dirname, '../../specs/ts.security.express-nosql-injection.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.observable-timing-discrepancy.spec.yaml',
+    ),
+    resolve(__dirname, '../../specs/ts.security.permissive-file-permissions.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.postmessage-wildcard-origin.spec.yaml',
+    ),
+    resolve(__dirname, '../../specs/ts.security.raw-html-using-user-input.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.sensitive-data-in-exception.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.sensitive-data-written-to-file.spec.yaml',
+    ),
+    resolve(__dirname, '../../specs/ts.security.ui-redress.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.format-string-using-user-input.spec.yaml',
+    ),
+    resolve(__dirname, '../../specs/ts.security.user-controlled-sendfile.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.user-controlled-view-render.spec.yaml'),
+    resolve(__dirname, '../../specs/ts.security.exposed-directory-listing.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.express-default-session-config.spec.yaml',
+    ),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.express-default-cookie-config.spec.yaml',
+    ),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.express-static-assets-after-session.spec.yaml',
+    ),
+    resolve(__dirname, '../../specs/ts.security.express-missing-helmet.spec.yaml'),
+    resolve(
+      __dirname,
+      '../../specs/ts.security.express-reduce-fingerprint.spec.yaml',
+    ),
+    resolve(__dirname, '../../specs/ts.security.unsanitized-http-response.spec.yaml'),
     resolve(__dirname, '../../specs/ts.react.no-cascaded-effect-fetches.spec.yaml'),
     resolve(__dirname, '../../specs/ts.next.no-server-client-boundary-leaks.spec.yaml'),
   ];

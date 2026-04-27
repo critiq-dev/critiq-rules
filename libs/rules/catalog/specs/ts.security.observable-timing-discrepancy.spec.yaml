@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.observable-timing-discrepancy.rule.yaml
+fixtures:
+  - name: flags equality checks on likely secret material
+    sourcePath: ./fixtures/public-security/auth-files.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.observable-timing-discrepancy
+      allSeverities:
+        - high
+  - name: ignores constant-time comparisons
+    sourcePath: ./fixtures/public-security/auth-files.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

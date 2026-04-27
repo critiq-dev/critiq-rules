@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.user-controlled-view-render
+  title: Validate `res.render()` view selection
+  summary: Express view names should not come directly from request input.
+  rationale: Request-controlled template names can expose internal views or bypass intended route-level behavior.
+  tags:
+    - security
+    - express
+    - rendering
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.user-controlled-view-render
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - express
+      - rendering
+  message:
+    title: Validate the view passed to `${captures.issue.text}`
+    summary: "`${captures.issue.text}` selects an Express view from request-controlled input."
+  remediation:
+    summary: Resolve the template from an allowlist or fixed route mapping before calling `res.render()`.
+

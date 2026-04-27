@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.ui-redress
+  title: Do not derive anti-framing headers from request input
+  summary: Framing and CSP headers should not be set from request-controlled values.
+  rationale: Request-controlled anti-framing headers weaken protections against clickjacking and UI redress attacks.
+  tags:
+    - security
+    - clickjacking
+    - headers
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.ui-redress
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.88
+    tags:
+      - security
+      - clickjacking
+      - headers
+  message:
+    title: Set `${captures.issue.text}` from trusted policy only
+    summary: "`${captures.issue.text}` derives anti-framing or CSP header values from request input."
+  remediation:
+    summary: Set framing and CSP headers from fixed server policy instead of request data.
+

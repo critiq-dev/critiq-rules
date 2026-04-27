@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.express-nosql-injection
+  title: Avoid request-driven model queries
+  summary: Express handlers should not pass raw request objects into NoSQL model query helpers.
+  rationale: Request-shaped filters or query objects can expand query scope or inject unintended operators.
+  tags:
+    - security
+    - injection
+    - nosql
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.express-nosql-injection
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: critical
+    confidence: 0.92
+    tags:
+      - security
+      - injection
+      - nosql
+  message:
+    title: Narrow the query passed to `${captures.issue.text}`
+    summary: "`${captures.issue.text}` receives request-controlled query input without an allowlisted query shape."
+  remediation:
+    summary: Build the model query from fixed fields or validated filters instead of passing request data directly.
+

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.express-insecure-cookie
+  title: Set `Secure` on Express session cookies
+  summary: Express session and cookie-session configs should not disable the `Secure` flag.
+  rationale: Cookies sent over non-HTTPS transport are easier to intercept or replay.
+  tags:
+    - security
+    - authentication
+    - cookies
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.express-insecure-cookie
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - authentication
+      - cookies
+  message:
+    title: Turn `Secure` back on for `${captures.issue.text}`
+    summary: "`${captures.issue.text}` disables the `Secure` cookie flag in Express session configuration."
+  remediation:
+    summary: "Set `secure: true` and serve the cookie only over HTTPS."

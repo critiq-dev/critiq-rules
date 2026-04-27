@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.jwt-not-revoked.rule.yaml
+fixtures:
+  - name: flags express jwt config without revocation
+    sourcePath: ./fixtures/public-security/dynamodb-jwt.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.jwt-not-revoked
+      allSeverities:
+        - medium
+  - name: ignores express jwt config with revocation
+    sourcePath: ./fixtures/public-security/dynamodb-jwt.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

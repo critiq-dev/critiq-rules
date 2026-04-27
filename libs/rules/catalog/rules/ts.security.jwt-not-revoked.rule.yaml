@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.jwt-not-revoked
+  title: Add a JWT revocation hook
+  summary: Express JWT middleware should check revocation state when bearer tokens can be invalidated early.
+  rationale: Signature validation alone does not handle logout, compromise, or forced token invalidation.
+  tags:
+    - security
+    - authentication
+    - jwt
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.jwt-not-revoked
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - authentication
+      - jwt
+  message:
+    title: Add revocation handling to `${captures.issue.text}`
+    summary: "`${captures.issue.text}` configures Express JWT validation without an `isRevoked` check."
+  remediation:
+    summary: Add an `isRevoked` callback or equivalent revocation check for tokens that can be invalidated before expiry.
+

@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.insecure-allow-origin.rule.yaml
+fixtures:
+  - name: flags reflected CORS origins
+    sourcePath: ./fixtures/public-security/headers-nosql.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.insecure-allow-origin
+      allSeverities:
+        - high
+  - name: ignores fixed allow origins
+    sourcePath: ./fixtures/public-security/headers-nosql.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

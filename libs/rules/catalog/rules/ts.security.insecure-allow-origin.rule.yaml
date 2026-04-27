@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.insecure-allow-origin
+  title: Do not reflect request origin into CORS policy
+  summary: "`Access-Control-Allow-Origin` should not be set from request-controlled input."
+  rationale: Reflecting the request origin into a CORS allowlist turns origin validation into a no-op.
+  tags:
+    - security
+    - cors
+    - misconfiguration
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.insecure-allow-origin
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.92
+    tags:
+      - security
+      - cors
+      - misconfiguration
+  message:
+    title: Validate the origin before setting `${captures.issue.text}`
+    summary: "`${captures.issue.text}` reflects request input into `Access-Control-Allow-Origin`."
+  remediation:
+    summary: Set CORS origins from a fixed allowlist or explicit trusted origin check.

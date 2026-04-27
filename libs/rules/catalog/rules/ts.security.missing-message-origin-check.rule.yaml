@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.missing-message-origin-check
+  title: Verify `message` event origins
+  summary: "`message` handlers should validate `event.origin` before trusting cross-window data."
+  rationale: Without an origin check, hostile pages can post crafted messages into the handler.
+  tags:
+    - security
+    - browser
+    - messaging
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.missing-message-origin-check
+    bind: issue
+emit:
+  finding:
+    category: security.browser
+    severity: high
+    confidence: 0.92
+    tags:
+      - security
+      - browser
+      - messaging
+  message:
+    title: Check `event.origin` before processing `${captures.issue.text}`
+    summary: "`${captures.issue.text}` handles cross-window messages without validating the sender origin."
+  remediation:
+    summary: Gate the handler on a strict allowlist of expected origins before reading `event.data`.

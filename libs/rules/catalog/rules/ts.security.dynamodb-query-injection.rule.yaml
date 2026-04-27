@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.dynamodb-query-injection
+  title: Avoid request-driven DynamoDB queries
+  summary: DynamoDB query objects should not be built directly from request input.
+  rationale: Raw request data in DynamoDB query helpers can widen query scope or let attackers control key expressions and filters.
+  tags:
+    - security
+    - injection
+    - dynamodb
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.dynamodb-query-injection
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: critical
+    confidence: 0.9
+    tags:
+      - security
+      - injection
+      - dynamodb
+  message:
+    title: Constrain `${captures.issue.text}` to a fixed DynamoDB query shape
+    summary: "`${captures.issue.text}` receives request-controlled query input without narrowing it to a trusted expression or key map."
+  remediation:
+    summary: Build the DynamoDB query from fixed code paths and allowlisted fields instead of passing request objects directly.
+

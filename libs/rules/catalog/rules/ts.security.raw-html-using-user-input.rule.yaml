@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.raw-html-using-user-input
+  title: Avoid raw HTML with request input
+  summary: Request-derived values should not be interpolated into raw HTML strings.
+  rationale: Raw HTML construction with request data is a common path to reflected and stored XSS.
+  tags:
+    - security
+    - xss
+    - output-encoding
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.raw-html-using-user-input
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.92
+    tags:
+      - security
+      - xss
+      - output-encoding
+  message:
+    title: Remove request input from `${captures.issue.text}`
+    summary: "`${captures.issue.text}` interpolates request-derived content into raw HTML."
+  remediation:
+    summary: Use framework escaping, a trusted sanitizer, or safe DOM APIs instead of raw HTML interpolation.
+

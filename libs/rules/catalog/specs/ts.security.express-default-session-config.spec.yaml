@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.express-default-session-config.rule.yaml
+fixtures:
+  - name: flags default Express session config
+    sourcePath: ./fixtures/public-security/render-express.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-default-session-config
+      allSeverities:
+        - medium
+  - name: ignores explicit Express session config
+    sourcePath: ./fixtures/public-security/render-express.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

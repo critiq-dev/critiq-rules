@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.user-controlled-sendfile
+  title: Constrain `res.sendFile` to a trusted root
+  summary: "`res.sendFile()` should not resolve filenames or options from request input without a trusted root."
+  rationale: Request-controlled file responses are a common path to path traversal and unintended local file disclosure.
+  tags:
+    - security
+    - filesystem
+    - express
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.user-controlled-sendfile
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.92
+    tags:
+      - security
+      - filesystem
+      - express
+  message:
+    title: Validate the file path used by `${captures.issue.text}`
+    summary: "`${captures.issue.text}` serves a request-controlled file path or options object without a trusted root."
+  remediation:
+    summary: Resolve files from an allowlisted directory and validate request input before it reaches `res.sendFile()`.

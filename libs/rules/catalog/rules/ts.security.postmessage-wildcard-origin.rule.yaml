@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.postmessage-wildcard-origin
+  title: Avoid wildcard `postMessage` targets
+  summary: "`postMessage` calls should not use `*` as the target origin when they carry application data."
+  rationale: Wildcard targets allow the browser to deliver the message to any origin that receives the window reference.
+  tags:
+    - security
+    - browser
+    - messaging
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.postmessage-wildcard-origin
+    bind: issue
+emit:
+  finding:
+    category: security.browser
+    severity: high
+    confidence: 0.95
+    tags:
+      - security
+      - browser
+      - messaging
+  message:
+    title: Replace the wildcard target in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses `*` as the `postMessage` target origin."
+  remediation:
+    summary: Set the target origin to a strict expected origin instead of `*`.

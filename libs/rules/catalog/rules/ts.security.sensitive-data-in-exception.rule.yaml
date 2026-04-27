@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.sensitive-data-in-exception
+  title: Avoid sensitive data in thrown errors
+  summary: Exceptions and rejection payloads should not include raw secrets or personal data.
+  rationale: Exception payloads often reach logs, APM tools, and client responses with less review than normal business data.
+  tags:
+    - security
+    - privacy
+    - errors
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.sensitive-data-in-exception
+    bind: issue
+emit:
+  finding:
+    category: security.privacy
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - privacy
+      - errors
+  message:
+    title: Remove sensitive data from `${captures.issue.text}`
+    summary: "`${captures.issue.text}` includes sensitive values in an exception or rejection payload."
+  remediation:
+    summary: Replace raw secrets and personal data with opaque identifiers or redacted summaries before throwing or rejecting.
+

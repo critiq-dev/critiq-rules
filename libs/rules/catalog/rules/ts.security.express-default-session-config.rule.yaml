@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.express-default-session-config
+  title: Override Express session defaults
+  summary: Express session middleware should not rely on default session naming and configuration.
+  rationale: Default session settings make applications easier to fingerprint and often skip explicit hardening choices.
+  tags:
+    - security
+    - authentication
+    - express
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.express-default-session-config
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: medium
+    confidence: 0.88
+    tags:
+      - security
+      - authentication
+      - express
+  message:
+    title: Replace the defaults in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` relies on default Express session configuration."
+  remediation:
+    summary: Set an explicit session name and hardening options instead of relying on middleware defaults.
+

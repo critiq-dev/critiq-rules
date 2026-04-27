@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.express-reduce-fingerprint.rule.yaml
+fixtures:
+  - name: flags Express apps that expose default fingerprinting
+    sourcePath: ./fixtures/public-security/render-express.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-reduce-fingerprint
+      allSeverities:
+        - medium
+  - name: ignores Express apps that disable fingerprinting
+    sourcePath: ./fixtures/public-security/render-express.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

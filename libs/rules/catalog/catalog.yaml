@@ -336,3 +336,175 @@ rules:
     presets:
       - strict
       - security
+  - id: ts.security.datadog-browser-track-user-interactions
+    rulePath: ./rules/ts.security.datadog-browser-track-user-interactions.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.dynamodb-query-injection
+    rulePath: ./rules/ts.security.dynamodb-query-injection.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.hardcoded-auth-secret
+    rulePath: ./rules/ts.security.hardcoded-auth-secret.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.import-using-user-input
+    rulePath: ./rules/ts.security.import-using-user-input.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.insecure-allow-origin
+    rulePath: ./rules/ts.security.insecure-allow-origin.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.express-insecure-cookie
+    rulePath: ./rules/ts.security.express-insecure-cookie.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.express-cookie-missing-http-only
+    rulePath: ./rules/ts.security.express-cookie-missing-http-only.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.insecure-password-hash-configuration
+    rulePath: ./rules/ts.security.insecure-password-hash-configuration.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.insecure-websocket-transport
+    rulePath: ./rules/ts.security.insecure-websocket-transport.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.jwt-not-revoked
+    rulePath: ./rules/ts.security.jwt-not-revoked.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.manual-html-sanitization
+    rulePath: ./rules/ts.security.manual-html-sanitization.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.missing-message-origin-check
+    rulePath: ./rules/ts.security.missing-message-origin-check.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.express-nosql-injection
+    rulePath: ./rules/ts.security.express-nosql-injection.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.observable-timing-discrepancy
+    rulePath: ./rules/ts.security.observable-timing-discrepancy.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.permissive-file-permissions
+    rulePath: ./rules/ts.security.permissive-file-permissions.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.postmessage-wildcard-origin
+    rulePath: ./rules/ts.security.postmessage-wildcard-origin.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.raw-html-using-user-input
+    rulePath: ./rules/ts.security.raw-html-using-user-input.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.sensitive-data-in-exception
+    rulePath: ./rules/ts.security.sensitive-data-in-exception.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.sensitive-data-written-to-file
+    rulePath: ./rules/ts.security.sensitive-data-written-to-file.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.ui-redress
+    rulePath: ./rules/ts.security.ui-redress.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.format-string-using-user-input
+    rulePath: ./rules/ts.security.format-string-using-user-input.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.user-controlled-sendfile
+    rulePath: ./rules/ts.security.user-controlled-sendfile.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.user-controlled-view-render
+    rulePath: ./rules/ts.security.user-controlled-view-render.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.exposed-directory-listing
+    rulePath: ./rules/ts.security.exposed-directory-listing.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.express-default-session-config
+    rulePath: ./rules/ts.security.express-default-session-config.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.express-default-cookie-config
+    rulePath: ./rules/ts.security.express-default-cookie-config.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.express-static-assets-after-session
+    rulePath: ./rules/ts.security.express-static-assets-after-session.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.express-missing-helmet
+    rulePath: ./rules/ts.security.express-missing-helmet.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.express-reduce-fingerprint
+    rulePath: ./rules/ts.security.express-reduce-fingerprint.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.unsanitized-http-response
+    rulePath: ./rules/ts.security.unsanitized-http-response.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security

@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.exposed-directory-listing
+  title: Avoid exposed directory listings
+  summary: Directory listing middleware should not be enabled on public paths without a deliberate review.
+  rationale: Directory listings expose internal file names and make unintended resources easier to discover and fetch.
+  tags:
+    - security
+    - express
+    - filesystem
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.exposed-directory-listing
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.95
+    tags:
+      - security
+      - express
+      - filesystem
+  message:
+    title: Review `${captures.issue.text}` before exposing directory listings
+    summary: "`${captures.issue.text}` enables public directory listing behavior."
+  remediation:
+    summary: Remove directory listing middleware or protect it behind strict authorization and path scoping.
+

@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.observable-timing-discrepancy
+  title: Use constant-time secret comparison
+  summary: Secrets and tokens should not be compared with ordinary equality operators.
+  rationale: Ordinary string comparison can leak timing differences that help attackers guess secret material.
+  tags:
+    - security
+    - cryptography
+    - timing
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.observable-timing-discrepancy
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - cryptography
+      - timing
+  message:
+    title: Replace `${captures.issue.text}` with a constant-time comparison
+    summary: "`${captures.issue.text}` compares a likely secret value with ordinary equality."
+  remediation:
+    summary: Use a constant-time comparison helper such as `crypto.timingSafeEqual` for secrets, tokens, and password hashes.
+

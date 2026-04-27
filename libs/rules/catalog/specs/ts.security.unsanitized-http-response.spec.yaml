@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../rules/ts.security.unsanitized-http-response.rule.yaml
+fixtures:
+  - name: flags raw request data in http responses
+    sourcePath: ./fixtures/public-security/module-response.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.unsanitized-http-response
+      allSeverities:
+        - high
+  - name: ignores safe http responses
+    sourcePath: ./fixtures/public-security/module-response.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

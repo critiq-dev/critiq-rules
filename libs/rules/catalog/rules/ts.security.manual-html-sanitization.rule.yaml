@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.manual-html-sanitization
+  title: Avoid ad hoc HTML sanitization
+  summary: Hand-rolled HTML escaping and sanitization should be replaced with vetted sanitizers or safe rendering paths.
+  rationale: String replacement chains miss edge cases and are easy to bypass as rendering behavior evolves.
+  tags:
+    - security
+    - xss
+    - sanitization
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.manual-html-sanitization
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: medium
+    confidence: 0.88
+    tags:
+      - security
+      - xss
+      - sanitization
+  message:
+    title: Replace `${captures.issue.text}` with a vetted sanitizer
+    summary: "`${captures.issue.text}` performs manual HTML escaping instead of using a trusted sanitization or safe rendering path."
+  remediation:
+    summary: Use a vetted sanitizer or framework-native escaping model instead of string replacement chains.
+
