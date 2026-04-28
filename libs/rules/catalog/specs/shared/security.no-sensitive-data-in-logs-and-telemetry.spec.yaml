@@ -43,3 +43,55 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags sensitive logging in Java
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sensitive-data-in-logs-and-telemetry
+      allSeverities:
+        - high
+  - name: ignores redacted Java logging
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags sensitive logging in PHP
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sensitive-data-in-logs-and-telemetry
+      allSeverities:
+        - high
+  - name: ignores redacted PHP logging
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags sensitive logging in Ruby
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sensitive-data-in-logs-and-telemetry
+      allSeverities:
+        - high
+  - name: ignores redacted Ruby logging
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags sensitive logging in Rust
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sensitive-data-in-logs-and-telemetry
+      allSeverities:
+        - high
+  - name: ignores redacted Rust logging
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -43,3 +43,55 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags plain http outbound requests in Java
+    sourcePath: ./fixtures/security.insecure-http-transport/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.insecure-http-transport
+      allSeverities:
+        - high
+  - name: ignores secure transport in Java
+    sourcePath: ./fixtures/security.insecure-http-transport/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags plain http outbound requests in PHP
+    sourcePath: ./fixtures/security.insecure-http-transport/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.insecure-http-transport
+      allSeverities:
+        - high
+  - name: ignores secure transport in PHP
+    sourcePath: ./fixtures/security.insecure-http-transport/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags plain http outbound requests in Ruby
+    sourcePath: ./fixtures/security.insecure-http-transport/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.insecure-http-transport
+      allSeverities:
+        - high
+  - name: ignores secure transport in Ruby
+    sourcePath: ./fixtures/security.insecure-http-transport/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags plain http outbound requests in Rust
+    sourcePath: ./fixtures/security.insecure-http-transport/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.insecure-http-transport
+      allSeverities:
+        - high
+  - name: ignores secure transport in Rust
+    sourcePath: ./fixtures/security.insecure-http-transport/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

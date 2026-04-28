@@ -43,3 +43,55 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags interpolated SQL in Java
+    sourcePath: ./fixtures/security.no-sql-interpolation/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sql-interpolation
+      allSeverities:
+        - high
+  - name: ignores parameterized Java SQL queries
+    sourcePath: ./fixtures/security.no-sql-interpolation/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags interpolated SQL in PHP
+    sourcePath: ./fixtures/security.no-sql-interpolation/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sql-interpolation
+      allSeverities:
+        - high
+  - name: ignores parameterized PHP SQL queries
+    sourcePath: ./fixtures/security.no-sql-interpolation/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags interpolated SQL in Ruby
+    sourcePath: ./fixtures/security.no-sql-interpolation/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sql-interpolation
+      allSeverities:
+        - high
+  - name: ignores parameterized Ruby SQL queries
+    sourcePath: ./fixtures/security.no-sql-interpolation/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags interpolated SQL in Rust
+    sourcePath: ./fixtures/security.no-sql-interpolation/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sql-interpolation
+      allSeverities:
+        - high
+  - name: ignores parameterized Rust SQL queries
+    sourcePath: ./fixtures/security.no-sql-interpolation/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

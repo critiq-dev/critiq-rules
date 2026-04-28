@@ -41,3 +41,55 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags unsafe deserialization in Java
+    sourcePath: ./fixtures/security.unsafe-deserialization/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.unsafe-deserialization
+      allSeverities:
+        - high
+  - name: ignores trusted Java deserialization
+    sourcePath: ./fixtures/security.unsafe-deserialization/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags unsafe deserialization in PHP
+    sourcePath: ./fixtures/security.unsafe-deserialization/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.unsafe-deserialization
+      allSeverities:
+        - high
+  - name: ignores trusted PHP deserialization
+    sourcePath: ./fixtures/security.unsafe-deserialization/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags unsafe deserialization in Ruby
+    sourcePath: ./fixtures/security.unsafe-deserialization/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.unsafe-deserialization
+      allSeverities:
+        - high
+  - name: ignores trusted Ruby deserialization
+    sourcePath: ./fixtures/security.unsafe-deserialization/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags unsafe deserialization in Rust
+    sourcePath: ./fixtures/security.unsafe-deserialization/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.unsafe-deserialization
+      allSeverities:
+        - high
+  - name: ignores trusted Rust deserialization
+    sourcePath: ./fixtures/security.unsafe-deserialization/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

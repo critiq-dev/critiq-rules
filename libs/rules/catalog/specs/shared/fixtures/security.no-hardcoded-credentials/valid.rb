@@ -1,0 +1,1 @@
+API_SECRET = ENV.fetch("API_SECRET")

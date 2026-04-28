@@ -1,0 +1,1 @@
+API_SECRET = "sk_live_12345678"

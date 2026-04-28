@@ -41,3 +41,55 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags request-controlled command execution in Java
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-command-execution-with-request-input
+      allSeverities:
+        - critical
+  - name: ignores fixed command execution in Java
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags request-controlled command execution in PHP
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-command-execution-with-request-input
+      allSeverities:
+        - critical
+  - name: ignores fixed command execution in PHP
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags request-controlled command execution in Ruby
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-command-execution-with-request-input
+      allSeverities:
+        - critical
+  - name: ignores fixed command execution in Ruby
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags request-controlled command execution in Rust
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-command-execution-with-request-input
+      allSeverities:
+        - critical
+  - name: ignores fixed command execution in Rust
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

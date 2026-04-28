@@ -45,3 +45,55 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags disabled tls verification in Java
+    sourcePath: ./fixtures/security.tls-verification-disabled/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.tls-verification-disabled
+      allSeverities:
+        - high
+  - name: ignores safe tls verification in Java
+    sourcePath: ./fixtures/security.tls-verification-disabled/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags disabled tls verification in PHP
+    sourcePath: ./fixtures/security.tls-verification-disabled/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.tls-verification-disabled
+      allSeverities:
+        - high
+  - name: ignores safe tls verification in PHP
+    sourcePath: ./fixtures/security.tls-verification-disabled/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags disabled tls verification in Ruby
+    sourcePath: ./fixtures/security.tls-verification-disabled/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.tls-verification-disabled
+      allSeverities:
+        - high
+  - name: ignores safe tls verification in Ruby
+    sourcePath: ./fixtures/security.tls-verification-disabled/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags disabled tls verification in Rust
+    sourcePath: ./fixtures/security.tls-verification-disabled/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.tls-verification-disabled
+      allSeverities:
+        - high
+  - name: ignores safe tls verification in Rust
+    sourcePath: ./fixtures/security.tls-verification-disabled/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

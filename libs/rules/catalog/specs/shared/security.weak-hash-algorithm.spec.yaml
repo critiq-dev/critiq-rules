@@ -41,3 +41,55 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags weak hash usage in Java
+    sourcePath: ./fixtures/security.weak-hash-algorithm/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.weak-hash-algorithm
+      allSeverities:
+        - high
+  - name: ignores strong hash usage in Java
+    sourcePath: ./fixtures/security.weak-hash-algorithm/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags weak hash usage in PHP
+    sourcePath: ./fixtures/security.weak-hash-algorithm/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.weak-hash-algorithm
+      allSeverities:
+        - high
+  - name: ignores strong hash usage in PHP
+    sourcePath: ./fixtures/security.weak-hash-algorithm/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags weak hash usage in Ruby
+    sourcePath: ./fixtures/security.weak-hash-algorithm/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.weak-hash-algorithm
+      allSeverities:
+        - high
+  - name: ignores strong hash usage in Ruby
+    sourcePath: ./fixtures/security.weak-hash-algorithm/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags weak hash usage in Rust
+    sourcePath: ./fixtures/security.weak-hash-algorithm/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.weak-hash-algorithm
+      allSeverities:
+        - high
+  - name: ignores strong hash usage in Rust
+    sourcePath: ./fixtures/security.weak-hash-algorithm/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -43,3 +43,55 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags request-controlled file reads in Java
+    sourcePath: ./fixtures/security.no-request-path-file-read/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-request-path-file-read
+      allSeverities:
+        - high
+  - name: ignores fixed Java file reads
+    sourcePath: ./fixtures/security.no-request-path-file-read/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags request-controlled file reads in PHP
+    sourcePath: ./fixtures/security.no-request-path-file-read/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-request-path-file-read
+      allSeverities:
+        - high
+  - name: ignores fixed PHP file reads
+    sourcePath: ./fixtures/security.no-request-path-file-read/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags request-controlled file reads in Ruby
+    sourcePath: ./fixtures/security.no-request-path-file-read/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-request-path-file-read
+      allSeverities:
+        - high
+  - name: ignores fixed Ruby file reads
+    sourcePath: ./fixtures/security.no-request-path-file-read/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags request-controlled file reads in Rust
+    sourcePath: ./fixtures/security.no-request-path-file-read/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-request-path-file-read
+      allSeverities:
+        - high
+  - name: ignores fixed Rust file reads
+    sourcePath: ./fixtures/security.no-request-path-file-read/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

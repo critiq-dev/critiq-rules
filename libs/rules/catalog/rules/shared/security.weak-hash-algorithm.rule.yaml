@@ -17,6 +17,10 @@ scope:
     - javascript
     - go
     - python
+    - java
+    - php
+    - ruby
+    - rust
 match:
   fact:
     kind: security.weak-hash-algorithm
