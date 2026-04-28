@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.express-static-assets-after-session.rule.yaml
+fixtures:
+  - name: flags static asset middleware mounted after sessions
+    sourcePath: ./fixtures/public-security/render-express.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-static-assets-after-session
+      allSeverities:
+        - medium
+  - name: ignores static asset middleware mounted before sessions
+    sourcePath: ./fixtures/public-security/render-express.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

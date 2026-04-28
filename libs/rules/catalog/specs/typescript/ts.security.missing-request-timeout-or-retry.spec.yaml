@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.missing-request-timeout-or-retry.rule.yaml
+fixtures:
+  - name: flags external calls without timeout or retry protection
+    sourcePath: ./fixtures/ts.security.missing-request-timeout-or-retry/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.missing-request-timeout-or-retry
+      allSeverities:
+        - medium
+  - name: ignores external calls with timeout protection
+    sourcePath: ./fixtures/ts.security.missing-request-timeout-or-retry/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

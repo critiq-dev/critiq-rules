@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.browser-token-storage.rule.yaml
+fixtures:
+  - name: flags access token stored in browser storage
+    sourcePath: ./fixtures/ts.security.browser-token-storage/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.browser-token-storage
+      allSeverities:
+        - medium
+  - name: ignores non-token browser storage
+    sourcePath: ./fixtures/ts.security.browser-token-storage/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

@@ -8,11 +8,11 @@ It ships:
 - rule YAML files under `rules/`
 - preset membership for `recommended`, `strict`, `security`, and `experimental`
 
-The current catalog is TypeScript and JavaScript focused. Some rules are pure
-AST matches, and others depend on TypeScript adapter facts such as
-control-flow, async, structural, and data-flow observations. A smaller set now
-depends on check-runner project heuristics for cross-file auth, coupling, and
-testing checks.
+The current catalog is still TypeScript-heavy, but the shared security baseline
+also runs across Go and Python. Some rules are pure AST matches, and others
+depend on adapter facts such as control-flow, async, structural, and data-flow
+observations. A smaller set now depends on check-runner project heuristics for
+cross-file auth, coupling, and testing checks.
 
 ## What Gets Checked
 
@@ -123,18 +123,21 @@ pattern it checks.
 
 ### Security
 
-- `ts.security.no-sql-interpolation` (`recommended`, `strict`, `security`): SQL built by string interpolation or concatenation with untrusted data.
+- `security.no-sql-interpolation` (`recommended`, `strict`, `security`): SQL built by string interpolation or concatenation with untrusted data.
 - `ts.security.no-dynamic-execution` (`recommended`, `strict`, `security`): `eval`, `Function`, or similar runtime code execution helpers.
-- `ts.security.no-request-path-file-read` (`recommended`, `strict`, `security`): file reads using request-controlled paths.
-- `ts.security.no-command-execution-with-request-input` (`recommended`, `strict`, `security`): command execution helpers given request-controlled input.
+- `security.no-request-path-file-read` (`recommended`, `strict`, `security`): file reads using request-controlled paths.
+- `security.no-command-execution-with-request-input` (`recommended`, `strict`, `security`): command execution helpers given request-controlled input.
 - `ts.security.no-innerhtml-assignment` (`recommended`, `strict`, `security`): direct `innerHTML` assignment.
-- `ts.security.no-hardcoded-credentials` (`recommended`, `strict`, `security`): credential-like literals embedded in source.
+- `security.no-hardcoded-credentials` (`recommended`, `strict`, `security`): credential-like literals embedded in source.
 - `ts.security.missing-authorization-before-sensitive-action` (`strict`, `security`): backend-like sensitive handlers without a local authorization guard.
 - `ts.security.missing-ownership-validation` (`strict`, `security`): auth-gated handlers acting on caller-supplied resource ids without an ownership check.
 - `ts.security.frontend-only-authorization` (`experimental`): frontend-auth-gated literal route calls whose matching backend route lacks authorization.
 - `ts.security.token-or-session-not-validated` (`recommended`, `strict`, `security`): token or session values from external input used without same-function validation.
+- `security.tls-verification-disabled` (`recommended`, `strict`, `security`): transport clients configured to skip certificate verification.
+- `security.insecure-http-transport` (`recommended`, `strict`, `security`): outbound requests sent over plain HTTP to non-local endpoints.
+- `security.weak-hash-algorithm` (`recommended`, `strict`, `security`): MD5, SHA-1, or similar weak hashing primitives used in security-sensitive flows.
 - `ts.security.unvalidated-external-input` (`strict`, `security`): request-derived values used to construct `RegExp` or `URL` without validation.
-- `ts.security.unsafe-deserialization` (`recommended`, `strict`, `security`): `JSON.parse`, `yaml.load`, `qs.parse`, or similar deserializers fed external input.
+- `security.unsafe-deserialization` (`recommended`, `strict`, `security`): `JSON.parse`, `yaml.load`, `qs.parse`, or similar deserializers fed external input.
 - `ts.security.missing-request-timeout-or-retry` (`strict`, `security`): external calls with neither timeout or cancellation nor retry protection.
 
 ## Notes
@@ -146,4 +149,4 @@ pattern it checks.
   default.
 
 For executable examples, see the sandbox scenarios under
-[`critiq-sandbox/scenarios/typescript`](</Users/aavanzyl/Documents/personal/critiq/critiq-sandbox/scenarios/typescript>).
+[`critiq-sandbox/scenarios`](</Users/aavanzyl/Documents/personal/critiq/critiq-sandbox/scenarios>).

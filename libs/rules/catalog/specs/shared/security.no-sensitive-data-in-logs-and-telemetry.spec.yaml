@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.no-sensitive-data-in-logs-and-telemetry.rule.yaml
+fixtures:
+  - name: flags sensitive values in logging and telemetry sinks
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - security.no-sensitive-data-in-logs-and-telemetry
+        - security.no-sensitive-data-in-logs-and-telemetry
+      allSeverities:
+        - high
+        - high
+  - name: ignores redacted logging
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags sensitive logging in Go
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sensitive-data-in-logs-and-telemetry
+      allSeverities:
+        - high
+  - name: ignores redacted Go logging
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags sensitive logging in Python
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sensitive-data-in-logs-and-telemetry
+      allSeverities:
+        - high
+  - name: ignores redacted Python logging
+    sourcePath: ./fixtures/security.no-sensitive-data-in-logs-and-telemetry/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

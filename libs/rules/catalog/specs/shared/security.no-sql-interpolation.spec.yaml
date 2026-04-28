@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.no-sql-interpolation.rule.yaml
+fixtures:
+  - name: flags interpolated sql query
+    sourcePath: ./fixtures/security.no-sql-interpolation/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sql-interpolation
+      allSeverities:
+        - high
+      titleContains:
+        - Avoid interpolated SQL
+  - name: ignores parameterized query
+    sourcePath: ./fixtures/security.no-sql-interpolation/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags interpolated SQL in Go
+    sourcePath: ./fixtures/security.no-sql-interpolation/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sql-interpolation
+      allSeverities:
+        - high
+  - name: ignores parameterized Go SQL queries
+    sourcePath: ./fixtures/security.no-sql-interpolation/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags interpolated SQL in Python
+    sourcePath: ./fixtures/security.no-sql-interpolation/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sql-interpolation
+      allSeverities:
+        - high
+  - name: ignores parameterized Python SQL queries
+    sourcePath: ./fixtures/security.no-sql-interpolation/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

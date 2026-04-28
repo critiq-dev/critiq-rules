@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.next.no-server-client-boundary-leaks.rule.yaml
+fixtures:
+  - name: flags browser-only APIs in a Next server file
+    observationPath: ./fixtures/ts.next.no-server-client-boundary-leaks/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.next.no-server-client-boundary-leaks
+      allSeverities:
+        - high
+  - name: ignores the same code after an explicit client boundary
+    observationPath: ./fixtures/ts.next.no-server-client-boundary-leaks/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

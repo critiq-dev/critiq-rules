@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.datadog-browser-track-user-interactions.rule.yaml
+fixtures:
+  - name: flags Datadog RUM interaction capture
+    sourcePath: ./fixtures/public-security/dynamodb-jwt.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.datadog-browser-track-user-interactions
+      allSeverities:
+        - medium
+  - name: ignores disabled Datadog interaction capture
+    sourcePath: ./fixtures/public-security/dynamodb-jwt.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

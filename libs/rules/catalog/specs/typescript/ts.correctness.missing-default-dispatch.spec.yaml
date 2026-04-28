@@ -1,0 +1,22 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.missing-default-dispatch.rule.yaml
+fixtures:
+  - name: flags switch statements without default handling
+    sourcePath: ./fixtures/ts.correctness.missing-default-dispatch/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.missing-default-dispatch
+      allSeverities:
+        - medium
+  - name: ignores dispatches with explicit fallback handling
+    sourcePath: ./fixtures/ts.correctness.missing-default-dispatch/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores dispatches that share a fallback after the switch
+    sourcePath: ./fixtures/ts.correctness.missing-default-dispatch/shared-fallback.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

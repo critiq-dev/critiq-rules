@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.import-using-user-input.rule.yaml
+fixtures:
+  - name: flags request-controlled module loading
+    sourcePath: ./fixtures/public-security/module-response.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.import-using-user-input
+      allSeverities:
+        - high
+  - name: ignores allowlisted module loading
+    sourcePath: ./fixtures/public-security/module-response.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

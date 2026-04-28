@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: security.tls-verification-disabled
+  title: TLS verification disabled
+  summary: Transport clients should not disable certificate verification.
+  rationale: Trust-all TLS settings accept any certificate and undermine transport security.
+  tags:
+    - security
+    - transport
+    - tls
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+    - go
+    - python
+match:
+  fact:
+    kind: security.tls-verification-disabled
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - transport
+      - tls
+  message:
+    title: TLS verification disabled in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` disables certificate verification or trust validation."
+  remediation:
+    summary: Use trusted certificate validation and remove trust-all overrides outside local development.

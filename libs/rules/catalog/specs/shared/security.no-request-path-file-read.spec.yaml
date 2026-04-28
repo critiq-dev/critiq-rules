@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.no-request-path-file-read.rule.yaml
+fixtures:
+  - name: flags request-controlled file reads
+    sourcePath: ./fixtures/security.no-request-path-file-read/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-request-path-file-read
+      allSeverities:
+        - high
+      summaryContains:
+        - request data
+  - name: ignores validated path usage
+    sourcePath: ./fixtures/security.no-request-path-file-read/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags request-controlled file reads in Go
+    sourcePath: ./fixtures/security.no-request-path-file-read/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-request-path-file-read
+      allSeverities:
+        - high
+  - name: ignores fixed Go file reads
+    sourcePath: ./fixtures/security.no-request-path-file-read/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags request-controlled file reads in Python
+    sourcePath: ./fixtures/security.no-request-path-file-read/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-request-path-file-read
+      allSeverities:
+        - high
+  - name: ignores fixed Python file reads
+    sourcePath: ./fixtures/security.no-request-path-file-read/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

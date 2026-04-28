@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.no-command-execution-with-request-input.rule.yaml
+fixtures:
+  - name: flags request-controlled exec call
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-command-execution-with-request-input
+      allSeverities:
+        - critical
+  - name: ignores allowlisted command execution
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags request-controlled command execution in Go
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-command-execution-with-request-input
+      allSeverities:
+        - critical
+  - name: ignores fixed command execution in Go
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags request-controlled command execution in Python
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-command-execution-with-request-input
+      allSeverities:
+        - critical
+  - name: ignores fixed command execution in Python
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

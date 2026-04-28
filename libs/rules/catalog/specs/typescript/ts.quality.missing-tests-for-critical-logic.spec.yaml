@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.quality.missing-tests-for-critical-logic.rule.yaml
+fixtures:
+  - name: flags critical logic without matching test files
+    observationPath: ./fixtures/ts.quality.missing-tests-for-critical-logic/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.missing-tests-for-critical-logic
+      allSeverities:
+        - medium
+  - name: ignores observations without matching project facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

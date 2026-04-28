@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.raw-html-using-user-input.rule.yaml
+fixtures:
+  - name: flags request input interpolated into raw html
+    sourcePath: ./fixtures/public-security/browser-html.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.raw-html-using-user-input
+      allSeverities:
+        - high
+  - name: ignores non-request html interpolation
+    sourcePath: ./fixtures/public-security/browser-html.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

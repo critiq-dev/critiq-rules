@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.unsafe-deserialization.rule.yaml
+fixtures:
+  - name: flags deserialization of request-derived payloads
+    sourcePath: ./fixtures/security.unsafe-deserialization/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.unsafe-deserialization
+      allSeverities:
+        - high
+  - name: ignores deserialization of trusted literals
+    sourcePath: ./fixtures/security.unsafe-deserialization/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags unsafe deserialization in Go
+    sourcePath: ./fixtures/security.unsafe-deserialization/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.unsafe-deserialization
+      allSeverities:
+        - high
+  - name: ignores trusted Go deserialization
+    sourcePath: ./fixtures/security.unsafe-deserialization/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags unsafe deserialization in Python
+    sourcePath: ./fixtures/security.unsafe-deserialization/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.unsafe-deserialization
+      allSeverities:
+        - high
+  - name: ignores trusted Python deserialization
+    sourcePath: ./fixtures/security.unsafe-deserialization/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

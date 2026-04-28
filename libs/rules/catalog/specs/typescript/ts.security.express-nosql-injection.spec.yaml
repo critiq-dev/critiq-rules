@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.express-nosql-injection.rule.yaml
+fixtures:
+  - name: flags request-controlled model queries
+    sourcePath: ./fixtures/public-security/headers-nosql.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-nosql-injection
+      allSeverities:
+        - critical
+  - name: ignores fixed model queries
+    sourcePath: ./fixtures/public-security/headers-nosql.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

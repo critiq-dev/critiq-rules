@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.quality.hardcoded-configuration-values.rule.yaml
+fixtures:
+  - name: flags top-level hardcoded config-like literals
+    sourcePath: ./fixtures/ts.quality.hardcoded-configuration-values/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.hardcoded-configuration-values
+      allSeverities:
+        - low
+  - name: ignores values loaded from configuration sources
+    sourcePath: ./fixtures/ts.quality.hardcoded-configuration-values/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.weak-hash-algorithm.rule.yaml
+fixtures:
+  - name: flags weak hash usage
+    observationPath: ./fixtures/security.weak-hash-algorithm/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.weak-hash-algorithm
+      allSeverities:
+        - high
+  - name: ignores strong hash usage
+    observationPath: ./fixtures/security.weak-hash-algorithm/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags weak hash usage in Go
+    sourcePath: ./fixtures/security.weak-hash-algorithm/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.weak-hash-algorithm
+      allSeverities:
+        - high
+  - name: ignores strong hash usage in Go
+    sourcePath: ./fixtures/security.weak-hash-algorithm/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags weak hash usage in Python
+    sourcePath: ./fixtures/security.weak-hash-algorithm/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.weak-hash-algorithm
+      allSeverities:
+        - high
+  - name: ignores strong hash usage in Python
+    sourcePath: ./fixtures/security.weak-hash-algorithm/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -2,508 +2,508 @@ apiVersion: critiq.dev/v1alpha1
 kind: RuleCatalog
 rules:
   - id: ts.logging.no-console-log
-    rulePath: ./rules/ts.logging.no-console-log.rule.yaml
+    rulePath: ./rules/typescript/ts.logging.no-console-log.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.logging.no-console-error
-    rulePath: ./rules/ts.logging.no-console-error.rule.yaml
+    rulePath: ./rules/typescript/ts.logging.no-console-error.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.runtime.no-debugger-statement
-    rulePath: ./rules/ts.runtime.no-debugger-statement.rule.yaml
+    rulePath: ./rules/typescript/ts.runtime.no-debugger-statement.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.constant-condition
-    rulePath: ./rules/ts.correctness.constant-condition.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.constant-condition.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.missing-await-on-async-call
-    rulePath: ./rules/ts.correctness.missing-await-on-async-call.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.missing-await-on-async-call.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.implicit-undefined-return
-    rulePath: ./rules/ts.correctness.implicit-undefined-return.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.implicit-undefined-return.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.unhandled-async-error
-    rulePath: ./rules/ts.correctness.unhandled-async-error.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.unhandled-async-error.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.correctness.incorrect-boolean-logic
-    rulePath: ./rules/ts.correctness.incorrect-boolean-logic.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.incorrect-boolean-logic.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.blocking-call-in-async-flow
-    rulePath: ./rules/ts.correctness.blocking-call-in-async-flow.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.blocking-call-in-async-flow.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.missing-default-dispatch
-    rulePath: ./rules/ts.correctness.missing-default-dispatch.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.missing-default-dispatch.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.missing-timeout-on-external-call
-    rulePath: ./rules/ts.correctness.missing-timeout-on-external-call.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.missing-timeout-on-external-call.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.correctness.possible-null-dereference
-    rulePath: ./rules/ts.correctness.possible-null-dereference.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.possible-null-dereference.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.nested-property-access-without-check
-    rulePath: ./rules/ts.correctness.nested-property-access-without-check.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.nested-property-access-without-check.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.unchecked-map-key-access
-    rulePath: ./rules/ts.correctness.unchecked-map-key-access.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.unchecked-map-key-access.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.optional-value-without-fallback
-    rulePath: ./rules/ts.correctness.optional-value-without-fallback.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.optional-value-without-fallback.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.off-by-one-loop-boundary
-    rulePath: ./rules/ts.correctness.off-by-one-loop-boundary.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.off-by-one-loop-boundary.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.correctness.shared-state-race
-    rulePath: ./rules/ts.correctness.shared-state-race.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.shared-state-race.rule.yaml
     presets:
       - experimental
   - id: ts.correctness.unreachable-statement
-    rulePath: ./rules/ts.correctness.unreachable-statement.rule.yaml
+    rulePath: ./rules/typescript/ts.correctness.unreachable-statement.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.quality.swallowed-error
-    rulePath: ./rules/ts.quality.swallowed-error.rule.yaml
+    rulePath: ./rules/typescript/ts.quality.swallowed-error.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.quality.function-too-large-or-complex
-    rulePath: ./rules/ts.quality.function-too-large-or-complex.rule.yaml
+    rulePath: ./rules/typescript/ts.quality.function-too-large-or-complex.rule.yaml
     presets:
       - strict
   - id: ts.quality.duplicate-code-block
-    rulePath: ./rules/ts.quality.duplicate-code-block.rule.yaml
+    rulePath: ./rules/typescript/ts.quality.duplicate-code-block.rule.yaml
     presets:
       - strict
   - id: ts.quality.deep-nesting
-    rulePath: ./rules/ts.quality.deep-nesting.rule.yaml
+    rulePath: ./rules/typescript/ts.quality.deep-nesting.rule.yaml
     presets:
       - strict
   - id: ts.quality.missing-error-context
-    rulePath: ./rules/ts.quality.missing-error-context.rule.yaml
+    rulePath: ./rules/typescript/ts.quality.missing-error-context.rule.yaml
     presets:
       - strict
   - id: ts.quality.tight-module-coupling
-    rulePath: ./rules/ts.quality.tight-module-coupling.rule.yaml
+    rulePath: ./rules/typescript/ts.quality.tight-module-coupling.rule.yaml
     presets:
       - strict
   - id: ts.quality.hardcoded-configuration-values
-    rulePath: ./rules/ts.quality.hardcoded-configuration-values.rule.yaml
+    rulePath: ./rules/typescript/ts.quality.hardcoded-configuration-values.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.quality.magic-numbers-or-strings
-    rulePath: ./rules/ts.quality.magic-numbers-or-strings.rule.yaml
+    rulePath: ./rules/typescript/ts.quality.magic-numbers-or-strings.rule.yaml
     presets:
       - strict
   - id: ts.quality.missing-tests-for-critical-logic
-    rulePath: ./rules/ts.quality.missing-tests-for-critical-logic.rule.yaml
+    rulePath: ./rules/typescript/ts.quality.missing-tests-for-critical-logic.rule.yaml
     presets:
       - strict
   - id: ts.quality.logic-change-without-test-updates
-    rulePath: ./rules/ts.quality.logic-change-without-test-updates.rule.yaml
+    rulePath: ./rules/typescript/ts.quality.logic-change-without-test-updates.rule.yaml
     presets:
       - strict
   - id: ts.config.no-process-env-outside-config
-    rulePath: ./rules/ts.config.no-process-env-outside-config.rule.yaml
+    rulePath: ./rules/typescript/ts.config.no-process-env-outside-config.rule.yaml
     presets:
       - strict
   - id: ts.random.no-math-random-in-core
-    rulePath: ./rules/ts.random.no-math-random-in-core.rule.yaml
+    rulePath: ./rules/typescript/ts.random.no-math-random-in-core.rule.yaml
     presets:
       - strict
   - id: ts.performance.sequential-async-calls
-    rulePath: ./rules/ts.performance.sequential-async-calls.rule.yaml
+    rulePath: ./rules/typescript/ts.performance.sequential-async-calls.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.performance.repeated-io-in-loop
-    rulePath: ./rules/ts.performance.repeated-io-in-loop.rule.yaml
+    rulePath: ./rules/typescript/ts.performance.repeated-io-in-loop.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.performance.repeated-expensive-computation
-    rulePath: ./rules/ts.performance.repeated-expensive-computation.rule.yaml
+    rulePath: ./rules/typescript/ts.performance.repeated-expensive-computation.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.performance.inefficient-data-structure-usage
-    rulePath: ./rules/ts.performance.inefficient-data-structure-usage.rule.yaml
+    rulePath: ./rules/typescript/ts.performance.inefficient-data-structure-usage.rule.yaml
     presets:
       - recommended
       - strict
   - id: ts.performance.nested-loops-hot-path
-    rulePath: ./rules/ts.performance.nested-loops-hot-path.rule.yaml
+    rulePath: ./rules/typescript/ts.performance.nested-loops-hot-path.rule.yaml
     presets:
       - strict
   - id: ts.performance.missing-batch-operations
-    rulePath: ./rules/ts.performance.missing-batch-operations.rule.yaml
+    rulePath: ./rules/typescript/ts.performance.missing-batch-operations.rule.yaml
     presets:
       - strict
   - id: ts.performance.large-payload-without-streaming
-    rulePath: ./rules/ts.performance.large-payload-without-streaming.rule.yaml
+    rulePath: ./rules/typescript/ts.performance.large-payload-without-streaming.rule.yaml
     presets:
       - strict
   - id: ts.performance.unbounded-growth-memory-leak
-    rulePath: ./rules/ts.performance.unbounded-growth-memory-leak.rule.yaml
+    rulePath: ./rules/typescript/ts.performance.unbounded-growth-memory-leak.rule.yaml
     presets:
       - strict
   - id: ts.performance.retained-large-object
-    rulePath: ./rules/ts.performance.retained-large-object.rule.yaml
+    rulePath: ./rules/typescript/ts.performance.retained-large-object.rule.yaml
     presets:
       - experimental
   - id: ts.performance.unnecessary-rerenders-from-state-misuse
-    rulePath: ./rules/ts.performance.unnecessary-rerenders-from-state-misuse.rule.yaml
+    rulePath: ./rules/typescript/ts.performance.unnecessary-rerenders-from-state-misuse.rule.yaml
     presets:
       - experimental
   - id: ts.react.no-cascaded-effect-fetches
-    rulePath: ./rules/ts.react.no-cascaded-effect-fetches.rule.yaml
+    rulePath: ./rules/typescript/ts.react.no-cascaded-effect-fetches.rule.yaml
     presets:
       - strict
   - id: ts.next.no-server-client-boundary-leaks
-    rulePath: ./rules/ts.next.no-server-client-boundary-leaks.rule.yaml
+    rulePath: ./rules/typescript/ts.next.no-server-client-boundary-leaks.rule.yaml
     presets:
       - strict
-  - id: ts.security.no-sql-interpolation
-    rulePath: ./rules/ts.security.no-sql-interpolation.rule.yaml
+  - id: security.no-sql-interpolation
+    rulePath: ./rules/shared/security.no-sql-interpolation.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.no-dynamic-execution
-    rulePath: ./rules/ts.security.no-dynamic-execution.rule.yaml
+    rulePath: ./rules/typescript/ts.security.no-dynamic-execution.rule.yaml
     presets:
       - recommended
       - strict
       - security
-  - id: ts.security.no-request-path-file-read
-    rulePath: ./rules/ts.security.no-request-path-file-read.rule.yaml
+  - id: security.no-request-path-file-read
+    rulePath: ./rules/shared/security.no-request-path-file-read.rule.yaml
     presets:
       - recommended
       - strict
       - security
-  - id: ts.security.no-command-execution-with-request-input
-    rulePath: ./rules/ts.security.no-command-execution-with-request-input.rule.yaml
+  - id: security.no-command-execution-with-request-input
+    rulePath: ./rules/shared/security.no-command-execution-with-request-input.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.no-innerhtml-assignment
-    rulePath: ./rules/ts.security.no-innerhtml-assignment.rule.yaml
+    rulePath: ./rules/typescript/ts.security.no-innerhtml-assignment.rule.yaml
     presets:
       - recommended
       - strict
       - security
-  - id: ts.security.no-hardcoded-credentials
-    rulePath: ./rules/ts.security.no-hardcoded-credentials.rule.yaml
+  - id: security.no-hardcoded-credentials
+    rulePath: ./rules/shared/security.no-hardcoded-credentials.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.missing-authorization-before-sensitive-action
-    rulePath: ./rules/ts.security.missing-authorization-before-sensitive-action.rule.yaml
+    rulePath: ./rules/typescript/ts.security.missing-authorization-before-sensitive-action.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.missing-ownership-validation
-    rulePath: ./rules/ts.security.missing-ownership-validation.rule.yaml
+    rulePath: ./rules/typescript/ts.security.missing-ownership-validation.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.frontend-only-authorization
-    rulePath: ./rules/ts.security.frontend-only-authorization.rule.yaml
+    rulePath: ./rules/typescript/ts.security.frontend-only-authorization.rule.yaml
     presets:
       - experimental
   - id: ts.security.token-or-session-not-validated
-    rulePath: ./rules/ts.security.token-or-session-not-validated.rule.yaml
+    rulePath: ./rules/typescript/ts.security.token-or-session-not-validated.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.insecure-auth-cookie-flags
-    rulePath: ./rules/ts.security.insecure-auth-cookie-flags.rule.yaml
+    rulePath: ./rules/typescript/ts.security.insecure-auth-cookie-flags.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.jwt-sensitive-claims
-    rulePath: ./rules/ts.security.jwt-sensitive-claims.rule.yaml
+    rulePath: ./rules/typescript/ts.security.jwt-sensitive-claims.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.browser-token-storage
-    rulePath: ./rules/ts.security.browser-token-storage.rule.yaml
+    rulePath: ./rules/typescript/ts.security.browser-token-storage.rule.yaml
     presets:
       - recommended
       - strict
       - security
-  - id: ts.security.tls-verification-disabled
-    rulePath: ./rules/ts.security.tls-verification-disabled.rule.yaml
+  - id: security.tls-verification-disabled
+    rulePath: ./rules/shared/security.tls-verification-disabled.rule.yaml
     presets:
       - recommended
       - strict
       - security
-  - id: ts.security.insecure-http-transport
-    rulePath: ./rules/ts.security.insecure-http-transport.rule.yaml
+  - id: security.insecure-http-transport
+    rulePath: ./rules/shared/security.insecure-http-transport.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.open-redirect
-    rulePath: ./rules/ts.security.open-redirect.rule.yaml
+    rulePath: ./rules/typescript/ts.security.open-redirect.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.sensitive-data-egress
-    rulePath: ./rules/ts.security.sensitive-data-egress.rule.yaml
+    rulePath: ./rules/typescript/ts.security.sensitive-data-egress.rule.yaml
     presets:
       - strict
       - security
-  - id: ts.security.no-sensitive-data-in-logs-and-telemetry
-    rulePath: ./rules/ts.security.no-sensitive-data-in-logs-and-telemetry.rule.yaml
+  - id: security.no-sensitive-data-in-logs-and-telemetry
+    rulePath: ./rules/shared/security.no-sensitive-data-in-logs-and-telemetry.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.ssrf
-    rulePath: ./rules/ts.security.ssrf.rule.yaml
+    rulePath: ./rules/typescript/ts.security.ssrf.rule.yaml
     presets:
       - recommended
       - strict
       - security
-  - id: ts.security.weak-hash-algorithm
-    rulePath: ./rules/ts.security.weak-hash-algorithm.rule.yaml
+  - id: security.weak-hash-algorithm
+    rulePath: ./rules/shared/security.weak-hash-algorithm.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.weak-cipher-or-mode
-    rulePath: ./rules/ts.security.weak-cipher-or-mode.rule.yaml
+    rulePath: ./rules/typescript/ts.security.weak-cipher-or-mode.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.predictable-token-generation
-    rulePath: ./rules/ts.security.predictable-token-generation.rule.yaml
+    rulePath: ./rules/typescript/ts.security.predictable-token-generation.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.unvalidated-external-input
-    rulePath: ./rules/ts.security.unvalidated-external-input.rule.yaml
+    rulePath: ./rules/typescript/ts.security.unvalidated-external-input.rule.yaml
     presets:
       - strict
       - security
-  - id: ts.security.unsafe-deserialization
-    rulePath: ./rules/ts.security.unsafe-deserialization.rule.yaml
+  - id: security.unsafe-deserialization
+    rulePath: ./rules/shared/security.unsafe-deserialization.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.missing-request-timeout-or-retry
-    rulePath: ./rules/ts.security.missing-request-timeout-or-retry.rule.yaml
+    rulePath: ./rules/typescript/ts.security.missing-request-timeout-or-retry.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.datadog-browser-track-user-interactions
-    rulePath: ./rules/ts.security.datadog-browser-track-user-interactions.rule.yaml
+    rulePath: ./rules/typescript/ts.security.datadog-browser-track-user-interactions.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.dynamodb-query-injection
-    rulePath: ./rules/ts.security.dynamodb-query-injection.rule.yaml
+    rulePath: ./rules/typescript/ts.security.dynamodb-query-injection.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.hardcoded-auth-secret
-    rulePath: ./rules/ts.security.hardcoded-auth-secret.rule.yaml
+    rulePath: ./rules/typescript/ts.security.hardcoded-auth-secret.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.import-using-user-input
-    rulePath: ./rules/ts.security.import-using-user-input.rule.yaml
+    rulePath: ./rules/typescript/ts.security.import-using-user-input.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.insecure-allow-origin
-    rulePath: ./rules/ts.security.insecure-allow-origin.rule.yaml
+    rulePath: ./rules/typescript/ts.security.insecure-allow-origin.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.express-insecure-cookie
-    rulePath: ./rules/ts.security.express-insecure-cookie.rule.yaml
+    rulePath: ./rules/typescript/ts.security.express-insecure-cookie.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.express-cookie-missing-http-only
-    rulePath: ./rules/ts.security.express-cookie-missing-http-only.rule.yaml
+    rulePath: ./rules/typescript/ts.security.express-cookie-missing-http-only.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.insecure-password-hash-configuration
-    rulePath: ./rules/ts.security.insecure-password-hash-configuration.rule.yaml
+    rulePath: ./rules/typescript/ts.security.insecure-password-hash-configuration.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.insecure-websocket-transport
-    rulePath: ./rules/ts.security.insecure-websocket-transport.rule.yaml
+    rulePath: ./rules/typescript/ts.security.insecure-websocket-transport.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.jwt-not-revoked
-    rulePath: ./rules/ts.security.jwt-not-revoked.rule.yaml
+    rulePath: ./rules/typescript/ts.security.jwt-not-revoked.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.manual-html-sanitization
-    rulePath: ./rules/ts.security.manual-html-sanitization.rule.yaml
+    rulePath: ./rules/typescript/ts.security.manual-html-sanitization.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.missing-message-origin-check
-    rulePath: ./rules/ts.security.missing-message-origin-check.rule.yaml
+    rulePath: ./rules/typescript/ts.security.missing-message-origin-check.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.express-nosql-injection
-    rulePath: ./rules/ts.security.express-nosql-injection.rule.yaml
+    rulePath: ./rules/typescript/ts.security.express-nosql-injection.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.observable-timing-discrepancy
-    rulePath: ./rules/ts.security.observable-timing-discrepancy.rule.yaml
+    rulePath: ./rules/typescript/ts.security.observable-timing-discrepancy.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.permissive-file-permissions
-    rulePath: ./rules/ts.security.permissive-file-permissions.rule.yaml
+    rulePath: ./rules/typescript/ts.security.permissive-file-permissions.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.postmessage-wildcard-origin
-    rulePath: ./rules/ts.security.postmessage-wildcard-origin.rule.yaml
+    rulePath: ./rules/typescript/ts.security.postmessage-wildcard-origin.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.raw-html-using-user-input
-    rulePath: ./rules/ts.security.raw-html-using-user-input.rule.yaml
+    rulePath: ./rules/typescript/ts.security.raw-html-using-user-input.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.sensitive-data-in-exception
-    rulePath: ./rules/ts.security.sensitive-data-in-exception.rule.yaml
+    rulePath: ./rules/typescript/ts.security.sensitive-data-in-exception.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.sensitive-data-written-to-file
-    rulePath: ./rules/ts.security.sensitive-data-written-to-file.rule.yaml
+    rulePath: ./rules/typescript/ts.security.sensitive-data-written-to-file.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.ui-redress
-    rulePath: ./rules/ts.security.ui-redress.rule.yaml
+    rulePath: ./rules/typescript/ts.security.ui-redress.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.format-string-using-user-input
-    rulePath: ./rules/ts.security.format-string-using-user-input.rule.yaml
+    rulePath: ./rules/typescript/ts.security.format-string-using-user-input.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.user-controlled-sendfile
-    rulePath: ./rules/ts.security.user-controlled-sendfile.rule.yaml
+    rulePath: ./rules/typescript/ts.security.user-controlled-sendfile.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.user-controlled-view-render
-    rulePath: ./rules/ts.security.user-controlled-view-render.rule.yaml
+    rulePath: ./rules/typescript/ts.security.user-controlled-view-render.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.exposed-directory-listing
-    rulePath: ./rules/ts.security.exposed-directory-listing.rule.yaml
+    rulePath: ./rules/typescript/ts.security.exposed-directory-listing.rule.yaml
     presets:
       - recommended
       - strict
       - security
   - id: ts.security.express-default-session-config
-    rulePath: ./rules/ts.security.express-default-session-config.rule.yaml
+    rulePath: ./rules/typescript/ts.security.express-default-session-config.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.express-default-cookie-config
-    rulePath: ./rules/ts.security.express-default-cookie-config.rule.yaml
+    rulePath: ./rules/typescript/ts.security.express-default-cookie-config.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.express-static-assets-after-session
-    rulePath: ./rules/ts.security.express-static-assets-after-session.rule.yaml
+    rulePath: ./rules/typescript/ts.security.express-static-assets-after-session.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.express-missing-helmet
-    rulePath: ./rules/ts.security.express-missing-helmet.rule.yaml
+    rulePath: ./rules/typescript/ts.security.express-missing-helmet.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.express-reduce-fingerprint
-    rulePath: ./rules/ts.security.express-reduce-fingerprint.rule.yaml
+    rulePath: ./rules/typescript/ts.security.express-reduce-fingerprint.rule.yaml
     presets:
       - strict
       - security
   - id: ts.security.unsanitized-http-response
-    rulePath: ./rules/ts.security.unsanitized-http-response.rule.yaml
+    rulePath: ./rules/typescript/ts.security.unsanitized-http-response.rule.yaml
     presets:
       - recommended
       - strict

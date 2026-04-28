@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.insecure-http-transport.rule.yaml
+fixtures:
+  - name: flags plain http outbound requests
+    observationPath: ./fixtures/security.insecure-http-transport/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.insecure-http-transport
+      allSeverities:
+        - high
+      summaryContains:
+        - plain HTTP
+  - name: ignores secure and local-development transport
+    observationPath: ./fixtures/security.insecure-http-transport/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags plain http outbound requests in Go
+    sourcePath: ./fixtures/security.insecure-http-transport/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.insecure-http-transport
+      allSeverities:
+        - high
+  - name: ignores secure and local-development transport in Go
+    sourcePath: ./fixtures/security.insecure-http-transport/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags plain http outbound requests in Python
+    sourcePath: ./fixtures/security.insecure-http-transport/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.insecure-http-transport
+      allSeverities:
+        - high
+  - name: ignores secure and local-development transport in Python
+    sourcePath: ./fixtures/security.insecure-http-transport/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

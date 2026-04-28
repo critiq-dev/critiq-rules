@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: security.no-sensitive-data-in-logs-and-telemetry
+  title: Avoid sensitive data in logs and telemetry
+  summary: Sensitive fields should not be sent to logging, tracing, or analytics sinks.
+  rationale: Observability payloads often leave the service boundary and can expose secrets, account identifiers, or personal data if they carry raw request or user fields.
+  tags:
+    - security
+    - privacy
+    - logging
+    - telemetry
+    - rules-catalog
+  stability: stable
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+    - go
+    - python
+match:
+  fact:
+    kind: security.sensitive-data-in-logs-and-telemetry
+    bind: issue
+emit:
+  finding:
+    category: security.privacy
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - privacy
+      - logging
+      - telemetry
+  message:
+    title: Remove sensitive data from logs and telemetry
+    summary: "`${captures.issue.text}` reaches a logging or telemetry sink with sensitive data."
+  remediation:
+    summary: Redact, hash, or drop the sensitive field before it reaches the sink.

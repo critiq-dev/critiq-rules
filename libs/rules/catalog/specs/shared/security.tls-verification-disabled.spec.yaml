@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.tls-verification-disabled.rule.yaml
+fixtures:
+  - name: flags disabled tls verification
+    observationPath: ./fixtures/security.tls-verification-disabled/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.tls-verification-disabled
+      allSeverities:
+        - high
+      titleContains:
+        - TLS verification disabled
+  - name: ignores safe tls config
+    observationPath: ./fixtures/security.tls-verification-disabled/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags disabled tls verification in Go
+    sourcePath: ./fixtures/security.tls-verification-disabled/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.tls-verification-disabled
+      allSeverities:
+        - high
+  - name: ignores safe tls verification in Go
+    sourcePath: ./fixtures/security.tls-verification-disabled/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: flags disabled tls verification in Python
+    sourcePath: ./fixtures/security.tls-verification-disabled/invalid.py
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - security.tls-verification-disabled
+        - security.tls-verification-disabled
+      allSeverities:
+        - high
+        - high
+  - name: ignores safe tls verification in Python
+    sourcePath: ./fixtures/security.tls-verification-disabled/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

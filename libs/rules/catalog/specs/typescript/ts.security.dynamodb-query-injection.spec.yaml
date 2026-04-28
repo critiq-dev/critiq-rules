@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.dynamodb-query-injection.rule.yaml
+fixtures:
+  - name: flags request-controlled DynamoDB query input
+    sourcePath: ./fixtures/public-security/dynamodb-jwt.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.dynamodb-query-injection
+      allSeverities:
+        - critical
+  - name: ignores fixed DynamoDB query shapes
+    sourcePath: ./fixtures/public-security/dynamodb-jwt.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

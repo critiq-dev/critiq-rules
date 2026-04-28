@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.sensitive-data-in-exception.rule.yaml
+fixtures:
+  - name: flags sensitive data in exception payloads
+    sourcePath: ./fixtures/public-security/auth-files.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.sensitive-data-in-exception
+      allSeverities:
+        - high
+  - name: ignores flows without sensitive exception data
+    sourcePath: ./fixtures/public-security/auth-files.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+

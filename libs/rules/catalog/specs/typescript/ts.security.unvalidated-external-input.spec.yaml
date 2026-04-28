@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.unvalidated-external-input.rule.yaml
+fixtures:
+  - name: flags external input used to build regexes without validation
+    sourcePath: ./fixtures/ts.security.unvalidated-external-input/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.unvalidated-external-input
+      allSeverities:
+        - medium
+  - name: ignores external input after validation
+    sourcePath: ./fixtures/ts.security.unvalidated-external-input/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

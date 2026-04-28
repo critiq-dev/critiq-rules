@@ -1,0 +1,27 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.possible-null-dereference.rule.yaml
+fixtures:
+  - name: flags nullable dereferences without a guard
+    sourcePath: ./fixtures/ts.correctness.possible-null-dereference/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.possible-null-dereference
+      allSeverities:
+        - high
+  - name: ignores dereferences inside a positive null guard
+    sourcePath: ./fixtures/ts.correctness.possible-null-dereference/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores dereferences after an early-return null guard
+    sourcePath: ./fixtures/ts.correctness.possible-null-dereference/guarded-return.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores dereferences protected by logical short-circuit guards
+    sourcePath: ./fixtures/ts.correctness.possible-null-dereference/logical-guard.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

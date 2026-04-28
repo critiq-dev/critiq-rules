@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.unhandled-async-error.rule.yaml
+fixtures:
+  - name: flags floating promise chains without catch
+    sourcePath: ./fixtures/ts.correctness.unhandled-async-error/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.unhandled-async-error
+      allSeverities:
+        - high
+  - name: ignores promise chains with terminal catch handling
+    sourcePath: ./fixtures/ts.correctness.unhandled-async-error/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
