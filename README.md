@@ -16,14 +16,20 @@ workspace.
 Typical flow:
 
 ```bash
-cd ../critiq-core
-npm install
-npm run build
-
-cd ../critiq-rules
+cd critiq-rules
+npm run prepare-core-link
 npm install
 npm run verify
 ```
 
-The package overrides in this repo point at `../critiq-core/dist/...` so the
-core workspace must be built before installing dependencies here.
+`npm run prepare-core-link` builds the sibling `../critiq-core` workspace and
+verifies every `file:../critiq-core/dist/...` package that this repo consumes.
+
+`npm run build` also verifies that the packaged `@critiq/rules` output contains
+`catalog.yaml` and every catalog-referenced rule asset.
+
+For a packaged CLI smoke pass against the starter pack:
+
+```bash
+npm run smoke:packaged-cli
+```

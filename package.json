@@ -6,11 +6,14 @@
   "private": true,
   "scripts": {
     "nx": "nx",
-    "build": "nx run-many -t build --all",
+    "prepare-core-link": "node scripts/prepare-core-link.mjs",
+    "build": "nx run-many -t build --all && npm run check:built-catalog-assets",
+    "check:built-catalog-assets": "node scripts/check-built-catalog-assets.mjs",
+    "smoke:packaged-cli": "node scripts/smoke-packaged-cli.mjs",
     "lint": "nx run-many -t lint --all",
     "test": "nx run-many -t test --all",
     "typecheck": "nx run-many -t typecheck --all",
-    "verify": "npm run lint && npm run test && npm run build && npm run typecheck"
+    "verify": "npm run prepare-core-link && npm run lint && npm run test && npm run build && npm run typecheck"
   },
   "workspaces": [
     "examples/*",
@@ -43,6 +46,8 @@
     "@critiq/adapter-shared": "file:../critiq-core/dist/libs/adapters/shared",
     "@critiq/adapter-typescript": "file:../critiq-core/dist/libs/adapters/typescript",
     "@critiq/check-runner": "file:../critiq-core/dist/libs/runtime/check-runner",
+    "@critiq/core-catalog": "file:../critiq-core/dist/libs/core/catalog",
+    "@critiq/core-config": "file:../critiq-core/dist/libs/core/config",
     "@critiq/core-diagnostics": "file:../critiq-core/dist/libs/core/diagnostics",
     "@critiq/core-finding-schema": "file:../critiq-core/dist/libs/core/finding-schema",
     "@critiq/core-ir": "file:../critiq-core/dist/libs/core/ir",
@@ -77,6 +82,8 @@
     "@critiq/adapter-rust": "file:../critiq-core/dist/libs/adapters/rust",
     "@critiq/adapter-shared": "file:../critiq-core/dist/libs/adapters/shared",
     "@critiq/adapter-typescript": "file:../critiq-core/dist/libs/adapters/typescript",
+    "@critiq/core-catalog": "file:../critiq-core/dist/libs/core/catalog",
+    "@critiq/core-config": "file:../critiq-core/dist/libs/core/config",
     "@critiq/core-diagnostics": "file:../critiq-core/dist/libs/core/diagnostics",
     "@critiq/core-finding-schema": "file:../critiq-core/dist/libs/core/finding-schema",
     "@critiq/core-ir": "file:../critiq-core/dist/libs/core/ir",

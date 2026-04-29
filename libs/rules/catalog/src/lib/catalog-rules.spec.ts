@@ -1,3 +1,4 @@
+import { loadRuleCatalogFile } from '@critiq/core-catalog';
 import { runRuleSpec } from '@critiq/testing-harness';
 import { readdirSync, readFileSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
@@ -23,14 +24,25 @@ describe('rules catalog rule specs', () => {
   const specPaths = collectFiles(specsDirectory, '.spec.yaml');
 
   it('keeps catalog entries, rule files, and spec files in sync', () => {
-    const catalogText = readFileSync(catalogPath, 'utf8');
-    const catalogRuleIds = [...catalogText.matchAll(/^\s*-\s+id:\s+([^\s]+)\s*$/gm)]
-      .map((match) => match[1])
+    const loadedCatalog = loadRuleCatalogFile(catalogPath);
+
+    expect(loadedCatalog.success).toBe(true);
+
+    if (!loadedCatalog.success) {
+      throw new Error(
+        loadedCatalog.diagnostics
+          .map((diagnostic) => `${diagnostic.code}: ${diagnostic.message}`)
+          .join('\n'),
+      );
+    }
+
+    const catalogRuleIds = loadedCatalog.data.rules
+      .map((ruleEntry) => ruleEntry.id)
       .sort((left, right) => left.localeCompare(right));
-    const catalogRuleFiles = [
-      ...catalogText.matchAll(/^\s*rulePath:\s+\.\/rules\/([^\s]+)\s*$/gm),
-    ]
-      .map((match) => match[1])
+    const catalogRuleFiles = loadedCatalog.data.rules
+      .map((ruleEntry) =>
+        ruleEntry.rulePath.replace(/^\.\/rules\//u, ''),
+      )
       .sort((left, right) => left.localeCompare(right));
     const discoveredRuleFiles = collectFiles(rulesDirectory, '.rule.yaml').map((rulePath) =>
       relative(rulesDirectory, rulePath).replace(/\\/gu, '/'),
@@ -54,7 +66,7 @@ describe('rules catalog rule specs', () => {
       .filter((ruleId): ruleId is string => Boolean(ruleId))
       .sort((left, right) => left.localeCompare(right));
     const referencedFixturePaths = specPaths.flatMap((specPath) =>
-      [...readFileSync(specPath, 'utf8').matchAll(/^\s+(?:sourcePath|observationPath):\s+([^\s]+)\s*$/gm)]
+      [...readFileSync(specPath, 'utf8').matchAll(/^\s+(?:sourcePath|observationPath|workspacePath):\s+([^\s]+)\s*$/gm)]
         .map((match) => match[1]),
     );
 
