@@ -1,0 +1,34 @@
+{
+  "path": "src/crypto/keys.ts",
+  "language": "typescript",
+  "text": "generateKeyPairSync(\"rsa\", { modulusLength: 1024 });\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.weak-key-strength",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 52
+          },
+          "text": "generateKeyPairSync(\"rsa\", { modulusLength: 1024 })",
+          "props": {
+            "algorithm": "rsa",
+            "declaredStrength": 1024,
+            "requiredStrength": 2048,
+            "sink": "generateKeyPairSync",
+            "strengthType": "modulusLength"
+          }
+        }
+      ]
+    }
+  }
+}

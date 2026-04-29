@@ -1,0 +1,33 @@
+{
+  "path": "src/auth/session.ts",
+  "language": "typescript",
+  "text": "const sessionToken = createCipheriv(\"aes-256-cbc\", key, Buffer.alloc(16)).update(payload, \"utf8\", \"hex\");\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.missing-integrity-check",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 104
+          },
+          "text": "const sessionToken = createCipheriv(\"aes-256-cbc\", key, Buffer.alloc(16)).update(payload, \"utf8\", \"hex\")",
+          "props": {
+            "algorithm": "aes-256-cbc",
+            "ivIssue": "fixed",
+            "sink": "createCipheriv",
+            "target": "sessionToken"
+          }
+        }
+      ]
+    }
+  }
+}

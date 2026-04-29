@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.weak-key-strength
+  title: Avoid weak key-generation strength
+  summary: Key-generation helpers should use current minimum strengths for RSA, AES, and HMAC keys.
+  rationale: Weak modulus or key lengths make brute-force and cryptanalytic attacks more practical, even when the API itself is correct.
+  tags:
+    - security
+    - cryptography
+    - key-management
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.weak-key-strength
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - cryptography
+      - key-management
+  message:
+    title: Strengthen the key configuration used by `${captures.issue.text}`
+    summary: "`${captures.issue.text}` configures a key length or modulus size below the current minimum expected for production cryptography."
+  remediation:
+    summary: Use at least 2048-bit RSA keys and at least 128-bit AES or HMAC keys unless a clearly documented compatibility boundary requires otherwise.

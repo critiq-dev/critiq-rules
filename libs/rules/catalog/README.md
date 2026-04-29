@@ -143,6 +143,12 @@ pattern it checks.
 - `security.tls-verification-disabled` (`recommended`, `strict`, `security`): transport clients configured to skip certificate verification.
 - `security.insecure-http-transport` (`recommended`, `strict`, `security`): outbound requests sent over plain HTTP to non-local endpoints.
 - `security.weak-hash-algorithm` (`recommended`, `strict`, `security`): MD5, SHA-1, or similar weak hashing primitives used in security-sensitive flows.
+- `ts.security.weak-cipher-or-mode` (`recommended`, `strict`, `security`): weak or obsolete cipher selections such as ECB mode, DES-family ciphers, RC4, Blowfish, or RSA no-padding.
+- `ts.security.predictable-token-generation` (`recommended`, `strict`, `security`): auth-like tokens, invite codes, or reset helpers derived from `Math.random`, timestamps, or other predictable sources.
+- `ts.security.insufficiently-random-values` (`recommended`, `strict`, `security`): secret-like values generated from cryptographic APIs with less than 16 bytes of entropy.
+- `ts.security.weak-key-strength` (`recommended`, `strict`, `security`): explicit RSA, AES, or HMAC key-generation settings below modern minimum sizes.
+- `ts.security.missing-integrity-check` (`recommended`, `strict`, `security`): token or secret encryption helpers using non-AEAD modes or predictable IVs without same-function integrity protection.
+- `ts.security.insecure-password-hash-configuration` (`recommended`, `strict`, `security`): legacy or obsolete password-hash configuration such as insecure Argon2 mode selections.
 - `ts.security.unvalidated-external-input` (`strict`, `security`): request-derived values used to construct `RegExp` or `URL` without validation.
 - `security.unsafe-deserialization` (`recommended`, `strict`, `security`): `JSON.parse`, `yaml.load`, `qs.parse`, or similar deserializers fed external input.
 - `ts.security.missing-request-timeout-or-retry` (`strict`, `security`): external calls with neither timeout or cancellation nor retry protection.

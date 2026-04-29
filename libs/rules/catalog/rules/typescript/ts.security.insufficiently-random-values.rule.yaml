@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.insufficiently-random-values
+  title: Use enough entropy for secrets and tokens
+  summary: Secret-bearing tokens and secrets should use at least 16 bytes of cryptographic entropy.
+  rationale: Short random values are harder to brute-force than predictable values, but they can still be guessed faster than modern secret-bearing flows should allow.
+  tags:
+    - security
+    - cryptography
+    - randomness
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.insufficiently-random-values
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - cryptography
+      - randomness
+  message:
+    title: Increase the entropy used by `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a cryptographically random source, but not enough entropy for a secret-bearing value."
+  remediation:
+    summary: Generate at least 16 bytes of entropy for reset tokens, invitation codes, session secrets, and similar secret-bearing values.

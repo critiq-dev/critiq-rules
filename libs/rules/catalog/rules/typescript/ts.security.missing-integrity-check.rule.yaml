@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.missing-integrity-check
+  title: Use authenticated encryption for secrets and tokens
+  summary: Session, cookie, and token encryption should provide integrity protection in the same helper.
+  rationale: Confidentiality-only encryption leaves secret-bearing values vulnerable to tampering unless the code also applies an integrity check or uses an authenticated mode.
+  tags:
+    - security
+    - cryptography
+    - integrity
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.missing-integrity-check
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - cryptography
+      - integrity
+  message:
+    title: Add integrity protection to `${captures.issue.text}`
+    summary: "`${captures.issue.text}` encrypts a secret-bearing value without authenticated encryption or a same-helper integrity check."
+  remediation:
+    summary: Prefer authenticated encryption such as AES-GCM, or pair non-AEAD encryption with an explicit integrity check in the same helper.

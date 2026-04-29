@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.missing-integrity-check.rule.yaml
+fixtures:
+  - name: flags secret-bearing encryption without integrity protection
+    observationPath: ./fixtures/ts.security.missing-integrity-check/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.missing-integrity-check
+      allSeverities:
+        - high
+  - name: ignores authenticated encryption flows
+    observationPath: ./fixtures/ts.security.missing-integrity-check/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

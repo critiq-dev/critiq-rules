@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.weak-key-strength.rule.yaml
+fixtures:
+  - name: flags weak key-strength configuration
+    observationPath: ./fixtures/ts.security.weak-key-strength/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.weak-key-strength
+      allSeverities:
+        - high
+  - name: ignores current minimum key-strength configuration
+    observationPath: ./fixtures/ts.security.weak-key-strength/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

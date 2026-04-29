@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.insufficiently-random-values.rule.yaml
+fixtures:
+  - name: flags secret-bearing values with too little entropy
+    observationPath: ./fixtures/ts.security.insufficiently-random-values/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.insufficiently-random-values
+      allSeverities:
+        - high
+  - name: ignores sufficiently random secret-bearing values
+    observationPath: ./fixtures/ts.security.insufficiently-random-values/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

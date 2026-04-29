@@ -332,6 +332,24 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.insufficiently-random-values
+    rulePath: ./rules/typescript/ts.security.insufficiently-random-values.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.weak-key-strength
+    rulePath: ./rules/typescript/ts.security.weak-key-strength.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.missing-integrity-check
+    rulePath: ./rules/typescript/ts.security.missing-integrity-check.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.unvalidated-external-input
     rulePath: ./rules/typescript/ts.security.unvalidated-external-input.rule.yaml
     presets:
