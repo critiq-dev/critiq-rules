@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.import-using-user-input
-  title: Avoid request-controlled module loading
-  summary: "`require()` and dynamic `import()` should not resolve modules from request input."
-  rationale: Request-controlled module paths let attackers steer code loading toward unintended files or modules.
+  title: Constrain module-loading trust boundaries
+  summary: "`require()` and dynamic `import()` should not resolve modules from untrusted input."
+  rationale: Untrusted module paths let attackers steer module-loading boundaries toward unintended files, packages, or plugins.
   tags:
     - security
     - execution
@@ -30,7 +30,7 @@ emit:
       - execution
       - module-loading
   message:
-    title: Replace `${captures.issue.text}` with an allowlisted module dispatcher
-    summary: "`${captures.issue.text}` loads code from request-controlled input."
+    title: Resolve `${captures.issue.text}` from a trusted module map
+    summary: "`${captures.issue.text}` crosses a module-loading trust boundary with untrusted input."
   remediation:
-    summary: Resolve modules from a fixed allowlist or explicit dispatcher instead of request data.
+    summary: Resolve modules from a fixed allowlist or explicit dispatcher instead of untrusted request or event data.

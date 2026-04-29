@@ -15,4 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
-
+  - name: ignores allowlisted res.render view names
+    sourcePath: ./fixtures/ts.security.user-controlled-view-render/valid-allowlist.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

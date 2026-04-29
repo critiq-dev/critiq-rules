@@ -15,4 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
-
+  - name: ignores module loading after allowlist validation
+    sourcePath: ./fixtures/ts.security.import-using-user-input/valid-allowlist.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

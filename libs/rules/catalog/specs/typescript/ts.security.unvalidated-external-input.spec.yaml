@@ -15,3 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: ignores allowlisted redirect construction
+    sourcePath: ./fixtures/ts.security.unvalidated-external-input/validated-url.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: security.unsafe-deserialization
-  title: Unsafe deserialization from external input
-  summary: Deserializers should not consume untrusted payloads directly.
-  rationale: Deserializing attacker-controlled input creates a high-leverage parsing boundary and can amplify malformed or malicious payloads.
+  title: Protect deserialization trust boundaries
+  summary: Deserializers should not consume untrusted payloads directly across a trust boundary.
+  rationale: Deserializing untrusted payloads can let attacker-controlled data reshape parser state, object graphs, or downstream runtime behavior.
   tags:
     - security
     - deserialization
@@ -35,7 +35,7 @@ emit:
       - security
       - deserialization
   message:
-    title: Avoid deserializing untrusted input directly
-    summary: "`${captures.issue.text}` deserializes data that originated from external input."
+    title: Constrain the trust boundary before `${captures.issue.text}`
+    summary: "`${captures.issue.text}` deserializes an untrusted payload across a trust boundary."
   remediation:
-    summary: Parse only trusted data, or validate and constrain the payload shape before deserializing it.
+    summary: Deserialize only from trusted producers, or validate and constrain the payload shape before crossing the deserialization boundary.

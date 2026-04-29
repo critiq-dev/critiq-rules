@@ -15,3 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: ignores validated template markup when escaping stays enabled
+    sourcePath: ./fixtures/ts.security.handlebars-no-escape/validated.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -15,6 +15,11 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: ignores deserialization after validating request payloads
+    sourcePath: ./fixtures/security.unsafe-deserialization/validated.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
   - name: flags unsafe deserialization in Go
     sourcePath: ./fixtures/security.unsafe-deserialization/invalid.go
     expect:

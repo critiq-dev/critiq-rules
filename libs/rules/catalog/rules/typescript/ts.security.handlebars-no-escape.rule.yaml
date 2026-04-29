@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.handlebars-no-escape
-  title: Keep Handlebars escaping enabled
-  summary: "Handlebars templates should not disable HTML escaping with `noEscape: true`."
-  rationale: Disabling Handlebars escaping removes a strong output-encoding control and can turn otherwise safe template output into XSS.
+  title: Keep Handlebars escaping enabled at template trust boundaries
+  summary: "Server-side Handlebars compilation should not disable HTML escaping with `noEscape: true`."
+  rationale: Disabling Handlebars escaping weakens the template trust boundary and can turn server-rendered output into attacker-controlled HTML.
   tags:
     - security
     - xss
@@ -33,6 +33,6 @@ emit:
       - output-encoding
   message:
     title: Keep escaping enabled in `${captures.issue.text}`
-    summary: "`${captures.issue.text}` disables Handlebars HTML escaping with `noEscape: true`."
+    summary: "`${captures.issue.text}` disables Handlebars escaping at a server-template trust boundary."
   remediation:
-    summary: Leave Handlebars escaping enabled, or apply a strongly reviewed sanitization model before rendering.
+    summary: Leave Handlebars escaping enabled, or treat raw HTML rendering as an explicit, narrowly reviewed trust boundary.
