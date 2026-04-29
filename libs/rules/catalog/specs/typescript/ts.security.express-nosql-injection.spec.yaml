@@ -15,4 +15,16 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
-
+  - name: flags request-controlled aggregation pipelines
+    sourcePath: ./fixtures/public-security/nosql-aggregate.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-nosql-injection
+      allSeverities:
+        - critical
+  - name: ignores validated aggregation pipeline builders
+    sourcePath: ./fixtures/public-security/nosql-aggregate.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

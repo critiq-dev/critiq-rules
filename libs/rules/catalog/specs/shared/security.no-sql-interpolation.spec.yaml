@@ -17,6 +17,19 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags request-driven raw query sinks in TypeScript
+    sourcePath: ./fixtures/security.no-sql-interpolation/invalid-raw.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-sql-interpolation
+      allSeverities:
+        - high
+  - name: ignores parameterized raw query helpers in TypeScript
+    sourcePath: ./fixtures/security.no-sql-interpolation/valid-raw.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
   - name: flags interpolated SQL in Go
     sourcePath: ./fixtures/security.no-sql-interpolation/invalid.go
     expect:

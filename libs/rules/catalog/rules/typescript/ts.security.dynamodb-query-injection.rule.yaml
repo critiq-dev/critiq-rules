@@ -3,8 +3,8 @@ kind: Rule
 metadata:
   id: ts.security.dynamodb-query-injection
   title: Avoid request-driven DynamoDB queries
-  summary: DynamoDB query objects should not be built directly from request input.
-  rationale: Raw request data in DynamoDB query helpers can widen query scope or let attackers control key expressions and filters.
+  summary: DynamoDB query and scan inputs should not be built directly from request input.
+  rationale: Raw request data in DynamoDB helpers can widen query scope or let attackers control expressions, filters, and key conditions.
   tags:
     - security
     - injection
@@ -31,7 +31,6 @@ emit:
       - dynamodb
   message:
     title: Constrain `${captures.issue.text}` to a fixed DynamoDB query shape
-    summary: "`${captures.issue.text}` receives request-controlled query input without narrowing it to a trusted expression or key map."
+    summary: "`${captures.issue.text}` receives request-controlled DynamoDB input without narrowing it to trusted expressions or key maps."
   remediation:
-    summary: Build the DynamoDB query from fixed code paths and allowlisted fields instead of passing request objects directly.
-
+    summary: Build DynamoDB requests from fixed expressions and allowlisted fields instead of forwarding request-shaped input.

@@ -3,8 +3,8 @@ kind: Rule
 metadata:
   id: ts.security.express-nosql-injection
   title: Avoid request-driven model queries
-  summary: Express handlers should not pass raw request objects into NoSQL model query helpers.
-  rationale: Request-shaped filters or query objects can expand query scope or inject unintended operators.
+  summary: Express handlers should not pass raw request objects into NoSQL filters, query helpers, or aggregation pipelines.
+  rationale: Request-shaped filters, operators, or pipelines can expand query scope and inject unintended behavior.
   tags:
     - security
     - injection
@@ -31,7 +31,6 @@ emit:
       - nosql
   message:
     title: Narrow the query passed to `${captures.issue.text}`
-    summary: "`${captures.issue.text}` receives request-controlled query input without an allowlisted query shape."
+    summary: "`${captures.issue.text}` receives request-controlled query input without an allowlisted query or pipeline shape."
   remediation:
-    summary: Build the model query from fixed fields or validated filters instead of passing request data directly.
-
+    summary: Build the NoSQL query or aggregation pipeline from fixed fields or validated filter builders instead of passing request data directly.

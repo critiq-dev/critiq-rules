@@ -15,6 +15,19 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags shell-backed execFile input in TypeScript
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/invalid-shell.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.no-command-execution-with-request-input
+      allSeverities:
+        - critical
+  - name: ignores fixed execFile execution in TypeScript
+    sourcePath: ./fixtures/security.no-command-execution-with-request-input/valid-exec-file.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
   - name: flags request-controlled command execution in Go
     sourcePath: ./fixtures/security.no-command-execution-with-request-input/invalid.go
     expect:

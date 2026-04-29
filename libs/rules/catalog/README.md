@@ -123,10 +123,10 @@ pattern it checks.
 
 ### Security
 
-- `security.no-sql-interpolation` (`recommended`, `strict`, `security`): SQL built by string interpolation or concatenation with untrusted data.
-- `ts.security.no-dynamic-execution` (`recommended`, `strict`, `security`): `eval`, `Function`, or similar runtime code execution helpers.
+- `security.no-sql-interpolation` (`recommended`, `strict`, `security`): raw or interpolated SQL text passed into query sinks.
+- `ts.security.no-dynamic-execution` (`recommended`, `strict`, `security`): `eval`, `Function`, `vm`, or string-evaluated timer execution.
 - `security.no-request-path-file-read` (`recommended`, `strict`, `security`): file reads using request-controlled paths.
-- `security.no-command-execution-with-request-input` (`recommended`, `strict`, `security`): command execution helpers given request-controlled input.
+- `security.no-command-execution-with-request-input` (`recommended`, `strict`, `security`): process execution helpers given request-controlled executables or shell-interpreted arguments.
 - `ts.security.no-innerhtml-assignment` (`recommended`, `strict`, `security`): direct `innerHTML` assignment.
 - `security.no-hardcoded-credentials` (`recommended`, `strict`, `security`): credential-like literals embedded in source.
 - `ts.security.missing-authorization-before-sensitive-action` (`strict`, `security`): backend-like sensitive handlers without a local authorization guard.

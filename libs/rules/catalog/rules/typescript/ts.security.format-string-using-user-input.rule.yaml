@@ -4,7 +4,7 @@ metadata:
   id: ts.security.format-string-using-user-input
   title: Avoid request-controlled format strings
   summary: Logging and formatting helpers should not take request input as the format string itself.
-  rationale: Request-controlled format strings can corrupt logs, leak structure, or create unexpected formatting behavior.
+  rationale: Request-controlled format strings can corrupt logs, leak structure, or produce unexpected formatting behavior.
   tags:
     - security
     - logging
@@ -33,5 +33,4 @@ emit:
     title: Treat `${captures.issue.text}` as data, not a format string
     summary: "`${captures.issue.text}` uses request-controlled input as the formatting template."
   remediation:
-    summary: Keep the format string fixed and pass request data as ordinary values or structured fields.
-
+    summary: Keep the format string fixed and pass request data as ordinary arguments or structured fields.

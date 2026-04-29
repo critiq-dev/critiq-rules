@@ -15,4 +15,16 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
-
+  - name: flags request-controlled DynamoDB scan expressions
+    sourcePath: ./fixtures/public-security/dynamodb-expression.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.dynamodb-query-injection
+      allSeverities:
+        - critical
+  - name: ignores fixed DynamoDB scan expressions
+    sourcePath: ./fixtures/public-security/dynamodb-expression.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

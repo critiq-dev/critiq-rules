@@ -3,8 +3,8 @@ kind: Rule
 metadata:
   id: security.no-command-execution-with-request-input
   title: Command execution using untrusted input
-  summary: Command execution helpers must not receive request-controlled input.
-  rationale: Request-controlled shell commands can become remote code execution vulnerabilities.
+  summary: Process execution helpers must not receive request-controlled executables or shell-interpreted arguments.
+  rationale: Request-controlled process execution can become remote code execution when attackers choose the binary or influence shell parsing.
   tags:
     - security
     - injection
@@ -37,6 +37,6 @@ emit:
       - command-execution
   message:
     title: Avoid request-controlled command execution in `${captures.execCall.text}`
-    summary: "`${captures.execCall.text}` executes a command using untrusted input."
+    summary: "`${captures.execCall.text}` executes a process using request-controlled command data."
   remediation:
-    summary: Use an allowlisted command dispatcher and pass validated arguments without invoking a shell.
+    summary: Dispatch only allowlisted binaries, keep shell mode disabled, and validate or constrain subcommands before execution.

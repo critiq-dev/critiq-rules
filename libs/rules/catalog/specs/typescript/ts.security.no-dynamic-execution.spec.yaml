@@ -17,3 +17,16 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags vm execution helpers
+    sourcePath: ./fixtures/ts.security.no-dynamic-execution/invalid-vm.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.no-dynamic-execution
+      allSeverities:
+        - high
+  - name: ignores ordinary timer callbacks
+    sourcePath: ./fixtures/ts.security.no-dynamic-execution/valid-timer.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

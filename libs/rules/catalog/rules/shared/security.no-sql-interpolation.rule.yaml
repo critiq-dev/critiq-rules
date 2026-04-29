@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: security.no-sql-interpolation
-  title: SQL query built via string concatenation
-  summary: Database queries must not interpolate untrusted values directly into SQL.
-  rationale: Interpolated SQL strings can allow attackers to change query structure.
+  title: Avoid raw or interpolated SQL
+  summary: Database query sinks must not receive request-driven or dynamically interpolated SQL text.
+  rationale: Raw or interpolated SQL can let attackers control query structure when values are not passed separately.
   tags:
     - security
     - sql
@@ -37,6 +37,6 @@ emit:
       - injection
   message:
     title: Avoid interpolated SQL in `${captures.queryCall.text}`
-    summary: Use parameter placeholders instead of string interpolation in `${captures.queryCall.text}`.
+    summary: "`${captures.queryCall.text}` builds or forwards SQL text directly into a raw query sink."
   remediation:
-    summary: Pass values separately to the database client and use placeholders such as `$1`.
+    summary: Use prepared statements, placeholder parameters, or a typed query builder instead of executing raw SQL text.

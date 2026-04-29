@@ -15,4 +15,16 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
-
+  - name: flags util.format with request-controlled format text
+    sourcePath: ./fixtures/public-security/format-string.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.format-string-using-user-input
+      allSeverities:
+        - high
+  - name: ignores util.format with fixed format text
+    sourcePath: ./fixtures/public-security/format-string.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

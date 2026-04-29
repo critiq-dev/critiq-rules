@@ -3,8 +3,8 @@ kind: Rule
 metadata:
   id: ts.security.no-dynamic-execution
   title: Eval or dynamic code execution
-  summary: Runtime code execution helpers such as eval should not process application input.
-  rationale: Dynamic execution turns data into code and expands the attack surface.
+  summary: Eval-like helpers, `vm` execution APIs, and string-evaluated timers should not execute dynamic code.
+  rationale: Dynamic execution turns data into code, widens the attack surface, and bypasses normal control flow.
   tags:
     - security
     - execution
@@ -16,14 +16,9 @@ scope:
     - typescript
     - javascript
 match:
-  node:
-    kind: CallExpression
-    bind: dynamicExecution
-    where:
-      - path: callee.text
-        in:
-          - eval
-          - Function
+  fact:
+    kind: security.dynamic-execution
+    bind: issue
 emit:
   finding:
     category: security.execution
@@ -33,7 +28,7 @@ emit:
       - security
       - execution
   message:
-    title: Avoid `${captures.dynamicExecution.text}`
-    summary: "`${captures.dynamicExecution.text}` executes dynamic code and should be replaced with a safer alternative."
+    title: Avoid `${captures.issue.text}`
+    summary: "`${captures.issue.text}` executes dynamic code and should be replaced with a safer alternative."
   remediation:
-    summary: Replace dynamic execution with explicit parsing, validation, or a fixed dispatcher.
+    summary: Replace dynamic execution with explicit parsing, fixed dispatch tables, or normal function callbacks.
