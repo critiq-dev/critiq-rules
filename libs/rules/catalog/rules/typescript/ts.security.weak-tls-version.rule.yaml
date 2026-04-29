@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.weak-tls-version
+  title: Require modern TLS minimum versions
+  summary: Transport clients should not explicitly allow SSLv3, TLS 1.0, or TLS 1.1.
+  rationale: Legacy TLS protocol floors weaken transport security and keep obsolete downgrade-compatible settings alive in production code.
+  tags:
+    - security
+    - transport
+    - tls
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.weak-tls-version
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - transport
+      - tls
+  message:
+    title: Raise the TLS protocol floor in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` explicitly allows an obsolete TLS or SSL protocol version."
+  remediation:
+    summary: Set `minVersion` to at least `TLSv1.2` or `TLSv1.3` and remove legacy `secureProtocol` values.

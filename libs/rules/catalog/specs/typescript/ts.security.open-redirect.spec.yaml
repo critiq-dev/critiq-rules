@@ -15,4 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
-
+  - name: ignores shared safe redirect helpers
+    sourcePath: ./fixtures/ts.security.open-redirect/shared-safe-wrapper.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

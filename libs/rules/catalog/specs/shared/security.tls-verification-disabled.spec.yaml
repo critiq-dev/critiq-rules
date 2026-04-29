@@ -17,6 +17,19 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags permissive checkServerIdentity in TypeScript
+    sourcePath: ./fixtures/security.tls-verification-disabled/check-server-identity.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.tls-verification-disabled
+      allSeverities:
+        - high
+  - name: ignores safe checkServerIdentity in TypeScript
+    sourcePath: ./fixtures/security.tls-verification-disabled/check-server-identity.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
   - name: flags disabled tls verification in Go
     sourcePath: ./fixtures/security.tls-verification-disabled/invalid.go
     expect:

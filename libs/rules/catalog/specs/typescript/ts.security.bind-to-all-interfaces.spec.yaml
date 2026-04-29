@@ -1,0 +1,25 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.bind-to-all-interfaces.rule.yaml
+fixtures:
+  - name: flags explicit all-interface binds
+    sourcePath: ./fixtures/ts.security.bind-to-all-interfaces/invalid.ts
+    expect:
+      findingCount: 5
+      allRuleIds:
+        - ts.security.bind-to-all-interfaces
+        - ts.security.bind-to-all-interfaces
+        - ts.security.bind-to-all-interfaces
+        - ts.security.bind-to-all-interfaces
+        - ts.security.bind-to-all-interfaces
+      allSeverities:
+        - medium
+        - medium
+        - medium
+        - medium
+        - medium
+  - name: ignores loopback and omitted-host binds
+    sourcePath: ./fixtures/ts.security.bind-to-all-interfaces/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

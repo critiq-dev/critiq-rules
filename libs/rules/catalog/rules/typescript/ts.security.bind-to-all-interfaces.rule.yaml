@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.bind-to-all-interfaces
+  title: Avoid binding to all interfaces
+  summary: Network-facing services should not explicitly bind to every interface unless public exposure is intentional and protected.
+  rationale: Binding to `0.0.0.0` or `::` can expose a service beyond the expected trust boundary and widen the reachable attack surface.
+  tags:
+    - security
+    - network
+    - exposure
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.bind-to-all-interfaces
+    bind: issue
+emit:
+  finding:
+    category: security.network
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - network
+      - exposure
+  message:
+    title: Restrict interface binding in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` explicitly binds a network-facing service to every interface."
+  remediation:
+    summary: Bind to loopback or a specific interface unless public exposure is an intentional deployment requirement with compensating controls.

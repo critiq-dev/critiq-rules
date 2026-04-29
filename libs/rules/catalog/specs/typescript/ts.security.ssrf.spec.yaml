@@ -23,4 +23,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
-
+  - name: ignores shared safe url wrappers
+    sourcePath: ./fixtures/ts.security.ssrf/shared-safe-wrapper.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

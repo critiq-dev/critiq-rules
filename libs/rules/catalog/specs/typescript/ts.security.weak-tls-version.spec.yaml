@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.weak-tls-version.rule.yaml
+fixtures:
+  - name: flags weak tls version floors
+    sourcePath: ./fixtures/ts.security.weak-tls-version/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.weak-tls-version
+        - ts.security.weak-tls-version
+      allSeverities:
+        - high
+        - high
+  - name: ignores modern tls floors
+    sourcePath: ./fixtures/ts.security.weak-tls-version/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

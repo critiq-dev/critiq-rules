@@ -15,4 +15,11 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
-
+  - name: still flags cleartext loopback websocket URLs
+    sourcePath: ./fixtures/public-security/browser-html.loopback.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.insecure-websocket-transport
+      allSeverities:
+        - high

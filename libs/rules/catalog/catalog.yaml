@@ -292,6 +292,12 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.weak-tls-version
+    rulePath: ./rules/typescript/ts.security.weak-tls-version.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.open-redirect
     rulePath: ./rules/typescript/ts.security.open-redirect.rule.yaml
     presets:
@@ -310,6 +316,12 @@ rules:
       - security
   - id: ts.security.ssrf
     rulePath: ./rules/typescript/ts.security.ssrf.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.bind-to-all-interfaces
+    rulePath: ./rules/typescript/ts.security.bind-to-all-interfaces.rule.yaml
     presets:
       - recommended
       - strict
