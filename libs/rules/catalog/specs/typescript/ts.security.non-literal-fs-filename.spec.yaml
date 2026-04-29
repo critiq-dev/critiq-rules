@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.non-literal-fs-filename.rule.yaml
+fixtures:
+  - name: flags external filenames in direct file reads
+    sourcePath: ./fixtures/filesystem-safety/file-reads.invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.non-literal-fs-filename
+        - ts.security.non-literal-fs-filename
+      allSeverities:
+        - high
+        - high
+  - name: ignores allowlisted file reads
+    sourcePath: ./fixtures/filesystem-safety/file-reads.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

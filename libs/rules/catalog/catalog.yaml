@@ -436,6 +436,24 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.external-file-upload
+    rulePath: ./rules/typescript/ts.security.external-file-upload.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.file-generation
+    rulePath: ./rules/typescript/ts.security.file-generation.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.non-literal-fs-filename
+    rulePath: ./rules/typescript/ts.security.non-literal-fs-filename.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.permissive-file-permissions
     rulePath: ./rules/typescript/ts.security.permissive-file-permissions.rule.yaml
     presets:

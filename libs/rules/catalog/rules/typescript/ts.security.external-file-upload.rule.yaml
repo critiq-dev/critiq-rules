@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.external-file-upload
+  title: Do not persist upload filenames directly
+  summary: Upload handlers should not store attacker-controlled filenames without generating or validating a safe local name.
+  rationale: Upload filenames can carry traversal payloads, collisions, or misleading extensions that break local containment.
+  tags:
+    - security
+    - filesystem
+    - upload
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.external-file-upload
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.93
+    tags:
+      - security
+      - filesystem
+      - upload
+  message:
+    title: Generate a trusted local filename for `${captures.issue.text}`
+    summary: "`${captures.issue.text}` persists an upload filename derived from attacker-controlled input."
+  remediation:
+    summary: Generate a server-side filename or apply a strict allowlist before storing uploaded content.

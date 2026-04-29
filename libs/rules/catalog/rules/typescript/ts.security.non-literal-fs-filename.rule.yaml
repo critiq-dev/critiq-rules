@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.non-literal-fs-filename
+  title: Avoid attacker-controlled filesystem read paths
+  summary: Direct filesystem read APIs should not consume request- or upload-controlled filenames.
+  rationale: Dynamic read paths can expose unintended local files or bypass expected file-selection constraints.
+  tags:
+    - security
+    - filesystem
+    - path-traversal
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.non-literal-fs-filename
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - filesystem
+      - path-traversal
+  message:
+    title: Constrain the filename used by `${captures.issue.text}`
+    summary: "`${captures.issue.text}` reads from a filename derived from external input."
+  remediation:
+    summary: Resolve reads from a trusted allowlist or a validated server-controlled mapping instead of external filenames.

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.file-generation
+  title: Constrain local file generation paths
+  summary: Local file writes should not derive their destination path from request or upload input.
+  rationale: Attacker-controlled write paths can overwrite local state, escape intended directories, or create files in sensitive locations.
+  tags:
+    - security
+    - filesystem
+    - file-write
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.file-generation
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.92
+    tags:
+      - security
+      - filesystem
+      - file-write
+  message:
+    title: Validate the local write path used by `${captures.issue.text}`
+    summary: "`${captures.issue.text}` writes to a path derived from external input without a trusted local filename."
+  remediation:
+    summary: Generate the destination name on the server or constrain writes to an allowlisted directory and filename set.

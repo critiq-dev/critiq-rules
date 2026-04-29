@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.external-file-upload.rule.yaml
+fixtures:
+  - name: flags upload handlers that reuse attacker-controlled filenames
+    sourcePath: ./fixtures/filesystem-safety/upload-filename.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.external-file-upload
+      allSeverities:
+        - high
+  - name: ignores upload handlers that generate safe filenames
+    sourcePath: ./fixtures/filesystem-safety/upload-filename.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

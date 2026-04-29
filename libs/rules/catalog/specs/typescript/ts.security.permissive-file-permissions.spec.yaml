@@ -2,17 +2,18 @@ apiVersion: critiq.dev/v1alpha1
 kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.permissive-file-permissions.rule.yaml
 fixtures:
-  - name: flags world-accessible file modes
-    sourcePath: ./fixtures/public-security/auth-files.invalid.ts
+  - name: flags world-accessible file and directory modes
+    sourcePath: ./fixtures/filesystem-safety/permissions.invalid.ts
     expect:
-      findingCount: 1
+      findingCount: 2
       allRuleIds:
+        - ts.security.permissive-file-permissions
         - ts.security.permissive-file-permissions
       allSeverities:
         - high
+        - high
   - name: ignores restrictive file modes
-    sourcePath: ./fixtures/public-security/auth-files.valid.ts
+    sourcePath: ./fixtures/filesystem-safety/permissions.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []
-

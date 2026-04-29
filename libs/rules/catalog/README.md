@@ -127,6 +127,9 @@ pattern it checks.
 - `security.no-sql-interpolation` (`recommended`, `strict`, `security`): raw or interpolated SQL text passed into query sinks.
 - `ts.security.no-dynamic-execution` (`recommended`, `strict`, `security`): `eval`, `Function`, `vm`, or string-evaluated timer execution.
 - `security.no-request-path-file-read` (`recommended`, `strict`, `security`): file reads using request-controlled paths.
+- `ts.security.non-literal-fs-filename` (`recommended`, `strict`, `security`): direct filesystem reads using request- or upload-controlled filenames.
+- `ts.security.file-generation` (`recommended`, `strict`, `security`): local file writes whose destination path is derived from external input.
+- `ts.security.external-file-upload` (`recommended`, `strict`, `security`): upload handlers that persist attacker-controlled filenames directly.
 - `security.no-command-execution-with-request-input` (`recommended`, `strict`, `security`): process execution helpers given request-controlled executables or shell-interpreted arguments.
 - `ts.security.dangerous-insert-html` (`recommended`, `strict`, `security`): unsafe `outerHTML`, `document.write*`, or `insertAdjacentHTML` use with non-literal, non-sanitized HTML.
 - `ts.security.dangerously-set-inner-html` (`recommended`, `strict`, `security`): React `dangerouslySetInnerHTML` given non-literal, non-sanitized HTML.
@@ -144,6 +147,9 @@ pattern it checks.
 - `security.unsafe-deserialization` (`recommended`, `strict`, `security`): `JSON.parse`, `yaml.load`, `qs.parse`, or similar deserializers fed external input.
 - `ts.security.missing-request-timeout-or-retry` (`strict`, `security`): external calls with neither timeout or cancellation nor retry protection.
 - `ts.security.unsanitized-http-response` (`recommended`, `strict`, `security`): raw `res.send`, `res.write`, or `res.end` output of request-derived HTML without trusted escaping or sanitization.
+- `ts.security.permissive-file-permissions` (`recommended`, `strict`, `security`): world-accessible file or directory modes on creation helpers or `chmod`.
+- `ts.security.user-controlled-sendfile` (`recommended`, `strict`, `security`): `res.sendFile()` paths or options driven by external input without a trusted root.
+- `ts.security.exposed-directory-listing` (`recommended`, `strict`, `security`): explicit directory-listing middleware such as `serveIndex`.
 
 ## Notes
 

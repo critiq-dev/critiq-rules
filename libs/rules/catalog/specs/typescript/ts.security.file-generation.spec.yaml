@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.file-generation.rule.yaml
+fixtures:
+  - name: flags local writes driven by external file paths
+    sourcePath: ./fixtures/filesystem-safety/file-generation.invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.file-generation
+        - ts.security.file-generation
+      allSeverities:
+        - high
+        - high
+  - name: ignores server-generated local artifact paths
+    sourcePath: ./fixtures/filesystem-safety/file-generation.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
