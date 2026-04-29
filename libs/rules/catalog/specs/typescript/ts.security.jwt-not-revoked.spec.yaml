@@ -3,7 +3,7 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.jwt-not-revoked.rule.yaml
 fixtures:
   - name: flags express jwt config without revocation
-    sourcePath: ./fixtures/public-security/dynamodb-jwt.invalid.ts
+    sourcePath: ./fixtures/public-security/auth-session-hardening.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
@@ -11,8 +11,7 @@ fixtures:
       allSeverities:
         - medium
   - name: ignores express jwt config with revocation
-    sourcePath: ./fixtures/public-security/dynamodb-jwt.valid.ts
+    sourcePath: ./fixtures/public-security/auth-session-hardening.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []
-

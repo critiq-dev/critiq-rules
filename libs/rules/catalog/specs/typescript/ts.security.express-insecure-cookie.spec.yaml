@@ -3,7 +3,7 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.express-insecure-cookie.rule.yaml
 fixtures:
   - name: flags insecure Express cookie config
-    sourcePath: ./fixtures/public-security/render-express.invalid.ts
+    sourcePath: ./fixtures/public-security/auth-session-hardening.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
@@ -11,8 +11,7 @@ fixtures:
       allSeverities:
         - medium
   - name: ignores secure Express cookie config
-    sourcePath: ./fixtures/public-security/render-express.valid.ts
+    sourcePath: ./fixtures/public-security/auth-session-hardening.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []
-
