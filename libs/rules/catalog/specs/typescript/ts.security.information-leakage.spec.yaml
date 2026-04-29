@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.information-leakage.rule.yaml
+fixtures:
+  - name: flags information disclosure through logs stdout and responses
+    sourcePath: ./fixtures/public-security/information-leakage.invalid.ts
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ts.security.information-leakage
+        - ts.security.information-leakage
+        - ts.security.information-leakage
+      allSeverities:
+        - high
+        - high
+        - high
+  - name: ignores redacted or explicitly dev-only disclosure helpers
+    sourcePath: ./fixtures/public-security/information-leakage.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

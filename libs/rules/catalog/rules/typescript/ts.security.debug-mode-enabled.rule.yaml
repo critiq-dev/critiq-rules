@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.debug-mode-enabled
+  title: Do not expose debug routes or middleware in production
+  summary: Debug handlers, stack-showing middleware, and diagnostic endpoints should stay behind explicit development-only guards.
+  rationale: Debug endpoints and stack-showing middleware can disclose internal topology, environment details, and request data with very little attacker effort.
+  tags:
+    - security
+    - express
+    - diagnostics
+    - misconfiguration
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.debug-mode-enabled
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.92
+    tags:
+      - security
+      - express
+      - diagnostics
+      - misconfiguration
+  message:
+    title: Guard `${captures.issue.text}` behind an explicit development-only check
+    summary: "`${captures.issue.text}` enables debug or diagnostic exposure without a visible same-file development guard."
+  remediation:
+    summary: Wrap the registration in an explicit development-only guard or remove the endpoint or middleware from production builds.

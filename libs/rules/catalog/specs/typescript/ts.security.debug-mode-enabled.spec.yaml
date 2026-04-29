@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.debug-mode-enabled.rule.yaml
+fixtures:
+  - name: flags ungated debug middleware routes and diagnostic handlers
+    sourcePath: ./fixtures/public-security/debug-mode.invalid.ts
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ts.security.debug-mode-enabled
+        - ts.security.debug-mode-enabled
+        - ts.security.debug-mode-enabled
+      allSeverities:
+        - medium
+        - medium
+        - medium
+  - name: ignores explicitly dev-only debug exposure
+    sourcePath: ./fixtures/public-security/debug-mode.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.information-leakage
+  title: Avoid leaking sensitive or diagnostic state
+  summary: Logs, stdout or stderr, and direct response sinks should not expose sensitive fields or internal diagnostic detail.
+  rationale: Stack traces, request metadata, auth or session objects, and environment state are often leaked through "temporary" debugging output that later reaches production paths.
+  tags:
+    - security
+    - privacy
+    - logging
+    - diagnostics
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.information-leakage
+    bind: issue
+emit:
+  finding:
+    category: security.privacy
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - privacy
+      - logging
+      - diagnostics
+  message:
+    title: Remove sensitive or diagnostic data from `${captures.issue.text}`
+    summary: "`${captures.issue.text}` exposes sensitive fields or internal diagnostic detail through a direct sink."
+  remediation:
+    summary: Replace the payload with a fixed summary, redact sensitive fields, and strip stack, env, request, or cookie data from production output.

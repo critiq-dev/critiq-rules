@@ -514,6 +514,12 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.information-leakage
+    rulePath: ./rules/typescript/ts.security.information-leakage.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.ui-redress
     rulePath: ./rules/typescript/ts.security.ui-redress.rule.yaml
     presets:
@@ -566,6 +572,12 @@ rules:
   - id: ts.security.express-reduce-fingerprint
     rulePath: ./rules/typescript/ts.security.express-reduce-fingerprint.rule.yaml
     presets:
+      - strict
+      - security
+  - id: ts.security.debug-mode-enabled
+    rulePath: ./rules/typescript/ts.security.debug-mode-enabled.rule.yaml
+    presets:
+      - recommended
       - strict
       - security
   - id: ts.security.unsanitized-http-response
