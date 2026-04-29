@@ -3,16 +3,19 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.unsanitized-http-response.rule.yaml
 fixtures:
   - name: flags raw request data in http responses
-    sourcePath: ./fixtures/public-security/module-response.invalid.ts
+    sourcePath: ./fixtures/ts.security.unsanitized-http-response/invalid.ts
     expect:
-      findingCount: 1
+      findingCount: 3
       allRuleIds:
+        - ts.security.unsanitized-http-response
+        - ts.security.unsanitized-http-response
         - ts.security.unsanitized-http-response
       allSeverities:
         - high
+        - high
+        - high
   - name: ignores safe http responses
-    sourcePath: ./fixtures/public-security/module-response.valid.ts
+    sourcePath: ./fixtures/ts.security.unsanitized-http-response/valid.ts
     expect:
       findingCount: 0
       allRuleIds: []
-

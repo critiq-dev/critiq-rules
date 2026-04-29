@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.dangerously-set-inner-html.rule.yaml
+fixtures:
+  - name: flags unsafe dangerouslySetInnerHTML usage
+    sourcePath: ./fixtures/ts.security.dangerously-set-inner-html/invalid.tsx
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.dangerously-set-inner-html
+        - ts.security.dangerously-set-inner-html
+      allSeverities:
+        - high
+        - high
+  - name: ignores fixed and sanitized dangerouslySetInnerHTML usage
+    sourcePath: ./fixtures/ts.security.dangerously-set-inner-html/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

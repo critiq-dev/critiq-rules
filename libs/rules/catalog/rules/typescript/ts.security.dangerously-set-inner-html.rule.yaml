@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.dangerously-set-inner-html
+  title: Avoid unsafe `dangerouslySetInnerHTML`
+  summary: React `dangerouslySetInnerHTML` should only render fixed or explicitly sanitized HTML.
+  rationale: React bypasses its normal escaping model when `dangerouslySetInnerHTML` is used, which makes unsanitized HTML a direct XSS sink.
+  tags:
+    - security
+    - xss
+    - react
+    - output-encoding
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.dangerously-set-inner-html
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.93
+    tags:
+      - security
+      - xss
+      - react
+      - output-encoding
+  message:
+    title: Avoid unsafe `dangerouslySetInnerHTML` in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` bypasses React escaping with non-literal, non-sanitized HTML."
+  remediation:
+    summary: Prefer normal React rendering, or pass only fixed or explicitly sanitized HTML to `dangerouslySetInnerHTML`.

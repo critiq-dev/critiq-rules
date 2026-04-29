@@ -2,8 +2,8 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.unsanitized-http-response
-  title: Avoid unsanitized request data in HTTP responses
-  summary: Express response writers should not echo request data directly into raw responses.
+  title: Avoid unsafe raw HTTP response output
+  summary: Raw response writers should not echo request data into HTML-capable responses without trusted escaping or sanitization.
   rationale: Directly reflecting request data into HTML-capable response sinks creates reflected XSS and content injection risk.
   tags:
     - security
@@ -31,7 +31,6 @@ emit:
       - express
   message:
     title: Remove request data from `${captures.issue.text}` or escape it first
-    summary: "`${captures.issue.text}` writes request-controlled data directly into an HTTP response sink."
+    summary: "`${captures.issue.text}` writes request-controlled data into a raw HTTP response sink without a trusted HTML escaping model."
   remediation:
-    summary: Escape or sanitize the data, or switch to a response format that does not treat it as executable markup.
-
+    summary: Escape or sanitize the data with a trusted helper, or switch to a response format that does not treat it as executable markup.

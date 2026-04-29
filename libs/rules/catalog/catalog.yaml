@@ -218,6 +218,18 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.dangerous-insert-html
+    rulePath: ./rules/typescript/ts.security.dangerous-insert-html.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.dangerously-set-inner-html
+    rulePath: ./rules/typescript/ts.security.dangerously-set-inner-html.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.no-innerhtml-assignment
     rulePath: ./rules/typescript/ts.security.no-innerhtml-assignment.rule.yaml
     presets:
@@ -391,6 +403,12 @@ rules:
       - security
   - id: ts.security.jwt-not-revoked
     rulePath: ./rules/typescript/ts.security.jwt-not-revoked.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.handlebars-no-escape
+    rulePath: ./rules/typescript/ts.security.handlebars-no-escape.rule.yaml
     presets:
       - recommended
       - strict

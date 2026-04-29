@@ -2,7 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.no-innerhtml-assignment.rule.yaml
 fixtures:
-  - name: flags innerhtml assignment
+  - name: flags unsafe innerhtml assignment
     sourcePath: ./fixtures/ts.security.no-innerhtml-assignment/invalid.ts
     expect:
       findingCount: 1
@@ -10,7 +10,7 @@ fixtures:
         - ts.security.no-innerhtml-assignment
       allSeverities:
         - high
-  - name: ignores textcontent assignment
+  - name: ignores sanitized and fixed innerhtml assignment
     sourcePath: ./fixtures/ts.security.no-innerhtml-assignment/valid.ts
     expect:
       findingCount: 0

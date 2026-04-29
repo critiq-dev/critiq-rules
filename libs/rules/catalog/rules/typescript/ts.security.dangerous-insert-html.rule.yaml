@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.dangerous-insert-html
+  title: Avoid unsafe DOM HTML insertion sinks
+  summary: "`outerHTML`, `document.write*`, and `insertAdjacentHTML` should only receive fixed or explicitly sanitized HTML."
+  rationale: HTML-capable DOM insertion sinks can execute attacker-controlled markup unless the HTML is fixed or strongly sanitized first.
+  tags:
+    - security
+    - xss
+    - output-encoding
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.dangerous-insert-html
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.92
+    tags:
+      - security
+      - xss
+      - output-encoding
+  message:
+    title: Avoid unsafe HTML insertion in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses an HTML-capable DOM sink with non-literal, non-sanitized content."
+  remediation:
+    summary: Insert text with safe DOM APIs, or pass only fixed or explicitly sanitized HTML to the sink.

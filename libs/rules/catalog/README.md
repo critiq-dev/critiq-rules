@@ -60,6 +60,7 @@ function parseIdentity(req: { headers: Record<string, string | undefined> }) {
 ```ts
 const query = `SELECT * FROM users WHERE email = '${email}'`;
 element.innerHTML = req.body.html;
+document.write(userMarkup);
 execFile(req.query.command, []);
 JSON.parse(req.body.payload);
 ```
@@ -127,8 +128,11 @@ pattern it checks.
 - `ts.security.no-dynamic-execution` (`recommended`, `strict`, `security`): `eval`, `Function`, `vm`, or string-evaluated timer execution.
 - `security.no-request-path-file-read` (`recommended`, `strict`, `security`): file reads using request-controlled paths.
 - `security.no-command-execution-with-request-input` (`recommended`, `strict`, `security`): process execution helpers given request-controlled executables or shell-interpreted arguments.
-- `ts.security.no-innerhtml-assignment` (`recommended`, `strict`, `security`): direct `innerHTML` assignment.
+- `ts.security.dangerous-insert-html` (`recommended`, `strict`, `security`): unsafe `outerHTML`, `document.write*`, or `insertAdjacentHTML` use with non-literal, non-sanitized HTML.
+- `ts.security.dangerously-set-inner-html` (`recommended`, `strict`, `security`): React `dangerouslySetInnerHTML` given non-literal, non-sanitized HTML.
+- `ts.security.no-innerhtml-assignment` (`recommended`, `strict`, `security`): `innerHTML` assignment without fixed or explicitly sanitized HTML.
 - `security.no-hardcoded-credentials` (`recommended`, `strict`, `security`): credential-like literals embedded in source.
+- `ts.security.handlebars-no-escape` (`recommended`, `strict`, `security`): `Handlebars.compile(..., { noEscape: true })`.
 - `ts.security.missing-authorization-before-sensitive-action` (`strict`, `security`): backend-like sensitive handlers without a local authorization guard.
 - `ts.security.missing-ownership-validation` (`strict`, `security`): auth-gated handlers acting on caller-supplied resource ids without an ownership check.
 - `ts.security.frontend-only-authorization` (`experimental`): frontend-auth-gated literal route calls whose matching backend route lacks authorization.
@@ -139,6 +143,7 @@ pattern it checks.
 - `ts.security.unvalidated-external-input` (`strict`, `security`): request-derived values used to construct `RegExp` or `URL` without validation.
 - `security.unsafe-deserialization` (`recommended`, `strict`, `security`): `JSON.parse`, `yaml.load`, `qs.parse`, or similar deserializers fed external input.
 - `ts.security.missing-request-timeout-or-retry` (`strict`, `security`): external calls with neither timeout or cancellation nor retry protection.
+- `ts.security.unsanitized-http-response` (`recommended`, `strict`, `security`): raw `res.send`, `res.write`, or `res.end` output of request-derived HTML without trusted escaping or sanitization.
 
 ## Notes
 

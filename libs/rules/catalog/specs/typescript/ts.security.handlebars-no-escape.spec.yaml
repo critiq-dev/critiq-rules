@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.handlebars-no-escape.rule.yaml
+fixtures:
+  - name: flags handlebars compile noEscape true
+    sourcePath: ./fixtures/ts.security.handlebars-no-escape/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.handlebars-no-escape
+      allSeverities:
+        - high
+  - name: ignores handlebars compile with escaping enabled
+    sourcePath: ./fixtures/ts.security.handlebars-no-escape/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

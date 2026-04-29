@@ -1,0 +1,23 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.dangerous-insert-html.rule.yaml
+fixtures:
+  - name: flags unsafe DOM html insertion sinks
+    sourcePath: ./fixtures/ts.security.dangerous-insert-html/invalid.ts
+    expect:
+      findingCount: 4
+      allRuleIds:
+        - ts.security.dangerous-insert-html
+        - ts.security.dangerous-insert-html
+        - ts.security.dangerous-insert-html
+        - ts.security.dangerous-insert-html
+      allSeverities:
+        - high
+        - high
+        - high
+        - high
+  - name: ignores fixed and sanitized DOM html insertion
+    sourcePath: ./fixtures/ts.security.dangerous-insert-html/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
