@@ -5,12 +5,14 @@ fixtures:
   - name: flags sensitive egress to external processor calls
     sourcePath: ./fixtures/ts.security.sensitive-data-egress/invalid.ts
     expect:
-      findingCount: 3
+      findingCount: 4
       allRuleIds:
         - ts.security.sensitive-data-egress
         - ts.security.sensitive-data-egress
         - ts.security.sensitive-data-egress
+        - ts.security.sensitive-data-egress
       allSeverities:
+        - high
         - high
         - high
         - high

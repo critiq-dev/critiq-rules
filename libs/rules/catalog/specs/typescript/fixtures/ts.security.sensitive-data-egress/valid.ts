@@ -2,8 +2,6 @@ declare const analytics: {
   track(event: string, payload: Record<string, unknown>): void;
 };
 
-declare function webhookSend(payload: Record<string, unknown>): void;
-
 declare const user: {
   email: string;
   address: string;
@@ -19,10 +17,4 @@ analytics.track('signup', {
   source: 'web',
 });
 
-webhookSend({
-  userId: 'customer-123',
-  source: 'web',
-});
-
 declare function redact<T>(value: T): T;
-

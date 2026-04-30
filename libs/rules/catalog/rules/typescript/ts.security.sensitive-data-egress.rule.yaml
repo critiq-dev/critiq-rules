@@ -31,7 +31,6 @@ emit:
       - data-exposure
   message:
     title: Avoid sending sensitive data through `${captures.issue.text}`
-    summary: "`${captures.issue.text}` sends sensitive fields to an outbound processor or external service."
+    summary: "`${captures.issue.text}` sends normalized sensitive datatypes to an outbound processor or external service."
   remediation:
     summary: Minimize the payload, redact the sensitive fields, or route the data only to approved processors.
-

@@ -2,13 +2,10 @@ declare const analytics: {
   track(event: string, payload: Record<string, unknown>): void;
 };
 
-declare const webhook: {
-  send(payload: Record<string, unknown>): void;
-};
-
 declare const user: {
   email: string;
   address: string;
+  token: string;
 };
 
 await fetch('https://api.example.com/ingest', {
@@ -24,7 +21,11 @@ analytics.track('signup', {
   address: user.address,
 });
 
-webhook.send({
+window.dataLayer.push({
   email: user.email,
-  address: user.address,
+  token: user.token,
+});
+
+Sentry.setUser({
+  email: user.email,
 });
