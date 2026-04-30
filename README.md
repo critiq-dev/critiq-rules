@@ -2,10 +2,15 @@
 
 `@critiq/rules` is the public OSS rule catalog for Critiq.
 
+[![npm version](https://img.shields.io/npm/v/%40critiq%2Frules)](https://www.npmjs.com/package/@critiq/rules)
+[![CI status](https://github.com/critiq-dev/critiq-rules/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/critiq-dev/critiq-rules/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/critiq-dev/critiq-rules)](https://github.com/critiq-dev/critiq-rules/blob/main/LICENSE)
+[![Rule count](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/critiq-dev/critiq-rules/main/docs/assets/badges/rules-count.json)](https://github.com/critiq-dev/critiq-rules/tree/main/libs/rules/catalog/rules)
+
 If you want the runtime, CLI, and rule DSL that execute this catalog, use [critiq-core](https://github.com/critiq-dev/critiq-core).
 
 ```bash
-npm install -D @critiq/core @critiq/rules
+npm install -D @critiq/cli @critiq/rules
 npx critiq check .
 ```
 
@@ -48,7 +53,7 @@ We want this catalog to stay high-signal.
 ## This Repository Contains
 
 - `@critiq/rules`: the publishable OSS catalog package consumed by `critiq check`
-- `@critiq/example-starter-pack`: example authoring content, fixtures, and specs
+- `@critiq/example-starter-pack`: private example authoring content, fixtures, and specs excluded from release versioning
 
 ## Local Development
 
@@ -66,6 +71,12 @@ npm run verify
 `npm run prepare-core-link` builds the sibling `../critiq-core` workspace and verifies every `file:../critiq-core/dist/...` package that this repo consumes.
 
 `npm run build` also verifies that the packaged `@critiq/rules` output contains `catalog.yaml` and every catalog-referenced rule asset.
+
+When the catalog changes, refresh the README count and badge source with:
+
+```bash
+npm run update:rule-count
+```
 
 For a packaged CLI smoke pass against the starter pack:
 

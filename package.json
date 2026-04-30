@@ -5,15 +5,25 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
+    "changeset": "changeset",
+    "check:changeset-status": "node scripts/check-changeset-status.mjs",
     "nx": "nx",
+    "commit": "cz",
+    "commitlint": "commitlint --last",
     "prepare-core-link": "node scripts/prepare-core-link.mjs",
     "build": "nx run-many -t build --all && npm run check:built-catalog-assets",
     "check:built-catalog-assets": "node scripts/check-built-catalog-assets.mjs",
+    "check:rule-count": "node scripts/check-rule-count.mjs",
     "smoke:packaged-cli": "node scripts/smoke-packaged-cli.mjs",
     "lint": "nx run-many -t lint --all",
     "test": "nx run-many -t test --all",
     "typecheck": "nx run-many -t typecheck --all",
-    "verify": "npm run prepare-core-link && npm run lint && npm run test && npm run build && npm run typecheck"
+    "update:rule-count": "node scripts/update-rule-count.mjs",
+    "verify": "npm run prepare-core-link && npm run lint && npm run test && npm run build && npm run typecheck && npm run check:rule-count",
+    "release:dry-run": "node scripts/publish-dry-run.mjs",
+    "release:status": "changeset status",
+    "release:verify": "npm run prepare-core-link && npm run build && npm run check:rule-count && npm run release:dry-run",
+    "version:packages": "changeset version"
   },
   "workspaces": [
     "examples/*",
@@ -23,6 +33,8 @@
     "node": ">=20.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.3",
     "@changesets/cli": "^2.30.0",
     "@eslint/js": "^9.39.1",
     "@nx/esbuild": "22.6.4",
@@ -55,6 +67,8 @@
     "@critiq/core-rules-engine": "file:../critiq-core/dist/libs/core/rules-engine",
     "@critiq/testing-harness": "file:../critiq-core/dist/tools/testing/harness",
     "@critiq/util-yaml-loader": "file:../critiq-core/dist/libs/utils/yaml-loader",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.0.0",
     "jest": "^30.3.0",

@@ -1,0 +1,75 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      CRITIQ_CORE_ROOT: ${{ github.workspace }}/critiq-core
+      CRITIQ_SKIP_CORE_BUILD: '1'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          path: critiq-rules
+
+      - uses: actions/checkout@v6
+        with:
+          repository: critiq-dev/critiq-core
+          path: critiq-core
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            critiq-core/package-lock.json
+            critiq-rules/package-lock.json
+          registry-url: https://registry.npmjs.org
+
+      - name: Install critiq-core
+        working-directory: critiq-core
+        run: npm ci
+
+      - name: Build critiq-core artifacts
+        working-directory: critiq-core
+        run: |
+          npm run build
+          npm run build:release-cli
+
+      - name: Install critiq-rules
+        working-directory: critiq-rules
+        run: npm ci
+
+      - name: Verify Release Tag
+        working-directory: critiq-rules
+        run: node scripts/check-release-tag.mjs "${GITHUB_REF_NAME}"
+
+      - name: Verify Release Readiness
+        working-directory: critiq-rules
+        run: npm run release:verify
+
+      - name: Generate Release Notes
+        shell: bash
+        working-directory: critiq-rules
+        run: |
+          set -euo pipefail
+          node scripts/generate-release-notes.mjs "${GITHUB_REF_NAME}" > "${RUNNER_TEMP}/release-notes.md"
+
+      - name: Publish @critiq/rules
+        working-directory: critiq-rules/dist/libs/rules/catalog
+        run: npm publish --access public
+
+      - name: Create GitHub Release
+        working-directory: critiq-rules
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" --title "${GITHUB_REF_NAME}" --notes-file "${RUNNER_TEMP}/release-notes.md"

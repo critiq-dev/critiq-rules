@@ -1,6 +1,8 @@
 {
   "name": "@critiq/rules",
   "version": "0.0.1",
+  "private": false,
+  "description": "Public OSS Critiq rule catalog with catalog metadata, shipped rule YAML files, and preset membership.",
   "type": "commonjs",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
@@ -9,6 +11,9 @@
       "types": "./src/index.d.ts",
       "default": "./src/index.js"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "tslib": "^2.3.0"

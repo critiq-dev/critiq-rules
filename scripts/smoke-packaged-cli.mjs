@@ -4,10 +4,12 @@ import { fileURLToPath } from 'node:url';
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptDirectory, '..');
-const packagedCliPath = resolve(
-  repoRoot,
-  '../critiq-core/dist/apps/cli/main.js',
-);
+const coreRoot = process.env['CRITIQ_CORE_ROOT']?.trim()
+  ? resolve(process.env['CRITIQ_CORE_ROOT'])
+  : resolve(repoRoot, '../critiq-core');
+const packagedCliPath =
+  process.env['CRITIQ_PACKAGED_CLI_PATH']?.trim() ??
+  resolve(coreRoot, 'dist/publish/cli/main.js');
 const packagedCatalogRoot = resolve(repoRoot, 'dist/libs/rules/catalog');
 
 function runCli(args, options = {}) {
