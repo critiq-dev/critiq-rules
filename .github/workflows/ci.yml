@@ -12,7 +12,7 @@ jobs:
     permissions:
       contents: read
     env:
-      npm_config_cache: ${{ runner.temp }}/npm-cache
+      npm_config_cache: /tmp/critiq-npm-cache
     steps:
       - uses: actions/checkout@v6
         with:
@@ -42,7 +42,7 @@ jobs:
     permissions:
       contents: read
     env:
-      npm_config_cache: ${{ runner.temp }}/npm-cache
+      npm_config_cache: /tmp/critiq-npm-cache
     steps:
       - uses: actions/checkout@v6
         with:
