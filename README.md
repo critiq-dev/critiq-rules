@@ -1,17 +1,58 @@
 # Critiq Rules
 
-`critiq-rules` owns the public OSS rule catalog and example starter pack for
-Critiq.
+`@critiq/rules` is the public OSS rule catalog for Critiq.
 
-This repository contains:
+If you want the runtime, CLI, and rule DSL that execute this catalog, use [critiq-core](https://github.com/critiq-dev/critiq-core).
+
+```bash
+npm install -D @critiq/core @critiq/rules
+npx critiq check .
+```
+
+## Catalog At A Glance
+
+The OSS catalog currently includes `112` rules across `10` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+
+| Category | Rules | What it looks after |
+| --- | ---: | --- |
+| Security | 70 | Injection, auth and session gaps, unsafe transport, sensitive data exposure, unsafe file and HTML handling |
+| Correctness | 15 | Async bugs, null access, control-flow mistakes, missing fallbacks, race conditions |
+| Performance | 10 | Repeated IO, wasted async sequencing, hot-path loops, large retained objects, render churn |
+| Quality | 10 | Error handling gaps, oversized functions, coupling, duplicated logic, and weak test coverage |
+| Logging | 2 | Console usage and unsafe logging patterns |
+| Config | 1 | Configuration access boundaries |
+| Next | 1 | Server and client boundary leaks |
+| Random | 1 | Unsafe randomness in core logic |
+| React | 1 | Cascaded effect fetch patterns |
+| Runtime | 1 | Debug-only statements left in shipped code |
+
+## Rule Methodology
+
+We want this catalog to stay high-signal.
+
+- We add rules that catch production-relevant problems developers routinely miss in review: security flaws, correctness bugs, performance regressions, and maintainability issues with real cost.
+- We prefer rules that are deterministic, explainable, and testable with fixtures.
+- We avoid low-value rules that are already better enforced by TypeScript, `tsconfig`, or a standard linter configuration. A blanket `any` detector is a good example of what we do not want to spend catalog budget on.
+- Every rule should earn its place by producing an actionable finding with evidence, not by restating generic style preferences.
+
+## High-Value Rules You Can Browse
+
+- [`security.no-sql-interpolation`](./libs/rules/catalog/rules/shared/security.no-sql-interpolation.rule.yaml): catches direct SQL string construction with untrusted input.
+- [`ts.security.ssrf`](./libs/rules/catalog/rules/typescript/ts.security.ssrf.rule.yaml): flags user-controlled server-side outbound requests.
+- [`ts.security.open-redirect`](./libs/rules/catalog/rules/typescript/ts.security.open-redirect.rule.yaml): catches redirect flows driven by untrusted values.
+- [`ts.correctness.missing-await-on-async-call`](./libs/rules/catalog/rules/typescript/ts.correctness.missing-await-on-async-call.rule.yaml): finds async calls that silently escape control flow.
+- [`ts.performance.repeated-io-in-loop`](./libs/rules/catalog/rules/typescript/ts.performance.repeated-io-in-loop.rule.yaml): identifies repeated IO work inside loops.
+- [`ts.quality.logic-change-without-test-updates`](./libs/rules/catalog/rules/typescript/ts.quality.logic-change-without-test-updates.rule.yaml): flags risky logic edits without matching test movement.
+- [`ts.next.no-server-client-boundary-leaks`](./libs/rules/catalog/rules/typescript/ts.next.no-server-client-boundary-leaks.rule.yaml): protects server and client boundaries in Next.js code.
+
+## This Repository Contains
 
 - `@critiq/rules`: the publishable OSS catalog package consumed by `critiq check`
 - `@critiq/example-starter-pack`: example authoring content, fixtures, and specs
 
 ## Local Development
 
-This workspace tests against built packages from the sibling `critiq-core`
-workspace.
+This workspace tests against built packages from the sibling `critiq-core` workspace.
 
 Typical flow:
 
@@ -22,11 +63,9 @@ npm install
 npm run verify
 ```
 
-`npm run prepare-core-link` builds the sibling `../critiq-core` workspace and
-verifies every `file:../critiq-core/dist/...` package that this repo consumes.
+`npm run prepare-core-link` builds the sibling `../critiq-core` workspace and verifies every `file:../critiq-core/dist/...` package that this repo consumes.
 
-`npm run build` also verifies that the packaged `@critiq/rules` output contains
-`catalog.yaml` and every catalog-referenced rule asset.
+`npm run build` also verifies that the packaged `@critiq/rules` output contains `catalog.yaml` and every catalog-referenced rule asset.
 
 For a packaged CLI smoke pass against the starter pack:
 
