@@ -11,6 +11,8 @@
     "nx": "nx",
     "commit": "cz",
     "commitlint": "commitlint --last",
+    "commitlint:edit": "commitlint --edit",
+    "prepare": "simple-git-hooks",
     "prepare-core-link": "node scripts/prepare-core-link.mjs",
     "build": "nx run-many -t build --all && npm run check:built-catalog-assets",
     "check:built-catalog-assets": "node scripts/check-built-catalog-assets.mjs",
@@ -78,6 +80,7 @@
     "jsonc-eslint-parser": "^2.1.0",
     "nx": "22.6.4",
     "prettier": "~3.6.2",
+    "simple-git-hooks": "^2.13.1",
     "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
@@ -105,5 +108,8 @@
     "@critiq/core-rules-dsl": "file:../critiq-core/dist/libs/core/rules-dsl",
     "@critiq/core-rules-engine": "file:../critiq-core/dist/libs/core/rules-engine",
     "@critiq/util-yaml-loader": "file:../critiq-core/dist/libs/utils/yaml-loader"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "npm run commitlint:edit -- \"$1\""
   }
 }
