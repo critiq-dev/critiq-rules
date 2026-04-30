@@ -1,10 +1,15 @@
 const express = require('express');
-const helmet = require('helmet');
 const app = express();
 
+const corsOptions = { origin: ['https://app.example.com'] };
+
+function buildHelmet() {
+  return helmet();
+}
+
 app.disable('x-powered-by');
-app.use(helmet());
-app.use(express.static('public'));
+app.use(buildHelmet());
+app.use(cors(corsOptions));
 app.use(
   session({
     name: 'sid',
@@ -19,8 +24,3 @@ app.use(
     },
   }),
 );
-
-function handler(req, res) {
-  res.render('dashboard');
-  res.sendFile(fileName, { root: safeRoot });
-}

@@ -15,6 +15,7 @@ app.use(
       domain: 'example.com',
       secure: true,
       httpOnly: true,
+      sameSite: 'lax',
     },
   }),
 );

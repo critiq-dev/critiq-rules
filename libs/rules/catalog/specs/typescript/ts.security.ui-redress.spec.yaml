@@ -10,9 +10,16 @@ fixtures:
         - ts.security.ui-redress
       allSeverities:
         - high
+  - name: flags disabled helmet frame protections
+    sourcePath: ./fixtures/public-security/web-hardening.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.ui-redress
+      allSeverities:
+        - high
   - name: ignores fixed clickjacking headers
     sourcePath: ./fixtures/public-security/headers-nosql.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []
-

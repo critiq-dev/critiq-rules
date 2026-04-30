@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.express-permissive-cookie-config.rule.yaml
+fixtures:
+  - name: flags cross-site or wildcard-scoped session cookies
+    sourcePath: ./fixtures/public-security/web-hardening.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-permissive-cookie-config
+      allSeverities:
+        - medium
+  - name: ignores strict or same-site session cookies
+    sourcePath: ./fixtures/public-security/web-hardening.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

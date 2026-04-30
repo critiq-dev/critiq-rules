@@ -407,6 +407,12 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.permissive-allow-origin
+    rulePath: ./rules/typescript/ts.security.permissive-allow-origin.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.express-insecure-cookie
     rulePath: ./rules/typescript/ts.security.express-insecure-cookie.rule.yaml
     presets:
@@ -556,6 +562,11 @@ rules:
       - security
   - id: ts.security.express-default-cookie-config
     rulePath: ./rules/typescript/ts.security.express-default-cookie-config.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.express-permissive-cookie-config
+    rulePath: ./rules/typescript/ts.security.express-permissive-cookie-config.rule.yaml
     presets:
       - strict
       - security

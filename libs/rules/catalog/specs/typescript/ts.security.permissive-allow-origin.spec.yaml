@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.permissive-allow-origin.rule.yaml
+fixtures:
+  - name: flags wildcard and implicit CORS origins
+    sourcePath: ./fixtures/public-security/web-hardening.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.permissive-allow-origin
+      allSeverities:
+        - high
+  - name: ignores explicit CORS allowlists
+    sourcePath: ./fixtures/public-security/web-hardening.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

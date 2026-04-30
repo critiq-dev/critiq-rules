@@ -10,9 +10,16 @@ fixtures:
         - ts.security.insecure-allow-origin
       allSeverities:
         - high
+  - name: flags reflected CORS callbacks through bound config
+    sourcePath: ./fixtures/public-security/web-hardening.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.insecure-allow-origin
+      allSeverities:
+        - high
   - name: ignores fixed allow origins
     sourcePath: ./fixtures/public-security/headers-nosql.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []
-

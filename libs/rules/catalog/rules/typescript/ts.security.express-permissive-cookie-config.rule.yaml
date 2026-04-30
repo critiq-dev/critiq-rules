@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.express-permissive-cookie-config
+  title: Avoid permissive Express session cookie scope
+  summary: Express session cookies should not explicitly opt into cross-site or wildcard-style scope.
+  rationale: Broad cookie scope increases where session cookies are sent and makes cross-site misuse harder to contain.
+  tags:
+    - security
+    - authentication
+    - express
+    - cookies
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.express-permissive-cookie-config
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: medium
+    confidence: 0.89
+    tags:
+      - security
+      - authentication
+      - express
+      - cookies
+  message:
+    title: Tighten cookie scope in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` explicitly widens session cookie scope with cross-site or wildcard-style settings."
+  remediation:
+    summary: Prefer exact cookie domains and `SameSite=Lax` or `Strict` unless a reviewed cross-site requirement exists.

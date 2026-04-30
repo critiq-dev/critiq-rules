@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.permissive-allow-origin
+  title: Do not allow every origin in CORS policy
+  summary: CORS should not fall back to wildcard or implicit allow-all origin settings.
+  rationale: Wildcard or implicit allow-all CORS policies expose authenticated browser responses across origins.
+  tags:
+    - security
+    - cors
+    - misconfiguration
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.permissive-allow-origin
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.92
+    tags:
+      - security
+      - cors
+      - misconfiguration
+  message:
+    title: Restrict `${captures.issue.text}` to trusted origins
+    summary: "`${captures.issue.text}` allows any origin through wildcard or implicit CORS policy."
+  remediation:
+    summary: Configure an explicit allowlist or validated origin callback instead of allowing all origins.

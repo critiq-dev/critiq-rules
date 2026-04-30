@@ -15,4 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
-
+  - name: ignores same-file wrappers that return helmet middleware
+    sourcePath: ./fixtures/public-security/web-hardening.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
