@@ -2,12 +2,16 @@ import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
 const workspaceRoot = resolve(import.meta.dirname, '..');
-const readmePath = resolve(workspaceRoot, 'README.md');
+const readmePaths = [
+  resolve(workspaceRoot, 'README.md'),
+  resolve(workspaceRoot, 'libs/rules/catalog/README.md'),
+];
 const badgePath = resolve(
   workspaceRoot,
   'docs/assets/badges/rules-count.json',
 );
 const rulesRoot = resolve(workspaceRoot, 'libs/rules/catalog/rules');
+const readmePattern = /`\d+` rules across `\d+` categories/;
 
 function getRuleCategory(fileName) {
   const baseName = fileName.replace(/\.rule\.yaml$/, '');
@@ -52,18 +56,23 @@ function collectCatalogStats(directory) {
 
 const { ruleCount, categories } = collectCatalogStats(rulesRoot);
 const categoryCount = categories.size;
-const readme = readFileSync(readmePath, 'utf8');
-const readmePattern =
-  /The OSS catalog currently includes `\d+` rules across `\d+` categories,/;
 
-if (!readmePattern.test(readme)) {
-  throw new Error('Unable to locate the rule-count sentence in README.md.');
+for (const readmePath of readmePaths) {
+  const readme = readFileSync(readmePath, 'utf8');
+
+  if (!readmePattern.test(readme)) {
+    throw new Error(
+      `Unable to locate the rule-count snippet in ${readmePath.replace(`${workspaceRoot}/`, '')}.`,
+    );
+  }
+
+  const updatedReadme = readme.replace(
+    readmePattern,
+    `\`${ruleCount}\` rules across \`${categoryCount}\` categories`,
+  );
+
+  writeFileSync(readmePath, updatedReadme);
 }
-
-const updatedReadme = readme.replace(
-  readmePattern,
-  `The OSS catalog currently includes \`${ruleCount}\` rules across \`${categoryCount}\` categories,`,
-);
 
 mkdirSync(dirname(badgePath), { recursive: true });
 writeFileSync(
@@ -79,6 +88,7 @@ writeFileSync(
     2,
   )}\n`,
 );
-writeFileSync(readmePath, updatedReadme);
 
-console.log(`Updated README and badge artifacts for ${ruleCount} shipped rules.`);
+console.log(
+  `Updated README and badge artifacts for ${ruleCount} shipped rules.`,
+);

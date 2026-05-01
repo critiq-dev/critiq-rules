@@ -1,6 +1,6 @@
 {
   "name": "@critiq/rules",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "Public OSS Critiq rule catalog with catalog metadata, shipped rule YAML files, and preset membership.",
   "license": "Apache-2.0",

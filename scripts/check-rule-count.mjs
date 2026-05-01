@@ -2,12 +2,16 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const workspaceRoot = resolve(import.meta.dirname, '..');
-const readmePath = resolve(workspaceRoot, 'README.md');
+const readmePaths = [
+  resolve(workspaceRoot, 'README.md'),
+  resolve(workspaceRoot, 'libs/rules/catalog/README.md'),
+];
 const badgePath = resolve(
   workspaceRoot,
   'docs/assets/badges/rules-count.json',
 );
 const rulesRoot = resolve(workspaceRoot, 'libs/rules/catalog/rules');
+const readmePattern = /`(\d+)` rules across `(\d+)` categories/;
 
 function getRuleCategory(fileName) {
   const baseName = fileName.replace(/\.rule\.yaml$/, '');
@@ -52,26 +56,29 @@ function collectCatalogStats(directory) {
 
 const { ruleCount, categories } = collectCatalogStats(rulesRoot);
 const categoryCount = categories.size;
-const readme = readFileSync(readmePath, 'utf8');
 const badge = JSON.parse(readFileSync(badgePath, 'utf8'));
-const readmeMatch = readme.match(
-  /The OSS catalog currently includes `(\d+)` rules across `(\d+)` categories,/,
-);
 
-if (!readmeMatch) {
-  throw new Error('Unable to locate the rule-count sentence in README.md.');
-}
+for (const readmePath of readmePaths) {
+  const readme = readFileSync(readmePath, 'utf8');
+  const readmeMatch = readme.match(readmePattern);
 
-if (Number(readmeMatch[1]) !== ruleCount) {
-  throw new Error(
-    `README rule count drift detected: expected ${ruleCount}, found ${readmeMatch[1]}.`,
-  );
-}
+  if (!readmeMatch) {
+    throw new Error(
+      `Unable to locate the rule-count snippet in ${readmePath.replace(`${workspaceRoot}/`, '')}.`,
+    );
+  }
 
-if (Number(readmeMatch[2]) !== categoryCount) {
-  throw new Error(
-    `README category count drift detected: expected ${categoryCount}, found ${readmeMatch[2]}.`,
-  );
+  if (Number(readmeMatch[1]) !== ruleCount) {
+    throw new Error(
+      `README rule count drift detected in ${readmePath.replace(`${workspaceRoot}/`, '')}: expected ${ruleCount}, found ${readmeMatch[1]}.`,
+    );
+  }
+
+  if (Number(readmeMatch[2]) !== categoryCount) {
+    throw new Error(
+      `README category count drift detected in ${readmePath.replace(`${workspaceRoot}/`, '')}: expected ${categoryCount}, found ${readmeMatch[2]}.`,
+    );
+  }
 }
 
 if (badge.message !== String(ruleCount)) {
