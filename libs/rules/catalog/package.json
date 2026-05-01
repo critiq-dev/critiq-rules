@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": false,
   "description": "Public OSS Critiq rule catalog with catalog metadata, shipped rule YAML files, and preset membership.",
+  "license": "Apache-2.0",
   "type": "commonjs",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",

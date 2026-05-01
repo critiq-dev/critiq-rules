@@ -13,6 +13,7 @@
         "main": "libs/rules/catalog/src/index.ts",
         "tsConfig": "libs/rules/catalog/tsconfig.lib.json",
         "assets": [
+          "libs/rules/catalog/LICENSE",
           "libs/rules/catalog/*.md",
           "libs/rules/catalog/catalog.yaml",
           "libs/rules/catalog/rules/**/*.yaml"
