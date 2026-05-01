@@ -65,8 +65,8 @@ jobs:
           node scripts/generate-release-notes.mjs "${GITHUB_REF_NAME}" > "${RUNNER_TEMP}/release-notes.md"
 
       - name: Publish @critiq/rules
-        working-directory: critiq-rules/dist/libs/rules/catalog
-        run: npm publish --access public
+        working-directory: critiq-rules
+        run: npx nx run rules:publish
 
       - name: Create GitHub Release
         working-directory: critiq-rules
