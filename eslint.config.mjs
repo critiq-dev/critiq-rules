@@ -5,7 +5,12 @@ export default [
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   {
-    ignores: ['**/dist', '**/out-tsc'],
+    ignores: [
+      '**/dist',
+      '**/out-tsc',
+      // RuleSpec fixtures intentionally embed invalid patterns (debugger, constant conditions, etc.).
+      '**/libs/rules/catalog/specs/**/fixtures/**',
+    ],
   },
   {
     files: [

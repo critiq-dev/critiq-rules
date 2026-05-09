@@ -85,11 +85,12 @@ npm run smoke:packaged-cli
 
 ## Catalog At A Glance
 
-Today the catalog includes `112` rules across `10` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+Today the catalog includes `121` rules across `11` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |
 | Security | 70 | Injection, auth and session gaps, unsafe transport, sensitive data exposure, unsafe file and HTML handling |
+| Python | 9 | Django, DRF, Flask, and FastAPI deployment and framework safety |
 | Correctness | 15 | Async bugs, null access, control-flow mistakes, missing fallbacks, race conditions |
 | Performance | 10 | Repeated IO, wasted async sequencing, hot-path loops, large retained objects, render churn |
 | Quality | 10 | Error handling gaps, oversized functions, coupling, duplicated logic, and weak test coverage |

@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.flask-unsafe-upload-filename
+  title: Sanitize Flask upload filenames before saving
+  summary: Flask upload handlers should pass filenames through `secure_filename` (or equivalent) before persisting to disk.
+  rationale: Attacker-controlled filenames enable traversal sequences, extension spoofing, and collisions when saved verbatim.
+  tags:
+    - security
+    - python
+    - flask
+    - filesystem
+    - upload
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+match:
+  fact:
+    kind: python.security.flask-unsafe-upload-filename
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - flask
+      - upload
+  message:
+    title: Harden upload save `${captures.issue.text}`
+    summary: "`${captures.issue.text}` persists uploads using an unsanitized client-provided filename."
+  remediation:
+    summary: Generate trusted server-side names or wrap uploads with `werkzeug.utils.secure_filename` before calling `save`.

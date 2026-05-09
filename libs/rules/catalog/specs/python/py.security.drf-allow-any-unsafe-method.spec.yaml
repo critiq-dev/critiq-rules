@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.drf-allow-any-unsafe-method.rule.yaml
+fixtures:
+  - name: flags AllowAny with unsafe verbs
+    sourcePath: ./fixtures/py.security.drf-allow-any-unsafe-method/drf_views.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.drf-allow-any-unsafe-method
+  - name: allows AllowAny on safe read-only routes
+    sourcePath: ./fixtures/py.security.drf-allow-any-unsafe-method/drf_views.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

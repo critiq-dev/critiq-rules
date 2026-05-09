@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.flask-missing-upload-body-limit.rule.yaml
+fixtures:
+  - name: flags uploads without max body configuration
+    sourcePath: ./fixtures/py.security.flask-missing-upload-body-limit/flask_upload_limits.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.flask-missing-upload-body-limit
+  - name: accepts explicit MAX_CONTENT_LENGTH
+    sourcePath: ./fixtures/py.security.flask-missing-upload-body-limit/flask_upload_limits.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

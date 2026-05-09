@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.drf-allow-any-default.rule.yaml
+fixtures:
+  - name: flags AllowAny defaults in REST_FRAMEWORK
+    sourcePath: ./fixtures/py.security.drf-allow-any-default/drf_settings.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.drf-allow-any-default
+  - name: accepts authenticated defaults
+    sourcePath: ./fixtures/py.security.drf-allow-any-default/drf_settings.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

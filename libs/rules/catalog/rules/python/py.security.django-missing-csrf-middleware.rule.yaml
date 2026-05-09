@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.django-missing-csrf-middleware
+  title: Enable Django CSRF middleware for browser apps
+  summary: Django projects using cookie-backed sessions should include `CsrfViewMiddleware` in `MIDDLEWARE`.
+  rationale: Without CSRF middleware, Django cannot enforce CSRF tokens on unsafe HTTP methods for browser clients.
+  tags:
+    - security
+    - python
+    - django
+    - csrf
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/settings/**/*.py"
+      - "**/*settings*.py"
+    exclude:
+      - "**/settings/local.py"
+      - "**/settings/dev.py"
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.django-missing-csrf-middleware
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.78
+    tags:
+      - security
+      - django
+      - csrf
+  message:
+    title: Add CSRF middleware to Django `${captures.issue.text}`
+    summary: "`MIDDLEWARE` is declared without `django.middleware.csrf.CsrfViewMiddleware`, which disables framework CSRF checks."
+  remediation:
+    summary: Insert `django.middleware.csrf.CsrfViewMiddleware` into `MIDDLEWARE` according to the Django deployment checklist ordering guidance.

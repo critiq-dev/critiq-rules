@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.django-missing-csrf-middleware.rule.yaml
+fixtures:
+  - name: flags middleware stacks missing csrf
+    sourcePath: ./fixtures/py.security.django-missing-csrf-middleware/django_middleware_settings.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.django-missing-csrf-middleware
+  - name: accepts stacks that enable csrf middleware
+    sourcePath: ./fixtures/py.security.django-missing-csrf-middleware/django_middleware_settings.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

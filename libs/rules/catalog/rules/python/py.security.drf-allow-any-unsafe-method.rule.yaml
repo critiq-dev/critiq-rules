@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.drf-allow-any-unsafe-method
+  title: Avoid AllowAny on unsafe DRF methods
+  summary: DRF views that accept POST, PUT, PATCH, or DELETE should not declare `AllowAny` unless the endpoint is intentionally public.
+  rationale: Open unsafe methods allow unauthenticated clients to mutate data and violate least-privilege API access.
+  tags:
+    - security
+    - python
+    - django
+    - drf
+    - authorization
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.drf-allow-any-unsafe-method
+    bind: issue
+emit:
+  finding:
+    category: security.authorization
+    severity: high
+    confidence: 0.8
+    tags:
+      - security
+      - django
+      - drf
+      - authorization
+  message:
+    title: Tighten permissions around `${captures.issue.text}`
+    summary: "`${captures.issue.text}` combines `AllowAny` with an unsafe HTTP method declaration."
+  remediation:
+    summary: Require authentication or scoped permissions for unsafe verbs unless the handler is explicitly public and documented.

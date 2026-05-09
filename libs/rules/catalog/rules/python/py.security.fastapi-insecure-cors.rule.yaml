@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.fastapi-insecure-cors
+  title: Avoid permissive FastAPI CORS with credentials
+  summary: FastAPI `CORSMiddleware` should not combine wildcard origins, methods, or headers with `allow_credentials=True`.
+  rationale: Wildcard CORS policies plus credentials mirror insecure browser CORS combinations that attackers can abuse from malicious origins.
+  tags:
+    - security
+    - python
+    - fastapi
+    - cors
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+match:
+  fact:
+    kind: python.security.fastapi-insecure-cors
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.87
+    tags:
+      - security
+      - fastapi
+      - cors
+  message:
+    title: Tighten FastAPI CORS `${captures.issue.text}`
+    summary: "`${captures.issue.text}` configures `CORSMiddleware` with wildcards while credentials are enabled."
+  remediation:
+    summary: Replace wildcard origins, methods, and headers with explicit allowlists when credentials are required.

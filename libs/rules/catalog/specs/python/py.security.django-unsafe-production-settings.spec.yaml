@@ -1,0 +1,23 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.django-unsafe-production-settings.rule.yaml
+fixtures:
+  - name: flags risky Django deployment knobs
+    sourcePath: ./fixtures/py.security.django-unsafe-production-settings/django_production_settings.invalid.py
+    expect:
+      findingCount: 4
+      allRuleIds:
+        - py.security.django-unsafe-production-settings
+        - py.security.django-unsafe-production-settings
+        - py.security.django-unsafe-production-settings
+        - py.security.django-unsafe-production-settings
+      allSeverities:
+        - high
+        - high
+        - high
+        - high
+  - name: accepts hardened Django-style settings
+    sourcePath: ./fixtures/py.security.django-unsafe-production-settings/django_production_settings.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.flask-unsafe-upload-filename.rule.yaml
+fixtures:
+  - name: flags saves using raw upload filenames
+    sourcePath: ./fixtures/py.security.flask-unsafe-upload-filename/flask_upload.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.flask-unsafe-upload-filename
+  - name: accepts secure_filename wrapping
+    sourcePath: ./fixtures/py.security.flask-unsafe-upload-filename/flask_upload.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.flask-unsafe-html-output.rule.yaml
+fixtures:
+  - name: flags Markup fed by request parameters
+    sourcePath: ./fixtures/py.security.flask-unsafe-html-output/flask_markup.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.flask-unsafe-html-output
+  - name: accepts sanitized responses
+    sourcePath: ./fixtures/py.security.flask-unsafe-html-output/flask_markup.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

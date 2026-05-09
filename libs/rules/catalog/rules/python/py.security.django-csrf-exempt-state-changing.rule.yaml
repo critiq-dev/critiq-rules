@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.django-csrf-exempt-state-changing
+  title: Avoid CSRF exemptions on state-changing Django views
+  summary: Browser-facing Django views that change state should remain CSRF-protected unless they are explicitly token-authenticated APIs.
+  rationale: >-
+    Using django.decorators.csrf.csrf_exempt removes CSRF defenses for session-backed browsers,
+    enabling cross-site request forgery against unsafe methods.
+  tags:
+    - security
+    - python
+    - django
+    - csrf
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.django-csrf-exempt-state-changing
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: high
+    confidence: 0.82
+    tags:
+      - security
+      - django
+      - csrf
+  message:
+    title: Review CSRF exemption `${captures.issue.text}`
+    summary: "`${captures.issue.text}` is applied near code that handles POST/PUT/PATCH/DELETE or `request.POST`, which is risky for browser sessions."
+  remediation:
+    summary: Remove `@csrf_exempt`, enforce CSRF tokens for browser views, or constrain the endpoint to non-session authentication with explicit CSRF policy.

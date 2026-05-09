@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.fastapi-insecure-cors.rule.yaml
+fixtures:
+  - name: flags wildcard cors with credentials enabled
+    sourcePath: ./fixtures/py.security.fastapi-insecure-cors/fastapi_cors.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.fastapi-insecure-cors
+  - name: accepts explicit cors allowlists
+    sourcePath: ./fixtures/py.security.fastapi-insecure-cors/fastapi_cors.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []
