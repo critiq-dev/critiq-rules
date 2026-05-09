@@ -42,11 +42,11 @@ npx critiq check . --base origin/main --head HEAD
 
 ## Catalog At A Glance
 
-Today the catalog includes `121` rules across `11` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+Today the catalog includes `123` rules across `11` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |
-| Security | 70 | Injection, auth and session gaps, unsafe transport, sensitive data exposure, unsafe file and HTML handling |
+| Security | 72 | Injection, auth and session gaps, unsafe transport, sensitive data exposure, unsafe file and HTML handling |
 | Python | 9 | Django, DRF, Flask, and FastAPI deployment and framework safety |
 | Correctness | 15 | Async bugs, null access, control-flow mistakes, missing fallbacks, race conditions |
 | Performance | 10 | Repeated IO, wasted async sequencing, hot-path loops, large retained objects, render churn |
@@ -86,7 +86,7 @@ Critiq keeps the OSS catalog intentionally high-signal.
 
 ## More Rules In This Catalog
 
-The catalog also includes these `100` additional rules beyond the highlights above.
+The catalog also includes these `102` additional rules beyond the highlights above.
 
 ### Security
 
@@ -143,6 +143,8 @@ The catalog also includes these `100` additional rules beyond the highlights abo
 | `Avoid leaking sensitive or diagnostic state` | Logs, stdout or stderr, and direct response sinks should not expose sensitive fields or internal diagnostic detail. |
 | `Do not derive anti-framing headers from request input` | Framing and CSP headers should not be set from request-controlled values. |
 | `Avoid request-controlled format strings` | Logging and formatting helpers should not take request input as the format string itself. |
+| `Sanitize user-controlled values before they reach log messages` | Logger calls in pino, winston, bunyan, and consola should not interpolate or concatenate request input directly into the message text. |
+| `Remove leftover console.trace calls from production paths` | `console.trace()` calls should not ship in production code outside an explicit dev-only branch. |
 | `` Constrain `res.sendFile` to a trusted root `` | `res.sendFile()` should not resolve filenames or options from request input without a trusted root. |
 | `` Constrain `res.render()` trust boundaries `` | Express view names should not cross into server-side rendering from untrusted input. |
 | `Avoid exposed directory listings` | Directory listing middleware should not be enabled on public paths without a deliberate review. |

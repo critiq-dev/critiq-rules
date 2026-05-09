@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.debug-statement-in-source.rule.yaml
+fixtures:
+  - name: flags ungated console.trace calls in production paths
+    sourcePath: ./fixtures/public-security/debug-statement-in-source.invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.debug-statement-in-source
+        - ts.security.debug-statement-in-source
+      allSeverities:
+        - low
+        - low
+  - name: ignores console.trace calls inside explicit dev-only branches
+    sourcePath: ./fixtures/public-security/debug-statement-in-source.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -538,6 +538,12 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.log-injection
+    rulePath: ./rules/typescript/ts.security.log-injection.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.user-controlled-sendfile
     rulePath: ./rules/typescript/ts.security.user-controlled-sendfile.rule.yaml
     presets:
@@ -587,6 +593,12 @@ rules:
       - security
   - id: ts.security.debug-mode-enabled
     rulePath: ./rules/typescript/ts.security.debug-mode-enabled.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.debug-statement-in-source
+    rulePath: ./rules/typescript/ts.security.debug-statement-in-source.rule.yaml
     presets:
       - recommended
       - strict

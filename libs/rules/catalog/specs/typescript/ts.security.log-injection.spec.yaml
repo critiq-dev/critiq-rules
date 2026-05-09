@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.log-injection.rule.yaml
+fixtures:
+  - name: flags request-controlled values interpolated into broader logger families
+    sourcePath: ./fixtures/public-security/log-injection.invalid.ts
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ts.security.log-injection
+        - ts.security.log-injection
+        - ts.security.log-injection
+      allSeverities:
+        - medium
+        - medium
+        - medium
+  - name: ignores sanitized payloads and structured logging on broader logger families
+    sourcePath: ./fixtures/public-security/log-injection.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
