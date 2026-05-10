@@ -1,0 +1,28 @@
+{
+  "path": "src/BadInput.tsx",
+  "language": "typescript",
+  "text": "export function BadInput({ v }: { v: string }) {\n  return <input value={v} defaultValue=\"seed\" />;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-input",
+          "kind": "ui.react.uncontrolled-controlled-input",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 2,
+            "startColumn": 11,
+            "endLine": 2,
+            "endColumn": 16
+          },
+          "text": "input",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

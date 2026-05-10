@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-missing-error-boundary.rule.yaml
+fixtures:
+  - name: flags App Router pages without segment error.tsx
+    observationPath: ./fixtures/ts.react.no-missing-error-boundary/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-missing-error-boundary
+      allSeverities:
+        - medium
+  - name: ignores segments that already surface error facts elsewhere
+    observationPath: ./fixtures/ts.react.no-missing-error-boundary/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

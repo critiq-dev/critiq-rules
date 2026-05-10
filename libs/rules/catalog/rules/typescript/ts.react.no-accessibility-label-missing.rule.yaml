@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-accessibility-label-missing
+  title: Give interactive elements an accessible name
+  summary: Buttons, links, and inputs need labels, aria attributes, or visible text so assistive technologies can describe them.
+  rationale: Unlabeled controls are ambiguous to keyboard and screen reader users and fail basic accessibility expectations.
+  tags:
+    - react
+    - accessibility
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.missing-accessible-name
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.74
+    tags:
+      - react
+      - accessibility
+      - ui
+  message:
+    title: Add an accessible name to interactive elements
+    summary: "`${captures.issue.text}` renders without aria labeling or visible text."
+  remediation:
+    summary: Add aria-label or aria-labelledby, associate a label element, or include descriptive visible content.

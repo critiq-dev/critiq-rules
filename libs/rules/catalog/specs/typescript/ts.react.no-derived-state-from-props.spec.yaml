@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-derived-state-from-props.rule.yaml
+fixtures:
+  - name: flags useState seeded from props
+    observationPath: ./fixtures/ts.react.no-derived-state-from-props/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-derived-state-from-props
+      allSeverities:
+        - medium
+  - name: ignores literals without prop coupling in this observation
+    observationPath: ./fixtures/ts.react.no-derived-state-from-props/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

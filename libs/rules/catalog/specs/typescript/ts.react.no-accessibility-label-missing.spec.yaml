@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-accessibility-label-missing.rule.yaml
+fixtures:
+  - name: flags icon-only buttons
+    observationPath: ./fixtures/ts.react.no-accessibility-label-missing/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-accessibility-label-missing
+      allSeverities:
+        - high
+  - name: accepts buttons with visible text
+    observationPath: ./fixtures/ts.react.no-accessibility-label-missing/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

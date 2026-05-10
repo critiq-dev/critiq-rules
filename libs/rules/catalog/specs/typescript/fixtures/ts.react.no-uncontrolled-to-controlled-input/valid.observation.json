@@ -1,0 +1,14 @@
+{
+  "path": "src/GoodInput.tsx",
+  "language": "typescript",
+  "text": "export function GoodInput({ v }: { v: string }) {\n  return <input value={v} onChange={() => {}} />;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

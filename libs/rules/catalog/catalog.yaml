@@ -194,6 +194,26 @@ rules:
     rulePath: ./rules/typescript/ts.next.no-server-client-boundary-leaks.rule.yaml
     presets:
       - strict
+  - id: ts.react.no-index-as-key-in-dynamic-list
+    rulePath: ./rules/typescript/ts.react.no-index-as-key-in-dynamic-list.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-derived-state-from-props
+    rulePath: ./rules/typescript/ts.react.no-derived-state-from-props.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-missing-error-boundary
+    rulePath: ./rules/typescript/ts.react.no-missing-error-boundary.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-accessibility-label-missing
+    rulePath: ./rules/typescript/ts.react.no-accessibility-label-missing.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-uncontrolled-to-controlled-input
+    rulePath: ./rules/typescript/ts.react.no-uncontrolled-to-controlled-input.rule.yaml
+    presets:
+      - strict
   - id: security.no-sql-interpolation
     rulePath: ./rules/shared/security.no-sql-interpolation.rule.yaml
     presets:

@@ -1,0 +1,30 @@
+{
+  "path": "src/IconButton.tsx",
+  "language": "typescript",
+  "text": "export function IconButton() {\n  return (\n    <button type=\"button\">\n      <span className=\"glyph\" />\n    </button>\n  );\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-a11y",
+          "kind": "ui.react.missing-accessible-name",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 3,
+            "startColumn": 6,
+            "endLine": 3,
+            "endColumn": 12
+          },
+          "text": "button",
+          "props": {
+            "tag": "button"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "path": "src/List.tsx",
+  "language": "typescript",
+  "text": "export function List({ items }: { items: string[] }) {\n  return (\n    <ul>\n      {items.map((item, index) => (\n        <li key={index}>{item}</li>\n      ))}\n    </ul>\n  );\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-index-key",
+          "kind": "ui.react.index-key-in-list",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 6,
+            "startColumn": 17,
+            "endLine": 6,
+            "endColumn": 22
+          },
+          "text": "index",
+          "props": {
+            "indexParameter": "index"
+          }
+        }
+      ]
+    }
+  }
+}

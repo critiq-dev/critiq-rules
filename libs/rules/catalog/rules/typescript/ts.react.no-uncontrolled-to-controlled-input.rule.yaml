@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-uncontrolled-to-controlled-input
+  title: Avoid mixing controlled and uncontrolled input props
+  summary: Combining value with defaultValue leads to ambiguous ownership between React and the DOM.
+  rationale: Inputs should be either controlled via value or bootstrapped once via defaultValue, not both at once.
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.uncontrolled-controlled-input
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.88
+    tags:
+      - react
+      - ui
+  message:
+    title: Pick either controlled or uncontrolled inputs
+    summary: "`${captures.issue.text}` sets both value and defaultValue."
+  remediation:
+    summary: Remove defaultValue when binding value, or drop value to stay fully uncontrolled.

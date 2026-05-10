@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-index-as-key-in-dynamic-list.rule.yaml
+fixtures:
+  - name: flags index keys in mapped JSX
+    observationPath: ./fixtures/ts.react.no-index-as-key-in-dynamic-list/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-index-as-key-in-dynamic-list
+      allSeverities:
+        - medium
+  - name: ignores stable keys sourced from item ids
+    observationPath: ./fixtures/ts.react.no-index-as-key-in-dynamic-list/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

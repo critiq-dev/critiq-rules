@@ -1,0 +1,28 @@
+{
+  "path": "src/Counter.tsx",
+  "language": "typescript",
+  "text": "import { useState } from 'react';\n\nexport function Counter(props: { initial: number }) {\n  const [value, setValue] = useState(props.initial);\n  return <span>{value}</span>;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-derived",
+          "kind": "ui.react.derived-state-from-props",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 4,
+            "startColumn": 42,
+            "endLine": 4,
+            "endColumn": 56
+          },
+          "text": "props.initial",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "path": "src/app/dashboard/page.tsx",
+  "language": "typescript",
+  "text": "export default function Page() {\n  return null;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-eb",
+          "kind": "ui.react.missing-error-boundary",
+          "appliesTo": "project",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 1
+          },
+          "text": "page.tsx",
+          "props": {
+            "routeDirectory": "src/app/dashboard"
+          }
+        }
+      ]
+    }
+  }
+}

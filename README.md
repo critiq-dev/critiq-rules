@@ -85,7 +85,7 @@ npm run smoke:packaged-cli
 
 ## Catalog At A Glance
 
-Today the catalog includes `123` rules across `11` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+Today the catalog includes `128` rules across `11` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |

@@ -1,0 +1,14 @@
+{
+  "path": "src/List.tsx",
+  "language": "typescript",
+  "text": "export function List({ items }: { items: { id: string }[] }) {\n  return (\n    <ul>\n      {items.map((item) => (\n        <li key={item.id}>{item.id}</li>\n      ))}\n    </ul>\n  );\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

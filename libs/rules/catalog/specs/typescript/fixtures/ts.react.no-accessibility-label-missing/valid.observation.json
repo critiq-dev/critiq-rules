@@ -1,0 +1,14 @@
+{
+  "path": "src/Save.tsx",
+  "language": "typescript",
+  "text": "export function Save() {\n  return <button type=\"button\">Save</button>;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

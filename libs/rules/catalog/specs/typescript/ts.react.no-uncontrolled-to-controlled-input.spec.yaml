@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-uncontrolled-to-controlled-input.rule.yaml
+fixtures:
+  - name: flags inputs that combine value and defaultValue
+    observationPath: ./fixtures/ts.react.no-uncontrolled-to-controlled-input/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-uncontrolled-to-controlled-input
+      allSeverities:
+        - medium
+  - name: ignores controlled-only inputs
+    observationPath: ./fixtures/ts.react.no-uncontrolled-to-controlled-input/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

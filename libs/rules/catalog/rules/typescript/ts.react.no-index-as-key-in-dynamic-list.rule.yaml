@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-index-as-key-in-dynamic-list
+  title: Avoid array index keys in dynamic lists
+  summary: Using the map index as a React key breaks reconciliation when lists reorder, filter, or insert items.
+  rationale: Stable keys help React preserve component state and reduce subtle UI bugs when list membership changes.
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.index-key-in-list
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.78
+    tags:
+      - react
+      - ui
+  message:
+    title: Replace index keys with stable identifiers
+    summary: "`${captures.issue.text}` uses a list index as a React key."
+  remediation:
+    summary: Use a stable business identifier from each item, or derive a stable key when the dataset truly never mutates order.

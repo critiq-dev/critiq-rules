@@ -1,0 +1,14 @@
+{
+  "path": "src/Counter.tsx",
+  "language": "typescript",
+  "text": "import { useState } from 'react';\n\nexport function Counter() {\n  const [value, setValue] = useState(0);\n  return <span>{value}</span>;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

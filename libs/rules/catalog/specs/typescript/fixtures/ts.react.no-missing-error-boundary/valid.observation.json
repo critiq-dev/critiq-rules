@@ -1,0 +1,14 @@
+{
+  "path": "src/app/dashboard/page.tsx",
+  "language": "typescript",
+  "text": "export default function Page() {\n  return null;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}
