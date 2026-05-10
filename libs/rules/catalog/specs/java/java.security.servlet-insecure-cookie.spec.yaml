@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.servlet-insecure-cookie.rule.yaml
+fixtures:
+  - name: flags session-like Cookie constructors
+    sourcePath: ./fixtures/java.security.servlet-insecure-cookie/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.servlet-insecure-cookie
+      allSeverities:
+        - high
+  - name: ignores non-session cookie names without request coupling
+    sourcePath: ./fixtures/java.security.servlet-insecure-cookie/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

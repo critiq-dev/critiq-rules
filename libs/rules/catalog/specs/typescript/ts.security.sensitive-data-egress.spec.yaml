@@ -21,3 +21,16 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags Java RestTemplate calls forwarding request parameters externally
+    sourcePath: ./fixtures/ts.security.sensitive-data-egress/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.sensitive-data-egress
+      allSeverities:
+        - high
+  - name: ignores literal outbound RestTemplate bodies
+    sourcePath: ./fixtures/ts.security.sensitive-data-egress/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -674,3 +674,31 @@ rules:
     presets:
       - strict
       - security
+  - id: java.security.android-screenshot-exposure
+    rulePath: ./rules/java/java.security.android-screenshot-exposure.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: java.security.android-world-readable-mode
+    rulePath: ./rules/java/java.security.android-world-readable-mode.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: java.security.reflected-output-from-request
+    rulePath: ./rules/java/java.security.reflected-output-from-request.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.servlet-insecure-cookie
+    rulePath: ./rules/java/java.security.servlet-insecure-cookie.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: java.security.spring-debug-exposure
+    rulePath: ./rules/java/java.security.spring-debug-exposure.rule.yaml
+    presets:
+      - strict
+      - security

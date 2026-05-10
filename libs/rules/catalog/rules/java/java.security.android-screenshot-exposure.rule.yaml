@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.android-screenshot-exposure
+  title: Protect sensitive Android screens from screenshots and recents
+  summary: Sensitive activities should enable FLAG_SECURE or avoid clearing it so screen content is harder to capture.
+  rationale: Finance, authentication, and secret-bearing screens can leak through screenshots, screen recording, and recent-task previews when FLAG_SECURE is missing or cleared.
+  tags:
+    - security
+    - privacy
+    - android
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - java
+match:
+  fact:
+    kind: security.android-screenshot-exposure
+    bind: issue
+emit:
+  finding:
+    category: security.privacy
+    severity: high
+    confidence: 0.82
+    tags:
+      - security
+      - privacy
+      - android
+  message:
+    title: Harden Android UI capture policy for `${captures.issue.text}`
+    summary: "`${captures.issue.text}` appears on a sensitive Android surface without an effective FLAG_SECURE posture."
+  remediation:
+    summary: Enable FLAG_SECURE for sensitive screens, avoid clearing it at runtime, and document exceptions only after explicit threat modeling.

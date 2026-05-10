@@ -16,6 +16,7 @@ scope:
   languages:
     - typescript
     - javascript
+    - java
 match:
   fact:
     kind: security.open-redirect

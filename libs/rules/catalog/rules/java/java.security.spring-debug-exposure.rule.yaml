@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.spring-debug-exposure
+  title: Avoid Spring Boot debug and actuator exposure in shipped configuration
+  summary: Spring Boot configuration should not force debug logging or wildcard actuator exposure.
+  rationale: Debug modes and fully exposed actuator endpoints leak internals and expand remote attack surface when configs ship to production.
+  tags:
+    - security
+    - spring
+    - configuration
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - java
+match:
+  fact:
+    kind: security.spring-debug-exposure
+    bind: issue
+emit:
+  finding:
+    category: security.secrets
+    severity: medium
+    confidence: 0.8
+    tags:
+      - security
+      - spring
+      - disclosure
+  message:
+    title: Tighten Spring configuration near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` enables verbose debugging or permissive actuator exposure that should stay out of production defaults."
+  remediation:
+    summary: Remove debug=true overrides, scope logging levels deliberately, and enumerate only required actuator endpoints behind authentication.

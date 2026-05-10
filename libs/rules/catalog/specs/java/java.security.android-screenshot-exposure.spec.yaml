@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.android-screenshot-exposure.rule.yaml
+fixtures:
+  - name: flags sensitive Android activity without FLAG_SECURE
+    sourcePath: ./fixtures/java.security.android-screenshot-exposure/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.android-screenshot-exposure
+      allSeverities:
+        - high
+  - name: ignores activities without sensitive surface hints
+    sourcePath: ./fixtures/java.security.android-screenshot-exposure/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

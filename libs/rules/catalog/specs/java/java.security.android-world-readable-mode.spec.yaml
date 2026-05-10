@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.android-world-readable-mode.rule.yaml
+fixtures:
+  - name: flags legacy world-readable modes
+    sourcePath: ./fixtures/java.security.android-world-readable-mode/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.android-world-readable-mode
+      allSeverities:
+        - high
+  - name: ignores private creation modes
+    sourcePath: ./fixtures/java.security.android-world-readable-mode/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

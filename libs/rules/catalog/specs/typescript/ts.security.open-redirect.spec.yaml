@@ -20,3 +20,16 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags Java servlet redirects driven by request parameters
+    sourcePath: ./fixtures/ts.security.open-redirect/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.open-redirect
+      allSeverities:
+        - high
+  - name: ignores fixed-path servlet redirects
+    sourcePath: ./fixtures/ts.security.open-redirect/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

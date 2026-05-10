@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.reflected-output-from-request.rule.yaml
+fixtures:
+  - name: flags response writers fed by request accessors
+    sourcePath: ./fixtures/java.security.reflected-output-from-request/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.reflected-output-from-request
+      allSeverities:
+        - high
+  - name: ignores constant servlet responses
+    sourcePath: ./fixtures/java.security.reflected-output-from-request/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
