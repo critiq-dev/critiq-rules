@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.echo-sensitive-binding-without-validation
+  title: Echo handlers should validate sensitive request bodies
+  summary: >-
+    Sensitive Echo binds should use struct tags or validators so mutations cannot accept empty or malformed credentials and roles.
+  rationale: >-
+    Regex-based heuristics flag Echo `Bind` usage when the file defines structs with sensitive fields that omit `validate` or `binding` style tags.
+    This is intentionally conservative and may miss cross-file structs or middleware-protected routes.
+  tags:
+    - security
+    - go
+    - echo
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.echo-sensitive-binding-without-validation
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: medium
+    confidence: 0.72
+    tags:
+      - security
+      - go
+      - echo
+  message:
+    title: Add validation tags for sensitive Echo binds in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` binds request data without validation tags on sensitive struct fields."
+  remediation:
+    summary: >-
+      Add `validate` tags, use Echo's binding helpers with explicit validation, or route through a hardened DTO layer.

@@ -8,6 +8,12 @@ fixtures:
       findingCount: 1
       allRuleIds:
         - ruby.security.rails-open-redirect
+  - name: flags redirect_to params without allow_other_host
+    sourcePath: ./fixtures/ruby.security.rails-open-redirect/invalid-params-only.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-open-redirect
   - name: allows wrapped redirect helper
     sourcePath: ./fixtures/ruby.security.rails-open-redirect/valid.rb
     expect:

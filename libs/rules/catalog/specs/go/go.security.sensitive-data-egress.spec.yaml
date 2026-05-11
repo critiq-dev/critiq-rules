@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.sensitive-data-egress.rule.yaml
+fixtures:
+  - name: flags http.Post with tainted body and constant URL
+    sourcePath: ./fixtures/go.security.sensitive-data-egress/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.sensitive-data-egress
+  - name: ignores safe static bodies
+    sourcePath: ./fixtures/go.security.sensitive-data-egress/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

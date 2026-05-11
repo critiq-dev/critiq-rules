@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.sensitive-data-egress
+  title: Avoid relaying request-controlled data through outbound Go HTTP clients
+  summary: >-
+    Outbound `http.Post` bodies should not be built directly from request values without validation or redaction.
+  rationale: >-
+    Tainted POST bodies can exfiltrate secrets, replay cookies, or forward attacker payloads to internal integrations.
+  tags:
+    - security
+    - go
+    - privacy
+    - egress
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: security.sensitive-data-egress
+    bind: issue
+emit:
+  finding:
+    category: security.privacy
+    severity: high
+    confidence: 0.78
+    tags:
+      - security
+      - go
+      - privacy
+  message:
+    title: Validate outbound HTTP payloads in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` forwards tainted values into an outbound HTTP client body."
+  remediation:
+    summary: >-
+      Allowlist outbound hosts, strip secrets from relayed payloads, and route integrations through audited helpers.

@@ -33,3 +33,11 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags Go redirects driven by request query parameters
+    sourcePath: ./fixtures/ts.security.open-redirect/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.open-redirect
+      allSeverities:
+        - high

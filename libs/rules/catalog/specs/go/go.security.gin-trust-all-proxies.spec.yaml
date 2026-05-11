@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.gin-trust-all-proxies.rule.yaml
+fixtures:
+  - name: flags SetTrustedProxies nil
+    sourcePath: ./fixtures/go.security.gin-trust-all-proxies/invalid-nil.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.gin-trust-all-proxies
+  - name: flags SetTrustedProxies with trust-all CIDR
+    sourcePath: ./fixtures/go.security.gin-trust-all-proxies/invalid-cidr.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.gin-trust-all-proxies
+  - name: accepts restricted proxy list
+    sourcePath: ./fixtures/go.security.gin-trust-all-proxies/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

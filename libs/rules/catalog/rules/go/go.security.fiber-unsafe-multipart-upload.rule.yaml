@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.fiber-unsafe-multipart-upload
+  title: Harden Fiber multipart uploads
+  summary: >-
+    Fiber upload helpers should enforce size limits and never persist client-controlled filenames without normalization.
+  rationale: >-
+    `FormFile`/`SaveFile` flows that concatenate `Filename` into paths or skip `filepath.Base` are a common path traversal and storage abuse vector.
+  tags:
+    - security
+    - go
+    - fiber
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.fiber-unsafe-multipart-upload
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.76
+    tags:
+      - security
+      - go
+      - fiber
+  message:
+    title: Harden Fiber upload handling in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` handles multipart uploads without basename hardening or byte limits in the local handler window."
+  remediation:
+    summary: >-
+      Apply `filepath.Base`, cap reader sizes, allowlist extensions, and store uploads using server-generated object keys.

@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.gin-sensitive-binding-without-validation
+  title: Gin handlers should validate sensitive request bodies
+  summary: >-
+    Sensitive Gin binds should use `binding` or validator tags so authentication and mutation payloads cannot be silently empty.
+  rationale: >-
+    Regex heuristics flag `ShouldBindJSON`/`BindJSON` usage when structs in the same file omit `binding`/`validate` tags on sensitive fields such as passwords or roles.
+  tags:
+    - security
+    - go
+    - gin
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.gin-sensitive-binding-without-validation
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: medium
+    confidence: 0.74
+    tags:
+      - security
+      - go
+      - gin
+  message:
+    title: Add validation tags for sensitive Gin binds in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` binds JSON without validation tags on sensitive struct fields."
+  remediation:
+    summary: >-
+      Add `binding`/`validate` tags, register validators, or reject requests before they reach persistence layers.

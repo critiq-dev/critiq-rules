@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.fiber-sensitive-binding-without-validation
+  title: Fiber handlers should validate sensitive request bodies
+  summary: >-
+    Sensitive Fiber parsers should pair structs with validator tags or explicit validation so roles and secrets cannot be silently omitted.
+  rationale: >-
+    Regex heuristics flag `BodyParser`/`JSON` usage when structs in the same file define sensitive fields without `validate` or `binding` style tags.
+  tags:
+    - security
+    - go
+    - fiber
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.fiber-sensitive-binding-without-validation
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: medium
+    confidence: 0.72
+    tags:
+      - security
+      - go
+      - fiber
+  message:
+    title: Add validation tags for sensitive Fiber binds in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` parses request bodies without validation tags on sensitive struct fields."
+  remediation:
+    summary: >-
+      Add `validate` struct tags, use Fiber validator middleware, or centralize DTO validation before business logic.

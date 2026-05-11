@@ -817,3 +817,58 @@ rules:
     presets:
       - strict
       - security
+  - id: go.security.echo-sensitive-binding-without-validation
+    rulePath: ./rules/go/go.security.echo-sensitive-binding-without-validation.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.echo-unsafe-multipart-upload
+    rulePath: ./rules/go/go.security.echo-unsafe-multipart-upload.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.fiber-sensitive-binding-without-validation
+    rulePath: ./rules/go/go.security.fiber-sensitive-binding-without-validation.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.fiber-unsafe-multipart-upload
+    rulePath: ./rules/go/go.security.fiber-unsafe-multipart-upload.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.gin-sensitive-binding-without-validation
+    rulePath: ./rules/go/go.security.gin-sensitive-binding-without-validation.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.gin-trust-all-proxies
+    rulePath: ./rules/go/go.security.gin-trust-all-proxies.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.gin-wildcard-cors-with-credentials
+    rulePath: ./rules/go/go.security.gin-wildcard-cors-with-credentials.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.net-http-missing-timeouts
+    rulePath: ./rules/go/go.security.net-http-missing-timeouts.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.sensitive-data-egress
+    rulePath: ./rules/go/go.security.sensitive-data-egress.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.tar-path-traversal
+    rulePath: ./rules/go/go.security.tar-path-traversal.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.template-unescaped-request-value
+    rulePath: ./rules/go/go.security.template-unescaped-request-value.rule.yaml
+    presets:
+      - strict
+      - security

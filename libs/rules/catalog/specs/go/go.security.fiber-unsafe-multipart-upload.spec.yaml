@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.fiber-unsafe-multipart-upload.rule.yaml
+fixtures:
+  - name: flags Fiber SaveFile without basename hardening
+    sourcePath: ./fixtures/go.security.fiber-unsafe-multipart-upload/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.fiber-unsafe-multipart-upload
+  - name: accepts SaveFile with filepath.Base
+    sourcePath: ./fixtures/go.security.fiber-unsafe-multipart-upload/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

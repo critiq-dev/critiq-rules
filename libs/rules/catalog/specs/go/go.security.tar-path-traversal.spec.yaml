@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.tar-path-traversal.rule.yaml
+fixtures:
+  - name: flags os.Create concatenating hdr.Name
+    sourcePath: ./fixtures/go.security.tar-path-traversal/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.tar-path-traversal
+  - name: accepts filepath.Base on header name
+    sourcePath: ./fixtures/go.security.tar-path-traversal/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

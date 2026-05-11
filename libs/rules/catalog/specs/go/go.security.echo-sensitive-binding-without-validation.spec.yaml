@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.echo-sensitive-binding-without-validation.rule.yaml
+fixtures:
+  - name: flags Echo bind with sensitive struct missing validators
+    sourcePath: ./fixtures/go.security.echo-sensitive-binding-without-validation/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.echo-sensitive-binding-without-validation
+  - name: accepts validated structs
+    sourcePath: ./fixtures/go.security.echo-sensitive-binding-without-validation/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.net-http-missing-timeouts.rule.yaml
+fixtures:
+  - name: flags ListenAndServe without timeouts
+    sourcePath: ./fixtures/go.security.net-http-missing-timeouts/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.net-http-missing-timeouts
+  - name: accepts configured http.Server
+    sourcePath: ./fixtures/go.security.net-http-missing-timeouts/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

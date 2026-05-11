@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.net-http-missing-timeouts
+  title: Configure HTTP server timeouts for public listeners
+  summary: >-
+    Public Go HTTP servers should use `http.Server` with read, write, idle, and header timeouts instead of convenience `ListenAndServe` helpers or incomplete literals.
+  rationale: >-
+    Missing timeouts enable slowloris-style resource exhaustion and hung connections on internet-facing services.
+  tags:
+    - security
+    - go
+    - net/http
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.net-http-missing-timeouts
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.7
+    tags:
+      - security
+      - go
+      - net/http
+  message:
+    title: Add HTTP timeouts around `${captures.issue.text}`
+    summary: "`${captures.issue.text}` exposes a listener without full `http.Server` timeout coverage suitable for public networks."
+  remediation:
+    summary: >-
+      Construct `http.Server` with `ReadHeaderTimeout`, `ReadTimeout`, `WriteTimeout`, and `IdleTimeout`, and prefer `ListenAndServe` on that configured instance.

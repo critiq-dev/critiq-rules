@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.template-unescaped-request-value.rule.yaml
+fixtures:
+  - name: flags template.HTML wrapping query parameters
+    sourcePath: ./fixtures/go.security.template-unescaped-request-value/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.template-unescaped-request-value
+  - name: accepts sanitizer-wrapped preview
+    sourcePath: ./fixtures/go.security.template-unescaped-request-value/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

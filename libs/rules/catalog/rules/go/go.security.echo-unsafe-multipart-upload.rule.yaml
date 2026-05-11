@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.echo-unsafe-multipart-upload
+  title: Harden Echo multipart uploads
+  summary: >-
+    Multipart handlers should cap body size, sanitize filenames with `filepath.Base`, and avoid concatenating user filenames into destination paths.
+  rationale: >-
+    Unbounded multipart reads and raw `FormFile().Filename` usage enable DoS and path traversal when combined with predictable upload directories.
+  tags:
+    - security
+    - go
+    - echo
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.echo-unsafe-multipart-upload
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.78
+    tags:
+      - security
+      - go
+      - echo
+  message:
+    title: Harden Echo upload handling in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` writes multipart uploads without `MaxBytesReader`, basename hardening, or equivalent guards."
+  remediation:
+    summary: >-
+      Wrap the request body with `http.MaxBytesReader`, normalize filenames with `filepath.Base`, enforce extension allowlists, and prefer storage APIs that never trust client paths.

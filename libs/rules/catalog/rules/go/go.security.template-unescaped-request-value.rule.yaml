@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.template-unescaped-request-value
+  title: Avoid feeding request data into trusted template types
+  summary: >-
+    `template.HTML`, `template.JS`, and `template.CSS` should not wrap request-derived strings unless they were sanitized first.
+  rationale: >-
+    Trusted template types disable escaping and turn reflected input into cross-site scripting when executed in browsers.
+  tags:
+    - security
+    - go
+    - templates
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.template-unescaped-request-value
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.8
+    tags:
+      - security
+      - go
+      - templates
+  message:
+    title: Sanitize before using trusted template types in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` wraps request-controlled data in `template.HTML`/`JS`/`CSS` without an obvious sanitizer."
+  remediation:
+    summary: >-
+      Run untrusted strings through an HTML sanitizer such as bluemonday, prefer typed templates, or keep data in plain escaped fields.

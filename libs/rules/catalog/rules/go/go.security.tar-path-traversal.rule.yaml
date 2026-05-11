@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.tar-path-traversal
+  title: Sanitize archive entry paths before writing to disk
+  summary: >-
+    Tar extraction must normalize `header.Name` with `filepath.Base` or `filepath.Clean` before opening destination files.
+  rationale: >-
+    Writing `hdr.Name` directly enables `../` traversal that escapes intended extraction directories.
+  tags:
+    - security
+    - go
+    - archive
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.tar-path-traversal
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.8
+    tags:
+      - security
+      - go
+      - archive
+  message:
+    title: Normalize tar entry paths in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` opens a filesystem path using raw tar header names without `filepath.Base`/`filepath.Clean`."
+  remediation:
+    summary: >-
+      Join destinations using a fixed root with `filepath.Join`, reject absolute paths, and always apply `filepath.Base` before `os.Create`.

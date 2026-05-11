@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.echo-unsafe-multipart-upload.rule.yaml
+fixtures:
+  - name: flags unsafe Echo multipart write
+    sourcePath: ./fixtures/go.security.echo-unsafe-multipart-upload/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.echo-unsafe-multipart-upload
+  - name: accepts hardened upload handler
+    sourcePath: ./fixtures/go.security.echo-unsafe-multipart-upload/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

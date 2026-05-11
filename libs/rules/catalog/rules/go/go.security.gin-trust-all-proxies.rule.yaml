@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.gin-trust-all-proxies
+  title: Avoid trust-all Gin reverse proxy settings
+  summary: >-
+    `SetTrustedProxies` should list real upstreams instead of `nil` or `0.0.0.0/0` style catch-alls that spoof `X-Forwarded-For`.
+  rationale: >-
+    Trusting every proxy allows clients to forge client IP headers and bypass IP-based controls or auditing.
+  tags:
+    - security
+    - go
+    - gin
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.gin-trust-all-proxies
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.86
+    tags:
+      - security
+      - go
+      - gin
+  message:
+    title: Restrict Gin trusted proxies in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` trusts all proxies or nil, which enables forwarded header spoofing."
+  remediation:
+    summary: >-
+      Replace catch-all trusted proxy lists with explicit CIDRs for your ingress tier and document the expected hop count.

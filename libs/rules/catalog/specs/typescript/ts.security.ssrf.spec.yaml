@@ -28,3 +28,11 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags Go http.Get with request-derived URL
+    sourcePath: ./fixtures/ts.security.ssrf/request-controlled-fetch.invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.ssrf
+      allSeverities:
+        - high
