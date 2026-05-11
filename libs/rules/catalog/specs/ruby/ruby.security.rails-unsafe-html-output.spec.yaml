@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-unsafe-html-output.rule.yaml
+fixtures:
+  - name: flags raw params in ERB
+    sourcePath: ./fixtures/ruby.security.rails-unsafe-html-output/invalid.html.erb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-unsafe-html-output
+  - name: accepts sanitize helper
+    sourcePath: ./fixtures/ruby.security.rails-unsafe-html-output/valid.html.erb
+    expect:
+      findingCount: 0
+      allRuleIds: []

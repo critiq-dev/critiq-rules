@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.rails-unsafe-session-or-cookie-store
+  title: Do not store raw request params in session or cookies
+  summary: >-
+    Session and signed cookie stores should not persist raw `params` blobs that attackers can influence.
+  rationale: >-
+    Writing `params` directly into `session` or `cookies` enables tampering, fixation, and oversized payload attacks unless additional integrity controls exist.
+  tags:
+    - security
+    - ruby
+    - rails
+    - session
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.rails-unsafe-session-or-cookie-store
+    bind: issue
+emit:
+  finding:
+    category: security.session-management
+    severity: medium
+    confidence: 0.85
+    tags:
+      - security
+      - ruby
+      - rails
+  message:
+    title: Avoid persisting raw params in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` assigns request `params` directly into session or cookie storage."
+  remediation:
+    summary: >-
+      Store opaque identifiers, use signed or encrypted cookie jars appropriately, and validate any user-derived values before persistence.

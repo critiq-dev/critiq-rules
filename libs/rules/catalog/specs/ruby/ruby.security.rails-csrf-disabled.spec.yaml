@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-csrf-disabled.rule.yaml
+fixtures:
+  - name: flags skip_forgery_protection
+    sourcePath: ./fixtures/ruby.security.rails-csrf-disabled/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-csrf-disabled
+  - name: accepts default forgery protection
+    sourcePath: ./fixtures/ruby.security.rails-csrf-disabled/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

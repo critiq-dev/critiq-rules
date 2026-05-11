@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.rails-unsafe-html-output
+  title: Avoid unescaped HTML built from request or tainted data
+  summary: >-
+    Do not mark request-driven strings as HTML safe or bypass sanitization in views or helpers.
+  rationale: >-
+    `raw`, `html_safe`, `sanitize: false`, and ERB double-equals disable escaping and commonly become reflected XSS sinks.
+  tags:
+    - security
+    - ruby
+    - rails
+    - xss
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+      - "**/*.erb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.rails-unsafe-html-output
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.86
+    tags:
+      - security
+      - ruby
+      - rails
+  message:
+    title: Encode or sanitize HTML instead of `${captures.issue.text}`
+    summary: "`${captures.issue.text}` mixes tainted or request data with helpers that disable Rails HTML escaping."
+  remediation:
+    summary: >-
+      Prefer default escaping, pass sanitized fragments, or centralize HTML generation through a vetted sanitizer instead of `raw`/`html_safe`.

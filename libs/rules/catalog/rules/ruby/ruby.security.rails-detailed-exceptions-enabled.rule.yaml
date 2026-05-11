@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.rails-detailed-exceptions-enabled
+  title: Keep production Rails exception disclosure minimal
+  summary: >-
+    Production environments should not enable local-style exception pages or verbose Action Dispatch exception rendering.
+  rationale: >-
+    Detailed exceptions leak stack traces, secrets, and implementation details that attackers can use to refine exploits.
+  tags:
+    - security
+    - ruby
+    - rails
+    - misconfiguration
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/config/environments/production.rb"
+    exclude:
+      - "**/vendor/**"
+match:
+  fact:
+    kind: ruby.security.rails-detailed-exceptions-enabled
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - ruby
+      - rails
+  message:
+    title: Disable verbose exceptions for `${captures.issue.text}`
+    summary: "`${captures.issue.text}` enables detailed exceptions or local request handling in the production environment file."
+  remediation:
+    summary: >-
+      Set `consider_all_requests_local` and `show_detailed_exceptions` to safe defaults, route errors through monitored handlers, and keep `config.action_dispatch.show_exceptions` off verbose modes in production.

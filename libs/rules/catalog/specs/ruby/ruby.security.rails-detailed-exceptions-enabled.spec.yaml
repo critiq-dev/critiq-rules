@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-detailed-exceptions-enabled.rule.yaml
+fixtures:
+  - name: flags verbose production exception settings
+    sourcePath: ./fixtures/ruby.security.rails-detailed-exceptions-enabled/invalid/config/environments/production.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-detailed-exceptions-enabled
+  - name: accepts safe production defaults
+    sourcePath: ./fixtures/ruby.security.rails-detailed-exceptions-enabled/valid/config/environments/production.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-unsafe-session-or-cookie-store.rule.yaml
+fixtures:
+  - name: flags session assignment from params
+    sourcePath: ./fixtures/ruby.security.rails-unsafe-session-or-cookie-store/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-unsafe-session-or-cookie-store
+  - name: accepts non-params persistence
+    sourcePath: ./fixtures/ruby.security.rails-unsafe-session-or-cookie-store/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

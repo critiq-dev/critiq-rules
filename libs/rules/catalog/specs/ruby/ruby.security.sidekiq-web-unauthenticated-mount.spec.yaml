@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.sidekiq-web-unauthenticated-mount.rule.yaml
+fixtures:
+  - name: flags unauthenticated mount
+    sourcePath: ./fixtures/ruby.security.sidekiq-web-unauthenticated-mount/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.sidekiq-web-unauthenticated-mount
+  - name: accepts authenticate wrapper
+    sourcePath: ./fixtures/ruby.security.sidekiq-web-unauthenticated-mount/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

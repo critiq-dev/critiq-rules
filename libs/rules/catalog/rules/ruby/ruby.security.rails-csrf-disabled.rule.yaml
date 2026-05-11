@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.rails-csrf-disabled
+  title: Do not disable Rails CSRF protection on browser controllers
+  summary: >-
+    Browser-facing Rails controllers should keep forgery protection enabled with a safe strategy.
+  rationale: >-
+    Skipping CSRF verification or downgrading to `null_session` lets attackers replay cross-site requests against authenticated sessions.
+  tags:
+    - security
+    - ruby
+    - rails
+    - csrf
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.rails-csrf-disabled
+    bind: issue
+emit:
+  finding:
+    category: security.session-management
+    severity: high
+    confidence: 0.82
+    tags:
+      - security
+      - ruby
+      - rails
+  message:
+    title: Re-enable CSRF protections around `${captures.issue.text}`
+    summary: "`${captures.issue.text}` weakens or skips Rails CSRF defenses outside an API-only controller surface."
+  remediation:
+    summary: >-
+      Remove broad `skip_forgery_protection` usage, prefer `protect_from_forgery with: :exception`, and keep `verify_authenticity_token` enabled for state-changing browser actions.

@@ -772,3 +772,48 @@ rules:
     presets:
       - strict
       - security
+  - id: ruby.security.rails-csrf-disabled
+    rulePath: ./rules/ruby/ruby.security.rails-csrf-disabled.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.rails-detailed-exceptions-enabled
+    rulePath: ./rules/ruby/ruby.security.rails-detailed-exceptions-enabled.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.rails-open-redirect
+    rulePath: ./rules/ruby/ruby.security.rails-open-redirect.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.rails-unsafe-html-output
+    rulePath: ./rules/ruby/ruby.security.rails-unsafe-html-output.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.rails-unsafe-render
+    rulePath: ./rules/ruby/ruby.security.rails-unsafe-render.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.rails-unsafe-session-or-cookie-store
+    rulePath: ./rules/ruby/ruby.security.rails-unsafe-session-or-cookie-store.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.rails-unsafe-strong-parameters
+    rulePath: ./rules/ruby/ruby.security.rails-unsafe-strong-parameters.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.sensitive-data-egress
+    rulePath: ./rules/ruby/ruby.security.sensitive-data-egress.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.sidekiq-web-unauthenticated-mount
+    rulePath: ./rules/ruby/ruby.security.sidekiq-web-unauthenticated-mount.rule.yaml
+    presets:
+      - strict
+      - security

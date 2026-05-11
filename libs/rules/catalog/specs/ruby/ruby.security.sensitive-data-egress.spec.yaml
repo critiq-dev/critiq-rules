@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.sensitive-data-egress.rule.yaml
+fixtures:
+  - name: flags tainted URI.open target
+    sourcePath: ./fixtures/ruby.security.sensitive-data-egress/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.sensitive-data-egress
+  - name: accepts literal outbound URL
+    sourcePath: ./fixtures/ruby.security.sensitive-data-egress/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

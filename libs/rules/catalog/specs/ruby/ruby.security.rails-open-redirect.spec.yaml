@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-open-redirect.rule.yaml
+fixtures:
+  - name: flags cross-host redirect with params
+    sourcePath: ./fixtures/ruby.security.rails-open-redirect/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-open-redirect
+  - name: allows wrapped redirect helper
+    sourcePath: ./fixtures/ruby.security.rails-open-redirect/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

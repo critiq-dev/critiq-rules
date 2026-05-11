@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-unsafe-strong-parameters.rule.yaml
+fixtures:
+  - name: flags permit! and raw mass assignment
+    sourcePath: ./fixtures/ruby.security.rails-unsafe-strong-parameters/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.security.rails-unsafe-strong-parameters
+        - ruby.security.rails-unsafe-strong-parameters
+  - name: accepts explicit safe permit list
+    sourcePath: ./fixtures/ruby.security.rails-unsafe-strong-parameters/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

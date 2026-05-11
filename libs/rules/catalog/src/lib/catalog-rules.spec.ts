@@ -76,7 +76,13 @@ describe('rules catalog rule specs', () => {
         rulePath.replace(/\.rule\.yaml$/u, '.spec.yaml'),
       ),
     );
-    expect(topLevelSpecDirectories).toEqual(['java', 'python', 'shared', 'typescript']);
+    expect(topLevelSpecDirectories).toEqual([
+      'java',
+      'python',
+      'ruby',
+      'shared',
+      'typescript',
+    ]);
     expect(referencedFixturePaths.every((fixturePath) => fixturePath.startsWith('./fixtures/'))).toBe(
       true,
     );

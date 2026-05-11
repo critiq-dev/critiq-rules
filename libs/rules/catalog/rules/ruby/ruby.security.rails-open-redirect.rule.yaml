@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.rails-open-redirect
+  title: Avoid open redirects from request-controlled targets
+  summary: >-
+    Redirect helpers must not send users to hosts or paths derived directly from request input without validation.
+  rationale: >-
+    `redirect_to` and `redirect_back` calls that honor `params`, `request` URLs, or `allow_other_host: true` with tainted data are a common phishing and OAuth bypass vector.
+  tags:
+    - security
+    - ruby
+    - rails
+    - open-redirect
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.rails-open-redirect
+    bind: issue
+emit:
+  finding:
+    category: security.url-redirection
+    severity: medium
+    confidence: 0.84
+    tags:
+      - security
+      - ruby
+      - rails
+  message:
+    title: Validate redirect targets in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` forwards users using request-derived data or cross-host redirects without a safe allowlist."
+  remediation:
+    summary: >-
+      Use an allowlisted path helper, reject off-host targets, and avoid pairing `allow_other_host: true` with user-controlled URLs.

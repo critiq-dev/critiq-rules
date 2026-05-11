@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.sensitive-data-egress
+  title: Avoid relaying request-controlled data through outbound Ruby HTTP clients
+  summary: >-
+    Outbound HTTP helpers should not receive URLs or bodies directly from `params` or other tainted sources without validation.
+  rationale: >-
+    User-controlled egress enables SSRF, data exfiltration, and token theft when combined with open HTTP clients.
+  tags:
+    - security
+    - ruby
+    - privacy
+    - egress
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: security.sensitive-data-egress
+    bind: issue
+emit:
+  finding:
+    category: security.privacy
+    severity: high
+    confidence: 0.8
+    tags:
+      - security
+      - ruby
+      - privacy
+  message:
+    title: Validate outbound HTTP data in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` forwards tainted values into an outbound HTTP client."
+  remediation:
+    summary: >-
+      Allowlist hosts, strip secrets from outbound payloads, and route external calls through audited integration points.

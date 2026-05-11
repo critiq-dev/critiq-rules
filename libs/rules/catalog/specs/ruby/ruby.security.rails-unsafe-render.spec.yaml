@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-unsafe-render.rule.yaml
+fixtures:
+  - name: flags render html with params
+    sourcePath: ./fixtures/ruby.security.rails-unsafe-render/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-unsafe-render
+  - name: accepts static render html
+    sourcePath: ./fixtures/ruby.security.rails-unsafe-render/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

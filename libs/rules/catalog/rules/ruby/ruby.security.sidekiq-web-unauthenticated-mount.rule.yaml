@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.sidekiq-web-unauthenticated-mount
+  title: Protect Sidekiq::Web mounts with authentication
+  summary: >-
+    Sidekiq Web must not be exposed on public routes without an authentication or network guard.
+  rationale: >-
+    Unauthenticated Sidekiq Web consoles expose queues and often lead to remote code execution via job replay or configuration changes.
+  tags:
+    - security
+    - ruby
+    - rails
+    - sidekiq
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.sidekiq-web-unauthenticated-mount
+    bind: issue
+emit:
+  finding:
+    category: security.authorization
+    severity: high
+    confidence: 0.8
+    tags:
+      - security
+      - ruby
+      - sidekiq
+  message:
+    title: Authenticate Sidekiq Web before `${captures.issue.text}`
+    summary: "`${captures.issue.text}` mounts the Sidekiq console without a visible authentication or constraint guard."
+  remediation:
+    summary: >-
+      Wrap mounts in `authenticate`, add route constraints, use basic auth or VPN-only routing, and keep consoles off public networks.
