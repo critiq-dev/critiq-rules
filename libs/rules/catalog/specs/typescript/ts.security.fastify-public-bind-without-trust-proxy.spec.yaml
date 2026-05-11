@@ -15,3 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: accepts public bind behind gateway marker
+    sourcePath: ./fixtures/node-framework/fastify-public-bind-gateway.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

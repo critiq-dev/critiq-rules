@@ -15,3 +15,11 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags oversized Fastify route body limits
+    sourcePath: ./fixtures/node-framework/fastify-body-limit-route.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.fastify-excessive-body-limit
+      allSeverities:
+        - medium

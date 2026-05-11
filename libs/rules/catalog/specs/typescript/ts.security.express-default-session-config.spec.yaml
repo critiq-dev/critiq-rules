@@ -15,3 +15,11 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags default connect.sid session name
+    sourcePath: ./fixtures/node-framework/express-default-session-name.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-default-session-config
+      allSeverities:
+        - medium

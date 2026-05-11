@@ -15,3 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: accepts localhost-only bootstrap posture
+    sourcePath: ./fixtures/node-framework/apollo-missing-limits-internal.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

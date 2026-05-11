@@ -21,3 +21,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: accepts non-production guarded parser middleware
+    sourcePath: ./fixtures/node-framework/express-unbounded-body-dev-guard.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

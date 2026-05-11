@@ -15,3 +15,11 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: flags missing sameSite in explicit cookie config
+    sourcePath: ./fixtures/node-framework/express-cookie-missing-samesite.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-default-cookie-config
+      allSeverities:
+        - medium

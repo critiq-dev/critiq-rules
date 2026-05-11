@@ -46,7 +46,7 @@ Today the catalog includes `197` rules across `16` categories, with `recommended
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |
-| Security | 72 | Injection, auth and session gaps, unsafe transport, sensitive data exposure, unsafe file and HTML handling |
+| Security | 78 | Injection, auth and session gaps, unsafe transport, sensitive data exposure, unsafe file and HTML handling |
 | Python | 9 | Django, DRF, Flask, and FastAPI deployment and framework safety |
 | Correctness | 15 | Async bugs, null access, control-flow mistakes, missing fallbacks, race conditions |
 | Performance | 10 | Repeated IO, wasted async sequencing, hot-path loops, large retained objects, render churn |
@@ -86,7 +86,7 @@ Critiq keeps the OSS catalog intentionally high-signal.
 
 ## More Rules In This Catalog
 
-The catalog also includes these `131` additional rules beyond the highlights above.
+The catalog also includes these `137` additional rules beyond the highlights above.
 
 ### Security
 
@@ -152,6 +152,18 @@ The catalog also includes these `131` additional rules beyond the highlights abo
 | `Override Express cookie defaults` | Express session cookie settings should not omit explicit lifetime, scope, and transport attributes. |
 | `Avoid permissive Express session cookie scope` | Express session cookies should not explicitly opt into cross-site or wildcard-style scope. |
 | `Serve static assets before session middleware` | Static assets should be mounted before session middleware when they do not need session state. |
+| `Limit Express request parser body size` | Express and body-parser middleware should set explicit parser limits, including upload middleware caps. |
+| `Constrain Fastify body limits` | Fastify bootstrap and route-level body limits should not be disabled or set unusually high without compensating controls. |
+| `Protect Fastify public bind posture` | Fastify public binds should pair with trust-proxy or gateway controls before exposing upstream network metadata. |
+| `Harden Apollo GraphQL CSRF posture` | Apollo server configs should not disable CSRF protection in public bootstraps. |
+| `Constrain Apollo introspection exposure` | Apollo production bootstraps should not unconditionally enable introspection. |
+| `Require GraphQL query limiting controls` | Public GraphQL servers should define depth, complexity, persisted operation, or equivalent query limiting controls. |
+| `Avoid Apollo dev tooling exposure in production` | Apollo dev landing pages and playground plugins should not ship without explicit production guards. |
+| `Avoid GraphQL upload middleware without CSRF guard` | GraphQL multipart upload middleware should not run when CSRF prevention is explicitly disabled. |
+| `Apply Helmet before NestJS route mounts` | NestJS apps should register helmet before route middleware mounts. |
+| `Enable NestJS global validation pipe` | NestJS bootstraps should configure a global ValidationPipe to harden DTO trust boundaries. |
+| `Whitelist NestJS ValidationPipe payload fields` | ValidationPipe should enable whitelist-style filtering for request payload hardening. |
+| `Avoid SkipThrottle on sensitive NestJS auth routes` | Sensitive NestJS auth routes should not bypass throttle controls without compensating protection. |
 | `Apply Helmet to Express apps` | Express apps should use Helmet or equivalent header hardening middleware. |
 | `Reduce Express fingerprinting` | Express apps should disable `x-powered-by` or equivalent fingerprinting headers. |
 | `Do not expose debug routes or middleware in production` | Debug handlers, stack-showing middleware, and diagnostic endpoints should stay behind explicit development-only guards. |
