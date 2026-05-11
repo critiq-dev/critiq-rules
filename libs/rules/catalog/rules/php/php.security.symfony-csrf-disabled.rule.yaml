@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.symfony-csrf-disabled
+  title: Keep Symfony CSRF enabled on state-changing form flows
+  summary: >-
+    Symfony forms and controllers handling state changes should not disable CSRF protection without a clear API token boundary.
+  rationale: >-
+    Disabling CSRF for authenticated browser flows enables cross-site request forgery on sensitive actions.
+  tags:
+    - security
+    - php
+    - symfony
+    - csrf
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.symfony-csrf-disabled
+    bind: issue
+emit:
+  finding:
+    category: security.session-management
+    severity: high
+    confidence: 0.84
+    tags:
+      - security
+      - php
+      - symfony
+  message:
+    title: Re-enable CSRF guard around `${captures.issue.text}`
+    summary: "`${captures.issue.text}` disables CSRF protection for a state-changing Symfony surface."
+  remediation:
+    summary: >-
+      Keep CSRF enabled for browser forms/controllers and only exempt endpoints that are explicitly authenticated by signed tokens.

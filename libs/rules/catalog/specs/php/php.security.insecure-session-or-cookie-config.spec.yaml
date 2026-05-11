@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.insecure-session-or-cookie-config.rule.yaml
+fixtures:
+  - name: flags insecure cookie params
+    sourcePath: ./fixtures/php.security.insecure-session-or-cookie-config/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.insecure-session-or-cookie-config
+  - name: ignores secure cookie params
+    sourcePath: ./fixtures/php.security.insecure-session-or-cookie-config/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

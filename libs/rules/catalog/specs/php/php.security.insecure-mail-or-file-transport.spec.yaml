@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.insecure-mail-or-file-transport.rule.yaml
+fixtures:
+  - name: flags plaintext ftp usage
+    sourcePath: ./fixtures/php.security.insecure-mail-or-file-transport/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.insecure-mail-or-file-transport
+  - name: ignores secure transport usage
+    sourcePath: ./fixtures/php.security.insecure-mail-or-file-transport/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

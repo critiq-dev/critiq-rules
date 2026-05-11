@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.laravel-sensitive-csrf-exclusion.rule.yaml
+fixtures:
+  - name: flags sensitive wildcard exclusions
+    sourcePath: ./fixtures/php.security.laravel-sensitive-csrf-exclusion/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.laravel-sensitive-csrf-exclusion
+  - name: ignores signed webhook exclusions
+    sourcePath: ./fixtures/php.security.laravel-sensitive-csrf-exclusion/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

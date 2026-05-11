@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.wordpress-missing-nonce-or-capability
+  title: Require nonce and capability checks in sensitive WordPress mutation callbacks
+  summary: >-
+    WordPress admin/AJAX mutation callbacks should verify nonce tokens and enforce capability checks.
+  rationale: >-
+    Missing nonce or authorization checks let attackers trigger privileged actions through forged or unauthorized requests.
+  tags:
+    - security
+    - php
+    - wordpress
+    - authorization
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.wordpress-missing-nonce-or-capability
+    bind: issue
+emit:
+  finding:
+    category: security.authorization
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - php
+      - wordpress
+  message:
+    title: Protect WordPress action `${captures.issue.text}`
+    summary: "`${captures.issue.text}` handles a mutation callback without complete nonce and capability enforcement."
+  remediation:
+    summary: >-
+      Add nonce verification (`check_ajax_referer`/`check_admin_referer`) and explicit capability checks (`current_user_can`) before performing mutations.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.wordpress-unprepared-sql.rule.yaml
+fixtures:
+  - name: flags wpdb interpolated query
+    sourcePath: ./fixtures/php.security.wordpress-unprepared-sql/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.wordpress-unprepared-sql
+  - name: ignores prepared wpdb query
+    sourcePath: ./fixtures/php.security.wordpress-unprepared-sql/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

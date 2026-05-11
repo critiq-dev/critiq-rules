@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.symfony-debug-exposure.rule.yaml
+fixtures:
+  - name: flags debug enabled in prod env
+    sourcePath: ./fixtures/php.security.symfony-debug-exposure/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.symfony-debug-exposure
+  - name: ignores safe prod debug config
+    sourcePath: ./fixtures/php.security.symfony-debug-exposure/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

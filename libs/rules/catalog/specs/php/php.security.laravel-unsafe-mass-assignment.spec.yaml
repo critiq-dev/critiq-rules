@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.laravel-unsafe-mass-assignment.rule.yaml
+fixtures:
+  - name: flags request all mass assignment
+    sourcePath: ./fixtures/php.security.laravel-unsafe-mass-assignment/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.laravel-unsafe-mass-assignment
+  - name: accepts explicit allowlist assignment
+    sourcePath: ./fixtures/php.security.laravel-unsafe-mass-assignment/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -872,3 +872,63 @@ rules:
     presets:
       - strict
       - security
+  - id: php.security.insecure-cors-wildcard-with-credentials
+    rulePath: ./rules/php/php.security.insecure-cors-wildcard-with-credentials.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.insecure-mail-or-file-transport
+    rulePath: ./rules/php/php.security.insecure-mail-or-file-transport.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.insecure-session-or-cookie-config
+    rulePath: ./rules/php/php.security.insecure-session-or-cookie-config.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.laravel-sensitive-csrf-exclusion
+    rulePath: ./rules/php/php.security.laravel-sensitive-csrf-exclusion.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.laravel-unsafe-blade-output
+    rulePath: ./rules/php/php.security.laravel-unsafe-blade-output.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.laravel-unsafe-mass-assignment
+    rulePath: ./rules/php/php.security.laravel-unsafe-mass-assignment.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.sensitive-data-egress
+    rulePath: ./rules/php/php.security.sensitive-data-egress.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.symfony-csrf-disabled
+    rulePath: ./rules/php/php.security.symfony-csrf-disabled.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.symfony-debug-exposure
+    rulePath: ./rules/php/php.security.symfony-debug-exposure.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.unsafe-file-upload-handling
+    rulePath: ./rules/php/php.security.unsafe-file-upload-handling.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.wordpress-missing-nonce-or-capability
+    rulePath: ./rules/php/php.security.wordpress-missing-nonce-or-capability.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.wordpress-unprepared-sql
+    rulePath: ./rules/php/php.security.wordpress-unprepared-sql.rule.yaml
+    presets:
+      - strict
+      - security

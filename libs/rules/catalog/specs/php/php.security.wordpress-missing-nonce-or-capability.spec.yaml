@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.wordpress-missing-nonce-or-capability.rule.yaml
+fixtures:
+  - name: flags missing nonce and capability checks
+    sourcePath: ./fixtures/php.security.wordpress-missing-nonce-or-capability/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.wordpress-missing-nonce-or-capability
+  - name: ignores protected ajax callback
+    sourcePath: ./fixtures/php.security.wordpress-missing-nonce-or-capability/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

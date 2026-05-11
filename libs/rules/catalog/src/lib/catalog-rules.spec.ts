@@ -79,6 +79,7 @@ describe('rules catalog rule specs', () => {
     expect(topLevelSpecDirectories).toEqual([
       'go',
       'java',
+      'php',
       'python',
       'ruby',
       'shared',

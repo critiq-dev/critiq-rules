@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.laravel-unsafe-blade-output.rule.yaml
+fixtures:
+  - name: flags raw blade output from request
+    sourcePath: ./fixtures/php.security.laravel-unsafe-blade-output/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.laravel-unsafe-blade-output
+  - name: ignores escaped blade output
+    sourcePath: ./fixtures/php.security.laravel-unsafe-blade-output/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

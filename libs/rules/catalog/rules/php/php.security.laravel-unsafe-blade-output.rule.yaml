@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.laravel-unsafe-blade-output
+  title: Avoid unescaped Laravel Blade output from request or model data
+  summary: >-
+    Raw Blade rendering (`{!! !!}`) should not directly render request, model, or translated user content.
+  rationale: >-
+    Unescaped template output can enable stored or reflected XSS when user-controlled values are rendered as HTML.
+  tags:
+    - security
+    - php
+    - laravel
+    - xss
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.laravel-unsafe-blade-output
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: high
+    confidence: 0.84
+    tags:
+      - security
+      - php
+      - laravel
+  message:
+    title: Escape template output in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` emits raw HTML from potentially untrusted values."
+  remediation:
+    summary: >-
+      Prefer escaped Blade output (`{{ }}`) and sanitizer wrappers before rendering user-influenced HTML.

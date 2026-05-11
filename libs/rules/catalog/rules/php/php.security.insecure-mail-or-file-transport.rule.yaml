@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.insecure-mail-or-file-transport
+  title: Avoid insecure PHP FTP/SMTP or plaintext transport patterns
+  summary: >-
+    Outbound mail/file transfer code should not rely on plaintext transport endpoints for sensitive traffic.
+  rationale: >-
+    Unencrypted transfer channels expose credentials and payloads to interception or tampering.
+  tags:
+    - security
+    - php
+    - transport
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.insecure-mail-or-file-transport
+    bind: issue
+emit:
+  finding:
+    category: security.network
+    severity: medium
+    confidence: 0.72
+    tags:
+      - security
+      - php
+      - transport
+  message:
+    title: Prefer encrypted transport in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses plaintext FTP/SMTP/HTTP transport for potentially sensitive operations."
+  remediation:
+    summary: >-
+      Use encrypted transport endpoints and modern client libraries with certificate validation enabled.

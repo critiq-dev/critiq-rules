@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.unsafe-file-upload-handling
+  title: Validate uploaded filenames and content before storing files
+  summary: >-
+    PHP upload handlers should not persist raw `$_FILES` names without validation and normalization.
+  rationale: >-
+    Unsafely handled uploads can enable path traversal, executable file placement, and malicious payload storage.
+  tags:
+    - security
+    - php
+    - file-upload
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.unsafe-file-upload-handling
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: high
+    confidence: 0.86
+    tags:
+      - security
+      - php
+      - file-upload
+  message:
+    title: Harden upload handling in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` stores uploaded files without strong filename/content validation."
+  remediation:
+    summary: >-
+      Normalize filenames, enforce extension and MIME allowlists, and route uploads through dedicated validated storage helpers.

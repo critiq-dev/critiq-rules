@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.insecure-session-or-cookie-config
+  title: Harden PHP session and cookie security flags
+  summary: >-
+    Session/cookie configuration should keep secure, httpOnly, and safe same-site posture for authenticated contexts.
+  rationale: >-
+    Weak cookie/session flags increase theft and replay risk across XSS, mixed transport, and cross-site request contexts.
+  tags:
+    - security
+    - php
+    - session
+    - cookies
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.insecure-session-or-cookie-config
+    bind: issue
+emit:
+  finding:
+    category: security.session-management
+    severity: medium
+    confidence: 0.76
+    tags:
+      - security
+      - php
+      - session
+  message:
+    title: Tighten cookie/session configuration in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` configures cookies or sessions with insecure defaults."
+  remediation:
+    summary: >-
+      Set `secure=true`, `httponly=true`, and a restrictive same-site policy for authentication cookies in production traffic.

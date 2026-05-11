@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.laravel-sensitive-csrf-exclusion
+  title: Avoid broad Laravel CSRF exclusions on sensitive routes
+  summary: >-
+    Wildcard CSRF exclusions should not cover account, billing, admin, password, or profile endpoints.
+  rationale: >-
+    Over-broad CSRF exemptions remove request integrity checks from high-impact authenticated actions.
+  tags:
+    - security
+    - php
+    - laravel
+    - csrf
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.laravel-sensitive-csrf-exclusion
+    bind: issue
+emit:
+  finding:
+    category: security.session-management
+    severity: high
+    confidence: 0.86
+    tags:
+      - security
+      - php
+      - laravel
+  message:
+    title: Narrow CSRF exclusions near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` exempts sensitive route patterns from CSRF verification."
+  remediation:
+    summary: >-
+      Limit CSRF exceptions to explicitly signed webhook endpoints and avoid wildcard exclusions on authenticated user flows.

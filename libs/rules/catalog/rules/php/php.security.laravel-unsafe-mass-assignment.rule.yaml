@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.laravel-unsafe-mass-assignment
+  title: Avoid mass-assigning full Laravel request payloads
+  summary: >-
+    Eloquent writes should not use `$request->all()` or fully unguarded models for sensitive records.
+  rationale: >-
+    Raw request mass assignment lets attackers set privileged fields like role or account ownership.
+  tags:
+    - security
+    - php
+    - laravel
+    - mass-assignment
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: php.security.laravel-unsafe-mass-assignment
+    bind: issue
+emit:
+  finding:
+    category: security.authorization
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - php
+      - laravel
+  message:
+    title: Restrict model assignment in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` writes unfiltered request attributes into a model."
+  remediation:
+    summary: >-
+      Use validated DTO/request objects and explicit allowlists (`only`) for model writes, and avoid `$guarded = []` on sensitive models.

@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.sensitive-data-egress
+  title: Avoid relaying request-derived sensitive data in outbound PHP HTTP calls
+  summary: >-
+    Outbound HTTP clients should not forward tainted request/session material without validation or redaction.
+  rationale: >-
+    Unchecked egress forwarding can leak tokens, credentials, or personal data to external systems.
+  tags:
+    - security
+    - php
+    - privacy
+    - egress
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: security.sensitive-data-egress
+    bind: issue
+emit:
+  finding:
+    category: security.privacy
+    severity: high
+    confidence: 0.78
+    tags:
+      - security
+      - php
+      - privacy
+  message:
+    title: Validate outbound payloads in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` forwards tainted or sensitive values to an external HTTP client."
+  remediation:
+    summary: >-
+      Scrub secrets, restrict outbound destinations, and centralize external integrations behind audited request builders.

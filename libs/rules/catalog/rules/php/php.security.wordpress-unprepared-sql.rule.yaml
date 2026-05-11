@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.wordpress-unprepared-sql
+  title: Use `$wpdb->prepare` for dynamic WordPress SQL
+  summary: >-
+    WordPress SQL calls should not interpolate request values directly into query strings.
+  rationale: >-
+    Dynamic SQL without `$wpdb->prepare` enables injection and unauthorized data access/manipulation.
+  tags:
+    - security
+    - php
+    - wordpress
+    - sql-injection
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.wordpress-unprepared-sql
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - php
+      - wordpress
+  message:
+    title: Parameterize SQL near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` concatenates request data into a WordPress SQL call without `$wpdb->prepare`."
+  remediation:
+    summary: >-
+      Build SQL through `$wpdb->prepare` placeholders and sanitize scalar inputs before passing them to query execution calls.

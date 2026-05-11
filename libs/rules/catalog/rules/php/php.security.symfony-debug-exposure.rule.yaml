@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.symfony-debug-exposure
+  title: Disable Symfony debug and profiler in production-like configs
+  summary: >-
+    Production-like Symfony configuration should not enable debug mode or web profiler surfaces.
+  rationale: >-
+    Debug and profiler exposure can leak internals, stack traces, secrets, and request details.
+  tags:
+    - security
+    - php
+    - symfony
+    - debug
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+      - "**/.env"
+      - "**/.env.*"
+match:
+  fact:
+    kind: php.security.symfony-debug-exposure
+    bind: issue
+emit:
+  finding:
+    category: security.information-leakage
+    severity: high
+    confidence: 0.88
+    tags:
+      - security
+      - php
+      - symfony
+  message:
+    title: Disable debug exposure in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` enables Symfony debug or profiler behavior in a production-like surface."
+  remediation:
+    summary: >-
+      Keep `APP_DEBUG=0` in production and disable profiler bundles/toolbars outside local dev/test environments.
