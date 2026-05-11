@@ -310,6 +310,18 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.astro-vite-public-secret-define
+    rulePath: ./rules/typescript/ts.security.astro-vite-public-secret-define.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.nuxt-public-runtime-secret
+    rulePath: ./rules/typescript/ts.security.nuxt-public-runtime-secret.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.apollo-server-csrf-disabled
     rulePath: ./rules/typescript/ts.security.apollo-server-csrf-disabled.rule.yaml
     presets:
@@ -324,6 +336,18 @@ rules:
       - security
   - id: ts.security.apollo-server-missing-query-limits
     rulePath: ./rules/typescript/ts.security.apollo-server-missing-query-limits.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.apollo-server-graphql-dev-tooling-exposure
+    rulePath: ./rules/typescript/ts.security.apollo-server-graphql-dev-tooling-exposure.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.graphql-upload-without-csrf-guard
+    rulePath: ./rules/typescript/ts.security.graphql-upload-without-csrf-guard.rule.yaml
     presets:
       - recommended
       - strict
@@ -667,6 +691,12 @@ rules:
       - security
   - id: ts.security.fastify-excessive-body-limit
     rulePath: ./rules/typescript/ts.security.fastify-excessive-body-limit.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.fastify-public-bind-without-trust-proxy
+    rulePath: ./rules/typescript/ts.security.fastify-public-bind-without-trust-proxy.rule.yaml
     presets:
       - recommended
       - strict

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.graphql-upload-without-csrf-guard.rule.yaml
+fixtures:
+  - name: flags upload middleware with CSRF disabled
+    sourcePath: ./fixtures/node-framework/graphql-upload.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.graphql-upload-without-csrf-guard
+      allSeverities:
+        - high
+  - name: ignores upload when Apollo keeps default CSRF posture
+    sourcePath: ./fixtures/node-framework/graphql-upload.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.apollo-server-graphql-dev-tooling-exposure
+  title: Avoid shipping GraphQL dev landing or playground plugins without a production guard
+  summary: Apollo Server dev landing pages, sandbox UIs, and GraphQL Playground-style plugins should not load unconditionally in production builds.
+  rationale: Interactive GraphQL explorers widen attack surface and often expose schema details beyond what production APIs should advertise by default.
+  tags:
+    - security
+    - graphql
+    - apollo
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.apollo-server-graphql-dev-tooling-exposure
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.78
+    tags:
+      - security
+      - graphql
+  message:
+    title: Gate GraphQL dev tooling away from production
+    summary: Apollo Server registers dev-oriented landing or playground plugins without an obvious environment guard in the same plugin expression.
+  remediation:
+    summary: >-
+      Load sandbox or local landing plugins only outside production, prefer `ApolloServerPluginLandingPageProductionDefault`, or disable interactive explorers behind authentication at the edge.

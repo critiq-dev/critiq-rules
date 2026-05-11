@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.fastify-public-bind-without-trust-proxy.rule.yaml
+fixtures:
+  - name: flags public listen without trustProxy
+    sourcePath: ./fixtures/node-framework/fastify-public-bind.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.fastify-public-bind-without-trust-proxy
+      allSeverities:
+        - medium
+  - name: accepts trustProxy with public bind
+    sourcePath: ./fixtures/node-framework/fastify-public-bind.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

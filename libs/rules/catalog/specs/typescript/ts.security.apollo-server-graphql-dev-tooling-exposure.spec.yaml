@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.apollo-server-graphql-dev-tooling-exposure.rule.yaml
+fixtures:
+  - name: flags unguarded dev landing plugin
+    sourcePath: ./fixtures/node-framework/apollo-dev-tooling.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.apollo-server-graphql-dev-tooling-exposure
+      allSeverities:
+        - medium
+  - name: accepts NODE_ENV gated plugin wiring
+    sourcePath: ./fixtures/node-framework/apollo-dev-tooling.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.fastify-public-bind-without-trust-proxy
+  title: Enable trust proxy for publicly bound Fastify servers
+  summary: >-
+    Fastify instances listening on all interfaces should enable trustProxy or terminate behind a reverse proxy you register in code.
+  rationale: >-
+    Without trustProxy, client IP and protocol metadata from an edge proxy are easy to misread, and public binds amplify exposure when the process is not intentionally perimeter-hardened.
+  tags:
+    - security
+    - fastify
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.fastify-public-bind-without-trust-proxy
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.74
+    tags:
+      - security
+      - fastify
+  message:
+    title: Set trustProxy or proxy middleware before binding Fastify publicly
+    summary: >-
+      Fastify listens on a public host without trustProxy enabled and without @fastify/http-proxy or @fastify/proxy in this file.
+  remediation:
+    summary: >-
+      Set trustProxy when running behind a reverse proxy, prefer non-public bind addresses in development, or register an explicit Fastify proxy plugin so client metadata and TLS termination assumptions stay correct.
