@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.rocket-panic-prone-request-handler.rule.yaml
+fixtures:
+  - name: flags unwrap in rocket handler
+    sourcePath: ./fixtures/rust.security.rocket-panic-prone-request-handler/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.rocket-panic-prone-request-handler
+  - name: accepts result-based handler
+    sourcePath: ./fixtures/rust.security.rocket-panic-prone-request-handler/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

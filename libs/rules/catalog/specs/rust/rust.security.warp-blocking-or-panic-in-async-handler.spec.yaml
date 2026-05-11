@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.warp-blocking-or-panic-in-async-handler.rule.yaml
+fixtures:
+  - name: flags blocking std fs in async warp handler
+    sourcePath: ./fixtures/rust.security.warp-blocking-or-panic-in-async-handler/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.warp-blocking-or-panic-in-async-handler
+  - name: accepts tokio async file io
+    sourcePath: ./fixtures/rust.security.warp-blocking-or-panic-in-async-handler/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

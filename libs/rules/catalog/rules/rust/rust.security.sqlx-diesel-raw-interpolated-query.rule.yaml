@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.sqlx-diesel-raw-interpolated-query
+  title: Avoid dynamic SQL built with format! for SQLx or Diesel
+  summary: >-
+    Do not pass `format!(...)` (or equivalent string concatenation) into `sqlx::query` or `diesel::sql_query` sinks.
+  rationale: >-
+    Interpolated SQL is the primary SQL injection pattern in Rust ORMs; compile-time macros and bind parameters keep queries safe.
+  tags:
+    - security
+    - rust
+    - sqlx
+    - diesel
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.sqlx-diesel-raw-interpolated-query
+    bind: issue
+emit:
+  finding:
+    category: security.sql-injection
+    severity: high
+    confidence: 0.88
+    tags:
+      - security
+      - rust
+      - sqlx
+      - diesel
+  message:
+    title: Replace interpolated SQL at `${captures.issue.text}`
+    summary: "`${captures.issue.text}` builds SQL with `format!` instead of bound parameters or compile-time checked macros."
+  remediation:
+    summary: >-
+      Prefer `sqlx::query!` / `query_as!`, use `.bind(...)` on typed query builders, or Diesel's query DSL with bound parameters instead of raw interpolated strings.

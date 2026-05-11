@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.rocket-unsafe-template-output.rule.yaml
+fixtures:
+  - name: flags RawHtml from route parameter
+    sourcePath: ./fixtures/rust.security.rocket-unsafe-template-output/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.rocket-unsafe-template-output
+  - name: accepts json response without raw html
+    sourcePath: ./fixtures/rust.security.rocket-unsafe-template-output/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

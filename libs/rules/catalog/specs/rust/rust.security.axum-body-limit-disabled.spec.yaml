@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.axum-body-limit-disabled.rule.yaml
+fixtures:
+  - name: flags disabled default body limit
+    sourcePath: ./fixtures/rust.security.axum-body-limit-disabled/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.axum-body-limit-disabled
+  - name: accepts explicit max body limit
+    sourcePath: ./fixtures/rust.security.axum-body-limit-disabled/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

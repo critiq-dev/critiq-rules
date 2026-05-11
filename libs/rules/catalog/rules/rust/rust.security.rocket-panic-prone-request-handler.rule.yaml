@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.rocket-panic-prone-request-handler
+  title: Avoid panicking on request-derived data in Rocket handlers
+  summary: >-
+    Rocket route handlers should not `unwrap`, `expect`, or otherwise panic on values derived from the HTTP request.
+  rationale: >-
+    Panics become hard failures and can be abused for denial-of-service or to leak error detail; prefer `Result` and typed rejections.
+  tags:
+    - security
+    - rust
+    - rocket
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.rocket-panic-prone-request-handler
+    bind: issue
+emit:
+  finding:
+    category: security.error-handling
+    severity: medium
+    confidence: 0.74
+    tags:
+      - security
+      - rust
+      - rocket
+  message:
+    title: Replace infallible unwraps in Rocket handler near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` can panic on malformed or hostile input in a Rocket request handler."
+  remediation:
+    summary: >-
+      Return `Result`, `Option`, or `status::Custom`, map errors to HTTP responses, and reserve `unwrap` for tests or statically known invariants.

@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.warp-blocking-or-panic-in-async-handler
+  title: Avoid blocking I/O and infallible unwraps in async Warp handlers
+  summary: >-
+    Warp filters and handlers run on the async runtime; avoid `std::fs`, `thread::sleep`, and `unwrap` on request paths without `spawn_blocking` or proper errors.
+  rationale: >-
+    Blocking the runtime reduces availability and unwraps turn parse errors into panics; both are amplified under load and hostile traffic.
+  tags:
+    - security
+    - rust
+    - warp
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.warp-blocking-or-panic-in-async-handler
+    bind: issue
+emit:
+  finding:
+    category: security.availability
+    severity: medium
+    confidence: 0.72
+    tags:
+      - security
+      - rust
+      - warp
+  message:
+    title: Refactor async Warp handler around `${captures.issue.text}`
+    summary: "`${captures.issue.text}` blocks the async executor or can panic inside a Warp async handler."
+  remediation:
+    summary: >-
+      Use `tokio::fs`, offload blocking work with `spawn_blocking`, and propagate errors with `Rejection` instead of `unwrap`.

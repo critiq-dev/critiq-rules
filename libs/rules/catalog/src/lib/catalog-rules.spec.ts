@@ -82,6 +82,7 @@ describe('rules catalog rule specs', () => {
       'php',
       'python',
       'ruby',
+      'rust',
       'shared',
       'typescript',
     ]);

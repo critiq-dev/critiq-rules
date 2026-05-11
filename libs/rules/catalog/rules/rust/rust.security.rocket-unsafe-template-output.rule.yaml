@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.rocket-unsafe-template-output
+  title: Avoid raw HTML built from Rocket route parameters
+  summary: >-
+    Do not wrap request-sourced strings in `RawHtml` (or similar) without escaping in Rocket handlers.
+  rationale: >-
+    Raw HTML bypasses Rocket's escaping defaults and is a common XSS footgun when fed from path, query, or body inputs.
+  tags:
+    - security
+    - rust
+    - rocket
+    - xss
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.rocket-unsafe-template-output
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.76
+    tags:
+      - security
+      - rust
+      - rocket
+      - xss
+  message:
+    title: Escape or sanitize before `${captures.issue.text}`
+    summary: "`${captures.issue.text}` emits raw HTML from handler parameters without an obvious sanitizer."
+  remediation:
+    summary: >-
+      Prefer typed templates with auto-escaping, sanitize with a vetted HTML policy crate, or return plain text/JSON instead of `RawHtml`.

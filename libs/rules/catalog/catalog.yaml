@@ -817,6 +817,46 @@ rules:
     presets:
       - strict
       - security
+  - id: rust.security.actix-wildcard-cors-with-credentials
+    rulePath: ./rules/rust/rust.security.actix-wildcard-cors-with-credentials.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.axum-body-limit-disabled
+    rulePath: ./rules/rust/rust.security.axum-body-limit-disabled.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.axum-insecure-cors-with-credentials
+    rulePath: ./rules/rust/rust.security.axum-insecure-cors-with-credentials.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.rocket-panic-prone-request-handler
+    rulePath: ./rules/rust/rust.security.rocket-panic-prone-request-handler.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.rocket-unsafe-template-output
+    rulePath: ./rules/rust/rust.security.rocket-unsafe-template-output.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.sqlx-diesel-raw-interpolated-query
+    rulePath: ./rules/rust/rust.security.sqlx-diesel-raw-interpolated-query.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.template-unescaped-request-value
+    rulePath: ./rules/rust/rust.security.template-unescaped-request-value.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.warp-blocking-or-panic-in-async-handler
+    rulePath: ./rules/rust/rust.security.warp-blocking-or-panic-in-async-handler.rule.yaml
+    presets:
+      - strict
+      - security
   - id: go.security.echo-sensitive-binding-without-validation
     rulePath: ./rules/go/go.security.echo-sensitive-binding-without-validation.rule.yaml
     presets:

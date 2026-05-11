@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.template-unescaped-request-value.rule.yaml
+fixtures:
+  - name: flags tera context insert from query field
+    sourcePath: ./fixtures/rust.security.template-unescaped-request-value/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.template-unescaped-request-value
+  - name: accepts ammonia sanitized insert
+    sourcePath: ./fixtures/rust.security.template-unescaped-request-value/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

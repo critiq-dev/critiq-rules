@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.sqlx-diesel-raw-interpolated-query.rule.yaml
+fixtures:
+  - name: flags sqlx and diesel format interpolated sql
+    sourcePath: ./fixtures/rust.security.sqlx-diesel-raw-interpolated-query/invalid.rs
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - rust.security.sqlx-diesel-raw-interpolated-query
+        - rust.security.sqlx-diesel-raw-interpolated-query
+  - name: accepts compile time sqlx macro and static diesel sql
+    sourcePath: ./fixtures/rust.security.sqlx-diesel-raw-interpolated-query/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.axum-body-limit-disabled
+  title: Do not disable Axum default body limits for untrusted uploads
+  summary: >-
+    Axum apps should keep a finite `DefaultBodyLimit` (or equivalent) so request bodies cannot exhaust memory.
+  rationale: >-
+    `DefaultBodyLimit::disable()` removes the framework guardrail against huge bodies and is unsafe on routes that accept untrusted input.
+  tags:
+    - security
+    - rust
+    - axum
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.axum-body-limit-disabled
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.86
+    tags:
+      - security
+      - rust
+      - axum
+  message:
+    title: Restore a body size limit instead of `${captures.issue.text}`
+    summary: "`${captures.issue.text}` disables Axum body limits; prefer `DefaultBodyLimit::max(...)` or a reverse-proxy limit."
+  remediation:
+    summary: >-
+      Set an explicit max body size with `DefaultBodyLimit::max`, add `tower_http::limit::RequestBodyLimitLayer`, or enforce limits at your edge proxy before accepting large uploads.
