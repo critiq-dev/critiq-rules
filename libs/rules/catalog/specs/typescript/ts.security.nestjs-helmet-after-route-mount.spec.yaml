@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.nestjs-helmet-after-route-mount.rule.yaml
+fixtures:
+  - name: flags helmet after routed mounts
+    sourcePath: ./fixtures/nestjs/helmet-after-route.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.nestjs-helmet-after-route-mount
+      allSeverities:
+        - medium
+  - name: accepts helmet registered first
+    sourcePath: ./fixtures/nestjs/helmet-after-route.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

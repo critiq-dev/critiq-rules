@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.apollo-server-missing-query-limits
+  title: Add GraphQL query depth or complexity controls
+  summary: Apollo Server bootstrap should declare validation rules or plugins that bound query cost.
+  rationale: Without depth, complexity, persisted operations, or gateway limits, GraphQL endpoints are easier to abuse with expensive queries.
+  tags:
+    - security
+    - graphql
+    - apollo
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.apollo-server-missing-query-limits
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.72
+    tags:
+      - security
+      - graphql
+  message:
+    title: Layer defenses against expensive GraphQL queries
+    summary: Apollo Server is constructed without recognizable validation rules or protective plugins.
+  remediation:
+    summary: Add depth limits, query complexity rules, persisted operations, rate limits, or terminate behind a gateway/WAF that enforces GraphQL policies.

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.apollo-server-csrf-disabled
+  title: Keep Apollo Server CSRF protections enabled
+  summary: Apollo Server should not explicitly disable CSRF prevention for browser-accessible endpoints.
+  rationale: GraphQL POST endpoints are vulnerable to cross-site writes when CSRF defenses are turned off.
+  tags:
+    - security
+    - graphql
+    - apollo
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.apollo-server-csrf-disabled
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.88
+    tags:
+      - security
+      - graphql
+  message:
+    title: Re-enable Apollo Server CSRF prevention
+    summary: Apollo Server sets `csrfPrevention` to false.
+  remediation:
+    summary: >-
+      Remove `csrfPrevention: false` or replace it with an equivalent POST-only plus preflight strategy documented by Apollo.

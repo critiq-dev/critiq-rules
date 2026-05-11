@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.next.server-action-missing-local-auth.rule.yaml
+fixtures:
+  - name: flags destructive actions without auth helpers
+    sourcePath: ./fixtures/next-server-actions/invalid/actions.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.next.server-action-missing-local-auth
+      allSeverities:
+        - high
+  - name: accepts authenticated actions
+    sourcePath: ./fixtures/next-server-actions/valid/actions.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.fastify-excessive-body-limit.rule.yaml
+fixtures:
+  - name: flags oversized Fastify limits
+    sourcePath: ./fixtures/node-framework/fastify-body-limit.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.fastify-excessive-body-limit
+      allSeverities:
+        - medium
+  - name: accepts modest Fastify limits
+    sourcePath: ./fixtures/node-framework/fastify-body-limit.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

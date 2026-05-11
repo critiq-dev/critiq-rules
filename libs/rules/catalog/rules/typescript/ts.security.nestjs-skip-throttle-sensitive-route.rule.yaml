@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.nestjs-skip-throttle-sensitive-route
+  title: Do not skip throttling on credential routes
+  summary: Sensitive Nest routes should not disable `@nestjs/throttler` protections without a compensating throttle.
+  rationale: Authentication endpoints are brute-force magnets; removing throttling removes basic abuse resistance.
+  tags:
+    - security
+    - nestjs
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.nestjs-skip-throttle-sensitive-route
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: medium
+    confidence: 0.79
+    tags:
+      - security
+      - nestjs
+      - throttling
+  message:
+    title: Restore throttling for brute-force sensitive handlers
+    summary: "`${captures.issue.text}` disables throttling on an authentication-sensitive route."
+  remediation:
+    summary: Remove `@SkipThrottle()` or pair it with an explicit `@Throttle` policy tuned for the handler.

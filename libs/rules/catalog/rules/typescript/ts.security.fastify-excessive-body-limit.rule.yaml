@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.fastify-excessive-body-limit
+  title: Avoid excessive Fastify body limits
+  summary: Fastify applications should not disable body limits or configure unusually large defaults without compensating controls.
+  rationale: Oversized bodies amplify denial-of-service risk on services without upstream buffering limits.
+  tags:
+    - security
+    - fastify
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.fastify-excessive-body-limit
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.76
+    tags:
+      - security
+      - fastify
+  message:
+    title: Reduce Fastify bodyLimit or add upstream limiting
+    summary: Fastify is configured with an oversized or disabled bodyLimit.
+  remediation:
+    summary: Lower `bodyLimit`, enforce route-specific caps, or terminate traffic behind an API gateway or proxy that caps body size.

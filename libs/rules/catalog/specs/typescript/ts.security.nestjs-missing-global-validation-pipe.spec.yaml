@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.nestjs-missing-global-validation-pipe.rule.yaml
+fixtures:
+  - name: flags bootstrap without global pipes
+    sourcePath: ./fixtures/nestjs/missing-validation-pipe.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.nestjs-missing-global-validation-pipe
+      allSeverities:
+        - medium
+  - name: accepts global ValidationPipe registration
+    sourcePath: ./fixtures/nestjs/missing-validation-pipe.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

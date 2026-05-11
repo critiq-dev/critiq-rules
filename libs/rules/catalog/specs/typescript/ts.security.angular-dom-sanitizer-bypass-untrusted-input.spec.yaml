@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.angular-dom-sanitizer-bypass-untrusted-input.rule.yaml
+fixtures:
+  - name: flags route-driven bypass helpers
+    sourcePath: ./fixtures/angular-sanitizer/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.angular-dom-sanitizer-bypass-untrusted-input
+      allSeverities:
+        - high
+  - name: accepts literal bypass targets
+    sourcePath: ./fixtures/angular-sanitizer/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

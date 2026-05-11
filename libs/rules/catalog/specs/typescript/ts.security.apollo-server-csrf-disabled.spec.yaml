@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.apollo-server-csrf-disabled.rule.yaml
+fixtures:
+  - name: flags disabled csrf prevention
+    sourcePath: ./fixtures/node-framework/apollo-csrf.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.apollo-server-csrf-disabled
+      allSeverities:
+        - high
+  - name: accepts csrf prevention enabled
+    sourcePath: ./fixtures/node-framework/apollo-csrf.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

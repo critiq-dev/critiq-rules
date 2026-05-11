@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.next.server-action-missing-local-auth
+  title: Authenticate Next.js Server Actions before mutations
+  summary: Server Actions that mutate state must validate sessions locally before reaching privileged sinks.
+  rationale: Server Actions behave like public POST endpoints and inherit the same authentication obligations as route handlers.
+  tags:
+    - security
+    - next
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.next-server-action-missing-local-auth
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: high
+    confidence: 0.77
+    tags:
+      - security
+      - next
+  message:
+    title: Gate Server Actions with explicit authentication checks
+    summary: This Server Action performs privileged work without any preceding auth helpers.
+  remediation:
+    summary: >-
+      Call your auth/session helper before mutations and enforce ownership inside database predicates.

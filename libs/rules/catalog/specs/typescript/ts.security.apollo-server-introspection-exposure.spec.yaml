@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.apollo-server-introspection-exposure.rule.yaml
+fixtures:
+  - name: flags literal introspection true
+    sourcePath: ./fixtures/node-framework/apollo-introspection.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.apollo-server-introspection-exposure
+      allSeverities:
+        - medium
+  - name: accepts environment guarded introspection
+    sourcePath: ./fixtures/node-framework/apollo-introspection.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

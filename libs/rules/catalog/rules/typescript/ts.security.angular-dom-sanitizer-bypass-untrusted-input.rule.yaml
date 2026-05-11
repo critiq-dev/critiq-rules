@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.angular-dom-sanitizer-bypass-untrusted-input
+  title: Avoid trusting unsanitized Angular bypass sinks
+  summary: DomSanitizer bypass helpers should not receive route, storage, or request-derived values without validation.
+  rationale: Bypass helpers disable Angular templating protections and turn downstream sinks into XSS execution points.
+  tags:
+    - security
+    - angular
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.angular-dom-sanitizer-bypass-untrusted-input
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.81
+    tags:
+      - security
+      - angular
+  message:
+    title: Replace Angular sanitizer bypass with validated HTML or structured bindings
+    summary: "`${captures.issue.text}` trusts externally influenced markup."
+  remediation:
+    summary: >-
+      Keep sensitive markup on Angular-safe bindings or sanitize with a reviewed helper before calling bypassSecurityTrust helpers.

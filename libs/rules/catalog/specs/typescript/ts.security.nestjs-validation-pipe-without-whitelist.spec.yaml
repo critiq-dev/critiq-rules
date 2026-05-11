@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.nestjs-validation-pipe-without-whitelist.rule.yaml
+fixtures:
+  - name: flags ValidationPipe missing whitelist hardening
+    sourcePath: ./fixtures/nestjs/validation-pipe-no-whitelist.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.nestjs-validation-pipe-without-whitelist
+      allSeverities:
+        - medium
+  - name: accepts whitelist configuration
+    sourcePath: ./fixtures/nestjs/validation-pipe-no-whitelist.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

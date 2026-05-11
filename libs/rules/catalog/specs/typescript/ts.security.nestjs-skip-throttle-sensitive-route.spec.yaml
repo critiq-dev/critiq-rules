@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.nestjs-skip-throttle-sensitive-route.rule.yaml
+fixtures:
+  - name: flags skip throttle on sensitive routes
+    sourcePath: ./fixtures/nestjs/skip-throttle-sensitive.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.nestjs-skip-throttle-sensitive-route
+      allSeverities:
+        - medium
+  - name: accepts compensating throttle decorators
+    sourcePath: ./fixtures/nestjs/skip-throttle-sensitive.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

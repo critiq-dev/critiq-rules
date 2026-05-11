@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-effect-fetch-without-cancellation
+  title: Cancel inflight fetches inside React effects
+  summary: React effects that fetch remote data should attach AbortSignal wiring so stale responses cannot commit after dependencies change.
+  rationale: Race conditions from abandoned requests produce inconsistent UI state and duplicated side effects when identifiers or routes change quickly.
+  tags:
+    - performance
+    - react
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: performance.react-effect-fetch-without-cancellation
+    bind: issue
+emit:
+  finding:
+    category: performance.ui
+    severity: medium
+    confidence: 0.74
+    tags:
+      - performance
+      - react
+  message:
+    title: Abort stale fetch responses inside effects
+    summary: "`${captures.issue.text}` loads remote data without an AbortSignal or comparable cancellation guard."
+  remediation:
+    summary: >-
+      Thread AbortController.signal through fetch or axios calls and abort inside the effect cleanup, or migrate to a data library that manages cancellation.

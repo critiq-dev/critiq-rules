@@ -42,7 +42,7 @@ npx critiq check . --base origin/main --head HEAD
 
 ## Catalog At A Glance
 
-Today the catalog includes `133` rules across `12` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+Today the catalog includes `145` rules across `12` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |
@@ -86,7 +86,7 @@ Critiq keeps the OSS catalog intentionally high-signal.
 
 ## More Rules In This Catalog
 
-The catalog also includes these `107` additional rules beyond the highlights above.
+The catalog also includes these `119` additional rules beyond the highlights above.
 
 ### Security
 

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-effect-fetch-without-cancellation.rule.yaml
+fixtures:
+  - name: flags fetch-driven effects without abort wiring
+    sourcePath: ./fixtures/react-effect-cancel/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-effect-fetch-without-cancellation
+      allSeverities:
+        - medium
+  - name: accepts fetch calls wired with AbortSignal
+    sourcePath: ./fixtures/react-effect-cancel/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

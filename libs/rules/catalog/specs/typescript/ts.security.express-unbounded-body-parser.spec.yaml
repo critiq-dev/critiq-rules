@@ -1,0 +1,23 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.express-unbounded-body-parser.rule.yaml
+fixtures:
+  - name: flags parsers without limits
+    sourcePath: ./fixtures/node-framework/express-unbounded-body.invalid.ts
+    expect:
+      findingCount: 4
+      allRuleIds:
+        - ts.security.express-unbounded-body-parser
+        - ts.security.express-unbounded-body-parser
+        - ts.security.express-unbounded-body-parser
+        - ts.security.express-unbounded-body-parser
+      allSeverities:
+        - medium
+        - medium
+        - medium
+        - medium
+  - name: accepts explicit limits
+    sourcePath: ./fixtures/node-framework/express-unbounded-body.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

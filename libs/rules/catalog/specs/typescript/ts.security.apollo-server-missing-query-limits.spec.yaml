@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.apollo-server-missing-query-limits.rule.yaml
+fixtures:
+  - name: flags Apollo bootstrap without protective rules
+    sourcePath: ./fixtures/node-framework/apollo-missing-limits.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.apollo-server-missing-query-limits
+      allSeverities:
+        - medium
+  - name: accepts validation rules present
+    sourcePath: ./fixtures/node-framework/apollo-missing-limits.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

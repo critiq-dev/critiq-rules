@@ -190,10 +190,20 @@ rules:
     rulePath: ./rules/typescript/ts.react.no-cascaded-effect-fetches.rule.yaml
     presets:
       - strict
+  - id: ts.react.no-effect-fetch-without-cancellation
+    rulePath: ./rules/typescript/ts.react.no-effect-fetch-without-cancellation.rule.yaml
+    presets:
+      - strict
   - id: ts.next.no-server-client-boundary-leaks
     rulePath: ./rules/typescript/ts.next.no-server-client-boundary-leaks.rule.yaml
     presets:
       - strict
+  - id: ts.next.server-action-missing-local-auth
+    rulePath: ./rules/typescript/ts.next.server-action-missing-local-auth.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.react.no-index-as-key-in-dynamic-list
     rulePath: ./rules/typescript/ts.react.no-index-as-key-in-dynamic-list.rule.yaml
     presets:
@@ -290,6 +300,30 @@ rules:
       - security
   - id: ts.security.jwt-sensitive-claims
     rulePath: ./rules/typescript/ts.security.jwt-sensitive-claims.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.angular-dom-sanitizer-bypass-untrusted-input
+    rulePath: ./rules/typescript/ts.security.angular-dom-sanitizer-bypass-untrusted-input.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.apollo-server-csrf-disabled
+    rulePath: ./rules/typescript/ts.security.apollo-server-csrf-disabled.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.apollo-server-introspection-exposure
+    rulePath: ./rules/typescript/ts.security.apollo-server-introspection-exposure.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.apollo-server-missing-query-limits
+    rulePath: ./rules/typescript/ts.security.apollo-server-missing-query-limits.rule.yaml
     presets:
       - recommended
       - strict
@@ -480,6 +514,30 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.nestjs-helmet-after-route-mount
+    rulePath: ./rules/typescript/ts.security.nestjs-helmet-after-route-mount.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.nestjs-missing-global-validation-pipe
+    rulePath: ./rules/typescript/ts.security.nestjs-missing-global-validation-pipe.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.nestjs-skip-throttle-sensitive-route
+    rulePath: ./rules/typescript/ts.security.nestjs-skip-throttle-sensitive-route.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.nestjs-validation-pipe-without-whitelist
+    rulePath: ./rules/typescript/ts.security.nestjs-validation-pipe-without-whitelist.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.express-nosql-injection
     rulePath: ./rules/typescript/ts.security.express-nosql-injection.rule.yaml
     presets:
@@ -599,6 +657,18 @@ rules:
   - id: ts.security.express-static-assets-after-session
     rulePath: ./rules/typescript/ts.security.express-static-assets-after-session.rule.yaml
     presets:
+      - strict
+      - security
+  - id: ts.security.express-unbounded-body-parser
+    rulePath: ./rules/typescript/ts.security.express-unbounded-body-parser.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.fastify-excessive-body-limit
+    rulePath: ./rules/typescript/ts.security.fastify-excessive-body-limit.rule.yaml
+    presets:
+      - recommended
       - strict
       - security
   - id: ts.security.express-missing-helmet

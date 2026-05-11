@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.apollo-server-introspection-exposure
+  title: Avoid unconditional GraphQL introspection
+  summary: Apollo Server should not hard-enable introspection without environment guards.
+  rationale: Introspection aids attackers in mapping schemas on production deployments.
+  tags:
+    - security
+    - graphql
+    - apollo
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.apollo-server-introspection-exposure
+    bind: issue
+emit:
+  finding:
+    category: security.information-exposure
+    severity: medium
+    confidence: 0.84
+    tags:
+      - security
+      - graphql
+  message:
+    title: Gate GraphQL introspection away from production
+    summary: Apollo Server enables introspection with a literal `true` flag.
+  remediation:
+    summary: Bind introspection to non-production environments or protect the endpoint behind authenticated tooling.
