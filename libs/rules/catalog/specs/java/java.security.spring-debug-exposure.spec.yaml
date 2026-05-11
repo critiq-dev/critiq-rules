@@ -5,12 +5,10 @@ fixtures:
   - name: flags permissive Spring Boot properties
     sourcePath: ./fixtures/java.security.spring-debug-exposure/invalid.properties
     expect:
-      findingCount: 2
+      findingCount: 1
       allRuleIds:
         - java.security.spring-debug-exposure
-        - java.security.spring-debug-exposure
       allSeverities:
-        - medium
         - medium
   - name: ignores benign defaults
     sourcePath: ./fixtures/java.security.spring-debug-exposure/valid.properties

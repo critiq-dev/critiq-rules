@@ -756,6 +756,11 @@ rules:
       - recommended
       - strict
       - security
+  - id: java.security.jpa-concatenated-query
+    rulePath: ./rules/java/java.security.jpa-concatenated-query.rule.yaml
+    presets:
+      - strict
+      - security
   - id: java.security.reflected-output-from-request
     rulePath: ./rules/java/java.security.reflected-output-from-request.rule.yaml
     presets:
@@ -767,8 +772,38 @@ rules:
       - recommended
       - strict
       - security
+  - id: java.security.spring-actuator-health-details-always
+    rulePath: ./rules/java/java.security.spring-actuator-health-details-always.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.spring-actuator-sensitive-exposure
+    rulePath: ./rules/java/java.security.spring-actuator-sensitive-exposure.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.spring-csrf-globally-disabled
+    rulePath: ./rules/java/java.security.spring-csrf-globally-disabled.rule.yaml
+    presets:
+      - strict
+      - security
   - id: java.security.spring-debug-exposure
     rulePath: ./rules/java/java.security.spring-debug-exposure.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.spring-permit-all-default
+    rulePath: ./rules/java/java.security.spring-permit-all-default.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.spring-webmvc-unrestricted-data-binding
+    rulePath: ./rules/java/java.security.spring-webmvc-unrestricted-data-binding.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.template-unescaped-user-output
+    rulePath: ./rules/java/java.security.template-unescaped-user-output.rule.yaml
     presets:
       - strict
       - security

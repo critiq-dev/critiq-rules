@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.spring-actuator-health-details-always.rule.yaml
+fixtures:
+  - name: flags always-on health details
+    sourcePath: ./fixtures/java.security.spring-actuator-health-details-always/invalid.properties
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.spring-actuator-health-details-always
+      allSeverities:
+        - medium
+  - name: ignores when-authorized health details
+    sourcePath: ./fixtures/java.security.spring-actuator-health-details-always/valid.properties
+    expect:
+      findingCount: 0
+      allRuleIds: []

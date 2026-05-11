@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.spring-permit-all-default.rule.yaml
+fixtures:
+  - name: flags anonymous-by-default authorization
+    sourcePath: ./fixtures/java.security.spring-permit-all-default/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.spring-permit-all-default
+      allSeverities:
+        - high
+  - name: ignores authenticated default chains
+    sourcePath: ./fixtures/java.security.spring-permit-all-default/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

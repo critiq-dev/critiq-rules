@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.template-unescaped-user-output.rule.yaml
+fixtures:
+  - name: flags Thymeleaf utext with request parameters
+    sourcePath: ./fixtures/java.security.template-unescaped-user-output/invalid.html
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.template-unescaped-user-output
+      allSeverities:
+        - high
+  - name: prefers escaped text binding
+    sourcePath: ./fixtures/java.security.template-unescaped-user-output/valid.html
+    expect:
+      findingCount: 0
+      allRuleIds: []

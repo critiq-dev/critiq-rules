@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.spring-webmvc-unrestricted-data-binding.rule.yaml
+fixtures:
+  - name: flags entity binding without binder allow lists
+    sourcePath: ./fixtures/java.security.spring-webmvc-unrestricted-data-binding/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.spring-webmvc-unrestricted-data-binding
+      allSeverities:
+        - high
+  - name: ignores binding when InitBinder allow lists exist
+    sourcePath: ./fixtures/java.security.spring-webmvc-unrestricted-data-binding/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

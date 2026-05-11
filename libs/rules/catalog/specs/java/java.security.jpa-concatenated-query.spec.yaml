@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.jpa-concatenated-query.rule.yaml
+fixtures:
+  - name: flags concatenated JPQL
+    sourcePath: ./fixtures/java.security.jpa-concatenated-query/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.jpa-concatenated-query
+      allSeverities:
+        - critical
+  - name: ignores parameterized queries
+    sourcePath: ./fixtures/java.security.jpa-concatenated-query/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

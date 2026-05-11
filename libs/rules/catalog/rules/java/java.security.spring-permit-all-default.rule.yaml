@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.spring-permit-all-default
+  title: Avoid Spring Security chains that leave every request anonymous by default
+  summary: >-
+    Production HTTP security chains should not end with a broad permit-all fallback such as `anyRequest().permitAll()` or `requestMatchers("/**").permitAll()`.
+  rationale: >-
+    Anonymous-by-default authorization lets unauthenticated callers reach handlers that were meant to be protected, which often leads to broken access control and data exposure.
+  tags:
+    - security
+    - java
+    - spring
+    - spring-security
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.security.spring-permit-all-default
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: high
+    confidence: 0.82
+    tags:
+      - security
+      - java
+      - spring-security
+  message:
+    title: Tighten Spring Security authorization instead of `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` leaves requests broadly permitted; require authentication or explicit scoped rules for non-public routes.
+  remediation:
+    summary: >-
+      Replace broad permit-all with authenticated or role-based rules, keep public paths explicit, and add integration tests that assert unauthorized access is rejected.

@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.spring-webmvc-unrestricted-data-binding
+  title: Constrain Spring MVC data binding for domain objects
+  summary: >-
+    Binding request parameters directly into entity-like models without `setAllowedFields` / `@InitBinder` controls risks mass-assignment privilege escalation.
+  rationale: >-
+    Attackers can post unexpected fields (for example `role=admin`) that map onto persistent entities unless binding is explicitly allow-listed.
+  tags:
+    - security
+    - java
+    - spring-mvc
+    - mass-assignment
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.security.spring-webmvc-unrestricted-data-binding
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.74
+    tags:
+      - security
+      - java
+      - spring-mvc
+  message:
+    title: Add binding guards instead of `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` suggests unconstrained binding; use DTOs, `@InitBinder#setAllowedFields`, or constructor binding with immutable commands.
+  remediation:
+    summary: >-
+      Prefer dedicated request DTOs, declare allowed fields explicitly, and avoid binding security-sensitive properties from raw requests.

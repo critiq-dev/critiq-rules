@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.jpa-concatenated-query
+  title: Do not build JPA or JDBC queries by concatenating user-controlled input
+  summary: >-
+    `createQuery`, `createNativeQuery`, `JdbcTemplate` calls, and string-based `@Query` values must not stitch SQL with request data using `+`, `String.format`, or similar.
+  rationale: >-
+    Dynamic SQL built from untrusted fragments is a direct injection surface; parameterized queries and named parameters are the safe default.
+  tags:
+    - security
+    - java
+    - jpa
+    - jdbc
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.security.jpa-concatenated-query
+    bind: issue
+emit:
+  finding:
+    category: security.sql-injection
+    severity: critical
+    confidence: 0.84
+    tags:
+      - security
+      - java
+      - sql-injection
+  message:
+    title: Replace dynamic SQL construction in `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` builds a query from concatenated or formatted fragments; bind parameters instead of embedding user-controlled text.
+  remediation:
+    summary: >-
+      Use JPQL named parameters, `CriteriaUpdate`, or prepared JDBC statements with bound parameters; never interpolate request values into query text.

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.spring-csrf-globally-disabled.rule.yaml
+fixtures:
+  - name: flags global CSRF disable without token API hints
+    sourcePath: ./fixtures/java.security.spring-csrf-globally-disabled/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.spring-csrf-globally-disabled
+      allSeverities:
+        - high
+  - name: ignores CSRF disable when OAuth2 resource server is present
+    sourcePath: ./fixtures/java.security.spring-csrf-globally-disabled/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

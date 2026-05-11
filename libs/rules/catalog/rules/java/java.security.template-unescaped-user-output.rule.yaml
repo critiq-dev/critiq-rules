@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.template-unescaped-user-output
+  title: Escape template output that reflects request or model data
+  summary: >-
+    Thymeleaf `th:utext`, JSP scriptlets, and FreeMarker `?no_esc` patterns must not render untrusted request or model values without an explicit sanitization strategy.
+  rationale: >-
+    Non-escaped template sinks turn reflected input into XSS, which compromises browser sessions and administrative workflows.
+  tags:
+    - security
+    - java
+    - templates
+    - xss
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.html"
+      - "**/*.htm"
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.security.template-unescaped-user-output
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: high
+    confidence: 0.8
+    tags:
+      - security
+      - java
+      - xss
+  message:
+    title: Prefer escaped template output instead of `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` renders template content without default escaping; switch to escaped directives or sanitize with a trusted library.
+  remediation:
+    summary: >-
+      Use Thymeleaf `th:text`, avoid raw JSP expressions for request data, and keep FreeMarker auto-escaping on unless a vetted sanitizer wraps dynamic HTML.

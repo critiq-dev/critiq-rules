@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.spring-actuator-sensitive-exposure
+  title: Restrict Spring Boot actuator web exposure to non-sensitive endpoints
+  summary: >-
+    Actuator `management.endpoints.web.exposure.include` should not expose wildcards or high-risk endpoints (such as `env`, `beans`, or `heapdump`) without deliberate access control.
+  rationale: >-
+    Over-exposed actuators leak configuration, secrets material, and JVM internals that attackers can use to pivot or crash the service.
+  tags:
+    - security
+    - java
+    - spring-boot
+    - actuator
+    - rules-catalog
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - java
+match:
+  fact:
+    kind: java.security.spring-actuator-sensitive-exposure
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.8
+    tags:
+      - security
+      - java
+      - actuator
+  message:
+    title: Narrow actuator exposure for `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` exposes sensitive actuator endpoints; enumerate only what you need and protect them with authentication and network controls.
+  remediation:
+    summary: >-
+      Replace wildcards with explicit endpoint lists, move sensitive endpoints off public networks, and pair exposure with Spring Security rules or management port isolation.

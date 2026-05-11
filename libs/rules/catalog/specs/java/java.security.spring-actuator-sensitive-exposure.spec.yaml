@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.spring-actuator-sensitive-exposure.rule.yaml
+fixtures:
+  - name: flags wildcard actuator exposure
+    sourcePath: ./fixtures/java.security.spring-actuator-sensitive-exposure/invalid.properties
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.spring-actuator-sensitive-exposure
+      allSeverities:
+        - high
+  - name: ignores narrow actuator exposure lists
+    sourcePath: ./fixtures/java.security.spring-actuator-sensitive-exposure/valid.properties
+    expect:
+      findingCount: 0
+      allRuleIds: []

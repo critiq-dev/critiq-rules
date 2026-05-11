@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.spring-csrf-globally-disabled
+  title: Avoid disabling Spring CSRF protection without a stateless API hardening story
+  summary: >-
+    Disabling CSRF globally is unsafe for cookie-backed browser sessions unless the app is clearly hardened as a stateless API (for example OAuth2 resource server with stateless sessions).
+  rationale: >-
+    CSRF protects browser clients that send session cookies; turning it off without token-based or stateless mitigations invites cross-site request forgery against privileged actions.
+  tags:
+    - security
+    - java
+    - spring
+    - spring-security
+    - csrf
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.security.spring-csrf-globally-disabled
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.78
+    tags:
+      - security
+      - java
+      - spring-security
+      - csrf
+  message:
+    title: Revisit CSRF configuration near `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` disables CSRF; keep it enabled for session-backed MVC, or move to explicit stateless API patterns and document the threat model.
+  remediation:
+    summary: >-
+      Prefer CSRF tokens for cookie sessions, use `oauth2ResourceServer` with JWT for APIs, or set `SessionCreationPolicy.STATELESS` with a reviewed token story instead of blanket `csrf().disable()`.

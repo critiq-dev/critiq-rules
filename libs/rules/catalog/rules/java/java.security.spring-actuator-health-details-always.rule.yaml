@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.spring-actuator-health-details-always
+  title: Avoid always-on Spring Boot health details in external profiles
+  summary: >-
+    `management.endpoint.health.show-details=always` (or YAML equivalent) publishes detailed health payloads to any caller, which often leaks dependency and infrastructure facts.
+  rationale: >-
+    Detailed health should be reserved for authenticated operators or internal networks; `always` removes that gate for anonymous clients.
+  tags:
+    - security
+    - java
+    - spring-boot
+    - actuator
+    - rules-catalog
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - java
+match:
+  fact:
+    kind: java.security.spring-actuator-health-details-always
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.76
+    tags:
+      - security
+      - java
+      - actuator
+  message:
+    title: Scope health detail visibility for `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` always exposes detailed health information; prefer `when-authorized` or role-based access outside tightly controlled environments.
+  remediation:
+    summary: >-
+      Switch to `when-authorized`, protect `/actuator/**` with Spring Security, and keep verbose health on internal-only ports or profiles.
