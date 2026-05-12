@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.sensitive-data-egress.rule.yaml
+fixtures:
+  - name: flags Python processor egress facts
+    observationPath: ./fixtures/security.sensitive-data-egress/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.sensitive-data-egress
+      allSeverities:
+        - high
+  - name: ignores files without egress facts
+    observationPath: ./fixtures/security.sensitive-data-egress/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

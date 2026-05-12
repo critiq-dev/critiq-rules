@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.archive-path-traversal.rule.yaml
+fixtures:
+  - name: flags archive entry write facts
+    observationPath: ./fixtures/security.archive-path-traversal/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.archive-path-traversal
+      allSeverities:
+        - high
+  - name: ignores files without archive facts
+    observationPath: ./fixtures/security.archive-path-traversal/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

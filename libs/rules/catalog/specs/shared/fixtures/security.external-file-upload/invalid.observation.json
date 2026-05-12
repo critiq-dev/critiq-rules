@@ -1,0 +1,30 @@
+{
+  "path": "app/upload.py",
+  "language": "python",
+  "text": "uploaded_file.save(request.files['file'].filename)",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.external-file-upload",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 49
+          },
+          "text": "uploaded_file.save(request.files['file'].filename)",
+          "props": {
+            "source": "upload-filename"
+          }
+        }
+      ]
+    }
+  }
+}

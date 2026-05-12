@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.external-file-upload.rule.yaml
+fixtures:
+  - name: flags non-TS upload filename persistence facts
+    observationPath: ./fixtures/security.external-file-upload/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.external-file-upload
+      allSeverities:
+        - high
+  - name: ignores files without upload facts
+    observationPath: ./fixtures/security.external-file-upload/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

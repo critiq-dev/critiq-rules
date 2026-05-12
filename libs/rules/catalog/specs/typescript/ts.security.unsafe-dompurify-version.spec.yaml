@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.unsafe-dompurify-version.rule.yaml
+fixtures:
+  - name: flags outdated DOM sanitizer dependency facts
+    observationPath: ./fixtures/ts.security.unsafe-dompurify-version/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.unsafe-dompurify-version
+      allSeverities:
+        - high
+  - name: ignores files without dependency policy facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

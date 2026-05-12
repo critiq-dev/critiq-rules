@@ -1,0 +1,14 @@
+{
+  "path": "app/archive.py",
+  "language": "python",
+  "text": "safe_extract(zip_file, target_dir)",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

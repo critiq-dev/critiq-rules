@@ -1,0 +1,30 @@
+{
+  "path": "app/files.py",
+  "language": "python",
+  "text": "os.chmod(path, 0o777)",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.permissive-file-permissions",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 22
+          },
+          "text": "os.chmod(path, 0o777)",
+          "props": {
+            "permission": "world-readable-or-writable"
+          }
+        }
+      ]
+    }
+  }
+}

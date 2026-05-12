@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/shared/security.permissive-file-permissions.rule.yaml
+fixtures:
+  - name: flags non-TS broad file permission facts
+    observationPath: ./fixtures/security.permissive-file-permissions/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - security.permissive-file-permissions
+      allSeverities:
+        - medium
+  - name: ignores files without permission facts
+    observationPath: ./fixtures/security.permissive-file-permissions/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

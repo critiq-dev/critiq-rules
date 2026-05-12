@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.unsafe-dompurify-version
+  title: Upgrade DOM sanitization dependency
+  summary: DOM sanitization libraries should stay on patched versions before they are trusted for untrusted HTML.
+  rationale: Older sanitizer versions can miss browser parsing edge cases and leave XSS protections incomplete.
+  tags:
+    - security
+    - dependency
+    - xss
+    - rules-catalog
+  stability: experimental
+  appliesTo: project
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.dependency.dompurify-unsafe-version
+    bind: issue
+emit:
+  finding:
+    category: security.dependency
+    severity: high
+    confidence: 0.82
+    tags:
+      - security
+      - dependency
+      - xss
+  message:
+    title: Upgrade `${captures.issue.text}`
+    summary: "`${captures.issue.text}` is below the minimum sanitizer version Critiq treats as safe for untrusted HTML."
+  remediation:
+    summary: Upgrade the package, then keep HTML sanitizer usage behind a small reviewed wrapper.

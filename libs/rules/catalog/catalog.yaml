@@ -387,6 +387,21 @@ rules:
     presets:
       - strict
       - security
+  - id: security.sensitive-data-egress
+    rulePath: ./rules/shared/security.sensitive-data-egress.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.unsafe-dompurify-version
+    rulePath: ./rules/typescript/ts.security.unsafe-dompurify-version.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.unsafe-marked-version
+    rulePath: ./rules/typescript/ts.security.unsafe-marked-version.rule.yaml
+    presets:
+      - strict
+      - security
   - id: security.no-sensitive-data-in-logs-and-telemetry
     rulePath: ./rules/shared/security.no-sensitive-data-in-logs-and-telemetry.rule.yaml
     presets:
@@ -580,6 +595,18 @@ rules:
       - recommended
       - strict
       - security
+  - id: security.external-file-upload
+    rulePath: ./rules/shared/security.external-file-upload.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: security.archive-path-traversal
+    rulePath: ./rules/shared/security.archive-path-traversal.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.file-generation
     rulePath: ./rules/typescript/ts.security.file-generation.rule.yaml
     presets:
@@ -594,6 +621,12 @@ rules:
       - security
   - id: ts.security.permissive-file-permissions
     rulePath: ./rules/typescript/ts.security.permissive-file-permissions.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: security.permissive-file-permissions
+    rulePath: ./rules/shared/security.permissive-file-permissions.rule.yaml
     presets:
       - recommended
       - strict

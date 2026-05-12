@@ -1,0 +1,14 @@
+{
+  "path": "app/handlers.py",
+  "language": "python",
+  "text": "logger.info('ok')",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

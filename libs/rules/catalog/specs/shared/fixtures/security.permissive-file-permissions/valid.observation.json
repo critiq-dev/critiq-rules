@@ -1,0 +1,14 @@
+{
+  "path": "app/files.py",
+  "language": "python",
+  "text": "os.chmod(path, 0o600)",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

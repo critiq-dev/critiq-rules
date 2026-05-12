@@ -1,0 +1,34 @@
+{
+  "path": "src/markdown.ts",
+  "language": "typescript",
+  "text": "export const markdown = '# demo';",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.dependency.marked-unsafe-version",
+          "appliesTo": "project",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 32
+          },
+          "text": "marked@4.0.0",
+          "props": {
+            "ecosystem": "npm",
+            "packageName": "marked",
+            "versionRange": "4.0.0",
+            "manifestPath": "package.json",
+            "policyId": "marked-unsafe-version"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: security.archive-path-traversal
+  title: Sanitize archive entry paths before writing
+  summary: Archive extraction should not write entry names directly to the filesystem.
+  rationale: Archive entries can contain traversal paths that overwrite files outside the intended extraction directory.
+  tags:
+    - security
+    - filesystem
+    - archive
+    - path-traversal
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+    - java
+    - php
+    - python
+    - ruby
+    - rust
+match:
+  fact:
+    kind: security.archive-path-traversal
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.82
+    tags:
+      - security
+      - filesystem
+      - archive
+  message:
+    title: Check archive containment for `${captures.issue.text}`
+    summary: "`${captures.issue.text}` may write an archive-controlled path without a containment check."
+  remediation:
+    summary: Normalize each entry path against a trusted extraction root and reject paths that escape it.

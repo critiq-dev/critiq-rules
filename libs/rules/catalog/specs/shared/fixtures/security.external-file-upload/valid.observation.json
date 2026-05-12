@@ -1,0 +1,14 @@
+{
+  "path": "app/upload.py",
+  "language": "python",
+  "text": "uploaded_file.save(generated_name)",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

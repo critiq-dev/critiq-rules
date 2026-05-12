@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: security.permissive-file-permissions
+  title: Avoid world-readable or world-writable file permissions
+  summary: File creation and permission changes should not grant broad local access.
+  rationale: Broad permissions expose application data to local users or processes that should not read or modify it.
+  tags:
+    - security
+    - filesystem
+    - permissions
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+    - java
+    - php
+    - python
+    - ruby
+    - rust
+match:
+  fact:
+    kind: security.permissive-file-permissions
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: medium
+    confidence: 0.8
+    tags:
+      - security
+      - filesystem
+      - permissions
+  message:
+    title: Tighten file permissions for `${captures.issue.text}`
+    summary: "`${captures.issue.text}` grants world-readable or world-writable filesystem access."
+  remediation:
+    summary: Use least-privilege file modes and avoid world-readable or world-writable permissions.

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.unsafe-marked-version
+  title: Upgrade Markdown rendering dependency
+  summary: Markdown renderers should stay on patched versions before rendering untrusted content.
+  rationale: Older Markdown renderer versions can expose unsafe HTML handling and parser edge cases.
+  tags:
+    - security
+    - dependency
+    - xss
+    - rules-catalog
+  stability: experimental
+  appliesTo: project
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.dependency.marked-unsafe-version
+    bind: issue
+emit:
+  finding:
+    category: security.dependency
+    severity: high
+    confidence: 0.82
+    tags:
+      - security
+      - dependency
+      - xss
+  message:
+    title: Upgrade `${captures.issue.text}`
+    summary: "`${captures.issue.text}` is below the minimum Markdown renderer version Critiq treats as safe for untrusted content."
+  remediation:
+    summary: Upgrade the package and keep untrusted Markdown rendering behind explicit sanitization.

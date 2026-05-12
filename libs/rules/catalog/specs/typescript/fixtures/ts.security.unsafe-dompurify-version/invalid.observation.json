@@ -1,0 +1,34 @@
+{
+  "path": "src/render.ts",
+  "language": "typescript",
+  "text": "export const html = '<p>demo</p>';",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.dependency.dompurify-unsafe-version",
+          "appliesTo": "project",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 35
+          },
+          "text": "dompurify@2.3.10",
+          "props": {
+            "ecosystem": "npm",
+            "packageName": "dompurify",
+            "versionRange": "2.3.10",
+            "manifestPath": "package.json",
+            "policyId": "dompurify-unsafe-version"
+          }
+        }
+      ]
+    }
+  }
+}
