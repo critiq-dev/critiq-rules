@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.performance.no-regex-construction-in-loop
+  title: Avoid regex construction inside loops
+  summary: Constructing regular expressions inside loops repeatedly allocates and reparses patterns.
+  rationale: Constructing regular expressions inside loops repeatedly allocates and reparses patterns.
+  tags:
+    - performance
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: performance.no-regex-construction-in-loop
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.8
+    tags:
+      - performance
+  message:
+    title: Avoid regex construction inside loops
+    summary: "`${captures.issue.text}` matches ts.performance.no-regex-construction-in-loop."
+  remediation:
+    summary: Refactor this path to avoid repeated work in hot execution paths.

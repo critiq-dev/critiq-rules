@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.performance.no-regex-construction-in-loop
+  title: Avoid no regex construction in loop
+  summary: Performance hygiene signal for python sources.
+  rationale: Performance hygiene signal for python sources.
+  tags:
+    - performance
+    - python
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - python
+match:
+  fact:
+    kind: py.performance.no-regex-construction-in-loop
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - python
+  message:
+    title: Avoid no regex construction in loop in `python` code
+    summary: "`${captures.issue.text}` matches py.performance.no-regex-construction-in-loop."
+  remediation:
+    summary: Refactor this path to reduce avoidable runtime overhead.

@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.no-regex-construction-in-loop
+  title: Avoid no regex construction in loop
+  summary: Performance hygiene signal for go sources.
+  rationale: Performance hygiene signal for go sources.
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.performance.no-regex-construction-in-loop
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - go
+  message:
+    title: Avoid no regex construction in loop in `go` code
+    summary: "`${captures.issue.text}` matches go.performance.no-regex-construction-in-loop."
+  remediation:
+    summary: Refactor this path to reduce avoidable runtime overhead.

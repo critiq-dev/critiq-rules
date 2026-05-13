@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.performance.no-unbounded-concurrency.rule.yaml
+fixtures:
+  - name: flags bad pattern
+    sourcePath: ./fixtures/rust.performance.no-unbounded-concurrency/tests/bad_test.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.performance.no-unbounded-concurrency
+  - name: allows clean pattern
+    sourcePath: ./fixtures/rust.performance.no-unbounded-concurrency/tests/good_test.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

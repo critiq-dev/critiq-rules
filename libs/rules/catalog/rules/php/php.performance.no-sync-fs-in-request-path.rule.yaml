@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.performance.no-sync-fs-in-request-path
+  title: Avoid no sync fs in request path
+  summary: Performance hygiene signal for php sources.
+  rationale: Performance hygiene signal for php sources.
+  tags:
+    - performance
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+match:
+  fact:
+    kind: php.performance.no-sync-fs-in-request-path
+    bind: issue
+emit:
+  finding:
+    category: performance.io
+    severity: high
+    confidence: 0.66
+    tags:
+      - performance
+      - php
+  message:
+    title: Avoid no sync fs in request path in `php` code
+    summary: "`${captures.issue.text}` matches php.performance.no-sync-fs-in-request-path."
+  remediation:
+    summary: Refactor this path to reduce avoidable runtime overhead.

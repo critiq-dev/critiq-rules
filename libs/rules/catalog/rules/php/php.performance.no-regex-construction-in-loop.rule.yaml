@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.performance.no-regex-construction-in-loop
+  title: Avoid no regex construction in loop
+  summary: Performance hygiene signal for php sources.
+  rationale: Performance hygiene signal for php sources.
+  tags:
+    - performance
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+match:
+  fact:
+    kind: php.performance.no-regex-construction-in-loop
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - php
+  message:
+    title: Avoid no regex construction in loop in `php` code
+    summary: "`${captures.issue.text}` matches php.performance.no-regex-construction-in-loop."
+  remediation:
+    summary: Refactor this path to reduce avoidable runtime overhead.

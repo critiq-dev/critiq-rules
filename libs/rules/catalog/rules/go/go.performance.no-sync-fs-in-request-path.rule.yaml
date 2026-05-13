@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.no-sync-fs-in-request-path
+  title: Avoid no sync fs in request path
+  summary: Performance hygiene signal for go sources.
+  rationale: Performance hygiene signal for go sources.
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.performance.no-sync-fs-in-request-path
+    bind: issue
+emit:
+  finding:
+    category: performance.io
+    severity: high
+    confidence: 0.66
+    tags:
+      - performance
+      - go
+  message:
+    title: Avoid no sync fs in request path in `go` code
+    summary: "`${captures.issue.text}` matches go.performance.no-sync-fs-in-request-path."
+  remediation:
+    summary: Refactor this path to reduce avoidable runtime overhead.

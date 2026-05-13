@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.performance.no-n-plus-one-await-in-map
+  title: Avoid N+1 await patterns in map flows
+  summary: Per-item awaits inside map-like flows often create avoidable latency and fan-out bottlenecks.
+  rationale: Per-item awaits inside map-like flows often create avoidable latency and fan-out bottlenecks.
+  tags:
+    - performance
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: performance.no-n-plus-one-await-in-map
+    bind: issue
+emit:
+  finding:
+    category: performance.async
+    severity: high
+    confidence: 0.8
+    tags:
+      - performance
+  message:
+    title: Avoid N+1 await patterns in map flows
+    summary: "`${captures.issue.text}` matches ts.performance.no-n-plus-one-await-in-map."
+  remediation:
+    summary: Refactor this path to avoid repeated work in hot execution paths.

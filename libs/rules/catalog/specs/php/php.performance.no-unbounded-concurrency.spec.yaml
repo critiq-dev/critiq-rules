@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.performance.no-unbounded-concurrency.rule.yaml
+fixtures:
+  - name: flags bad pattern
+    sourcePath: ./fixtures/php.performance.no-unbounded-concurrency/tests/bad_test.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.performance.no-unbounded-concurrency
+  - name: allows clean pattern
+    sourcePath: ./fixtures/php.performance.no-unbounded-concurrency/tests/good_test.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

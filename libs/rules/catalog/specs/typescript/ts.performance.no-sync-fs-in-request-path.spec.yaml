@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.performance.no-sync-fs-in-request-path.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.performance.no-sync-fs-in-request-path/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.performance.no-sync-fs-in-request-path
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.performance.no-sync-fs-in-request-path/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

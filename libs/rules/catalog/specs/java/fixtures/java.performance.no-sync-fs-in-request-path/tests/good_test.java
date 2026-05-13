@@ -1,0 +1,3 @@
+class SyncFsOkTest {
+  void handler() {}
+}

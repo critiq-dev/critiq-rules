@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.performance.no-redundant-network-fetch.rule.yaml
+fixtures:
+  - name: flags matching observation
+    observationPath: ./fixtures/ts.performance.no-redundant-network-fetch/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.performance.no-redundant-network-fetch
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

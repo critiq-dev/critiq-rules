@@ -1,0 +1,1 @@
+class ConcurrencyOkTest { void run() {} }

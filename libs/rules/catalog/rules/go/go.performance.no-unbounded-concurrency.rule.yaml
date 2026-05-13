@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.no-unbounded-concurrency
+  title: Avoid no unbounded concurrency
+  summary: Performance hygiene signal for go sources.
+  rationale: Performance hygiene signal for go sources.
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.performance.no-unbounded-concurrency
+    bind: issue
+emit:
+  finding:
+    category: performance.async
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - go
+  message:
+    title: Avoid no unbounded concurrency in `go` code
+    summary: "`${captures.issue.text}` matches go.performance.no-unbounded-concurrency."
+  remediation:
+    summary: Refactor this path to reduce avoidable runtime overhead.

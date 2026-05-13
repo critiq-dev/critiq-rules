@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.performance.no-unbounded-concurrency.rule.yaml
+fixtures:
+  - name: flags bad pattern
+    sourcePath: ./fixtures/py.performance.no-unbounded-concurrency/tests/bad_test.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.performance.no-unbounded-concurrency
+  - name: allows clean pattern
+    sourcePath: ./fixtures/py.performance.no-unbounded-concurrency/tests/good_test.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

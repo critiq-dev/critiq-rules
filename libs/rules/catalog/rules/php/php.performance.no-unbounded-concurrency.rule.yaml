@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.performance.no-unbounded-concurrency
+  title: Avoid no unbounded concurrency
+  summary: Performance hygiene signal for php sources.
+  rationale: Performance hygiene signal for php sources.
+  tags:
+    - performance
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+match:
+  fact:
+    kind: php.performance.no-unbounded-concurrency
+    bind: issue
+emit:
+  finding:
+    category: performance.async
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - php
+  message:
+    title: Avoid no unbounded concurrency in `php` code
+    summary: "`${captures.issue.text}` matches php.performance.no-unbounded-concurrency."
+  remediation:
+    summary: Refactor this path to reduce avoidable runtime overhead.

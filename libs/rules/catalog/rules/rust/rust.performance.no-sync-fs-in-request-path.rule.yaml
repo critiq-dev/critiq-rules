@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.performance.no-sync-fs-in-request-path
+  title: Avoid no sync fs in request path
+  summary: Performance hygiene signal for rust sources.
+  rationale: Performance hygiene signal for rust sources.
+  tags:
+    - performance
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+match:
+  fact:
+    kind: rust.performance.no-sync-fs-in-request-path
+    bind: issue
+emit:
+  finding:
+    category: performance.io
+    severity: high
+    confidence: 0.66
+    tags:
+      - performance
+      - rust
+  message:
+    title: Avoid no sync fs in request path in `rust` code
+    summary: "`${captures.issue.text}` matches rust.performance.no-sync-fs-in-request-path."
+  remediation:
+    summary: Refactor this path to reduce avoidable runtime overhead.

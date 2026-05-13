@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.no-unbounded-concurrency.rule.yaml
+fixtures:
+  - name: flags bad pattern
+    sourcePath: ./fixtures/go.performance.no-unbounded-concurrency/tests/bad_test.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.no-unbounded-concurrency
+  - name: allows clean pattern
+    sourcePath: ./fixtures/go.performance.no-unbounded-concurrency/tests/good_test.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

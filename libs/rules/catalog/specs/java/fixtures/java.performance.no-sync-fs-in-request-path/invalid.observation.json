@@ -1,0 +1,28 @@
+{
+  "path": "src/example.txt",
+  "language": "java",
+  "text": "sample",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.performance.no-sync-fs-in-request-path",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 7
+          },
+          "text": "sample",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

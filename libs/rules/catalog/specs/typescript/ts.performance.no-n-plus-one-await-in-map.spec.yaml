@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.performance.no-n-plus-one-await-in-map.rule.yaml
+fixtures:
+  - name: flags matching observation
+    observationPath: ./fixtures/ts.performance.no-n-plus-one-await-in-map/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.performance.no-n-plus-one-await-in-map
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

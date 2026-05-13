@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.performance.no-sync-fs-in-request-path.rule.yaml
+fixtures:
+  - name: flags matching observation
+    observationPath: ./fixtures/ruby.performance.no-sync-fs-in-request-path/invalid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []
+#        - ruby.performance.no-sync-fs-in-request-path
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

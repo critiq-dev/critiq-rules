@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.no-regex-construction-in-loop.rule.yaml
+fixtures:
+  - name: flags matching observation
+    observationPath: ./fixtures/java.performance.no-regex-construction-in-loop/invalid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []
+#        - java.performance.no-regex-construction-in-loop
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

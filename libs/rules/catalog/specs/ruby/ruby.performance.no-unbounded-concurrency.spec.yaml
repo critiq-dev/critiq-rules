@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.performance.no-unbounded-concurrency.rule.yaml
+fixtures:
+  - name: flags bad pattern
+    sourcePath: ./fixtures/ruby.performance.no-unbounded-concurrency/tests/bad_test.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.performance.no-unbounded-concurrency
+  - name: allows clean pattern
+    sourcePath: ./fixtures/ruby.performance.no-unbounded-concurrency/tests/good_test.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

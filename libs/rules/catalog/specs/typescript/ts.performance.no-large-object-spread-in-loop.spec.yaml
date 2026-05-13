@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.performance.no-large-object-spread-in-loop.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.performance.no-large-object-spread-in-loop/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.performance.no-large-object-spread-in-loop
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.performance.no-large-object-spread-in-loop/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.performance.no-regex-construction-in-loop.rule.yaml
+fixtures:
+  - name: flags bad pattern
+    sourcePath: ./fixtures/rust.performance.no-regex-construction-in-loop/tests/bad_test.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.performance.no-regex-construction-in-loop
+  - name: allows clean pattern
+    sourcePath: ./fixtures/rust.performance.no-regex-construction-in-loop/tests/good_test.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

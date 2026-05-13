@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.performance.no-unbounded-concurrency
+  title: Avoid unbounded concurrency fan-out
+  summary: Unbounded Promise fan-out over unknown input can exhaust downstream capacity.
+  rationale: Unbounded Promise fan-out over unknown input can exhaust downstream capacity.
+  tags:
+    - performance
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: performance.no-unbounded-concurrency
+    bind: issue
+emit:
+  finding:
+    category: performance.async
+    severity: high
+    confidence: 0.8
+    tags:
+      - performance
+  message:
+    title: Avoid unbounded concurrency fan-out
+    summary: "`${captures.issue.text}` matches ts.performance.no-unbounded-concurrency."
+  remediation:
+    summary: Refactor this path to avoid repeated work in hot execution paths.

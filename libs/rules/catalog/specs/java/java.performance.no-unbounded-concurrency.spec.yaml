@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.no-unbounded-concurrency.rule.yaml
+fixtures:
+  - name: flags bad pattern
+    sourcePath: ./fixtures/java.performance.no-unbounded-concurrency/tests/bad_test.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.no-unbounded-concurrency
+  - name: allows clean pattern
+    sourcePath: ./fixtures/java.performance.no-unbounded-concurrency/tests/good_test.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

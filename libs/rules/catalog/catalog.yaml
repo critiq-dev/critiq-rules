@@ -264,6 +264,128 @@ rules:
     rulePath: ./rules/typescript/ts.performance.unnecessary-rerenders-from-state-misuse.rule.yaml
     presets:
       - experimental
+  - id: ts.performance.no-array-spread-in-hot-loop
+    rulePath: ./rules/typescript/ts.performance.no-array-spread-in-hot-loop.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.performance.no-regex-construction-in-loop
+    rulePath: ./rules/typescript/ts.performance.no-regex-construction-in-loop.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.performance.no-json-parse-stringify-clone
+    rulePath: ./rules/typescript/ts.performance.no-json-parse-stringify-clone.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.performance.no-sync-fs-in-request-path
+    rulePath: ./rules/typescript/ts.performance.no-sync-fs-in-request-path.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.performance.no-large-object-spread-in-loop
+    rulePath: ./rules/typescript/ts.performance.no-large-object-spread-in-loop.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.performance.no-n-plus-one-await-in-map
+    rulePath: ./rules/typescript/ts.performance.no-n-plus-one-await-in-map.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.performance.no-unbounded-concurrency
+    rulePath: ./rules/typescript/ts.performance.no-unbounded-concurrency.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.performance.no-redundant-network-fetch
+    rulePath: ./rules/typescript/ts.performance.no-redundant-network-fetch.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.performance.no-expensive-sort-in-render-path
+    rulePath: ./rules/typescript/ts.performance.no-expensive-sort-in-render-path.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.performance.no-cache-miss-from-unstable-key
+    rulePath: ./rules/typescript/ts.performance.no-cache-miss-from-unstable-key.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: go.performance.no-regex-construction-in-loop
+    rulePath: ./rules/go/go.performance.no-regex-construction-in-loop.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.no-sync-fs-in-request-path
+    rulePath: ./rules/go/go.performance.no-sync-fs-in-request-path.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.no-unbounded-concurrency
+    rulePath: ./rules/go/go.performance.no-unbounded-concurrency.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.no-regex-construction-in-loop
+    rulePath: ./rules/java/java.performance.no-regex-construction-in-loop.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.no-sync-fs-in-request-path
+    rulePath: ./rules/java/java.performance.no-sync-fs-in-request-path.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.no-unbounded-concurrency
+    rulePath: ./rules/java/java.performance.no-unbounded-concurrency.rule.yaml
+    presets:
+      - strict
+  - id: php.performance.no-regex-construction-in-loop
+    rulePath: ./rules/php/php.performance.no-regex-construction-in-loop.rule.yaml
+    presets:
+      - strict
+  - id: php.performance.no-sync-fs-in-request-path
+    rulePath: ./rules/php/php.performance.no-sync-fs-in-request-path.rule.yaml
+    presets:
+      - strict
+  - id: php.performance.no-unbounded-concurrency
+    rulePath: ./rules/php/php.performance.no-unbounded-concurrency.rule.yaml
+    presets:
+      - strict
+  - id: py.performance.no-regex-construction-in-loop
+    rulePath: ./rules/python/py.performance.no-regex-construction-in-loop.rule.yaml
+    presets:
+      - strict
+  - id: py.performance.no-sync-fs-in-request-path
+    rulePath: ./rules/python/py.performance.no-sync-fs-in-request-path.rule.yaml
+    presets:
+      - strict
+  - id: py.performance.no-unbounded-concurrency
+    rulePath: ./rules/python/py.performance.no-unbounded-concurrency.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.no-regex-construction-in-loop
+    rulePath: ./rules/ruby/ruby.performance.no-regex-construction-in-loop.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.no-sync-fs-in-request-path
+    rulePath: ./rules/ruby/ruby.performance.no-sync-fs-in-request-path.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.no-unbounded-concurrency
+    rulePath: ./rules/ruby/ruby.performance.no-unbounded-concurrency.rule.yaml
+    presets:
+      - strict
+  - id: rust.performance.no-regex-construction-in-loop
+    rulePath: ./rules/rust/rust.performance.no-regex-construction-in-loop.rule.yaml
+    presets:
+      - strict
+  - id: rust.performance.no-sync-fs-in-request-path
+    rulePath: ./rules/rust/rust.performance.no-sync-fs-in-request-path.rule.yaml
+    presets:
+      - strict
+  - id: rust.performance.no-unbounded-concurrency
+    rulePath: ./rules/rust/rust.performance.no-unbounded-concurrency.rule.yaml
+    presets:
+      - strict
   - id: ts.react.no-cascaded-effect-fetches
     rulePath: ./rules/typescript/ts.react.no-cascaded-effect-fetches.rule.yaml
     presets:

@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.performance.no-json-parse-stringify-clone
+  title: Avoid JSON parse/stringify deep-clone
+  summary: JSON stringify/parse cloning is expensive and loses type fidelity for rich objects.
+  rationale: JSON stringify/parse cloning is expensive and loses type fidelity for rich objects.
+  tags:
+    - performance
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: performance.no-json-parse-stringify-clone
+    bind: issue
+emit:
+  finding:
+    category: performance.cpu
+    severity: medium
+    confidence: 0.8
+    tags:
+      - performance
+  message:
+    title: Avoid JSON parse/stringify deep-clone
+    summary: "`${captures.issue.text}` matches ts.performance.no-json-parse-stringify-clone."
+  remediation:
+    summary: Refactor this path to avoid repeated work in hot execution paths.

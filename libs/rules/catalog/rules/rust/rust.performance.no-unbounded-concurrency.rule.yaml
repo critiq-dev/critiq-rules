@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.performance.no-unbounded-concurrency
+  title: Avoid no unbounded concurrency
+  summary: Performance hygiene signal for rust sources.
+  rationale: Performance hygiene signal for rust sources.
+  tags:
+    - performance
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+match:
+  fact:
+    kind: rust.performance.no-unbounded-concurrency
+    bind: issue
+emit:
+  finding:
+    category: performance.async
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - rust
+  message:
+    title: Avoid no unbounded concurrency in `rust` code
+    summary: "`${captures.issue.text}` matches rust.performance.no-unbounded-concurrency."
+  remediation:
+    summary: Refactor this path to reduce avoidable runtime overhead.

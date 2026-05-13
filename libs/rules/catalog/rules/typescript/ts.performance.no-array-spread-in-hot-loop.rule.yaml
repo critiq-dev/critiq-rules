@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.performance.no-array-spread-in-hot-loop
+  title: Avoid array spread inside hot loops
+  summary: Array spread or repeated concat in loops allocates per iteration and scales poorly.
+  rationale: Array spread or repeated concat in loops allocates per iteration and scales poorly.
+  tags:
+    - performance
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: performance.no-array-spread-in-hot-loop
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: high
+    confidence: 0.8
+    tags:
+      - performance
+  message:
+    title: Avoid array spread inside hot loops
+    summary: "`${captures.issue.text}` matches ts.performance.no-array-spread-in-hot-loop."
+  remediation:
+    summary: Refactor this path to avoid repeated work in hot execution paths.

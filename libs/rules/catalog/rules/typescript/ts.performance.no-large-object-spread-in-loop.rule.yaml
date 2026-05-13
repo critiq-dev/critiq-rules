@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.performance.no-large-object-spread-in-loop
+  title: Avoid large object spread inside loops
+  summary: Object spread inside loops creates repeated allocations and can degrade throughput.
+  rationale: Object spread inside loops creates repeated allocations and can degrade throughput.
+  tags:
+    - performance
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: performance.no-large-object-spread-in-loop
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.8
+    tags:
+      - performance
+  message:
+    title: Avoid large object spread inside loops
+    summary: "`${captures.issue.text}` matches ts.performance.no-large-object-spread-in-loop."
+  remediation:
+    summary: Refactor this path to avoid repeated work in hot execution paths.
