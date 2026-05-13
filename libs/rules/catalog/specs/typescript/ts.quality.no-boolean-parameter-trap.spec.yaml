@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.quality.no-boolean-parameter-trap.rule.yaml
+fixtures:
+  - name: flags multiple booleans in exported signature
+    sourcePath: ./fixtures/ts.quality.no-boolean-parameter-trap/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.no-boolean-parameter-trap
+  - name: allows explicit options object
+    sourcePath: ./fixtures/ts.quality.no-boolean-parameter-trap/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

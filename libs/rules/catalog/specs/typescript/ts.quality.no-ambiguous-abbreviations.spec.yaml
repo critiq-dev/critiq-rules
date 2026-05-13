@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.quality.no-ambiguous-abbreviations.rule.yaml
+fixtures:
+  - name: flags ambiguous abbreviation in export
+    sourcePath: ./fixtures/ts.quality.no-ambiguous-abbreviations/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.no-ambiguous-abbreviations
+  - name: allows explicit exported names
+    sourcePath: ./fixtures/ts.quality.no-ambiguous-abbreviations/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

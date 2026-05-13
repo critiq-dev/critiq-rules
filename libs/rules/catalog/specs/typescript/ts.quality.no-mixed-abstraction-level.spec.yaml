@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.quality.no-mixed-abstraction-level.rule.yaml
+fixtures:
+  - name: flags mixed abstraction in one function
+    sourcePath: ./fixtures/ts.quality.no-mixed-abstraction-level/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.no-mixed-abstraction-level
+  - name: allows separated abstraction levels
+    sourcePath: ./fixtures/ts.quality.no-mixed-abstraction-level/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

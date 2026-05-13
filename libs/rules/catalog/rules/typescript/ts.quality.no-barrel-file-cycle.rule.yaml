@@ -1,0 +1,27 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.quality.no-barrel-file-cycle
+  title: Avoid barrel file cycles
+  summary: Cycles involving barrel files obscure ownership and complicate module boundaries.
+  rationale: Re-export cycles make import behavior less predictable and harder to review.
+  tags: [quality, architecture, rules-catalog]
+  stability: stable
+  appliesTo: file
+scope:
+  languages: [typescript, javascript]
+match:
+  fact:
+    kind: quality.barrel-file-cycle
+    bind: issue
+emit:
+  finding:
+    category: quality.architecture
+    severity: medium
+    confidence: 0.83
+    tags: [quality, architecture]
+  message:
+    title: Break the barrel cycle between modules
+    summary: "`${captures.issue.text}` participates in a re-export cycle."
+  remediation:
+    summary: Remove cycle edges, move shared symbols to a third module, and keep barrel ownership explicit.

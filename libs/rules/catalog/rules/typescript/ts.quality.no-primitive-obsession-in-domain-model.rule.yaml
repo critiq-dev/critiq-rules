@@ -1,0 +1,27 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.quality.no-primitive-obsession-in-domain-model
+  title: Avoid primitive obsession in domain model APIs
+  summary: Domain-facing APIs with many primitive parameters should use richer value objects.
+  rationale: Grouping related primitives into value types improves readability and reduces argument-order bugs.
+  tags: [quality, maintainability, rules-catalog]
+  stability: stable
+  appliesTo: file
+scope:
+  languages: [typescript, javascript]
+match:
+  fact:
+    kind: quality.primitive-obsession-domain-model
+    bind: issue
+emit:
+  finding:
+    category: quality.design
+    severity: low
+    confidence: 0.8
+    tags: [quality, design]
+  message:
+    title: Replace primitive parameter groups with domain objects
+    summary: "`${captures.issue.text}` appears to rely on repeated primitive parameters."
+  remediation:
+    summary: Introduce a value object or typed input model for related arguments.

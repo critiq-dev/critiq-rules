@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.quality.no-wide-public-surface.rule.yaml
+fixtures:
+  - name: flags module with broad export surface
+    sourcePath: ./fixtures/ts.quality.no-wide-public-surface/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.no-wide-public-surface
+  - name: allows focused module exports
+    sourcePath: ./fixtures/ts.quality.no-wide-public-surface/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

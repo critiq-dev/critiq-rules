@@ -1,0 +1,27 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.quality.no-hidden-side-effect-import
+  title: Avoid hidden side-effect imports
+  summary: Bare side-effect imports outside setup files make module behavior implicit.
+  rationale: Hidden side effects are difficult to reason about and can create order-dependent bugs.
+  tags: [quality, maintainability, rules-catalog]
+  stability: stable
+  appliesTo: file
+scope:
+  languages: [typescript, javascript]
+match:
+  fact:
+    kind: quality.hidden-side-effect-import
+    bind: issue
+emit:
+  finding:
+    category: quality.maintainability
+    severity: medium
+    confidence: 0.85
+    tags: [quality, maintainability]
+  message:
+    title: Move side effects into explicit setup boundaries
+    summary: "`${captures.issue.text}` is a side-effect-only import outside allowlisted setup files."
+  remediation:
+    summary: Use explicit setup modules or import named symbols instead of hidden side effects.

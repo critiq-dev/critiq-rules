@@ -1,0 +1,27 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.quality.no-mixed-abstraction-level
+  title: Keep function abstraction levels consistent
+  summary: Functions that mix transport, persistence, validation, and domain logic are hard to change safely.
+  rationale: Mixed abstraction creates hidden coupling and complicates testing and review.
+  tags: [quality, architecture, rules-catalog]
+  stability: stable
+  appliesTo: file
+scope:
+  languages: [typescript, javascript]
+match:
+  fact:
+    kind: quality.mixed-abstraction-level
+    bind: issue
+emit:
+  finding:
+    category: quality.architecture
+    severity: medium
+    confidence: 0.8
+    tags: [quality, architecture]
+  message:
+    title: Split this flow into cohesive layers
+    summary: "`${captures.issue.text}` combines multiple abstraction levels in a single flow."
+  remediation:
+    summary: Separate transport, validation, persistence, and domain logic into dedicated functions or services.

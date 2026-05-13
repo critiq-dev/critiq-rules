@@ -134,6 +134,49 @@ rules:
     rulePath: ./rules/typescript/ts.quality.logic-change-without-test-updates.rule.yaml
     presets:
       - strict
+  - id: ts.quality.no-boolean-parameter-trap
+    rulePath: ./rules/typescript/ts.quality.no-boolean-parameter-trap.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.quality.no-primitive-obsession-in-domain-model
+    rulePath: ./rules/typescript/ts.quality.no-primitive-obsession-in-domain-model.rule.yaml
+    presets:
+      - strict
+  - id: ts.quality.no-wide-public-surface
+    rulePath: ./rules/typescript/ts.quality.no-wide-public-surface.rule.yaml
+    presets:
+      - strict
+  - id: ts.quality.no-barrel-file-cycle
+    rulePath: ./rules/typescript/ts.quality.no-barrel-file-cycle.rule.yaml
+    presets:
+      - strict
+  - id: ts.quality.no-hidden-side-effect-import
+    rulePath: ./rules/typescript/ts.quality.no-hidden-side-effect-import.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.quality.no-mixed-abstraction-level
+    rulePath: ./rules/typescript/ts.quality.no-mixed-abstraction-level.rule.yaml
+    presets:
+      - strict
+  - id: ts.quality.no-ambiguous-abbreviations
+    rulePath: ./rules/typescript/ts.quality.no-ambiguous-abbreviations.rule.yaml
+    presets:
+      - strict
+  - id: ts.quality.no-inconsistent-error-shape
+    rulePath: ./rules/typescript/ts.quality.no-inconsistent-error-shape.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.quality.no-temporal-coupling
+    rulePath: ./rules/typescript/ts.quality.no-temporal-coupling.rule.yaml
+    presets:
+      - strict
+  - id: ts.quality.no-dead-export
+    rulePath: ./rules/typescript/ts.quality.no-dead-export.rule.yaml
+    presets:
+      - strict
   - id: ts.testing.no-focused-test
     rulePath: ./rules/typescript/ts.testing.no-focused-test.rule.yaml
     presets:

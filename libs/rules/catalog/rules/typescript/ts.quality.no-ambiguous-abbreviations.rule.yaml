@@ -1,0 +1,27 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.quality.no-ambiguous-abbreviations
+  title: Avoid ambiguous abbreviations in public APIs
+  summary: Ambiguous abbreviated names in exported APIs reduce readability and onboarding speed.
+  rationale: Public API names are long-lived and should optimize for clarity over brevity.
+  tags: [quality, maintainability, rules-catalog]
+  stability: stable
+  appliesTo: file
+scope:
+  languages: [typescript, javascript]
+match:
+  fact:
+    kind: quality.ambiguous-abbreviation-public-api
+    bind: issue
+emit:
+  finding:
+    category: quality.maintainability
+    severity: low
+    confidence: 0.76
+    tags: [quality, naming]
+  message:
+    title: Use explicit naming for exported API symbols
+    summary: "`${captures.issue.text}` looks like an ambiguous abbreviation in a public API."
+  remediation:
+    summary: Rename exported symbols to descriptive terms that communicate domain intent.

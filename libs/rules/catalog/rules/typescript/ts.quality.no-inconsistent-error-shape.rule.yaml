@@ -1,0 +1,27 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.quality.no-inconsistent-error-shape
+  title: Keep error payload shape consistent
+  summary: Inconsistent thrown or rejected error shapes make error handling brittle.
+  rationale: Standardized error construction simplifies observability, retries, and user-safe handling.
+  tags: [quality, error-handling, rules-catalog]
+  stability: stable
+  appliesTo: block
+scope:
+  languages: [typescript, javascript]
+match:
+  fact:
+    kind: quality.inconsistent-error-shape
+    bind: issue
+emit:
+  finding:
+    category: quality.error-handling
+    severity: medium
+    confidence: 0.82
+    tags: [quality, error-handling]
+  message:
+    title: Use a consistent error construction pattern
+    summary: "`${captures.issue.text}` indicates mixed error shapes in this module."
+  remediation:
+    summary: Standardize on one error type or envelope and normalize throw/reject paths.

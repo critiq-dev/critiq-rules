@@ -1,0 +1,27 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.quality.no-boolean-parameter-trap
+  title: Avoid boolean parameter trap in public APIs
+  summary: Public APIs with multiple boolean flags reduce readability and increase change risk.
+  rationale: Boolean-heavy signatures hide intent and make call-sites brittle.
+  tags: [quality, maintainability, rules-catalog]
+  stability: stable
+  appliesTo: file
+scope:
+  languages: [typescript, javascript]
+match:
+  fact:
+    kind: quality.boolean-parameter-trap
+    bind: issue
+emit:
+  finding:
+    category: quality.maintainability
+    severity: medium
+    confidence: 0.86
+    tags: [quality, maintainability]
+  message:
+    title: Replace multiple boolean flags with an options object
+    summary: "`${captures.issue.text}` appears to accept multiple boolean flags."
+  remediation:
+    summary: Prefer explicit option objects or dedicated methods to encode behavior clearly.

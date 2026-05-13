@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.quality.no-inconsistent-error-shape.rule.yaml
+fixtures:
+  - name: flags inconsistent throw shape
+    sourcePath: ./fixtures/ts.quality.no-inconsistent-error-shape/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.no-inconsistent-error-shape
+  - name: allows consistent Error usage
+    sourcePath: ./fixtures/ts.quality.no-inconsistent-error-shape/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
