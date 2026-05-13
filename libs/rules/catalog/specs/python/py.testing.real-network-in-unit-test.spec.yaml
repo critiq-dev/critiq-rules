@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.testing.real-network-in-unit-test.rule.yaml
+fixtures:
+  - name: flags requests.get
+    sourcePath: ./fixtures/py.testing.real-network-in-unit-test/tests/test_bad.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.testing.real-network-in-unit-test
+  - name: clean
+    sourcePath: ./fixtures/py.testing.real-network-in-unit-test/tests/test_good.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

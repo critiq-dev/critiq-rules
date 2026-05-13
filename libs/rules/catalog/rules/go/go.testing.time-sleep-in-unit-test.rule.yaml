@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.testing.time-sleep-in-unit-test
+  title: Avoid time.Sleep in Go unit tests
+  summary: Sleeping in _test.go files slows CI and hides synchronization bugs.
+  rationale: Prefer fake clocks, polling helpers, or integration suites for real delays.
+  tags:
+    - testing
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.testing.time-sleep-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: low
+    confidence: 0.62
+    tags:
+      - testing
+      - go
+  message:
+    title: Replace `time.Sleep` in unit tests
+    summary: "`${captures.issue.text}` blocks a goroutine on real wall-clock time."
+  remediation:
+    summary: Inject a clock interface, shorten waits, or move the scenario to an integration test harness.

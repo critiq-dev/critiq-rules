@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.testing.skip-without-ticket-reference
+  title: RSpec skip should cite a ticket
+  summary: skip(...) without a nearby tracker reference is hard to triage.
+  rationale: Skips without traceability tend to linger.
+  tags:
+    - testing
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.testing.skip-without-ticket-reference
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.66
+    tags:
+      - testing
+      - ruby
+  message:
+    title: Add a ticket reference to `${captures.issue.text}`
+    summary: "`skip` is used without an adjacent issue key or accepted suppression comment."
+  remediation:
+    summary: Link the skip to a tracker id or document the temporary bypass with an owner.

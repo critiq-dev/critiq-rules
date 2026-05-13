@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.testing.no-snapshot-without-intent.rule.yaml
+fixtures:
+  - name: flags anonymous snapshot
+    sourcePath: ./fixtures/ts.testing.no-snapshot-without-intent/invalid.test.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.no-snapshot-without-intent
+  - name: allows snapshot intent comment
+    sourcePath: ./fixtures/ts.testing.no-snapshot-without-intent/valid.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

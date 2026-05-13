@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.testing.real-network-in-unit-test.rule.yaml
+fixtures:
+  - name: invalid
+    sourcePath: ./fixtures/rust.testing.real-network-in-unit-test/tests/bad.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.testing.real-network-in-unit-test
+  - name: valid
+    sourcePath: ./fixtures/rust.testing.real-network-in-unit-test/tests/good.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

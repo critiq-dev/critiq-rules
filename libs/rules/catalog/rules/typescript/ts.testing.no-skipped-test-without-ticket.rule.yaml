@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.testing.no-skipped-test-without-ticket
+  title: Skipped tests should cite a ticket or timed suppression
+  summary: Skipped or disabled tests should reference a tracked issue, expiry, or accepted suppression comment.
+  rationale: Silent skips decay into permanent holes in coverage unless they carry reviewable intent.
+  tags:
+    - testing
+    - quality
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: testing.skipped-without-ticket-reference
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.72
+    tags:
+      - testing
+      - coverage
+  message:
+    title: Add a ticket or suppression note for `${captures.issue.text}`
+    summary: "`${captures.issue.text}` skips a test without an adjacent issue key, GitHub issue URL, or TODO(expires) style note."
+  remediation:
+    summary: Link the skip to a tracker id, add a short expiry note, or replace the skip with a focused assertion.

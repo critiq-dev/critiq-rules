@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.testing.pytest-skip-without-ticket-reference
+  title: pytest.mark.skip should include a reason or ticket
+  summary: Skips without `reason=` or a nearby tracker reference are hard to triage.
+  rationale: Silent pytest skips accumulate unless they carry reviewable intent.
+  tags:
+    - testing
+    - python
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - python
+match:
+  fact:
+    kind: py.testing.pytest-skip-without-ticket-reference
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.68
+    tags:
+      - testing
+      - python
+  message:
+    title: Document `@pytest.mark.skip` with reason or ticket
+    summary: "`${captures.issue.text}` marks a skip without `reason=` and without a nearby issue reference."
+  remediation:
+    summary: Add `reason=` with a tracker id or move the skip behind a feature flag with expiry notes.

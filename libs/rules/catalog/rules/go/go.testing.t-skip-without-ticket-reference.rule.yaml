@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.testing.t-skip-without-ticket-reference
+  title: t.Skip should cite a ticket or suppression
+  summary: Go tests that call t.Skip without a nearby tracker reference are easy to forget.
+  rationale: Skips without traceability tend to linger and hide regressions.
+  tags:
+    - testing
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.testing.t-skip-without-ticket-reference
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.7
+    tags:
+      - testing
+      - go
+  message:
+    title: Add a ticket reference to `${captures.issue.text}`
+    summary: "`t.Skip` is used without an adjacent issue key or accepted suppression comment."
+  remediation:
+    summary: Link the skip to a tracker id or document why the suite is intentionally bypassed.

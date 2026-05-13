@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.testing.focused-example
+  title: Remove focused RSpec examples before merge
+  summary: fit and fdescribe skip the rest of the suite and should not ship.
+  rationale: Focused examples hide failures in sibling specs.
+  tags:
+    - testing
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.testing.focused-example
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.85
+    tags:
+      - testing
+      - ruby
+  message:
+    title: Remove focused RSpec call `${captures.issue.text}`
+    summary: "`${captures.issue.text}` runs only the focused block and skips other examples."
+  remediation:
+    summary: Delete `fit` / `fdescribe` usage and rely on the full spec suite in CI.

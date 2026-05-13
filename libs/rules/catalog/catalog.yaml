@@ -134,6 +134,41 @@ rules:
     rulePath: ./rules/typescript/ts.quality.logic-change-without-test-updates.rule.yaml
     presets:
       - strict
+  - id: ts.testing.no-focused-test
+    rulePath: ./rules/typescript/ts.testing.no-focused-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.testing.no-skipped-test-without-ticket
+    rulePath: ./rules/typescript/ts.testing.no-skipped-test-without-ticket.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.testing.no-snapshot-without-intent
+    rulePath: ./rules/typescript/ts.testing.no-snapshot-without-intent.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.testing.no-flaky-timer-test
+    rulePath: ./rules/typescript/ts.testing.no-flaky-timer-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.testing.no-network-call-in-unit-test
+    rulePath: ./rules/typescript/ts.testing.no-network-call-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.testing.no-missing-edge-case-tests
+    rulePath: ./rules/typescript/ts.testing.no-missing-edge-case-tests.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.testing.no-test-only-code-in-production
+    rulePath: ./rules/typescript/ts.testing.no-test-only-code-in-production.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.config.no-process-env-outside-config
     rulePath: ./rules/typescript/ts.config.no-process-env-outside-config.rule.yaml
     presets:
@@ -955,6 +990,106 @@ rules:
     presets:
       - strict
       - security
+  - id: go.testing.t-skip-without-ticket-reference
+    rulePath: ./rules/go/go.testing.t-skip-without-ticket-reference.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: go.testing.time-sleep-in-unit-test
+    rulePath: ./rules/go/go.testing.time-sleep-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: go.testing.real-network-in-unit-test
+    rulePath: ./rules/go/go.testing.real-network-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: py.testing.pytest-skip-without-ticket-reference
+    rulePath: ./rules/python/py.testing.pytest-skip-without-ticket-reference.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: py.testing.real-network-in-unit-test
+    rulePath: ./rules/python/py.testing.real-network-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: py.testing.time-sleep-in-unit-test
+    rulePath: ./rules/python/py.testing.time-sleep-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.testing.focused-example
+    rulePath: ./rules/ruby/ruby.testing.focused-example.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.testing.skip-without-ticket-reference
+    rulePath: ./rules/ruby/ruby.testing.skip-without-ticket-reference.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.testing.pending-without-ticket-reference
+    rulePath: ./rules/ruby/ruby.testing.pending-without-ticket-reference.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.testing.real-network-in-unit-test
+    rulePath: ./rules/ruby/ruby.testing.real-network-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.testing.sleep-in-unit-test
+    rulePath: ./rules/ruby/ruby.testing.sleep-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: rust.testing.ignore-without-ticket-reference
+    rulePath: ./rules/rust/rust.testing.ignore-without-ticket-reference.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: rust.testing.real-network-in-unit-test
+    rulePath: ./rules/rust/rust.testing.real-network-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: rust.testing.thread-sleep-in-unit-test
+    rulePath: ./rules/rust/rust.testing.thread-sleep-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.testing.disabled-without-ticket-reference
+    rulePath: ./rules/java/java.testing.disabled-without-ticket-reference.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.testing.thread-sleep-in-unit-test
+    rulePath: ./rules/java/java.testing.thread-sleep-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.testing.http-client-in-unit-test
+    rulePath: ./rules/java/java.testing.http-client-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: php.testing.mark-test-skipped-without-ticket-reference
+    rulePath: ./rules/php/php.testing.mark-test-skipped-without-ticket-reference.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: php.testing.sleep-in-unit-test
+    rulePath: ./rules/php/php.testing.sleep-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: php.testing.curl-in-unit-test
+    rulePath: ./rules/php/php.testing.curl-in-unit-test.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: go.security.echo-sensitive-binding-without-validation
     rulePath: ./rules/go/go.security.echo-sensitive-binding-without-validation.rule.yaml
     presets:

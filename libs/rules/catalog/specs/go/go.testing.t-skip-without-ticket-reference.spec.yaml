@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.testing.t-skip-without-ticket-reference.rule.yaml
+fixtures:
+  - name: flags t.Skip without ticket context
+    sourcePath: ./fixtures/go.testing.t-skip-without-ticket/tests/bad_test.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.testing.t-skip-without-ticket-reference
+  - name: allows skip with ticket comment
+    sourcePath: ./fixtures/go.testing.t-skip-without-ticket/tests/good_test.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

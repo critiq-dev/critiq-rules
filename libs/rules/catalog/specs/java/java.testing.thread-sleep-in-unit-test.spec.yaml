@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.testing.thread-sleep-in-unit-test.rule.yaml
+fixtures:
+  - name: invalid
+    sourcePath: ./fixtures/java.testing.thread-sleep-in-unit-test/src/test/java/BadTest.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.testing.thread-sleep-in-unit-test
+  - name: valid
+    sourcePath: ./fixtures/java.testing.thread-sleep-in-unit-test/src/test/java/GoodTest.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

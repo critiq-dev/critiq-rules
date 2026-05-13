@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.testing.sleep-in-unit-test.rule.yaml
+fixtures:
+  - name: invalid
+    sourcePath: ./fixtures/php.testing.sleep-in-unit-test/tests/BadTest.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.testing.sleep-in-unit-test
+  - name: valid
+    sourcePath: ./fixtures/php.testing.sleep-in-unit-test/tests/GoodTest.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

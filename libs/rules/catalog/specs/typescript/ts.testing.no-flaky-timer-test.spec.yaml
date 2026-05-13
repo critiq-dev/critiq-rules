@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.testing.no-flaky-timer-test.rule.yaml
+fixtures:
+  - name: flags real timers without fakes
+    sourcePath: ./fixtures/ts.testing.no-flaky-timer-test/invalid.test.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.no-flaky-timer-test
+  - name: allows jest fake timers
+    sourcePath: ./fixtures/ts.testing.no-flaky-timer-test/valid.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

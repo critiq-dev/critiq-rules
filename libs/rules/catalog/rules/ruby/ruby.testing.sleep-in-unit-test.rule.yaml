@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.testing.sleep-in-unit-test
+  title: Avoid sleep in Ruby unit tests
+  summary: sleep in specs slows CI and hides synchronization bugs.
+  rationale: Prefer deterministic waits or travel_to style time helpers.
+  tags:
+    - testing
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.testing.sleep-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: low
+    confidence: 0.58
+    tags:
+      - testing
+      - ruby
+  message:
+    title: Replace `sleep` in specs
+    summary: "`${captures.issue.text}` blocks on real wall-clock time inside a spec-like path."
+  remediation:
+    summary: Use event-driven waits, shorten delays, or move timing coverage to integration suites.

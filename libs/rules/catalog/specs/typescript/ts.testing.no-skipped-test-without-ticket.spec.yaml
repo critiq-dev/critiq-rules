@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.testing.no-skipped-test-without-ticket.rule.yaml
+fixtures:
+  - name: flags bare skip
+    sourcePath: ./fixtures/ts.testing.no-skipped-test-without-ticket/invalid.test.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.no-skipped-test-without-ticket
+  - name: allows ticket in comment
+    sourcePath: ./fixtures/ts.testing.no-skipped-test-without-ticket/valid.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

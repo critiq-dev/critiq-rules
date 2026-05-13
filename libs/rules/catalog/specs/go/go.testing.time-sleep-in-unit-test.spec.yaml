@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.testing.time-sleep-in-unit-test.rule.yaml
+fixtures:
+  - name: flags time.Sleep in tests
+    sourcePath: ./fixtures/go.testing.time-sleep-in-unit-test/tests/bad_test.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.testing.time-sleep-in-unit-test
+  - name: clean test
+    sourcePath: ./fixtures/go.testing.time-sleep-in-unit-test/tests/good_test.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

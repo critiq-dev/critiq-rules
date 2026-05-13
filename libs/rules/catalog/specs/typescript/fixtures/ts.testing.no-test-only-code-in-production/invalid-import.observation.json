@@ -1,0 +1,30 @@
+{
+  "path": "src/services/checkout.ts",
+  "language": "typescript",
+  "text": "export const x = 1;\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-import",
+          "kind": "testing.production-imports-test-code",
+          "appliesTo": "project",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 20
+          },
+          "text": "import from test",
+          "props": {
+            "resolvedPath": "src/services/checkout.test.ts"
+          }
+        }
+      ]
+    }
+  }
+}

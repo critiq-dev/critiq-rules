@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.testing.time-sleep-in-unit-test
+  title: Avoid time.sleep in Python unit tests
+  summary: Sleeping in tests slows suites and hides synchronization bugs.
+  rationale: Prefer deterministic waits, polling helpers, or clock fakes.
+  tags:
+    - testing
+    - python
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - python
+match:
+  fact:
+    kind: py.testing.time-sleep-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: low
+    confidence: 0.6
+    tags:
+      - testing
+      - python
+  message:
+    title: Replace `time.sleep` in unit tests
+    summary: "`${captures.issue.text}` blocks on real wall-clock time inside a test module."
+  remediation:
+    summary: Inject a clock, shorten waits, or move timing-sensitive coverage to integration tests.

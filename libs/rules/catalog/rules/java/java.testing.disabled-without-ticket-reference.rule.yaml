@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.testing.disabled-without-ticket-reference
+  title: JUnit @Disabled should cite a ticket
+  summary: Disabled tests without a reason string or nearby tracker note are hard to triage.
+  rationale: Disabled tests should carry reviewable intent.
+  tags:
+    - testing
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+match:
+  fact:
+    kind: java.testing.disabled-without-ticket-reference
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.64
+    tags:
+      - testing
+      - java
+  message:
+    title: Add a reason or ticket to `${captures.issue.text}`
+    summary: "`@Disabled` is used without a documented reason containing a tracker reference."
+  remediation:
+    summary: Add `@Disabled("JIRA-123 ...")` or a nearby suppression comment with an issue id.

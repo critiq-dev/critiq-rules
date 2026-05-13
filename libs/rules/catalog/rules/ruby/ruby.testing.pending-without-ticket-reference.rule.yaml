@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.testing.pending-without-ticket-reference
+  title: pending examples should cite a ticket
+  summary: pending without a tracker reference is easy to forget.
+  rationale: Pending specs should carry reviewable intent like skips elsewhere.
+  tags:
+    - testing
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.testing.pending-without-ticket-reference
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: low
+    confidence: 0.6
+    tags:
+      - testing
+      - ruby
+  message:
+    title: Add a ticket reference to `${captures.issue.text}`
+    summary: "`pending` is used without an adjacent issue key or accepted suppression comment."
+  remediation:
+    summary: Link pending work to a tracker id or convert to a skip with reason.

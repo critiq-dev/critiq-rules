@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.testing.focused-example.rule.yaml
+fixtures:
+  - name: invalid case
+    sourcePath: ./fixtures/ruby.testing.focused-example/spec/bad_spec.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.testing.focused-example
+  - name: valid case
+    sourcePath: ./fixtures/ruby.testing.focused-example/spec/good_spec.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

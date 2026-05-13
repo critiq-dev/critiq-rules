@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.testing.mark-test-skipped-without-ticket-reference.rule.yaml
+fixtures:
+  - name: invalid
+    sourcePath: ./fixtures/php.testing.mark-test-skipped-without-ticket-reference/tests/BadTest.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.testing.mark-test-skipped-without-ticket-reference
+  - name: valid
+    sourcePath: ./fixtures/php.testing.mark-test-skipped-without-ticket-reference/tests/GoodTest.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

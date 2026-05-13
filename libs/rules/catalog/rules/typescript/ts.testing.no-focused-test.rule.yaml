@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.testing.no-focused-test
+  title: Remove focused or exclusive tests before merge
+  summary: Focused tests such as it.only or describe.only should not ship because they silence the rest of the suite in CI.
+  rationale: Exclusive tests hide failures in sibling cases and are a common accidental merge footgun.
+  tags:
+    - testing
+    - quality
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: testing.focused-only-invocation
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.88
+    tags:
+      - testing
+      - ci
+  message:
+    title: Remove focused test `${captures.issue.text}`
+    summary: "`${captures.issue.text}` runs in exclusive mode so other tests in the file or suite are skipped."
+  remediation:
+    summary: Remove `.only` / `fit` / `fdescribe` style exclusivity and rely on the full suite in CI.

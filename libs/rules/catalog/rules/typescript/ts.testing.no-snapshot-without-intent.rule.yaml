@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.testing.no-snapshot-without-intent
+  title: Snapshot assertions should name intent
+  summary: Snapshot matchers without a snapshot name or preceding intent comment are hard to review in diffs.
+  rationale: Anonymous snapshots churn without communicating what behavior reviewers should protect.
+  tags:
+    - testing
+    - quality
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: testing.snapshot-without-review-intent
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: low
+    confidence: 0.65
+    tags:
+      - testing
+      - snapshots
+  message:
+    title: Clarify snapshot intent for `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a snapshot matcher without a string name and without a `// snapshot:` review comment on the previous line."
+  remediation:
+    summary: Add a named snapshot, or place `// snapshot:` on the preceding line describing what the snapshot protects.

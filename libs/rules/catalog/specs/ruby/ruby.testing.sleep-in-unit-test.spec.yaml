@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.testing.sleep-in-unit-test.rule.yaml
+fixtures:
+  - name: invalid case
+    sourcePath: ./fixtures/ruby.testing.sleep-in-unit-test/spec/bad_spec.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.testing.sleep-in-unit-test
+  - name: valid case
+    sourcePath: ./fixtures/ruby.testing.sleep-in-unit-test/spec/good_spec.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

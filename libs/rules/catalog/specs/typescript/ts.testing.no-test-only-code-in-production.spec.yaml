@@ -1,0 +1,23 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.testing.no-test-only-code-in-production.rule.yaml
+fixtures:
+  - name: flags production importing test code
+    observationPath: ./fixtures/ts.testing.no-test-only-code-in-production/invalid-import.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.no-test-only-code-in-production
+      allSeverities:
+        - high
+  - name: flags NODE_ENV test branch
+    observationPath: ./fixtures/ts.testing.no-test-only-code-in-production/invalid-env.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.no-test-only-code-in-production
+  - name: clean production module
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

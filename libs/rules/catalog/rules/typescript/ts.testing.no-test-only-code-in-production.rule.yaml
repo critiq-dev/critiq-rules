@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.testing.no-test-only-code-in-production
+  title: Keep test-only modules and guards out of production paths
+  summary: Production modules should not import test doubles or gate behavior on test-only environment flags.
+  rationale: Test-only imports and NODE_ENV test branches can ship dead paths or accidental coupling to test harnesses.
+  tags:
+    - testing
+    - quality
+    - rules-catalog
+  stability: experimental
+  appliesTo: project
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  any:
+    - fact:
+        kind: testing.production-imports-test-code
+        bind: issue
+    - fact:
+        kind: testing.test-only-env-branch-in-production
+        bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: high
+    confidence: 0.8
+    tags:
+      - testing
+      - boundaries
+  message:
+    title: Remove test-only coupling in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` imports a test-only module or compares runtime mode against `test` outside test paths."
+  remediation:
+    summary: Move helpers into shared neutral modules, guard test utilities behind dev-only entrypoints, and keep production code free of `NODE_ENV === 'test'` branches.

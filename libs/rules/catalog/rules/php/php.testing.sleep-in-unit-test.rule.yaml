@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.testing.sleep-in-unit-test
+  title: Avoid sleep in PHP unit tests
+  summary: sleep() in tests slows CI and hides synchronization bugs.
+  rationale: Prefer deterministic waits or clock injection.
+  tags:
+    - testing
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+match:
+  fact:
+    kind: php.testing.sleep-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: low
+    confidence: 0.58
+    tags:
+      - testing
+      - php
+  message:
+    title: Replace `sleep` in unit tests
+    summary: "`${captures.issue.text}` blocks on real wall-clock time inside a test-like path."
+  remediation:
+    summary: Inject a clock, shorten waits, or move timing coverage to integration suites.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.testing.pytest-skip-without-ticket-reference.rule.yaml
+fixtures:
+  - name: flags bare pytest.mark.skip
+    sourcePath: ./fixtures/py.testing.pytest-skip-without-ticket/tests/test_bad.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.testing.pytest-skip-without-ticket-reference
+  - name: accepts reason parameter
+    sourcePath: ./fixtures/py.testing.pytest-skip-without-ticket/tests/test_good.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

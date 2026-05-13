@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.testing.real-network-in-unit-test
+  title: Avoid live reqwest clients in Rust unit tests
+  summary: reqwest usage in tests should target local servers or fakes.
+  rationale: Live HTTP couples CI to the network.
+  tags:
+    - testing
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+match:
+  fact:
+    kind: rust.testing.real-network-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.64
+    tags:
+      - testing
+      - rust
+  message:
+    title: Stub outbound HTTP in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` references `reqwest` inside a test-like path."
+  remediation:
+    summary: Use wiremock, axum test servers, or injected clients with deterministic responses.

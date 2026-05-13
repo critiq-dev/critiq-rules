@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.testing.no-missing-edge-case-tests
+  title: Update tests when branch-heavy service logic changes
+  summary: Diffs that touch many branches in critical service paths should update paired tests in the same change.
+  rationale: Branch-heavy edits without test updates often miss boundary and failure behavior reviewers expect.
+  tags:
+    - testing
+    - quality
+    - rules-catalog
+  stability: experimental
+  appliesTo: project
+scope:
+  languages:
+    - typescript
+    - javascript
+  changedLinesOnly: false
+match:
+  fact:
+    kind: testing.missing-edge-case-tests-for-changes
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.66
+    tags:
+      - testing
+      - diff
+  message:
+    title: Exercise new branches in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` changes branch-heavy logic on a critical path without a corresponding test file change."
+  remediation:
+    summary: Extend the paired unit test with cases for new branches, guards, and failure paths touched by the diff.

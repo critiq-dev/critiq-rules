@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.testing.curl-in-unit-test
+  title: Avoid raw curl calls in PHP unit tests
+  summary: curl_exec in tests should target doubles or local fixtures.
+  rationale: Live HTTP couples CI to the network.
+  tags:
+    - testing
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+match:
+  fact:
+    kind: php.testing.curl-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.62
+    tags:
+      - testing
+      - php
+  message:
+    title: Stub outbound HTTP in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses curl primitives inside a test-like path."
+  remediation:
+    summary: Wrap HTTP behind an injectable client and replace curl usage with doubles in unit tests.

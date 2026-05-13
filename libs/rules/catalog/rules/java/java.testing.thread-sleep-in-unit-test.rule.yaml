@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.testing.thread-sleep-in-unit-test
+  title: Avoid Thread.sleep in Java unit tests
+  summary: Sleeping in tests slows CI and hides synchronization bugs.
+  rationale: Prefer Awaitility, latches, or deterministic test doubles.
+  tags:
+    - testing
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+match:
+  fact:
+    kind: java.testing.thread-sleep-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: low
+    confidence: 0.6
+    tags:
+      - testing
+      - java
+  message:
+    title: Replace `Thread.sleep` in unit tests
+    summary: "`${captures.issue.text}` blocks on real wall-clock time inside a `*Test.java` file."
+  remediation:
+    summary: Use synchronization primitives, timeouts with polling, or move timing coverage to integration tests.

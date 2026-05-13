@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.testing.disabled-without-ticket-reference.rule.yaml
+fixtures:
+  - name: invalid
+    sourcePath: ./fixtures/java.testing.disabled-without-ticket-reference/src/test/java/BadTest.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.testing.disabled-without-ticket-reference
+  - name: valid
+    sourcePath: ./fixtures/java.testing.disabled-without-ticket-reference/src/test/java/GoodTest.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

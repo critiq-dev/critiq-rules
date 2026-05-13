@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.testing.thread-sleep-in-unit-test
+  title: Avoid thread::sleep in Rust unit tests
+  summary: Sleeping in tests slows CI and hides synchronization bugs.
+  rationale: Prefer deterministic synchronization or tokio time advances.
+  tags:
+    - testing
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+match:
+  fact:
+    kind: rust.testing.thread-sleep-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: low
+    confidence: 0.6
+    tags:
+      - testing
+      - rust
+  message:
+    title: Replace sleep in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` blocks on real wall-clock time inside a test-like path."
+  remediation:
+    summary: Use `tokio::time::pause`, condvars, or scoped integration tests for real delays.

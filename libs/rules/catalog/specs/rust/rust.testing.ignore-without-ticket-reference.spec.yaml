@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.testing.ignore-without-ticket-reference.rule.yaml
+fixtures:
+  - name: invalid
+    sourcePath: ./fixtures/rust.testing.ignore-without-ticket-reference/tests/bad.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.testing.ignore-without-ticket-reference
+  - name: valid
+    sourcePath: ./fixtures/rust.testing.ignore-without-ticket-reference/tests/good.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

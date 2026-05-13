@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.testing.http-client-in-unit-test
+  title: Avoid live HTTP clients in Java unit tests
+  summary: HttpClient/URL/RestTemplate usage in unit tests should target fakes or embedded servers.
+  rationale: Live HTTP couples CI to the network.
+  tags:
+    - testing
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+match:
+  fact:
+    kind: java.testing.http-client-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.62
+    tags:
+      - testing
+      - java
+  message:
+    title: Stub outbound HTTP in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` references a live HTTP client inside a `*Test.java` file."
+  remediation:
+    summary: Use MockWebServer, WireMock, or injected clients with deterministic responses.

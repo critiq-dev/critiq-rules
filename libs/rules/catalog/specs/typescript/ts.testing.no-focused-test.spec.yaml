@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.testing.no-focused-test.rule.yaml
+fixtures:
+  - name: flags it.only in unit tests
+    sourcePath: ./fixtures/ts.testing.no-focused-test/invalid.test.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.no-focused-test
+      allSeverities:
+        - medium
+  - name: ignores plain it blocks
+    sourcePath: ./fixtures/ts.testing.no-focused-test/valid.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

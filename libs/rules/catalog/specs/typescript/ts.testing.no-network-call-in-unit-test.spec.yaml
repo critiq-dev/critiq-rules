@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.testing.no-network-call-in-unit-test.rule.yaml
+fixtures:
+  - name: flags fetch in unit test
+    sourcePath: ./fixtures/ts.testing.no-network-call-in-unit-test/invalid.test.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.no-network-call-in-unit-test
+  - name: clean unit test
+    sourcePath: ./fixtures/ts.testing.no-network-call-in-unit-test/valid.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

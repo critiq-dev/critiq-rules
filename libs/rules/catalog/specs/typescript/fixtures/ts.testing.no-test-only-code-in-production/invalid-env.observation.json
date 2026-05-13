@@ -1,0 +1,28 @@
+{
+  "path": "src/services/checkout.ts",
+  "language": "typescript",
+  "text": "export const x = 1;\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-env",
+          "kind": "testing.test-only-env-branch-in-production",
+          "appliesTo": "project",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 35
+          },
+          "text": "process.env.NODE_ENV === 'test'",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

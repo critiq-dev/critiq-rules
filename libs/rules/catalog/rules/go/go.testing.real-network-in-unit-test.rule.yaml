@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.testing.real-network-in-unit-test
+  title: Avoid live network clients in Go unit tests
+  summary: Unit tests should not dial the real network; prefer fakes or httptest servers.
+  rationale: Live network calls make tests flaky and couple CI to external availability.
+  tags:
+    - testing
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.testing.real-network-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.68
+    tags:
+      - testing
+      - go
+  message:
+    title: Stub outbound network in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a real HTTP or dial client inside a `_test.go` file."
+  remediation:
+    summary: Use `httptest`, interface fakes, or recorded fixtures instead of live hosts.

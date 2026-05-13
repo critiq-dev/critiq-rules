@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.testing.real-network-in-unit-test
+  title: Avoid live HTTP clients in Ruby unit tests
+  summary: Net::HTTP, Faraday, or HTTParty usage in specs should be doubled or recorded.
+  rationale: Live HTTP couples CI to the network.
+  tags:
+    - testing
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.testing.real-network-in-unit-test
+    bind: issue
+emit:
+  finding:
+    category: quality.testing
+    severity: medium
+    confidence: 0.64
+    tags:
+      - testing
+      - ruby
+  message:
+    title: Stub outbound HTTP in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` references a live HTTP client inside a spec-like path."
+  remediation:
+    summary: Use WebMock/VCR or dependency-injected doubles instead of live calls.

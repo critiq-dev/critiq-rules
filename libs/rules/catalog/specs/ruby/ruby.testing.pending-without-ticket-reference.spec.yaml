@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.testing.pending-without-ticket-reference.rule.yaml
+fixtures:
+  - name: invalid case
+    sourcePath: ./fixtures/ruby.testing.pending-without-ticket-reference/spec/bad_spec.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.testing.pending-without-ticket-reference
+  - name: valid case
+    sourcePath: ./fixtures/ruby.testing.pending-without-ticket-reference/spec/good_spec.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

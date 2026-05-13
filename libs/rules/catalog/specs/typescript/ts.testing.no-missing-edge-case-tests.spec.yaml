@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.testing.no-missing-edge-case-tests.rule.yaml
+fixtures:
+  - name: flags missing edge-case coverage fact
+    observationPath: ./fixtures/ts.testing.no-missing-edge-case-tests/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.no-missing-edge-case-tests
+      allSeverities:
+        - medium
+  - name: ignores files without project facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []
