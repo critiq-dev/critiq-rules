@@ -1,0 +1,14 @@
+{
+  "path": "src/example.java",
+  "language": "java",
+  "text": "class Example {}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

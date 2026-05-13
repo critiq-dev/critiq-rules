@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-widget-role-without-tabindex
+  title: Pair interactive roles with focus behavior
+  summary: "Custom elements that declare widget roles need to enter the tab order unless they wrap a native focusable control."
+  rationale: ARIA widget roles without `tabIndex` are inert to keyboard users because the browser never sends them focus events.
+  tags:
+    - react
+    - accessibility
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.widget-role-without-tabindex
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.83
+    tags:
+      - react
+      - accessibility
+      - ui
+  message:
+    title: Make custom widgets focusable
+    summary: "`${captures.issue.text}` exposes a widget role without a non-negative `tabIndex`."
+  remediation:
+    summary: Add `tabIndex={0}` for simple widgets, or prefer native elements like `button` and `a` with real `href` values.

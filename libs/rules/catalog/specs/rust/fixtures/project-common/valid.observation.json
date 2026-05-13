@@ -1,0 +1,14 @@
+{
+  "path": "src/example.rs",
+  "language": "rust",
+  "text": "fn main() {}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

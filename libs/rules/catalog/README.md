@@ -42,7 +42,7 @@ npx critiq check . --base origin/main --head HEAD
 
 ## Catalog At A Glance
 
-Today the catalog includes `274` rules across `17` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+Today the catalog includes `282` rules across `17` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |

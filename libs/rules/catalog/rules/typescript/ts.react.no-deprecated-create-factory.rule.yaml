@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-deprecated-create-factory
+  title: Avoid React.createFactory
+  summary: "`createFactory` is a legacy helper for pre-JSX code and is removed from modern React typings and guidance."
+  rationale: Function components and JSX provide clearer element construction without the indirection and weaker typing of factory helpers.
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.deprecated-create-factory
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: low
+    confidence: 0.86
+    tags:
+      - react
+      - ui
+  message:
+    title: Replace createFactory with JSX or createElement
+    summary: "`${captures.issue.text}` relies on the deprecated `createFactory` helper."
+  remediation:
+    summary: Inline JSX, call `React.createElement` with explicit props, or convert the call site to a small function component.

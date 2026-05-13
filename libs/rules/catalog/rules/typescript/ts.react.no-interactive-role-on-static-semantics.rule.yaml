@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-interactive-role-on-static-semantics
+  title: Keep interactive roles off static semantics
+  summary: "Headings, captions, and phrasing content should not pretend to be buttons or tabs without restructuring the markup."
+  rationale: Mixing document roles with widget roles confuses assistive technologies and usually signals a heading or label that should stay static while a real control sits nearby.
+  tags:
+    - react
+    - accessibility
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.semantic-static-with-interactive-role
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.78
+    tags:
+      - react
+      - accessibility
+      - ui
+  message:
+    title: Avoid widget roles on semantic text elements
+    summary: "`${captures.issue.text}` assigns an interactive ARIA role to a semantic text element."
+  remediation:
+    summary: Move the interaction to a sibling `button` or link, keep the heading for structure only, and wire behaviour with IDs or aria-controls instead of overloading roles.

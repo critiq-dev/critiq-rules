@@ -1,0 +1,14 @@
+{
+  "path": "src/example.php",
+  "language": "php",
+  "text": "<?php\n// ok\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

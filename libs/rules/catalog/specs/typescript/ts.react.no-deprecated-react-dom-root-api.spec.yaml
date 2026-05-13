@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-deprecated-react-dom-root-api.rule.yaml
+fixtures:
+  - name: flags legacy ReactDOM.render calls
+    sourcePath: ./fixtures/ts.react.no-deprecated-react-dom-root-api/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-deprecated-react-dom-root-api
+      allSeverities:
+        - medium
+  - name: allows createRoot based mounting
+    sourcePath: ./fixtures/ts.react.no-deprecated-react-dom-root-api/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

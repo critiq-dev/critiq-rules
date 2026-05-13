@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-deprecated-create-factory.rule.yaml
+fixtures:
+  - name: flags createFactory imports
+    sourcePath: ./fixtures/ts.react.no-deprecated-create-factory/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-deprecated-create-factory
+      allSeverities:
+        - low
+  - name: allows createElement factories
+    sourcePath: ./fixtures/ts.react.no-deprecated-create-factory/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

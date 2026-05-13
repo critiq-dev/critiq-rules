@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-invalid-anchor-href.rule.yaml
+fixtures:
+  - name: flags anchors without usable href
+    sourcePath: ./fixtures/ts.react.no-invalid-anchor-href/invalid.tsx
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.react.no-invalid-anchor-href
+        - ts.react.no-invalid-anchor-href
+      allSeverities:
+        - medium
+        - medium
+  - name: allows anchors with real targets
+    sourcePath: ./fixtures/ts.react.no-invalid-anchor-href/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

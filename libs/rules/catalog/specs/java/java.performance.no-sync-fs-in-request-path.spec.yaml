@@ -5,9 +5,11 @@ fixtures:
   - name: flags matching observation
     observationPath: ./fixtures/java.performance.no-sync-fs-in-request-path/invalid.observation.json
     expect:
-      findingCount: 0
-      allRuleIds: []
-#        - java.performance.no-sync-fs-in-request-path
+      findingCount: 1
+      allRuleIds:
+        - java.performance.no-sync-fs-in-request-path
+      allSeverities:
+        - high
   - name: ignores observations without matching facts
     observationPath: ./fixtures/project-common/valid.observation.json
     expect:

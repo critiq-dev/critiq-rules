@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-activedescendant-on-non-focusable-host.rule.yaml
+fixtures:
+  - name: flags non-focusable hosts for aria-activedescendant
+    sourcePath: ./fixtures/ts.react.no-activedescendant-on-non-focusable-host/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-activedescendant-on-non-focusable-host
+      allSeverities:
+        - high
+  - name: allows combobox inputs to own active descendants
+    sourcePath: ./fixtures/ts.react.no-activedescendant-on-non-focusable-host/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

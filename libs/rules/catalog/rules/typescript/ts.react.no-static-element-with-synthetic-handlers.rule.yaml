@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-static-element-with-synthetic-handlers
+  title: Avoid dangling pointer or key handlers on static elements
+  summary: "Non-interactive elements that listen for pointer or key events without a widget role usually hide custom interaction that needs explicit semantics."
+  rationale: Drag handles, menus, and listboxes should expose roles and focus models; otherwise assistive technologies treat the region as inert content.
+  tags:
+    - react
+    - accessibility
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.non-interactive-with-pointer-or-key-handler-without-role
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.76
+    tags:
+      - react
+      - accessibility
+      - ui
+  message:
+    title: Model custom interaction explicitly
+    summary: "`${captures.issue.text}` listens for pointer or keyboard events without declaring a widget role."
+  remediation:
+    summary: Promote the element to a named widget with `role`, keyboard parity, and focus order, or attach handlers to a native interactive element instead.

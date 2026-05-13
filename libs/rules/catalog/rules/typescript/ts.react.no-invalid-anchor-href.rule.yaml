@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-invalid-anchor-href
+  title: Use real destinations for anchor elements
+  summary: "Links need a concrete `href` so navigation, keyboard activation, and assistive technologies behave predictably."
+  rationale: Placeholder anchors and `javascript:` URLs break expectations for links, harm accessibility, and often hide ad-hoc click handlers that should be buttons instead.
+  tags:
+    - react
+    - accessibility
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.anchor-with-invalid-href
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.82
+    tags:
+      - react
+      - accessibility
+      - ui
+  message:
+    title: Give anchors a valid href
+    summary: "`${captures.issue.text}` is an anchor without a usable navigation target."
+  remediation:
+    summary: Point `href` at a real URL or in-page fragment, use a native button for actions, or add an explicit widget role with keyboard support when mimicking controls.

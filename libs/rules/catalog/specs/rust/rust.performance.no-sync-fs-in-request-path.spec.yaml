@@ -5,9 +5,11 @@ fixtures:
   - name: flags matching observation
     observationPath: ./fixtures/rust.performance.no-sync-fs-in-request-path/invalid.observation.json
     expect:
-      findingCount: 0
-      allRuleIds: []
-#        - rust.performance.no-sync-fs-in-request-path
+      findingCount: 1
+      allRuleIds:
+        - rust.performance.no-sync-fs-in-request-path
+      allSeverities:
+        - high
   - name: ignores observations without matching facts
     observationPath: ./fixtures/project-common/valid.observation.json
     expect:

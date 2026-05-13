@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-static-element-with-synthetic-handlers.rule.yaml
+fixtures:
+  - name: flags pointer handlers without roles
+    sourcePath: ./fixtures/ts.react.no-static-element-with-synthetic-handlers/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-static-element-with-synthetic-handlers
+      allSeverities:
+        - medium
+  - name: allows sliders with explicit roles
+    sourcePath: ./fixtures/ts.react.no-static-element-with-synthetic-handlers/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

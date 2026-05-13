@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-keyboard-interaction-without-widget-role.rule.yaml
+fixtures:
+  - name: flags combined handlers without widget role
+    sourcePath: ./fixtures/ts.react.no-keyboard-interaction-without-widget-role/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-keyboard-interaction-without-widget-role
+      allSeverities:
+        - medium
+  - name: allows explicit widget semantics
+    sourcePath: ./fixtures/ts.react.no-keyboard-interaction-without-widget-role/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

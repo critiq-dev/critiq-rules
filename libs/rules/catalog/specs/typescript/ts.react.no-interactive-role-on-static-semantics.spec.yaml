@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-interactive-role-on-static-semantics.rule.yaml
+fixtures:
+  - name: flags interactive roles on headings
+    sourcePath: ./fixtures/ts.react.no-interactive-role-on-static-semantics/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-interactive-role-on-static-semantics
+      allSeverities:
+        - medium
+  - name: allows tabs on real controls
+    sourcePath: ./fixtures/ts.react.no-interactive-role-on-static-semantics/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-activedescendant-on-non-focusable-host
+  title: Make aria-activedescendant hosts keyboard focusable
+  summary: "Elements that manage active descendants must participate in the tab order or be native controls that already receive focus."
+  rationale: Screen readers and keyboard users cannot follow listbox and combobox patterns when the controlling node never becomes focused.
+  tags:
+    - react
+    - accessibility
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.activedescendant-host-not-focusable
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.8
+    tags:
+      - react
+      - accessibility
+      - ui
+  message:
+    title: Add focusability to the active-descendant owner
+    summary: "`${captures.issue.text}` sets `aria-activedescendant` on a host that is not keyboard focusable."
+  remediation:
+    summary: Use a native input or button where possible, or add `tabIndex={0}` on the owning element while preserving roving tabindex semantics for options.

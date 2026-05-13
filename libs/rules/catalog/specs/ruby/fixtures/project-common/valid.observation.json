@@ -1,0 +1,14 @@
+{
+  "path": "src/example.rb",
+  "language": "ruby",
+  "text": "ok = true\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

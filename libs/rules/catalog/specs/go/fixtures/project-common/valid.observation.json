@@ -1,0 +1,14 @@
+{
+  "path": "src/example.go",
+  "language": "go",
+  "text": "package main\n\nfunc main() {}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

@@ -448,6 +448,38 @@ rules:
     rulePath: ./rules/typescript/ts.react.no-uncontrolled-to-controlled-input.rule.yaml
     presets:
       - strict
+  - id: ts.react.no-invalid-anchor-href
+    rulePath: ./rules/typescript/ts.react.no-invalid-anchor-href.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-activedescendant-on-non-focusable-host
+    rulePath: ./rules/typescript/ts.react.no-activedescendant-on-non-focusable-host.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-widget-role-without-tabindex
+    rulePath: ./rules/typescript/ts.react.no-widget-role-without-tabindex.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-interactive-role-on-static-semantics
+    rulePath: ./rules/typescript/ts.react.no-interactive-role-on-static-semantics.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-keyboard-interaction-without-widget-role
+    rulePath: ./rules/typescript/ts.react.no-keyboard-interaction-without-widget-role.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-static-element-with-synthetic-handlers
+    rulePath: ./rules/typescript/ts.react.no-static-element-with-synthetic-handlers.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-deprecated-react-dom-root-api
+    rulePath: ./rules/typescript/ts.react.no-deprecated-react-dom-root-api.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-deprecated-create-factory
+    rulePath: ./rules/typescript/ts.react.no-deprecated-create-factory.rule.yaml
+    presets:
+      - strict
   - id: security.no-sql-interpolation
     rulePath: ./rules/shared/security.no-sql-interpolation.rule.yaml
     presets:

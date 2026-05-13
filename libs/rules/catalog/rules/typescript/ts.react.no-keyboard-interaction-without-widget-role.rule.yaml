@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-keyboard-interaction-without-widget-role
+  title: Declare a widget role when mixing click and key handlers
+  summary: "Elements that handle both clicks and key events behave like custom controls and should advertise an appropriate ARIA role."
+  rationale: Assistive technologies cannot infer widget behaviour from events alone; an explicit role pairs keyboard support with the correct accessibility tree semantics.
+  tags:
+    - react
+    - accessibility
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.keyboard-interaction-without-widget-role
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.8
+    tags:
+      - react
+      - accessibility
+      - ui
+  message:
+    title: Add a widget role for custom controls
+    summary: "`${captures.issue.text}` combines click and keyboard handlers without a widget role."
+  remediation:
+    summary: Set `role="button"` or another fitting widget role, ensure focusability, and mirror native control keyboard patterns.

@@ -1,0 +1,14 @@
+{
+  "path": "src/example.py",
+  "language": "python",
+  "text": "ok = True\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

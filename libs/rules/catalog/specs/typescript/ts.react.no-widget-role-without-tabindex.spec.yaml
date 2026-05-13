@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-widget-role-without-tabindex.rule.yaml
+fixtures:
+  - name: flags widget roles missing tabIndex
+    sourcePath: ./fixtures/ts.react.no-widget-role-without-tabindex/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-widget-role-without-tabindex
+      allSeverities:
+        - high
+  - name: allows focusable custom buttons
+    sourcePath: ./fixtures/ts.react.no-widget-role-without-tabindex/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []
