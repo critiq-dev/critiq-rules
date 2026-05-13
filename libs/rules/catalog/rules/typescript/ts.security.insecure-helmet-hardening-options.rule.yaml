@@ -4,7 +4,7 @@ metadata:
   id: ts.security.insecure-helmet-hardening-options
   title: Avoid disabling core Helmet protections
   summary: Helmet should keep nosniff, HSTS, DNS prefetch control, Expect-CT, and referrer policy enabled unless another gateway enforces them.
-  rationale: Turning off individual Helmet middlewares removes baseline HTTP hardening that DeepSource flags as high-signal misconfiguration risk.
+  rationale: Turning off individual Helmet middlewares removes baseline HTTP hardening that is a high-signal misconfiguration risk.
   tags:
     - security
     - express

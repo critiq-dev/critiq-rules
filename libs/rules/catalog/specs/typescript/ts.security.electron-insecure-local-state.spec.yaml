@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.electron-insecure-local-state.rule.yaml
 fixtures:
   - name: flags sensitive electron-store writes
-    sourcePath: ./fixtures/deepsource-js-chunk-b/electron-store.invalid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/electron-store.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.electron-insecure-local-state
   - name: accepts non-sensitive keys
-    sourcePath: ./fixtures/deepsource-js-chunk-b/electron-store.valid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/electron-store.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []

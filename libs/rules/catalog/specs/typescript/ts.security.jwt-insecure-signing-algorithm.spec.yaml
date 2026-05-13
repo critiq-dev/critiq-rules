@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.jwt-insecure-signing-algorithm.rule.yaml
 fixtures:
   - name: flags jwt none algorithm
-    sourcePath: ./fixtures/deepsource-js-chunk-b/jwt-none.invalid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/jwt-none.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.jwt-insecure-signing-algorithm
   - name: accepts hs256
-    sourcePath: ./fixtures/deepsource-js-chunk-b/jwt-none.valid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/jwt-none.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []

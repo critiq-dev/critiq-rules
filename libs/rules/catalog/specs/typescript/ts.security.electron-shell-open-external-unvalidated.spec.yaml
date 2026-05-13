@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.electron-shell-open-external-unvalidated.rule.yaml
 fixtures:
   - name: flags openExternal with request urls
-    sourcePath: ./fixtures/deepsource-js-chunk-b/electron-open-external.invalid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/electron-open-external.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.electron-shell-open-external-unvalidated
   - name: accepts constant targets
-    sourcePath: ./fixtures/deepsource-js-chunk-b/electron-open-external.valid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/electron-open-external.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []

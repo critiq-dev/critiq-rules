@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.express-user-controlled-static-mount.rule.yaml
 fixtures:
   - name: flags request-driven static mounts
-    sourcePath: ./fixtures/deepsource-js-chunk-b/express-static-mount.invalid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/express-static-mount.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.express-user-controlled-static-mount
   - name: accepts fixed mount paths
-    sourcePath: ./fixtures/deepsource-js-chunk-b/express-static-mount.valid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/express-static-mount.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []

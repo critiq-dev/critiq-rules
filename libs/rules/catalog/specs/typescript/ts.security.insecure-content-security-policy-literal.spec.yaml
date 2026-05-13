@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.insecure-content-security-policy-literal.rule.yaml
 fixtures:
   - name: flags unsafe csp literals
-    sourcePath: ./fixtures/deepsource-js-chunk-b/insecure-csp-literal.invalid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/insecure-csp-literal.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.insecure-content-security-policy-literal
   - name: accepts nonce-based csp
-    sourcePath: ./fixtures/deepsource-js-chunk-b/insecure-csp-literal.valid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/insecure-csp-literal.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []

@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.electron-missing-ipc-origin-check.rule.yaml
 fixtures:
   - name: flags ipc without origin validation
-    sourcePath: ./fixtures/deepsource-js-chunk-b/electron-ipc.invalid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/electron-ipc.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.electron-missing-ipc-origin-check
   - name: accepts ipc with sender checks
-    sourcePath: ./fixtures/deepsource-js-chunk-b/electron-ipc.valid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/electron-ipc.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []

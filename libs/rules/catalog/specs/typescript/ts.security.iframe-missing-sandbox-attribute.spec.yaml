@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.iframe-missing-sandbox-attribute.rule.yaml
 fixtures:
   - name: flags iframe without sandbox
-    sourcePath: ./fixtures/deepsource-js-chunk-b/iframe-missing-sandbox.invalid.tsx
+    sourcePath: ./fixtures/javascript-security-chunk-b/iframe-missing-sandbox.invalid.tsx
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.iframe-missing-sandbox-attribute
   - name: accepts sandboxed iframe
-    sourcePath: ./fixtures/deepsource-js-chunk-b/iframe-missing-sandbox.valid.tsx
+    sourcePath: ./fixtures/javascript-security-chunk-b/iframe-missing-sandbox.valid.tsx
     expect:
       findingCount: 0
       allRuleIds: []

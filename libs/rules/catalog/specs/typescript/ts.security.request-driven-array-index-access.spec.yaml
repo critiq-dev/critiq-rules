@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.request-driven-array-index-access.rule.yaml
 fixtures:
   - name: flags req-driven indexes
-    sourcePath: ./fixtures/deepsource-js-chunk-b/request-array-index.invalid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/request-array-index.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.request-driven-array-index-access
   - name: accepts literal indexes
-    sourcePath: ./fixtures/deepsource-js-chunk-b/request-array-index.valid.ts
+    sourcePath: ./fixtures/javascript-security-chunk-b/request-array-index.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []
