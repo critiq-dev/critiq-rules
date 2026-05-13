@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.jwt-insecure-signing-algorithm
+  title: Do not sign JWTs with the none algorithm
+  summary: JSON Web Token signing options must not enable the none algorithm.
+  rationale: The none algorithm allows tokens to be accepted without verification, defeating authentication.
+  tags:
+    - security
+    - jwt
+    - authentication
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ts.security.jwt-insecure-signing-algorithm
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: critical
+    confidence: 0.95
+    tags:
+      - security
+      - jwt
+  message:
+    title: "Remove insecure JWT algorithm from ${captures.issue.text}"
+    summary: "${captures.issue.text} is configured with the none algorithm or algorithm list."
+  remediation:
+    summary: Require asymmetric or HMAC algorithms explicitly and reject none at signing and verification layers.

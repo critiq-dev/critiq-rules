@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.electron-dangerous-webpreferences.rule.yaml
+fixtures:
+  - name: flags insecure webPreferences
+    sourcePath: ./fixtures/deepsource-js-chunk-b/electron-webpreferences.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.electron-dangerous-webpreferences
+  - name: accepts hardened webPreferences
+    sourcePath: ./fixtures/deepsource-js-chunk-b/electron-webpreferences.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

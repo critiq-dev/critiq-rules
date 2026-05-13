@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.ajv-insecure-configuration.rule.yaml
+fixtures:
+  - name: flags permissive ajv compile options
+    sourcePath: ./fixtures/deepsource-js-chunk-b/ajv-insecure.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.ajv-insecure-configuration
+  - name: accepts strict ajv options
+    sourcePath: ./fixtures/deepsource-js-chunk-b/ajv-secure.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

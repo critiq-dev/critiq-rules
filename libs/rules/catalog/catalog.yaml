@@ -923,6 +923,83 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.insecure-helmet-hardening-options
+    rulePath: ./rules/typescript/ts.security.insecure-helmet-hardening-options.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.express-static-dotfiles-allow
+    rulePath: ./rules/typescript/ts.security.express-static-dotfiles-allow.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.insecure-content-security-policy-literal
+    rulePath: ./rules/typescript/ts.security.insecure-content-security-policy-literal.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.ajv-insecure-configuration
+    rulePath: ./rules/typescript/ts.security.ajv-insecure-configuration.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.xml-parse-string-with-untrusted-input
+    rulePath: ./rules/typescript/ts.security.xml-parse-string-with-untrusted-input.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.express-error-handler-information-disclosure
+    rulePath: ./rules/typescript/ts.security.express-error-handler-information-disclosure.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.request-driven-array-index-access
+    rulePath: ./rules/typescript/ts.security.request-driven-array-index-access.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.express-user-controlled-static-mount
+    rulePath: ./rules/typescript/ts.security.express-user-controlled-static-mount.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.legacy-buffer-constructor
+    rulePath: ./rules/typescript/ts.security.legacy-buffer-constructor.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.iframe-missing-sandbox-attribute
+    rulePath: ./rules/typescript/ts.security.iframe-missing-sandbox-attribute.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.jwt-insecure-signing-algorithm
+    rulePath: ./rules/typescript/ts.security.jwt-insecure-signing-algorithm.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.electron-dangerous-webpreferences
+    rulePath: ./rules/typescript/ts.security.electron-dangerous-webpreferences.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.electron-missing-ipc-origin-check
+    rulePath: ./rules/typescript/ts.security.electron-missing-ipc-origin-check.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.electron-insecure-local-state
+    rulePath: ./rules/typescript/ts.security.electron-insecure-local-state.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.electron-shell-open-external-unvalidated
+    rulePath: ./rules/typescript/ts.security.electron-shell-open-external-unvalidated.rule.yaml
+    presets:
+      - strict
+      - security
   - id: ts.security.format-string-using-user-input
     rulePath: ./rules/typescript/ts.security.format-string-using-user-input.rule.yaml
     presets:

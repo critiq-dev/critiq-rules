@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.electron-shell-open-external-unvalidated
+  title: Do not open external URLs from request data in Electron
+  summary: shell.openExternal should not receive request-controlled URLs without validation.
+  rationale: Open redirects and SSRF-style flows in the main process can pivot to arbitrary system browsers or handlers.
+  tags:
+    - security
+    - electron
+    - open-redirect
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.electron-shell-open-external-unvalidated
+    bind: issue
+emit:
+  finding:
+    category: security.open-redirect
+    severity: high
+    confidence: 0.83
+    tags:
+      - security
+      - electron
+  message:
+    title: "Validate target URL for ${captures.issue.text}"
+    summary: "${captures.issue.text} opens a URL derived from request-controlled input."
+  remediation:
+    summary: Allowlist URL schemes and hosts, normalize targets, and block private IP ranges before calling openExternal.

@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.legacy-buffer-constructor
+  title: Replace legacy Buffer constructors
+  summary: Use Buffer.from, Buffer.alloc, or Buffer.allocUnsafe instead of the deprecated Buffer constructor.
+  rationale: Legacy constructors behave differently across Node versions and are harder to audit for safe allocation.
+  tags:
+    - security
+    - node
+    - memory
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.legacy-buffer-constructor
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - node
+  message:
+    title: "Replace ${captures.issue.text}"
+    summary: "${captures.issue.text} uses the deprecated Buffer constructor API."
+  remediation:
+    summary: Prefer Buffer.from for encoded data and Buffer.alloc for zero-filled buffers sized by trusted logic.

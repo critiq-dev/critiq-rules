@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.express-error-handler-information-disclosure
+  title: Avoid returning raw errors from Express error middleware
+  summary: Express error handlers should not send the err object directly to clients in production paths.
+  rationale: Returning raw errors leaks stack traces, internal identifiers, and implementation details to attackers.
+  tags:
+    - security
+    - express
+    - information-disclosure
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.express-error-handler-information-disclosure
+    bind: issue
+emit:
+  finding:
+    category: security.information-disclosure
+    severity: medium
+    confidence: 0.8
+    tags:
+      - security
+      - express
+  message:
+    title: "Sanitize error responses from ${captures.issue.text}"
+    summary: "${captures.issue.text} forwards the caught error directly to res.send or res.json."
+  remediation:
+    summary: Log detailed errors server-side and return stable, generic client responses with correlation identifiers.

@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.request-driven-array-index-access
+  title: Avoid request-driven array indexing without bounds checks
+  summary: Arrays indexed with request-derived keys can read or write out-of-bounds entries.
+  rationale: Attacker-controlled indexes bypass assumptions about array length and element initialization.
+  tags:
+    - security
+    - correctness
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.request-driven-array-index-access
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: medium
+    confidence: 0.72
+    tags:
+      - security
+  message:
+    title: "Validate index ${captures.issue.text} before use"
+    summary: "Array access uses a computed index derived from ${captures.issue.text}."
+  remediation:
+    summary: Parse and bound-check indexes, prefer maps keyed by stable identifiers, or avoid indexing arrays with request data.

@@ -1,0 +1,1 @@
+void Buffer.from('ok');

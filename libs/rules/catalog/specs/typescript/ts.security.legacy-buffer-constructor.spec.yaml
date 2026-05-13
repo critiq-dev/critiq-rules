@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.legacy-buffer-constructor.rule.yaml
+fixtures:
+  - name: flags legacy Buffer constructor
+    sourcePath: ./fixtures/deepsource-js-chunk-b/legacy-buffer.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.legacy-buffer-constructor
+  - name: accepts Buffer.from
+    sourcePath: ./fixtures/deepsource-js-chunk-b/legacy-buffer.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

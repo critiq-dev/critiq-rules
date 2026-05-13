@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.insecure-helmet-hardening-options
+  title: Avoid disabling core Helmet protections
+  summary: Helmet should keep nosniff, HSTS, DNS prefetch control, Expect-CT, and referrer policy enabled unless another gateway enforces them.
+  rationale: Turning off individual Helmet middlewares removes baseline HTTP hardening that DeepSource flags as high-signal misconfiguration risk.
+  tags:
+    - security
+    - express
+    - headers
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.insecure-helmet-hardening-options
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.86
+    tags:
+      - security
+      - express
+      - headers
+  message:
+    title: "Review disabled Helmet option in ${captures.issue.text}"
+    summary: "${captures.issue.text} disables a Helmet protection that should usually remain enabled."
+  remediation:
+    summary: Remove false overrides for nosniff, HSTS, DNS prefetch control, Expect-CT, and referrer policy unless a documented compensating control applies.

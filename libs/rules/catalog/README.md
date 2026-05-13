@@ -42,11 +42,11 @@ npx critiq check . --base origin/main --head HEAD
 
 ## Catalog At A Glance
 
-Today the catalog includes `282` rules across `17` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+Today the catalog includes `297` rules across `17` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |
-| Security | 84 | Injection, auth and session gaps, unsafe transport, sensitive data exposure, dependency policy, unsafe file and HTML handling |
+| Security | 93 | Injection, auth and session gaps, unsafe transport, sensitive data exposure, dependency policy, unsafe file and HTML handling |
 | Python | 9 | Django, DRF, Flask, and FastAPI deployment and framework safety |
 | Correctness | 15 | Async bugs, null access, control-flow mistakes, missing fallbacks, race conditions |
 | Performance | 10 | Repeated IO, wasted async sequencing, hot-path loops, large retained objects, render churn |

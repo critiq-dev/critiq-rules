@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.xml-parse-string-with-untrusted-input
+  title: Do not parse untrusted XML with permissive parsers
+  summary: parseString and similar XML helpers should not consume request-controlled payloads without hardening.
+  rationale: Untrusted XML can enable XXE-style parser abuse depending on the underlying implementation and parser flags.
+  tags:
+    - security
+    - xml
+    - deserialization
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.xml-parse-string-with-untrusted-input
+    bind: issue
+emit:
+  finding:
+    category: security.deserialization
+    severity: high
+    confidence: 0.78
+    tags:
+      - security
+      - xml
+  message:
+    title: "Validate XML parsing for ${captures.issue.text}"
+    summary: "${captures.issue.text} parses XML that appears request-driven."
+  remediation:
+    summary: Disable external entities, validate payloads against a strict schema, and parse with a hardened XML configuration.

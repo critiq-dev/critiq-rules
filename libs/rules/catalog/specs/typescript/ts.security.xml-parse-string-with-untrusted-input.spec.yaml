@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.xml-parse-string-with-untrusted-input.rule.yaml
+fixtures:
+  - name: flags parseString on request xml
+    sourcePath: ./fixtures/deepsource-js-chunk-b/xml-parse-string.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.xml-parse-string-with-untrusted-input
+  - name: accepts literal xml payloads
+    sourcePath: ./fixtures/deepsource-js-chunk-b/xml-parse-string.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

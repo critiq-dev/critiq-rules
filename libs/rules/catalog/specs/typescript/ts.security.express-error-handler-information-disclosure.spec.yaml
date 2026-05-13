@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.express-error-handler-information-disclosure.rule.yaml
+fixtures:
+  - name: flags res.send(err)
+    sourcePath: ./fixtures/deepsource-js-chunk-b/express-error-handler.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-error-handler-information-disclosure
+  - name: accepts generic error responses
+    sourcePath: ./fixtures/deepsource-js-chunk-b/express-error-handler.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

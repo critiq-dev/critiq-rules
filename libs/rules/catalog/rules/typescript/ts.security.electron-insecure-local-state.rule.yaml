@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.electron-insecure-local-state
+  title: Avoid storing secrets in Electron local stores without hardening
+  summary: electron-store writes that look like credentials should use OS-level secret storage instead.
+  rationale: Local JSON stores are readable by other processes and backups unless encrypted with platform APIs.
+  tags:
+    - security
+    - electron
+    - storage
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.electron-insecure-local-state
+    bind: issue
+emit:
+  finding:
+    category: security.data-exposure
+    severity: medium
+    confidence: 0.82
+    tags:
+      - security
+      - electron
+  message:
+    title: "Harden Electron store usage in ${captures.issue.text}"
+    summary: "${captures.issue.text} persists sensitive-looking data through electron-store."
+  remediation:
+    summary: Prefer OS keychains, encrypted vaults, or short-lived session material instead of long-lived plaintext secrets on disk.

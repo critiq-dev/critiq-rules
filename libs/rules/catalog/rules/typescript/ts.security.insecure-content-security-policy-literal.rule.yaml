@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.insecure-content-security-policy-literal
+  title: Avoid unsafe Content-Security-Policy literals
+  summary: Static CSP header values should not rely on unsafe-inline, unsafe-eval, or unsafe-hashes without nonces.
+  rationale: Permissive CSP keywords weaken XSS defenses for every response that carries the header.
+  tags:
+    - security
+    - csp
+    - headers
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.insecure-content-security-policy-literal
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.8
+    tags:
+      - security
+      - csp
+  message:
+    title: "Tighten Content-Security-Policy in ${captures.issue.text}"
+    summary: "${captures.issue.text} sets a CSP that includes unsafe directives without a nonce-based escape hatch."
+  remediation:
+    summary: Prefer nonces or hashes, remove unsafe-inline and unsafe-eval, and scope directives to the smallest required surface.

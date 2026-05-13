@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.insecure-helmet-hardening-options.rule.yaml
+fixtures:
+  - name: flags weakened helmet options
+    sourcePath: ./fixtures/deepsource-js-chunk-b/insecure-helmet-options.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.insecure-helmet-hardening-options
+  - name: accepts default helmet
+    sourcePath: ./fixtures/deepsource-js-chunk-b/insecure-helmet-options.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

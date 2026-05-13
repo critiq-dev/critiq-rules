@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.electron-missing-ipc-origin-check
+  title: Validate IPC sender origins in Electron
+  summary: Privileged ipcMain handlers should validate event.sender origins before acting.
+  rationale: Missing origin checks let any loaded renderer invoke privileged main-process behavior.
+  tags:
+    - security
+    - electron
+    - ipc
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.electron-missing-ipc-origin-check
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: high
+    confidence: 0.86
+    tags:
+      - security
+      - electron
+  message:
+    title: "Add origin checks to ${captures.issue.text}"
+    summary: "${captures.issue.text} handles privileged IPC without validating the sender frame origin."
+  remediation:
+    summary: Assert trusted origins or channels before running privileged logic and reject unexpected senders early.
