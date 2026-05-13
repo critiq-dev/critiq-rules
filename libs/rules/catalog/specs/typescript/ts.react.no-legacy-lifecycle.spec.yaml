@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-legacy-lifecycle.rule.yaml
+fixtures:
+  - name: flags deprecated lifecycle methods
+    observationPath: ./fixtures/ts.react.no-legacy-lifecycle/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-legacy-lifecycle
+      allSeverities:
+        - medium
+  - name: ignores modern lifecycle alternatives
+    observationPath: ./fixtures/ts.react.no-legacy-lifecycle/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

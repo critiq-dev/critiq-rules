@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-img-missing-alt-text.rule.yaml
+fixtures:
+  - name: flags images without alt text
+    observationPath: ./fixtures/ts.react.no-img-missing-alt-text/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-img-missing-alt-text
+      allSeverities:
+        - high
+  - name: accepts images with meaningful alt text
+    observationPath: ./fixtures/ts.react.no-img-missing-alt-text/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

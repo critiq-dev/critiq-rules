@@ -1,0 +1,14 @@
+{
+  "path": "src/SearchBox.tsx",
+  "language": "typescript",
+  "text": "import React from 'react';\n\nexport class SearchBox extends React.Component {\n  private readonly inputRef = React.createRef<HTMLInputElement>();\n\n  componentDidMount() {\n    this.inputRef.current?.scrollIntoView();\n  }\n\n  render() {\n    return <input ref={this.inputRef} type=\"search\" />;\n  }\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

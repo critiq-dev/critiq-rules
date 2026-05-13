@@ -1,0 +1,30 @@
+{
+  "path": "src/ExpandRow.tsx",
+  "language": "typescript",
+  "text": "export function ExpandRow() {\n  return <div onClick={() => void 0}>Expand row</div>;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-click-keyboard",
+          "kind": "ui.react.click-without-keyboard-handler",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 2,
+            "startColumn": 11,
+            "endLine": 2,
+            "endColumn": 48
+          },
+          "text": "<div onClick={() => void 0}>",
+          "props": {
+            "tag": "div"
+          }
+        }
+      ]
+    }
+  }
+}

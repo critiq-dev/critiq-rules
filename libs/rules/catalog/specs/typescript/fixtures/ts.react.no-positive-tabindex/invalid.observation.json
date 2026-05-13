@@ -1,0 +1,30 @@
+{
+  "path": "src/ShortcutCard.tsx",
+  "language": "typescript",
+  "text": "export function ShortcutCard() {\n  return <div tabIndex={2}>Open settings</div>;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-positive-tabindex",
+          "kind": "ui.react.positive-tabindex",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 2,
+            "startColumn": 15,
+            "endLine": 2,
+            "endColumn": 27
+          },
+          "text": "tabIndex={2}",
+          "props": {
+            "value": 2
+          }
+        }
+      ]
+    }
+  }
+}

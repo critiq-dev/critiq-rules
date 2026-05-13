@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-click-without-keyboard-handler
+  title: Support keyboard interaction for click handlers
+  summary: "Non-interactive JSX elements that respond to clicks also need an equivalent keyboard path."
+  rationale: Mouse-only interaction blocks keyboard users and creates inaccessible custom controls that do not behave like native UI elements.
+  tags:
+    - react
+    - accessibility
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.click-without-keyboard-handler
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.84
+    tags:
+      - react
+      - accessibility
+      - ui
+  message:
+    title: Add keyboard support to click-driven UI
+    summary: "`${captures.issue.text}` handles clicks without an equivalent keyboard event."
+  remediation:
+    summary: Prefer native buttons or links, or add the necessary role, focus behavior, and keyboard handlers for the same action.

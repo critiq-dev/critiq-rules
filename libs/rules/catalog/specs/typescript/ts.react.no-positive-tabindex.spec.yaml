@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-positive-tabindex.rule.yaml
+fixtures:
+  - name: flags positive tabindex values
+    observationPath: ./fixtures/ts.react.no-positive-tabindex/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-positive-tabindex
+      allSeverities:
+        - medium
+  - name: ignores natural and programmatic focus targets
+    observationPath: ./fixtures/ts.react.no-positive-tabindex/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

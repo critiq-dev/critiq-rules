@@ -1,0 +1,14 @@
+{
+  "path": "src/Hero.tsx",
+  "language": "typescript",
+  "text": "export function Hero() {\n  return <img src=\"/hero.png\" alt=\"Account overview\" />;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

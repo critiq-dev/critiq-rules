@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-legacy-lifecycle
+  title: Avoid legacy React lifecycle methods
+  summary: Legacy class lifecycle hooks are brittle in strict mode and block migration toward modern React patterns.
+  rationale: Deprecated lifecycle methods are easy to misuse during async rendering and create noisy upgrade work across older React codebases.
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.legacy-lifecycle
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.76
+    tags:
+      - react
+      - ui
+  message:
+    title: Replace legacy React lifecycle methods
+    summary: "`${captures.issue.text}` is a legacy React lifecycle method."
+  remediation:
+    summary: "Prefer modern lifecycle alternatives, hooks, or an explicit `UNSAFE_` migration name only as a short-lived bridge."

@@ -1,0 +1,14 @@
+{
+  "path": "src/ShortcutCard.tsx",
+  "language": "typescript",
+  "text": "export function ShortcutCard() {\n  return <div tabIndex={0}>Open settings</div>;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

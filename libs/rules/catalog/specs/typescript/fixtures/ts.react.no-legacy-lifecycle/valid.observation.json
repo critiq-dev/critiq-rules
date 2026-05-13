@@ -1,0 +1,14 @@
+{
+  "path": "src/ModernProfile.tsx",
+  "language": "typescript",
+  "text": "import React from 'react';\n\nexport class ModernProfile extends React.Component<{ userId: string }> {\n  componentDidUpdate(prevProps: { userId: string }) {\n    if (prevProps.userId !== this.props.userId) {\n      void this.props.userId;\n    }\n  }\n\n  render() {\n    return <section>{this.props.userId}</section>;\n  }\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

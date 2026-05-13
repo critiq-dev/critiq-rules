@@ -1,0 +1,30 @@
+{
+  "path": "src/SearchBox.tsx",
+  "language": "typescript",
+  "text": "import React from 'react';\nimport { findDOMNode } from 'react-dom';\n\nexport class SearchBox extends React.Component {\n  componentDidMount() {\n    findDOMNode(this)?.scrollIntoView();\n  }\n\n  render() {\n    return <input type=\"search\" />;\n  }\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-find-dom-node",
+          "kind": "ui.react.find-dom-node",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 6,
+            "startColumn": 5,
+            "endLine": 6,
+            "endColumn": 22
+          },
+          "text": "findDOMNode(this)",
+          "props": {
+            "callee": "findDOMNode"
+          }
+        }
+      ]
+    }
+  }
+}

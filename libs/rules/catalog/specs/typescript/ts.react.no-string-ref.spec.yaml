@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-string-ref.rule.yaml
+fixtures:
+  - name: flags legacy string refs
+    observationPath: ./fixtures/ts.react.no-string-ref/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-string-ref
+      allSeverities:
+        - medium
+  - name: ignores callback refs
+    observationPath: ./fixtures/ts.react.no-string-ref/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

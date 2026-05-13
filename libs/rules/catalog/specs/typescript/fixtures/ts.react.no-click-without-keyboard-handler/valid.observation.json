@@ -1,0 +1,14 @@
+{
+  "path": "src/ExpandRow.tsx",
+  "language": "typescript",
+  "text": "export function ExpandRow() {\n  return (\n    <div\n      role=\"button\"\n      tabIndex={0}\n      onClick={() => void 0}\n      onKeyDown={() => void 0}\n    >\n      Expand row\n    </div>\n  );\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

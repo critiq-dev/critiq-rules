@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-click-without-keyboard-handler.rule.yaml
+fixtures:
+  - name: flags click-only non-interactive elements
+    observationPath: ./fixtures/ts.react.no-click-without-keyboard-handler/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-click-without-keyboard-handler
+      allSeverities:
+        - high
+  - name: ignores native buttons and keyboard-enabled fallbacks
+    observationPath: ./fixtures/ts.react.no-click-without-keyboard-handler/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

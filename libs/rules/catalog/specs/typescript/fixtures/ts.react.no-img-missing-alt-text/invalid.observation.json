@@ -1,0 +1,30 @@
+{
+  "path": "src/Hero.tsx",
+  "language": "typescript",
+  "text": "export function Hero() {\n  return <img src=\"/hero.png\" />;\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-missing-alt",
+          "kind": "ui.react.missing-alt-text",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 2,
+            "startColumn": 11,
+            "endLine": 2,
+            "endColumn": 32
+          },
+          "text": "<img src=\"/hero.png\" />",
+          "props": {
+            "tag": "img"
+          }
+        }
+      ]
+    }
+  }
+}

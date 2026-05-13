@@ -1,0 +1,14 @@
+{
+  "path": "src/LoginForm.tsx",
+  "language": "typescript",
+  "text": "import React from 'react';\n\nexport class LoginForm extends React.Component {\n  private emailInput: HTMLInputElement | null = null;\n\n  componentDidMount() {\n    this.emailInput?.focus();\n  }\n\n  render() {\n    return <input ref={(node) => { this.emailInput = node; }} type=\"email\" />;\n  }\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

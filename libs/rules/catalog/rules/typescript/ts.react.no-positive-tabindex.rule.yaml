@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-positive-tabindex
+  title: Avoid positive tabIndex values
+  summary: "Positive `tabIndex` values create a custom keyboard order that is fragile and usually less accessible than DOM order."
+  rationale: Manual focus sequencing is easy to break as layouts evolve and makes keyboard navigation less predictable for assistive-technology users.
+  tags:
+    - react
+    - accessibility
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.positive-tabindex
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.85
+    tags:
+      - react
+      - accessibility
+      - ui
+  message:
+    title: Keep keyboard focus order natural
+    summary: "`${captures.issue.text}` uses a positive `tabIndex` value."
+  remediation:
+    summary: "Prefer source-order focus flow, use `tabIndex={0}` only when needed, and reserve negative values for programmatic focus targets."

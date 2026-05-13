@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-find-dom-node.rule.yaml
+fixtures:
+  - name: flags ReactDOM.findDOMNode usage
+    observationPath: ./fixtures/ts.react.no-find-dom-node/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-find-dom-node
+      allSeverities:
+        - medium
+  - name: ignores direct element refs
+    observationPath: ./fixtures/ts.react.no-find-dom-node/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

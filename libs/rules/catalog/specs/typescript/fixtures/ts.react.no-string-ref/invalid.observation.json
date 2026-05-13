@@ -1,0 +1,30 @@
+{
+  "path": "src/LoginForm.tsx",
+  "language": "typescript",
+  "text": "import React from 'react';\n\nexport class LoginForm extends React.Component {\n  componentDidMount() {\n    this.refs.email?.focus();\n  }\n\n  render() {\n    return <input ref=\"email\" type=\"email\" />;\n  }\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-string-ref",
+          "kind": "ui.react.string-ref",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 8,
+            "startColumn": 19,
+            "endLine": 8,
+            "endColumn": 30
+          },
+          "text": "ref=\"email\"",
+          "props": {
+            "refName": "email"
+          }
+        }
+      ]
+    }
+  }
+}

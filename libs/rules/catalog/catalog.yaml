@@ -420,6 +420,30 @@ rules:
     rulePath: ./rules/typescript/ts.react.no-accessibility-label-missing.rule.yaml
     presets:
       - strict
+  - id: ts.react.no-img-missing-alt-text
+    rulePath: ./rules/typescript/ts.react.no-img-missing-alt-text.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-positive-tabindex
+    rulePath: ./rules/typescript/ts.react.no-positive-tabindex.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-click-without-keyboard-handler
+    rulePath: ./rules/typescript/ts.react.no-click-without-keyboard-handler.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-find-dom-node
+    rulePath: ./rules/typescript/ts.react.no-find-dom-node.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-string-ref
+    rulePath: ./rules/typescript/ts.react.no-string-ref.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-legacy-lifecycle
+    rulePath: ./rules/typescript/ts.react.no-legacy-lifecycle.rule.yaml
+    presets:
+      - strict
   - id: ts.react.no-uncontrolled-to-controlled-input
     rulePath: ./rules/typescript/ts.react.no-uncontrolled-to-controlled-input.rule.yaml
     presets:

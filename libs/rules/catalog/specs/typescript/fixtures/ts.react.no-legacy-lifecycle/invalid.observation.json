@@ -1,0 +1,30 @@
+{
+  "path": "src/LegacyProfile.tsx",
+  "language": "typescript",
+  "text": "import React from 'react';\n\nexport class LegacyProfile extends React.Component<{ userId: string }> {\n  componentWillReceiveProps(nextProps: { userId: string }) {\n    if (nextProps.userId !== this.props.userId) {\n      void nextProps.userId;\n    }\n  }\n\n  render() {\n    return <section>{this.props.userId}</section>;\n  }\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-legacy",
+          "kind": "ui.react.legacy-lifecycle",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 4,
+            "startColumn": 3,
+            "endLine": 4,
+            "endColumn": 28
+          },
+          "text": "componentWillReceiveProps",
+          "props": {
+            "methodName": "componentWillReceiveProps"
+          }
+        }
+      ]
+    }
+  }
+}
