@@ -1,5 +1,5 @@
 ---
-"@critiq/rules": feat
+"@critiq/rules": patch
 ---
 
 Add OSS TypeScript and JavaScript framework security rules covering Angular, NestJS, Apollo, Express, Fastify, Next.js, React, Nuxt, and Astro:

@@ -1,5 +1,5 @@
 ---
-"@critiq/rules": feat
+"@critiq/rules": patch
 ---
 
 Add the public TypeScript performance expansion rule set (`ts.performance.no-*`) with catalog entries, RuleSpecs, and fixtures.
