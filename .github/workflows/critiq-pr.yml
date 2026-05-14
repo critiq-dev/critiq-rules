@@ -12,8 +12,6 @@ jobs:
     uses: critiq-dev/critiq-action/.github/workflows/reusable-critiq.yml@main
     secrets: inherit
     with:
-      # Pin action-ref to the same ref as the reusable workflow while testing pre-release.
-      action-ref: main
       checkout-layout: rules-with-sibling-core
       working-directory: critiq-rules
       fail-on-severity: off
