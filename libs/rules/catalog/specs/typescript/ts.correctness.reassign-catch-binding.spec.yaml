@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.reassign-catch-binding.rule.yaml
+fixtures:
+  - name: flags assignment to catch parameter
+    sourcePath: ./fixtures/ts.correctness.reassign-catch-binding/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.reassign-catch-binding
+      allSeverities:
+        - medium
+  - name: allows introducing a new local for the error value
+    sourcePath: ./fixtures/ts.correctness.reassign-catch-binding/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

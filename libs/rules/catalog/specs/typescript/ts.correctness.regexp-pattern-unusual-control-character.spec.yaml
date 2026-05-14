@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.regexp-pattern-unusual-control-character.rule.yaml
+fixtures:
+  - name: flags regexp patterns with unusual ASCII control characters
+    observationPath: ./fixtures/ts.correctness.regexp-pattern-unusual-control-character/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.regexp-pattern-unusual-control-character
+      allSeverities:
+        - low
+  - name: allows patterns without unusual control characters
+    observationPath: ./fixtures/ts.correctness.regexp-pattern-unusual-control-character/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

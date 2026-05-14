@@ -1,0 +1,14 @@
+{
+  "path": "src/regexp-sample.ts",
+  "language": "typescript",
+  "text": "export const r = /\\t/;\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

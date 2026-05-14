@@ -1,0 +1,28 @@
+{
+  "path": "src/regexp-sample.ts",
+  "language": "typescript",
+  "text": "export const r = /\\u0001/;\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-regexp-control",
+          "kind": "language.regexp-pattern-unusual-control-character",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 18,
+            "endLine": 1,
+            "endColumn": 21
+          },
+          "text": "/\u0001/",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

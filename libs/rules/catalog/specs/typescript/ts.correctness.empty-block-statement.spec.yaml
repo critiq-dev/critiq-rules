@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.empty-block-statement.rule.yaml
+fixtures:
+  - name: flags empty if branch block
+    sourcePath: ./fixtures/ts.correctness.empty-block-statement/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.empty-block-statement
+      allSeverities:
+        - low
+  - name: allows empty arrow block and non-empty branches
+    sourcePath: ./fixtures/ts.correctness.empty-block-statement/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
