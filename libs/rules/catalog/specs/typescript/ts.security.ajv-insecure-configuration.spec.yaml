@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.ajv-insecure-configuration.rule.yaml
 fixtures:
   - name: flags permissive ajv compile options
-    sourcePath: ./fixtures/javascript-security-chunk-b/ajv-insecure.invalid.ts
+    sourcePath: ./fixtures/javascript-public-security-directory/ajv-insecure.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.ajv-insecure-configuration
   - name: accepts strict ajv options
-    sourcePath: ./fixtures/javascript-security-chunk-b/ajv-secure.valid.ts
+    sourcePath: ./fixtures/javascript-public-security-directory/ajv-secure.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []

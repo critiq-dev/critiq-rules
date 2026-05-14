@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.self-assignment.rule.yaml
+fixtures:
+  - name: flags self assignment
+    sourcePath: ./fixtures/ts.correctness.self-assignment/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.self-assignment
+      allSeverities:
+        - low
+  - name: allows assignment to a different expression
+    sourcePath: ./fixtures/ts.correctness.self-assignment/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

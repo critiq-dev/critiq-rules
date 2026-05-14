@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.assignment-in-condition.rule.yaml
+fixtures:
+  - name: flags top-level assignment in an if condition
+    sourcePath: ./fixtures/ts.correctness.assignment-in-condition/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.assignment-in-condition
+      allSeverities:
+        - medium
+  - name: allows boolean comparison
+    sourcePath: ./fixtures/ts.correctness.assignment-in-condition/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

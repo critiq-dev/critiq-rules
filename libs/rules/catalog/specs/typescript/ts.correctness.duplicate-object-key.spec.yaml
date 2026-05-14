@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.duplicate-object-key.rule.yaml
+fixtures:
+  - name: flags duplicate static keys
+    sourcePath: ./fixtures/ts.correctness.duplicate-object-key/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.duplicate-object-key
+      allSeverities:
+        - medium
+  - name: allows unique keys
+    sourcePath: ./fixtures/ts.correctness.duplicate-object-key/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

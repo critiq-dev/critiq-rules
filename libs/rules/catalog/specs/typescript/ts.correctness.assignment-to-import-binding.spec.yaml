@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.assignment-to-import-binding.rule.yaml
+fixtures:
+  - name: flags reassignment of a named import
+    sourcePath: ./fixtures/ts.correctness.assignment-to-import-binding/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.assignment-to-import-binding
+      allSeverities:
+        - medium
+  - name: allows read-only use of imports
+    sourcePath: ./fixtures/ts.correctness.assignment-to-import-binding/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

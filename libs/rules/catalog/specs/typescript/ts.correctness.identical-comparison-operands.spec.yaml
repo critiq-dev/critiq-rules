@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.identical-comparison-operands.rule.yaml
+fixtures:
+  - name: flags identical operands
+    sourcePath: ./fixtures/ts.correctness.identical-comparison-operands/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.identical-comparison-operands
+      allSeverities:
+        - low
+  - name: allows different operands
+    sourcePath: ./fixtures/ts.correctness.identical-comparison-operands/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

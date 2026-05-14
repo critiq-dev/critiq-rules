@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.express-error-handler-information-disclosure.rule.yaml
 fixtures:
   - name: flags res.send(err)
-    sourcePath: ./fixtures/javascript-security-chunk-b/express-error-handler.invalid.ts
+    sourcePath: ./fixtures/javascript-public-security-directory/express-error-handler.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.express-error-handler-information-disclosure
   - name: accepts generic error responses
-    sourcePath: ./fixtures/javascript-security-chunk-b/express-error-handler.valid.ts
+    sourcePath: ./fixtures/javascript-public-security-directory/express-error-handler.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []

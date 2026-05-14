@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.duplicate-switch-case.rule.yaml
+fixtures:
+  - name: flags duplicate literal case labels
+    sourcePath: ./fixtures/ts.correctness.duplicate-switch-case/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.duplicate-switch-case
+      allSeverities:
+        - medium
+  - name: allows distinct case labels
+    sourcePath: ./fixtures/ts.correctness.duplicate-switch-case/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

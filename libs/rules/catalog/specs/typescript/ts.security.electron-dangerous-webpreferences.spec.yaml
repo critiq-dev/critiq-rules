@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.electron-dangerous-webpreferences.rule.yaml
 fixtures:
   - name: flags insecure webPreferences
-    sourcePath: ./fixtures/javascript-security-chunk-b/electron-webpreferences.invalid.ts
+    sourcePath: ./fixtures/javascript-public-security-directory/electron-webpreferences.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.electron-dangerous-webpreferences
   - name: accepts hardened webPreferences
-    sourcePath: ./fixtures/javascript-security-chunk-b/electron-webpreferences.valid.ts
+    sourcePath: ./fixtures/javascript-public-security-directory/electron-webpreferences.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []

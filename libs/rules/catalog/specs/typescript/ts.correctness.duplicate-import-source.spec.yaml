@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.duplicate-import-source.rule.yaml
+fixtures:
+  - name: flags repeated imports from the same path
+    sourcePath: ./fixtures/ts.correctness.duplicate-import-source/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.duplicate-import-source
+      allSeverities:
+        - low
+  - name: allows a single combined import
+    sourcePath: ./fixtures/ts.correctness.duplicate-import-source/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

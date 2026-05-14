@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.async-promise-executor.rule.yaml
+fixtures:
+  - name: flags async executor
+    sourcePath: ./fixtures/ts.correctness.async-promise-executor/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.async-promise-executor
+      allSeverities:
+        - medium
+  - name: allows synchronous executor
+    sourcePath: ./fixtures/ts.correctness.async-promise-executor/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

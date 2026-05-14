@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.duplicate-function-parameter.rule.yaml
+fixtures:
+  - name: flags duplicate simple parameter names
+    sourcePath: ./fixtures/ts.correctness.duplicate-function-parameter/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.duplicate-function-parameter
+      allSeverities:
+        - medium
+  - name: allows distinct parameter names
+    sourcePath: ./fixtures/ts.correctness.duplicate-function-parameter/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

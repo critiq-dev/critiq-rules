@@ -3,13 +3,13 @@ kind: RuleSpec
 rulePath: ../../rules/typescript/ts.security.express-static-dotfiles-allow.rule.yaml
 fixtures:
   - name: flags dotfiles allow
-    sourcePath: ./fixtures/javascript-security-chunk-b/express-static-dotfiles.invalid.ts
+    sourcePath: ./fixtures/javascript-public-security-directory/express-static-dotfiles.invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.security.express-static-dotfiles-allow
   - name: accepts default static options
-    sourcePath: ./fixtures/javascript-security-chunk-b/express-static-dotfiles.valid.ts
+    sourcePath: ./fixtures/javascript-public-security-directory/express-static-dotfiles.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []
