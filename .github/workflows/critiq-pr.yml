@@ -1,3 +1,4 @@
+# critiq-rules depends on file:../critiq-core/dist/... ; build core first, then run Critiq like other repos.
 name: Critiq PR
 
 on:
@@ -9,9 +10,18 @@ permissions:
 
 jobs:
   critiq:
-    uses: critiq-dev/critiq-action/.github/workflows/reusable-critiq.yml@main
-    secrets: inherit
-    with:
-      checkout-layout: rules-with-sibling-core
-      working-directory: critiq-rules
-      fail-on-severity: off
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Critiq
+        uses: critiq-dev/critiq-action@main
+        with:
+          working-directory: critiq-rules
+          fail-on-severity: off
