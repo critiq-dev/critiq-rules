@@ -40,6 +40,39 @@ Run against a diff:
 npx critiq check . --base origin/main --head HEAD
 ```
 
+## GitHub Actions
+
+For pull request workflows that run `critiq check` in CI and want to post **inline review comments** on the pr, use the Github Action **[critiq-dev/critiq-action](https://github.com/critiq-dev/critiq-action)** ([README](https://github.com/critiq-dev/critiq-action/blob/main/README.md)). It installs `@critiq/cli` (and `@critiq/rules` when needed), respects `.critiq/config.yaml`, and does not require Critiq Cloud or a separate account.
+
+Example `.github/workflows/critiq.yml`:
+
+```yaml
+name: Critiq Review
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  critiq:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Run Critiq
+        uses: critiq-dev/critiq-action@v1
+        with:
+          fail-on-severity: off
+```
+
+Use a **major tag** (`@v1`) or pin a **commit SHA** for supply-chain control. More options (inputs, outputs, monorepos, reusable workflow) are in the [action README](https://github.com/critiq-dev/critiq-action/blob/main/README.md).
+
 ## Catalog At A Glance
 
 Today the catalog includes `309` rules across `17` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
