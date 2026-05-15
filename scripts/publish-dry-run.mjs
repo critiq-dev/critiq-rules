@@ -68,6 +68,12 @@ if (rulesManifest.name !== '@critiq/rules') {
   );
 }
 
+if (rulesManifest.repository?.url !== 'git+https://github.com/critiq-dev/critiq-rules.git') {
+  throw new Error(
+    `Expected published @critiq/rules repository.url to match critiq-rules provenance, found ${JSON.stringify(rulesManifest.repository?.url)}.`,
+  );
+}
+
 const internalDependencies = Object.keys(rulesManifest.dependencies ?? {}).filter(
   (dependency) => dependency.startsWith('@critiq/'),
 );

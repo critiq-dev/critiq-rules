@@ -12,6 +12,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: prod
     env:
       CRITIQ_CORE_ROOT: ${{ github.workspace }}/critiq-core
       CRITIQ_SKIP_CORE_BUILD: '1'
