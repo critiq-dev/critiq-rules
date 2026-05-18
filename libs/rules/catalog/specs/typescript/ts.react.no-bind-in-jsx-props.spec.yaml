@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-bind-in-jsx-props.rule.yaml
+fixtures:
+  - name: flags inline handlers in JSX props
+    sourcePath: ./fixtures/ts.react.no-bind-in-jsx-props/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-bind-in-jsx-props
+      allSeverities:
+        - medium
+  - name: allows stable handler references
+    sourcePath: ./fixtures/ts.react.no-bind-in-jsx-props/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

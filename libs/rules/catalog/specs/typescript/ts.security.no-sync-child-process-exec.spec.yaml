@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.no-sync-child-process-exec.rule.yaml
+fixtures:
+  - name: flags dynamic sync child process commands
+    sourcePath: ./fixtures/express-security/sync-child-process.invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.no-sync-child-process-exec
+        - ts.security.no-sync-child-process-exec
+      allSeverities:
+        - high
+        - high
+  - name: accepts static sync commands
+    sourcePath: ./fixtures/express-security/sync-child-process.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

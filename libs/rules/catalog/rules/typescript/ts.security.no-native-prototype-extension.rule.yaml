@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.no-native-prototype-extension
+  title: Do not extend native prototypes
+  summary: Do not assign properties on built-in prototype objects such as `Array.prototype`.
+  rationale: Mutating native prototypes affects every consumer of that type and can introduce subtle security bugs across the runtime.
+  tags:
+    - security
+    - language
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.native-prototype-extension
+    bind: issue
+emit:
+  finding:
+    category: security.language
+    severity: high
+    confidence: 0.96
+    tags:
+      - security
+      - language
+  message:
+    title: Do not extend native prototypes
+    summary: "`${captures.issue.text}` mutates a built-in prototype and can change behavior globally."
+  remediation:
+    summary: Use utility functions or wrapper types instead of modifying native prototypes.

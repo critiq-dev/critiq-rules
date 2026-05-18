@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.no-javascript-url.rule.yaml
+fixtures:
+  - name: flags javascript urls
+    sourcePath: ./fixtures/ts.security.no-javascript-url/invalid.tsx
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ts.security.no-javascript-url
+        - ts.security.no-javascript-url
+        - ts.security.no-javascript-url
+      allSeverities:
+        - high
+        - high
+        - high
+  - name: ignores safe urls
+    sourcePath: ./fixtures/ts.security.no-javascript-url/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

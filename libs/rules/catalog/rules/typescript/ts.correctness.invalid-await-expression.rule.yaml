@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.invalid-await-expression
+  title: Invalid Await Expression
+  summary: Await only promise-like values
+  rationale: Await only promise-like values:await on literals or clearly synchronous calls is usually a mistake.
+  tags:
+    - correctness
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: async.invalid-await-expression
+    bind: issue
+emit:
+  finding:
+    category: correctness
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+  message:
+    title: Invalid Await Expression
+    summary: "`${captures.issue.text}` matches ts.correctness.invalid-await-expression."
+  remediation:
+    summary: Await only promise-like values:await on literals or clearly synchronous calls is usually a mistake.

@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-set-state-in-component-did-mount
+  title: Avoid setState in componentDidMount
+  summary: Synchronous state updates during mount trigger an extra render before the browser paints the initial tree.
+  rationale: Initial state belongs in the constructor or class field initializers so the first render already reflects the mounted view.
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.set-state-in-component-did-mount
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.82
+    tags:
+      - react
+      - ui
+  message:
+    title: Initialize state before mount completes
+    summary: "`${captures.issue.text}` calls setState inside componentDidMount."
+  remediation:
+    summary: Move the initial value into state initialization or derive it from props with a guarded update strategy.

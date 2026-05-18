@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-this-in-function-component.rule.yaml
+fixtures:
+  - name: flags this usage in function components
+    sourcePath: ./fixtures/ts.react.no-this-in-function-component/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-this-in-function-component
+      allSeverities:
+        - high
+  - name: allows props in function components
+    sourcePath: ./fixtures/ts.react.no-this-in-function-component/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

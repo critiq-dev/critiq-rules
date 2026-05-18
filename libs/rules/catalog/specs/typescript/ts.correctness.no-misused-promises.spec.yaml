@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.no-misused-promises.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.no-misused-promises/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.no-misused-promises
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.no-misused-promises/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

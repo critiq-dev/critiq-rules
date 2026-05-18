@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.no-arguments-callee
+  title: Avoid `arguments.callee` and `arguments.caller`
+  summary: Do not read `arguments.callee` or `arguments.caller` in functions.
+  rationale: These legacy properties break optimizations, leak stack details, and are restricted in strict mode.
+  tags:
+    - security
+    - language
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.arguments-callee-or-caller
+    bind: issue
+emit:
+  finding:
+    category: security.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - security
+      - language
+  message:
+    title: Avoid `${captures.issue.text}`
+    summary: "`${captures.issue.text}` relies on deprecated `arguments` metadata and should not be used."
+  remediation:
+    summary: Use named function expressions or arrow functions instead of `arguments.callee` or `arguments.caller`.

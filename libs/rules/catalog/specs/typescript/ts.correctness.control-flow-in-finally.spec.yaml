@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.control-flow-in-finally.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.control-flow-in-finally/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.control-flow-in-finally
+      allSeverities:
+        - medium
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.control-flow-in-finally/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

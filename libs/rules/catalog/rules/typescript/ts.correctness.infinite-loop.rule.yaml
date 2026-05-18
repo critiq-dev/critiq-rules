@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.infinite-loop
+  title: Infinite Loop
+  summary: Detect obvious infinite loops
+  rationale: Detect obvious infinite loops:while (true) and for(;;) without break, return, or throw in the loop body.
+  tags:
+    - correctness
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: async.infinite-loop
+    bind: issue
+emit:
+  finding:
+    category: correctness
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+  message:
+    title: Infinite Loop
+    summary: "`${captures.issue.text}` matches ts.correctness.infinite-loop."
+  remediation:
+    summary: Detect obvious infinite loops:while (true) and for(;;) without break, return, or throw in the loop body.

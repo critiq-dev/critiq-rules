@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.no-javascript-url
+  title: Avoid `javascript:` URLs
+  summary: Do not use `javascript:` URLs in string literals, template literals, or JSX link attributes.
+  rationale: "`javascript:` URLs execute attacker-controlled code when used as navigation targets."
+  tags:
+    - security
+    - xss
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.javascript-url
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.94
+    tags:
+      - security
+      - xss
+  message:
+    title: "Avoid `javascript:` URLs"
+    summary: "`${captures.issue.text}` uses a `javascript:` URL that can execute arbitrary script."
+  remediation:
+    summary: "Use safe HTTPS links, in-app handlers, or explicit event callbacks instead of `javascript:` URLs."

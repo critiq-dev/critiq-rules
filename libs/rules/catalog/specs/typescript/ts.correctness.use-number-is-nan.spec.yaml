@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.use-number-is-nan.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.use-number-is-nan/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.use-number-is-nan
+      allSeverities:
+        - medium
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.use-number-is-nan/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

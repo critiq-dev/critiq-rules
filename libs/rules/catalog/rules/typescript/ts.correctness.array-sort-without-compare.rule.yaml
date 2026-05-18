@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.array-sort-without-compare
+  title: Array.sort without compare function
+  summary: Provide a compare function when sorting non-string arrays.
+  rationale: Default sort coerces elements to strings, which misorders numbers and many objects.
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-036
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.array-sort-without-compare
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.88
+    tags:
+      - correctness
+      - language
+  message:
+    title: Pass a compare function to sort
+    summary: "`${captures.issue.text}` calls sort() without a comparator."
+  remediation:
+    summary: Pass an explicit compare function, for example `(a, b) => a - b` for numbers.

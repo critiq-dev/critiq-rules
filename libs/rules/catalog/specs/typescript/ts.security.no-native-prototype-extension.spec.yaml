@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.no-native-prototype-extension.rule.yaml
+fixtures:
+  - name: flags native prototype extension
+    sourcePath: ./fixtures/ts.security.no-native-prototype-extension/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.no-native-prototype-extension
+      allSeverities:
+        - high
+  - name: ignores utility functions
+    sourcePath: ./fixtures/ts.security.no-native-prototype-extension/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

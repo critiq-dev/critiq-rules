@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.runtime.no-process-exit.rule.yaml
+fixtures:
+  - name: flags process.exit calls
+    sourcePath: ./fixtures/ts.runtime.no-process-exit/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.runtime.no-process-exit
+      allSeverities:
+        - medium
+  - name: ignores graceful error propagation
+    sourcePath: ./fixtures/ts.runtime.no-process-exit/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.runtime.no-process-exit
+  title: Avoid `process.exit` in application code
+  summary: Do not call `process.exit` from application logic; reserve termination for CLI entrypoints.
+  rationale: Forced process termination bypasses graceful shutdown, in-flight request draining, and cleanup hooks.
+  tags:
+    - runtime
+    - node
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: runtime.process-exit
+    bind: issue
+emit:
+  finding:
+    category: security.reliability
+    severity: medium
+    confidence: 0.9
+    tags:
+      - runtime
+      - node
+  message:
+    title: Avoid `process.exit` in application code
+    summary: "`${captures.issue.text}` terminates the process abruptly and should be limited to CLI entrypoints."
+  remediation:
+    summary: Propagate errors to the caller or use graceful shutdown hooks instead of calling `process.exit`.

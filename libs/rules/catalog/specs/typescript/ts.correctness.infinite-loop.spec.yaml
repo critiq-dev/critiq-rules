@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.infinite-loop.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.infinite-loop/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.correctness.infinite-loop
+        - ts.correctness.infinite-loop
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.infinite-loop/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

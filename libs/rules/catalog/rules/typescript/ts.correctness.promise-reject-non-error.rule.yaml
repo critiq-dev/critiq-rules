@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.promise-reject-non-error
+  title: Reject or throw non-Error values
+  summary: Promise rejections and async throws should use Error objects.
+  rationale: Non-Error rejections lose stack traces and are harder to handle consistently in async code.
+  tags:
+    - correctness
+    - async
+    - rules-catalog
+    - crq-cor-033
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.promise-reject-non-error
+    bind: issue
+emit:
+  finding:
+    category: correctness.async
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - async
+  message:
+    title: Use Error for rejections and async throws
+    summary: "`${captures.issue.text}` rejects or throws a non-Error literal."
+  remediation:
+    summary: Reject or throw `new Error(...)` (or a typed Error subclass) instead of a string or other primitive.

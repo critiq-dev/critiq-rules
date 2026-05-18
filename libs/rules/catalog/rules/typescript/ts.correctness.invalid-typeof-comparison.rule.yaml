@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.invalid-typeof-comparison
+  title: Invalid typeof comparison string
+  summary: Compare typeof results only to known typeof strings.
+  rationale: typeof returns a fixed set of strings; other comparisons are always false.
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-030
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.invalid-typeof-comparison
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix typeof comparison
+    summary: "`${captures.issue.text}` compares typeof to a string that typeof never returns."
+  remediation:
+    summary: Compare against a valid typeof result or use a different type guard (for example Array.isArray).

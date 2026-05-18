@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.array-sort-without-compare.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.array-sort-without-compare/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.array-sort-without-compare
+      allSeverities:
+        - medium
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.array-sort-without-compare/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

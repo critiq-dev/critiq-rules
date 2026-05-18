@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-bind-in-jsx-props
+  title: Avoid inline functions and bind in JSX props
+  summary: Creating `function` handlers or `.bind()` calls inside JSX forces new function identities every render and makes memoized children re-render unnecessarily.
+  rationale: Stable handler references keep render work predictable and make dependency lists in memoized components meaningful.
+  tags:
+    - react
+    - performance
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.bind-in-jsx-prop
+    bind: issue
+emit:
+  finding:
+    category: performance.ui
+    severity: medium
+    confidence: 0.78
+    tags:
+      - react
+      - performance
+      - ui
+  message:
+    title: Hoist JSX event handlers out of render
+    summary: "`${captures.issue.text}` creates a new handler on every render."
+  remediation:
+    summary: Define handlers on the class instance, bind once in the constructor, or use useCallback for function components.

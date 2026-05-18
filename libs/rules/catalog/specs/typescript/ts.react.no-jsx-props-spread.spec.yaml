@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-jsx-props-spread.rule.yaml
+fixtures:
+  - name: flags prop spreads on JSX elements
+    sourcePath: ./fixtures/ts.react.no-jsx-props-spread/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-jsx-props-spread
+      allSeverities:
+        - low
+  - name: allows explicit prop forwarding
+    sourcePath: ./fixtures/ts.react.no-jsx-props-spread/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

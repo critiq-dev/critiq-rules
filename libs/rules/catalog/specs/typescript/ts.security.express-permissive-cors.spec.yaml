@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.express-permissive-cors.rule.yaml
+fixtures:
+  - name: flags permissive CORS with credentials
+    sourcePath: ./fixtures/express-security/permissive-cors.invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.express-permissive-cors
+        - ts.security.express-permissive-cors
+      allSeverities:
+        - high
+        - high
+  - name: accepts explicit allowlists with credentials
+    sourcePath: ./fixtures/express-security/permissive-cors.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-duplicate-jsx-attributes.rule.yaml
+fixtures:
+  - name: flags duplicate JSX attributes
+    sourcePath: ./fixtures/ts.react.no-duplicate-jsx-attributes/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-duplicate-jsx-attributes
+      allSeverities:
+        - medium
+  - name: allows a single attribute per name
+    sourcePath: ./fixtures/ts.react.no-duplicate-jsx-attributes/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

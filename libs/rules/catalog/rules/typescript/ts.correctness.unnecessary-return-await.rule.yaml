@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.unnecessary-return-await
+  title: Unnecessary Return Await
+  summary: Remove redundant return await
+  rationale: Remove redundant return await:return await in async functions outside try/catch adds stack overhead without changing behavior.
+  tags:
+    - correctness
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: async.unnecessary-return-await
+    bind: issue
+emit:
+  finding:
+    category: correctness
+    severity: low
+    confidence: 0.85
+    tags:
+      - correctness
+  message:
+    title: Unnecessary Return Await
+    summary: "`${captures.issue.text}` matches ts.correctness.unnecessary-return-await."
+  remediation:
+    summary: Remove redundant return await:return await in async functions outside try/catch adds stack overhead without changing behavior.

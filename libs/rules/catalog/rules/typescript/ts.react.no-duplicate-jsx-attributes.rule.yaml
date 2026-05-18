@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-duplicate-jsx-attributes
+  title: Remove duplicate JSX attributes
+  summary: Repeating the same prop on a JSX element makes the last value win silently and hides author intent.
+  rationale: Duplicate attributes are usually copy-paste mistakes that change runtime behavior without type errors.
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.duplicate-jsx-attribute
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.9
+    tags:
+      - react
+      - ui
+  message:
+    title: Keep only one JSX attribute with the same name
+    summary: "`${captures.issue.text}` appears more than once on the same JSX element."
+  remediation:
+    summary: Remove the duplicate attribute or merge the values into a single prop expression.

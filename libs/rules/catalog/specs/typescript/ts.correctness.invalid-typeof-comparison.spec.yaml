@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.invalid-typeof-comparison.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.invalid-typeof-comparison/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.invalid-typeof-comparison
+      allSeverities:
+        - medium
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.invalid-typeof-comparison/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.no-assign-mutable-export
+  title: Avoid mutable module exports
+  summary: Shared module state should not be exported with `let`/`var` or reassigned after export.
+  rationale: Mutable exports make it easy for unrelated modules to change shared security or configuration state at runtime.
+  tags:
+    - security
+    - express
+    - maintainability
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.mutable-module-export
+    bind: issue
+emit:
+  finding:
+    category: security.maintainability
+    severity: low
+    confidence: 0.84
+    tags:
+      - security
+      - module-boundary
+  message:
+    title: Keep exported module state immutable for `${captures.issue.text}`
+    summary: "`${captures.issue.text}` is exported with a mutable binding that can change at runtime."
+  remediation:
+    summary: Export read-only values, freeze shared objects, or expose accessors instead of mutable bindings.

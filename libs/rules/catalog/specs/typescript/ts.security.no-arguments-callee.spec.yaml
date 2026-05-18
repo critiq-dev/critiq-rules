@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.no-arguments-callee.rule.yaml
+fixtures:
+  - name: flags arguments callee and caller
+    sourcePath: ./fixtures/ts.security.no-arguments-callee/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.no-arguments-callee
+        - ts.security.no-arguments-callee
+      allSeverities:
+        - medium
+        - medium
+  - name: ignores ordinary arguments access
+    sourcePath: ./fixtures/ts.security.no-arguments-callee/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

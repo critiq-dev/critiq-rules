@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.no-floating-promise-in-function.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.no-floating-promise-in-function/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.no-floating-promise-in-function
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.no-floating-promise-in-function/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.quality.no-empty-function.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.quality.no-empty-function/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.quality.no-empty-function
+        - ts.quality.no-empty-function
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.quality.no-empty-function/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

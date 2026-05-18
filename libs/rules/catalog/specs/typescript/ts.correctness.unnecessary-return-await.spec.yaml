@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.unnecessary-return-await.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.unnecessary-return-await/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.unnecessary-return-await
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.unnecessary-return-await/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

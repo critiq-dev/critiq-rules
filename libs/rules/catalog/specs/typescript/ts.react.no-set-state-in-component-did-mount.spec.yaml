@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-set-state-in-component-did-mount.rule.yaml
+fixtures:
+  - name: flags setState inside componentDidMount
+    sourcePath: ./fixtures/ts.react.no-set-state-in-component-did-mount/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-set-state-in-component-did-mount
+      allSeverities:
+        - medium
+  - name: allows initial state before mount
+    sourcePath: ./fixtures/ts.react.no-set-state-in-component-did-mount/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

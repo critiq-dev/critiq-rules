@@ -8,6 +8,12 @@ fixtures:
       findingCount: 1
       allRuleIds:
         - ts.security.express-error-handler-information-disclosure
+  - name: flags res.json with err.stack
+    sourcePath: ./fixtures/javascript-public-security-directory/express-error-handler-stack.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.express-error-handler-information-disclosure
   - name: accepts generic error responses
     sourcePath: ./fixtures/javascript-public-security-directory/express-error-handler.valid.ts
     expect:

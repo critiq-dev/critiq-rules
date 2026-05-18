@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.invalid-await-expression.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.invalid-await-expression/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.correctness.invalid-await-expression
+        - ts.correctness.invalid-await-expression
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.invalid-await-expression/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

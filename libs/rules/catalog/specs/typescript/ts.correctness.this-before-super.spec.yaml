@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.this-before-super.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.this-before-super/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.this-before-super
+      allSeverities:
+        - high
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.this-before-super/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

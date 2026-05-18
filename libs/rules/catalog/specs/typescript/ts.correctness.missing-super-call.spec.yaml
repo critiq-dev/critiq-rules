@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.missing-super-call.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.missing-super-call/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.missing-super-call
+      allSeverities:
+        - high
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.missing-super-call/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

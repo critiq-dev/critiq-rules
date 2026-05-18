@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-target-blank-without-rel.rule.yaml
+fixtures:
+  - name: flags target blank links without noopener
+    sourcePath: ./fixtures/ts.react.no-target-blank-without-rel/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-target-blank-without-rel
+      allSeverities:
+        - high
+  - name: allows noopener on external links
+    sourcePath: ./fixtures/ts.react.no-target-blank-without-rel/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

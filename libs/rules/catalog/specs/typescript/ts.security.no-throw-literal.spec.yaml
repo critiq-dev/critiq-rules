@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.no-throw-literal.rule.yaml
+fixtures:
+  - name: flags literal throws
+    sourcePath: ./fixtures/ts.security.no-throw-literal/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.no-throw-literal
+        - ts.security.no-throw-literal
+      allSeverities:
+        - medium
+        - medium
+  - name: ignores Error throws
+    sourcePath: ./fixtures/ts.security.no-throw-literal/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

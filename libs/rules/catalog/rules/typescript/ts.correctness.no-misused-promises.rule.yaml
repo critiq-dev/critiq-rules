@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.no-misused-promises
+  title: No Misused Promises
+  summary: Do not pass async callbacks where sync is expected
+  rationale: Do not pass async callbacks where sync is expected:array iteration methods expect synchronous predicates and should not receive async callbacks.
+  tags:
+    - correctness
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: async.misused-promises
+    bind: issue
+emit:
+  finding:
+    category: correctness
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+  message:
+    title: No Misused Promises
+    summary: "`${captures.issue.text}` matches ts.correctness.no-misused-promises."
+  remediation:
+    summary: Do not pass async callbacks where sync is expected:array iteration methods expect synchronous predicates and should not receive async callbacks.

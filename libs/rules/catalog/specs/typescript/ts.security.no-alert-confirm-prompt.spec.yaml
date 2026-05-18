@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.no-alert-confirm-prompt.rule.yaml
+fixtures:
+  - name: flags blocking dialogs
+    sourcePath: ./fixtures/ts.security.no-alert-confirm-prompt/invalid.ts
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ts.security.no-alert-confirm-prompt
+        - ts.security.no-alert-confirm-prompt
+        - ts.security.no-alert-confirm-prompt
+      allSeverities:
+        - medium
+        - medium
+        - medium
+  - name: ignores non-dialog calls
+    sourcePath: ./fixtures/ts.security.no-alert-confirm-prompt/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

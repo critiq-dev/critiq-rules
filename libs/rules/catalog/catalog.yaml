@@ -21,6 +21,11 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.correctness.control-flow-in-finally
+    rulePath: ./rules/typescript/ts.correctness.control-flow-in-finally.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.correctness.missing-await-on-async-call
     rulePath: ./rules/typescript/ts.correctness.missing-await-on-async-call.rule.yaml
     presets:
@@ -42,6 +47,11 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.correctness.invalid-typeof-comparison
+    rulePath: ./rules/typescript/ts.correctness.invalid-typeof-comparison.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.correctness.blocking-call-in-async-flow
     rulePath: ./rules/typescript/ts.correctness.blocking-call-in-async-flow.rule.yaml
     presets:
@@ -49,6 +59,11 @@ rules:
       - strict
   - id: ts.correctness.missing-default-dispatch
     rulePath: ./rules/typescript/ts.correctness.missing-default-dispatch.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.missing-super-call
+    rulePath: ./rules/typescript/ts.correctness.missing-super-call.rule.yaml
     presets:
       - recommended
       - strict
@@ -60,6 +75,11 @@ rules:
       - security
   - id: ts.correctness.possible-null-dereference
     rulePath: ./rules/typescript/ts.correctness.possible-null-dereference.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.promise-reject-non-error
+    rulePath: ./rules/typescript/ts.correctness.promise-reject-non-error.rule.yaml
     presets:
       - recommended
       - strict
@@ -87,8 +107,23 @@ rules:
     rulePath: ./rules/typescript/ts.correctness.shared-state-race.rule.yaml
     presets:
       - experimental
+  - id: ts.correctness.this-before-super
+    rulePath: ./rules/typescript/ts.correctness.this-before-super.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.correctness.unreachable-statement
     rulePath: ./rules/typescript/ts.correctness.unreachable-statement.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.array-callback-missing-return
+    rulePath: ./rules/typescript/ts.correctness.array-callback-missing-return.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.array-sort-without-compare
+    rulePath: ./rules/typescript/ts.correctness.array-sort-without-compare.rule.yaml
     presets:
       - recommended
       - strict
@@ -99,6 +134,11 @@ rules:
       - strict
   - id: ts.correctness.duplicate-function-parameter
     rulePath: ./rules/typescript/ts.correctness.duplicate-function-parameter.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.duplicate-if-else-condition
+    rulePath: ./rules/typescript/ts.correctness.duplicate-if-else-condition.rule.yaml
     presets:
       - recommended
       - strict
@@ -114,6 +154,36 @@ rules:
       - strict
   - id: ts.correctness.async-promise-executor
     rulePath: ./rules/typescript/ts.correctness.async-promise-executor.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.infinite-loop
+    rulePath: ./rules/typescript/ts.correctness.infinite-loop.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.unnecessary-return-await
+    rulePath: ./rules/typescript/ts.correctness.unnecessary-return-await.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.invalid-await-expression
+    rulePath: ./rules/typescript/ts.correctness.invalid-await-expression.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.missing-async-on-promise-method
+    rulePath: ./rules/typescript/ts.correctness.missing-async-on-promise-method.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.no-floating-promise-in-function
+    rulePath: ./rules/typescript/ts.correctness.no-floating-promise-in-function.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.no-misused-promises
+    rulePath: ./rules/typescript/ts.correctness.no-misused-promises.rule.yaml
     presets:
       - recommended
       - strict
@@ -142,6 +212,11 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.correctness.for-in-on-array
+    rulePath: ./rules/typescript/ts.correctness.for-in-on-array.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.correctness.reassign-catch-binding
     rulePath: ./rules/typescript/ts.correctness.reassign-catch-binding.rule.yaml
     presets:
@@ -149,6 +224,11 @@ rules:
       - strict
   - id: ts.correctness.regexp-pattern-unusual-control-character
     rulePath: ./rules/typescript/ts.correctness.regexp-pattern-unusual-control-character.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.use-number-is-nan
+    rulePath: ./rules/typescript/ts.correctness.use-number-is-nan.rule.yaml
     presets:
       - recommended
       - strict
@@ -236,6 +316,11 @@ rules:
   - id: ts.quality.no-dead-export
     rulePath: ./rules/typescript/ts.quality.no-dead-export.rule.yaml
     presets:
+      - strict
+  - id: ts.quality.no-empty-function
+    rulePath: ./rules/typescript/ts.quality.no-empty-function.rule.yaml
+    presets:
+      - recommended
       - strict
   - id: ts.testing.no-focused-test
     rulePath: ./rules/typescript/ts.testing.no-focused-test.rule.yaml
@@ -366,6 +451,11 @@ rules:
       - strict
   - id: ts.performance.no-expensive-sort-in-render-path
     rulePath: ./rules/typescript/ts.performance.no-expensive-sort-in-render-path.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.performance.no-await-in-loop
+    rulePath: ./rules/typescript/ts.performance.no-await-in-loop.rule.yaml
     presets:
       - recommended
       - strict
@@ -540,6 +630,52 @@ rules:
     rulePath: ./rules/typescript/ts.react.no-deprecated-create-factory.rule.yaml
     presets:
       - strict
+  - id: ts.react.no-bind-in-jsx-props
+    rulePath: ./rules/typescript/ts.react.no-bind-in-jsx-props.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.react.no-jsx-props-spread
+    rulePath: ./rules/typescript/ts.react.no-jsx-props-spread.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.react.no-children-prop
+    rulePath: ./rules/typescript/ts.react.no-children-prop.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.react.no-set-state-in-component-did-mount
+    rulePath: ./rules/typescript/ts.react.no-set-state-in-component-did-mount.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.react.no-set-state-in-component-did-update
+    rulePath: ./rules/typescript/ts.react.no-set-state-in-component-did-update.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.react.no-direct-state-mutation
+    rulePath: ./rules/typescript/ts.react.no-direct-state-mutation.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.react.no-target-blank-without-rel
+    rulePath: ./rules/typescript/ts.react.no-target-blank-without-rel.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.react.no-duplicate-jsx-attributes
+    rulePath: ./rules/typescript/ts.react.no-duplicate-jsx-attributes.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.react.no-this-in-function-component
+    rulePath: ./rules/typescript/ts.react.no-this-in-function-component.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: security.no-sql-interpolation
     rulePath: ./rules/shared/security.no-sql-interpolation.rule.yaml
     presets:
@@ -548,6 +684,60 @@ rules:
       - security
   - id: ts.security.no-dynamic-execution
     rulePath: ./rules/typescript/ts.security.no-dynamic-execution.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.no-with-statement
+    rulePath: ./rules/typescript/ts.security.no-with-statement.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.no-arguments-callee
+    rulePath: ./rules/typescript/ts.security.no-arguments-callee.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.no-javascript-url
+    rulePath: ./rules/typescript/ts.security.no-javascript-url.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.no-native-prototype-extension
+    rulePath: ./rules/typescript/ts.security.no-native-prototype-extension.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.no-global-native-reassignment
+    rulePath: ./rules/typescript/ts.security.no-global-native-reassignment.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.no-throw-literal
+    rulePath: ./rules/typescript/ts.security.no-throw-literal.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.no-alert-confirm-prompt
+    rulePath: ./rules/typescript/ts.security.no-alert-confirm-prompt.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.runtime.no-process-exit
+    rulePath: ./rules/typescript/ts.runtime.no-process-exit.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.unsafe-dirname-path-concat
+    rulePath: ./rules/typescript/ts.security.unsafe-dirname-path-concat.rule.yaml
     presets:
       - recommended
       - strict
@@ -1010,6 +1200,28 @@ rules:
       - security
   - id: ts.security.express-error-handler-information-disclosure
     rulePath: ./rules/typescript/ts.security.express-error-handler-information-disclosure.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.express-permissive-cors
+    rulePath: ./rules/typescript/ts.security.express-permissive-cors.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ts.security.no-sync-child-process-exec
+    rulePath: ./rules/typescript/ts.security.no-sync-child-process-exec.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.no-fs-readfile-sync-in-handler
+    rulePath: ./rules/typescript/ts.security.no-fs-readfile-sync-in-handler.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.no-assign-mutable-export
+    rulePath: ./rules/typescript/ts.security.no-assign-mutable-export.rule.yaml
     presets:
       - strict
       - security

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.duplicate-if-else-condition.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.duplicate-if-else-condition/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.duplicate-if-else-condition
+      allSeverities:
+        - medium
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.duplicate-if-else-condition/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

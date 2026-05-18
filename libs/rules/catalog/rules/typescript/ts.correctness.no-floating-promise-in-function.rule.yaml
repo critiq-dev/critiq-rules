@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.no-floating-promise-in-function
+  title: No Floating Promise In Function
+  summary: Handle promise-returning calls explicitly
+  rationale: Handle promise-returning calls explicitly:statement-level promise calls should be awaited, voided, returned, or chained with rejection handling.
+  tags:
+    - correctness
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: async.floating-promise-in-function
+    bind: issue
+emit:
+  finding:
+    category: correctness
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+  message:
+    title: No Floating Promise In Function
+    summary: "`${captures.issue.text}` matches ts.correctness.no-floating-promise-in-function."
+  remediation:
+    summary: Handle promise-returning calls explicitly:statement-level promise calls should be awaited, voided, returned, or chained with rejection handling.

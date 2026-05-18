@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-direct-state-mutation.rule.yaml
+fixtures:
+  - name: flags direct state mutation
+    sourcePath: ./fixtures/ts.react.no-direct-state-mutation/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-direct-state-mutation
+      allSeverities:
+        - high
+  - name: allows setState updates
+    sourcePath: ./fixtures/ts.react.no-direct-state-mutation/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

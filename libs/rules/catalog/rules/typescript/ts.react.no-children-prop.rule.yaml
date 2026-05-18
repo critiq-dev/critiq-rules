@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-children-prop
+  title: Prefer nested JSX children over the children prop
+  summary: Passing `children` as a named prop is harder to read than composing elements between opening and closing tags.
+  rationale: Nested children match React composition idioms and keep component APIs consistent across the tree.
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.children-prop
+    bind: issue
+emit:
+  finding:
+    category: maintainability.ui
+    severity: low
+    confidence: 0.8
+    tags:
+      - react
+      - ui
+  message:
+    title: Nest JSX children instead of using the children prop
+    summary: "`${captures.issue.text}` passes children through a prop attribute."
+  remediation:
+    summary: Place child elements between the component tags or accept `children` through normal function parameters without a JSX prop.

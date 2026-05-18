@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.unsafe-dirname-path-concat.rule.yaml
+fixtures:
+  - name: flags dirname and filename concatenation
+    sourcePath: ./fixtures/ts.security.unsafe-dirname-path-concat/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.unsafe-dirname-path-concat
+        - ts.security.unsafe-dirname-path-concat
+      allSeverities:
+        - medium
+        - medium
+  - name: ignores path.join
+    sourcePath: ./fixtures/ts.security.unsafe-dirname-path-concat/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.no-throw-literal
+  title: Throw `Error` objects instead of literals
+  summary: Only throw `Error` instances (or subclasses), not strings, numbers, or plain objects.
+  rationale: Throwing literals loses stack traces and makes error handling inconsistent across callers.
+  tags:
+    - security
+    - reliability
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.throw-literal
+    bind: issue
+emit:
+  finding:
+    category: security.reliability
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - reliability
+  message:
+    title: Throw an `Error` instead of a literal
+    summary: "`${captures.issue.text}` throws a non-`Error` value that is harder to inspect and handle safely."
+  remediation:
+    summary: Throw `new Error(...)` or a typed error subclass with a clear message.

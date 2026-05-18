@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.control-flow-in-finally
+  title: Control flow in finally block
+  summary: Avoid return, throw, break, or continue inside finally blocks.
+  rationale: Control-flow statements in finally override try/catch completion and can hide errors or skip cleanup intent.
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-028
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.control-flow-in-finally
+    bind: issue
+emit:
+  finding:
+    category: correctness.control-flow
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - language
+  message:
+    title: Remove control flow from finally
+    summary: "`${captures.issue.text}` changes completion inside a finally block."
+  remediation:
+    summary: Move return, throw, break, or continue out of the finally block, or restructure the try/finally logic.

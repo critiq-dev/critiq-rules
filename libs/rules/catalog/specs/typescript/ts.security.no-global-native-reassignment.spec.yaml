@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.no-global-native-reassignment.rule.yaml
+fixtures:
+  - name: flags global native reassignment
+    sourcePath: ./fixtures/ts.security.no-global-native-reassignment/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.no-global-native-reassignment
+        - ts.security.no-global-native-reassignment
+      allSeverities:
+        - high
+        - high
+  - name: ignores local bindings
+    sourcePath: ./fixtures/ts.security.no-global-native-reassignment/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

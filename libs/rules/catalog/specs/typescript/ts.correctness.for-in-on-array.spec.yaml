@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.for-in-on-array.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.for-in-on-array/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.for-in-on-array
+      allSeverities:
+        - medium
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.for-in-on-array/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

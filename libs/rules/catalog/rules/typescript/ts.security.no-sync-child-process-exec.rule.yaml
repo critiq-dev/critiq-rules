@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.no-sync-child-process-exec
+  title: Avoid synchronous child process execution with dynamic commands
+  summary: execSync and spawnSync should not run commands built from variables or template strings.
+  rationale: Synchronous shell execution blocks the event loop and dynamic command strings are a common command-injection surface.
+  tags:
+    - security
+    - express
+    - child-process
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.sync-child-process-exec
+    bind: issue
+emit:
+  finding:
+    category: security.command-injection
+    severity: high
+    confidence: 0.88
+    tags:
+      - security
+      - child-process
+  message:
+    title: Avoid synchronous shell execution in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` runs a child process synchronously with a non-literal command string."
+  remediation:
+    summary: Prefer async APIs with fixed command allowlists, or validate and normalize inputs before invoking shell commands.

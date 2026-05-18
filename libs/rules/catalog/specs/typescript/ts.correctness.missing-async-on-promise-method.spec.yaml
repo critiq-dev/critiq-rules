@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.missing-async-on-promise-method.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.missing-async-on-promise-method/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.missing-async-on-promise-method
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.missing-async-on-promise-method/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

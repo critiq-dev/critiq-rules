@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.missing-super-call
+  title: Missing super() in subclass constructor
+  summary: Subclass constructors must call super() before using this.
+  rationale: Derived classes must initialize the base class; omitting super() is a runtime error when this is accessed.
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-034
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.missing-super-call
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - language
+  message:
+    title: Call super() in the subclass constructor
+    summary: "`${captures.issue.text}` extends a base class but never calls super()."
+  remediation:
+    summary: Add `super(...)` as the first statement in the constructor (before using this).

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.no-with-statement.rule.yaml
+fixtures:
+  - name: flags with statements
+    sourcePath: ./fixtures/ts.security.no-with-statement/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.no-with-statement
+      allSeverities:
+        - high
+  - name: ignores explicit property access
+    sourcePath: ./fixtures/ts.security.no-with-statement/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

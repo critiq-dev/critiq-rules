@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-children-prop.rule.yaml
+fixtures:
+  - name: flags children passed as a JSX prop
+    sourcePath: ./fixtures/ts.react.no-children-prop/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-children-prop
+      allSeverities:
+        - low
+  - name: allows nested JSX children
+    sourcePath: ./fixtures/ts.react.no-children-prop/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

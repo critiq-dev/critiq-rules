@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.no-fs-readfile-sync-in-handler
+  title: Avoid synchronous file reads in HTTP handlers
+  summary: Request handlers should not call `readFileSync` or equivalent blocking file APIs.
+  rationale: Blocking disk I/O inside request handlers stalls the Node.js event loop and hurts availability under load.
+  tags:
+    - security
+    - express
+    - performance
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.readfile-sync-in-request-handler
+    bind: issue
+emit:
+  finding:
+    category: security.availability
+    severity: medium
+    confidence: 0.86
+    tags:
+      - security
+      - express
+      - filesystem
+  message:
+    title: Replace blocking file read `${captures.issue.text}` in this handler
+    summary: "`${captures.issue.text}` performs synchronous disk I/O on the request path."
+  remediation:
+    summary: Use `fs.promises.readFile`, streams, or preload static assets outside the hot request path.

@@ -1,0 +1,35 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.use-number-is-nan
+  title: Use Number.isNaN for NaN checks
+  summary: Do not compare values to NaN with `===` or `==`.
+  rationale: NaN is not equal to itself; identity comparisons are always false.
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-029
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.use-number-is-nan
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - language
+  message:
+    title: Replace NaN identity comparison
+    summary: "`${captures.issue.text}` compares to NaN with an equality operator."
+  remediation:
+    summary: Use `Number.isNaN(value)` (or `Number.isNaN` after coercion) instead of `value === NaN`.

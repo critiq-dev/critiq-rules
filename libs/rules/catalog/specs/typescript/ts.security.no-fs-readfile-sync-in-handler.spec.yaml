@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.no-fs-readfile-sync-in-handler.rule.yaml
+fixtures:
+  - name: flags readFileSync in request handlers
+    sourcePath: ./fixtures/express-security/readfile-sync-handler.invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.no-fs-readfile-sync-in-handler
+      allSeverities:
+        - medium
+  - name: accepts async file reads in handlers
+    sourcePath: ./fixtures/express-security/readfile-sync-handler.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

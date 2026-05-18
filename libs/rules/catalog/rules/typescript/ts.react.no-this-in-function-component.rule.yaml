@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-this-in-function-component
+  title: Do not use this in function components
+  summary: Function components have no instance, so `this` references are almost always mistakes copied from class components.
+  rationale: Hooks, props, and closures replace instance fields; leaving `this` in place breaks at runtime or hides missing refactors.
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.this-in-function-component
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.76
+    tags:
+      - react
+      - ui
+  message:
+    title: Remove this from function components
+    summary: "`${captures.issue.text}` uses this inside a function component."
+  remediation:
+    summary: Use props, hooks, module-level helpers, or refs instead of instance fields accessed through this.

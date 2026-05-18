@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.no-assign-mutable-export.rule.yaml
+fixtures:
+  - name: flags mutable exported bindings
+    sourcePath: ./fixtures/express-security/mutable-export.invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.no-assign-mutable-export
+        - ts.security.no-assign-mutable-export
+      allSeverities:
+        - low
+        - low
+  - name: accepts immutable exports
+    sourcePath: ./fixtures/express-security/mutable-export.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

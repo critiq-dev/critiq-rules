@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.performance.no-await-in-loop
+  title: No Await In Loop
+  summary: Avoid await inside loops
+  rationale: Avoid await inside loops:sequential awaits in loops multiply latency; batch work or use Promise.all when safe.
+  tags:
+    - performance
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: performance.no-await-in-loop
+    bind: issue
+emit:
+  finding:
+    category: performance
+    severity: medium
+    confidence: 0.85
+    tags:
+      - performance
+  message:
+    title: No Await In Loop
+    summary: "`${captures.issue.text}` matches ts.performance.no-await-in-loop."
+  remediation:
+    summary: Avoid await inside loops:sequential awaits in loops multiply latency; batch work or use Promise.all when safe.

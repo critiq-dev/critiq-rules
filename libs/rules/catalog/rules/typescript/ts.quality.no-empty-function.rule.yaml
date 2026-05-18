@@ -1,0 +1,32 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.quality.no-empty-function
+  title: No Empty Function
+  summary: Avoid empty function bodies
+  rationale: Avoid empty function bodies:empty implementations hide missing logic; use a comment, throw, or remove the stub.
+  tags:
+    - quality
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: quality.empty-function
+    bind: issue
+emit:
+  finding:
+    category: quality
+    severity: low
+    confidence: 0.85
+    tags:
+      - quality
+  message:
+    title: No Empty Function
+    summary: "`${captures.issue.text}` matches ts.quality.no-empty-function."
+  remediation:
+    summary: Avoid empty function bodies:empty implementations hide missing logic; use a comment, throw, or remove the stub.

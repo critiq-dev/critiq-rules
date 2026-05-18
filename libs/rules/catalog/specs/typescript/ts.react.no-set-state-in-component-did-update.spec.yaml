@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-set-state-in-component-did-update.rule.yaml
+fixtures:
+  - name: flags unguarded setState in componentDidUpdate
+    sourcePath: ./fixtures/ts.react.no-set-state-in-component-did-update/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-set-state-in-component-did-update
+      allSeverities:
+        - medium
+  - name: allows guarded setState in componentDidUpdate
+    sourcePath: ./fixtures/ts.react.no-set-state-in-component-did-update/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

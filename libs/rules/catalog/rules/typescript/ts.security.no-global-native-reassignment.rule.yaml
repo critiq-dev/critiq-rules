@@ -1,0 +1,34 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.no-global-native-reassignment
+  title: Do not reassign global native bindings
+  summary: Do not assign to global native bindings such as `Object`, `Array`, or `undefined`.
+  rationale: Reassigning global natives breaks language invariants and can disable security checks that rely on them.
+  tags:
+    - security
+    - language
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: security.global-native-reassignment
+    bind: issue
+emit:
+  finding:
+    category: security.language
+    severity: high
+    confidence: 0.97
+    tags:
+      - security
+      - language
+  message:
+    title: Do not reassign global native bindings
+    summary: "`${captures.issue.text}` reassigns a global native binding and can break runtime guarantees."
+  remediation:
+    summary: Use local variables with distinct names instead of overwriting global natives.

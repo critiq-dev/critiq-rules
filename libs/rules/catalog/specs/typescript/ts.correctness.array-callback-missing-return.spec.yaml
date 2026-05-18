@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.array-callback-missing-return.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/ts.correctness.array-callback-missing-return/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.array-callback-missing-return
+      allSeverities:
+        - medium
+  - name: allows valid pattern
+    sourcePath: ./fixtures/ts.correctness.array-callback-missing-return/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
