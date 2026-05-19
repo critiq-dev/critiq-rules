@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.weak-bcrypt-cost.rule.yaml
+fixtures:
+  - name: flags GenerateFromPassword with cost below default
+    sourcePath: ./fixtures/go.security.weak-bcrypt-cost/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.weak-bcrypt-cost
+  - name: accepts bcrypt.DefaultCost
+    sourcePath: ./fixtures/go.security.weak-bcrypt-cost/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

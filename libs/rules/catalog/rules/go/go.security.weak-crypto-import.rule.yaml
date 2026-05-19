@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.weak-crypto-import
+  title: Avoid importing broken or deprecated crypto packages
+  summary: >-
+    Production Go code should not import `crypto/md5`, `crypto/sha1`, `crypto/des`, or `crypto/rc4` for security-sensitive purposes.
+  rationale: >-
+    MD5 and SHA-1 are broken hash functions, DES has an obsolete key size, and RC4 has known biases; using them as cryptographic primitives degrades confidentiality and integrity.
+  tags:
+    - security
+    - go
+    - cryptography
+    - hash
+    - cipher
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.weak-crypto-import
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - go
+      - cryptography
+  message:
+    title: Replace weak crypto import at `${captures.issue.text}`
+    summary: "`${captures.issue.text}` imports a broken or deprecated crypto package."
+  remediation:
+    summary: >-
+      Use `crypto/sha256` or `crypto/sha512` for hashing, `crypto/aes` with GCM mode for ciphers, and avoid RC4 entirely.

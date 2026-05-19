@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.weak-rsa-key-size
+  title: Use at least 2048-bit RSA keys
+  summary: >-
+    `rsa.GenerateKey` and `rsa.GenerateMultiPrimeKey` should request a key size of 2048 bits or higher.
+  rationale: >-
+    RSA moduli below 2048 bits are considered cryptographically weak and feasible to attack with modern resources.
+  tags:
+    - security
+    - go
+    - cryptography
+    - rsa
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.weak-rsa-key-size
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - go
+      - cryptography
+      - rsa
+  message:
+    title: Increase RSA key size near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` initializes RSA with fewer than 2048 bits."
+  remediation:
+    summary: >-
+      Generate RSA keys with at least 2048 bits, or prefer Ed25519/ECDSA for new code where appropriate.

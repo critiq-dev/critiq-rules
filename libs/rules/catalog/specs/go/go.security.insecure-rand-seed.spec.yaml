@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.insecure-rand-seed.rule.yaml
+fixtures:
+  - name: flags rand.Seed against math/rand
+    sourcePath: ./fixtures/go.security.insecure-rand-seed/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.insecure-rand-seed
+  - name: accepts crypto/rand usage
+    sourcePath: ./fixtures/go.security.insecure-rand-seed/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

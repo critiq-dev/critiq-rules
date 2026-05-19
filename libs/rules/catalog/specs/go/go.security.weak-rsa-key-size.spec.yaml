@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.weak-rsa-key-size.rule.yaml
+fixtures:
+  - name: flags RSA key generation below 2048 bits
+    sourcePath: ./fixtures/go.security.weak-rsa-key-size/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.weak-rsa-key-size
+  - name: accepts RSA key generation at or above 2048 bits
+    sourcePath: ./fixtures/go.security.weak-rsa-key-size/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.nil-map-assignment.rule.yaml
+fixtures:
+  - name: flags writes to a nil map declared with var
+    sourcePath: ./fixtures/go.correctness.nil-map-assignment/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.nil-map-assignment
+  - name: accepts maps initialized with make before writes
+    sourcePath: ./fixtures/go.correctness.nil-map-assignment/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

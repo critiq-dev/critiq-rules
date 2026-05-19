@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.defer-close-before-check
+  title: Check error before deferring Close
+  summary: A deferred Close runs even when the open call failed and returned a nil handle.
+  rationale: >-
+    When `defer file.Close()` runs before the matching `if err != nil` check, a failed
+    open dereferences a nil resource and panics during cleanup.
+  tags:
+    - correctness
+    - go
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.defer-close-before-check
+    bind: issue
+emit:
+  finding:
+    category: correctness.exceptions
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - go
+  message:
+    title: Move `defer ... Close()` after the err check in `${captures.issue.text}`
+    summary: "A `defer ...Close()` runs before the matching `if err != nil` check on the open call."
+  remediation:
+    summary: >-
+      Return early when the open call sets a non-nil error, then defer the matching
+      `Close()` only once the resource is known to be valid.

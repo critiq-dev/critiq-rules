@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.bind-all-interfaces
+  title: Avoid binding Go services to all interfaces
+  summary: >-
+    Go network services should avoid explicit binds to `0.0.0.0`, `::`, or `[::]` unless public exposure is intentional and controlled.
+  rationale: >-
+    Binding every interface can unintentionally expose internal services beyond expected trust boundaries.
+  tags:
+    - security
+    - go
+    - network
+    - exposure
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.bind-all-interfaces
+    bind: issue
+emit:
+  finding:
+    category: security.network
+    severity: medium
+    confidence: 0.85
+    tags:
+      - security
+      - go
+      - network
+      - exposure
+  message:
+    title: Restrict interface bind in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` binds a service to all network interfaces."
+  remediation:
+    summary: >-
+      Prefer loopback or an explicit interface bind unless broad exposure is required and defended by network controls.

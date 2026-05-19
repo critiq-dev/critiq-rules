@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.insecure-rand-seed
+  title: Do not seed math/rand for security-sensitive randomness
+  summary: >-
+    `rand.Seed` from `math/rand` produces predictable streams; security-sensitive code must use `crypto/rand`.
+  rationale: >-
+    `math/rand` is a PRNG and remains predictable regardless of seed; tokens, secrets, and keys must come from `crypto/rand.Reader`.
+  tags:
+    - security
+    - go
+    - cryptography
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.insecure-rand-seed
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: medium
+    confidence: 0.72
+    tags:
+      - security
+      - go
+      - cryptography
+  message:
+    title: Replace `${captures.issue.text}` with cryptographic randomness
+    summary: "`${captures.issue.text}` seeds `math/rand`, which is not a secure source of randomness."
+  remediation:
+    summary: >-
+      Use `crypto/rand.Reader` (or `crypto/rand.Read`) to generate secrets, tokens, and keys. `math/rand` should only be used for non-security-sensitive randomness and does not need seeding in Go 1.20+.

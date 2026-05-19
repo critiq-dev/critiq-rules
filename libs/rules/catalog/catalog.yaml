@@ -1869,8 +1869,28 @@ rules:
     presets:
       - strict
       - security
+  - id: go.security.insecure-rand-seed
+    rulePath: ./rules/go/go.security.insecure-rand-seed.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.insecure-ssl-protocol
+    rulePath: ./rules/go/go.security.insecure-ssl-protocol.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.jwt-without-verification
+    rulePath: ./rules/go/go.security.jwt-without-verification.rule.yaml
+    presets:
+      - strict
+      - security
   - id: go.security.net-http-missing-timeouts
     rulePath: ./rules/go/go.security.net-http-missing-timeouts.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.pprof-exposed
+    rulePath: ./rules/go/go.security.pprof-exposed.rule.yaml
     presets:
       - strict
       - security
@@ -1889,6 +1909,79 @@ rules:
     presets:
       - strict
       - security
+  - id: go.security.bind-all-interfaces
+    rulePath: ./rules/go/go.security.bind-all-interfaces.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.unsafe-package-import
+    rulePath: ./rules/go/go.security.unsafe-package-import.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.insecure-ssh-host-key
+    rulePath: ./rules/go/go.security.insecure-ssh-host-key.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.insecure-temp-file
+    rulePath: ./rules/go/go.security.insecure-temp-file.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.weak-rsa-key-size
+    rulePath: ./rules/go/go.security.weak-rsa-key-size.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.weak-crypto-import
+    rulePath: ./rules/go/go.security.weak-crypto-import.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.tls-missing-min-version
+    rulePath: ./rules/go/go.security.tls-missing-min-version.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.weak-bcrypt-cost
+    rulePath: ./rules/go/go.security.weak-bcrypt-cost.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.weak-tls-cipher
+    rulePath: ./rules/go/go.security.weak-tls-cipher.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.correctness.defer-close-before-check
+    rulePath: ./rules/go/go.correctness.defer-close-before-check.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.defer-in-loop
+    rulePath: ./rules/go/go.correctness.defer-in-loop.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.nil-context-passed
+    rulePath: ./rules/go/go.correctness.nil-context-passed.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.nil-map-assignment
+    rulePath: ./rules/go/go.correctness.nil-map-assignment.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.time-tick-leak
+    rulePath: ./rules/go/go.correctness.time-tick-leak.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.unused-append-result
+    rulePath: ./rules/go/go.correctness.unused-append-result.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.waitgroup-add-in-goroutine
+    rulePath: ./rules/go/go.correctness.waitgroup-add-in-goroutine.rule.yaml
+    presets:
+      - strict
   - id: php.security.insecure-cors-wildcard-with-credentials
     rulePath: ./rules/php/php.security.insecure-cors-wildcard-with-credentials.rule.yaml
     presets:

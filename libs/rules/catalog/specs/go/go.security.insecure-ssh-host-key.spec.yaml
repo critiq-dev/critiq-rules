@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.insecure-ssh-host-key.rule.yaml
+fixtures:
+  - name: flags InsecureIgnoreHostKey usage
+    sourcePath: ./fixtures/go.security.insecure-ssh-host-key/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.insecure-ssh-host-key
+  - name: accepts FixedHostKey verification
+    sourcePath: ./fixtures/go.security.insecure-ssh-host-key/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

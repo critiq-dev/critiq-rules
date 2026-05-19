@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.weak-crypto-import.rule.yaml
+fixtures:
+  - name: flags weak crypto package imports
+    sourcePath: ./fixtures/go.security.weak-crypto-import/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.weak-crypto-import
+  - name: accepts strong crypto package imports
+    sourcePath: ./fixtures/go.security.weak-crypto-import/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

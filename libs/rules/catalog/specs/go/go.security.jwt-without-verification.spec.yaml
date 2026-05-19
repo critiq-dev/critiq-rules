@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.jwt-without-verification.rule.yaml
+fixtures:
+  - name: flags jwt.Parse with nil keyfunc
+    sourcePath: ./fixtures/go.security.jwt-without-verification/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.jwt-without-verification
+  - name: accepts jwt.Parse with keyfunc
+    sourcePath: ./fixtures/go.security.jwt-without-verification/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

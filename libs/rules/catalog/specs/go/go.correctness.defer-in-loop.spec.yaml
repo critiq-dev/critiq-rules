@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.defer-in-loop.rule.yaml
+fixtures:
+  - name: flags defer inside for range loop
+    sourcePath: ./fixtures/go.correctness.defer-in-loop/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.defer-in-loop
+  - name: accepts defer inside a per-iteration closure
+    sourcePath: ./fixtures/go.correctness.defer-in-loop/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.bind-all-interfaces.rule.yaml
+fixtures:
+  - name: flags bind to 0.0.0.0
+    sourcePath: ./fixtures/go.security.bind-all-interfaces/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.bind-all-interfaces
+  - name: accepts loopback bind
+    sourcePath: ./fixtures/go.security.bind-all-interfaces/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

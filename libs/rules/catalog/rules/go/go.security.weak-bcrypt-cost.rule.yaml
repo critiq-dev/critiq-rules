@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.weak-bcrypt-cost
+  title: Use a strong bcrypt cost factor
+  summary: >-
+    `bcrypt.GenerateFromPassword` (and similar helpers) must use a cost factor of at least `bcrypt.DefaultCost` (10).
+  rationale: >-
+    Low bcrypt costs make password hashes cheap to crack offline and undermine credential storage protections.
+  tags:
+    - security
+    - go
+    - cryptography
+    - passwords
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.weak-bcrypt-cost
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - go
+      - passwords
+  message:
+    title: Raise bcrypt cost in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` hashes passwords with a cost below the bcrypt default."
+  remediation:
+    summary: >-
+      Pass `bcrypt.DefaultCost` (or a higher value tuned to your performance budget) instead of a literal cost less than 10.

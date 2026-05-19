@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.unused-append-result
+  title: Assign the result of append
+  summary: append returns a new slice; dropping the result loses the appended element.
+  rationale: >-
+    `append` may allocate a new backing array, so it always returns the resulting
+    slice. Calling `append(s, x)` as a standalone statement silently throws the
+    update away.
+  tags:
+    - correctness
+    - go
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.unused-append-result
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-usage
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - go
+  message:
+    title: Capture the result of `${captures.issue.text}`
+    summary: "An `append(...)` call appears as a standalone statement without assigning its result."
+  remediation:
+    summary: Assign the result back to the slice variable, e.g. `s = append(s, x)`.

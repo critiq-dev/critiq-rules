@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.weak-tls-cipher
+  title: Remove weak TLS cipher suites
+  summary: >-
+    `tls.Config.CipherSuites` should not include RC4, DES, 3DES, NULL, or export-grade cipher constants.
+  rationale: >-
+    These ciphers are deprecated and break confidentiality (RC4 biases, Sweet32 against 3DES, NULL/export-grade weaknesses).
+  tags:
+    - security
+    - go
+    - tls
+    - cryptography
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.weak-tls-cipher
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.88
+    tags:
+      - security
+      - go
+      - tls
+  message:
+    title: Remove deprecated cipher from TLS configuration
+    summary: "`${captures.issue.text}` enables a weak or deprecated cipher suite in `tls.Config.CipherSuites`."
+  remediation:
+    summary: >-
+      Drop RC4/DES/3DES/NULL/export ciphers. Prefer the TLS 1.3 defaults or modern AEAD suites such as `TLS_AES_128_GCM_SHA256`.

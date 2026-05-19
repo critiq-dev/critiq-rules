@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.waitgroup-add-in-goroutine
+  title: Call WaitGroup.Add before launching the goroutine
+  summary: WaitGroup.Add called inside the goroutine races with Wait.
+  rationale: >-
+    `sync.WaitGroup.Add` must happen before the launching goroutine returns to the
+    caller. If `Add` runs inside the goroutine, `Wait` may observe a zero counter and
+    return before the work begins.
+  tags:
+    - correctness
+    - go
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.waitgroup-add-in-goroutine
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.88
+    tags:
+      - correctness
+      - go
+      - concurrency
+  message:
+    title: Move `${captures.issue.text}` before `go func`
+    summary: "A `WaitGroup.Add` call runs inside a `go func()` body and can race with `Wait`."
+  remediation:
+    summary: Call `wg.Add(n)` on the launching goroutine before the `go` statement starts the worker.

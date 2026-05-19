@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.insecure-ssh-host-key
+  title: Verify SSH host keys instead of ignoring them
+  summary: >-
+    `ssh.InsecureIgnoreHostKey()` disables host key verification and exposes SSH clients to man-in-the-middle attacks.
+  rationale: >-
+    Skipping host key verification lets any network attacker impersonate the remote host and steal credentials or hijack sessions.
+  tags:
+    - security
+    - go
+    - ssh
+    - transport
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.insecure-ssh-host-key
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: high
+    confidence: 0.95
+    tags:
+      - security
+      - go
+      - ssh
+      - transport
+  message:
+    title: Replace insecure host-key callback at `${captures.issue.text}`
+    summary: "`${captures.issue.text}` disables SSH host key verification."
+  remediation:
+    summary: >-
+      Use `ssh.FixedHostKey`, `knownhosts.New`, or a callback that compares the remote host key to a trusted pin before completing the handshake.

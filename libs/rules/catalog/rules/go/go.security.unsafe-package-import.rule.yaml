@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.unsafe-package-import
+  title: Avoid the `unsafe` package outside vetted boundaries
+  summary: >-
+    Production Go code should not import the `unsafe` package, which bypasses the type system and memory safety guarantees.
+  rationale: >-
+    `unsafe.Pointer` lets callers reinterpret arbitrary memory, hiding undefined behaviour and creating vulnerabilities that escape Go's compiler checks.
+  tags:
+    - security
+    - go
+    - memory-safety
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.unsafe-package-import
+    bind: issue
+emit:
+  finding:
+    category: security.memory-safety
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - go
+      - memory-safety
+  message:
+    title: Remove `unsafe` import at `${captures.issue.text}`
+    summary: "`${captures.issue.text}` imports `unsafe`, which bypasses Go's memory safety guarantees."
+  remediation:
+    summary: >-
+      Replace `unsafe.Pointer` usage with typed APIs from `reflect`, `encoding/binary`, or `cgo` boundaries that explicitly document and contain the unsafe scope.

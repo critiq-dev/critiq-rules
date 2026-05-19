@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.time-tick-leak
+  title: Avoid time.Tick for stoppable timers
+  summary: time.Tick leaks the underlying ticker because it cannot be stopped.
+  rationale: >-
+    `time.Tick` is documented as appropriate only for cases that run forever. Use
+    `time.NewTicker` so the ticker can be `Stop`ped when the consumer is done with it.
+  tags:
+    - correctness
+    - go
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.time-tick-leak
+    bind: issue
+emit:
+  finding:
+    category: correctness.resource-leak
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - go
+  message:
+    title: Use `time.NewTicker` instead of `${captures.issue.text}`
+    summary: "`time.Tick` cannot be stopped and leaks the ticker goroutine."
+  remediation:
+    summary: >-
+      Replace `time.Tick(d)` with `time.NewTicker(d)` and defer `ticker.Stop()` once
+      the consumer no longer needs the channel.

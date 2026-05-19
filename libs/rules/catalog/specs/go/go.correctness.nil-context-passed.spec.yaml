@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.nil-context-passed.rule.yaml
+fixtures:
+  - name: flags nil passed to NewRequestWithContext
+    sourcePath: ./fixtures/go.correctness.nil-context-passed/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.nil-context-passed
+  - name: accepts a real context value
+    sourcePath: ./fixtures/go.correctness.nil-context-passed/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

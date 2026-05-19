@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.unused-append-result.rule.yaml
+fixtures:
+  - name: flags standalone append without assignment
+    sourcePath: ./fixtures/go.correctness.unused-append-result/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.unused-append-result
+  - name: accepts append result captured into slice
+    sourcePath: ./fixtures/go.correctness.unused-append-result/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

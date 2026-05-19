@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.weak-tls-cipher.rule.yaml
+fixtures:
+  - name: flags TLS configuration with RC4 cipher
+    sourcePath: ./fixtures/go.security.weak-tls-cipher/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.weak-tls-cipher
+  - name: accepts modern AEAD cipher suite list
+    sourcePath: ./fixtures/go.security.weak-tls-cipher/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

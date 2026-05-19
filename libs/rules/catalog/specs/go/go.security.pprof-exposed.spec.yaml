@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.pprof-exposed.rule.yaml
+fixtures:
+  - name: flags blank pprof import and handler registration
+    sourcePath: ./fixtures/go.security.pprof-exposed/invalid.go
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - go.security.pprof-exposed
+        - go.security.pprof-exposed
+  - name: accepts code that does not import or register pprof
+    sourcePath: ./fixtures/go.security.pprof-exposed/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

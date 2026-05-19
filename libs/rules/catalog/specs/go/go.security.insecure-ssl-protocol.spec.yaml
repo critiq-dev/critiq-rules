@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.insecure-ssl-protocol.rule.yaml
+fixtures:
+  - name: flags tls.VersionSSL30 in TLS config
+    sourcePath: ./fixtures/go.security.insecure-ssl-protocol/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.insecure-ssl-protocol
+  - name: accepts modern TLS minimum version
+    sourcePath: ./fixtures/go.security.insecure-ssl-protocol/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

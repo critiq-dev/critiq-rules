@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.unsafe-package-import.rule.yaml
+fixtures:
+  - name: flags grouped import of unsafe package
+    sourcePath: ./fixtures/go.security.unsafe-package-import/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.unsafe-package-import
+  - name: accepts imports without unsafe
+    sourcePath: ./fixtures/go.security.unsafe-package-import/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.defer-in-loop
+  title: Avoid defer inside loops
+  summary: defer inside a loop holds resources until the surrounding function returns.
+  rationale: >-
+    `defer` runs when the enclosing function returns, not when the iteration ends.
+    Deferring inside a `for` or `for ... range` block accumulates open handles for
+    the lifetime of the function and can exhaust file descriptors or memory.
+  tags:
+    - correctness
+    - go
+    - resource-leak
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.defer-in-loop
+    bind: issue
+emit:
+  finding:
+    category: correctness.resource-leak
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - go
+      - resource-leak
+  message:
+    title: Remove `${captures.issue.text}` from the loop body
+    summary: "A `defer` statement runs inside a `for` loop and accumulates cleanups until the function returns."
+  remediation:
+    summary: >-
+      Wrap the per-iteration work in a helper or closure so the deferred call runs
+      when the iteration ends, not at function return.

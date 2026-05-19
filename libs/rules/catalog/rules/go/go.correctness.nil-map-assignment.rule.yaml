@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.nil-map-assignment
+  title: Initialize maps before assignment
+  summary: Writing to a nil map panics at runtime.
+  rationale: >-
+    A `var m map[K]V` declaration leaves `m` nil. Any `m[key] = value` write before
+    `make(map[K]V)` or a map literal initialization causes a runtime panic.
+  tags:
+    - correctness
+    - go
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.nil-map-assignment
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - go
+  message:
+    title: Initialize map before writing to `${captures.issue.text}`
+    summary: "A `var m map[...]...` declaration is written to before `make(...)` or a literal initialization."
+  remediation:
+    summary: Initialize the map with `make(map[K]V)` or a map literal before writing to it.

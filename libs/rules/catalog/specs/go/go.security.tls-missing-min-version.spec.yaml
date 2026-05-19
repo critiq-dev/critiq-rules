@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.tls-missing-min-version.rule.yaml
+fixtures:
+  - name: flags tls.Config literal without MinVersion
+    sourcePath: ./fixtures/go.security.tls-missing-min-version/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.tls-missing-min-version
+  - name: accepts tls.Config with MinVersion set
+    sourcePath: ./fixtures/go.security.tls-missing-min-version/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

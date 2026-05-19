@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.insecure-temp-file
+  title: Avoid deprecated `ioutil` temporary file helpers
+  summary: >-
+    Go code should use `os.CreateTemp` and `os.MkdirTemp` instead of the deprecated `ioutil.TempFile` / `ioutil.TempDir` helpers.
+  rationale: >-
+    The `ioutil` temp helpers are deprecated and frequently appear alongside race-prone temp-file patterns; the `os` replacements receive ongoing security fixes.
+  tags:
+    - security
+    - go
+    - filesystem
+    - tempfile
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.insecure-temp-file
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: medium
+    confidence: 0.88
+    tags:
+      - security
+      - go
+      - filesystem
+      - tempfile
+  message:
+    title: Replace deprecated temp helper at `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a deprecated `ioutil` temporary file helper."
+  remediation:
+    summary: >-
+      Switch to `os.CreateTemp(dir, pattern)` or `os.MkdirTemp(dir, pattern)` and ensure the pattern includes a `*` so a random component is generated.

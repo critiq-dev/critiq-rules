@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.defer-close-before-check.rule.yaml
+fixtures:
+  - name: flags defer Close before err check
+    sourcePath: ./fixtures/go.correctness.defer-close-before-check/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.defer-close-before-check
+  - name: accepts defer Close after err check
+    sourcePath: ./fixtures/go.correctness.defer-close-before-check/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

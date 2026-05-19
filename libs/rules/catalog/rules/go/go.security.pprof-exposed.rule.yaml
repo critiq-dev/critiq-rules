@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.pprof-exposed
+  title: Do not expose pprof endpoints on shared HTTP mux
+  summary: >-
+    Importing `net/http/pprof` or registering `/debug/pprof` handlers on the default mux exposes debugging endpoints to remote callers.
+  rationale: >-
+    Exposed pprof endpoints leak heap, goroutine, and CPU profiles and can be used for denial-of-service or sensitive data harvesting.
+  tags:
+    - security
+    - go
+    - net/http
+    - pprof
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.pprof-exposed
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.78
+    tags:
+      - security
+      - go
+      - net/http
+  message:
+    title: Move pprof off the public mux near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` exposes profiler endpoints without an authentication guard."
+  remediation:
+    summary: >-
+      Register pprof handlers on a private mux bound to localhost or a separate listener, and gate them behind authentication.

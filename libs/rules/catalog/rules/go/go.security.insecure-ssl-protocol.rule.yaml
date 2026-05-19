@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.insecure-ssl-protocol
+  title: Reject SSLv2 and SSLv3 protocols
+  summary: >-
+    `tls.VersionSSL30`, SSLv2, or SSLv3 string literals indicate use of broken legacy protocols.
+  rationale: >-
+    SSLv2 and SSLv3 contain unrecoverable cryptographic weaknesses (POODLE, DROWN) and must not be negotiated.
+  tags:
+    - security
+    - go
+    - tls
+    - cryptography
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.insecure-ssl-protocol
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - go
+      - tls
+  message:
+    title: Remove SSL legacy protocol from `${captures.issue.text}`
+    summary: "`${captures.issue.text}` references a broken SSLv2/SSLv3 protocol."
+  remediation:
+    summary: >-
+      Use `tls.VersionTLS12` or `tls.VersionTLS13` instead of SSL legacy constants or string literals.

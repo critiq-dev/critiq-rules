@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.waitgroup-add-in-goroutine.rule.yaml
+fixtures:
+  - name: flags wg.Add inside go func
+    sourcePath: ./fixtures/go.correctness.waitgroup-add-in-goroutine/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.waitgroup-add-in-goroutine
+  - name: accepts wg.Add before go func
+    sourcePath: ./fixtures/go.correctness.waitgroup-add-in-goroutine/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
