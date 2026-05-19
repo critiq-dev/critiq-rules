@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.debugger-import
+  title: Remove debugger imports from production code
+  summary: Production Python modules should not ship with interactive debugger imports.
+  rationale: Debugger modules can expose introspection hooks and halt execution paths in deployed environments.
+  tags:
+    - security
+    - python
+    - debugging
+    - hardening
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.debugger-import
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: medium
+    confidence: 0.86
+    tags:
+      - security
+      - python
+      - debugging
+      - hardening
+  message:
+    title: Remove debugger import `${captures.issue.text}`
+    summary: "`${captures.issue.text}` imports a debugger module in runtime code."
+  remediation:
+    summary: Remove debugger imports from committed runtime modules and gate debugging tools to local-only workflows.

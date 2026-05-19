@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.correctness.duplicate-dict-key.rule.yaml
+fixtures:
+  - name: flags duplicate key in dict literal
+    sourcePath: ./fixtures/py.correctness.duplicate-dict-key/duplicate_dict_key.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.correctness.duplicate-dict-key
+      allSeverities:
+        - medium
+  - name: allows unique dict keys
+    sourcePath: ./fixtures/py.correctness.duplicate-dict-key/duplicate_dict_key.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

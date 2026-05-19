@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.subprocess-shell-enabled.rule.yaml
+fixtures:
+  - name: flags shell enabled subprocess usage
+    sourcePath: ./fixtures/py.security.subprocess-shell-enabled/subprocess_shell.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.subprocess-shell-enabled
+  - name: accepts subprocess usage without shell mode
+    sourcePath: ./fixtures/py.security.subprocess-shell-enabled/subprocess_shell.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

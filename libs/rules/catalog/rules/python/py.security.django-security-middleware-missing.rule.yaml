@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.django-security-middleware-missing
+  title: Include Django SecurityMiddleware in middleware stack
+  summary: Django settings should include `django.middleware.security.SecurityMiddleware` in `MIDDLEWARE`.
+  rationale: Missing SecurityMiddleware can disable key hardening controls such as transport, header, and redirect protections.
+  tags:
+    - security
+    - python
+    - django
+    - configuration
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/settings/**/*.py"
+      - "**/*settings*.py"
+    exclude:
+      - "**/settings/local.py"
+      - "**/settings/dev.py"
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.django-security-middleware-missing
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - django
+      - configuration
+  message:
+    title: Add Django SecurityMiddleware near `${captures.issue.text}`
+    summary: "`MIDDLEWARE` is declared without `django.middleware.security.SecurityMiddleware`."
+  remediation:
+    summary: Add `django.middleware.security.SecurityMiddleware` to `MIDDLEWARE` following Django ordering guidance.

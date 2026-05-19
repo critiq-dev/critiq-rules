@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.flask-debug-enabled.rule.yaml
+fixtures:
+  - name: flags Flask debug mode toggles
+    sourcePath: ./fixtures/py.security.flask-debug-enabled/flask_debug_enabled.invalid.py
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - py.security.flask-debug-enabled
+        - py.security.flask-debug-enabled
+        - py.security.flask-debug-enabled
+      allSeverities:
+        - high
+        - high
+        - high
+  - name: accepts Flask runtime without debug
+    sourcePath: ./fixtures/py.security.flask-debug-enabled/flask_debug_enabled.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

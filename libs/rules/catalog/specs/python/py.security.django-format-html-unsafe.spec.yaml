@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.django-format-html-unsafe.rule.yaml
+fixtures:
+  - name: flags dynamic format_html interpolation
+    sourcePath: ./fixtures/py.security.django-format-html-unsafe/django_format_html_unsafe.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.django-format-html-unsafe
+      allSeverities:
+        - high
+  - name: accepts literal-only format_html usage
+    sourcePath: ./fixtures/py.security.django-format-html-unsafe/django_format_html_unsafe.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

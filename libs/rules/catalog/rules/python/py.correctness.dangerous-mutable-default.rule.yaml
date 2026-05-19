@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.correctness.dangerous-mutable-default
+  title: Avoid mutable default function arguments
+  summary: Mutable defaults in function signatures retain state across calls.
+  rationale: Reusing the same list, dict, or set instance can leak data between calls and produce non-deterministic behavior.
+  tags:
+    - correctness
+    - python
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+match:
+  fact:
+    kind: python.correctness.dangerous-mutable-default
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.96
+    tags:
+      - correctness
+      - python
+  message:
+    title: Replace mutable default `${captures.issue.text}`
+    summary: "`${captures.issue.text}` defines a mutable default argument that persists across invocations."
+  remediation:
+    summary: Use `None` as the default and construct a fresh mutable object inside the function.

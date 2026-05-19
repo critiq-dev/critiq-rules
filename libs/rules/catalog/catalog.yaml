@@ -512,6 +512,31 @@ rules:
     rulePath: ./rules/python/py.performance.no-unbounded-concurrency.rule.yaml
     presets:
       - strict
+  - id: py.correctness.assert-on-tuple
+    rulePath: ./rules/python/py.correctness.assert-on-tuple.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: py.correctness.bare-except
+    rulePath: ./rules/python/py.correctness.bare-except.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: py.correctness.broad-exception-handler
+    rulePath: ./rules/python/py.correctness.broad-exception-handler.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: py.correctness.dangerous-mutable-default
+    rulePath: ./rules/python/py.correctness.dangerous-mutable-default.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: py.correctness.duplicate-dict-key
+    rulePath: ./rules/python/py.correctness.duplicate-dict-key.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ruby.performance.no-regex-construction-in-loop
     rulePath: ./rules/ruby/ruby.performance.no-regex-construction-in-loop.rule.yaml
     presets:
@@ -1407,8 +1432,63 @@ rules:
     presets:
       - strict
       - security
+  - id: py.security.flask-debug-enabled
+    rulePath: ./rules/python/py.security.flask-debug-enabled.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.django-mark-safe
+    rulePath: ./rules/python/py.security.django-mark-safe.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.django-format-html-unsafe
+    rulePath: ./rules/python/py.security.django-format-html-unsafe.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.django-security-middleware-missing
+    rulePath: ./rules/python/py.security.django-security-middleware-missing.rule.yaml
+    presets:
+      - strict
+      - security
   - id: py.security.fastapi-insecure-cors
     rulePath: ./rules/python/py.security.fastapi-insecure-cors.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.subprocess-shell-enabled
+    rulePath: ./rules/python/py.security.subprocess-shell-enabled.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.dynamic-code-execution
+    rulePath: ./rules/python/py.security.dynamic-code-execution.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.insecure-yaml-load
+    rulePath: ./rules/python/py.security.insecure-yaml-load.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.insecure-temp-file
+    rulePath: ./rules/python/py.security.insecure-temp-file.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.bind-all-interfaces
+    rulePath: ./rules/python/py.security.bind-all-interfaces.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.debugger-import
+    rulePath: ./rules/python/py.security.debugger-import.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.jinja-autoescape-disabled
+    rulePath: ./rules/python/py.security.jinja-autoescape-disabled.rule.yaml
     presets:
       - strict
       - security

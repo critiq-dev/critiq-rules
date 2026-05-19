@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.correctness.bare-except.rule.yaml
+fixtures:
+  - name: flags bare except block
+    sourcePath: ./fixtures/py.correctness.bare-except/bare_except.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.correctness.bare-except
+      allSeverities:
+        - high
+  - name: allows typed except block
+    sourcePath: ./fixtures/py.correctness.bare-except/bare_except.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

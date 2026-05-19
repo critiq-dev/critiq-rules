@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.correctness.bare-except
+  title: Avoid bare except handlers
+  summary: Bare exception handlers catch all errors and hide root causes.
+  rationale: Catching every throwable without narrowing can swallow interruptions and make failures hard to diagnose.
+  tags:
+    - correctness
+    - python
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+match:
+  fact:
+    kind: python.correctness.bare-except
+    bind: issue
+emit:
+  finding:
+    category: correctness.control-flow
+    severity: high
+    confidence: 0.96
+    tags:
+      - correctness
+      - python
+  message:
+    title: Replace bare except `${captures.issue.text}`
+    summary: "`${captures.issue.text}` catches every exception type without restriction."
+  remediation:
+    summary: Catch specific expected exceptions and let unexpected failures propagate.

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.django-security-middleware-missing.rule.yaml
+fixtures:
+  - name: flags middleware stacks missing SecurityMiddleware
+    sourcePath: ./fixtures/py.security.django-security-middleware-missing/django_security_middleware_settings.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.django-security-middleware-missing
+      allSeverities:
+        - high
+  - name: accepts middleware stacks including SecurityMiddleware
+    sourcePath: ./fixtures/py.security.django-security-middleware-missing/django_security_middleware_settings.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

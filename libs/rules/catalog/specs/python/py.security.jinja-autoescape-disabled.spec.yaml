@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.jinja-autoescape-disabled.rule.yaml
+fixtures:
+  - name: flags jinja environment with autoescape disabled
+    sourcePath: ./fixtures/py.security.jinja-autoescape-disabled/jinja_autoescape.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.jinja-autoescape-disabled
+  - name: accepts jinja environment with autoescape enabled
+    sourcePath: ./fixtures/py.security.jinja-autoescape-disabled/jinja_autoescape.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.dynamic-code-execution.rule.yaml
+fixtures:
+  - name: flags eval or exec invocation
+    sourcePath: ./fixtures/py.security.dynamic-code-execution/dynamic_exec.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.dynamic-code-execution
+  - name: accepts explicit operation mapping
+    sourcePath: ./fixtures/py.security.dynamic-code-execution/dynamic_exec.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

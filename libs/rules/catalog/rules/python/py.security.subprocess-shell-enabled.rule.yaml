@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.subprocess-shell-enabled
+  title: Avoid enabling shell mode in subprocess calls
+  summary: Python process execution should avoid `shell=True` unless shell interpretation is explicitly required and tightly controlled.
+  rationale: Shell-enabled process execution introduces command parsing behavior that increases injection and execution risk.
+  tags:
+    - security
+    - python
+    - subprocess
+    - execution
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.subprocess-shell-enabled
+    bind: issue
+emit:
+  finding:
+    category: security.execution
+    severity: high
+    confidence: 0.93
+    tags:
+      - security
+      - python
+      - subprocess
+      - execution
+  message:
+    title: Review shell-enabled process call `${captures.issue.text}`
+    summary: "`${captures.issue.text}` enables shell interpretation via `shell=True`."
+  remediation:
+    summary: Use argument-list execution with `shell=False` by default, and only allow fixed commands when shell mode is unavoidable.

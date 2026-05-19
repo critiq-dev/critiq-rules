@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.django-mark-safe.rule.yaml
+fixtures:
+  - name: flags Django mark_safe usage
+    sourcePath: ./fixtures/py.security.django-mark-safe/django_mark_safe.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.django-mark-safe
+      allSeverities:
+        - high
+  - name: accepts escaped Django response path
+    sourcePath: ./fixtures/py.security.django-mark-safe/django_mark_safe.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

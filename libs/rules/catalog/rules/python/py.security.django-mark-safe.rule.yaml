@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.django-mark-safe
+  title: Avoid Django mark_safe for dynamic content
+  summary: "Django responses should avoid `mark_safe` when content can include untrusted input."
+  rationale: "`mark_safe` bypasses Django escaping and can introduce cross-site scripting when values are not strictly trusted."
+  tags:
+    - security
+    - python
+    - django
+    - xss
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+match:
+  fact:
+    kind: python.security.django-mark-safe
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.88
+    tags:
+      - security
+      - django
+      - xss
+  message:
+    title: Remove unsafe HTML trust `${captures.issue.text}`
+    summary: "`${captures.issue.text}` bypasses escaping and can expose XSS when rendered with variable data."
+  remediation:
+    summary: "Prefer Django auto-escaping or sanitize untrusted values before rendering instead of forcing trust with `mark_safe`."

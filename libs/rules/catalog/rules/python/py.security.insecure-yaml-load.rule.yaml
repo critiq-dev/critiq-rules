@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.insecure-yaml-load
+  title: Use SafeLoader with yaml.load
+  summary: Python YAML parsing should use `SafeLoader` when calling `yaml.load`.
+  rationale: Unsafe YAML deserialization can instantiate arbitrary Python objects and lead to unexpected code paths.
+  tags:
+    - security
+    - python
+    - yaml
+    - deserialization
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.insecure-yaml-load
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - python
+      - yaml
+      - deserialization
+  message:
+    title: Use a safe YAML loader in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` calls `yaml.load` without a safe loader."
+  remediation:
+    summary: Prefer `yaml.safe_load` or pass `Loader=yaml.SafeLoader` explicitly for trusted-safe parsing behavior.

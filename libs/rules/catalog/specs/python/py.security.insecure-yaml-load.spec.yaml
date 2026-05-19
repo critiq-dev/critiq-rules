@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.insecure-yaml-load.rule.yaml
+fixtures:
+  - name: flags yaml load without safe loader
+    sourcePath: ./fixtures/py.security.insecure-yaml-load/yaml_load.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.insecure-yaml-load
+  - name: accepts yaml load with safe loader
+    sourcePath: ./fixtures/py.security.insecure-yaml-load/yaml_load.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

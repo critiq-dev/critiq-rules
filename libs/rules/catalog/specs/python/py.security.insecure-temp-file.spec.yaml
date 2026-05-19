@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.insecure-temp-file.rule.yaml
+fixtures:
+  - name: flags race-prone temp filename usage
+    sourcePath: ./fixtures/py.security.insecure-temp-file/temp_file.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.insecure-temp-file
+  - name: accepts secure temporary file creation
+    sourcePath: ./fixtures/py.security.insecure-temp-file/temp_file.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

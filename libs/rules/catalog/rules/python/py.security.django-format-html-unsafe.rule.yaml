@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.django-format-html-unsafe
+  title: Review dynamic interpolation in Django format_html
+  summary: Django `format_html` calls with placeholder templates and dynamic arguments should be reviewed for unsafe output composition.
+  rationale: Unsafe interpolation patterns can still produce dangerous HTML when trusted and untrusted fragments are mixed incorrectly.
+  tags:
+    - security
+    - python
+    - django
+    - xss
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+match:
+  fact:
+    kind: python.security.django-format-html-unsafe
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.8
+    tags:
+      - security
+      - django
+      - xss
+  message:
+    title: Audit Django HTML interpolation `${captures.issue.text}`
+    summary: "`${captures.issue.text}` interpolates dynamic values into `format_html`; confirm values are safe for the rendered context."
+  remediation:
+    summary: Keep templates static, ensure interpolated values are trusted for the target context, and avoid assembling HTML from user-controlled fragments.

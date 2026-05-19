@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.bind-all-interfaces.rule.yaml
+fixtures:
+  - name: flags hardcoded all-interface host bind
+    sourcePath: ./fixtures/py.security.bind-all-interfaces/bind_all.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.bind-all-interfaces
+  - name: accepts loopback host bind
+    sourcePath: ./fixtures/py.security.bind-all-interfaces/bind_all.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

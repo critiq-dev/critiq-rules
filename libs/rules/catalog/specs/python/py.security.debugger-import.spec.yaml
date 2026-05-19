@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.debugger-import.rule.yaml
+fixtures:
+  - name: flags debugger imports in source
+    sourcePath: ./fixtures/py.security.debugger-import/debugger_import.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.debugger-import
+  - name: accepts non-debug runtime imports
+    sourcePath: ./fixtures/py.security.debugger-import/debugger_import.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

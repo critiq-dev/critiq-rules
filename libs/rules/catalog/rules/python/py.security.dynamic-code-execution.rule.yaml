@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.dynamic-code-execution
+  title: Avoid dynamic code execution with eval or exec
+  summary: Python services should not execute runtime-generated code via `eval` or `exec`.
+  rationale: Dynamic code execution turns untrusted data into executable behavior and expands code-injection risk.
+  tags:
+    - security
+    - python
+    - execution
+    - injection
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.dynamic-code-execution
+    bind: issue
+emit:
+  finding:
+    category: security.execution
+    severity: high
+    confidence: 0.95
+    tags:
+      - security
+      - python
+      - execution
+      - injection
+  message:
+    title: Avoid dynamic execution in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` executes code dynamically with `eval` or `exec`."
+  remediation:
+    summary: Replace dynamic execution with explicit parsing, allowlisted operations, or fixed function dispatch tables.

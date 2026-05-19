@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.correctness.assert-on-tuple.rule.yaml
+fixtures:
+  - name: flags assert tuple pattern
+    sourcePath: ./fixtures/py.correctness.assert-on-tuple/assert_on_tuple.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.correctness.assert-on-tuple
+      allSeverities:
+        - medium
+  - name: allows boolean assertion
+    sourcePath: ./fixtures/py.correctness.assert-on-tuple/assert_on_tuple.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

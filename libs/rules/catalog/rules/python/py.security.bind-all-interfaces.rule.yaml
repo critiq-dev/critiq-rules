@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.bind-all-interfaces
+  title: Avoid binding Python services to all interfaces
+  summary: Python network services should avoid explicit binds to `0.0.0.0` or `::` unless public exposure is intentional and controlled.
+  rationale: Binding every interface can unintentionally expose internal services beyond expected trust boundaries.
+  tags:
+    - security
+    - python
+    - network
+    - exposure
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.bind-all-interfaces
+    bind: issue
+emit:
+  finding:
+    category: security.network
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - python
+      - network
+      - exposure
+  message:
+    title: Restrict interface bind in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` binds a service to all network interfaces."
+  remediation:
+    summary: Prefer loopback or an explicit interface bind unless broad exposure is required and defended by network controls.

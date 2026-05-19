@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.insecure-temp-file
+  title: Avoid insecure temporary file name helpers
+  summary: Python temporary files should not use `mktemp` or `tempnam` helpers that create race-prone filenames.
+  rationale: Predictable temporary filenames can enable symlink races and unauthorized file access before creation.
+  tags:
+    - security
+    - python
+    - filesystem
+    - tempfile
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.insecure-temp-file
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: medium
+    confidence: 0.92
+    tags:
+      - security
+      - python
+      - filesystem
+      - tempfile
+  message:
+    title: Replace insecure temp helper `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses an insecure temporary filename API."
+  remediation:
+    summary: Use `tempfile.NamedTemporaryFile` or `tempfile.mkstemp` to create secure files atomically.

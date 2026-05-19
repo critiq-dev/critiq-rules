@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.correctness.duplicate-dict-key
+  title: Avoid duplicate keys in dict literals
+  summary: Repeated keys in a dict literal overwrite earlier entries.
+  rationale: Silent key replacement hides bugs and can invalidate intended configuration values.
+  tags:
+    - correctness
+    - python
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+match:
+  fact:
+    kind: python.correctness.duplicate-dict-key
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - python
+  message:
+    title: Resolve duplicate dict key `${captures.issue.text}`
+    summary: "`${captures.issue.text}` appears multiple times in a single dict literal."
+  remediation:
+    summary: Keep each key unique and merge or rename entries so earlier values are not silently replaced.

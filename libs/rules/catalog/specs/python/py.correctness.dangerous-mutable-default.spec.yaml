@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.correctness.dangerous-mutable-default.rule.yaml
+fixtures:
+  - name: flags mutable defaults
+    sourcePath: ./fixtures/py.correctness.dangerous-mutable-default/dangerous_mutable_default.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.correctness.dangerous-mutable-default
+      allSeverities:
+        - high
+  - name: allows none default and local init
+    sourcePath: ./fixtures/py.correctness.dangerous-mutable-default/dangerous_mutable_default.valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []
