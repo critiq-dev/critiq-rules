@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.equals-on-array
+  title: Compare arrays with Arrays.equals
+  summary: Array.equals compares references, not contents.
+  rationale: Reference equality on arrays is almost always a logic bug.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.equals-on-array
+    bind: issue
+emit:
+  finding:
+    category: correctness.equality
+    severity: medium
+    confidence: 0.88
+    tags:
+      - correctness
+      - java
+  message:
+    title: Fix array comparison in `${captures.issue.text}`
+    summary: "Array.equals compares references instead of elements."
+  remediation:
+    summary: Use Arrays.equals or Arrays.deepEquals for array content comparison.

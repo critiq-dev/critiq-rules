@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.insecure-network-protocol
+  title: Avoid plaintext or legacy network protocols
+  summary: "URL/URI literals should not use `ftp://`, `telnet://`, or `jar:http://`."
+  rationale: These schemes transmit credentials and payloads in cleartext or load remote archives without integrity checks.
+  tags:
+    - security
+    - java
+    - transport
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.security.insecure-network-protocol
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: high
+    confidence: 0.92
+    tags:
+      - security
+      - java
+      - transport
+  message:
+    title: Use a secure protocol instead of `${captures.issue.text}`
+    summary: "`${captures.issue.text}` opens a URL or URI with a plaintext or legacy protocol."
+  remediation:
+    summary: "Use `https://`, `sftp://`, or `ssh://` and verify integrity for remote archives instead of `jar:http://`."

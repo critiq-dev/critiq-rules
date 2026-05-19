@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.catch-null-pointer.rule.yaml
+fixtures:
+  - name: flags catching NullPointerException
+    sourcePath: ./fixtures/java.correctness.catch-null-pointer/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.catch-null-pointer
+  - name: allows targeted exception types
+    sourcePath: ./fixtures/java.correctness.catch-null-pointer/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.insecure-ssl-context.rule.yaml
+fixtures:
+  - name: flags SSLv3 context selection
+    sourcePath: ./fixtures/java.security.insecure-ssl-context/insecure_ssl_context.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.insecure-ssl-context
+  - name: accepts modern TLS context selection
+    sourcePath: ./fixtures/java.security.insecure-ssl-context/insecure_ssl_context.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

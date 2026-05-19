@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.hibernate-sql-concatenation.rule.yaml
+fixtures:
+  - name: flags Hibernate createQuery with string concatenation
+    sourcePath: ./fixtures/java.security.hibernate-sql-concatenation/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.hibernate-sql-concatenation
+      allSeverities:
+        - critical
+  - name: accepts Hibernate createQuery with bound parameters
+    sourcePath: ./fixtures/java.security.hibernate-sql-concatenation/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

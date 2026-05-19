@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.unsafe-optional-get
+  title: Check Optional before calling get
+  summary: Optional.get without a presence check can throw.
+  rationale: Unchecked Optional access causes runtime failures.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.unsafe-optional-get
+    bind: issue
+emit:
+  finding:
+    category: correctness.nullability
+    severity: medium
+    confidence: 0.88
+    tags:
+      - correctness
+      - java
+  message:
+    title: Guard Optional.get in `${captures.issue.text}`
+    summary: "Optional.get is called without a nearby presence check."
+  remediation:
+    summary: Use orElse, orElseThrow, or isPresent before calling get.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.equals-on-array.rule.yaml
+fixtures:
+  - name: flags .equals call on array variable
+    sourcePath: ./fixtures/java.correctness.equals-on-array/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.equals-on-array
+  - name: allows Arrays.equals on array values
+    sourcePath: ./fixtures/java.correctness.equals-on-array/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

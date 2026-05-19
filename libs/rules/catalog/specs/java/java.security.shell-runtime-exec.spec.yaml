@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.shell-runtime-exec.rule.yaml
+fixtures:
+  - name: flags Runtime.exec with a single string argument
+    sourcePath: ./fixtures/java.security.shell-runtime-exec/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.shell-runtime-exec
+      allSeverities:
+        - high
+  - name: accepts Runtime.exec with an explicit String array
+    sourcePath: ./fixtures/java.security.shell-runtime-exec/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

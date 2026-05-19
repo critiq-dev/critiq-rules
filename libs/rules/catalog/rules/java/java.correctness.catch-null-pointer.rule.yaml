@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.catch-null-pointer
+  title: Do not catch NullPointerException
+  summary: NullPointerException indicates a programming error.
+  rationale: Catching NPE masks bugs that should be fixed at the source.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.catch-null-pointer
+    bind: issue
+emit:
+  finding:
+    category: correctness.exceptions
+    severity: low
+    confidence: 0.88
+    tags:
+      - correctness
+      - java
+  message:
+    title: Remove NullPointerException catch in `${captures.issue.text}`
+    summary: "NullPointerException is caught instead of preventing null access."
+  remediation:
+    summary: Add null checks or Optional handling at the source of the failure.

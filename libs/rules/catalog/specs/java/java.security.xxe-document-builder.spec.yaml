@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.xxe-document-builder.rule.yaml
+fixtures:
+  - name: flags DocumentBuilderFactory without secure processing
+    sourcePath: ./fixtures/java.security.xxe-document-builder/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.xxe-document-builder
+      allSeverities:
+        - high
+  - name: accepts DocumentBuilderFactory hardened with secure processing
+    sourcePath: ./fixtures/java.security.xxe-document-builder/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

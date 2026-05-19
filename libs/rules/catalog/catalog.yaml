@@ -1555,6 +1555,100 @@ rules:
     presets:
       - strict
       - security
+  - id: java.security.unsafe-jackson-deserialization
+    rulePath: ./rules/java/java.security.unsafe-jackson-deserialization.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.xxe-document-builder
+    rulePath: ./rules/java/java.security.xxe-document-builder.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.xxe-xml-input-factory
+    rulePath: ./rules/java/java.security.xxe-xml-input-factory.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.hibernate-sql-concatenation
+    rulePath: ./rules/java/java.security.hibernate-sql-concatenation.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.shell-runtime-exec
+    rulePath: ./rules/java/java.security.shell-runtime-exec.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.predictable-securerandom
+    rulePath: ./rules/java/java.security.predictable-securerandom.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.correctness.empty-catch
+    rulePath: ./rules/java/java.correctness.empty-catch.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.equals-on-array
+    rulePath: ./rules/java/java.correctness.equals-on-array.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.sync-on-string-literal
+    rulePath: ./rules/java/java.correctness.sync-on-string-literal.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.catch-null-pointer
+    rulePath: ./rules/java/java.correctness.catch-null-pointer.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.unsafe-optional-get
+    rulePath: ./rules/java/java.correctness.unsafe-optional-get.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.return-in-finally
+    rulePath: ./rules/java/java.correctness.return-in-finally.rule.yaml
+    presets:
+      - strict
+  - id: java.security.insecure-cipher-mode
+    rulePath: ./rules/java/java.security.insecure-cipher-mode.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.weak-rsa-key-size
+    rulePath: ./rules/java/java.security.weak-rsa-key-size.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.insecure-ssl-context
+    rulePath: ./rules/java/java.security.insecure-ssl-context.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.permissive-cors
+    rulePath: ./rules/java/java.security.permissive-cors.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.trust-all-certificates
+    rulePath: ./rules/java/java.security.trust-all-certificates.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.insecure-network-protocol
+    rulePath: ./rules/java/java.security.insecure-network-protocol.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.null-cipher
+    rulePath: ./rules/java/java.security.null-cipher.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: java.security.jwt-without-verification
+    rulePath: ./rules/java/java.security.jwt-without-verification.rule.yaml
+    presets:
+      - strict
+      - security
   - id: ruby.security.rails-csrf-disabled
     rulePath: ./rules/ruby/ruby.security.rails-csrf-disabled.rule.yaml
     presets:

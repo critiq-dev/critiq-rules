@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.weak-rsa-key-size.rule.yaml
+fixtures:
+  - name: flags 1024-bit RSA key generation
+    sourcePath: ./fixtures/java.security.weak-rsa-key-size/weak_rsa.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.weak-rsa-key-size
+  - name: accepts 2048-bit RSA key generation
+    sourcePath: ./fixtures/java.security.weak-rsa-key-size/weak_rsa.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

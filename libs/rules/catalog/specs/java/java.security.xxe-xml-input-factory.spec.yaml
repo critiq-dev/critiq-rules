@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.xxe-xml-input-factory.rule.yaml
+fixtures:
+  - name: flags XMLInputFactory without DTD or external entity hardening
+    sourcePath: ./fixtures/java.security.xxe-xml-input-factory/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.xxe-xml-input-factory
+      allSeverities:
+        - high
+  - name: accepts XMLInputFactory with DTD and external entities disabled
+    sourcePath: ./fixtures/java.security.xxe-xml-input-factory/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.null-cipher.rule.yaml
+fixtures:
+  - name: flags NullCipher construction
+    sourcePath: ./fixtures/java.security.null-cipher/null_cipher.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.null-cipher
+  - name: accepts authenticated cipher construction
+    sourcePath: ./fixtures/java.security.null-cipher/null_cipher.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

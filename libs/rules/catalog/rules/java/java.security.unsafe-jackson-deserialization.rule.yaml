@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.unsafe-jackson-deserialization
+  title: Avoid enabling Jackson polymorphic deserialization
+  summary: >-
+    Jackson `ObjectMapper` should not call `enableDefaultTyping` or `activateDefaultTyping`, and `@JsonTypeInfo(use = Id.CLASS|MINIMAL_CLASS)` should not be applied without an allowlist.
+  rationale: >-
+    Polymorphic deserialization that encodes class names lets attacker-controlled payloads instantiate gadget chains and pivot to remote code execution.
+  tags:
+    - security
+    - java
+    - jackson
+    - deserialization
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+      - "**/*Tests.java"
+match:
+  fact:
+    kind: java.security.unsafe-jackson-deserialization
+    bind: issue
+emit:
+  finding:
+    category: security.deserialization
+    severity: critical
+    confidence: 0.88
+    tags:
+      - security
+      - java
+      - jackson
+      - deserialization
+  message:
+    title: Restrict Jackson polymorphic typing at `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` opts into Jackson polymorphic typing without an allowlist; untrusted JSON can then instantiate arbitrary classes.
+  remediation:
+    summary: >-
+      Disable default typing, validate types with a strict subtype resolver, or replace `Id.CLASS` / `Id.MINIMAL_CLASS` with `Id.NAME` and a registered set of allowed subtypes.

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.predictable-securerandom.rule.yaml
+fixtures:
+  - name: flags SecureRandom seeded with a literal byte array
+    sourcePath: ./fixtures/java.security.predictable-securerandom/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.predictable-securerandom
+      allSeverities:
+        - high
+  - name: accepts SecureRandom without a literal seed
+    sourcePath: ./fixtures/java.security.predictable-securerandom/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

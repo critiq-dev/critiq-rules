@@ -1,0 +1,3 @@
+class Fixture {
+  new SecureRandom();
+}

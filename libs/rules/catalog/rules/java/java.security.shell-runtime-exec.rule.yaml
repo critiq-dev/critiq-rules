@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.shell-runtime-exec
+  title: Prefer Runtime.exec with an argument array
+  summary: >-
+    `Runtime.getRuntime().exec(...)` should not be invoked with a single `String` command argument; the array form (`exec(String[])`) avoids shell-style tokenization.
+  rationale: >-
+    The `exec(String)` overload splits on whitespace and respects no quoting; values containing spaces or shell metacharacters can change the command parsed at runtime.
+  tags:
+    - security
+    - java
+    - execution
+    - shell-injection
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+      - "**/*Tests.java"
+match:
+  fact:
+    kind: java.security.shell-runtime-exec
+    bind: issue
+emit:
+  finding:
+    category: security.execution
+    severity: high
+    confidence: 0.86
+    tags:
+      - security
+      - java
+      - execution
+  message:
+    title: Use the array form for `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` calls `Runtime.exec` with a single `String`, which tokenizes on whitespace and can lead to unintended arguments.
+  remediation:
+    summary: >-
+      Pass an explicit `String[]` of command and arguments, or use `ProcessBuilder` with separate arguments and the parent process inheriting no shell.

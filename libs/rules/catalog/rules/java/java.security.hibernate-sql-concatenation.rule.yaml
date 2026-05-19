@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.hibernate-sql-concatenation
+  title: Bind Hibernate query parameters instead of concatenating SQL
+  summary: >-
+    Hibernate `Session.createQuery`, `createNativeQuery`, and `createSQLQuery` calls must not build their query text from string concatenation or `String.format`.
+  rationale: >-
+    Dynamic SQL fragments stitched into Hibernate query strings are an injection sink whenever any segment came from request, environment, or upload input.
+  tags:
+    - security
+    - java
+    - hibernate
+    - sql-injection
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+      - "**/*Tests.java"
+match:
+  fact:
+    kind: java.security.hibernate-sql-concatenation
+    bind: issue
+emit:
+  finding:
+    category: security.sql-injection
+    severity: critical
+    confidence: 0.84
+    tags:
+      - security
+      - java
+      - hibernate
+      - sql-injection
+  message:
+    title: Bind parameters in Hibernate query at `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` constructs a Hibernate query by concatenating or formatting strings instead of binding parameters.
+  remediation:
+    summary: >-
+      Use named or positional parameters via `setParameter`, the Criteria API, or typed query DSLs instead of interpolating values into the HQL or SQL text.

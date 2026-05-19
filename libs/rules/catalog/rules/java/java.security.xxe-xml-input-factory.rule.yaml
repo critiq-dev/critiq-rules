@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.xxe-xml-input-factory
+  title: Disable DTD and external entities on XMLInputFactory
+  summary: >-
+    `XMLInputFactory.newInstance()` and `XMLInputFactory.newFactory()` should set `SUPPORT_DTD` and `IS_SUPPORTING_EXTERNAL_ENTITIES` to false before reading untrusted XML.
+  rationale: >-
+    StAX `XMLInputFactory` defaults expand DTDs and external entities; without explicit hardening the parser is vulnerable to XXE and external resource disclosure.
+  tags:
+    - security
+    - java
+    - xxe
+    - stax
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+      - "**/*Tests.java"
+match:
+  fact:
+    kind: java.security.xxe-xml-input-factory
+    bind: issue
+emit:
+  finding:
+    category: security.xxe
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - java
+      - xxe
+      - stax
+  message:
+    title: Harden XMLInputFactory at `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` returns an `XMLInputFactory` without disabling DTD support or external entities.
+  remediation:
+    summary: >-
+      Set `XMLInputFactory.SUPPORT_DTD` and `XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES` to `false` before creating any reader.

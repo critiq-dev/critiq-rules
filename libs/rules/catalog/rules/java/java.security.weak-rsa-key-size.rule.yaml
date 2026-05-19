@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.weak-rsa-key-size
+  title: Use at least 2048-bit RSA keys
+  summary: RSA key generation should request a key size of 2048 bits or higher.
+  rationale: RSA moduli below 2048 bits are considered cryptographically weak and feasible to attack with modern resources.
+  tags:
+    - security
+    - java
+    - cryptography
+    - rsa
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.security.weak-rsa-key-size
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - java
+      - cryptography
+      - rsa
+  message:
+    title: Increase RSA key size near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` initializes RSA with fewer than 2048 bits."
+  remediation:
+    summary: Generate RSA keys with at least 2048 bits, or prefer Ed25519/ECDSA for new code where appropriate.

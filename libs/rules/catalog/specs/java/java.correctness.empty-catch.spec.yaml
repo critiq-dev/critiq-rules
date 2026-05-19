@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.empty-catch.rule.yaml
+fixtures:
+  - name: flags empty catch block
+    sourcePath: ./fixtures/java.correctness.empty-catch/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.empty-catch
+  - name: allows catch block with handling
+    sourcePath: ./fixtures/java.correctness.empty-catch/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

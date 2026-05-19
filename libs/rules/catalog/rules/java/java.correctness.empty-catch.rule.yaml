@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.empty-catch
+  title: Do not use empty catch blocks
+  summary: Catch blocks should handle or rethrow exceptions.
+  rationale: Empty catches hide failures and make debugging difficult.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.empty-catch
+    bind: issue
+emit:
+  finding:
+    category: correctness.exceptions
+    severity: medium
+    confidence: 0.88
+    tags:
+      - correctness
+      - java
+  message:
+    title: Handle exception in `${captures.issue.text}`
+    summary: "A catch block swallows an exception without handling it."
+  remediation:
+    summary: Log, recover, or rethrow the exception with context.

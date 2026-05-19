@@ -1,0 +1,10 @@
+import java.io.InputStream;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
+
+class StaxReader {
+  XMLStreamReader read(InputStream input) throws Exception {
+    XMLInputFactory factory = XMLInputFactory.newInstance();
+    return factory.createXMLStreamReader(input);
+  }
+}

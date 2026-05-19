@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.trust-all-certificates.rule.yaml
+fixtures:
+  - name: flags empty TrustManager bodies
+    sourcePath: ./fixtures/java.security.trust-all-certificates/trust_all.invalid.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.security.trust-all-certificates
+        - java.security.trust-all-certificates
+  - name: accepts validating TrustManager
+    sourcePath: ./fixtures/java.security.trust-all-certificates/trust_all.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

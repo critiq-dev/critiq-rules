@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unsafe-optional-get.rule.yaml
+fixtures:
+  - name: flags unchecked Optional.get
+    sourcePath: ./fixtures/java.correctness.unsafe-optional-get/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.unsafe-optional-get
+      allSeverities:
+        - medium
+  - name: allows guarded Optional.get
+    sourcePath: ./fixtures/java.correctness.unsafe-optional-get/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

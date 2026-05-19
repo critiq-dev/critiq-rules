@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.permissive-cors.rule.yaml
+fixtures:
+  - name: flags wildcard CrossOrigin annotation
+    sourcePath: ./fixtures/java.security.permissive-cors/permissive_cors.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.permissive-cors
+  - name: accepts explicit origin list
+    sourcePath: ./fixtures/java.security.permissive-cors/permissive_cors.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

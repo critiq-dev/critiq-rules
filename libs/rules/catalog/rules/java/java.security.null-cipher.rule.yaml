@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.null-cipher
+  title: Do not use NullCipher
+  summary: "Constructing `new NullCipher()` or `Cipher.getInstance(\"Null\")` performs no encryption."
+  rationale: NullCipher returns plaintext unchanged, providing no confidentiality and often disguising an intentional bypass of crypto.
+  tags:
+    - security
+    - java
+    - cryptography
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.security.null-cipher
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: critical
+    confidence: 0.97
+    tags:
+      - security
+      - java
+      - cryptography
+  message:
+    title: Replace NullCipher usage `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses NullCipher, which leaves data unencrypted."
+  remediation:
+    summary: "Use an authenticated cipher such as `AES/GCM/NoPadding` with a properly managed key."

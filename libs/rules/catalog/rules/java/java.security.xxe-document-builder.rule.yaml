@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.xxe-document-builder
+  title: Disable external entities on Java XML parsers
+  summary: >-
+    `DocumentBuilderFactory`, `SAXParserFactory`, and `TransformerFactory` instances should enable secure processing and disable external entities before they parse untrusted XML.
+  rationale: >-
+    Java XML parser factories default to processing external DTDs and entities; without explicit hardening they expose XXE that can exfiltrate files or perform server-side requests.
+  tags:
+    - security
+    - java
+    - xxe
+    - xml
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+      - "**/*Tests.java"
+match:
+  fact:
+    kind: java.security.xxe-document-builder
+    bind: issue
+emit:
+  finding:
+    category: security.xxe
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - java
+      - xxe
+      - xml
+  message:
+    title: Harden XML parser factory at `${captures.issue.text}`
+    summary: >-
+      `${captures.issue.text}` constructs a Java XML factory without secure processing or external-entity hardening.
+  remediation:
+    summary: >-
+      Call `setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true)` and disable `disallow-doctype-decl`, `external-general-entities`, and `external-parameter-entities` before parsing untrusted XML.

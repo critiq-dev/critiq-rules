@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.jwt-without-verification.rule.yaml
+fixtures:
+  - name: flags JWT decode without verify
+    sourcePath: ./fixtures/java.security.jwt-without-verification/jwt_without_verification.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.jwt-without-verification
+  - name: accepts JWT verify with algorithm
+    sourcePath: ./fixtures/java.security.jwt-without-verification/jwt_without_verification.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

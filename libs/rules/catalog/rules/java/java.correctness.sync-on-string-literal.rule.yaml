@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.sync-on-string-literal
+  title: Do not synchronize on string literals
+  summary: String literals are interned and shared across the JVM.
+  rationale: Synchronizing on interned strings can cause unexpected deadlocks.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.sync-on-string-literal
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: medium
+    confidence: 0.88
+    tags:
+      - correctness
+      - java
+  message:
+    title: Avoid synchronizing on string literal in `${captures.issue.text}`
+    summary: "A synchronized block locks on a string literal."
+  remediation:
+    summary: Synchronize on a private final lock object instead.

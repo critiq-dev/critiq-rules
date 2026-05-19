@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.unsafe-jackson-deserialization.rule.yaml
+fixtures:
+  - name: flags Jackson default typing toggles
+    sourcePath: ./fixtures/java.security.unsafe-jackson-deserialization/invalid.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.security.unsafe-jackson-deserialization
+        - java.security.unsafe-jackson-deserialization
+      allSeverities:
+        - critical
+        - critical
+  - name: accepts mapper with default typing disabled and Id.NAME annotations
+    sourcePath: ./fixtures/java.security.unsafe-jackson-deserialization/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

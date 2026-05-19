@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.insecure-cipher-mode.rule.yaml
+fixtures:
+  - name: flags AES with ECB mode
+    sourcePath: ./fixtures/java.security.insecure-cipher-mode/insecure_cipher_mode.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.insecure-cipher-mode
+  - name: accepts AES with GCM mode
+    sourcePath: ./fixtures/java.security.insecure-cipher-mode/insecure_cipher_mode.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

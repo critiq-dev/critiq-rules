@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.security.trust-all-certificates
+  title: Do not trust every TLS certificate
+  summary: "TrustManagers must validate certificates; empty `checkServerTrusted`/`checkClientTrusted` bodies or `TrustAllStrategy` accept any peer."
+  rationale: Disabling certificate validation defeats TLS authentication and enables man-in-the-middle attacks.
+  tags:
+    - security
+    - java
+    - tls
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.security.trust-all-certificates
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: critical
+    confidence: 0.93
+    tags:
+      - security
+      - java
+      - tls
+  message:
+    title: Restore certificate validation near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` accepts any TLS certificate without verification."
+  remediation:
+    summary: "Use the platform default `TrustManager` or pin specific CAs; never ship a TrustManager whose validation methods are empty."

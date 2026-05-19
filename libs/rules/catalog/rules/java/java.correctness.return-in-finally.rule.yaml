@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.return-in-finally
+  title: Avoid control flow in finally blocks
+  summary: return, break, continue, and throw in finally alter normal flow.
+  rationale: Control flow in finally can suppress exceptions and confuse readers.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.return-in-finally
+    bind: issue
+emit:
+  finding:
+    category: correctness.control-flow
+    severity: medium
+    confidence: 0.88
+    tags:
+      - correctness
+      - java
+  message:
+    title: Remove control flow from finally in `${captures.issue.text}`
+    summary: "A finally block contains return, break, continue, or throw."
+  remediation:
+    summary: Keep finally blocks limited to cleanup without altering control flow.

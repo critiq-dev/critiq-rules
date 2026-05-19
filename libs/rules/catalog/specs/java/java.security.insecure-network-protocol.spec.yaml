@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.security.insecure-network-protocol.rule.yaml
+fixtures:
+  - name: flags ftp URL constructor
+    sourcePath: ./fixtures/java.security.insecure-network-protocol/insecure_network_protocol.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.security.insecure-network-protocol
+  - name: accepts https URL constructor
+    sourcePath: ./fixtures/java.security.insecure-network-protocol/insecure_network_protocol.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
