@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.thread-sleep-in-async
+  title: Avoid blocking thread sleep in async functions
+  summary: std::thread::sleep blocks the executor thread inside async code.
+  rationale: >-
+    `std::thread::sleep` blocks the current OS thread. Inside `async fn` this stalls
+    the runtime worker and harms throughput. Prefer `tokio::time::sleep` instead.
+  tags:
+    - correctness
+    - rust
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.thread-sleep-in-async
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+      - concurrency
+  message:
+    title: Replace blocking sleep in async code
+    summary: "`${captures.issue.text}` blocks an async executor thread."
+  remediation:
+    summary: Use `tokio::time::sleep` or move blocking work to `spawn_blocking`.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.insecure-ssh-host-key.rule.yaml
+fixtures:
+  - name: flags insecure pattern
+    sourcePath: ./fixtures/rust.security.insecure-ssh-host-key/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.insecure-ssh-host-key
+  - name: accepts secure pattern
+    sourcePath: ./fixtures/rust.security.insecure-ssh-host-key/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

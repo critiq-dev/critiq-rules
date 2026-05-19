@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.jwt-without-verification.rule.yaml
+fixtures:
+  - name: flags insecure pattern
+    sourcePath: ./fixtures/rust.security.jwt-without-verification/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.jwt-without-verification
+  - name: accepts secure pattern
+    sourcePath: ./fixtures/rust.security.jwt-without-verification/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

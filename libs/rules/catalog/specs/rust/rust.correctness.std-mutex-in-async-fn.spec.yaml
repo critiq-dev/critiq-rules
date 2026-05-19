@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.std-mutex-in-async-fn.rule.yaml
+fixtures:
+  - name: flags std-mutex-in-async-fn
+    sourcePath: ./fixtures/rust.correctness.std-mutex-in-async-fn/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.std-mutex-in-async-fn
+  - name: accepts safe alternative for std-mutex-in-async-fn
+    sourcePath: ./fixtures/rust.correctness.std-mutex-in-async-fn/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

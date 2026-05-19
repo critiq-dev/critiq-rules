@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.mutex-held-across-await.rule.yaml
+fixtures:
+  - name: flags mutex-held-across-await
+    sourcePath: ./fixtures/rust.correctness.mutex-held-across-await/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.mutex-held-across-await
+  - name: accepts safe alternative for mutex-held-across-await
+    sourcePath: ./fixtures/rust.correctness.mutex-held-across-await/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

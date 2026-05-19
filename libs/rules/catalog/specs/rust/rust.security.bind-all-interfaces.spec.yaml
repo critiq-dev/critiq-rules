@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.bind-all-interfaces.rule.yaml
+fixtures:
+  - name: flags insecure pattern
+    sourcePath: ./fixtures/rust.security.bind-all-interfaces/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.bind-all-interfaces
+  - name: accepts secure pattern
+    sourcePath: ./fixtures/rust.security.bind-all-interfaces/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

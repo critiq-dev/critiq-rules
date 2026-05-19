@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.tls-missing-min-version.rule.yaml
+fixtures:
+  - name: flags insecure pattern
+    sourcePath: ./fixtures/rust.security.tls-missing-min-version/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.tls-missing-min-version
+  - name: accepts secure pattern
+    sourcePath: ./fixtures/rust.security.tls-missing-min-version/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

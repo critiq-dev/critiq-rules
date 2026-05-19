@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.insecure-temp-file
+  title: Avoid predictable or permissionless temporary files
+  summary: >-
+    Temporary file creation should use secure helpers with random suffixes and restrictive permissions.
+  rationale: >-
+    Predictable temp paths and default-permission temp files enable symlink races and information disclosure.
+  tags:
+    - security
+    - rust
+    - filesystem
+    - tempfile
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.insecure-temp-file
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: medium
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - filesystem
+      - tempfile
+  message:
+    title: Use secure temp file creation near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` creates a temporary file with an insecure pattern."
+  remediation:
+    summary: >-
+      Use `tempfile::Builder` with explicit permissions and patterns containing `*`, or `std::env::temp_dir` with random names.

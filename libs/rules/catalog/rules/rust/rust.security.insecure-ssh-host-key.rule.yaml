@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.insecure-ssh-host-key
+  title: Verify SSH host keys before connecting
+  summary: >-
+    SSH clients must not disable host key verification.
+  rationale: >-
+    Skipping host key checks enables person-in-the-middle attacks against SSH sessions.
+  tags:
+    - security
+    - rust
+    - ssh
+    - network
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.insecure-ssh-host-key
+    bind: issue
+emit:
+  finding:
+    category: security.network
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - ssh
+      - network
+  message:
+    title: Enable SSH host key verification near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` disables SSH host key verification."
+  remediation:
+    summary: >-
+      Keep host key checking enabled and pin known host keys or use a trusted known_hosts store.

@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.weak-tls-cipher
+  title: Avoid weak TLS cipher suites
+  summary: >-
+    Rust TLS configuration must not include cipher suites using RC4, 3DES, NULL, or EXPORT algorithms.
+  rationale: >-
+    Weak cipher suites are vulnerable to practical attacks and should not be negotiated.
+  tags:
+    - security
+    - rust
+    - tls
+    - cryptography
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.weak-tls-cipher
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - tls
+      - cryptography
+  message:
+    title: Replace weak TLS cipher near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` references a weak TLS cipher suite."
+  remediation:
+    summary: >-
+      Use modern AEAD cipher suites such as TLS_AES_128_GCM_SHA256 or TLS_CHACHA20_POLY1305_SHA256.

@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.unchecked-index
+  title: Prefer fallible slice access for variable indices
+  summary: Direct indexing with a variable can panic when the index is out of bounds.
+  rationale: >-
+    Slice indexing with a non-literal index panics on bounds failure. Use `.get(index)`
+    when the index comes from a variable and handle `None` explicitly.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.unchecked-index
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: medium
+    confidence: 0.8
+    tags:
+      - correctness
+      - rust
+  message:
+    title: Use fallible access for variable indices
+    summary: "`${captures.issue.text}` indexes a slice with a variable that may be out of bounds."
+  remediation:
+    summary: Replace direct indexing with `.get(index)` and handle the `None` case.

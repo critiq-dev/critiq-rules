@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.forget-join-handle.rule.yaml
+fixtures:
+  - name: flags forget-join-handle
+    sourcePath: ./fixtures/rust.correctness.forget-join-handle/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.forget-join-handle
+  - name: accepts safe alternative for forget-join-handle
+    sourcePath: ./fixtures/rust.correctness.forget-join-handle/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

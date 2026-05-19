@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.shell-command-spawn
+  title: Avoid shell invocation via Command
+  summary: >-
+    Spawning `/bin/sh` or `bash` with `-c` enables shell metacharacter injection.
+  rationale: >-
+    Shell interpretation expands attacker-controlled input into arbitrary command execution.
+  tags:
+    - security
+    - rust
+    - command-injection
+    - shell
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.shell-command-spawn
+    bind: issue
+emit:
+  finding:
+    category: security.command-injection
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - command-injection
+      - shell
+  message:
+    title: Avoid shell spawn near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` spawns a shell with `-c`, enabling command injection."
+  remediation:
+    summary: >-
+      Invoke binaries directly with explicit arguments instead of routing through a shell.

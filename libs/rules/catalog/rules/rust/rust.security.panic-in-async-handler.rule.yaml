@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.panic-in-async-handler
+  title: Avoid panic and unwrap in async handlers
+  summary: >-
+    Async request handlers should propagate errors instead of panicking or unwrapping Results.
+  rationale: >-
+    Panics in async handlers can abort tasks and leak error details under load.
+  tags:
+    - security
+    - rust
+    - async
+    - reliability
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.panic-in-async-handler
+    bind: issue
+emit:
+  finding:
+    category: security.reliability
+    severity: medium
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - async
+      - reliability
+  message:
+    title: Handle errors in async handler near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` panics or unwraps inside an async function."
+  remediation:
+    summary: >-
+      Return `Result` from async handlers and map errors to appropriate HTTP responses.

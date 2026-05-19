@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.weak-rsa-key-size
+  title: Use RSA keys of at least 2048 bits
+  summary: >-
+    RSA key generation must use at least 2048 bits.
+  rationale: >-
+    RSA keys shorter than 2048 bits are vulnerable to factorization attacks with modern compute.
+  tags:
+    - security
+    - rust
+    - cryptography
+    - rsa
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.weak-rsa-key-size
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - cryptography
+      - rsa
+  message:
+    title: Increase RSA key size near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` generates an RSA key smaller than 2048 bits."
+  remediation:
+    summary: >-
+      Generate RSA keys with at least 2048 bits, or prefer Ed25519/ECDSA for new designs.

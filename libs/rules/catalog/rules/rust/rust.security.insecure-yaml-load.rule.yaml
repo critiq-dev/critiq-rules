@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.insecure-yaml-load
+  title: Avoid untyped YAML deserialization
+  summary: >-
+    Untyped `serde_yaml` deserialization can instantiate arbitrary types from untrusted input.
+  rationale: >-
+    YAML loaders without strict typing enable unsafe object graphs and unexpected type coercion.
+  tags:
+    - security
+    - rust
+    - yaml
+    - deserialization
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.insecure-yaml-load
+    bind: issue
+emit:
+  finding:
+    category: security.deserialization
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - yaml
+      - deserialization
+  message:
+    title: Use typed YAML parsing near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` deserializes YAML without a constrained target type."
+  remediation:
+    summary: >-
+      Deserialize into explicit structs or enums and validate input before use.

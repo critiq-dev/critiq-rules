@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.tls-missing-min-version
+  title: Set a minimum TLS protocol version in Rust TLS configs
+  summary: >-
+    Rust TLS client and server configuration should set an explicit minimum protocol version (TLS 1.2 or newer).
+  rationale: >-
+    Without a minimum version, legacy SSL/TLS protocols may be negotiated, weakening transport security.
+  tags:
+    - security
+    - rust
+    - tls
+    - cryptography
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.tls-missing-min-version
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - tls
+      - cryptography
+  message:
+    title: Set minimum TLS version near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` configures TLS without an explicit minimum protocol version."
+  remediation:
+    summary: >-
+      Set `min_protocol_version` (rustls) or `min_tls_version` (reqwest) to TLS 1.2 or newer.

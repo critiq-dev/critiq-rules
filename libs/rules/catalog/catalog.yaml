@@ -549,6 +549,34 @@ rules:
     rulePath: ./rules/ruby/ruby.performance.no-unbounded-concurrency.rule.yaml
     presets:
       - strict
+  - id: rust.correctness.block-on-in-async
+    rulePath: ./rules/rust/rust.correctness.block-on-in-async.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.forget-join-handle
+    rulePath: ./rules/rust/rust.correctness.forget-join-handle.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.mutex-held-across-await
+    rulePath: ./rules/rust/rust.correctness.mutex-held-across-await.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.std-mutex-in-async-fn
+    rulePath: ./rules/rust/rust.correctness.std-mutex-in-async-fn.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.thread-sleep-in-async
+    rulePath: ./rules/rust/rust.correctness.thread-sleep-in-async.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.unbounded-channel
+    rulePath: ./rules/rust/rust.correctness.unbounded-channel.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.unchecked-index
+    rulePath: ./rules/rust/rust.correctness.unchecked-index.rule.yaml
+    presets:
+      - strict
   - id: rust.performance.no-regex-construction-in-loop
     rulePath: ./rules/rust/rust.performance.no-regex-construction-in-loop.rule.yaml
     presets:
@@ -1709,6 +1737,41 @@ rules:
     presets:
       - strict
       - security
+  - id: rust.security.bind-all-interfaces
+    rulePath: ./rules/rust/rust.security.bind-all-interfaces.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.insecure-ssh-host-key
+    rulePath: ./rules/rust/rust.security.insecure-ssh-host-key.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.insecure-ssl-protocol
+    rulePath: ./rules/rust/rust.security.insecure-ssl-protocol.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.insecure-temp-file
+    rulePath: ./rules/rust/rust.security.insecure-temp-file.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.insecure-yaml-load
+    rulePath: ./rules/rust/rust.security.insecure-yaml-load.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.jwt-without-verification
+    rulePath: ./rules/rust/rust.security.jwt-without-verification.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.panic-in-async-handler
+    rulePath: ./rules/rust/rust.security.panic-in-async-handler.rule.yaml
+    presets:
+      - strict
+      - security
   - id: rust.security.rocket-panic-prone-request-handler
     rulePath: ./rules/rust/rust.security.rocket-panic-prone-request-handler.rule.yaml
     presets:
@@ -1716,6 +1779,11 @@ rules:
       - security
   - id: rust.security.rocket-unsafe-template-output
     rulePath: ./rules/rust/rust.security.rocket-unsafe-template-output.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.shell-command-spawn
+    rulePath: ./rules/rust/rust.security.shell-command-spawn.rule.yaml
     presets:
       - strict
       - security
@@ -1729,8 +1797,28 @@ rules:
     presets:
       - strict
       - security
+  - id: rust.security.tls-missing-min-version
+    rulePath: ./rules/rust/rust.security.tls-missing-min-version.rule.yaml
+    presets:
+      - strict
+      - security
   - id: rust.security.warp-blocking-or-panic-in-async-handler
     rulePath: ./rules/rust/rust.security.warp-blocking-or-panic-in-async-handler.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.weak-crypto-import
+    rulePath: ./rules/rust/rust.security.weak-crypto-import.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.weak-rsa-key-size
+    rulePath: ./rules/rust/rust.security.weak-rsa-key-size.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.weak-tls-cipher
+    rulePath: ./rules/rust/rust.security.weak-tls-cipher.rule.yaml
     presets:
       - strict
       - security

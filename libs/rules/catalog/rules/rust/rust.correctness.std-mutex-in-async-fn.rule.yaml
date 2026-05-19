@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.std-mutex-in-async-fn
+  title: Prefer async mutex primitives in async functions
+  summary: std::sync::Mutex in async code encourages blocking and await deadlocks.
+  rationale: >-
+    `std::sync::Mutex` blocks the executor when contended. In `async fn`, prefer
+    `tokio::sync::Mutex` or `async_lock` primitives that cooperate with the runtime.
+  tags:
+    - correctness
+    - rust
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.std-mutex-in-async-fn
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+      - concurrency
+  message:
+    title: Replace std mutex in async code
+    summary: "`${captures.issue.text}` uses `std::sync::Mutex` inside an `async fn`."
+  remediation:
+    summary: Switch to `tokio::sync::Mutex` or keep blocking locks outside async contexts.

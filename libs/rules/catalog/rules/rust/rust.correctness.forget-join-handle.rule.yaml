@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.forget-join-handle
+  title: Do not forget spawned task handles
+  summary: Forgetting a JoinHandle leaks the task and drops panic propagation.
+  rationale: >-
+    `std::mem::forget` on a `tokio::spawn` return value or `JoinHandle` abandons
+    the task without awaiting completion or observing panics.
+  tags:
+    - correctness
+    - rust
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.forget-join-handle
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+      - concurrency
+  message:
+    title: Await or detach spawned tasks explicitly
+    summary: "`${captures.issue.text}` forgets a task handle instead of awaiting it."
+  remediation:
+    summary: Store the `JoinHandle`, await it, or use a structured shutdown path.

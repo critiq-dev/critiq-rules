@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.block-on-in-async.rule.yaml
+fixtures:
+  - name: flags block-on-in-async
+    sourcePath: ./fixtures/rust.correctness.block-on-in-async/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.block-on-in-async
+  - name: accepts safe alternative for block-on-in-async
+    sourcePath: ./fixtures/rust.correctness.block-on-in-async/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

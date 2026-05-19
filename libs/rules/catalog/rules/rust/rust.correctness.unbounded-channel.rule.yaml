@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.unbounded-channel
+  title: Avoid unbounded async channels
+  summary: Unbounded channels can grow without backpressure and exhaust memory.
+  rationale: >-
+    `tokio::sync::mpsc::unbounded_channel` and `futures::channel::mpsc::unbounded`
+    accept messages without capacity limits, which can cause unbounded memory growth
+    under load.
+  tags:
+    - correctness
+    - rust
+    - resource-leak
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.unbounded-channel
+    bind: issue
+emit:
+  finding:
+    category: correctness.resource-leak
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+      - resource-leak
+  message:
+    title: Prefer bounded channels for backpressure
+    summary: "`${captures.issue.text}` creates an unbounded channel."
+  remediation:
+    summary: Use a bounded `mpsc::channel` with an explicit capacity.

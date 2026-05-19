@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.weak-crypto-import
+  title: Avoid importing broken or deprecated crypto crates
+  summary: >-
+    Production Rust code should not import `md5`, `sha1`, `des`, or `rc4` for security-sensitive purposes.
+  rationale: >-
+    MD5 and SHA-1 are broken hash functions, DES has an obsolete key size, and RC4 has known biases.
+  tags:
+    - security
+    - rust
+    - cryptography
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.weak-crypto-import
+    bind: issue
+emit:
+  finding:
+    category: security.cryptography
+    severity: medium
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - cryptography
+  message:
+    title: Replace weak crypto import at `${captures.issue.text}`
+    summary: "`${captures.issue.text}` imports a broken or deprecated crypto crate."
+  remediation:
+    summary: >-
+      Use `sha2`, `blake3`, or `aes-gcm` for modern cryptographic primitives.

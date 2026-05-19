@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.jwt-without-verification
+  title: Verify JWT signatures before trusting claims
+  summary: >-
+    JWT parsing must use a verification key and must not disable signature validation.
+  rationale: >-
+    Trusting unverified JWTs allows attackers to forge tokens with arbitrary claims.
+  tags:
+    - security
+    - rust
+    - jwt
+    - authentication
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.jwt-without-verification
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - jwt
+      - authentication
+  message:
+    title: Verify JWT signature near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` parses a JWT without verifying its signature."
+  remediation:
+    summary: >-
+      Pass a `DecodingKey` to `decode` and validate claims with a strict `Validation` configuration.

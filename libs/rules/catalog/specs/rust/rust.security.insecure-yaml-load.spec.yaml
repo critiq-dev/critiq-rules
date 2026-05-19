@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.insecure-yaml-load.rule.yaml
+fixtures:
+  - name: flags insecure pattern
+    sourcePath: ./fixtures/rust.security.insecure-yaml-load/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.insecure-yaml-load
+  - name: accepts secure pattern
+    sourcePath: ./fixtures/rust.security.insecure-yaml-load/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

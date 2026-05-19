@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.block-on-in-async
+  title: Avoid block_on inside async functions
+  summary: Calling block_on from async code can deadlock the runtime.
+  rationale: >-
+    `Handle::current().block_on`, `Runtime::block_on`, and `futures::executor::block_on`
+    block the async executor thread and can deadlock when invoked from `async fn`.
+  tags:
+    - correctness
+    - rust
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.block-on-in-async
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+      - concurrency
+  message:
+    title: Remove block_on from async code
+    summary: "`${captures.issue.text}` can deadlock the async runtime."
+  remediation:
+    summary: Await the future directly or run blocking work on a dedicated runtime thread.
