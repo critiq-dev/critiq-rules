@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.unsafe-include-with-user-input
+  title: Avoid include/require with user-controlled paths
+  summary: >-
+    Include and require statements must not load files from request-derived or tainted path values.
+  rationale: >-
+    User-controlled includes can load attacker-chosen PHP and lead to remote code execution.
+  tags:
+    - security
+    - php
+    - inclusion
+    - injection
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.unsafe-include-with-user-input
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - php
+      - inclusion
+  message:
+    title: Harden include path in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` includes or requires a path influenced by untrusted input."
+  remediation:
+    summary: >-
+      Map user input to an allowlisted template name and include only fixed, reviewed file paths.

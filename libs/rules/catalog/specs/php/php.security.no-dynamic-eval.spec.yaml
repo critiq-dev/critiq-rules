@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.no-dynamic-eval.rule.yaml
+fixtures:
+  - name: flags dynamic execution helpers
+    sourcePath: ./fixtures/php.security.no-dynamic-eval/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.no-dynamic-eval
+  - name: ignores normal assert
+    sourcePath: ./fixtures/php.security.no-dynamic-eval/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

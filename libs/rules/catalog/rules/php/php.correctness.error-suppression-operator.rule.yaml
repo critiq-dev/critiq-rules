@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.error-suppression-operator
+  title: Avoid the error suppression operator
+  summary: The `@` operator hides warnings and errors instead of handling them explicitly.
+  rationale: Suppressed failures make debugging harder and can mask security or data integrity issues.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.error-suppression-operator
+    bind: issue
+emit:
+  finding:
+    category: correctness.error-handling
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove error suppression in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses `@` to suppress PHP errors or warnings."
+  remediation:
+    summary: Handle expected failures with explicit checks, try/catch where appropriate, or fix the underlying condition instead of silencing errors.

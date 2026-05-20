@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.weak-cipher
+  title: Avoid weak PHP cipher algorithms
+  summary: >-
+    OpenSSL and mcrypt usage should not rely on DES, RC4, Blowfish, ECB mode, or legacy mcrypt APIs.
+  rationale: >-
+    Weak ciphers and modes are vulnerable to practical cryptanalysis and do not meet modern confidentiality standards.
+  tags:
+    - security
+    - php
+    - crypto
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.weak-cipher
+    bind: issue
+emit:
+  finding:
+    category: security.weak-crypto
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - php
+      - crypto
+  message:
+    title: Replace weak cipher usage in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a weak cipher algorithm or mode."
+  remediation:
+    summary: >-
+      Use modern authenticated encryption (for example AES-GCM) via sodium or OpenSSL with vetted algorithms and modes.

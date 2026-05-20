@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.weak-cipher.rule.yaml
+fixtures:
+  - name: flags weak cipher usage
+    sourcePath: ./fixtures/php.security.weak-cipher/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.weak-cipher
+  - name: ignores modern cipher usage
+    sourcePath: ./fixtures/php.security.weak-cipher/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

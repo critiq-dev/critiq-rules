@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.duplicate-array-key.rule.yaml
+fixtures:
+  - name: flags duplicate keys in array literals
+    sourcePath: ./fixtures/php.correctness.duplicate-array-key/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.duplicate-array-key
+  - name: ignores unique array keys
+    sourcePath: ./fixtures/php.correctness.duplicate-array-key/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

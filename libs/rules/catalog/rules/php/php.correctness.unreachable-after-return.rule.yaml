@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.unreachable-after-return
+  title: Remove unreachable statements after return or throw
+  summary: Code after `return` or `throw` in the same block never runs.
+  rationale: Unreachable statements usually indicate dead code, incomplete refactors, or missing control-flow fixes.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.unreachable-after-return
+    bind: issue
+emit:
+  finding:
+    category: correctness.control-flow
+    severity: low
+    confidence: 0.85
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove unreachable statement
+    summary: "This statement appears after a `return` or `throw` in the same block and will not execute."
+  remediation:
+    summary: Delete the dead code or move it before the terminal statement if it is still required.

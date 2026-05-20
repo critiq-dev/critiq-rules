@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.insecure-session-id-generation.rule.yaml
+fixtures:
+  - name: flags weak session id assignment
+    sourcePath: ./fixtures/php.security.insecure-session-id-generation/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.insecure-session-id-generation
+  - name: ignores default session start
+    sourcePath: ./fixtures/php.security.insecure-session-id-generation/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.debug-function-exposure
+  title: Remove debug dump helpers from production PHP
+  summary: >-
+    var_dump, print_r, debug_zval_dump, and xdebug helpers should not ship in application code paths.
+  rationale: >-
+    Debug helpers can leak secrets, PII, and internal object state to logs or HTTP responses.
+  tags:
+    - security
+    - php
+    - debug
+    - information-leakage
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.php"
+match:
+  fact:
+    kind: php.security.debug-function-exposure
+    bind: issue
+emit:
+  finding:
+    category: security.information-leakage
+    severity: medium
+    confidence: 0.86
+    tags:
+      - security
+      - php
+      - debug
+  message:
+    title: Remove debug helper in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a debug dump helper in non-test code."
+  remediation:
+    summary: >-
+      Remove debug helpers from production paths or route diagnostics through structured logging with redaction.

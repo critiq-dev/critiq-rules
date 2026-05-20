@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.error-suppression-operator.rule.yaml
+fixtures:
+  - name: flags error suppression operator
+    sourcePath: ./fixtures/php.correctness.error-suppression-operator/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.error-suppression-operator
+  - name: ignores explicit error handling
+    sourcePath: ./fixtures/php.correctness.error-suppression-operator/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

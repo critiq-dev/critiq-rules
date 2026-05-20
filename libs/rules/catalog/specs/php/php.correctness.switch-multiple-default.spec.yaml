@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.switch-multiple-default.rule.yaml
+fixtures:
+  - name: flags multiple default cases
+    sourcePath: ./fixtures/php.correctness.switch-multiple-default/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.switch-multiple-default
+  - name: ignores single default case
+    sourcePath: ./fixtures/php.correctness.switch-multiple-default/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

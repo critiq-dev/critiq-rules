@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.unreachable-after-return.rule.yaml
+fixtures:
+  - name: flags unreachable statements after return
+    sourcePath: ./fixtures/php.correctness.unreachable-after-return/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.unreachable-after-return
+  - name: ignores reachable control flow
+    sourcePath: ./fixtures/php.correctness.unreachable-after-return/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

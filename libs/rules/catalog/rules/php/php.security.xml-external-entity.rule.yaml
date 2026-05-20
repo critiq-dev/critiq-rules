@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.xml-external-entity
+  title: Harden PHP XML parsing against external entities
+  summary: >-
+    XML parsing should disable external entities and avoid LIBXML_NOENT or libxml_disable_entity_loader(false).
+  rationale: >-
+    Unsafe XML parser configuration enables XXE attacks that can leak files and reach internal services.
+  tags:
+    - security
+    - php
+    - xml
+    - xxe
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.xml-external-entity
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - php
+      - xml
+      - xxe
+  message:
+    title: Harden XML parsing in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` parses XML without external-entity protections."
+  remediation:
+    summary: >-
+      Call libxml_disable_entity_loader(true) before parsing and pass LIBXML_NONET; never enable LIBXML_NOENT.

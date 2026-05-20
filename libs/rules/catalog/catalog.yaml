@@ -488,6 +488,26 @@ rules:
     rulePath: ./rules/java/java.performance.no-unbounded-concurrency.rule.yaml
     presets:
       - strict
+  - id: php.correctness.duplicate-array-key
+    rulePath: ./rules/php/php.correctness.duplicate-array-key.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.error-suppression-operator
+    rulePath: ./rules/php/php.correctness.error-suppression-operator.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.nullsafe-returned-by-reference
+    rulePath: ./rules/php/php.correctness.nullsafe-returned-by-reference.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.switch-multiple-default
+    rulePath: ./rules/php/php.correctness.switch-multiple-default.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.unreachable-after-return
+    rulePath: ./rules/php/php.correctness.unreachable-after-return.rule.yaml
+    presets:
+      - strict
   - id: php.performance.no-regex-construction-in-loop
     rulePath: ./rules/php/php.performance.no-regex-construction-in-loop.rule.yaml
     presets:
@@ -2082,6 +2102,36 @@ rules:
       - security
   - id: php.security.insecure-session-or-cookie-config
     rulePath: ./rules/php/php.security.insecure-session-or-cookie-config.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.debug-function-exposure
+    rulePath: ./rules/php/php.security.debug-function-exposure.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.insecure-session-id-generation
+    rulePath: ./rules/php/php.security.insecure-session-id-generation.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.no-dynamic-eval
+    rulePath: ./rules/php/php.security.no-dynamic-eval.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.unsafe-include-with-user-input
+    rulePath: ./rules/php/php.security.unsafe-include-with-user-input.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.weak-cipher
+    rulePath: ./rules/php/php.security.weak-cipher.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: php.security.xml-external-entity
+    rulePath: ./rules/php/php.security.xml-external-entity.rule.yaml
     presets:
       - strict
       - security

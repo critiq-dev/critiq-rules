@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.nullsafe-returned-by-reference
+  title: Do not return nullsafe access by reference
+  summary: By-reference arrow functions cannot safely return nullsafe property access.
+  rationale: Nullsafe access may evaluate to null, which cannot be returned by reference and triggers runtime errors.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.nullsafe-returned-by-reference
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.92
+    tags:
+      - correctness
+      - php
+  message:
+    title: Fix by-reference arrow function using nullsafe access
+    summary: "`${captures.issue.text}` returns a nullsafe property access by reference."
+  remediation:
+    summary: Return a value by copy, guard against null before returning a reference, or avoid by-reference arrow functions for nullable targets.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.xml-external-entity.rule.yaml
+fixtures:
+  - name: flags unhardened xml load
+    sourcePath: ./fixtures/php.security.xml-external-entity/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.xml-external-entity
+  - name: ignores hardened xml load
+    sourcePath: ./fixtures/php.security.xml-external-entity/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

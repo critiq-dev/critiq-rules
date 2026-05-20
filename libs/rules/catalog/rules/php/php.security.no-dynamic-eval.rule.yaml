@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.no-dynamic-eval
+  title: Avoid dynamic PHP code execution
+  summary: >-
+    Do not execute runtime-generated PHP via eval, string assert, or create_function.
+  rationale: >-
+    Dynamic execution turns untrusted or mutable input into executable code and expands injection risk.
+  tags:
+    - security
+    - php
+    - execution
+    - injection
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.no-dynamic-eval
+    bind: issue
+emit:
+  finding:
+    category: security.execution
+    severity: high
+    confidence: 0.94
+    tags:
+      - security
+      - php
+      - execution
+  message:
+    title: Remove dynamic execution in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` executes PHP code dynamically."
+  remediation:
+    summary: >-
+      Replace eval, string assert, and create_function with explicit control flow, parsing, or allowlisted dispatch.

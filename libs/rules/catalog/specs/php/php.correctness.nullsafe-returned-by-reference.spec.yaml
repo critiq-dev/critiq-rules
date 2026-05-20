@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.nullsafe-returned-by-reference.rule.yaml
+fixtures:
+  - name: flags nullsafe access in by-reference arrow function
+    sourcePath: ./fixtures/php.correctness.nullsafe-returned-by-reference/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.nullsafe-returned-by-reference
+  - name: ignores safe arrow function returns
+    sourcePath: ./fixtures/php.correctness.nullsafe-returned-by-reference/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

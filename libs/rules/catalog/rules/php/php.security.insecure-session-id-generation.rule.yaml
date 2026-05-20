@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.insecure-session-id-generation
+  title: Avoid predictable or user-supplied session IDs
+  summary: >-
+    session_id must not be set from weak hash helpers, uniqid, or request-derived values.
+  rationale: >-
+    Predictable or attacker-controlled session identifiers enable fixation and session hijacking.
+  tags:
+    - security
+    - php
+    - session
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.insecure-session-id-generation
+    bind: issue
+emit:
+  finding:
+    category: security.session-management
+    severity: high
+    confidence: 0.88
+    tags:
+      - security
+      - php
+      - session
+  message:
+    title: Harden session ID generation in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` sets session_id from weak or untrusted input."
+  remediation:
+    summary: >-
+      Let PHP generate session identifiers with session_start, or use random_bytes and bin2hex for custom IDs.

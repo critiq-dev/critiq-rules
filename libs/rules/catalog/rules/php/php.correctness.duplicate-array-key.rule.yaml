@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.duplicate-array-key
+  title: Avoid duplicate keys in array literals
+  summary: Repeated keys in an array literal overwrite earlier entries.
+  rationale: Silent key replacement hides bugs and can invalidate intended configuration values.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.duplicate-array-key
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - php
+  message:
+    title: Resolve duplicate array key `${captures.issue.text}`
+    summary: "`${captures.issue.text}` appears multiple times in a single array literal."
+  remediation:
+    summary: Keep each key unique and merge or rename entries so earlier values are not silently replaced.
