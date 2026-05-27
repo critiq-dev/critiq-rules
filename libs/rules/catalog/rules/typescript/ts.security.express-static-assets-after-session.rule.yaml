@@ -5,6 +5,21 @@ metadata:
   title: Serve static assets before session middleware
   summary: Static assets should be mounted before session middleware when they do not need session state.
   rationale: Serving public assets after session middleware broadens the session surface and adds unnecessary auth-state handling to static traffic.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-614
+      title: Sensitive Cookie Without Secure Attribute
+    - kind: owasp
+      title: Session Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - express
@@ -34,4 +49,5 @@ emit:
     summary: Static asset middleware is mounted after session middleware in this file.
   remediation:
     summary: Mount `express.static()` before session middleware unless the static path genuinely requires session state.
+
 

@@ -5,6 +5,15 @@ metadata:
   title: Upgrade DOM sanitization dependency
   summary: DOM sanitization libraries should stay on patched versions before they are trusted for untrusted HTML.
   rationale: Older sanitizer versions can miss browser parsing edge cases and leave XSS protections incomplete.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-1104
+      title: Use of Unmaintained Third Party Components
+    - kind: owasp
+      title: Vulnerable Dependency Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Vulnerable_Dependency_Management_Cheat_Sheet.html
   tags:
     - security
     - dependency
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` is below the minimum sanitizer version Critiq treats as safe for untrusted HTML."
   remediation:
     summary: Upgrade the package, then keep HTML sanitizer usage behind a small reviewed wrapper.
+

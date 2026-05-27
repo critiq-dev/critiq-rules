@@ -5,6 +5,15 @@ metadata:
   title: Remove sensitive claims from JWT payloads
   summary: JWT payloads should avoid embedding PII or secrets unless absolutely required.
   rationale: Client-visible tokens often outlive a single request and can leak more data than intended.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-287
+      title: Improper Authentication
+    - kind: owasp
+      title: JSON Web Token Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
   tags:
     - security
     - privacy
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` includes claims that expose personal or secret data in a token payload."
   remediation:
     summary: Keep JWT claims minimal. Prefer stable identifiers, not direct PII or secret-bearing fields.
+
 

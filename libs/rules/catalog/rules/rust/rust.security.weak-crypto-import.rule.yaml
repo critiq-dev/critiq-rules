@@ -7,6 +7,15 @@ metadata:
     Production Rust code should not import `md5`, `sha1`, `des`, or `rc4` for security-sensitive purposes.
   rationale: >-
     MD5 and SHA-1 are broken hash functions, DES has an obsolete key size, and RC4 has known biases.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - rust
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Use `sha2`, `blake3`, or `aes-gcm` for modern cryptographic primitives.
+

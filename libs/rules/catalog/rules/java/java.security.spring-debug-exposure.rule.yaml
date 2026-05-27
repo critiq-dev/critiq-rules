@@ -5,6 +5,18 @@ metadata:
   title: Avoid Spring Boot debug and actuator exposure in shipped configuration
   summary: Spring Boot configuration should not force debug logging or wildcard actuator exposure.
   rationale: Debug modes and fully exposed actuator endpoints leak internals and expand remote attack surface when configs ship to production.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-209
+      title: Generation of Error Message Containing Sensitive Information
+    - kind: owasp
+      title: Error Handling Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
+    - kind: url
+      title: Spring Boot security
+      url: https://docs.spring.io/spring-boot/reference/web/spring-security.html
   tags:
     - security
     - spring
@@ -33,3 +45,4 @@ emit:
     summary: "`${captures.issue.text}` enables verbose debugging or permissive actuator exposure that should stay out of production defaults."
   remediation:
     summary: Remove debug=true overrides, scope logging levels deliberately, and enumerate only required actuator endpoints behind authentication.
+

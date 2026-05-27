@@ -5,6 +5,15 @@ metadata:
   title: Add a sandbox attribute to iframes
   summary: Intrinsic iframe elements should declare a sandbox attribute to reduce blast radius.
   rationale: Sandboxed iframes limit scripts, forms, and top-level navigation when embedded third-party content is compromised.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - react
@@ -33,3 +42,4 @@ emit:
     summary: "${captures.issue.text} is missing a sandbox attribute."
   remediation:
     summary: Add the most restrictive sandbox token set that still allows required behavior, and combine with a strict CSP.
+

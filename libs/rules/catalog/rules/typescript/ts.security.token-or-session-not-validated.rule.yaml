@@ -5,6 +5,15 @@ metadata:
   title: Token or session not validated
   summary: Session and token values from external input should be verified before authentication or identity use.
   rationale: Parsing or loading session state without verification allows forged or stale credentials to influence authorization paths.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-287
+      title: Improper Authentication
+    - kind: owasp
+      title: JSON Web Token Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
   tags:
     - security
     - authentication
@@ -33,3 +42,4 @@ emit:
     summary: "`${captures.issue.text}` uses token or session input without any preceding validation step."
   remediation:
     summary: Verify or authenticate the token or session value before decoding, loading, or deriving identity from it.
+

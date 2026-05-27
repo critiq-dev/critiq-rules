@@ -7,6 +7,18 @@ metadata:
     Production environments should not enable local-style exception pages or verbose Action Dispatch exception rendering.
   rationale: >-
     Detailed exceptions leak stack traces, secrets, and implementation details that attackers can use to refine exploits.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-209
+      title: Generation of Error Message Containing Sensitive Information
+    - kind: owasp
+      title: Error Handling Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
+    - kind: url
+      title: Ruby on Rails security guide
+      url: https://guides.rubyonrails.org/security.html
   tags:
     - security
     - ruby
@@ -42,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Set `consider_all_requests_local` and `show_detailed_exceptions` to safe defaults, route errors through monitored handlers, and keep `config.action_dispatch.show_exceptions` off verbose modes in production.
+

@@ -5,6 +5,21 @@ metadata:
   title: Override Express session defaults
   summary: Express session middleware should not rely on default session naming and configuration.
   rationale: Default session settings make applications easier to fingerprint and often skip explicit hardening choices.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-614
+      title: Sensitive Cookie Without Secure Attribute
+    - kind: owasp
+      title: Session Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - authentication
@@ -34,4 +49,5 @@ emit:
     summary: "`${captures.issue.text}` relies on default Express session configuration."
   remediation:
     summary: Set an explicit session name and hardening options instead of relying on middleware defaults.
+
 

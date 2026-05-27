@@ -5,6 +5,18 @@ metadata:
   title: Protect sensitive Android screens from screenshots and recents
   summary: Sensitive activities should enable FLAG_SECURE or avoid clearing it so screen content is harder to capture.
   rationale: Finance, authentication, and secret-bearing screens can leak through screenshots, screen recording, and recent-task previews when FLAG_SECURE is missing or cleared.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-200
+      title: Exposure of Sensitive Information to an Unauthorized Actor
+    - kind: url
+      title: Android App Security Best Practices
+      url: https://developer.android.com/privacy-and-security/risks
+    - kind: url
+      title: Android app security best practices
+      url: https://developer.android.com/privacy-and-security/risk
   tags:
     - security
     - privacy
@@ -33,3 +45,4 @@ emit:
     summary: "`${captures.issue.text}` appears on a sensitive Android surface without an effective FLAG_SECURE posture."
   remediation:
     summary: Enable FLAG_SECURE for sensitive screens, avoid clearing it at runtime, and document exceptions only after explicit threat modeling.
+

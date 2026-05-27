@@ -5,6 +5,15 @@ metadata:
   title: Constrain `res.sendFile` to a trusted root
   summary: "`res.sendFile()` should not resolve filenames or options from request input without a trusted root."
   rationale: Request-controlled file responses are a common path to path traversal and unintended local file disclosure.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-918
+      title: Server-Side Request Forgery (SSRF)
+    - kind: owasp
+      title: Server-Side Request Forgery
+      url: https://owasp.org/www-community/attacks/Server_Side_Request_Forgery
   tags:
     - security
     - filesystem
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` serves a request-controlled file path or options object without a trusted root."
   remediation:
     summary: Resolve files from an allowlisted directory and validate request input before it reaches `res.sendFile()`.
+

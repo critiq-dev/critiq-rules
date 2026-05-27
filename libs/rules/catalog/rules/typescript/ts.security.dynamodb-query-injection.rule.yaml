@@ -5,6 +5,15 @@ metadata:
   title: Avoid request-driven DynamoDB queries
   summary: DynamoDB query and scan inputs should not be built directly from request input.
   rationale: Raw request data in DynamoDB helpers can widen query scope or let attackers control expressions, filters, and key conditions.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-89
+      title: SQL Injection
+    - kind: owasp
+      title: SQL Injection Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
   tags:
     - security
     - injection
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` receives request-controlled DynamoDB input without narrowing it to trusted expressions or key maps."
   remediation:
     summary: Build DynamoDB requests from fixed expressions and allowlisted fields instead of forwarding request-shaped input.
+

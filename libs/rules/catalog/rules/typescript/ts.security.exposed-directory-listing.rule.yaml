@@ -5,6 +5,15 @@ metadata:
   title: Avoid exposed directory listings
   summary: Directory listing middleware should not be enabled on public paths without a deliberate review.
   rationale: Directory listings expose internal file names and make unintended resources easier to discover and fetch.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - express
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` enables public directory listing behavior."
   remediation:
     summary: Remove directory listing middleware or protect it behind strict authorization and path scoping.
+
 

@@ -7,6 +7,18 @@ metadata:
     Do not mark request-driven strings as HTML safe or bypass sanitization in views or helpers.
   rationale: >-
     `raw`, `html_safe`, `sanitize: false`, and ERB double-equals disable escaping and commonly become reflected XSS sinks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Ruby on Rails security guide
+      url: https://guides.rubyonrails.org/security.html
   tags:
     - security
     - ruby
@@ -44,3 +56,4 @@ emit:
   remediation:
     summary: >-
       Prefer default escaping, pass sanitized fragments, or centralize HTML generation through a vetted sanitizer instead of `raw`/`html_safe`.
+

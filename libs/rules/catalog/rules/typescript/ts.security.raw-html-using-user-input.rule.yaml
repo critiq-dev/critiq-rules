@@ -5,6 +5,15 @@ metadata:
   title: Avoid raw HTML with request input
   summary: Request-derived values should not be interpolated into raw HTML strings.
   rationale: Raw HTML construction with request data is a common path to reflected and stored XSS.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - xss
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` interpolates request-derived content into raw HTML."
   remediation:
     summary: Use framework escaping, a trusted sanitizer, or safe DOM APIs instead of raw HTML interpolation.
+
 

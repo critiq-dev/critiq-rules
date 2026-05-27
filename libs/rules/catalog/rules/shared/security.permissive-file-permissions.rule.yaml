@@ -5,6 +5,15 @@ metadata:
   title: Avoid world-readable or world-writable file permissions
   summary: File creation and permission changes should not grant broad local access.
   rationale: Broad permissions expose application data to local users or processes that should not read or modify it.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-732
+      title: Incorrect Permission Assignment for Critical Resource
+    - kind: owasp
+      title: File Permission
+      url: https://owasp.org/www-community/vulnerabilities/Improper_File_Permissions
   tags:
     - security
     - filesystem
@@ -38,3 +47,4 @@ emit:
     summary: "`${captures.issue.text}` grants world-readable or world-writable filesystem access."
   remediation:
     summary: Use least-privilege file modes and avoid world-readable or world-writable permissions.
+

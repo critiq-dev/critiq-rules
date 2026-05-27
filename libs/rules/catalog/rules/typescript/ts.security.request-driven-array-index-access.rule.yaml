@@ -5,6 +5,15 @@ metadata:
   title: Avoid request-driven array indexing without bounds checks
   summary: Arrays indexed with request-derived keys can read or write out-of-bounds entries.
   rationale: Attacker-controlled indexes bypass assumptions about array length and element initialization.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
   tags:
     - security
     - correctness
@@ -31,3 +40,4 @@ emit:
     summary: "Array access uses a computed index derived from ${captures.issue.text}."
   remediation:
     summary: Parse and bound-check indexes, prefer maps keyed by stable identifiers, or avoid indexing arrays with request data.
+

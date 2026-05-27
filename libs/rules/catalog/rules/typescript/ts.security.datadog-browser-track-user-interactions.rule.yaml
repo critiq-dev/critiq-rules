@@ -5,6 +5,15 @@ metadata:
   title: Review Datadog RUM user interaction capture
   summary: Datadog Browser RUM should not enable broad user interaction capture without a privacy review.
   rationale: Automatic interaction capture can leak sensitive page content or element labels to third-party telemetry.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-200
+      title: Exposure of Sensitive Information to an Unauthorized Actor
+    - kind: owasp
+      title: Logging Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
   tags:
     - security
     - privacy
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` turns on Datadog RUM user interaction tracking, which can capture sensitive UI context."
   remediation:
     summary: Disable broad interaction capture or add explicit scrubbing and allowlisted action naming before enabling it.
+
 

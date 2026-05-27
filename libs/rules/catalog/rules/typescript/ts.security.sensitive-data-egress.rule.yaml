@@ -5,6 +5,15 @@ metadata:
   title: Sensitive data egress to third-party processors
   summary: Sensitive values should not be sent to external processors or outbound SDKs without minimization or redaction.
   rationale: Sending regulated or secret data to third-party services increases privacy exposure and creates downstream processor risk.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-200
+      title: Exposure of Sensitive Information to an Unauthorized Actor
+    - kind: owasp
+      title: Logging Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
   tags:
     - security
     - privacy
@@ -35,3 +44,4 @@ emit:
     summary: "`${captures.issue.text}` sends normalized sensitive datatypes to an outbound processor or external service."
   remediation:
     summary: Minimize the payload, redact the sensitive fields, or route the data only to approved processors.
+

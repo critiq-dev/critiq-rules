@@ -7,6 +7,18 @@ metadata:
     Binding request parameters directly into entity-like models without `setAllowedFields` / `@InitBinder` controls risks mass-assignment privilege escalation.
   rationale: >-
     Attackers can post unexpected fields (for example `role=admin`) that map onto persistent entities unless binding is explicitly allow-listed.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Spring Boot security
+      url: https://docs.spring.io/spring-boot/reference/web/spring-security.html
   tags:
     - security
     - java
@@ -45,3 +57,4 @@ emit:
   remediation:
     summary: >-
       Prefer dedicated request DTOs, declare allowed fields explicitly, and avoid binding security-sensitive properties from raw requests.
+

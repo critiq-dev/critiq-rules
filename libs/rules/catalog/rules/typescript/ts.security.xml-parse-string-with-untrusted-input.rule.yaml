@@ -5,6 +5,15 @@ metadata:
   title: Do not parse untrusted XML with permissive parsers
   summary: parseString and similar XML helpers should not consume request-controlled payloads without hardening.
   rationale: Untrusted XML can enable XXE-style parser abuse depending on the underlying implementation and parser flags.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-502
+      title: Deserialization of Untrusted Data
+    - kind: owasp
+      title: Deserialization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html
   tags:
     - security
     - xml
@@ -33,3 +42,4 @@ emit:
     summary: "${captures.issue.text} parses XML that appears request-driven."
   remediation:
     summary: Disable external entities, validate payloads against a strict schema, and parse with a hardened XML configuration.
+

@@ -5,6 +5,15 @@ metadata:
   title: Avoid string-built paths from `__dirname` or `__filename`
   summary: Do not build filesystem paths by concatenating `__dirname` or `__filename` with strings or templates.
   rationale: String-built paths are easy to get wrong and can enable directory traversal when any segment is dynamic.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
   tags:
     - security
     - filesystem
@@ -32,3 +41,4 @@ emit:
     summary: "`${captures.issue.text}` builds a path by concatenating `__dirname` or `__filename`, which is fragile and risky."
   remediation:
     summary: Use `path.join`, `path.resolve`, or `import.meta.url` with validated segments instead of string concatenation.
+

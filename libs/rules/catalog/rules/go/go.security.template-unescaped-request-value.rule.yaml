@@ -7,6 +7,15 @@ metadata:
     `template.HTML`, `template.JS`, and `template.CSS` should not wrap request-derived strings unless they were sanitized first.
   rationale: >-
     Trusted template types disable escaping and turn reflected input into cross-site scripting when executed in browsers.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Run untrusted strings through an HTML sanitizer such as bluemonday, prefer typed templates, or keep data in plain escaped fields.
+

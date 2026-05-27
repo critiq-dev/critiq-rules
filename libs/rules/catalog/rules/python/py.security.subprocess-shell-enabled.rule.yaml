@@ -5,6 +5,15 @@ metadata:
   title: Avoid enabling shell mode in subprocess calls
   summary: Python process execution should avoid `shell=True` unless shell interpretation is explicitly required and tightly controlled.
   rationale: Shell-enabled process execution introduces command parsing behavior that increases injection and execution risk.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-78
+      title: OS Command Injection
+    - kind: owasp
+      title: OS Command Injection Defense Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
   tags:
     - security
     - python
@@ -43,3 +52,4 @@ emit:
     summary: "`${captures.issue.text}` enables shell interpretation via `shell=True`."
   remediation:
     summary: Use argument-list execution with `shell=False` by default, and only allow fixed commands when shell mode is unavoidable.
+

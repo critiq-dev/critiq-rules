@@ -5,6 +5,21 @@ metadata:
   title: Keep Apollo Server CSRF protections enabled
   summary: Apollo Server should not explicitly disable CSRF prevention for browser-accessible endpoints.
   rationale: GraphQL POST endpoints are vulnerable to cross-site writes when CSRF defenses are turned off.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-352
+      title: Cross-Site Request Forgery (CSRF)
+    - kind: owasp
+      title: Cross-Site Request Forgery Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Apollo Server security
+      url: https://www.apollographql.com/docs/apollo-server/security/security
   tags:
     - security
     - graphql
@@ -34,3 +49,4 @@ emit:
   remediation:
     summary: >-
       Remove `csrfPrevention: false` or replace it with an equivalent POST-only plus preflight strategy documented by Apollo.
+

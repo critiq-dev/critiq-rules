@@ -7,6 +7,18 @@ metadata:
     `render` options such as `html:`, `plain:`, or `inline:` must not consume unvalidated request data.
   rationale: >-
     These render modes bypass templates and can reflect attacker-controlled markup or scripts when fed tainted strings.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Ruby on Rails security guide
+      url: https://guides.rubyonrails.org/security.html
   tags:
     - security
     - ruby
@@ -43,3 +55,4 @@ emit:
   remediation:
     summary: >-
       Prefer templates with escaping, sanitize any rich text, or map request identifiers to trusted server-side content instead of rendering raw params.
+

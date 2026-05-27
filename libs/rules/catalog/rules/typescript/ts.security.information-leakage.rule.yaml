@@ -5,6 +5,15 @@ metadata:
   title: Avoid leaking sensitive or diagnostic state
   summary: Logs, stdout or stderr, and direct response sinks should not expose sensitive fields or internal diagnostic detail.
   rationale: Stack traces, request metadata, auth or session objects, and environment state are often leaked through "temporary" debugging output that later reaches production paths.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-532
+      title: Insertion of Sensitive Information into Log File
+    - kind: owasp
+      title: Logging Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
   tags:
     - security
     - privacy
@@ -36,3 +45,4 @@ emit:
     summary: "`${captures.issue.text}` exposes sensitive fields or internal diagnostic detail through a direct sink."
   remediation:
     summary: Replace the payload with a fixed summary, redact sensitive fields, and strip stack, env, request, or cookie data from production output.
+

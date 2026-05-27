@@ -7,6 +7,15 @@ metadata:
     Rust TLS client and server configuration should set an explicit minimum protocol version (TLS 1.2 or newer).
   rationale: >-
     Without a minimum version, legacy SSL/TLS protocols may be negotiated, weakening transport security.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - rust
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Set `min_protocol_version` (rustls) or `min_tls_version` (reqwest) to TLS 1.2 or newer.
+

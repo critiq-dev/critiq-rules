@@ -5,6 +5,21 @@ metadata:
   title: Avoid unconditional GraphQL introspection
   summary: Apollo Server should not hard-enable introspection without environment guards.
   rationale: Introspection aids attackers in mapping schemas on production deployments.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+    - kind: owasp
+      title: GraphQL Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Apollo Server security
+      url: https://www.apollographql.com/docs/apollo-server/security/security
   tags:
     - security
     - graphql
@@ -33,3 +48,4 @@ emit:
     summary: Apollo Server enables introspection with a literal `true` flag.
   remediation:
     summary: Bind introspection to non-production environments or protect the endpoint behind authenticated tooling.
+

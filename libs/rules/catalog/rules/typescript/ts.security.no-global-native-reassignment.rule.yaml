@@ -5,6 +5,15 @@ metadata:
   title: Do not reassign global native bindings
   summary: Do not assign to global native bindings such as `Object`, `Array`, or `undefined`.
   rationale: Reassigning global natives breaks language invariants and can disable security checks that rely on them.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-94
+      title: Improper Control of Generation of Code
+    - kind: owasp
+      title: Code Injection
+      url: https://owasp.org/www-community/attacks/Code_Injection
   tags:
     - security
     - language
@@ -32,3 +41,4 @@ emit:
     summary: "`${captures.issue.text}` reassigns a global native binding and can break runtime guarantees."
   remediation:
     summary: Use local variables with distinct names instead of overwriting global natives.
+

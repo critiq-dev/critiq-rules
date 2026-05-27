@@ -7,6 +7,21 @@ metadata:
     Fastify instances listening on all interfaces should enable trustProxy or terminate behind a reverse proxy you register in code.
   rationale: >-
     Without trustProxy, client IP and protocol metadata from an edge proxy are easy to misread, and public binds amplify exposure when the process is not intentionally perimeter-hardened.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-668
+      title: Exposure of Resource to Wrong Sphere
+    - kind: url
+      title: CWE-668 Exposure of Resource to Wrong Sphere
+      url: https://cwe.mitre.org/data/definitions/668.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Fastify recommendations
+      url: https://fastify.dev/docs/latest/Guides/Recommendation/
   tags:
     - security
     - fastify
@@ -36,3 +51,4 @@ emit:
   remediation:
     summary: >-
       Set trustProxy when running behind a reverse proxy, prefer non-public bind addresses in development, or register an explicit Fastify proxy plugin so client metadata and TLS termination assumptions stay correct.
+

@@ -5,6 +5,18 @@ metadata:
   title: Avoid trusting unsanitized Angular bypass sinks
   summary: DomSanitizer bypass helpers should not receive route, storage, or request-derived values without validation.
   rationale: Bypass helpers disable Angular templating protections and turn downstream sinks into XSS execution points.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Angular security guide
+      url: https://angular.dev/best-practices/security
   tags:
     - security
     - angular
@@ -33,3 +45,4 @@ emit:
   remediation:
     summary: >-
       Keep sensitive markup on Angular-safe bindings or sanitize with a reviewed helper before calling bypassSecurityTrust helpers.
+

@@ -5,6 +5,21 @@ metadata:
   title: Avoid request-controlled Express static mount paths
   summary: The path prefix for express.static should not be derived directly from request objects.
   rationale: User-controlled mount paths can collapse routing assumptions and expose unintended directories.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-22
+      title: Path Traversal
+    - kind: owasp
+      title: Path Traversal
+      url: https://owasp.org/www-community/attacks/Path_Traversal
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - express
@@ -33,3 +48,4 @@ emit:
     summary: "${captures.issue.text} mounts express.static under a request-derived URL prefix."
   remediation:
     summary: Use fixed, reviewed path prefixes and map external identifiers to internal paths through an allowlist.
+

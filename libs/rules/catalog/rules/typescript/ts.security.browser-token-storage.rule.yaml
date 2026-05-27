@@ -5,6 +5,15 @@ metadata:
   title: Avoid browser token storage
   summary: Access and session tokens should not be stored in long-lived browser storage.
   rationale: Long-lived browser storage exposes tokens to script access and increases the impact of XSS or device compromise.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-200
+      title: Exposure of Sensitive Information to an Unauthorized Actor
+    - kind: owasp
+      title: Logging Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
   tags:
     - security
     - authentication
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` stores an access or session token in browser storage."
   remediation:
     summary: Keep tokens in HttpOnly cookies or in memory, and avoid long-lived cleartext browser storage.
+
 

@@ -5,6 +5,21 @@ metadata:
   title: Do not combine permissive CORS origins with credentials
   summary: CORS middleware must not reflect every origin or use a wildcard while `credentials` is enabled.
   rationale: Allowing credentials with wildcard or reflected origins lets untrusted sites read authenticated browser responses.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-942
+      title: Permissive Cross-domain Policy with Untrusted Domains
+    - kind: owasp
+      title: Cross-Origin Resource Sharing (CORS)
+      url: https://owasp.org/www-community/attacks/CORS_OriginHeaderScrutiny
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - express
@@ -34,3 +49,4 @@ emit:
     summary: "`${captures.issue.text}` enables credentials with a wildcard, implicit, or reflected origin policy."
   remediation:
     summary: Use an explicit trusted-origin allowlist and disable credentials unless every allowed origin is intentional.
+

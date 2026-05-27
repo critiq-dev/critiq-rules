@@ -5,6 +5,15 @@ metadata:
   title: TLS verification disabled
   summary: Transport clients should not disable certificate verification.
   rationale: Trust-all TLS settings accept any certificate and undermine transport security.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - transport
@@ -40,3 +49,4 @@ emit:
     summary: "`${captures.issue.text}` disables certificate verification or trust validation."
   remediation:
     summary: Use trusted certificate validation and remove trust-all overrides outside local development.
+

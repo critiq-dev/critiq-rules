@@ -5,6 +5,15 @@ metadata:
   title: Avoid weak key-generation strength
   summary: Key-generation helpers should use current minimum strengths for RSA, AES, and HMAC keys.
   rationale: Weak modulus or key lengths make brute-force and cryptanalytic attacks more practical, even when the API itself is correct.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - cryptography
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` configures a key length or modulus size below the current minimum expected for production cryptography."
   remediation:
     summary: Use at least 2048-bit RSA keys and at least 128-bit AES or HMAC keys unless a clearly documented compatibility boundary requires otherwise.
+

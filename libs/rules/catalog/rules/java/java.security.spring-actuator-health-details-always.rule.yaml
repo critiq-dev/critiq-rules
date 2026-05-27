@@ -7,6 +7,18 @@ metadata:
     `management.endpoint.health.show-details=always` (or YAML equivalent) publishes detailed health payloads to any caller, which often leaks dependency and infrastructure facts.
   rationale: >-
     Detailed health should be reserved for authenticated operators or internal networks; `always` removes that gate for anonymous clients.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Spring Boot security
+      url: https://docs.spring.io/spring-boot/reference/web/spring-security.html
   tags:
     - security
     - java
@@ -38,3 +50,4 @@ emit:
   remediation:
     summary: >-
       Switch to `when-authorized`, protect `/actuator/**` with Spring Security, and keep verbose health on internal-only ports or profiles.
+

@@ -7,6 +7,15 @@ metadata:
     Importing `net/http/pprof` or registering `/debug/pprof` handlers on the default mux exposes debugging endpoints to remote callers.
   rationale: >-
     Exposed pprof endpoints leak heap, goroutine, and CPU profiles and can be used for denial-of-service or sensitive data harvesting.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -44,3 +53,4 @@ emit:
   remediation:
     summary: >-
       Register pprof handlers on a private mux bound to localhost or a separate listener, and gate them behind authentication.
+

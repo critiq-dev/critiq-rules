@@ -7,6 +7,15 @@ metadata:
     Tar extraction must normalize `header.Name` with `filepath.Base` or `filepath.Clean` before opening destination files.
   rationale: >-
     Writing `hdr.Name` directly enables `../` traversal that escapes intended extraction directories.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-22
+      title: Path Traversal
+    - kind: owasp
+      title: Path Traversal
+      url: https://owasp.org/www-community/attacks/Path_Traversal
   tags:
     - security
     - go
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Join destinations using a fixed root with `filepath.Join`, reject absolute paths, and always apply `filepath.Base` before `os.Create`.
+

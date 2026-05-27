@@ -7,6 +7,18 @@ metadata:
     Symfony forms and controllers handling state changes should not disable CSRF protection without a clear API token boundary.
   rationale: >-
     Disabling CSRF for authenticated browser flows enables cross-site request forgery on sensitive actions.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-352
+      title: Cross-Site Request Forgery (CSRF)
+    - kind: owasp
+      title: Cross-Site Request Forgery Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Symfony security
+      url: https://symfony.com/doc/current/security.html
   tags:
     - security
     - php
@@ -40,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Keep CSRF enabled for browser forms/controllers and only exempt endpoints that are explicitly authenticated by signed tokens.
+

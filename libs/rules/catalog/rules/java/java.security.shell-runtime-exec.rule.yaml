@@ -7,6 +7,15 @@ metadata:
     `Runtime.getRuntime().exec(...)` should not be invoked with a single `String` command argument; the array form (`exec(String[])`) avoids shell-style tokenization.
   rationale: >-
     The `exec(String)` overload splits on whitespace and respects no quoting; values containing spaces or shell metacharacters can change the command parsed at runtime.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-78
+      title: OS Command Injection
+    - kind: owasp
+      title: OS Command Injection Defense Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
   tags:
     - security
     - java
@@ -46,3 +55,4 @@ emit:
   remediation:
     summary: >-
       Pass an explicit `String[]` of command and arguments, or use `ProcessBuilder` with separate arguments and the parent process inheriting no shell.
+

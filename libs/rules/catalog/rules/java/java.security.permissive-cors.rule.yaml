@@ -5,6 +5,15 @@ metadata:
   title: Avoid wildcard CORS allow-origins
   summary: "Spring `@CrossOrigin(\"*\")`, `allowedOrigins(\"*\")`, and `addAllowedOriginPattern(\"*\")` open the API to any origin."
   rationale: Wildcard origins disable browser-enforced same-origin protection and can allow untrusted sites to call the API with credentials.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-942
+      title: Permissive Cross-domain Policy with Untrusted Domains
+    - kind: owasp
+      title: Cross-Origin Resource Sharing (CORS)
+      url: https://owasp.org/www-community/attacks/CORS_OriginHeaderScrutiny
   tags:
     - security
     - java
@@ -41,3 +50,4 @@ emit:
     summary: "`${captures.issue.text}` accepts every origin via a wildcard CORS configuration."
   remediation:
     summary: "Allow only the specific origins your service trusts; never combine `allowCredentials(true)` with a wildcard origin."
+

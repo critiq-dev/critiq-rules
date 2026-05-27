@@ -5,6 +5,15 @@ metadata:
   title: Use enough entropy for secrets and tokens
   summary: Secret-bearing tokens and secrets should use at least 16 bytes of cryptographic entropy.
   rationale: Short random values are harder to brute-force than predictable values, but they can still be guessed faster than modern secret-bearing flows should allow.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - cryptography
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` uses a cryptographically random source, but not enough entropy for a secret-bearing value."
   remediation:
     summary: Generate at least 16 bytes of entropy for reset tokens, invitation codes, session secrets, and similar secret-bearing values.
+

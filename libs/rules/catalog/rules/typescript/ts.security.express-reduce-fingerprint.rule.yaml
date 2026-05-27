@@ -5,6 +5,21 @@ metadata:
   title: Reduce Express fingerprinting
   summary: Express apps should disable `x-powered-by` or equivalent fingerprinting headers.
   rationale: Framework fingerprinting gives attackers unnecessary detail about the stack they are targeting.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - express
@@ -34,4 +49,5 @@ emit:
     summary: This Express app does not visibly disable `x-powered-by` or equivalent fingerprinting behavior.
   remediation:
     summary: Disable `x-powered-by` or use equivalent middleware to reduce framework fingerprinting.
+
 

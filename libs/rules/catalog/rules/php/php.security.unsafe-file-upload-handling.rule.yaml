@@ -7,6 +7,15 @@ metadata:
     PHP upload handlers should not persist raw `$_FILES` names without validation and normalization.
   rationale: >-
     Unsafely handled uploads can enable path traversal, executable file placement, and malicious payload storage.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
   tags:
     - security
     - php
@@ -39,3 +48,4 @@ emit:
   remediation:
     summary: >-
       Normalize filenames, enforce extension and MIME allowlists, and route uploads through dedicated validated storage helpers.
+

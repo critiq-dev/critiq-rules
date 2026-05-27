@@ -7,6 +7,15 @@ metadata:
     session_id must not be set from weak hash helpers, uniqid, or request-derived values.
   rationale: >-
     Predictable or attacker-controlled session identifiers enable fixation and session hijacking.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-614
+      title: Sensitive Cookie Without Secure Attribute
+    - kind: owasp
+      title: Session Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
   tags:
     - security
     - php
@@ -39,3 +48,4 @@ emit:
   remediation:
     summary: >-
       Let PHP generate session identifiers with session_start, or use random_bytes and bin2hex for custom IDs.
+

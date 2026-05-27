@@ -5,6 +5,15 @@ metadata:
   title: Open redirect via request-controlled target
   summary: Redirect and navigation sinks should not use request-controlled destinations without validation.
   rationale: Redirect targets that are derived from user input can send authenticated users to attacker-controlled destinations.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-601
+      title: URL Redirection to Untrusted Site
+    - kind: owasp
+      title: Unvalidated Redirects and Forwards Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html
   tags:
     - security
     - input-validation
@@ -36,4 +45,5 @@ emit:
     summary: "`${captures.issue.text}` redirects to a request-controlled destination without a strict allowlist or internal-path check."
   remediation:
     summary: Normalize the target to an internal path or validate it against a trusted origin allowlist before redirecting.
+
 

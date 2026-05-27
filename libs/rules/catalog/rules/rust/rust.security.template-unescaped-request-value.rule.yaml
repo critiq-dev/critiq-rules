@@ -7,6 +7,15 @@ metadata:
     Tera, Maud, and similar engines should not insert request-sourced strings into contexts or `PreEscaped`/`raw` sinks without sanitization.
   rationale: >-
     Template `safe`/raw sinks disable escaping; feeding path, query, form, or JSON extractors there is a direct XSS vector.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - rust
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       HTML-escape with a vetted policy (for example `ammonia::clean`), keep auto-escaping on, and avoid `PreEscaped`/`Markup::raw` for untrusted strings.
+

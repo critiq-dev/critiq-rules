@@ -5,6 +5,15 @@ metadata:
   title: Sanitize user-controlled values before they reach log messages
   summary: Logger calls in pino, winston, bunyan, and consola should not interpolate or concatenate request input directly into the message text.
   rationale: Unsanitized request data in log messages enables CRLF injection, control-character smuggling, and downstream log-parser confusion. Wrapping the value with a structured field, JSON encoder, or CRLF-stripping replace neutralizes the vector.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-532
+      title: Insertion of Sensitive Information into Log File
+    - kind: owasp
+      title: Logging Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
   tags:
     - security
     - logging
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` interpolates request data into a log message without an obvious sanitizer."
   remediation:
     summary: Pass request data as a structured field, JSON-encode it, or strip CRLF and control characters before concatenating it into the log message.
+

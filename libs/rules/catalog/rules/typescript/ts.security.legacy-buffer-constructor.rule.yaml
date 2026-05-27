@@ -5,6 +5,15 @@ metadata:
   title: Replace legacy Buffer constructors
   summary: Use Buffer.from, Buffer.alloc, or Buffer.allocUnsafe instead of the deprecated Buffer constructor.
   rationale: Legacy constructors behave differently across Node versions and are harder to audit for safe allocation.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - node
@@ -33,3 +42,4 @@ emit:
     summary: "${captures.issue.text} uses the deprecated Buffer constructor API."
   remediation:
     summary: Prefer Buffer.from for encoded data and Buffer.alloc for zero-filled buffers sized by trusted logic.
+

@@ -7,6 +7,18 @@ metadata:
     Raw Blade rendering (`{!! !!}`) should not directly render request, model, or translated user content.
   rationale: >-
     Unescaped template output can enable stored or reflected XSS when user-controlled values are rendered as HTML.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Laravel security
+      url: https://laravel.com/docs/master/security
   tags:
     - security
     - php
@@ -40,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Prefer escaped Blade output (`{{ }}`) and sanitizer wrappers before rendering user-influenced HTML.
+

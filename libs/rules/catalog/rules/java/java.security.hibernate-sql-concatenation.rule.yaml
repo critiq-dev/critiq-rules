@@ -7,6 +7,18 @@ metadata:
     Hibernate `Session.createQuery`, `createNativeQuery`, and `createSQLQuery` calls must not build their query text from string concatenation or `String.format`.
   rationale: >-
     Dynamic SQL fragments stitched into Hibernate query strings are an injection sink whenever any segment came from request, environment, or upload input.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-89
+      title: SQL Injection
+    - kind: owasp
+      title: SQL Injection Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Spring Boot security
+      url: https://docs.spring.io/spring-boot/reference/web/spring-security.html
   tags:
     - security
     - java
@@ -47,3 +59,4 @@ emit:
   remediation:
     summary: >-
       Use named or positional parameters via `setParameter`, the Criteria API, or typed query DSLs instead of interpolating values into the HQL or SQL text.
+

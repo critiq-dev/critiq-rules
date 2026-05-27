@@ -5,6 +5,21 @@ metadata:
   title: Register Helmet before Nest route mounts
   summary: Nest bootstrap files should apply Helmet before mounting path-bound routers.
   rationale: Middleware order determines whether framed routes inherit Helmet protections; mounting routers too early widens exposure.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: NestJS security
+      url: https://docs.nestjs.com/security/authentication
   tags:
     - security
     - nestjs
@@ -32,3 +47,4 @@ emit:
     summary: Helmet runs after a route-mounted `app.use` in this Nest bootstrap.
   remediation:
     summary: Call `helmet()` before registering routers bound to external paths unless another gateway applies equivalent protections.
+

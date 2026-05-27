@@ -7,6 +7,15 @@ metadata:
     Include and require statements must not load files from request-derived or tainted path values.
   rationale: >-
     User-controlled includes can load attacker-chosen PHP and lead to remote code execution.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
   tags:
     - security
     - php
@@ -40,3 +49,4 @@ emit:
   remediation:
     summary: >-
       Map user input to an allowlisted template name and include only fixed, reviewed file paths.
+

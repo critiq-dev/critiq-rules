@@ -5,6 +5,15 @@ metadata:
   title: Remove debugger imports from production code
   summary: Production Python modules should not ship with interactive debugger imports.
   rationale: Debugger modules can expose introspection hooks and halt execution paths in deployed environments.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-209
+      title: Generation of Error Message Containing Sensitive Information
+    - kind: owasp
+      title: Error Handling Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
   tags:
     - security
     - python
@@ -43,3 +52,4 @@ emit:
     summary: "`${captures.issue.text}` imports a debugger module in runtime code."
   remediation:
     summary: Remove debugger imports from committed runtime modules and gate debugging tools to local-only workflows.
+

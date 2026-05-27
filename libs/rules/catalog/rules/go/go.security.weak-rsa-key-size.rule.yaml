@@ -7,6 +7,15 @@ metadata:
     `rsa.GenerateKey` and `rsa.GenerateMultiPrimeKey` should request a key size of 2048 bits or higher.
   rationale: >-
     RSA moduli below 2048 bits are considered cryptographically weak and feasible to attack with modern resources.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Generate RSA keys with at least 2048 bits, or prefer Ed25519/ECDSA for new code where appropriate.
+

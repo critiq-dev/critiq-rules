@@ -7,6 +7,15 @@ metadata:
     OpenSSL and mcrypt usage should not rely on DES, RC4, Blowfish, ECB mode, or legacy mcrypt APIs.
   rationale: >-
     Weak ciphers and modes are vulnerable to practical cryptanalysis and do not meet modern confidentiality standards.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - php
@@ -39,3 +48,4 @@ emit:
   remediation:
     summary: >-
       Use modern authenticated encryption (for example AES-GCM) via sodium or OpenSSL with vetted algorithms and modes.
+

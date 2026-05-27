@@ -5,6 +5,15 @@ metadata:
   title: Avoid unsafe raw HTTP response output
   summary: Raw response writers should not echo request data into HTML-capable responses without trusted escaping or sanitization.
   rationale: Directly reflecting request data into HTML-capable response sinks creates reflected XSS and content injection risk.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - xss
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` writes request-controlled data into a raw HTTP response sink without a trusted HTML escaping model."
   remediation:
     summary: Escape or sanitize the data with a trusted helper, or switch to a response format that does not treat it as executable markup.
+

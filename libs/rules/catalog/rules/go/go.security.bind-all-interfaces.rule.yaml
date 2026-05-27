@@ -7,6 +7,15 @@ metadata:
     Go network services should avoid explicit binds to `0.0.0.0`, `::`, or `[::]` unless public exposure is intentional and controlled.
   rationale: >-
     Binding every interface can unintentionally expose internal services beyond expected trust boundaries.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-668
+      title: Exposure of Resource to Wrong Sphere
+    - kind: url
+      title: CWE-668 Exposure of Resource to Wrong Sphere
+      url: https://cwe.mitre.org/data/definitions/668.html
   tags:
     - security
     - go
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Prefer loopback or an explicit interface bind unless broad exposure is required and defended by network controls.
+

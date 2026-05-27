@@ -5,6 +5,18 @@ metadata:
   title: Authenticate Next.js Server Actions before mutations
   summary: Server Actions that mutate state must validate sessions locally before reaching privileged sinks.
   rationale: Server Actions behave like public POST endpoints and inherit the same authentication obligations as route handlers.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-862
+      title: Missing Authorization
+    - kind: owasp
+      title: Authorization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
   tags:
     - security
     - next
@@ -33,3 +45,4 @@ emit:
   remediation:
     summary: >-
       Call your auth/session helper before mutations and enforce ownership inside database predicates.
+

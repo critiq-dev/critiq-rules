@@ -7,6 +7,18 @@ metadata:
     `createQuery`, `createNativeQuery`, `JdbcTemplate` calls, and string-based `@Query` values must not stitch SQL with request data using `+`, `String.format`, or similar.
   rationale: >-
     Dynamic SQL built from untrusted fragments is a direct injection surface; parameterized queries and named parameters are the safe default.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-89
+      title: SQL Injection
+    - kind: owasp
+      title: SQL Injection Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Spring Boot security
+      url: https://docs.spring.io/spring-boot/reference/web/spring-security.html
   tags:
     - security
     - java
@@ -45,3 +57,4 @@ emit:
   remediation:
     summary: >-
       Use JPQL named parameters, `CriteriaUpdate`, or prepared JDBC statements with bound parameters; never interpolate request values into query text.
+

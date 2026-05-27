@@ -5,6 +5,15 @@ metadata:
   title: Add rel=noopener to target=_blank links
   summary: Opening links in a new tab without rel=noopener lets the destination page access window.opener.
   rationale: Untrusted destinations can navigate or phish the opener tab unless noopener severs that relationship.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - react
     - security
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` uses target=_blank without rel containing noopener."
   remediation:
     summary: Add rel=noopener or rel="noopener noreferrer" whenever target="_blank" is present.
+

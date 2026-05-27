@@ -5,6 +5,18 @@ metadata:
   title: Enable Django CSRF middleware for browser apps
   summary: Django projects using cookie-backed sessions should include `CsrfViewMiddleware` in `MIDDLEWARE`.
   rationale: Without CSRF middleware, Django cannot enforce CSRF tokens on unsafe HTTP methods for browser clients.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-352
+      title: Cross-Site Request Forgery (CSRF)
+    - kind: owasp
+      title: Cross-Site Request Forgery Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Django deployment checklist
+      url: https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
   tags:
     - security
     - python
@@ -45,3 +57,4 @@ emit:
     summary: "`MIDDLEWARE` is declared without `django.middleware.csrf.CsrfViewMiddleware`, which disables framework CSRF checks."
   remediation:
     summary: Insert `django.middleware.csrf.CsrfViewMiddleware` into `MIDDLEWARE` according to the Django deployment checklist ordering guidance.
+

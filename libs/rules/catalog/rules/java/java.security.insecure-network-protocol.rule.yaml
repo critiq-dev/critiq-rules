@@ -5,6 +5,15 @@ metadata:
   title: Avoid plaintext or legacy network protocols
   summary: "URL/URI literals should not use `ftp://`, `telnet://`, or `jar:http://`."
   rationale: These schemes transmit credentials and payloads in cleartext or load remote archives without integrity checks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - java
@@ -40,3 +49,4 @@ emit:
     summary: "`${captures.issue.text}` opens a URL or URI with a plaintext or legacy protocol."
   remediation:
     summary: "Use `https://`, `sftp://`, or `ssh://` and verify integrity for remote archives instead of `jar:http://`."
+

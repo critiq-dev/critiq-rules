@@ -7,6 +7,18 @@ metadata:
     Do not pass `format!(...)` (or equivalent string concatenation) into `sqlx::query` or `diesel::sql_query` sinks.
   rationale: >-
     Interpolated SQL is the primary SQL injection pattern in Rust ORMs; compile-time macros and bind parameters keep queries safe.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-89
+      title: SQL Injection
+    - kind: owasp
+      title: SQL Injection Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: ANSSI Rust secure development guidelines
+      url: https://anssi-fr.github.io/rust-guide/01-general-principles.html
   tags:
     - security
     - rust
@@ -45,3 +57,4 @@ emit:
   remediation:
     summary: >-
       Prefer `sqlx::query!` / `query_as!`, use `.bind(...)` on typed query builders, or Diesel's query DSL with bound parameters instead of raw interpolated strings.
+

@@ -5,6 +5,15 @@ metadata:
   title: Avoid synchronous file reads in HTTP handlers
   summary: Request handlers should not call `readFileSync` or equivalent blocking file APIs.
   rationale: Blocking disk I/O inside request handlers stalls the Node.js event loop and hurts availability under load.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - express
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` performs synchronous disk I/O on the request path."
   remediation:
     summary: Use `fs.promises.readFile`, streams, or preload static assets outside the hot request path.
+

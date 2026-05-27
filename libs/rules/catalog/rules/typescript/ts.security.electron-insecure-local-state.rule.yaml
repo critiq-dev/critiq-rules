@@ -5,6 +5,15 @@ metadata:
   title: Avoid storing secrets in Electron local stores without hardening
   summary: electron-store writes that look like credentials should use OS-level secret storage instead.
   rationale: Local JSON stores are readable by other processes and backups unless encrypted with platform APIs.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-749
+      title: Exposed Dangerous Method or Function
+    - kind: url
+      title: Electron Security
+      url: https://www.electronjs.org/docs/latest/tutorial/security
   tags:
     - security
     - electron
@@ -33,3 +42,4 @@ emit:
     summary: "${captures.issue.text} persists sensitive-looking data through electron-store."
   remediation:
     summary: Prefer OS keychains, encrypted vaults, or short-lived session material instead of long-lived plaintext secrets on disk.
+

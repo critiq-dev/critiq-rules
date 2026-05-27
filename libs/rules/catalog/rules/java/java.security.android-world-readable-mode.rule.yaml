@@ -5,6 +5,18 @@ metadata:
   title: Avoid Android world-readable or world-writable IO modes
   summary: Context files and shared preferences must not use MODE_WORLD_READABLE or MODE_WORLD_WRITABLE.
   rationale: Legacy Android modes expose application data to other packages on the device and break sandbox expectations for secrets.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-732
+      title: Incorrect Permission Assignment for Critical Resource
+    - kind: owasp
+      title: File Permission
+      url: https://owasp.org/www-community/vulnerabilities/Improper_File_Permissions
+    - kind: url
+      title: Android app security best practices
+      url: https://developer.android.com/privacy-and-security/risk
   tags:
     - security
     - privacy
@@ -33,3 +45,4 @@ emit:
     summary: "`${captures.issue.text}` opts into MODE_WORLD_READABLE or MODE_WORLD_WRITABLE, which weakens app sandbox isolation."
   remediation:
     summary: Use MODE_PRIVATE or scoped storage APIs instead of world-readable or world-writable modes.
+

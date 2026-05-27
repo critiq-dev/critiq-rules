@@ -5,6 +5,15 @@ metadata:
   title: Avoid insecure cipher transformations
   summary: "Java `Cipher.getInstance` should not request ECB mode or legacy algorithms like DES and RC4."
   rationale: ECB mode leaks structure across blocks, while DES and RC4 are broken or deprecated and unsuitable for confidentiality.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - java
@@ -40,3 +49,4 @@ emit:
     summary: "`${captures.issue.text}` requests an insecure cipher mode or algorithm."
   remediation:
     summary: "Use authenticated modes such as `AES/GCM/NoPadding` and modern algorithms; avoid ECB, DES, and RC4."
+

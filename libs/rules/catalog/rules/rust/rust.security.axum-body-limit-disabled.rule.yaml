@@ -7,6 +7,18 @@ metadata:
     Axum apps should keep a finite `DefaultBodyLimit` (or equivalent) so request bodies cannot exhaust memory.
   rationale: >-
     `DefaultBodyLimit::disable()` removes the framework guardrail against huge bodies and is unsafe on routes that accept untrusted input.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: ANSSI Rust secure development guidelines
+      url: https://anssi-fr.github.io/rust-guide/01-general-principles.html
   tags:
     - security
     - rust
@@ -43,3 +55,4 @@ emit:
   remediation:
     summary: >-
       Set an explicit max body size with `DefaultBodyLimit::max`, add `tower_http::limit::RequestBodyLimitLayer`, or enforce limits at your edge proxy before accepting large uploads.
+

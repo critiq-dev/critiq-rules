@@ -7,6 +7,18 @@ metadata:
     Eloquent writes should not use `$request->all()` or fully unguarded models for sensitive records.
   rationale: >-
     Raw request mass assignment lets attackers set privileged fields like role or account ownership.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+    - kind: url
+      title: Laravel security
+      url: https://laravel.com/docs/master/security
   tags:
     - security
     - php
@@ -43,3 +55,4 @@ emit:
   remediation:
     summary: >-
       Use validated DTO/request objects and explicit allowlists (`only`) for model writes, and avoid `$guarded = []` on sensitive models.
+

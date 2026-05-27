@@ -7,6 +7,15 @@ metadata:
     Production Go code should not import `crypto/md5`, `crypto/sha1`, `crypto/des`, or `crypto/rc4` for security-sensitive purposes.
   rationale: >-
     MD5 and SHA-1 are broken hash functions, DES has an obsolete key size, and RC4 has known biases; using them as cryptographic primitives degrades confidentiality and integrity.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Use `crypto/sha256` or `crypto/sha512` for hashing, `crypto/aes` with GCM mode for ciphers, and avoid RC4 entirely.
+

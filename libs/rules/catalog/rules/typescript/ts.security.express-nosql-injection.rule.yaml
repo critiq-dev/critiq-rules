@@ -5,6 +5,21 @@ metadata:
   title: Avoid request-driven model queries
   summary: Express handlers should not pass raw request objects into NoSQL filters, query helpers, or aggregation pipelines.
   rationale: Request-shaped filters, operators, or pipelines can expand query scope and inject unintended behavior.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-89
+      title: SQL Injection
+    - kind: owasp
+      title: SQL Injection Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - injection
@@ -34,3 +49,4 @@ emit:
     summary: "`${captures.issue.text}` receives request-controlled query input without an allowlisted query or pipeline shape."
   remediation:
     summary: Build the NoSQL query or aggregation pipeline from fixed fields or validated filter builders instead of passing request data directly.
+

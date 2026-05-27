@@ -7,6 +7,15 @@ metadata:
     Session/cookie configuration should keep secure, httpOnly, and safe same-site posture for authenticated contexts.
   rationale: >-
     Weak cookie/session flags increase theft and replay risk across XSS, mixed transport, and cross-site request contexts.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-614
+      title: Sensitive Cookie Without Secure Attribute
+    - kind: owasp
+      title: Session Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
   tags:
     - security
     - php
@@ -40,3 +49,4 @@ emit:
   remediation:
     summary: >-
       Set `secure=true`, `httponly=true`, and a restrictive same-site policy for authentication cookies in production traffic.
+

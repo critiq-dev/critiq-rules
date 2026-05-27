@@ -6,6 +6,18 @@ metadata:
   summary: Flask responses should not bypass escaping when interpolating `request` input into HTML helpers or template strings.
   rationale: >-
     Markup helpers, render_template_string, and Jinja safe filters bypass escaping and commonly become XSS sinks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Flask security considerations
+      url: https://flask.palletsprojects.com/en/stable/security/
   tags:
     - security
     - python
@@ -42,3 +54,4 @@ emit:
     summary: "`${captures.issue.text}` mixes request-controlled values with markup helpers or unescaped template paths."
   remediation:
     summary: Use automatic escaping, `render_template` with trusted contexts, or a vetted sanitizer instead of raw markup shortcuts.
+

@@ -5,6 +5,18 @@ metadata:
   title: Harden servlet session and auth cookies
   summary: Session-like cookies must not disable HttpOnly or Secure, and explicit insecure builder flags should be removed.
   rationale: Missing HttpOnly and Secure flags expose cookies to XSS and network interception; disabling them makes theft materially easier.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-614
+      title: Sensitive Cookie Without Secure Attribute
+    - kind: owasp
+      title: Session Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+    - kind: url
+      title: Spring Boot security
+      url: https://docs.spring.io/spring-boot/reference/web/spring-security.html
   tags:
     - security
     - session
@@ -33,3 +45,4 @@ emit:
     summary: "`${captures.issue.text}` builds or adjusts cookies with risky defaults or explicitly weakened HttpOnly/Secure flags."
   remediation:
     summary: Prefer ResponseCookie with Secure and HttpOnly enabled, SameSite appropriate for your topology, and minimize lifetime on authentication cookies.
+

@@ -5,6 +5,15 @@ metadata:
   title: Avoid ad hoc HTML sanitization
   summary: Hand-rolled HTML escaping and sanitization should be replaced with vetted sanitizers or safe rendering paths.
   rationale: String replacement chains miss edge cases and are easy to bypass as rendering behavior evolves.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - xss
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` performs manual HTML escaping instead of using a trusted sanitization or safe rendering path."
   remediation:
     summary: Use a vetted sanitizer or framework-native escaping model instead of string replacement chains.
+
 

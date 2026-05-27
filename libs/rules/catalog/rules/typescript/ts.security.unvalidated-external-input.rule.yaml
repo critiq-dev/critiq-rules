@@ -5,6 +5,15 @@ metadata:
   title: Validate untrusted input before parser construction
   summary: Untrusted input should be validated before it is used to construct sensitive parsers or runtime objects.
   rationale: Passing untrusted text across regex or URL construction boundaries increases the risk of parser abuse, denial of service, and downstream policy bypass.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
   tags:
     - security
     - input-validation
@@ -33,3 +42,4 @@ emit:
     summary: "`${captures.issue.text}` constructs a sensitive parser or runtime object from untrusted input without a trust-boundary check."
   remediation:
     summary: Validate, sanitize, or normalize the untrusted value before passing it into URL, RegExp, or similarly sensitive constructors.
+

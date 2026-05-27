@@ -5,6 +5,15 @@ metadata:
   title: Avoid `arguments.callee` and `arguments.caller`
   summary: Do not read `arguments.callee` or `arguments.caller` in functions.
   rationale: These legacy properties break optimizations, leak stack details, and are restricted in strict mode.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-94
+      title: Improper Control of Generation of Code
+    - kind: owasp
+      title: Code Injection
+      url: https://owasp.org/www-community/attacks/Code_Injection
   tags:
     - security
     - language
@@ -32,3 +41,4 @@ emit:
     summary: "`${captures.issue.text}` relies on deprecated `arguments` metadata and should not be used."
   remediation:
     summary: Use named function expressions or arrow functions instead of `arguments.callee` or `arguments.caller`.
+

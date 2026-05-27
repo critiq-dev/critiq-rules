@@ -5,6 +5,15 @@ metadata:
   title: Avoid unsafe `innerHTML` assignment
   summary: "`innerHTML` assignments should only use fixed or explicitly sanitized HTML."
   rationale: Direct HTML injection can allow untrusted or weakly reviewed content to execute in the browser.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - output-encoding
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` inserts non-literal, non-sanitized HTML into `innerHTML`."
   remediation:
     summary: Prefer text-only rendering APIs or assign only fixed or explicitly sanitized HTML.
+

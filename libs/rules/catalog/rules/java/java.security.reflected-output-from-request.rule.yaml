@@ -5,6 +5,15 @@ metadata:
   title: Avoid reflecting servlet request data through response writers
   summary: Servlet writers should not emit raw request parameters or headers without encoding or policy checks.
   rationale: Writing request-controlled strings directly into HTTP responses is a common reflected XSS vector for servlet stacks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
   tags:
     - security
     - xss
@@ -33,3 +42,4 @@ emit:
     summary: "`${captures.issue.text}` forwards request-derived content through the servlet response writer without an obvious encoding guard."
   remediation:
     summary: Contextually encode output for HTML or JSON consumers, validate redirect-like flows separately, and prefer templating APIs that auto-escape.
+

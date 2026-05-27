@@ -7,6 +7,15 @@ metadata:
     Public Go HTTP servers should use `http.Server` with read, write, idle, and header timeouts instead of convenience `ListenAndServe` helpers or incomplete literals.
   rationale: >-
     Missing timeouts enable slowloris-style resource exhaustion and hung connections on internet-facing services.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Construct `http.Server` with `ReadHeaderTimeout`, `ReadTimeout`, `WriteTimeout`, and `IdleTimeout`, and prefer `ListenAndServe` on that configured instance.
+

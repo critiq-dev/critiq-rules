@@ -7,6 +7,15 @@ metadata:
     `new SecureRandom(byte[])` should not be initialized with literal byte arrays, short fixed buffers, or string-derived seeds.
   rationale: >-
     A hardcoded or short seed reduces SecureRandom entropy to a guessable space, making downstream tokens, keys, and salts predictable.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - java
@@ -47,3 +56,4 @@ emit:
   remediation:
     summary: >-
       Construct `SecureRandom` without arguments to use the system entropy source, or call `SecureRandom.getInstanceStrong()` and `generateSeed` for high-entropy material.
+

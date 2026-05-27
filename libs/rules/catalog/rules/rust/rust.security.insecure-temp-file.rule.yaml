@@ -7,6 +7,15 @@ metadata:
     Temporary file creation should use secure helpers with random suffixes and restrictive permissions.
   rationale: >-
     Predictable temp paths and default-permission temp files enable symlink races and information disclosure.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
   tags:
     - security
     - rust
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Use `tempfile::Builder` with explicit permissions and patterns containing `*`, or `std::env::temp_dir` with random names.
+

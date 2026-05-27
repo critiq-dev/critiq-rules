@@ -7,6 +7,15 @@ metadata:
     `DocumentBuilderFactory`, `SAXParserFactory`, and `TransformerFactory` instances should enable secure processing and disable external entities before they parse untrusted XML.
   rationale: >-
     Java XML parser factories default to processing external DTDs and entities; without explicit hardening they expose XXE that can exfiltrate files or perform server-side requests.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-611
+      title: Improper Restriction of XML External Entity Reference
+    - kind: owasp
+      title: XML External Entity (XXE) Processing
+      url: https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing
   tags:
     - security
     - java
@@ -47,3 +56,4 @@ emit:
   remediation:
     summary: >-
       Call `setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true)` and disable `disallow-doctype-decl`, `external-general-entities`, and `external-parameter-entities` before parsing untrusted XML.
+

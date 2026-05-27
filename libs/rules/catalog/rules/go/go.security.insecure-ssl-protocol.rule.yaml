@@ -7,6 +7,15 @@ metadata:
     `tls.VersionSSL30`, SSLv2, or SSLv3 string literals indicate use of broken legacy protocols.
   rationale: >-
     SSLv2 and SSLv3 contain unrecoverable cryptographic weaknesses (POODLE, DROWN) and must not be negotiated.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -44,3 +53,4 @@ emit:
   remediation:
     summary: >-
       Use `tls.VersionTLS12` or `tls.VersionTLS13` instead of SSL legacy constants or string literals.
+

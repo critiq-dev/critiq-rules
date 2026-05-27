@@ -7,6 +7,15 @@ metadata:
     Sensitive Fiber parsers should pair structs with validator tags or explicit validation so roles and secrets cannot be silently omitted.
   rationale: >-
     Regex heuristics flag `BodyParser`/`JSON` usage when structs in the same file define sensitive fields without `validate` or `binding` style tags.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Add `validate` struct tags, use Fiber validator middleware, or centralize DTO validation before business logic.
+

@@ -5,6 +5,21 @@ metadata:
   title: Avoid excessive Fastify body limits
   summary: Fastify applications should not disable body limits or configure unusually large defaults without compensating controls.
   rationale: Oversized bodies amplify denial-of-service risk on services without upstream buffering limits.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Fastify recommendations
+      url: https://fastify.dev/docs/latest/Guides/Recommendation/
   tags:
     - security
     - fastify
@@ -32,3 +47,4 @@ emit:
     summary: Fastify is configured with an oversized or disabled bodyLimit.
   remediation:
     summary: Lower `bodyLimit`, enforce route-specific caps, or terminate traffic behind an API gateway or proxy that caps body size.
+

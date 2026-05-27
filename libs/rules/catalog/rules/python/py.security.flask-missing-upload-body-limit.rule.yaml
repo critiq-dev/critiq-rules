@@ -5,6 +5,18 @@ metadata:
   title: Set Flask MAX_CONTENT_LENGTH for uploads
   summary: Flask apps handling uploads should configure `MAX_CONTENT_LENGTH` to bound request bodies.
   rationale: Missing upload limits enables trivial denial-of-service via oversized multipart payloads.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+    - kind: url
+      title: Flask security considerations
+      url: https://flask.palletsprojects.com/en/stable/security/
   tags:
     - security
     - python
@@ -42,3 +54,4 @@ emit:
     summary: "Upload handling references `${captures.issue.text}` but no `MAX_CONTENT_LENGTH` configuration was detected in this file."
   remediation:
     summary: Set `app.config["MAX_CONTENT_LENGTH"]` (or equivalent) to a bounded maximum aligned with product limits.
+

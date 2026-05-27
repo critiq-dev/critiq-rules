@@ -5,6 +5,18 @@ metadata:
   title: Disable Flask debug mode in runtime configuration
   summary: Flask applications should not enable debug mode through `app.run`, config assignment, or `FLASK_DEBUG`.
   rationale: Debug mode can expose interactive tracebacks and internal application state to external users.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-209
+      title: Generation of Error Message Containing Sensitive Information
+    - kind: owasp
+      title: Error Handling Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
+    - kind: url
+      title: Flask security considerations
+      url: https://flask.palletsprojects.com/en/stable/security/
   tags:
     - security
     - python
@@ -41,3 +53,4 @@ emit:
     summary: "`${captures.issue.text}` enables Flask debug behavior that should remain off outside local development."
   remediation:
     summary: Remove debug flags from runtime code and environment assignments, then gate development-only behavior behind safe configuration.
+

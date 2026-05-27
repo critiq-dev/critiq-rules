@@ -5,6 +5,15 @@ metadata:
   title: Avoid permissive file modes
   summary: Files that can carry user or security data should not be created with world-accessible modes.
   rationale: Broad file permissions expose application data to local users or processes that should not read or modify it.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-732
+      title: Incorrect Permission Assignment for Critical Resource
+    - kind: owasp
+      title: File Permission
+      url: https://owasp.org/www-community/vulnerabilities/Improper_File_Permissions
   tags:
     - security
     - filesystem
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` sets a file mode that grants world access."
   remediation:
     summary: Use the minimum required file mode and remove world-readable or world-writable bits.
+
 

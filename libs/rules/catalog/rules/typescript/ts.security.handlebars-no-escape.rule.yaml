@@ -5,6 +5,15 @@ metadata:
   title: Keep Handlebars escaping enabled at template trust boundaries
   summary: "Server-side Handlebars compilation should not disable HTML escaping with `noEscape: true`."
   rationale: Disabling Handlebars escaping weakens the template trust boundary and can turn server-rendered output into attacker-controlled HTML.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - xss
@@ -36,3 +45,4 @@ emit:
     summary: "`${captures.issue.text}` disables Handlebars escaping at a server-template trust boundary."
   remediation:
     summary: Leave Handlebars escaping enabled, or treat raw HTML rendering as an explicit, narrowly reviewed trust boundary.
+

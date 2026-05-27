@@ -5,6 +5,21 @@ metadata:
   title: Do not allow dotfiles in Express static middleware
   summary: express.static should not serve dotfiles from disk unless explicitly required and reviewed.
   rationale: Allowing dotfiles can expose hidden configuration and secrets through the static file middleware.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - express
@@ -33,3 +48,4 @@ emit:
     summary: "${captures.issue.text} is configured with dotfiles allow, which can leak hidden files."
   remediation:
     summary: Use the default dotfiles ignore behavior or serve dotfiles from a tightly scoped directory with access controls.
+

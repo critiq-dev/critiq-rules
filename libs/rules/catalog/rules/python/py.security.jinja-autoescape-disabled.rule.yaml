@@ -5,6 +5,18 @@ metadata:
   title: Avoid disabling Jinja autoescape
   summary: Jinja2 environments should keep autoescaping enabled for HTML rendering contexts.
   rationale: Disabling autoescape can allow untrusted template data to render as executable markup in browser clients.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Flask security considerations
+      url: https://flask.palletsprojects.com/en/stable/security/
   tags:
     - security
     - python
@@ -43,3 +55,4 @@ emit:
     summary: "`${captures.issue.text}` configures a Jinja environment with `autoescape=False`."
   remediation:
     summary: Keep `autoescape` enabled for HTML templates and isolate trusted non-HTML rendering pipelines explicitly.
+

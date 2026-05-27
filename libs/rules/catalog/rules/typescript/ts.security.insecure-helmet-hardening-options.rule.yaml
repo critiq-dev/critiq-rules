@@ -5,6 +5,15 @@ metadata:
   title: Avoid disabling core Helmet protections
   summary: Helmet should keep nosniff, HSTS, DNS prefetch control, Expect-CT, and referrer policy enabled unless another gateway enforces them.
   rationale: Turning off individual Helmet middlewares removes baseline HTTP hardening that is a high-signal misconfiguration risk.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - express
@@ -34,3 +43,4 @@ emit:
     summary: "${captures.issue.text} disables a Helmet protection that should usually remain enabled."
   remediation:
     summary: Remove false overrides for nosniff, HSTS, DNS prefetch control, Expect-CT, and referrer policy unless a documented compensating control applies.
+

@@ -5,6 +5,15 @@ metadata:
   title: Server-side request forgery
   summary: Outbound requests should not use attacker-controlled targets or private hosts.
   rationale: Request-controlled targets can force the server to call internal services, metadata endpoints, or attacker-controlled infrastructure.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-918
+      title: Server-Side Request Forgery (SSRF)
+    - kind: owasp
+      title: Server-Side Request Forgery
+      url: https://owasp.org/www-community/attacks/Server_Side_Request_Forgery
   tags:
     - security
     - network
@@ -33,3 +42,4 @@ emit:
     summary: "`${captures.ssrfCall.text}` sends an outbound request to a request-controlled or private target."
   remediation:
     summary: Resolve URLs against a trusted allowlist, reject private hosts, and proxy outbound requests through a vetted server-side helper.
+

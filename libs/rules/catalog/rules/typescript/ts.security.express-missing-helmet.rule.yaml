@@ -5,6 +5,21 @@ metadata:
   title: Apply Helmet to Express apps
   summary: Express apps should use Helmet or equivalent header hardening middleware.
   rationale: Helmet packages several response-header protections that are easy to miss or drift when managed ad hoc.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - express
@@ -34,4 +49,5 @@ emit:
     summary: This Express app is initialized without visible Helmet-style header hardening.
   remediation:
     summary: Apply `helmet()` or an equivalent set of header protections near application startup.
+
 

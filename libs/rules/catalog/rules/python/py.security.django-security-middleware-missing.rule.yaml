@@ -5,6 +5,18 @@ metadata:
   title: Include Django SecurityMiddleware in middleware stack
   summary: Django settings should include `django.middleware.security.SecurityMiddleware` in `MIDDLEWARE`.
   rationale: Missing SecurityMiddleware can disable key hardening controls such as transport, header, and redirect protections.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Django deployment checklist
+      url: https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
   tags:
     - security
     - python
@@ -45,3 +57,4 @@ emit:
     summary: "`MIDDLEWARE` is declared without `django.middleware.security.SecurityMiddleware`."
   remediation:
     summary: Add `django.middleware.security.SecurityMiddleware` to `MIDDLEWARE` following Django ordering guidance.
+

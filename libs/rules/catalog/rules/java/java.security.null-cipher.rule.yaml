@@ -5,6 +5,15 @@ metadata:
   title: Do not use NullCipher
   summary: "Constructing `new NullCipher()` or `Cipher.getInstance(\"Null\")` performs no encryption."
   rationale: NullCipher returns plaintext unchanged, providing no confidentiality and often disguising an intentional bypass of crypto.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - java
@@ -40,3 +49,4 @@ emit:
     summary: "`${captures.issue.text}` uses NullCipher, which leaves data unencrypted."
   remediation:
     summary: "Use an authenticated cipher such as `AES/GCM/NoPadding` with a properly managed key."
+

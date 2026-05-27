@@ -7,6 +7,15 @@ metadata:
     `rand.Seed` from `math/rand` produces predictable streams; security-sensitive code must use `crypto/rand`.
   rationale: >-
     `math/rand` is a PRNG and remains predictable regardless of seed; tokens, secrets, and keys must come from `crypto/rand.Reader`.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Use `crypto/rand.Reader` (or `crypto/rand.Read`) to generate secrets, tokens, and keys. `math/rand` should only be used for non-security-sensitive randomness and does not need seeding in Go 1.20+.
+

@@ -5,6 +5,15 @@ metadata:
   title: Use secure WebSocket transport
   summary: WebSocket clients should not connect over cleartext `ws://` when sensitive application data is involved.
   rationale: Cleartext WebSocket transport exposes application traffic to interception and manipulation.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - transport
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` uses cleartext WebSocket transport."
   remediation:
     summary: Switch the endpoint to `wss://` and keep certificate validation enabled.
+
 

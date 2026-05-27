@@ -5,6 +5,15 @@ metadata:
   title: Avoid blocking dialog APIs
   summary: Do not call `alert`, `confirm`, or `prompt` in application code.
   rationale: Blocking dialogs freeze the UI thread, are easy to abuse for social engineering, and are inappropriate for production UX.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - ux
@@ -32,3 +41,4 @@ emit:
     summary: "`${captures.issue.text}` uses a blocking browser dialog that should not ship in application code."
   remediation:
     summary: Replace blocking dialogs with in-app UI components or structured notifications.
+

@@ -5,6 +5,21 @@ metadata:
   title: Pair GraphQL multipart uploads with CSRF-safe server posture
   summary: Legacy GraphQL multipart upload helpers should not run alongside Apollo Server configurations that disable CSRF protections.
   rationale: Multipart GraphQL requests complicate browser CSRF defenses; when Apollo CSRF prevention is explicitly disabled, upload middleware is a high-risk combination for cross-site writes.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Apollo Server security
+      url: https://www.apollographql.com/docs/apollo-server/security/security
   tags:
     - security
     - graphql
@@ -34,3 +49,4 @@ emit:
   remediation:
     summary: >-
       Keep Apollo csrfPrevention enabled (default in supported releases), add an explicit preflight header policy, or move uploads behind authenticated, non-browser APIs.
+

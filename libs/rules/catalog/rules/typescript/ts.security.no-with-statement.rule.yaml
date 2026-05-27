@@ -5,6 +5,15 @@ metadata:
   title: Avoid `with` statements
   summary: "`with` statements make binding resolution unpredictable and are disallowed in strict mode."
   rationale: The `with` statement introduces dynamic scope and makes static analysis, optimization, and security review unreliable.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-94
+      title: Improper Control of Generation of Code
+    - kind: owasp
+      title: Code Injection
+      url: https://owasp.org/www-community/attacks/Code_Injection
   tags:
     - security
     - language
@@ -32,3 +41,4 @@ emit:
     summary: "`${captures.issue.text}` uses a `with` statement that makes binding resolution unpredictable."
   remediation:
     summary: Replace the `with` block with explicit property access on a named object.
+

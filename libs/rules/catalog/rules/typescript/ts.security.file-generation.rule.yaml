@@ -5,6 +5,15 @@ metadata:
   title: Constrain local file generation paths
   summary: Local file writes should not derive their destination path from request or upload input.
   rationale: Attacker-controlled write paths can overwrite local state, escape intended directories, or create files in sensitive locations.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
   tags:
     - security
     - filesystem
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` writes to a path derived from external input without a trusted local filename."
   remediation:
     summary: Generate the destination name on the server or constrain writes to an allowlisted directory and filename set.
+

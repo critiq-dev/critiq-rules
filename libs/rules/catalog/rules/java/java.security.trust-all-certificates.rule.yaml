@@ -5,6 +5,15 @@ metadata:
   title: Do not trust every TLS certificate
   summary: "TrustManagers must validate certificates; empty `checkServerTrusted`/`checkClientTrusted` bodies or `TrustAllStrategy` accept any peer."
   rationale: Disabling certificate validation defeats TLS authentication and enables man-in-the-middle attacks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - java
@@ -40,3 +49,4 @@ emit:
     summary: "`${captures.issue.text}` accepts any TLS certificate without verification."
   remediation:
     summary: "Use the platform default `TrustManager` or pin specific CAs; never ship a TrustManager whose validation methods are empty."
+

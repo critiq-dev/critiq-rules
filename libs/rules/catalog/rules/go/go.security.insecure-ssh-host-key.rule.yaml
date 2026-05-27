@@ -7,6 +7,15 @@ metadata:
     `ssh.InsecureIgnoreHostKey()` disables host key verification and exposes SSH clients to man-in-the-middle attacks.
   rationale: >-
     Skipping host key verification lets any network attacker impersonate the remote host and steal credentials or hijack sessions.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Use `ssh.FixedHostKey`, `knownhosts.New`, or a callback that compares the remote host key to a trusted pin before completing the handshake.
+

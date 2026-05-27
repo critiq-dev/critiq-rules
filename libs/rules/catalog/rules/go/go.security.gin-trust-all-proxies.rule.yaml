@@ -7,6 +7,15 @@ metadata:
     `SetTrustedProxies` should list real upstreams instead of `nil` or `0.0.0.0/0` style catch-alls that spoof `X-Forwarded-For`.
   rationale: >-
     Trusting every proxy allows clients to forge client IP headers and bypass IP-based controls or auditing.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Replace catch-all trusted proxy lists with explicit CIDRs for your ingress tier and document the expected hop count.
+

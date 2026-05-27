@@ -7,6 +7,15 @@ metadata:
     Untyped `serde_yaml` deserialization can instantiate arbitrary types from untrusted input.
   rationale: >-
     YAML loaders without strict typing enable unsafe object graphs and unexpected type coercion.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-502
+      title: Deserialization of Untrusted Data
+    - kind: owasp
+      title: Deserialization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html
   tags:
     - security
     - rust
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Deserialize into explicit structs or enums and validate input before use.
+

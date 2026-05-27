@@ -7,6 +7,15 @@ metadata:
     `tls.Config` literals should set `MinVersion` to a modern protocol (`tls.VersionTLS12` or newer) to avoid downgrade attacks.
   rationale: >-
     Without `MinVersion`, the Go standard library accepts legacy TLS versions that are vulnerable to known protocol attacks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Add `MinVersion: tls.VersionTLS12` (or `tls.VersionTLS13`) to the configuration to enforce a modern protocol baseline.
+

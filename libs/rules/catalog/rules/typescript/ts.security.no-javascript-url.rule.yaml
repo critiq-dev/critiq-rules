@@ -5,6 +5,15 @@ metadata:
   title: Avoid `javascript:` URLs
   summary: Do not use `javascript:` URLs in string literals, template literals, or JSX link attributes.
   rationale: "`javascript:` URLs execute attacker-controlled code when used as navigation targets."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - xss
@@ -32,3 +41,4 @@ emit:
     summary: "`${captures.issue.text}` uses a `javascript:` URL that can execute arbitrary script."
   remediation:
     summary: "Use safe HTTPS links, in-app handlers, or explicit event callbacks instead of `javascript:` URLs."
+

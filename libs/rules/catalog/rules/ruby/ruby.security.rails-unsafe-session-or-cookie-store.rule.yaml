@@ -7,6 +7,18 @@ metadata:
     Session and signed cookie stores should not persist raw `params` blobs that attackers can influence.
   rationale: >-
     Writing `params` directly into `session` or `cookies` enables tampering, fixation, and oversized payload attacks unless additional integrity controls exist.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-614
+      title: Sensitive Cookie Without Secure Attribute
+    - kind: owasp
+      title: Session Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+    - kind: url
+      title: Ruby on Rails security guide
+      url: https://guides.rubyonrails.org/security.html
   tags:
     - security
     - ruby
@@ -43,3 +55,4 @@ emit:
   remediation:
     summary: >-
       Store opaque identifiers, use signed or encrypted cookie jars appropriately, and validate any user-derived values before persistence.
+

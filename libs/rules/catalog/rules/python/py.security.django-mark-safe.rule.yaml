@@ -5,6 +5,18 @@ metadata:
   title: Avoid Django mark_safe for dynamic content
   summary: "Django responses should avoid `mark_safe` when content can include untrusted input."
   rationale: "`mark_safe` bypasses Django escaping and can introduce cross-site scripting when values are not strictly trusted."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Django deployment checklist
+      url: https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
   tags:
     - security
     - python
@@ -41,3 +53,4 @@ emit:
     summary: "`${captures.issue.text}` bypasses escaping and can expose XSS when rendered with variable data."
   remediation:
     summary: "Prefer Django auto-escaping or sanitize untrusted values before rendering instead of forcing trust with `mark_safe`."
+

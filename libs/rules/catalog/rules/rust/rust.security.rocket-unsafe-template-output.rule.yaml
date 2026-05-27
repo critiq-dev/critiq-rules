@@ -7,6 +7,18 @@ metadata:
     Do not wrap request-sourced strings in `RawHtml` (or similar) without escaping in Rocket handlers.
   rationale: >-
     Raw HTML bypasses Rocket's escaping defaults and is a common XSS footgun when fed from path, query, or body inputs.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: ANSSI Rust secure development guidelines
+      url: https://anssi-fr.github.io/rust-guide/01-general-principles.html
   tags:
     - security
     - rust
@@ -45,3 +57,4 @@ emit:
   remediation:
     summary: >-
       Prefer typed templates with auto-escaping, sanitize with a vetted HTML policy crate, or return plain text/JSON instead of `RawHtml`.
+

@@ -5,6 +5,21 @@ metadata:
   title: Override Express cookie defaults
   summary: Express session cookie settings should not omit explicit lifetime, scope, and transport attributes.
   rationale: Implicit cookie defaults vary by middleware and make auth state harder to audit consistently.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-614
+      title: Sensitive Cookie Without Secure Attribute
+    - kind: owasp
+      title: Session Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - authentication
@@ -36,4 +51,5 @@ emit:
     summary: "`${captures.issue.text}` leaves key Express cookie settings at implicit defaults."
   remediation:
     summary: Set explicit cookie lifetime, scope, and transport attributes instead of relying on middleware defaults.
+
 

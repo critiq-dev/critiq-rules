@@ -5,6 +5,15 @@ metadata:
   title: Avoid sensitive data in logs and telemetry
   summary: Sensitive fields should not be sent to logging, tracing, or analytics sinks.
   rationale: Observability payloads often leave the service boundary and can expose secrets, account identifiers, or personal data if they carry raw request or user fields.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-532
+      title: Insertion of Sensitive Information into Log File
+    - kind: owasp
+      title: Logging Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
   tags:
     - security
     - privacy
@@ -42,3 +51,4 @@ emit:
     summary: "`${captures.issue.text}` reaches a logging or telemetry sink with sensitive data."
   remediation:
     summary: Redact, hash, or drop the sensitive field before it reaches the sink.
+

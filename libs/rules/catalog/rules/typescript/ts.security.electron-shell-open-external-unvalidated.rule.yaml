@@ -5,6 +5,18 @@ metadata:
   title: Do not open external URLs from request data in Electron
   summary: shell.openExternal should not receive request-controlled URLs without validation.
   rationale: Open redirects and SSRF-style flows in the main process can pivot to arbitrary system browsers or handlers.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-78
+      title: OS Command Injection
+    - kind: owasp
+      title: OS Command Injection Defense Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
+    - kind: url
+      title: Electron security tutorial
+      url: https://www.electronjs.org/docs/latest/tutorial/security
   tags:
     - security
     - electron
@@ -33,3 +45,4 @@ emit:
     summary: "${captures.issue.text} opens a URL derived from request-controlled input."
   remediation:
     summary: Allowlist URL schemes and hosts, normalize targets, and block private IP ranges before calling openExternal.
+

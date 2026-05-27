@@ -5,6 +5,15 @@ metadata:
   title: Avoid unsafe Content-Security-Policy literals
   summary: Static CSP header values should not rely on unsafe-inline, unsafe-eval, or unsafe-hashes without nonces.
   rationale: Permissive CSP keywords weaken XSS defenses for every response that carries the header.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - csp
@@ -33,3 +42,4 @@ emit:
     summary: "${captures.issue.text} sets a CSP that includes unsafe directives without a nonce-based escape hatch."
   remediation:
     summary: Prefer nonces or hashes, remove unsafe-inline and unsafe-eval, and scope directives to the smallest required surface.
+

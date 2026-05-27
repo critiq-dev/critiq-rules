@@ -7,6 +7,18 @@ metadata:
     Actuator `management.endpoints.web.exposure.include` should not expose wildcards or high-risk endpoints (such as `env`, `beans`, or `heapdump`) without deliberate access control.
   rationale: >-
     Over-exposed actuators leak configuration, secrets material, and JVM internals that attackers can use to pivot or crash the service.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Spring Boot security
+      url: https://docs.spring.io/spring-boot/reference/web/spring-security.html
   tags:
     - security
     - java
@@ -38,3 +50,4 @@ emit:
   remediation:
     summary: >-
       Replace wildcards with explicit endpoint lists, move sensitive endpoints off public networks, and pair exposure with Spring Security rules or management port isolation.
+

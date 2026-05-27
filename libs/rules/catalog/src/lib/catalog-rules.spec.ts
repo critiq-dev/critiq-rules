@@ -1,4 +1,9 @@
 import { loadRuleCatalogFile } from '@critiq/core-catalog';
+import {
+  loadRuleText,
+  validateLoadedRuleDocument,
+  validateOssCatalogRulePolicy,
+} from '@critiq/core-rules-dsl';
 import { runRuleSpec } from '@critiq/testing-harness';
 import { readdirSync, readFileSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
@@ -90,6 +95,62 @@ describe('rules catalog rule specs', () => {
       true,
     );
     expect(discoveredSpecIds).toEqual(catalogRuleIds);
+  });
+
+  it('rejects vulnerability blocks in OSS catalog rules', () => {
+    for (const rulePath of collectFiles(rulesDirectory, '.rule.yaml')) {
+      const loaded = loadRuleText(readFileSync(rulePath, 'utf8'), rulePath);
+
+      expect(loaded.success).toBe(true);
+
+      if (!loaded.success) {
+        continue;
+      }
+
+      const validated = validateLoadedRuleDocument(loaded.data);
+
+      expect(validated.success).toBe(true);
+
+      if (!validated.success) {
+        continue;
+      }
+
+      expect(
+        validateOssCatalogRulePolicy(
+          validated.data.document,
+          validated.data.sourceMap,
+        ),
+      ).toEqual([]);
+    }
+  });
+
+  it('requires transparency references on security-category rules', () => {
+    for (const rulePath of collectFiles(rulesDirectory, '.rule.yaml')) {
+      const loaded = loadRuleText(readFileSync(rulePath, 'utf8'), rulePath);
+
+      expect(loaded.success).toBe(true);
+
+      if (!loaded.success) {
+        continue;
+      }
+
+      const validated = validateLoadedRuleDocument(loaded.data);
+
+      expect(validated.success).toBe(true);
+
+      if (!validated.success) {
+        continue;
+      }
+
+      const { document } = validated.data;
+
+      if (!document.emit.finding.category.startsWith('security.')) {
+        continue;
+      }
+
+      expect(document.metadata.references?.length ?? 0).toBeGreaterThanOrEqual(1);
+      expect(document.metadata.detection?.kind ?? 'pattern').toBe('pattern');
+    }
   });
 
   it.each(specPaths)('passes %s', (specPath) => {

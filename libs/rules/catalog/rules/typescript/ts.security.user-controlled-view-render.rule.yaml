@@ -5,6 +5,15 @@ metadata:
   title: Constrain `res.render()` trust boundaries
   summary: Express view names should not cross into server-side rendering from untrusted input.
   rationale: Untrusted template names can expose internal views, bypass intended route behavior, or widen a server-side template boundary.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - express
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` selects a server-side template across a trust boundary using untrusted input."
   remediation:
     summary: Resolve the template from an allowlist or fixed route mapping before calling `res.render()`.
+

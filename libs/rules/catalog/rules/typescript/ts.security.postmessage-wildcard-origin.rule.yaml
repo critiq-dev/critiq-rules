@@ -5,6 +5,15 @@ metadata:
   title: Avoid wildcard `postMessage` targets
   summary: "`postMessage` calls should not use `*` as the target origin when they carry application data."
   rationale: Wildcard targets allow the browser to deliver the message to any origin that receives the window reference.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - browser
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` uses `*` as the `postMessage` target origin."
   remediation:
     summary: Set the target origin to a strict expected origin instead of `*`.
+

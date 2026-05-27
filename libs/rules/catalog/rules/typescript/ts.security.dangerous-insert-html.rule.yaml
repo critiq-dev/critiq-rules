@@ -5,6 +5,15 @@ metadata:
   title: Avoid unsafe DOM HTML insertion sinks
   summary: "`outerHTML`, `document.write*`, and `insertAdjacentHTML` should only receive fixed or explicitly sanitized HTML."
   rationale: HTML-capable DOM insertion sinks can execute attacker-controlled markup unless the HTML is fixed or strongly sanitized first.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - xss
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` uses an HTML-capable DOM sink with non-literal, non-sanitized content."
   remediation:
     summary: Insert text with safe DOM APIs, or pass only fixed or explicitly sanitized HTML to the sink.
+

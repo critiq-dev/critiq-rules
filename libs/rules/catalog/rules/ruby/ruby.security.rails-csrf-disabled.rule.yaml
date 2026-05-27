@@ -7,6 +7,18 @@ metadata:
     Browser-facing Rails controllers should keep forgery protection enabled with a safe strategy.
   rationale: >-
     Skipping CSRF verification or downgrading to `null_session` lets attackers replay cross-site requests against authenticated sessions.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-352
+      title: Cross-Site Request Forgery (CSRF)
+    - kind: owasp
+      title: Cross-Site Request Forgery Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Ruby on Rails security guide
+      url: https://guides.rubyonrails.org/security.html
   tags:
     - security
     - ruby
@@ -43,3 +55,4 @@ emit:
   remediation:
     summary: >-
       Remove broad `skip_forgery_protection` usage, prefer `protect_from_forgery with: :exception`, and keep `verify_authenticity_token` enabled for state-changing browser actions.
+

@@ -5,6 +5,15 @@ metadata:
   title: Eval or dynamic code execution
   summary: Eval-like helpers, `vm` execution APIs, and string-evaluated timers should not execute dynamic code.
   rationale: Dynamic execution turns data into code, widens the attack surface, and bypasses normal control flow.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-94
+      title: Improper Control of Generation of Code
+    - kind: owasp
+      title: Code Injection
+      url: https://owasp.org/www-community/attacks/Code_Injection
   tags:
     - security
     - execution
@@ -32,3 +41,4 @@ emit:
     summary: "`${captures.issue.text}` executes dynamic code and should be replaced with a safer alternative."
   remediation:
     summary: Replace dynamic execution with explicit parsing, fixed dispatch tables, or normal function callbacks.
+

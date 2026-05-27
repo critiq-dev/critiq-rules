@@ -5,6 +5,18 @@ metadata:
   title: Avoid AllowAny as DRF default permission
   summary: Django REST Framework APIs should default to authenticated permission classes instead of `AllowAny`.
   rationale: Default `AllowAny` exposes mutation-heavy APIs unless every view overrides permissions explicitly.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-862
+      title: Missing Authorization
+    - kind: owasp
+      title: Authorization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+    - kind: url
+      title: Django deployment checklist
+      url: https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
   tags:
     - security
     - python
@@ -44,3 +56,4 @@ emit:
     summary: "`REST_FRAMEWORK` enables `AllowAny` via `DEFAULT_PERMISSION_CLASSES`, which is unsafe for default API posture."
   remediation:
     summary: Prefer `IsAuthenticated` or another restrictive default, then opt-in public access only where documented.
+

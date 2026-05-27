@@ -7,6 +7,15 @@ metadata:
     Thymeleaf `th:utext`, JSP scriptlets, and FreeMarker `?no_esc` patterns must not render untrusted request or model values without an explicit sanitization strategy.
   rationale: >-
     Non-escaped template sinks turn reflected input into XSS, which compromises browser sessions and administrative workflows.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - java
@@ -47,3 +56,4 @@ emit:
   remediation:
     summary: >-
       Use Thymeleaf `th:text`, avoid raw JSP expressions for request data, and keep FreeMarker auto-escaping on unless a vetted sanitizer wraps dynamic HTML.
+

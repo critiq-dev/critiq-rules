@@ -5,6 +5,15 @@ metadata:
   title: Harden auth-bearing cookies
   summary: Auth and session cookies should set HttpOnly, Secure, and SameSite.
   rationale: Cookie flags prevent browser scripts, mixed transport, and cross-site requests from exposing session-bearing values.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-614
+      title: Sensitive Cookie Without Secure Attribute
+    - kind: owasp
+      title: Session Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
   tags:
     - security
     - authentication
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` sets an auth-bearing cookie without the expected protections."
   remediation:
     summary: Add `HttpOnly`, `Secure`, and an explicit `SameSite` policy before the cookie is used for session or auth state.
+
 

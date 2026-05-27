@@ -7,6 +7,15 @@ metadata:
     Do not execute runtime-generated PHP via eval, string assert, or create_function.
   rationale: >-
     Dynamic execution turns untrusted or mutable input into executable code and expands injection risk.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-94
+      title: Improper Control of Generation of Code
+    - kind: owasp
+      title: Code Injection
+      url: https://owasp.org/www-community/attacks/Code_Injection
   tags:
     - security
     - php
@@ -40,3 +49,4 @@ emit:
   remediation:
     summary: >-
       Replace eval, string assert, and create_function with explicit control flow, parsing, or allowlisted dispatch.
+

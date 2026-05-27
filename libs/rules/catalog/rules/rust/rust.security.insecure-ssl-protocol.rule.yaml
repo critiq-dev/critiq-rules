@@ -7,6 +7,15 @@ metadata:
     Rust code must not enable SSLv3, TLS 1.0, or TLS 1.1 in TLS configuration.
   rationale: >-
     These protocol versions have known weaknesses and are deprecated for secure transport.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - rust
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Require TLS 1.2 or TLS 1.3 and remove SSLv3, TLS 1.0, and TLS 1.1 from allowed protocol lists.
+

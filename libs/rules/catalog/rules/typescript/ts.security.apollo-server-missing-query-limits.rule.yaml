@@ -5,6 +5,21 @@ metadata:
   title: Add GraphQL query depth or complexity controls
   summary: Apollo Server bootstrap should declare validation rules or plugins that bound query cost.
   rationale: Without depth, complexity, persisted operations, or gateway limits, GraphQL endpoints are easier to abuse with expensive queries.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+    - kind: owasp
+      title: GraphQL Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Apollo Server security
+      url: https://www.apollographql.com/docs/apollo-server/security/security
   tags:
     - security
     - graphql
@@ -33,3 +48,4 @@ emit:
     summary: Apollo Server is constructed without recognizable validation rules or protective plugins.
   remediation:
     summary: Add depth limits, query complexity rules, persisted operations, rate limits, or terminate behind a gateway/WAF that enforces GraphQL policies.
+

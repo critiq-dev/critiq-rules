@@ -7,6 +7,18 @@ metadata:
     Rocket route handlers should not `unwrap`, `expect`, or otherwise panic on values derived from the HTTP request.
   rationale: >-
     Panics become hard failures and can be abused for denial-of-service or to leak error detail; prefer `Result` and typed rejections.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-209
+      title: Generation of Error Message Containing Sensitive Information
+    - kind: owasp
+      title: Error Handling Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
+    - kind: url
+      title: ANSSI Rust secure development guidelines
+      url: https://anssi-fr.github.io/rust-guide/01-general-principles.html
   tags:
     - security
     - rust
@@ -43,3 +55,4 @@ emit:
   remediation:
     summary: >-
       Return `Result`, `Option`, or `status::Custom`, map errors to HTTP responses, and reserve `unwrap` for tests or statically known invariants.
+

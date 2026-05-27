@@ -5,6 +5,15 @@ metadata:
   title: Avoid synchronous child process execution with dynamic commands
   summary: execSync and spawnSync should not run commands built from variables or template strings.
   rationale: Synchronous shell execution blocks the event loop and dynamic command strings are a common command-injection surface.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-78
+      title: OS Command Injection
+    - kind: owasp
+      title: OS Command Injection Defense Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
   tags:
     - security
     - express
@@ -33,3 +42,4 @@ emit:
     summary: "`${captures.issue.text}` runs a child process synchronously with a non-literal command string."
   remediation:
     summary: Prefer async APIs with fixed command allowlists, or validate and normalize inputs before invoking shell commands.
+

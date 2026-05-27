@@ -5,6 +5,21 @@ metadata:
   title: Do not skip throttling on credential routes
   summary: Sensitive Nest routes should not disable `@nestjs/throttler` protections without a compensating throttle.
   rationale: Authentication endpoints are brute-force magnets; removing throttling removes basic abuse resistance.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: NestJS security
+      url: https://docs.nestjs.com/security/authentication
   tags:
     - security
     - nestjs
@@ -33,3 +48,4 @@ emit:
     summary: "`${captures.issue.text}` disables throttling on an authentication-sensitive route."
   remediation:
     summary: Remove `@SkipThrottle()` or pair it with an explicit `@Throttle` policy tuned for the handler.
+

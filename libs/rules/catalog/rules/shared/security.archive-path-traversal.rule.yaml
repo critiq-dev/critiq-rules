@@ -5,6 +5,15 @@ metadata:
   title: Sanitize archive entry paths before writing
   summary: Archive extraction should not write entry names directly to the filesystem.
   rationale: Archive entries can contain traversal paths that overwrite files outside the intended extraction directory.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-22
+      title: Path Traversal
+    - kind: owasp
+      title: Path Traversal
+      url: https://owasp.org/www-community/attacks/Path_Traversal
   tags:
     - security
     - filesystem
@@ -39,3 +48,4 @@ emit:
     summary: "`${captures.issue.text}` may write an archive-controlled path without a containment check."
   remediation:
     summary: Normalize each entry path against a trusted extraction root and reject paths that escape it.
+

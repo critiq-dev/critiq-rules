@@ -7,6 +7,18 @@ metadata:
     Warp filters and handlers run on the async runtime; avoid `std::fs`, `thread::sleep`, and `unwrap` on request paths without `spawn_blocking` or proper errors.
   rationale: >-
     Blocking the runtime reduces availability and unwraps turn parse errors into panics; both are amplified under load and hostile traffic.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: ANSSI Rust secure development guidelines
+      url: https://anssi-fr.github.io/rust-guide/01-general-principles.html
   tags:
     - security
     - rust
@@ -43,3 +55,4 @@ emit:
   remediation:
     summary: >-
       Use `tokio::fs`, offload blocking work with `spawn_blocking`, and propagate errors with `Rejection` instead of `unwrap`.
+

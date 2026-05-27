@@ -7,6 +7,15 @@ metadata:
     Outbound HTTP clients should not forward tainted request/session material without validation or redaction.
   rationale: >-
     Unchecked egress forwarding can leak tokens, credentials, or personal data to external systems.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-200
+      title: Exposure of Sensitive Information to an Unauthorized Actor
+    - kind: owasp
+      title: Logging Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
   tags:
     - security
     - php
@@ -40,3 +49,4 @@ emit:
   remediation:
     summary: >-
       Scrub secrets, restrict outbound destinations, and centralize external integrations behind audited request builders.
+

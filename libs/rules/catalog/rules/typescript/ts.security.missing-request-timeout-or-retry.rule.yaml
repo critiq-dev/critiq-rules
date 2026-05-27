@@ -5,6 +5,15 @@ metadata:
   title: Missing request timeout or retry protection
   summary: External calls should define timeout, cancellation, or retry behavior before they enter security-sensitive flows.
   rationale: Authentication and dependency calls that have neither timeout nor retry protection fail unpredictably under network stress.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - resilience
@@ -33,3 +42,4 @@ emit:
     summary: "`${captures.issue.text}` performs an external call without timeout, cancellation, or retry handling."
   remediation:
     summary: Add explicit timeout or cancellation support, wrap the call in retry handling, or do both when the dependency is critical.
+

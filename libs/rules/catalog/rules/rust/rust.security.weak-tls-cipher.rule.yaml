@@ -7,6 +7,15 @@ metadata:
     Rust TLS configuration must not include cipher suites using RC4, 3DES, NULL, or EXPORT algorithms.
   rationale: >-
     Weak cipher suites are vulnerable to practical attacks and should not be negotiated.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - rust
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Use modern AEAD cipher suites such as TLS_AES_128_GCM_SHA256 or TLS_CHACHA20_POLY1305_SHA256.
+

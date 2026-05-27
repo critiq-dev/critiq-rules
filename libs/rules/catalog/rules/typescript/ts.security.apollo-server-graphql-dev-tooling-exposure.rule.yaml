@@ -5,6 +5,21 @@ metadata:
   title: Avoid shipping GraphQL dev landing or playground plugins without a production guard
   summary: Apollo Server dev landing pages, sandbox UIs, and GraphQL Playground-style plugins should not load unconditionally in production builds.
   rationale: Interactive GraphQL explorers widen attack surface and often expose schema details beyond what production APIs should advertise by default.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+    - kind: owasp
+      title: GraphQL Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Apollo Server security
+      url: https://www.apollographql.com/docs/apollo-server/security/security
   tags:
     - security
     - graphql
@@ -34,3 +49,4 @@ emit:
   remediation:
     summary: >-
       Load sandbox or local landing plugins only outside production, prefer `ApolloServerPluginLandingPageProductionDefault`, or disable interactive explorers behind authentication at the edge.
+

@@ -5,6 +5,15 @@ metadata:
   title: Avoid request-controlled format strings
   summary: Logging and formatting helpers should not take request input as the format string itself.
   rationale: Request-controlled format strings can corrupt logs, leak structure, or produce unexpected formatting behavior.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
   tags:
     - security
     - logging
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` uses request-controlled input as the formatting template."
   remediation:
     summary: Keep the format string fixed and pass request data as ordinary arguments or structured fields.
+

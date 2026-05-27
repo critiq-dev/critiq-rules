@@ -8,6 +8,15 @@ metadata:
   rationale: >-
     Regex-based heuristics flag Echo `Bind` usage when the file defines structs with sensitive fields that omit `validate` or `binding` style tags.
     This is intentionally conservative and may miss cross-file structs or middleware-protected routes.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -44,3 +53,4 @@ emit:
   remediation:
     summary: >-
       Add `validate` tags, use Echo's binding helpers with explicit validation, or route through a hardened DTO layer.
+

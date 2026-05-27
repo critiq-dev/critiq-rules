@@ -7,6 +7,18 @@ metadata:
     Production HTTP security chains should not end with a broad permit-all fallback such as `anyRequest().permitAll()` or `requestMatchers("/**").permitAll()`.
   rationale: >-
     Anonymous-by-default authorization lets unauthenticated callers reach handlers that were meant to be protected, which often leads to broken access control and data exposure.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-862
+      title: Missing Authorization
+    - kind: owasp
+      title: Authorization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+    - kind: url
+      title: Spring Boot security
+      url: https://docs.spring.io/spring-boot/reference/web/spring-security.html
   tags:
     - security
     - java
@@ -45,3 +57,4 @@ emit:
   remediation:
     summary: >-
       Replace broad permit-all with authenticated or role-based rules, keep public paths explicit, and add integration tests that assert unauthorized access is rejected.
+

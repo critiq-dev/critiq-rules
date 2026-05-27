@@ -5,6 +5,21 @@ metadata:
   title: Add a global Nest ValidationPipe
   summary: Nest bootstrap entries should register `ValidationPipe` globally when controllers parse bodies or DTOs.
   rationale: Without a validation pipe unexpected fields can reach controllers and weaken input hygiene.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: NestJS security
+      url: https://docs.nestjs.com/security/authentication
   tags:
     - security
     - nestjs
@@ -33,3 +48,4 @@ emit:
   remediation:
     summary: >-
       Call app.useGlobalPipes with ValidationPipe using whitelist and forbidNonWhitelisted flags near bootstrap completion.
+

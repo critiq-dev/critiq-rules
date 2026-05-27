@@ -5,6 +5,18 @@ metadata:
   title: Avoid AllowAny on unsafe DRF methods
   summary: DRF views that accept POST, PUT, PATCH, or DELETE should not declare `AllowAny` unless the endpoint is intentionally public.
   rationale: Open unsafe methods allow unauthenticated clients to mutate data and violate least-privilege API access.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-862
+      title: Missing Authorization
+    - kind: owasp
+      title: Authorization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+    - kind: url
+      title: Django deployment checklist
+      url: https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
   tags:
     - security
     - python
@@ -44,3 +56,4 @@ emit:
     summary: "`${captures.issue.text}` combines `AllowAny` with an unsafe HTTP method declaration."
   remediation:
     summary: Require authentication or scoped permissions for unsafe verbs unless the handler is explicitly public and documented.
+

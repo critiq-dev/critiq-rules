@@ -5,6 +5,15 @@ metadata:
   title: Do not persist upload filenames directly
   summary: Upload handlers should not store attacker-controlled filenames without generating or validating a safe local name.
   rationale: Upload filenames can carry traversal payloads, collisions, or misleading extensions that break local containment.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
   tags:
     - security
     - filesystem
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` persists an upload filename derived from attacker-controlled input."
   remediation:
     summary: Generate a server-side filename or apply a strict allowlist before storing uploaded content.
+

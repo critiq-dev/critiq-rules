@@ -7,6 +7,15 @@ metadata:
     Jackson `ObjectMapper` should not call `enableDefaultTyping` or `activateDefaultTyping`, and `@JsonTypeInfo(use = Id.CLASS|MINIMAL_CLASS)` should not be applied without an allowlist.
   rationale: >-
     Polymorphic deserialization that encodes class names lets attacker-controlled payloads instantiate gadget chains and pivot to remote code execution.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-502
+      title: Deserialization of Untrusted Data
+    - kind: owasp
+      title: Deserialization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html
   tags:
     - security
     - java
@@ -47,3 +56,4 @@ emit:
   remediation:
     summary: >-
       Disable default typing, validate types with a strict subtype resolver, or replace `Id.CLASS` / `Id.MINIMAL_CLASS` with `Id.NAME` and a registered set of allowed subtypes.
+

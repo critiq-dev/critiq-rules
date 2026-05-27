@@ -5,6 +5,15 @@ metadata:
   title: Avoid insecure temporary file name helpers
   summary: Python temporary files should not use `mktemp` or `tempnam` helpers that create race-prone filenames.
   rationale: Predictable temporary filenames can enable symlink races and unauthorized file access before creation.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
   tags:
     - security
     - python
@@ -43,3 +52,4 @@ emit:
     summary: "`${captures.issue.text}` uses an insecure temporary filename API."
   remediation:
     summary: Use `tempfile.NamedTemporaryFile` or `tempfile.mkstemp` to create secure files atomically.
+

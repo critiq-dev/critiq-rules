@@ -7,6 +7,18 @@ metadata:
     Wildcard CSRF exclusions should not cover account, billing, admin, password, or profile endpoints.
   rationale: >-
     Over-broad CSRF exemptions remove request integrity checks from high-impact authenticated actions.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-352
+      title: Cross-Site Request Forgery (CSRF)
+    - kind: owasp
+      title: Cross-Site Request Forgery Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Laravel security
+      url: https://laravel.com/docs/master/security
   tags:
     - security
     - php
@@ -40,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Limit CSRF exceptions to explicitly signed webhook endpoints and avoid wildcard exclusions on authenticated user flows.
+

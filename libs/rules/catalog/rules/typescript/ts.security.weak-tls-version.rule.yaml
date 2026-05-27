@@ -5,6 +5,15 @@ metadata:
   title: Require modern TLS minimum versions
   summary: Transport clients should not explicitly allow SSLv3, TLS 1.0, or TLS 1.1.
   rationale: Legacy TLS protocol floors weaken transport security and keep obsolete downgrade-compatible settings alive in production code.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - transport
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` explicitly allows an obsolete TLS or SSL protocol version."
   remediation:
     summary: Set `minVersion` to at least `TLSv1.2` or `TLSv1.3` and remove legacy `secureProtocol` values.
+

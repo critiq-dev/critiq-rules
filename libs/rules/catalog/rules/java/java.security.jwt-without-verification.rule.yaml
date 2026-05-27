@@ -5,6 +5,15 @@ metadata:
   title: Verify JWT signatures before trusting claims
   summary: Decoding a JWT without verifying its signature allows attackers to forge tokens and impersonate users.
   rationale: Methods like `JWT.decode` and `Jwts.parser().parseClaimsJwt` do not check the cryptographic signature; downstream claims cannot be trusted.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-287
+      title: Improper Authentication
+    - kind: owasp
+      title: JSON Web Token Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
   tags:
     - security
     - java
@@ -41,3 +50,4 @@ emit:
     summary: "`${captures.issue.text}` reads a JWT without verifying its signature."
   remediation:
     summary: "Use `JWT.require(algorithm).build().verify(token)` or `Jwts.parser().setSigningKey(key).parseClaimsJws(token)` to authenticate the token before trusting claims."
+

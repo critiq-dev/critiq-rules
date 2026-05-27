@@ -5,6 +5,15 @@ metadata:
   title: Avoid deprecated TLS/SSL protocol versions
   summary: "`SSLContext.getInstance` should not request SSL, SSLv2, SSLv3, TLSv1.0, or TLSv1.1."
   rationale: Pre-TLSv1.2 protocols are deprecated and vulnerable to known attacks such as POODLE and BEAST.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Security Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
   tags:
     - security
     - java
@@ -40,3 +49,4 @@ emit:
     summary: "`${captures.issue.text}` selects a deprecated TLS/SSL protocol version."
   remediation:
     summary: "Use `SSLContext.getInstance(\"TLSv1.2\")` or `\"TLSv1.3\"` and rely on platform defaults where possible."
+

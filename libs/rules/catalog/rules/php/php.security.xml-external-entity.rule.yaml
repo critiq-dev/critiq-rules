@@ -7,6 +7,15 @@ metadata:
     XML parsing should disable external entities and avoid LIBXML_NOENT or libxml_disable_entity_loader(false).
   rationale: >-
     Unsafe XML parser configuration enables XXE attacks that can leak files and reach internal services.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-611
+      title: Improper Restriction of XML External Entity Reference
+    - kind: owasp
+      title: XML External Entity (XXE) Processing
+      url: https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing
   tags:
     - security
     - php
@@ -41,3 +50,4 @@ emit:
   remediation:
     summary: >-
       Call libxml_disable_entity_loader(true) before parsing and pass LIBXML_NONET; never enable LIBXML_NOENT.
+

@@ -5,6 +5,15 @@ metadata:
   title: Use authenticated encryption for secrets and tokens
   summary: Session, cookie, and token encryption should provide integrity protection in the same helper.
   rationale: Confidentiality-only encryption leaves secret-bearing values vulnerable to tampering unless the code also applies an integrity check or uses an authenticated mode.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - cryptography
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` encrypts a secret-bearing value without authenticated encryption or a same-helper integrity check."
   remediation:
     summary: Prefer authenticated encryption such as AES-GCM, or pair non-AEAD encryption with an explicit integrity check in the same helper.
+

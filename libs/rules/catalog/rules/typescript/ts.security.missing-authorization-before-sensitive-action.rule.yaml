@@ -5,6 +5,15 @@ metadata:
   title: Missing authorization before sensitive action
   summary: Sensitive backend actions should be guarded by an authorization or permission check.
   rationale: Calling destructive or privileged actions without an authorization guard increases the risk of broken access control.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-862
+      title: Missing Authorization
+    - kind: owasp
+      title: Authorization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
   tags:
     - security
     - authorization
@@ -33,3 +42,4 @@ emit:
     summary: "`${captures.issue.text}` performs a sensitive action without a matching authorization guard."
   remediation:
     summary: Add an explicit authorization or permission check before the sensitive action executes.
+

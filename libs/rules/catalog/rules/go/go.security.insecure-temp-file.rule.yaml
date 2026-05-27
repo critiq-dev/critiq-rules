@@ -7,6 +7,15 @@ metadata:
     Go code should use `os.CreateTemp` and `os.MkdirTemp` instead of the deprecated `ioutil.TempFile` / `ioutil.TempDir` helpers.
   rationale: >-
     The `ioutil` temp helpers are deprecated and frequently appear alongside race-prone temp-file patterns; the `os` replacements receive ongoing security fixes.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Switch to `os.CreateTemp(dir, pattern)` or `os.MkdirTemp(dir, pattern)` and ensure the pattern includes a `*` so a random component is generated.
+

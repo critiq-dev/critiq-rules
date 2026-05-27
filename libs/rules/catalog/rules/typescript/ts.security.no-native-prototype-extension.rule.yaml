@@ -5,6 +5,15 @@ metadata:
   title: Do not extend native prototypes
   summary: Do not assign properties on built-in prototype objects such as `Array.prototype`.
   rationale: Mutating native prototypes affects every consumer of that type and can introduce subtle security bugs across the runtime.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-94
+      title: Improper Control of Generation of Code
+    - kind: owasp
+      title: Code Injection
+      url: https://owasp.org/www-community/attacks/Code_Injection
   tags:
     - security
     - language
@@ -32,3 +41,4 @@ emit:
     summary: "`${captures.issue.text}` mutates a built-in prototype and can change behavior globally."
   remediation:
     summary: Use utility functions or wrapper types instead of modifying native prototypes.
+

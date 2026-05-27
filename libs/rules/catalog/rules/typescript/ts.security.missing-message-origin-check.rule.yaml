@@ -5,6 +5,15 @@ metadata:
   title: Verify `message` event origins
   summary: "`message` handlers should validate `event.origin` before trusting cross-window data."
   rationale: Without an origin check, hostile pages can post crafted messages into the handler.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
   tags:
     - security
     - browser
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` handles cross-window messages without validating the sender origin."
   remediation:
     summary: Gate the handler on a strict allowlist of expected origins before reading `event.data`.
+

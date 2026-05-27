@@ -7,6 +7,15 @@ metadata:
     Multipart handlers should cap body size, sanitize filenames with `filepath.Base`, and avoid concatenating user filenames into destination paths.
   rationale: >-
     Unbounded multipart reads and raw `FormFile().Filename` usage enable DoS and path traversal when combined with predictable upload directories.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Wrap the request body with `http.MaxBytesReader`, normalize filenames with `filepath.Base`, enforce extension allowlists, and prefer storage APIs that never trust client paths.
+

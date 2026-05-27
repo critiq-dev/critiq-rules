@@ -5,6 +5,15 @@ metadata:
   title: Path traversal via user input
   summary: File access calls must not use request-controlled paths directly.
   rationale: User-controlled paths can escape the intended directory and expose sensitive files.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
   tags:
     - security
     - filesystem
@@ -40,3 +49,4 @@ emit:
     summary: "`${captures.fileRead.text}` reads from a path derived from request data without an allowlist or boundary check."
   remediation:
     summary: Resolve the path against a trusted base directory and reject values that escape it.
+

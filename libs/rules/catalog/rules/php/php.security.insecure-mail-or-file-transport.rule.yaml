@@ -7,6 +7,15 @@ metadata:
     Outbound mail/file transfer code should not rely on plaintext transport endpoints for sensitive traffic.
   rationale: >-
     Unencrypted transfer channels expose credentials and payloads to interception or tampering.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-668
+      title: Exposure of Resource to Wrong Sphere
+    - kind: url
+      title: CWE-668 Exposure of Resource to Wrong Sphere
+      url: https://cwe.mitre.org/data/definitions/668.html
   tags:
     - security
     - php
@@ -39,3 +48,4 @@ emit:
   remediation:
     summary: >-
       Use encrypted transport endpoints and modern client libraries with certificate validation enabled.
+

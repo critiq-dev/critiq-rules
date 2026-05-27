@@ -5,6 +5,15 @@ metadata:
   title: Do not allow every origin in CORS policy
   summary: CORS should not fall back to wildcard or implicit allow-all origin settings.
   rationale: Wildcard or implicit allow-all CORS policies expose authenticated browser responses across origins.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-942
+      title: Permissive Cross-domain Policy with Untrusted Domains
+    - kind: owasp
+      title: Cross-Origin Resource Sharing (CORS)
+      url: https://owasp.org/www-community/attacks/CORS_OriginHeaderScrutiny
   tags:
     - security
     - cors
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` allows any origin through wildcard or implicit CORS policy."
   remediation:
     summary: Configure an explicit allowlist or validated origin callback instead of allowing all origins.
+

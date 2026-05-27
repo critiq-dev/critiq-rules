@@ -5,6 +5,15 @@ metadata:
   title: Use constant-time secret comparison
   summary: Secrets and tokens should not be compared with ordinary equality operators.
   rationale: Ordinary string comparison can leak timing differences that help attackers guess secret material.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - cryptography
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` compares a likely secret value with ordinary equality."
   remediation:
     summary: Use a constant-time comparison helper such as `crypto.timingSafeEqual` for secrets, tokens, and password hashes.
+
 

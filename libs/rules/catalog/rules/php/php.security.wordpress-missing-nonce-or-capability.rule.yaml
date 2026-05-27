@@ -7,6 +7,18 @@ metadata:
     WordPress admin/AJAX mutation callbacks should verify nonce tokens and enforce capability checks.
   rationale: >-
     Missing nonce or authorization checks let attackers trigger privileged actions through forged or unauthorized requests.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-862
+      title: Missing Authorization
+    - kind: owasp
+      title: Authorization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+    - kind: url
+      title: WordPress plugin security
+      url: https://developer.wordpress.org/apis/security/
   tags:
     - security
     - php
@@ -40,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Add nonce verification (`check_ajax_referer`/`check_admin_referer`) and explicit capability checks (`current_user_can`) before performing mutations.
+

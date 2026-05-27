@@ -5,6 +5,21 @@ metadata:
   title: Set `Secure` on Express session cookies
   summary: Express session and cookie-session configs should not disable the `Secure` flag.
   rationale: Cookies sent over non-HTTPS transport are easier to intercept or replay.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-614
+      title: Sensitive Cookie Without Secure Attribute
+    - kind: owasp
+      title: Session Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - authentication
@@ -34,3 +49,4 @@ emit:
     summary: "`${captures.issue.text}` disables the `Secure` cookie flag in Express session configuration."
   remediation:
     summary: "Set `secure: true` and serve the cookie only over HTTPS."
+

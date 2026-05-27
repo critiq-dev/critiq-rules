@@ -5,6 +5,18 @@ metadata:
   title: Avoid permissive FastAPI CORS with credentials
   summary: FastAPI `CORSMiddleware` should not combine wildcard origins, methods, or headers with `allow_credentials=True`.
   rationale: Wildcard CORS policies plus credentials mirror insecure browser CORS combinations that attackers can abuse from malicious origins.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-942
+      title: Permissive Cross-domain Policy with Untrusted Domains
+    - kind: owasp
+      title: Cross-Origin Resource Sharing (CORS)
+      url: https://owasp.org/www-community/attacks/CORS_OriginHeaderScrutiny
+    - kind: url
+      title: FastAPI security
+      url: https://fastapi.tiangolo.com/tutorial/security/
   tags:
     - security
     - python
@@ -41,3 +53,4 @@ emit:
     summary: "`${captures.issue.text}` configures `CORSMiddleware` with wildcards while credentials are enabled."
   remediation:
     summary: Replace wildcard origins, methods, and headers with explicit allowlists when credentials are required.
+

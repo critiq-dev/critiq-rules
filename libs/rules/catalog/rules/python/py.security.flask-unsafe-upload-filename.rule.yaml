@@ -5,6 +5,18 @@ metadata:
   title: Sanitize Flask upload filenames before saving
   summary: Flask upload handlers should pass filenames through `secure_filename` (or equivalent) before persisting to disk.
   rationale: Attacker-controlled filenames enable traversal sequences, extension spoofing, and collisions when saved verbatim.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-434
+      title: Unrestricted Upload of File with Dangerous Type
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+    - kind: url
+      title: Flask security considerations
+      url: https://flask.palletsprojects.com/en/stable/security/
   tags:
     - security
     - python
@@ -42,3 +54,4 @@ emit:
     summary: "`${captures.issue.text}` persists uploads using an unsanitized client-provided filename."
   remediation:
     summary: Generate trusted server-side names or wrap uploads with `werkzeug.utils.secure_filename` before calling `save`.
+

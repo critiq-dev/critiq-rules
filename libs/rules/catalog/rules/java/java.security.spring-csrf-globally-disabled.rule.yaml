@@ -7,6 +7,18 @@ metadata:
     Disabling CSRF globally is unsafe for cookie-backed browser sessions unless the app is clearly hardened as a stateless API (for example OAuth2 resource server with stateless sessions).
   rationale: >-
     CSRF protects browser clients that send session cookies; turning it off without token-based or stateless mitigations invites cross-site request forgery against privileged actions.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-352
+      title: Cross-Site Request Forgery (CSRF)
+    - kind: owasp
+      title: Cross-Site Request Forgery Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Spring Boot security
+      url: https://docs.spring.io/spring-boot/reference/web/spring-security.html
   tags:
     - security
     - java
@@ -47,3 +59,4 @@ emit:
   remediation:
     summary: >-
       Prefer CSRF tokens for cookie sessions, use `oauth2ResourceServer` with JWT for APIs, or set `SessionCreationPolicy.STATELESS` with a reviewed token story instead of blanket `csrf().disable()`.
+

@@ -7,6 +7,18 @@ metadata:
     Redirect helpers must not send users to hosts or paths derived directly from request input without validation.
   rationale: >-
     `redirect_to` and `redirect_back` calls that honor `params`, `request` URLs, or `allow_other_host: true` with tainted data are a common phishing and OAuth bypass vector.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-601
+      title: URL Redirection to Untrusted Site
+    - kind: owasp
+      title: Unvalidated Redirects and Forwards Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html
+    - kind: url
+      title: Ruby on Rails security guide
+      url: https://guides.rubyonrails.org/security.html
   tags:
     - security
     - ruby
@@ -43,3 +55,4 @@ emit:
   remediation:
     summary: >-
       Use an allowlisted path helper, reject off-host targets, and avoid pairing `allow_other_host: true` with user-controlled URLs.
+

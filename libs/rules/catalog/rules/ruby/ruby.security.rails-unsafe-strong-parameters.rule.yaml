@@ -7,6 +7,18 @@ metadata:
     Strong parameters and mass assignment sinks should not accept unfiltered request hashes or privileged attributes.
   rationale: >-
     Permissive `permit!`, privileged `permit` fields, and direct `params` mass assignment enable attackers to escalate privileges or overwrite protected columns.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+    - kind: url
+      title: Ruby on Rails security guide
+      url: https://guides.rubyonrails.org/security.html
   tags:
     - security
     - ruby
@@ -44,3 +56,4 @@ emit:
   remediation:
     summary: >-
       Replace `permit!` with an explicit attribute list, drop privileged symbols from `permit`, and route updates through vetted strong-parameter helpers instead of raw `params`.
+

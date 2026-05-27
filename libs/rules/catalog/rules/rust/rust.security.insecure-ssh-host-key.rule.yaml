@@ -7,6 +7,15 @@ metadata:
     SSH clients must not disable host key verification.
   rationale: >-
     Skipping host key checks enables person-in-the-middle attacks against SSH sessions.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-668
+      title: Exposure of Resource to Wrong Sphere
+    - kind: url
+      title: CWE-668 Exposure of Resource to Wrong Sphere
+      url: https://cwe.mitre.org/data/definitions/668.html
   tags:
     - security
     - rust
@@ -45,3 +54,4 @@ emit:
   remediation:
     summary: >-
       Keep host key checking enabled and pin known host keys or use a trusted known_hosts store.
+

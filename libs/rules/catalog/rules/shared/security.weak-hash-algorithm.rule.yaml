@@ -5,6 +5,15 @@ metadata:
   title: Avoid weak hash algorithms
   summary: Cryptographic hashing should use modern, collision-resistant algorithms.
   rationale: Weak digests such as MD5 and SHA-1 are vulnerable to collisions and should not be used for security-sensitive hashing.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
   tags:
     - security
     - crypto
@@ -39,3 +48,4 @@ emit:
     summary: "`${captures.issue.text}` uses a weak hash algorithm."
   remediation:
     summary: Use SHA-256, SHA-384, SHA-512, or a stronger approved hashing primitive instead.
+

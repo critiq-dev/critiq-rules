@@ -5,6 +5,15 @@ metadata:
   title: Throw `Error` objects instead of literals
   summary: Only throw `Error` instances (or subclasses), not strings, numbers, or plain objects.
   rationale: Throwing literals loses stack traces and makes error handling inconsistent across callers.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
   tags:
     - security
     - reliability
@@ -32,3 +41,4 @@ emit:
     summary: "`${captures.issue.text}` throws a non-`Error` value that is harder to inspect and handle safely."
   remediation:
     summary: Throw `new Error(...)` or a typed error subclass with a clear message.
+

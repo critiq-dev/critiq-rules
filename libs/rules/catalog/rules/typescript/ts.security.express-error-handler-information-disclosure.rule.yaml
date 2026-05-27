@@ -5,6 +5,21 @@ metadata:
   title: Avoid returning raw errors from Express error middleware
   summary: Express error handlers should not send the err object directly to clients in production paths.
   rationale: Returning raw errors leaks stack traces, internal identifiers, and implementation details to attackers.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-209
+      title: Generation of Error Message Containing Sensitive Information
+    - kind: owasp
+      title: Error Handling Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - express
@@ -33,3 +48,4 @@ emit:
     summary: "${captures.issue.text} forwards the caught error directly to res.send or res.json."
   remediation:
     summary: Log detailed errors server-side and return stable, generic client responses with correlation identifiers.
+

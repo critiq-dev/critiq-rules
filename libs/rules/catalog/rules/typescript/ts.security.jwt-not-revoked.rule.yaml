@@ -5,6 +5,15 @@ metadata:
   title: Add a JWT revocation hook
   summary: Express JWT middleware should check revocation state when bearer tokens can be invalidated early.
   rationale: Signature validation alone does not handle logout, compromise, or forced token invalidation.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-287
+      title: Improper Authentication
+    - kind: owasp
+      title: JSON Web Token Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
   tags:
     - security
     - authentication
@@ -34,4 +43,5 @@ emit:
     summary: "`${captures.issue.text}` configures Express JWT validation without an `isRevoked` check."
   remediation:
     summary: Add an `isRevoked` callback or equivalent revocation check for tokens that can be invalidated before expiry.
+
 

@@ -7,6 +7,15 @@ metadata:
     Production Go code should not import the `unsafe` package, which bypasses the type system and memory safety guarantees.
   rationale: >-
     `unsafe.Pointer` lets callers reinterpret arbitrary memory, hiding undefined behaviour and creating vulnerabilities that escape Go's compiler checks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Replace `unsafe.Pointer` usage with typed APIs from `reflect`, `encoding/binary`, or `cgo` boundaries that explicitly document and contain the unsafe scope.
+

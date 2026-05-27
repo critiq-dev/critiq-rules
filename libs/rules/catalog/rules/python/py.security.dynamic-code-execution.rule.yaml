@@ -5,6 +5,15 @@ metadata:
   title: Avoid dynamic code execution with eval or exec
   summary: Python services should not execute runtime-generated code via `eval` or `exec`.
   rationale: Dynamic code execution turns untrusted data into executable behavior and expands code-injection risk.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-94
+      title: Improper Control of Generation of Code
+    - kind: owasp
+      title: Code Injection
+      url: https://owasp.org/www-community/attacks/Code_Injection
   tags:
     - security
     - python
@@ -43,3 +52,4 @@ emit:
     summary: "`${captures.issue.text}` executes code dynamically with `eval` or `exec`."
   remediation:
     summary: Replace dynamic execution with explicit parsing, allowlisted operations, or fixed function dispatch tables.
+

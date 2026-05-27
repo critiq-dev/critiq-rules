@@ -5,6 +5,15 @@ metadata:
   title: "Remove leftover `console.trace` calls from production paths"
   summary: "`console.trace()` calls should not ship in production code outside an explicit dev-only branch."
   rationale: "`console.trace` dumps a stack trace to stdout/stderr and is almost always leftover developer instrumentation. Stack traces in shipped output disclose internal call structure and inflate logs."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-209
+      title: Generation of Error Message Containing Sensitive Information
+    - kind: owasp
+      title: Error Handling Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
   tags:
     - security
     - logging
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` is leftover developer instrumentation that ships a stack trace to stdout or stderr."
   remediation:
     summary: Remove the call or guard it behind an explicit dev-only check (`process.env.NODE_ENV !== 'production'`, `import.meta.env.DEV`, or `__DEV__`).
+

@@ -7,6 +7,15 @@ metadata:
     var_dump, print_r, debug_zval_dump, and xdebug helpers should not ship in application code paths.
   rationale: >-
     Debug helpers can leak secrets, PII, and internal object state to logs or HTTP responses.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-209
+      title: Generation of Error Message Containing Sensitive Information
+    - kind: owasp
+      title: Error Handling Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
   tags:
     - security
     - php
@@ -43,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Remove debug helpers from production paths or route diagnostics through structured logging with redaction.
+

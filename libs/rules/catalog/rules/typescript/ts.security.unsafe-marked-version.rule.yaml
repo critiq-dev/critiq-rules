@@ -5,6 +5,15 @@ metadata:
   title: Upgrade Markdown rendering dependency
   summary: Markdown renderers should stay on patched versions before rendering untrusted content.
   rationale: Older Markdown renderer versions can expose unsafe HTML handling and parser edge cases.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-1104
+      title: Use of Unmaintained Third Party Components
+    - kind: owasp
+      title: Vulnerable Dependency Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Vulnerable_Dependency_Management_Cheat_Sheet.html
   tags:
     - security
     - dependency
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` is below the minimum Markdown renderer version Critiq treats as safe for untrusted content."
   remediation:
     summary: Upgrade the package and keep untrusted Markdown rendering behind explicit sanitization.
+

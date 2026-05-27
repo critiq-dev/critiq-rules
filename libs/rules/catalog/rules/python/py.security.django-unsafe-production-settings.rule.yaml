@@ -5,6 +5,18 @@ metadata:
   title: Avoid unsafe Django production settings
   summary: Production Django settings should disable debug mode, restrict hosts, protect secrets, and enable HTTPS-aligned cookie flags.
   rationale: Misconfigured Django defaults expose debug traces, enable host header attacks, leak secrets, and weaken cookie transport protections.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+    - kind: url
+      title: Django deployment checklist
+      url: https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
   tags:
     - security
     - python
@@ -45,3 +57,4 @@ emit:
     summary: "`${captures.issue.text}` weakens production security posture for Django deployment."
   remediation:
     summary: Align settings with your deployment checklist—disable DEBUG, pin ALLOWED_HOSTS, load secrets from the environment, and enable secure cookie and HTTPS flags.
+

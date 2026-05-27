@@ -5,6 +5,21 @@ metadata:
   title: Avoid permissive Express session cookie scope
   summary: Express session cookies should not explicitly opt into cross-site or wildcard-style scope.
   rationale: Broad cookie scope increases where session cookies are sent and makes cross-site misuse harder to contain.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-614
+      title: Sensitive Cookie Without Secure Attribute
+    - kind: owasp
+      title: Session Management Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+    - kind: url
+      title: Node.js security best practices
+      url: https://nodejs.org/en/learn/getting-started/security-best-practices
+    - kind: url
+      title: Express production security best practices
+      url: https://expressjs.com/en/advanced/best-practice-security.html
   tags:
     - security
     - authentication
@@ -36,3 +51,4 @@ emit:
     summary: "`${captures.issue.text}` explicitly widens session cookie scope with cross-site or wildcard-style settings."
   remediation:
     summary: Prefer exact cookie domains and `SameSite=Lax` or `Strict` unless a reviewed cross-site requirement exists.
+

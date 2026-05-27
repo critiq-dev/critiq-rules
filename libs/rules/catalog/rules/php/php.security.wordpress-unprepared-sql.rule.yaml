@@ -7,6 +7,18 @@ metadata:
     WordPress SQL calls should not interpolate request values directly into query strings.
   rationale: >-
     Dynamic SQL without `$wpdb->prepare` enables injection and unauthorized data access/manipulation.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-89
+      title: SQL Injection
+    - kind: owasp
+      title: SQL Injection Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: WordPress plugin security
+      url: https://developer.wordpress.org/apis/security/
   tags:
     - security
     - php
@@ -40,3 +52,4 @@ emit:
   remediation:
     summary: >-
       Build SQL through `$wpdb->prepare` placeholders and sanitize scalar inputs before passing them to query execution calls.
+

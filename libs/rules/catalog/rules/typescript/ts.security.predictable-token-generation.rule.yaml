@@ -5,6 +5,15 @@ metadata:
   title: Avoid predictable token generation
   summary: Tokens, reset links, and session secrets should be generated from cryptographically strong randomness.
   rationale: Predictable token material makes it easier to guess reset links, invite codes, and session secrets.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-287
+      title: Improper Authentication
+    - kind: owasp
+      title: JSON Web Token Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
   tags:
     - security
     - authentication
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` builds a token-like value from predictable inputs."
   remediation:
     summary: Generate the value with `crypto.randomBytes`, `crypto.randomUUID`, or an approved secure token source.
+

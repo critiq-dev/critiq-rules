@@ -7,6 +7,15 @@ metadata:
     Parsing JWTs with `jwt.Parse` and a nil keyfunc, `jwt.ParseUnverified`, or `jwt.Decode` skips signature verification and lets attackers forge tokens.
   rationale: >-
     Trusting unverified JWTs allows attackers to impersonate users or escalate privileges by crafting tokens with arbitrary claims.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-287
+      title: Improper Authentication
+    - kind: owasp
+      title: JSON Web Token Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
   tags:
     - security
     - go
@@ -44,3 +53,4 @@ emit:
   remediation:
     summary: >-
       Provide a non-nil keyfunc to `jwt.Parse` (or `jwt.ParseWithClaims`) and validate the returned token's `.Valid` flag before reading claims.
+

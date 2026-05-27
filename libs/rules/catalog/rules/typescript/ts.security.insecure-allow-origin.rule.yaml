@@ -5,6 +5,15 @@ metadata:
   title: Do not reflect request origin into CORS policy
   summary: "`Access-Control-Allow-Origin` should not be set from request-controlled input."
   rationale: Reflecting the request origin into a CORS allowlist turns origin validation into a no-op.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-942
+      title: Permissive Cross-domain Policy with Untrusted Domains
+    - kind: owasp
+      title: Cross-Origin Resource Sharing (CORS)
+      url: https://owasp.org/www-community/attacks/CORS_OriginHeaderScrutiny
   tags:
     - security
     - cors
@@ -34,3 +43,4 @@ emit:
     summary: "`${captures.issue.text}` reflects request input into `Access-Control-Allow-Origin`."
   remediation:
     summary: Set CORS origins from a fixed allowlist or explicit trusted origin check.
+
