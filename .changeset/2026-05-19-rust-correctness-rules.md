@@ -1,5 +1,0 @@
----
-"@critiq/rules": minor
----
-
-Ship 7 new Rust correctness catalog rules covering mutex guards held across `.await`, blocking sleep and `block_on` inside `async fn`, forgotten join handles, unbounded channels, `std::sync::Mutex` in async functions, and unchecked slice indexing with variable indices.
