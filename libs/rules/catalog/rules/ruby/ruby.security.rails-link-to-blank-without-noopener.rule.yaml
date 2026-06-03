@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.rails-link-to-blank-without-noopener
+  title: Add rel noopener to link_to with target _blank
+  summary: >-
+    External links opened in a new tab should set rel noopener or noreferrer.
+  rationale: >-
+    Pages opened via target _blank can access window.opener for tab-nabbing.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+      - "**/*.erb"
+      - "**/*.erb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.rails-link-to-blank-without-noopener
+    bind: issue
+emit:
+  finding:
+    category: security.session-management
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.security.rails-link-to-blank-without-noopener`."
+  remediation:
+    summary: >-
+      External links opened in a new tab should set rel noopener or noreferrer.

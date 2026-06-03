@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.insecure-json-load.rule.yaml
+fixtures:
+  - name: flags JSON.load
+    sourcePath: ./fixtures/ruby.security.insecure-json-load/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.insecure-json-load
+  - name: accepts JSON.parse
+    sourcePath: ./fixtures/ruby.security.insecure-json-load/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

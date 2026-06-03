@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.division-by-zero.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.bug-risk.division-by-zero/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.division-by-zero
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.bug-risk.division-by-zero/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

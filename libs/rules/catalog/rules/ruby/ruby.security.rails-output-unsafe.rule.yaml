@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.rails-output-unsafe
+  title: Avoid output-unsafe Rails helpers
+  summary: >-
+    Do not use html_safe, raw, or safe_concat to bypass escaping.
+  rationale: >-
+    Output-unsafe helpers mark content HTML-safe without escaping user input.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+      - "**/*.erb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.rails-output-unsafe
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.security.rails-output-unsafe`."
+  remediation:
+    summary: >-
+      Do not use html_safe, raw, or safe_concat to bypass escaping.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.kernel-open.rule.yaml
+fixtures:
+  - name: flags pipe-mode Kernel.open
+    sourcePath: ./fixtures/ruby.security.kernel-open/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.kernel-open
+  - name: accepts File.read
+    sourcePath: ./fixtures/ruby.security.kernel-open/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

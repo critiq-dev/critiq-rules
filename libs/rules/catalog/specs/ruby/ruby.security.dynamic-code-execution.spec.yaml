@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.dynamic-code-execution.rule.yaml
+fixtures:
+  - name: flags eval invocation
+    sourcePath: ./fixtures/ruby.security.dynamic-code-execution/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.dynamic-code-execution
+  - name: accepts safe parsing
+    sourcePath: ./fixtures/ruby.security.dynamic-code-execution/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.assignment-in-condition
+  title: Avoid assignment inside conditionals
+  summary: >-
+    Extract assignments from if, unless, while, and until conditions.
+  rationale: >-
+    Assignment in conditions is easy to mistake for comparison.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.assignment-in-condition
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.bug-risk.assignment-in-condition`."
+  remediation:
+    summary: >-
+      Extract assignments from if, unless, while, and until conditions.

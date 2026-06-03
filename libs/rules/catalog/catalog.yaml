@@ -1697,6 +1697,55 @@ rules:
     presets:
       - strict
       - security
+  - id: ruby.bug-risk.assignment-in-condition
+    rulePath: ./rules/ruby/ruby.bug-risk.assignment-in-condition.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.deprecated-uri-escape
+    rulePath: ./rules/ruby/ruby.bug-risk.deprecated-uri-escape.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.division-by-zero
+    rulePath: ./rules/ruby/ruby.bug-risk.division-by-zero.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.duplicate-hash-keys
+    rulePath: ./rules/ruby/ruby.bug-risk.duplicate-hash-keys.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.exception-class-overwritten
+    rulePath: ./rules/ruby/ruby.bug-risk.exception-class-overwritten.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.raw-sql-without-squish
+    rulePath: ./rules/ruby/ruby.bug-risk.raw-sql-without-squish.rule.yaml
+    presets:
+      - strict
+  - id: ruby.security.debugger-call
+    rulePath: ./rules/ruby/ruby.security.debugger-call.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.dynamic-code-execution
+    rulePath: ./rules/ruby/ruby.security.dynamic-code-execution.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.insecure-json-load
+    rulePath: ./rules/ruby/ruby.security.insecure-json-load.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.kernel-open
+    rulePath: ./rules/ruby/ruby.security.kernel-open.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.plaintext-password-in-callback
+    rulePath: ./rules/ruby/ruby.security.plaintext-password-in-callback.rule.yaml
+    presets:
+      - strict
+      - security
   - id: ruby.security.rails-csrf-disabled
     rulePath: ./rules/ruby/ruby.security.rails-csrf-disabled.rule.yaml
     presets:
@@ -1707,8 +1756,18 @@ rules:
     presets:
       - strict
       - security
+  - id: ruby.security.rails-link-to-blank-without-noopener
+    rulePath: ./rules/ruby/ruby.security.rails-link-to-blank-without-noopener.rule.yaml
+    presets:
+      - strict
+      - security
   - id: ruby.security.rails-open-redirect
     rulePath: ./rules/ruby/ruby.security.rails-open-redirect.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.rails-output-unsafe
+    rulePath: ./rules/ruby/ruby.security.rails-output-unsafe.rule.yaml
     presets:
       - strict
       - security

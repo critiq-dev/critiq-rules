@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.debugger-call
+  title: Remove debugger calls from application code
+  summary: >-
+    Debugger breakpoints must not ship in non-test Ruby sources.
+  rationale: >-
+    Leftover `debugger`, `byebug`, or `binding.break` calls pause production workers and can expose live request state.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-489
+      title: Active Debug Code
+  tags:
+    - security
+    - ruby
+    - debug
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+      - "**/spec/**"
+      - "**/test/**"
+      - "**/tests/**"
+match:
+  fact:
+    kind: ruby.security.debugger-call
+    bind: issue
+emit:
+  finding:
+    category: security.debug-exposure
+    severity: medium
+    confidence: 0.92
+    tags:
+      - security
+      - ruby
+      - debug
+  message:
+    title: Remove debugger call in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` leaves an interactive debugger breakpoint in application code."
+  remediation:
+    summary: >-
+      Delete debugger statements before merge or gate them behind development-only configuration.

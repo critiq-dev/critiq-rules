@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-link-to-blank-without-noopener.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.security.rails-link-to-blank-without-noopener/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-link-to-blank-without-noopener
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.security.rails-link-to-blank-without-noopener/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

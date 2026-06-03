@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.insecure-json-load
+  title: Avoid insecure JSON load helpers
+  summary: >-
+    Prefer `JSON.parse` over `JSON.load`, `JSON.restore`, or permissive Oj/MultiJson loaders.
+  rationale: >-
+    Load-style JSON APIs can deserialize arbitrary Ruby types and expand deserialization gadget risk.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-502
+      title: Deserialization of Untrusted Data
+    - kind: owasp
+      title: Deserialization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html
+  tags:
+    - security
+    - ruby
+    - deserialization
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.insecure-json-load
+    bind: issue
+emit:
+  finding:
+    category: security.deserialization
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - ruby
+      - deserialization
+  message:
+    title: Use safe JSON parsing in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a JSON loader that can deserialize unsafe Ruby objects."
+  remediation:
+    summary: >-
+      Parse JSON with `JSON.parse` and validate the resulting structure; avoid `JSON.load`, `JSON.restore`, and default `Oj.load` on untrusted input.

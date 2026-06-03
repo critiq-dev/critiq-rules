@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.debugger-call.rule.yaml
+fixtures:
+  - name: flags debugger call
+    sourcePath: ./fixtures/ruby.security.debugger-call/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.debugger-call
+  - name: accepts clean handler
+    sourcePath: ./fixtures/ruby.security.debugger-call/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

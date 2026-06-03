@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.dynamic-code-execution
+  title: Avoid dynamic Ruby code execution
+  summary: >-
+    Do not execute runtime-generated Ruby via eval, exec, or *_eval helpers.
+  rationale: >-
+    Dynamic execution turns untrusted or mutable input into executable code and expands injection risk.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-94
+      title: Improper Control of Generation of Code
+    - kind: owasp
+      title: Code Injection
+      url: https://owasp.org/www-community/attacks/Code_Injection
+  tags:
+    - security
+    - ruby
+    - execution
+    - injection
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.dynamic-code-execution
+    bind: issue
+emit:
+  finding:
+    category: security.execution
+    severity: high
+    confidence: 0.94
+    tags:
+      - security
+      - ruby
+      - execution
+  message:
+    title: Remove dynamic execution in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` executes Ruby code dynamically."
+  remediation:
+    summary: >-
+      Replace eval and *_eval calls with explicit parsing, allowlisted dispatch, or data structures that do not execute code.

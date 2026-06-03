@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.raw-sql-without-squish
+  title: Squish heredoc SQL passed to where
+  summary: >-
+    Normalize heredoc SQL with squish before passing to where or find_by_sql.
+  rationale: >-
+    Unsquished heredoc SQL preserves accidental whitespace and hurts readability.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.raw-sql-without-squish
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: low
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.bug-risk.raw-sql-without-squish`."
+  remediation:
+    summary: >-
+      Normalize heredoc SQL with squish before passing to where or find_by_sql.

@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.deprecated-uri-escape
+  title: Avoid deprecated URI.escape helpers
+  summary: >-
+    Use CGI.escape, URI.encode_www_form_component, or Addressable instead.
+  rationale: >-
+    URI.escape and URI.unescape are deprecated and removed in modern Ruby.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.deprecated-uri-escape
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: low
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.bug-risk.deprecated-uri-escape`."
+  remediation:
+    summary: >-
+      Use CGI.escape, URI.encode_www_form_component, or Addressable instead.

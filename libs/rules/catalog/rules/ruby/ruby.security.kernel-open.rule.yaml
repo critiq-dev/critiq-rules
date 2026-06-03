@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.kernel-open
+  title: Avoid Kernel.open pipe mode
+  summary: >-
+    Do not use `Kernel.open` with a leading pipe, which spawns a shell command.
+  rationale: >-
+    Pipe-mode `open` delegates to the shell and enables command injection when the argument is influenced by users.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-78
+      title: Improper Neutralization of Special Elements used in an OS Command
+    - kind: owasp
+      title: Command Injection
+      url: https://owasp.org/www-community/attacks/Command_Injection
+  tags:
+    - security
+    - ruby
+    - command-execution
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.kernel-open
+    bind: issue
+emit:
+  finding:
+    category: security.command-execution
+    severity: critical
+    confidence: 0.95
+    tags:
+      - security
+      - ruby
+      - command-execution
+  message:
+    title: Replace pipe-mode open in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses `Kernel.open` pipe mode, which can execute shell commands."
+  remediation:
+    summary: >-
+      Use `IO.popen` only with a fixed argv array, `Open3` with explicit command arrays, or file APIs that do not invoke a shell.

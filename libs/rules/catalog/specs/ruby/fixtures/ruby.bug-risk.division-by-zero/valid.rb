@@ -1,0 +1,1 @@
+avg = total / count
