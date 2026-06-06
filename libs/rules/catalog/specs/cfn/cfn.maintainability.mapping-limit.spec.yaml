@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.mapping-limit.rule.yaml
+fixtures:
+  - name: flags I7010 finding
+    observationPath: ./fixtures/cfn.maintainability.mapping-limit/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.mapping-limit
+      allSeverities:
+        - low
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.mapping-limit/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

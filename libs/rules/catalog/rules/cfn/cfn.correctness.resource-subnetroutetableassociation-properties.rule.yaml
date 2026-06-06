@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.resource-subnetroutetableassociation-properties
+  title: Resource subnetroutetableassociation properties
+  summary: Resource subnetroutetableassociation properties
+  rationale: cfn-lint reports E3022 when Resource subnetroutetableassociation properties.
+  aliases:
+    - CFLIN-E3022
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3022
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3022
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Resource subnetroutetableassociation properties
+    summary: "${captures.finding.text} matches cfn-lint E3022."
+  remediation:
+    summary: Resolve the cfn-lint E3022 finding in this CloudFormation template.

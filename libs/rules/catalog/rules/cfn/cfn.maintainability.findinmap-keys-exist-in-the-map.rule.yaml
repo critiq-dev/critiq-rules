@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.findinmap-keys-exist-in-the-map
+  title: Findinmap keys exist in the map
+  summary: Findinmap keys exist in the map
+  rationale: cfn-lint reports W1011 when Findinmap keys exist in the map.
+  aliases:
+    - CFLIN-W1011
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w1011
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W1011
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Findinmap keys exist in the map
+    summary: "${captures.finding.text} matches cfn-lint W1011."
+  remediation:
+    summary: Resolve the cfn-lint W1011 finding in this CloudFormation template.

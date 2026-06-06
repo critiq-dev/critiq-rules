@@ -1,0 +1,3 @@
+<?php
+
+$label = $name . ' ready';

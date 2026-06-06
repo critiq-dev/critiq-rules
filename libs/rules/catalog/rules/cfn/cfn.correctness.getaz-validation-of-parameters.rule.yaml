@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.getaz-validation-of-parameters
+  title: Getaz validation of parameters
+  summary: Getaz validation of parameters
+  rationale: cfn-lint reports E1015 when Getaz validation of parameters.
+  aliases:
+    - CFLIN-E1015
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e1015
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E1015
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Getaz validation of parameters
+    summary: "${captures.finding.text} matches cfn-lint E1015."
+  remediation:
+    summary: Resolve the cfn-lint E1015 finding in this CloudFormation template.

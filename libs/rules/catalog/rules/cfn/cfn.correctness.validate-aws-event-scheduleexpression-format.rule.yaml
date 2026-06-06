@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.validate-aws-event-scheduleexpression-format
+  title: Validate aws event scheduleexpression format
+  summary: Validate aws event scheduleexpression format
+  rationale: cfn-lint reports E3027 when Validate aws event scheduleexpression format.
+  aliases:
+    - CFLIN-E3027
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3027
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3027
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Validate aws event scheduleexpression format
+    summary: "${captures.finding.text} matches cfn-lint E3027."
+  remediation:
+    summary: Resolve the cfn-lint E3027 finding in this CloudFormation template.

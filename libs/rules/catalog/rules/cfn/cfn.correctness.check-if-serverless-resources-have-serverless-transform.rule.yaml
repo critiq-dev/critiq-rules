@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-if-serverless-resources-have-serverless-transform
+  title: Check if serverless resources have serverless transform
+  summary: Check if serverless resources have serverless transform
+  rationale: cfn-lint reports E3038 when Check if serverless resources have serverless transform.
+  aliases:
+    - CFLIN-E3038
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3038
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3038
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check if serverless resources have serverless transform
+    summary: "${captures.finding.text} matches cfn-lint E3038."
+  remediation:
+    summary: Resolve the cfn-lint E3038 finding in this CloudFormation template.

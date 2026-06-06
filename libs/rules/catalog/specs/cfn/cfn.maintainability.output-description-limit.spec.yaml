@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.output-description-limit.rule.yaml
+fixtures:
+  - name: flags I6012 finding
+    observationPath: ./fixtures/cfn.maintainability.output-description-limit/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.output-description-limit
+      allSeverities:
+        - low
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.output-description-limit/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

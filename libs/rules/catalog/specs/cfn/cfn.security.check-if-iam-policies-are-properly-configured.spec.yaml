@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.security.check-if-iam-policies-are-properly-configured.rule.yaml
+fixtures:
+  - name: flags E2507 finding
+    observationPath: ./fixtures/cfn.security.check-if-iam-policies-are-properly-configured/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.security.check-if-iam-policies-are-properly-configured
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.security.check-if-iam-policies-are-properly-configured/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

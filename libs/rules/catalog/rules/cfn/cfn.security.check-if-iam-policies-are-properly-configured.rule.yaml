@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.security.check-if-iam-policies-are-properly-configured
+  title: Check if iam policies are properly configured
+  summary: Check if iam policies are properly configured
+  rationale: cfn-lint reports E2507 when Check if iam policies are properly configured.
+  aliases:
+    - CFLIN-E2507
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e2507
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+  references:
+    - kind: url
+      title: AWS CloudFormation Linter (E2507)
+      url: https://github.com/aws-cloudformation/cfn-lint
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E2507
+emit:
+  finding:
+    category: security.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check if iam policies are properly configured
+    summary: "${captures.finding.text} matches cfn-lint E2507."
+  remediation:
+    summary: Resolve the cfn-lint E2507 finding in this CloudFormation template.

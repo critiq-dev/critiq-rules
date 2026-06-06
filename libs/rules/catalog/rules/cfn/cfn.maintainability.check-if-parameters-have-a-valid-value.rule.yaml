@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.check-if-parameters-have-a-valid-value
+  title: Check if parameters have a valid value
+  summary: Check if parameters have a valid value
+  rationale: cfn-lint reports W2030 when Check if parameters have a valid value.
+  aliases:
+    - CFLIN-W2030
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w2030
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W2030
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check if parameters have a valid value
+    summary: "${captures.finding.text} matches cfn-lint W2030."
+  remediation:
+    summary: Resolve the cfn-lint W2030 finding in this CloudFormation template.

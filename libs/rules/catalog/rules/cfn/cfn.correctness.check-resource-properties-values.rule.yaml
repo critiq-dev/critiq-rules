@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-resource-properties-values
+  title: Check resource properties values
+  summary: Check resource properties values
+  rationale: cfn-lint reports E3012 when Check resource properties values.
+  aliases:
+    - CFLIN-E3012
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3012
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3012
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check resource properties values
+    summary: "${captures.finding.text} matches cfn-lint E3012."
+  remediation:
+    summary: Resolve the cfn-lint E3012 finding in this CloudFormation template.

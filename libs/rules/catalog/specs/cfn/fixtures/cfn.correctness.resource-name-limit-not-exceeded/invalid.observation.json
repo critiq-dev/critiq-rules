@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-e3011",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "E3011: Resource name limit not exceeded",
+          "props": {
+            "ruleId": "E3011",
+            "directoryCode": "CFLIN-E3011",
+            "message": "Resource name limit not exceeded"
+          }
+        }
+      ]
+    }
+  }
+}

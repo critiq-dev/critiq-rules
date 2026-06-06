@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.error-processing-rule-on-the-template.rule.yaml
+fixtures:
+  - name: flags E0002 finding
+    observationPath: ./fixtures/cfn.correctness.error-processing-rule-on-the-template/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.error-processing-rule-on-the-template
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.error-processing-rule-on-the-template/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

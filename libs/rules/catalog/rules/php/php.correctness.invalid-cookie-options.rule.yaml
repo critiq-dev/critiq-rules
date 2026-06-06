@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-cookie-options
+  title: Use valid cookie option keys
+  summary: setcookie and setrawcookie option arrays only accept documented keys.
+  rationale: Invalid cookie option keys are ignored at runtime and can leave security attributes unset.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-cookie-options
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - php
+  message:
+    title: Use valid cookie option keys
+    summary: "`${captures.issue.text}` matches php.correctness.invalid-cookie-options."
+  remediation:
+    summary: Invalid cookie option keys are ignored at runtime and can leave security attributes unset.

@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.parameter-memory-size-attributes-should-have-max-and-min
+  title: Parameter memory size attributes should have max and min
+  summary: Parameter memory size attributes should have max and min
+  rationale: cfn-lint reports W2510 when Parameter memory size attributes should have max and min.
+  aliases:
+    - CFLIN-W2510
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w2510
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W2510
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Parameter memory size attributes should have max and min
+    summary: "${captures.finding.text} matches cfn-lint W2510."
+  remediation:
+    summary: Resolve the cfn-lint W2510 finding in this CloudFormation template.

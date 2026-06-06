@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.outputs-descriptions-can-only-be-strings.rule.yaml
+fixtures:
+  - name: flags E6005 finding
+    observationPath: ./fixtures/cfn.correctness.outputs-descriptions-can-only-be-strings/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.outputs-descriptions-can-only-be-strings
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.outputs-descriptions-can-only-be-strings/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

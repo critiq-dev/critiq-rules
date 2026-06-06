@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-if-a-list-has-between-min-and-max-number-of-values-specified.rule.yaml
+fixtures:
+  - name: flags E3032 finding
+    observationPath: ./fixtures/cfn.correctness.check-if-a-list-has-between-min-and-max-number-of-values-specified/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-if-a-list-has-between-min-and-max-number-of-values-specified
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-if-a-list-has-between-min-and-max-number-of-values-specified/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

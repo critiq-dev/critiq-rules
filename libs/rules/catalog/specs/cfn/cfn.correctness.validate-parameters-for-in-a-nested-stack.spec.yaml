@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.validate-parameters-for-in-a-nested-stack.rule.yaml
+fixtures:
+  - name: flags E3043 finding
+    observationPath: ./fixtures/cfn.correctness.validate-parameters-for-in-a-nested-stack/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.validate-parameters-for-in-a-nested-stack
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.validate-parameters-for-in-a-nested-stack/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

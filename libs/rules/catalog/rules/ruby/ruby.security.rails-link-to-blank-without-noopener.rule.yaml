@@ -9,6 +9,10 @@ metadata:
     Pages opened via target _blank can access window.opener for tab-nabbing.
   detection:
     kind: pattern
+  references:
+    - kind: owasp
+      title: Reverse Tabnabbing
+      url: https://owasp.org/www-community/attacks/Reverse_Tabnabbing
   tags:
     - rules-catalog
     - ruby

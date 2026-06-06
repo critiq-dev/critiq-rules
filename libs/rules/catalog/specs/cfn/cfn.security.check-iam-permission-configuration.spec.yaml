@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.security.check-iam-permission-configuration.rule.yaml
+fixtures:
+  - name: flags W3037 finding
+    observationPath: ./fixtures/cfn.security.check-iam-permission-configuration/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.security.check-iam-permission-configuration
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.security.check-iam-permission-configuration/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

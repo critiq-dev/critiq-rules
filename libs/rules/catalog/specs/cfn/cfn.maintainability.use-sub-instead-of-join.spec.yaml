@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.use-sub-instead-of-join.rule.yaml
+fixtures:
+  - name: flags I1022 finding
+    observationPath: ./fixtures/cfn.maintainability.use-sub-instead-of-join/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.use-sub-instead-of-join
+      allSeverities:
+        - low
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.use-sub-instead-of-join/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

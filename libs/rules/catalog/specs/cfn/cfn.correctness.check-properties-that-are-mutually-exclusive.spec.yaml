@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-properties-that-are-mutually-exclusive.rule.yaml
+fixtures:
+  - name: flags E2520 finding
+    observationPath: ./fixtures/cfn.correctness.check-properties-that-are-mutually-exclusive/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-properties-that-are-mutually-exclusive
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-properties-that-are-mutually-exclusive/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

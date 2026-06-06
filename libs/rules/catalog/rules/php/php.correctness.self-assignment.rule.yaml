@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.self-assignment
+  title: Remove self assignments
+  summary: Assigning a variable to itself has no effect.
+  rationale: Self assignments usually indicate incomplete refactors or accidental duplication.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.self-assignment
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: low
+    confidence: 0.95
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove self assignments
+    summary: "`${captures.issue.text}` matches php.correctness.self-assignment."
+  remediation:
+    summary: Self assignments usually indicate incomplete refactors or accidental duplication.

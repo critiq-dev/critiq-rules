@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.resource-name-limit-not-exceeded
+  title: Resource name limit not exceeded
+  summary: Resource name limit not exceeded
+  rationale: cfn-lint reports E3011 when Resource name limit not exceeded.
+  aliases:
+    - CFLIN-E3011
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3011
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3011
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Resource name limit not exceeded
+    summary: "${captures.finding.text} matches cfn-lint E3011."
+  remediation:
+    summary: Resolve the cfn-lint E3011 finding in this CloudFormation template.

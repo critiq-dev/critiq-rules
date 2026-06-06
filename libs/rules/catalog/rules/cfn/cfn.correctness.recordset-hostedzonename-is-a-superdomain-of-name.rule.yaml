@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.recordset-hostedzonename-is-a-superdomain-of-name
+  title: Recordset hostedzonename is a superdomain of name
+  summary: Recordset hostedzonename is a superdomain of name
+  rationale: cfn-lint reports E3041 when Recordset hostedzonename is a superdomain of name.
+  aliases:
+    - CFLIN-E3041
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3041
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3041
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Recordset hostedzonename is a superdomain of name
+    summary: "${captures.finding.text} matches cfn-lint E3041."
+  remediation:
+    summary: Resolve the cfn-lint E3041 finding in this CloudFormation template.

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.output-name-limit-not-exceeded.rule.yaml
+fixtures:
+  - name: flags E6011 finding
+    observationPath: ./fixtures/cfn.correctness.output-name-limit-not-exceeded/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.output-name-limit-not-exceeded
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.output-name-limit-not-exceeded/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

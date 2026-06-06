@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-regex-literal
+  title: Fix invalid regular expression literals
+  summary: preg_* calls must use a valid delimiter and closing pattern literal.
+  rationale: Invalid regex literals fail at runtime and often hide copy-paste or escaping mistakes.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-regex-literal
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Fix invalid regular expression literals
+    summary: "`${captures.issue.text}` matches php.correctness.invalid-regex-literal."
+  remediation:
+    summary: Invalid regex literals fail at runtime and often hide copy-paste or escaping mistakes.

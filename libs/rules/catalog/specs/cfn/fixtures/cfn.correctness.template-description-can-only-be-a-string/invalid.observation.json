@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-e1004",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "E1004: Template description can only be a string",
+          "props": {
+            "ruleId": "E1004",
+            "directoryCode": "CFLIN-E1004",
+            "message": "Template description can only be a string"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.nested-function-declaration
+  title: Avoid nested function declarations
+  summary: Declaring functions inside other functions is discouraged and hard to test.
+  rationale: Nested functions create hidden scope and make code harder to reuse, mock, and reason about.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.nested-function-declaration
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: low
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Avoid nested function declarations
+    summary: "`${captures.issue.text}` matches php.correctness.nested-function-declaration."
+  remediation:
+    summary: Nested functions create hidden scope and make code harder to reuse, mock, and reason about.

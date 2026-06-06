@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.arns-should-use-correctly-placed-pseudo-parameters.rule.yaml
+fixtures:
+  - name: flags I3042 finding
+    observationPath: ./fixtures/cfn.maintainability.arns-should-use-correctly-placed-pseudo-parameters/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.arns-should-use-correctly-placed-pseudo-parameters
+      allSeverities:
+        - low
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.arns-should-use-correctly-placed-pseudo-parameters/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

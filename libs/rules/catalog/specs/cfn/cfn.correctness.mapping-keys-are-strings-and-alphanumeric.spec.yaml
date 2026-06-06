@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.mapping-keys-are-strings-and-alphanumeric.rule.yaml
+fixtures:
+  - name: flags E7003 finding
+    observationPath: ./fixtures/cfn.correctness.mapping-keys-are-strings-and-alphanumeric/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.mapping-keys-are-strings-and-alphanumeric
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.mapping-keys-are-strings-and-alphanumeric/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

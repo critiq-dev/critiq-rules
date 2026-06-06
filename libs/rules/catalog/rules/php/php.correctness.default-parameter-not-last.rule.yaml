@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.default-parameter-not-last
+  title: Place default parameters last
+  summary: Parameters with default values must appear after required parameters.
+  rationale: Misordered defaults are invalid PHP and break callers that rely on positional arguments.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.default-parameter-not-last
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - php
+  message:
+    title: Place default parameters last
+    summary: "`${captures.issue.text}` matches php.correctness.default-parameter-not-last."
+  remediation:
+    summary: Misordered defaults are invalid PHP and break callers that rely on positional arguments.

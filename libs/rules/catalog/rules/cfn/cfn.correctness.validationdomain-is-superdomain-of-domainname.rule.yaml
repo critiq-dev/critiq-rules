@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.validationdomain-is-superdomain-of-domainname
+  title: Validationdomain is superdomain of domainname
+  summary: Validationdomain is superdomain of domainname
+  rationale: cfn-lint reports E3503 when Validationdomain is superdomain of domainname.
+  aliases:
+    - CFLIN-E3503
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3503
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3503
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Validationdomain is superdomain of domainname
+    summary: "${captures.finding.text} matches cfn-lint E3503."
+  remediation:
+    summary: Resolve the cfn-lint E3503 finding in this CloudFormation template.

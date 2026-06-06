@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.parameter-memory-size-attributes-should-have-max-and-min.rule.yaml
+fixtures:
+  - name: flags W2510 finding
+    observationPath: ./fixtures/cfn.maintainability.parameter-memory-size-attributes-should-have-max-and-min/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.parameter-memory-size-attributes-should-have-max-and-min
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.parameter-memory-size-attributes-should-have-max-and-min/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

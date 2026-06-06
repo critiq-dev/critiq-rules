@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.resource-dependencies-are-not-circular.rule.yaml
+fixtures:
+  - name: flags E3004 finding
+    observationPath: ./fixtures/cfn.correctness.resource-dependencies-are-not-circular/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.resource-dependencies-are-not-circular
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.resource-dependencies-are-not-circular/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

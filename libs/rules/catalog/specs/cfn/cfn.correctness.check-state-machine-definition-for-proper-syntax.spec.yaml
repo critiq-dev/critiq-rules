@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-state-machine-definition-for-proper-syntax.rule.yaml
+fixtures:
+  - name: flags E2532 finding
+    observationPath: ./fixtures/cfn.correctness.check-state-machine-definition-for-proper-syntax/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-state-machine-definition-for-proper-syntax
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-state-machine-definition-for-proper-syntax/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

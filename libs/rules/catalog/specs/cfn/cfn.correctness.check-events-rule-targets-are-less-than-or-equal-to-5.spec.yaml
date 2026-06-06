@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-events-rule-targets-are-less-than-or-equal-to-5.rule.yaml
+fixtures:
+  - name: flags E3021 finding
+    observationPath: ./fixtures/cfn.correctness.check-events-rule-targets-are-less-than-or-equal-to-5/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-events-rule-targets-are-less-than-or-equal-to-5
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-events-rule-targets-are-less-than-or-equal-to-5/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

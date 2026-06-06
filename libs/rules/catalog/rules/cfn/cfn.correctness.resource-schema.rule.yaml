@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.resource-schema
+  title: Resource schema
+  summary: Resource schema
+  rationale: cfn-lint reports E3000 when Resource schema.
+  aliases:
+    - CFLIN-E3000
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3000
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3000
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Resource schema
+    summary: "${captures.finding.text} matches cfn-lint E3000."
+  remediation:
+    summary: Resolve the cfn-lint E3000 finding in this CloudFormation template.

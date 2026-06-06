@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.check-if-imageid-parameters-have-the-correct-type
+  title: Check if imageid parameters have the correct type
+  summary: Check if imageid parameters have the correct type
+  rationale: cfn-lint reports W2506 when Check if imageid parameters have the correct type.
+  aliases:
+    - CFLIN-W2506
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w2506
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W2506
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check if imageid parameters have the correct type
+    summary: "${captures.finding.text} matches cfn-lint W2506."
+  remediation:
+    summary: Resolve the cfn-lint W2506 finding in this CloudFormation template.

@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.mapping-keys-are-strings-and-alphanumeric
+  title: Mapping keys are strings and alphanumeric
+  summary: Mapping keys are strings and alphanumeric
+  rationale: cfn-lint reports E7003 when Mapping keys are strings and alphanumeric.
+  aliases:
+    - CFLIN-E7003
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e7003
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E7003
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Mapping keys are strings and alphanumeric
+    summary: "${captures.finding.text} matches cfn-lint E7003."
+  remediation:
+    summary: Resolve the cfn-lint E7003 finding in this CloudFormation template.

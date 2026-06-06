@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-if-a-number-is-between-min-and-max.rule.yaml
+fixtures:
+  - name: flags E3034 finding
+    observationPath: ./fixtures/cfn.correctness.check-if-a-number-is-between-min-and-max/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-if-a-number-is-between-min-and-max
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-if-a-number-is-between-min-and-max/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

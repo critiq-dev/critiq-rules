@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.check-if-eol-lambda-function-runtimes-are-used-w2531.rule.yaml
+fixtures:
+  - name: flags W2531 finding
+    observationPath: ./fixtures/cfn.maintainability.check-if-eol-lambda-function-runtimes-are-used-w2531/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.check-if-eol-lambda-function-runtimes-are-used-w2531
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.check-if-eol-lambda-function-runtimes-are-used-w2531/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

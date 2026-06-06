@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-e3032",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "E3032: Check if a list has between min and max number of values specified",
+          "props": {
+            "ruleId": "E3032",
+            "directoryCode": "CFLIN-E3032",
+            "message": "Check if a list has between min and max number of values specified"
+          }
+        }
+      ]
+    }
+  }
+}

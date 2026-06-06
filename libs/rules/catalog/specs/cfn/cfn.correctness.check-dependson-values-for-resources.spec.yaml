@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-dependson-values-for-resources.rule.yaml
+fixtures:
+  - name: flags E3005 finding
+    observationPath: ./fixtures/cfn.correctness.check-dependson-values-for-resources/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-dependson-values-for-resources
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-dependson-values-for-resources/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

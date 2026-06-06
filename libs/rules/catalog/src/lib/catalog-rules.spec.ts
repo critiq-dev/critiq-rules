@@ -82,6 +82,7 @@ describe('rules catalog rule specs', () => {
       ),
     );
     expect(topLevelSpecDirectories).toEqual([
+      'cfn',
       'go',
       'java',
       'php',

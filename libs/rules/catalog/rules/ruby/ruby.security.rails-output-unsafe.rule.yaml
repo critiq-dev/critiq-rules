@@ -9,6 +9,10 @@ metadata:
     Output-unsafe helpers mark content HTML-safe without escaping user input.
   detection:
     kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Improper Neutralization of Input During Web Page Generation
   tags:
     - rules-catalog
     - ruby

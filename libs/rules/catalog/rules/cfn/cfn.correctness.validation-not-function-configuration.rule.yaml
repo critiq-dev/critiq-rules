@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.validation-not-function-configuration
+  title: Validation not function configuration
+  summary: Validation not function configuration
+  rationale: cfn-lint reports E1023 when Validation not function configuration.
+  aliases:
+    - CFLIN-E1023
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e1023
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E1023
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Validation not function configuration
+    summary: "${captures.finding.text} matches cfn-lint E1023."
+  remediation:
+    summary: Resolve the cfn-lint E1023 finding in this CloudFormation template.

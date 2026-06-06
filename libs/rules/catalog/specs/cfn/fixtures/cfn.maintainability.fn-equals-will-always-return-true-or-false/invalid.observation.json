@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-w8003",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "W8003: Fn::equals will always return true or false",
+          "props": {
+            "ruleId": "W8003",
+            "directoryCode": "CFLIN-W8003",
+            "message": "Fn::equals will always return true or false"
+          }
+        }
+      ]
+    }
+  }
+}

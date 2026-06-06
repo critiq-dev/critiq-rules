@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.nested-function-declaration.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/php.correctness.nested-function-declaration/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.nested-function-declaration
+  - name: ignores valid pattern
+    sourcePath: ./fixtures/php.correctness.nested-function-declaration/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

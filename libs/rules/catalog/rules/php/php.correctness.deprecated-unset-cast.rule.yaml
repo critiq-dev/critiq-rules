@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.deprecated-unset-cast
+  title: Remove deprecated (unset) casts
+  summary: "The `(unset)` cast is deprecated and should not be used in modern PHP code."
+  rationale: Deprecated casts break on newer PHP versions and hide intent compared to explicit unset calls.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.deprecated-unset-cast
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove deprecated (unset) casts
+    summary: "`${captures.issue.text}` matches php.correctness.deprecated-unset-cast."
+  remediation:
+    summary: Deprecated casts break on newer PHP versions and hide intent compared to explicit unset calls.

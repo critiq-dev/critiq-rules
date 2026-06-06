@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.check-obsolete-dependson-configuration-for-resources.rule.yaml
+fixtures:
+  - name: flags W3005 finding
+    observationPath: ./fixtures/cfn.maintainability.check-obsolete-dependson-configuration-for-resources/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.check-obsolete-dependson-configuration-for-resources
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.check-obsolete-dependson-configuration-for-resources/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

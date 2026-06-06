@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.nested-switch
+  title: Avoid nested switch statements
+  summary: Switch statements nested inside other switch statements are hard to follow.
+  rationale: Nested switch blocks increase cognitive load and often hide missing decomposition or polymorphism.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.nested-switch
+    bind: issue
+emit:
+  finding:
+    category: correctness.control-flow
+    severity: low
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Avoid nested switch statements
+    summary: "`${captures.issue.text}` matches php.correctness.nested-switch."
+  remediation:
+    summary: Nested switch blocks increase cognitive load and often hide missing decomposition or polymorphism.

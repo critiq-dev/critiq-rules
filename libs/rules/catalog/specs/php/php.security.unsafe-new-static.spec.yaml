@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.security.unsafe-new-static.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/php.security.unsafe-new-static/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.security.unsafe-new-static
+  - name: ignores valid pattern
+    sourcePath: ./fixtures/php.security.unsafe-new-static/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

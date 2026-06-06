@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.error-processing-rule-on-the-template
+  title: Error processing rule on the template
+  summary: Error processing rule on the template
+  rationale: cfn-lint reports E0002 when Error processing rule on the template.
+  aliases:
+    - CFLIN-E0002
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e0002
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E0002
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Error processing rule on the template
+    summary: "${captures.finding.text} matches cfn-lint E0002."
+  remediation:
+    summary: Resolve the cfn-lint E0002 finding in this CloudFormation template.

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.check-outputs-using-importvalue.rule.yaml
+fixtures:
+  - name: flags W6001 finding
+    observationPath: ./fixtures/cfn.maintainability.check-outputs-using-importvalue/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.check-outputs-using-importvalue
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.check-outputs-using-importvalue/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

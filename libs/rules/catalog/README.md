@@ -25,7 +25,7 @@ It does this by parsing your code, matching it against a curated catalog of expl
     alt="TypeScript, JavaScript, Node.js, Go, Java, Python, PHP, Ruby, and Rust support"
   />
 </p>
-`@critiq/rules` is the default open source rule catalog for Critiq. It ships `catalog.yaml`, preset membership, and rule YAML files for high-signal checks across TypeScript, JavaScript, Node.js, Go, Java, Python, PHP, Ruby and Rust.
+`@critiq/rules` is the default open source rule catalog for Critiq. It ships `catalog.yaml`, preset membership, and rule YAML files for high-signal checks across TypeScript, JavaScript, Node.js, Go, Java, Python, PHP, Ruby, Rust, and CloudFormation/SAM templates (via cfn-lint).
 
 Use it with [`@critiq/cli`](https://www.npmjs.com/package/@critiq/cli):
 
@@ -75,10 +75,11 @@ Use a **major tag** (`@v1`) or pin a **commit SHA** for supply-chain control. Mo
 
 ## Catalog At A Glance
 
-Today the catalog includes `448` rules across `17` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+Today the catalog includes `631` rules across `18` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |
+| CloudFormation | 157 | AWS CloudFormation and SAM template validation via wrapped cfn-lint (`cfn.correctness.*`, `cfn.maintainability.*`, `cfn.security.*`) |
 | Security | 93 | Injection, auth and session gaps, unsafe transport, sensitive data exposure, dependency policy, unsafe file and HTML handling |
 | Python | 9 | Django, DRF, Flask, and FastAPI deployment and framework safety |
 | Correctness | 18 | Async bugs, null access, control-flow mistakes, missing fallbacks, race conditions |

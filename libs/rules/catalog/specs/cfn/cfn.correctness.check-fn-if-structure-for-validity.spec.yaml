@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-fn-if-structure-for-validity.rule.yaml
+fixtures:
+  - name: flags E1028 finding
+    observationPath: ./fixtures/cfn.correctness.check-fn-if-structure-for-validity/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-fn-if-structure-for-validity
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-fn-if-structure-for-validity/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

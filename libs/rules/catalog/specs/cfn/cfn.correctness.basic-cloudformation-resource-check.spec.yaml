@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.basic-cloudformation-resource-check.rule.yaml
+fixtures:
+  - name: flags E3001 finding
+    observationPath: ./fixtures/cfn.correctness.basic-cloudformation-resource-check/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.basic-cloudformation-resource-check
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.basic-cloudformation-resource-check/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

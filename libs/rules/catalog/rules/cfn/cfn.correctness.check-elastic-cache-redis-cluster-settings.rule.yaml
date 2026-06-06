@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-elastic-cache-redis-cluster-settings
+  title: Check elastic cache redis cluster settings
+  summary: Check elastic cache redis cluster settings
+  rationale: cfn-lint reports E3026 when Check elastic cache redis cluster settings.
+  aliases:
+    - CFLIN-E3026
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3026
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3026
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check elastic cache redis cluster settings
+    summary: "${captures.finding.text} matches cfn-lint E3026."
+  remediation:
+    summary: Resolve the cfn-lint E3026 finding in this CloudFormation template.

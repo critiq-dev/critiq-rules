@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.split-validation-of-parameters
+  title: Split validation of parameters
+  summary: Split validation of parameters
+  rationale: cfn-lint reports E1018 when Split validation of parameters.
+  aliases:
+    - CFLIN-E1018
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e1018
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E1018
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Split validation of parameters
+    summary: "${captures.finding.text} matches cfn-lint E1018."
+  remediation:
+    summary: Resolve the cfn-lint E1018 finding in this CloudFormation template.

@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-if-a-number-is-between-min-and-max
+  title: Check if a number is between min and max
+  summary: Check if a number is between min and max
+  rationale: cfn-lint reports E3034 when Check if a number is between min and max.
+  aliases:
+    - CFLIN-E3034
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3034
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3034
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check if a number is between min and max
+    summary: "${captures.finding.text} matches cfn-lint E3034."
+  remediation:
+    summary: Resolve the cfn-lint E3034 finding in this CloudFormation template.

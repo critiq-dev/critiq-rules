@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.validate-accesscontrol-are-set-with-ownershipcontrols
+  title: Validate accesscontrol are set with ownershipcontrols
+  summary: Validate accesscontrol are set with ownershipcontrols
+  rationale: cfn-lint reports E3045 when Validate accesscontrol are set with ownershipcontrols.
+  aliases:
+    - CFLIN-E3045
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3045
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3045
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Validate accesscontrol are set with ownershipcontrols
+    summary: "${captures.finding.text} matches cfn-lint E3045."
+  remediation:
+    summary: Resolve the cfn-lint E3045 finding in this CloudFormation template.

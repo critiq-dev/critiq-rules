@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.ref-validation-of-value
+  title: Ref validation of value
+  summary: Ref validation of value
+  rationale: cfn-lint reports E1020 when Ref validation of value.
+  aliases:
+    - CFLIN-E1020
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e1020
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E1020
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Ref validation of value
+    summary: "${captures.finding.text} matches cfn-lint E1020."
+  remediation:
+    summary: Resolve the cfn-lint E1020 finding in this CloudFormation template.

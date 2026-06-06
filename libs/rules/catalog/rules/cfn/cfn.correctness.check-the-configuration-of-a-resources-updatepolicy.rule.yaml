@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-the-configuration-of-a-resources-updatepolicy
+  title: Check the configuration of a resources updatepolicy
+  summary: Check the configuration of a resources updatepolicy
+  rationale: cfn-lint reports E3016 when Check the configuration of a resources updatepolicy.
+  aliases:
+    - CFLIN-E3016
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3016
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3016
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check the configuration of a resources updatepolicy
+    summary: "${captures.finding.text} matches cfn-lint E3016."
+  remediation:
+    summary: Resolve the cfn-lint E3016 finding in this CloudFormation template.

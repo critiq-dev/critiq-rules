@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.resources-have-appropriate-names
+  title: Resources have appropriate names
+  summary: Resources have appropriate names
+  rationale: cfn-lint reports E3006 when Resources have appropriate names.
+  aliases:
+    - CFLIN-E3006
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3006
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3006
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Resources have appropriate names
+    summary: "${captures.finding.text} matches cfn-lint E3006."
+  remediation:
+    summary: Resolve the cfn-lint E3006 finding in this CloudFormation template.

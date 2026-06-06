@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.check-required-properties-for-lambda-if-the-deployment-package-is-a-zip-file.rule.yaml
+fixtures:
+  - name: flags W2533 finding
+    observationPath: ./fixtures/cfn.maintainability.check-required-properties-for-lambda-if-the-deployment-package-is-a-zip-file/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.check-required-properties-for-lambda-if-the-deployment-package-is-a-zip-file
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.check-required-properties-for-lambda-if-the-deployment-package-is-a-zip-file/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

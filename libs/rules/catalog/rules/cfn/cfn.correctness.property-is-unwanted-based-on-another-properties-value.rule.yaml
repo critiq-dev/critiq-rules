@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.property-is-unwanted-based-on-another-properties-value
+  title: Property is unwanted based on another properties value
+  summary: Property is unwanted based on another properties value
+  rationale: cfn-lint reports E3018 when Property is unwanted based on another properties value.
+  aliases:
+    - CFLIN-E3018
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3018
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3018
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Property is unwanted based on another properties value
+    summary: "${captures.finding.text} matches cfn-lint E3018."
+  remediation:
+    summary: Resolve the cfn-lint E3018 finding in this CloudFormation template.

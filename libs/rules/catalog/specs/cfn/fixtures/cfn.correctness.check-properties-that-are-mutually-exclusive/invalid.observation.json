@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-e2520",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "E2520: Check properties that are mutually exclusive",
+          "props": {
+            "ruleId": "E2520",
+            "directoryCode": "CFLIN-E2520",
+            "message": "Check properties that are mutually exclusive"
+          }
+        }
+      ]
+    }
+  }
+}

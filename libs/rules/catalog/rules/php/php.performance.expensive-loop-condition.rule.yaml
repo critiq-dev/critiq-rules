@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.performance.expensive-loop-condition
+  title: Avoid expensive calls in loop conditions
+  summary: Functions like count() and strlen() inside loop conditions run on every iteration.
+  rationale: Recomputing expensive conditions in loops adds avoidable overhead in hot paths.
+  tags:
+    - performance
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.performance.expensive-loop-condition
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.85
+    tags:
+      - performance
+      - php
+  message:
+    title: Avoid expensive calls in loop conditions
+    summary: "`${captures.issue.text}` matches php.performance.expensive-loop-condition."
+  remediation:
+    summary: Recomputing expensive conditions in loops adds avoidable overhead in hot paths.

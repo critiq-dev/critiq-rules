@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-properties-that-are-mutually-exclusive
+  title: Check properties that are mutually exclusive
+  summary: Check properties that are mutually exclusive
+  rationale: cfn-lint reports E2520 when Check properties that are mutually exclusive.
+  aliases:
+    - CFLIN-E2520
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e2520
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E2520
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check properties that are mutually exclusive
+    summary: "${captures.finding.text} matches cfn-lint E2520."
+  remediation:
+    summary: Resolve the cfn-lint E2520 finding in this CloudFormation template.

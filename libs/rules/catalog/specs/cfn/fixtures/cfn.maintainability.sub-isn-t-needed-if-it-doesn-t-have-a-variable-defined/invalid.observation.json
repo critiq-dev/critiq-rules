@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-w1020",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "W1020: Sub isn't needed if it doesn't have a variable defined",
+          "props": {
+            "ruleId": "W1020",
+            "directoryCode": "CFLIN-W1020",
+            "message": "Sub isn't needed if it doesn't have a variable defined"
+          }
+        }
+      ]
+    }
+  }
+}

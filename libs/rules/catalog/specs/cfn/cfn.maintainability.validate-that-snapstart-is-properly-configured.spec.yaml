@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.validate-that-snapstart-is-properly-configured.rule.yaml
+fixtures:
+  - name: flags W2530 finding
+    observationPath: ./fixtures/cfn.maintainability.validate-that-snapstart-is-properly-configured/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.validate-that-snapstart-is-properly-configured
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.validate-that-snapstart-is-properly-configured/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

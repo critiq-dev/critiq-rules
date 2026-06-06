@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-minimum-90-period-is-met-between-backupplan-cold-and-delete
+  title: Check minimum 90 period is met between backupplan cold and delete
+  summary: Check minimum 90 period is met between backupplan cold and delete
+  rationale: cfn-lint reports E3504 when Check minimum 90 period is met between backupplan cold and delete.
+  aliases:
+    - CFLIN-E3504
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3504
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3504
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check minimum 90 period is met between backupplan cold and delete
+    summary: "${captures.finding.text} matches cfn-lint E3504."
+  remediation:
+    summary: Resolve the cfn-lint E3504 finding in this CloudFormation template.

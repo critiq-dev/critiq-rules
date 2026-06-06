@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.function-comparison
+  title: Avoid comparing function values
+  summary: Comparing functions or callables with equality operators is unreliable.
+  rationale: Function comparisons rarely express intent correctly and usually indicate a logic bug.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.function-comparison
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: low
+    confidence: 0.55
+    tags:
+      - correctness
+      - php
+  message:
+    title: Avoid comparing function values
+    summary: "`${captures.issue.text}` matches php.correctness.function-comparison."
+  remediation:
+    summary: Function comparisons rarely express intent correctly and usually indicate a logic bug.

@@ -1,0 +1,3 @@
+<?php
+
+$document = new DOMDocument();

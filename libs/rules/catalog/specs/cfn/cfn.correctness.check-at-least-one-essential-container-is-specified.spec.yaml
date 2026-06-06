@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-at-least-one-essential-container-is-specified.rule.yaml
+fixtures:
+  - name: flags E3042 finding
+    observationPath: ./fixtures/cfn.correctness.check-at-least-one-essential-container-is-specified/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-at-least-one-essential-container-is-specified
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-at-least-one-essential-container-is-specified/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

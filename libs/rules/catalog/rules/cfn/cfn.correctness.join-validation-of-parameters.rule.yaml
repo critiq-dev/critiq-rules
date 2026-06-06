@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.join-validation-of-parameters
+  title: Join validation of parameters
+  summary: Join validation of parameters
+  rationale: cfn-lint reports E1022 when Join validation of parameters.
+  aliases:
+    - CFLIN-E1022
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e1022
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E1022
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Join validation of parameters
+    summary: "${captures.finding.text} matches cfn-lint E1022."
+  remediation:
+    summary: Resolve the cfn-lint E1022 finding in this CloudFormation template.

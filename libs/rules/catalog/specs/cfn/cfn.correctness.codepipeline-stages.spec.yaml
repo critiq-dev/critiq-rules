@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.codepipeline-stages.rule.yaml
+fixtures:
+  - name: flags E2540 finding
+    observationPath: ./fixtures/cfn.correctness.codepipeline-stages/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.codepipeline-stages
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.codepipeline-stages/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

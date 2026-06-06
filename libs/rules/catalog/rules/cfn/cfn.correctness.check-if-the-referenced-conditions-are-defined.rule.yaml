@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-if-the-referenced-conditions-are-defined
+  title: Check if the referenced conditions are defined
+  summary: Check if the referenced conditions are defined
+  rationale: cfn-lint reports E8002 when Check if the referenced conditions are defined.
+  aliases:
+    - CFLIN-E8002
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e8002
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E8002
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check if the referenced conditions are defined
+    summary: "${captures.finding.text} matches cfn-lint E8002."
+  remediation:
+    summary: Resolve the cfn-lint E8002 finding in this CloudFormation template.

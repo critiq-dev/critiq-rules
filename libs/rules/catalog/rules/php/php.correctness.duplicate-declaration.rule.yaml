@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.duplicate-declaration
+  title: Remove duplicate declarations
+  summary: Functions, classes, traits, and interfaces must be declared only once per file.
+  rationale: Duplicate declarations cause fatal errors and usually indicate incomplete refactors or copy-paste mistakes.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.duplicate-declaration
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove duplicate declarations
+    summary: "`${captures.issue.text}` matches php.correctness.duplicate-declaration."
+  remediation:
+    summary: Duplicate declarations cause fatal errors and usually indicate incomplete refactors or copy-paste mistakes.

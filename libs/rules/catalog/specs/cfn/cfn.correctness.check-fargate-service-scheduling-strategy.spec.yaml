@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-fargate-service-scheduling-strategy.rule.yaml
+fixtures:
+  - name: flags E3044 finding
+    observationPath: ./fixtures/cfn.correctness.check-fargate-service-scheduling-strategy/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-fargate-service-scheduling-strategy
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-fargate-service-scheduling-strategy/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

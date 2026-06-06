@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.template-description-can-only-be-a-string.rule.yaml
+fixtures:
+  - name: flags E1004 finding
+    observationPath: ./fixtures/cfn.correctness.template-description-can-only-be-a-string/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.template-description-can-only-be-a-string
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.template-description-can-only-be-a-string/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

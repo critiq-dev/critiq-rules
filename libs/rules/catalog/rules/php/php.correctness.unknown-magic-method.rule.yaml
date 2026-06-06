@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.unknown-magic-method
+  title: Use only supported magic methods
+  summary: PHP recognizes a fixed set of double-underscore magic methods.
+  rationale: Unknown magic methods are never invoked by the runtime and usually indicate typos or dead code.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.unknown-magic-method
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - php
+  message:
+    title: Use only supported magic methods
+    summary: "`${captures.issue.text}` matches php.correctness.unknown-magic-method."
+  remediation:
+    summary: Unknown magic methods are never invoked by the runtime and usually indicate typos or dead code.

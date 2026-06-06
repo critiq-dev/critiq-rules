@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-that-modules-resources-are-valid
+  title: Check that modules resources are valid
+  summary: Check that modules resources are valid
+  rationale: cfn-lint reports E5001 when Check that modules resources are valid.
+  aliases:
+    - CFLIN-E5001
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e5001
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E5001
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check that modules resources are valid
+    summary: "${captures.finding.text} matches cfn-lint E5001."
+  remediation:
+    summary: Resolve the cfn-lint E5001 finding in this CloudFormation template.

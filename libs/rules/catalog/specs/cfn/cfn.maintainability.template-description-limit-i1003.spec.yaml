@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.template-description-limit-i1003.rule.yaml
+fixtures:
+  - name: flags I1003 finding
+    observationPath: ./fixtures/cfn.maintainability.template-description-limit-i1003/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.template-description-limit-i1003
+      allSeverities:
+        - low
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.template-description-limit-i1003/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

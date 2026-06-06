@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-e3022",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "E3022: Resource subnetroutetableassociation properties",
+          "props": {
+            "ruleId": "E3022",
+            "directoryCode": "CFLIN-E3022",
+            "message": "Resource subnetroutetableassociation properties"
+          }
+        }
+      ]
+    }
+  }
+}

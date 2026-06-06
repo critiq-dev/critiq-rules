@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-w2506",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "W2506: Check if imageid parameters have the correct type",
+          "props": {
+            "ruleId": "W2506",
+            "directoryCode": "CFLIN-W2506",
+            "message": "Check if imageid parameters have the correct type"
+          }
+        }
+      ]
+    }
+  }
+}

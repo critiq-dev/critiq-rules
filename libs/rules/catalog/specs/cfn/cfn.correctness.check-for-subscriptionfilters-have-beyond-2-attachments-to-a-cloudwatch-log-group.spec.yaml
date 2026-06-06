@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-for-subscriptionfilters-have-beyond-2-attachments-to-a-cloudwatch-log-group.rule.yaml
+fixtures:
+  - name: flags E2529 finding
+    observationPath: ./fixtures/cfn.correctness.check-for-subscriptionfilters-have-beyond-2-attachments-to-a-cloudwatch-log-group/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-for-subscriptionfilters-have-beyond-2-attachments-to-a-cloudwatch-log-group
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-for-subscriptionfilters-have-beyond-2-attachments-to-a-cloudwatch-log-group/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

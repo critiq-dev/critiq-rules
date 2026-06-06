@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-if-property-values-adhere-to-a-specific-pattern
+  title: Check if property values adhere to a specific pattern
+  summary: Check if property values adhere to a specific pattern
+  rationale: cfn-lint reports E3031 when Check if property values adhere to a specific pattern.
+  aliases:
+    - CFLIN-E3031
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3031
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3031
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check if property values adhere to a specific pattern
+    summary: "${captures.finding.text} matches cfn-lint E3031."
+  remediation:
+    summary: Resolve the cfn-lint E3031 finding in this CloudFormation template.

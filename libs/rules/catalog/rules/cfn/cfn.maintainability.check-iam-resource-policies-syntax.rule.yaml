@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.check-iam-resource-policies-syntax
+  title: Check iam resource policies syntax
+  summary: Check iam resource policies syntax
+  rationale: cfn-lint reports W2511 when Check iam resource policies syntax.
+  aliases:
+    - CFLIN-W2511
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w2511
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W2511
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check iam resource policies syntax
+    summary: "${captures.finding.text} matches cfn-lint W2511."
+  remediation:
+    summary: Resolve the cfn-lint W2511 finding in this CloudFormation template.

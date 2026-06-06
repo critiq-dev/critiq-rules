@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.empty-code-block
+  title: Remove empty code blocks
+  summary: Empty control-flow blocks hide missing logic or unfinished branches.
+  rationale: Empty blocks make intent unclear and often survive incomplete refactors.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.empty-code-block
+    bind: issue
+emit:
+  finding:
+    category: correctness.maintainability
+    severity: low
+    confidence: 0.55
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove empty code blocks
+    summary: "`${captures.issue.text}` matches php.correctness.empty-code-block."
+  remediation:
+    summary: Empty blocks make intent unclear and often survive incomplete refactors.

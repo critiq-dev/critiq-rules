@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-w3011",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "W3011: Check resources with updatereplacepolicy/deletionpolicy have both",
+          "props": {
+            "ruleId": "W3011",
+            "directoryCode": "CFLIN-W3011",
+            "message": "Check resources with updatereplacepolicy/deletionpolicy have both"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.resource-ec2-security-group-ingress-properties.rule.yaml
+fixtures:
+  - name: flags E2506 finding
+    observationPath: ./fixtures/cfn.correctness.resource-ec2-security-group-ingress-properties/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.resource-ec2-security-group-ingress-properties
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.resource-ec2-security-group-ingress-properties/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

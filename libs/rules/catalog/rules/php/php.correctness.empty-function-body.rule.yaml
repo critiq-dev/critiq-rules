@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.empty-function-body
+  title: Implement or remove empty functions
+  summary: Non-abstract functions with empty bodies hide missing behavior.
+  rationale: Empty function bodies often indicate stubs that were never completed or dead placeholders.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.empty-function-body
+    bind: issue
+emit:
+  finding:
+    category: correctness.maintainability
+    severity: low
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Implement or remove empty functions
+    summary: "`${captures.issue.text}` matches php.correctness.empty-function-body."
+  remediation:
+    summary: Empty function bodies often indicate stubs that were never completed or dead placeholders.

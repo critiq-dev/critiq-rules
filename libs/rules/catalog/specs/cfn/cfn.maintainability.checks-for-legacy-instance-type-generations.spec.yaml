@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.checks-for-legacy-instance-type-generations.rule.yaml
+fixtures:
+  - name: flags I3100 finding
+    observationPath: ./fixtures/cfn.maintainability.checks-for-legacy-instance-type-generations/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.checks-for-legacy-instance-type-generations
+      allSeverities:
+        - low
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.checks-for-legacy-instance-type-generations/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

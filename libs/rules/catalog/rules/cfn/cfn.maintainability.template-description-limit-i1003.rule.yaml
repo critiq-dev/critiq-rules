@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.template-description-limit-i1003
+  title: Template description limit
+  summary: Template description limit
+  rationale: cfn-lint reports I1003 when Template description limit.
+  aliases:
+    - CFLIN-I1003
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - i1003
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: I1003
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: low
+    confidence: 0.8
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Template description limit
+    summary: "${captures.finding.text} matches cfn-lint I1003."
+  remediation:
+    summary: Resolve the cfn-lint I1003 finding in this CloudFormation template.

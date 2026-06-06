@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.default-value-cannot-use-refs.rule.yaml
+fixtures:
+  - name: flags E2014 finding
+    observationPath: ./fixtures/cfn.correctness.default-value-cannot-use-refs/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.default-value-cannot-use-refs
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.default-value-cannot-use-refs/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

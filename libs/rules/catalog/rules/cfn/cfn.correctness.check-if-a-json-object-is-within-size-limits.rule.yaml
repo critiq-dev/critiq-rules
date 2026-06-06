@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-if-a-json-object-is-within-size-limits
+  title: Check if a json object is within size limits
+  summary: Check if a json object is within size limits
+  rationale: cfn-lint reports E3502 when Check if a json object is within size limits.
+  aliases:
+    - CFLIN-E3502
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3502
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3502
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check if a json object is within size limits
+    summary: "${captures.finding.text} matches cfn-lint E3502."
+  remediation:
+    summary: Resolve the cfn-lint E3502 finding in this CloudFormation template.

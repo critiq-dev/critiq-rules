@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.useless-post-increment
+  title: Remove useless post-increment statements
+  summary: Standalone post-increment statements with discarded results are usually mistakes.
+  rationale: Post-increment statements that do not feed a larger expression often indicate dead or accidental code.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.useless-post-increment
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: low
+    confidence: 0.85
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove useless post-increment statements
+    summary: "`${captures.issue.text}` matches php.correctness.useless-post-increment."
+  remediation:
+    summary: Post-increment statements that do not feed a larger expression often indicate dead or accidental code.

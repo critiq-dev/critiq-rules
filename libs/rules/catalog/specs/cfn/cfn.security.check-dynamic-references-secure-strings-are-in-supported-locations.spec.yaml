@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.security.check-dynamic-references-secure-strings-are-in-supported-locations.rule.yaml
+fixtures:
+  - name: flags E1027 finding
+    observationPath: ./fixtures/cfn.security.check-dynamic-references-secure-strings-are-in-supported-locations/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.security.check-dynamic-references-secure-strings-are-in-supported-locations
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.security.check-dynamic-references-secure-strings-are-in-supported-locations/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

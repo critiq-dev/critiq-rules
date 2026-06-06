@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-elastic-cache-redis-cluster-settings.rule.yaml
+fixtures:
+  - name: flags E3026 finding
+    observationPath: ./fixtures/cfn.correctness.check-elastic-cache-redis-cluster-settings/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-elastic-cache-redis-cluster-settings
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-elastic-cache-redis-cluster-settings/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.use-sub-instead-of-join
+  title: Use sub instead of join
+  summary: Use sub instead of join
+  rationale: cfn-lint reports I1022 when Use sub instead of join.
+  aliases:
+    - CFLIN-I1022
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - i1022
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: I1022
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: low
+    confidence: 0.8
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Use sub instead of join
+    summary: "${captures.finding.text} matches cfn-lint I1022."
+  remediation:
+    summary: Resolve the cfn-lint I1022 finding in this CloudFormation template.

@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.resource-elb-properties
+  title: Resource elb properties
+  summary: Resource elb properties
+  rationale: cfn-lint reports E2503 when Resource elb properties.
+  aliases:
+    - CFLIN-E2503
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e2503
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E2503
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Resource elb properties
+    summary: "${captures.finding.text} matches cfn-lint E2503."
+  remediation:
+    summary: Resolve the cfn-lint E2503 finding in this CloudFormation template.

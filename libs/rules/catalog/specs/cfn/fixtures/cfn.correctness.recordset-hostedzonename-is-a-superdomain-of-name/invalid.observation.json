@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-e3041",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "E3041: Recordset hostedzonename is a superdomain of name",
+          "props": {
+            "ruleId": "E3041",
+            "directoryCode": "CFLIN-E3041",
+            "message": "Recordset hostedzonename is a superdomain of name"
+          }
+        }
+      ]
+    }
+  }
+}

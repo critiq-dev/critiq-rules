@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.base64-validation-of-parameters.rule.yaml
+fixtures:
+  - name: flags E1021 finding
+    observationPath: ./fixtures/cfn.correctness.base64-validation-of-parameters/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.base64-validation-of-parameters
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.base64-validation-of-parameters/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

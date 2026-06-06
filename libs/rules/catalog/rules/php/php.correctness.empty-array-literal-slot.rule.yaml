@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.empty-array-literal-slot
+  title: Remove empty slots from array literals
+  summary: Array literals with consecutive commas define empty slots that are easy to miss during review.
+  rationale: Empty array slots usually indicate typos or incomplete edits and can produce unexpected sparse arrays.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.empty-array-literal-slot
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove empty slots from array literals
+    summary: "`${captures.issue.text}` matches php.correctness.empty-array-literal-slot."
+  remediation:
+    summary: Empty array slots usually indicate typos or incomplete edits and can produce unexpected sparse arrays.

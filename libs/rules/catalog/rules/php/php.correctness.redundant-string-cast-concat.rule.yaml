@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.redundant-string-cast-concat
+  title: Remove redundant string casts before concatenation
+  summary: Casting to string immediately before concatenation is usually redundant in PHP.
+  rationale: Redundant casts add noise without changing behavior and can hide type problems that should be fixed directly.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.redundant-string-cast-concat
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: low
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove redundant string casts before concatenation
+    summary: "`${captures.issue.text}` matches php.correctness.redundant-string-cast-concat."
+  remediation:
+    summary: Redundant casts add noise without changing behavior and can hide type problems that should be fixed directly.

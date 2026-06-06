@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.metadata-interface-parameters-exist.rule.yaml
+fixtures:
+  - name: flags W4001 finding
+    observationPath: ./fixtures/cfn.maintainability.metadata-interface-parameters-exist/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.metadata-interface-parameters-exist
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.metadata-interface-parameters-exist/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

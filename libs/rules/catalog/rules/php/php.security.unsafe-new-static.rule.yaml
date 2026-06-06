@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.security.unsafe-new-static
+  title: Avoid unsafe new static() instantiation
+  summary: "Using `new static()` can instantiate unexpected subclasses and weaken type guarantees."
+  rationale: "Late static binding with `new static()` can bypass intended class boundaries and create objects outside expected inheritance chains."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-470
+      title: Use of Externally-Controlled Input to Select Classes or Code
+  tags:
+    - security
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.security.unsafe-new-static
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: medium
+    confidence: 0.88
+    tags:
+      - security
+      - php
+  message:
+    title: Avoid unsafe new static() instantiation
+    summary: "`${captures.issue.text}` matches php.security.unsafe-new-static."
+  remediation:
+    summary: "Late static binding with `new static()` can bypass intended class boundaries and create objects outside expected inheritance chains."

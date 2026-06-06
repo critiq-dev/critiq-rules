@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.fn-equals-will-always-return-true-or-false.rule.yaml
+fixtures:
+  - name: flags W8003 finding
+    observationPath: ./fixtures/cfn.maintainability.fn-equals-will-always-return-true-or-false/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.fn-equals-will-always-return-true-or-false
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.fn-equals-will-always-return-true-or-false/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

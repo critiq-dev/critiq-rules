@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.validate-the-configuration-of-the-metadata-section
+  title: Validate the configuration of the metadata section
+  summary: Validate the configuration of the metadata section
+  rationale: cfn-lint reports E4002 when Validate the configuration of the metadata section.
+  aliases:
+    - CFLIN-E4002
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e4002
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E4002
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Validate the configuration of the metadata section
+    summary: "${captures.finding.text} matches cfn-lint E4002."
+  remediation:
+    summary: Resolve the cfn-lint E4002 finding in this CloudFormation template.

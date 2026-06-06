@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.warn-when-properties-are-configured-to-only-work-with-the-package-command.rule.yaml
+fixtures:
+  - name: flags W3002 finding
+    observationPath: ./fixtures/cfn.maintainability.warn-when-properties-are-configured-to-only-work-with-the-package-command/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.warn-when-properties-are-configured-to-only-work-with-the-package-command
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.warn-when-properties-are-configured-to-only-work-with-the-package-command/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

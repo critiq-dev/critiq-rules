@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.validate-the-configuration-of-the-metadata-section.rule.yaml
+fixtures:
+  - name: flags E4002 finding
+    observationPath: ./fixtures/cfn.correctness.validate-the-configuration-of-the-metadata-section/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.validate-the-configuration-of-the-metadata-section
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.validate-the-configuration-of-the-metadata-section/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

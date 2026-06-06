@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-w3045",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "W3045: Controlling access to an s3 bucket should be done with bucket policies",
+          "props": {
+            "ruleId": "W3045",
+            "directoryCode": "CFLIN-W3045",
+            "message": "Controlling access to an s3 bucket should be done with bucket policies"
+          }
+        }
+      ]
+    }
+  }
+}

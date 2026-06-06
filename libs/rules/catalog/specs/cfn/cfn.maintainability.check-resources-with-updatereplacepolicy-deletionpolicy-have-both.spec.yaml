@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.check-resources-with-updatereplacepolicy-deletionpolicy-have-both.rule.yaml
+fixtures:
+  - name: flags W3011 finding
+    observationPath: ./fixtures/cfn.maintainability.check-resources-with-updatereplacepolicy-deletionpolicy-have-both/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.check-resources-with-updatereplacepolicy-deletionpolicy-have-both
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.check-resources-with-updatereplacepolicy-deletionpolicy-have-both/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

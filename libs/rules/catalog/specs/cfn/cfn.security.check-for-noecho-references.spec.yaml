@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.security.check-for-noecho-references.rule.yaml
+fixtures:
+  - name: flags W4002 finding
+    observationPath: ./fixtures/cfn.security.check-for-noecho-references/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.security.check-for-noecho-references
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.security.check-for-noecho-references/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

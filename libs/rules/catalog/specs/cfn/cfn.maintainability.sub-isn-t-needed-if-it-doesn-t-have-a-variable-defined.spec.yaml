@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.sub-isn-t-needed-if-it-doesn-t-have-a-variable-defined.rule.yaml
+fixtures:
+  - name: flags W1020 finding
+    observationPath: ./fixtures/cfn.maintainability.sub-isn-t-needed-if-it-doesn-t-have-a-variable-defined/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.sub-isn-t-needed-if-it-doesn-t-have-a-variable-defined
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.sub-isn-t-needed-if-it-doesn-t-have-a-variable-defined/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

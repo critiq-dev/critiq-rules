@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.outputs-have-values-of-strings.rule.yaml
+fixtures:
+  - name: flags E6003 finding
+    observationPath: ./fixtures/cfn.correctness.outputs-have-values-of-strings/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.outputs-have-values-of-strings
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.outputs-have-values-of-strings/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

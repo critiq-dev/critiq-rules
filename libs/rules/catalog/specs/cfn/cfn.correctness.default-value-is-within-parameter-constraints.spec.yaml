@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.default-value-is-within-parameter-constraints.rule.yaml
+fixtures:
+  - name: flags E2015 finding
+    observationPath: ./fixtures/cfn.correctness.default-value-is-within-parameter-constraints/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.default-value-is-within-parameter-constraints
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.default-value-is-within-parameter-constraints/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

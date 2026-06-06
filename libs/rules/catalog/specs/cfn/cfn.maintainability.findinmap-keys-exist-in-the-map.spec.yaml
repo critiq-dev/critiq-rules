@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.findinmap-keys-exist-in-the-map.rule.yaml
+fixtures:
+  - name: flags W1011 finding
+    observationPath: ./fixtures/cfn.maintainability.findinmap-keys-exist-in-the-map/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.findinmap-keys-exist-in-the-map
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.findinmap-keys-exist-in-the-map/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

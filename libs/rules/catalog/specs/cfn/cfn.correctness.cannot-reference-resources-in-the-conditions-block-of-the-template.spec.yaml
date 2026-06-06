@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.cannot-reference-resources-in-the-conditions-block-of-the-template.rule.yaml
+fixtures:
+  - name: flags E1026 finding
+    observationPath: ./fixtures/cfn.correctness.cannot-reference-resources-in-the-conditions-block-of-the-template/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.cannot-reference-resources-in-the-conditions-block-of-the-template
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.cannot-reference-resources-in-the-conditions-block-of-the-template/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

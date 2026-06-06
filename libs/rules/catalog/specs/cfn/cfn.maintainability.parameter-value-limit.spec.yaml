@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.parameter-value-limit.rule.yaml
+fixtures:
+  - name: flags I2012 finding
+    observationPath: ./fixtures/cfn.maintainability.parameter-value-limit/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.parameter-value-limit
+      allSeverities:
+        - low
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.parameter-value-limit/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

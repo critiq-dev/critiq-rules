@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.cannot-reference-resources-in-the-conditions-block-of-the-template
+  title: Cannot reference resources in the conditions block of the template
+  summary: Cannot reference resources in the conditions block of the template
+  rationale: cfn-lint reports E1026 when Cannot reference resources in the conditions block of the template.
+  aliases:
+    - CFLIN-E1026
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e1026
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E1026
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Cannot reference resources in the conditions block of the template
+    summary: "${captures.finding.text} matches cfn-lint E1026."
+  remediation:
+    summary: Resolve the cfn-lint E1026 finding in this CloudFormation template.

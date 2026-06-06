@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.rds-instance-type-is-compatible-with-the-rds-type.rule.yaml
+fixtures:
+  - name: flags E3025 finding
+    observationPath: ./fixtures/cfn.correctness.rds-instance-type-is-compatible-with-the-rds-type/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.rds-instance-type-is-compatible-with-the-rds-type
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.rds-instance-type-is-compatible-with-the-rds-type/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

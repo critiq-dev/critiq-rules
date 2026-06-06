@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.cloudfront-aliases.rule.yaml
+fixtures:
+  - name: flags E3013 finding
+    observationPath: ./fixtures/cfn.correctness.cloudfront-aliases/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.cloudfront-aliases
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.cloudfront-aliases/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

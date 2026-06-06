@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.mappings-have-appropriate-names.rule.yaml
+fixtures:
+  - name: flags E7002 finding
+    observationPath: ./fixtures/cfn.correctness.mappings-have-appropriate-names/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.mappings-have-appropriate-names
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.mappings-have-appropriate-names/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

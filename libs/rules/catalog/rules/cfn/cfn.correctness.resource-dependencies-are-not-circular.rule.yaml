@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.resource-dependencies-are-not-circular
+  title: Resource dependencies are not circular
+  summary: Resource dependencies are not circular
+  rationale: cfn-lint reports E3004 when Resource dependencies are not circular.
+  aliases:
+    - CFLIN-E3004
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3004
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3004
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Resource dependencies are not circular
+    summary: "${captures.finding.text} matches cfn-lint E3004."
+  remediation:
+    summary: Resolve the cfn-lint E3004 finding in this CloudFormation template.

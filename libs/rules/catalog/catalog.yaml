@@ -508,6 +508,111 @@ rules:
     rulePath: ./rules/php/php.correctness.unreachable-after-return.rule.yaml
     presets:
       - strict
+
+  - id: php.security.unsafe-new-static
+    rulePath: ./rules/php/php.security.unsafe-new-static.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.empty-array-literal-slot
+    rulePath: ./rules/php/php.correctness.empty-array-literal-slot.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.empty-bracket-array-access
+    rulePath: ./rules/php/php.correctness.empty-bracket-array-access.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.deprecated-unset-cast
+    rulePath: ./rules/php/php.correctness.deprecated-unset-cast.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.duplicate-declaration
+    rulePath: ./rules/php/php.correctness.duplicate-declaration.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.nested-function-declaration
+    rulePath: ./rules/php/php.correctness.nested-function-declaration.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.break-continue-outside-loop
+    rulePath: ./rules/php/php.correctness.break-continue-outside-loop.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.abstract-method-outside-abstract-class
+    rulePath: ./rules/php/php.correctness.abstract-method-outside-abstract-class.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.useless-unset
+    rulePath: ./rules/php/php.correctness.useless-unset.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-regex-literal
+    rulePath: ./rules/php/php.correctness.invalid-regex-literal.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.todo-fixme-marker
+    rulePath: ./rules/php/php.correctness.todo-fixme-marker.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.self-assignment
+    rulePath: ./rules/php/php.correctness.self-assignment.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.default-parameter-not-last
+    rulePath: ./rules/php/php.correctness.default-parameter-not-last.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.empty-function-body
+    rulePath: ./rules/php/php.correctness.empty-function-body.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.unknown-magic-method
+    rulePath: ./rules/php/php.correctness.unknown-magic-method.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.case-insensitive-define
+    rulePath: ./rules/php/php.correctness.case-insensitive-define.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.deprecated-filter-constant
+    rulePath: ./rules/php/php.correctness.deprecated-filter-constant.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.empty-code-block
+    rulePath: ./rules/php/php.correctness.empty-code-block.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.deprecated-libxml-entity-loader
+    rulePath: ./rules/php/php.correctness.deprecated-libxml-entity-loader.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.redundant-string-cast-concat
+    rulePath: ./rules/php/php.correctness.redundant-string-cast-concat.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.missing-member-visibility
+    rulePath: ./rules/php/php.correctness.missing-member-visibility.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.function-comparison
+    rulePath: ./rules/php/php.correctness.function-comparison.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.useless-post-increment
+    rulePath: ./rules/php/php.correctness.useless-post-increment.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.nested-switch
+    rulePath: ./rules/php/php.correctness.nested-switch.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-cookie-options
+    rulePath: ./rules/php/php.correctness.invalid-cookie-options.rule.yaml
+    presets:
+      - strict
+  - id: php.performance.expensive-loop-condition
+    rulePath: ./rules/php/php.performance.expensive-loop-condition.rule.yaml
+    presets:
+      - strict
   - id: php.performance.no-regex-construction-in-loop
     rulePath: ./rules/php/php.performance.no-regex-construction-in-loop.rule.yaml
     presets:
@@ -2239,3 +2344,637 @@ rules:
     presets:
       - strict
       - security
+  - id: cfn.correctness.error-processing-rule-on-the-template
+    rulePath: ./rules/cfn/cfn.correctness.error-processing-rule-on-the-template.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.basic-cloudformation-template-configuration
+    rulePath: ./rules/cfn/cfn.correctness.basic-cloudformation-template-configuration.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.template-size-limit
+    rulePath: ./rules/cfn/cfn.correctness.template-size-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.template-description-limit
+    rulePath: ./rules/cfn/cfn.correctness.template-description-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.template-description-can-only-be-a-string
+    rulePath: ./rules/cfn/cfn.correctness.template-description-can-only-be-a-string.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.getatt-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.getatt-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.findinmap-validation-of-configuration
+    rulePath: ./rules/cfn/cfn.correctness.findinmap-validation-of-configuration.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-refs-exist
+    rulePath: ./rules/cfn/cfn.correctness.check-if-refs-exist.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.getaz-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.getaz-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.importvalue-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.importvalue-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.select-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.select-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.split-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.split-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.sub-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.sub-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.ref-validation-of-value
+    rulePath: ./rules/cfn/cfn.correctness.ref-validation-of-value.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.base64-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.base64-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.join-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.join-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.validation-not-function-configuration
+    rulePath: ./rules/cfn/cfn.correctness.validation-not-function-configuration.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.cidr-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.cidr-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.cannot-reference-resources-in-the-conditions-block-of-the-template
+    rulePath: ./rules/cfn/cfn.correctness.cannot-reference-resources-in-the-conditions-block-of-the-template.rule.yaml
+    presets:
+      - strict
+  - id: cfn.security.check-dynamic-references-secure-strings-are-in-supported-locations
+    rulePath: ./rules/cfn/cfn.security.check-dynamic-references-secure-strings-are-in-supported-locations.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: cfn.correctness.check-fn-if-structure-for-validity
+    rulePath: ./rules/cfn/cfn.correctness.check-fn-if-structure-for-validity.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.sub-is-required-if-a-variable-is-used-in-a-string
+    rulePath: ./rules/cfn/cfn.correctness.sub-is-required-if-a-variable-is-used-in-a-string.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.length-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.length-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.tojsonstring-validation-of-parameters
+    rulePath: ./rules/cfn/cfn.correctness.tojsonstring-validation-of-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.validates-foreach-functions
+    rulePath: ./rules/cfn/cfn.correctness.validates-foreach-functions.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.parameters-have-appropriate-properties
+    rulePath: ./rules/cfn/cfn.correctness.parameters-have-appropriate-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.parameters-have-appropriate-type
+    rulePath: ./rules/cfn/cfn.correctness.parameters-have-appropriate-type.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.parameters-have-appropriate-names
+    rulePath: ./rules/cfn/cfn.correctness.parameters-have-appropriate-names.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.parameter-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.parameter-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.parameter-name-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.parameter-name-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.parameter-value-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.parameter-value-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.default-value-cannot-use-refs
+    rulePath: ./rules/cfn/cfn.correctness.default-value-cannot-use-refs.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.default-value-is-within-parameter-constraints
+    rulePath: ./rules/cfn/cfn.correctness.default-value-is-within-parameter-constraints.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.resource-elb-properties
+    rulePath: ./rules/cfn/cfn.correctness.resource-elb-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-ec2-ebs-properties
+    rulePath: ./rules/cfn/cfn.correctness.check-ec2-ebs-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.resource-ec2-security-group-ingress-properties
+    rulePath: ./rules/cfn/cfn.correctness.resource-ec2-security-group-ingress-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.security.check-if-iam-policies-are-properly-configured
+    rulePath: ./rules/cfn/cfn.security.check-if-iam-policies-are-properly-configured.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: cfn.correctness.check-properties-that-are-mutually-exclusive
+    rulePath: ./rules/cfn/cfn.correctness.check-properties-that-are-mutually-exclusive.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-properties-that-are-required-together
+    rulePath: ./rules/cfn/cfn.correctness.check-properties-that-are-required-together.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-properties-that-need-at-least-one-of-a-list-of-properties
+    rulePath: ./rules/cfn/cfn.correctness.check-properties-that-need-at-least-one-of-a-list-of-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-properties-that-need-only-one-of-a-list-of-properties
+    rulePath: ./rules/cfn/cfn.correctness.check-properties-that-need-only-one-of-a-list-of-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-for-subscriptionfilters-have-beyond-2-attachments-to-a-cloudwatch-log-group
+    rulePath: ./rules/cfn/cfn.correctness.check-for-subscriptionfilters-have-beyond-2-attachments-to-a-cloudwatch-log-group.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.snapstart-supports-the-configured-runtime
+    rulePath: ./rules/cfn/cfn.correctness.snapstart-supports-the-configured-runtime.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-eol-lambda-function-runtimes-are-used
+    rulePath: ./rules/cfn/cfn.correctness.check-if-eol-lambda-function-runtimes-are-used.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-state-machine-definition-for-proper-syntax
+    rulePath: ./rules/cfn/cfn.correctness.check-state-machine-definition-for-proper-syntax.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.codepipeline-stages
+    rulePath: ./rules/cfn/cfn.correctness.codepipeline-stages.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.codepipeline-stage-actions
+    rulePath: ./rules/cfn/cfn.correctness.codepipeline-stage-actions.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.resource-schema
+    rulePath: ./rules/cfn/cfn.correctness.resource-schema.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.basic-cloudformation-resource-check
+    rulePath: ./rules/cfn/cfn.correctness.basic-cloudformation-resource-check.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.resource-properties-are-invalid
+    rulePath: ./rules/cfn/cfn.correctness.resource-properties-are-invalid.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.required-resource-properties-are-missing
+    rulePath: ./rules/cfn/cfn.correctness.required-resource-properties-are-missing.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.resource-dependencies-are-not-circular
+    rulePath: ./rules/cfn/cfn.correctness.resource-dependencies-are-not-circular.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-dependson-values-for-resources
+    rulePath: ./rules/cfn/cfn.correctness.check-dependson-values-for-resources.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.resources-have-appropriate-names
+    rulePath: ./rules/cfn/cfn.correctness.resources-have-appropriate-names.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.unique-resource-and-parameter-names
+    rulePath: ./rules/cfn/cfn.correctness.unique-resource-and-parameter-names.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-values-of-properties-for-valid-refs-and-getatts
+    rulePath: ./rules/cfn/cfn.correctness.check-values-of-properties-for-valid-refs-and-getatts.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.resource-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.resource-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.resource-name-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.resource-name-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-resource-properties-values
+    rulePath: ./rules/cfn/cfn.correctness.check-resource-properties-values.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.cloudfront-aliases
+    rulePath: ./rules/cfn/cfn.correctness.cloudfront-aliases.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-the-configuration-of-a-resources-updatepolicy
+    rulePath: ./rules/cfn/cfn.correctness.check-the-configuration-of-a-resources-updatepolicy.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.property-is-required-based-on-another-properties-value
+    rulePath: ./rules/cfn/cfn.correctness.property-is-required-based-on-another-properties-value.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.property-is-unwanted-based-on-another-properties-value
+    rulePath: ./rules/cfn/cfn.correctness.property-is-unwanted-based-on-another-properties-value.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.validate-route53-recordsets
+    rulePath: ./rules/cfn/cfn.correctness.validate-route53-recordsets.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-events-rule-targets-are-less-than-or-equal-to-5
+    rulePath: ./rules/cfn/cfn.correctness.check-events-rule-targets-are-less-than-or-equal-to-5.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.resource-subnetroutetableassociation-properties
+    rulePath: ./rules/cfn/cfn.correctness.resource-subnetroutetableassociation-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.rds-instance-type-is-compatible-with-the-rds-type
+    rulePath: ./rules/cfn/cfn.correctness.rds-instance-type-is-compatible-with-the-rds-type.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-elastic-cache-redis-cluster-settings
+    rulePath: ./rules/cfn/cfn.correctness.check-elastic-cache-redis-cluster-settings.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.validate-aws-event-scheduleexpression-format
+    rulePath: ./rules/cfn/cfn.correctness.validate-aws-event-scheduleexpression-format.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-properties-have-a-valid-value
+    rulePath: ./rules/cfn/cfn.correctness.check-if-properties-have-a-valid-value.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-property-values-adhere-to-a-specific-pattern
+    rulePath: ./rules/cfn/cfn.correctness.check-if-property-values-adhere-to-a-specific-pattern.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-a-list-has-between-min-and-max-number-of-values-specified
+    rulePath: ./rules/cfn/cfn.correctness.check-if-a-list-has-between-min-and-max-number-of-values-specified.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-a-string-has-between-min-and-max-number-of-values-specified
+    rulePath: ./rules/cfn/cfn.correctness.check-if-a-string-has-between-min-and-max-number-of-values-specified.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-a-number-is-between-min-and-max
+    rulePath: ./rules/cfn/cfn.correctness.check-if-a-number-is-between-min-and-max.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-deletionpolicy-values-for-resources
+    rulePath: ./rules/cfn/cfn.correctness.check-deletionpolicy-values-for-resources.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-updatereplacepolicy-values-for-resources
+    rulePath: ./rules/cfn/cfn.correctness.check-updatereplacepolicy-values-for-resources.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-a-list-has-duplicate-values
+    rulePath: ./rules/cfn/cfn.correctness.check-if-a-list-has-duplicate-values.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-serverless-resources-have-serverless-transform
+    rulePath: ./rules/cfn/cfn.correctness.check-if-serverless-resources-have-serverless-transform.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.attributedefinitions-keyschemas-mismatch
+    rulePath: ./rules/cfn/cfn.correctness.attributedefinitions-keyschemas-mismatch.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.recordset-hostedzonename-is-a-superdomain-of-name
+    rulePath: ./rules/cfn/cfn.correctness.recordset-hostedzonename-is-a-superdomain-of-name.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-at-least-one-essential-container-is-specified
+    rulePath: ./rules/cfn/cfn.correctness.check-at-least-one-essential-container-is-specified.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.validate-parameters-for-in-a-nested-stack
+    rulePath: ./rules/cfn/cfn.correctness.validate-parameters-for-in-a-nested-stack.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-fargate-service-scheduling-strategy
+    rulePath: ./rules/cfn/cfn.correctness.check-fargate-service-scheduling-strategy.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.validate-accesscontrol-are-set-with-ownershipcontrols
+    rulePath: ./rules/cfn/cfn.correctness.validate-accesscontrol-are-set-with-ownershipcontrols.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-refing-to-a-iam-resource-with-path-set
+    rulePath: ./rules/cfn/cfn.correctness.check-if-refing-to-a-iam-resource-with-path-set.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-a-json-object-is-within-size-limits
+    rulePath: ./rules/cfn/cfn.correctness.check-if-a-json-object-is-within-size-limits.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.validationdomain-is-superdomain-of-domainname
+    rulePath: ./rules/cfn/cfn.correctness.validationdomain-is-superdomain-of-domainname.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-minimum-90-period-is-met-between-backupplan-cold-and-delete
+    rulePath: ./rules/cfn/cfn.correctness.check-minimum-90-period-is-met-between-backupplan-cold-and-delete.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.metadata-interface-have-appropriate-properties
+    rulePath: ./rules/cfn/cfn.correctness.metadata-interface-have-appropriate-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.validate-the-configuration-of-the-metadata-section
+    rulePath: ./rules/cfn/cfn.correctness.validate-the-configuration-of-the-metadata-section.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-that-modules-resources-are-valid
+    rulePath: ./rules/cfn/cfn.correctness.check-that-modules-resources-are-valid.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.outputs-have-appropriate-properties
+    rulePath: ./rules/cfn/cfn.correctness.outputs-have-appropriate-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.outputs-have-required-properties
+    rulePath: ./rules/cfn/cfn.correctness.outputs-have-required-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.outputs-have-values-of-strings
+    rulePath: ./rules/cfn/cfn.correctness.outputs-have-values-of-strings.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.outputs-have-appropriate-names
+    rulePath: ./rules/cfn/cfn.correctness.outputs-have-appropriate-names.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.outputs-descriptions-can-only-be-strings
+    rulePath: ./rules/cfn/cfn.correctness.outputs-descriptions-can-only-be-strings.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.output-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.output-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.output-name-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.output-name-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.output-description-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.output-description-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.mappings-are-appropriately-configured
+    rulePath: ./rules/cfn/cfn.correctness.mappings-are-appropriately-configured.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.mappings-have-appropriate-names
+    rulePath: ./rules/cfn/cfn.correctness.mappings-have-appropriate-names.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.mapping-keys-are-strings-and-alphanumeric
+    rulePath: ./rules/cfn/cfn.correctness.mapping-keys-are-strings-and-alphanumeric.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.mapping-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.mapping-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.mapping-name-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.mapping-name-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.mapping-attribute-limit-not-exceeded
+    rulePath: ./rules/cfn/cfn.correctness.mapping-attribute-limit-not-exceeded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.conditions-have-appropriate-properties
+    rulePath: ./rules/cfn/cfn.correctness.conditions-have-appropriate-properties.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-if-the-referenced-conditions-are-defined
+    rulePath: ./rules/cfn/cfn.correctness.check-if-the-referenced-conditions-are-defined.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-fn-equals-structure-for-validity
+    rulePath: ./rules/cfn/cfn.correctness.check-fn-equals-structure-for-validity.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-fn-and-structure-for-validity
+    rulePath: ./rules/cfn/cfn.correctness.check-fn-and-structure-for-validity.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-fn-not-structure-for-validity
+    rulePath: ./rules/cfn/cfn.correctness.check-fn-not-structure-for-validity.rule.yaml
+    presets:
+      - strict
+  - id: cfn.correctness.check-fn-or-structure-for-validity
+    rulePath: ./rules/cfn/cfn.correctness.check-fn-or-structure-for-validity.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.template-size-limit-i1002
+    rulePath: ./rules/cfn/cfn.maintainability.template-size-limit-i1002.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.template-description-limit-i1003
+    rulePath: ./rules/cfn/cfn.maintainability.template-description-limit-i1003.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.use-sub-instead-of-join
+    rulePath: ./rules/cfn/cfn.maintainability.use-sub-instead-of-join.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.parameter-limit
+    rulePath: ./rules/cfn/cfn.maintainability.parameter-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.parameter-name-limit
+    rulePath: ./rules/cfn/cfn.maintainability.parameter-name-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.parameter-value-limit
+    rulePath: ./rules/cfn/cfn.maintainability.parameter-value-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.validate-that-snapstart-is-configured-for-java11-runtimes
+    rulePath: ./rules/cfn/cfn.maintainability.validate-that-snapstart-is-configured-for-java11-runtimes.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.resource-limit
+    rulePath: ./rules/cfn/cfn.maintainability.resource-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-stateful-resources-have-a-set-updatereplacepolicy-deletionpolicy
+    rulePath: ./rules/cfn/cfn.maintainability.check-stateful-resources-have-a-set-updatereplacepolicy-deletionpolicy.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.resource-name-limit
+    rulePath: ./rules/cfn/cfn.maintainability.resource-name-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-resources-with-auto-expiring-content-have-explicit-retention-period
+    rulePath: ./rules/cfn/cfn.maintainability.check-resources-with-auto-expiring-content-have-explicit-retention-period.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-if-a-list-that-allows-duplicates-has-any-duplicates
+    rulePath: ./rules/cfn/cfn.maintainability.check-if-a-list-that-allows-duplicates-has-any-duplicates.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.arns-should-use-correctly-placed-pseudo-parameters
+    rulePath: ./rules/cfn/cfn.maintainability.arns-should-use-correctly-placed-pseudo-parameters.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.checks-for-legacy-instance-type-generations
+    rulePath: ./rules/cfn/cfn.maintainability.checks-for-legacy-instance-type-generations.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.output-limit
+    rulePath: ./rules/cfn/cfn.maintainability.output-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.output-name-limit
+    rulePath: ./rules/cfn/cfn.maintainability.output-name-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.output-description-limit
+    rulePath: ./rules/cfn/cfn.maintainability.output-description-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.mapping-limit
+    rulePath: ./rules/cfn/cfn.maintainability.mapping-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.mapping-name-limit
+    rulePath: ./rules/cfn/cfn.maintainability.mapping-name-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.mapping-attribute-limit
+    rulePath: ./rules/cfn/cfn.maintainability.mapping-attribute-limit.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.ref-getatt-to-resource-that-is-available-when-conditions-are-applied
+    rulePath: ./rules/cfn/cfn.maintainability.ref-getatt-to-resource-that-is-available-when-conditions-are-applied.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.findinmap-keys-exist-in-the-map
+    rulePath: ./rules/cfn/cfn.maintainability.findinmap-keys-exist-in-the-map.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.sub-validation-of-parameters-w1019
+    rulePath: ./rules/cfn/cfn.maintainability.sub-validation-of-parameters-w1019.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.sub-isn-t-needed-if-it-doesn-t-have-a-variable-defined
+    rulePath: ./rules/cfn/cfn.maintainability.sub-isn-t-needed-if-it-doesn-t-have-a-variable-defined.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-if-parameters-are-used
+    rulePath: ./rules/cfn/cfn.maintainability.check-if-parameters-are-used.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-if-parameters-have-a-valid-value
+    rulePath: ./rules/cfn/cfn.maintainability.check-if-parameters-have-a-valid-value.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-if-parameters-have-a-valid-value-based-on-an-allowed-pattern
+    rulePath: ./rules/cfn/cfn.maintainability.check-if-parameters-have-a-valid-value-based-on-an-allowed-pattern.rule.yaml
+    presets:
+      - strict
+  - id: cfn.security.check-if-password-properties-are-correctly-configured
+    rulePath: ./rules/cfn/cfn.security.check-if-password-properties-are-correctly-configured.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: cfn.maintainability.check-if-imageid-parameters-have-the-correct-type
+    rulePath: ./rules/cfn/cfn.maintainability.check-if-imageid-parameters-have-the-correct-type.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.parameter-memory-size-attributes-should-have-max-and-min
+    rulePath: ./rules/cfn/cfn.maintainability.parameter-memory-size-attributes-should-have-max-and-min.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-iam-resource-policies-syntax
+    rulePath: ./rules/cfn/cfn.maintainability.check-iam-resource-policies-syntax.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.validate-that-snapstart-is-properly-configured
+    rulePath: ./rules/cfn/cfn.maintainability.validate-that-snapstart-is-properly-configured.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-if-eol-lambda-function-runtimes-are-used-w2531
+    rulePath: ./rules/cfn/cfn.maintainability.check-if-eol-lambda-function-runtimes-are-used-w2531.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-required-properties-for-lambda-if-the-deployment-package-is-a-zip-file
+    rulePath: ./rules/cfn/cfn.maintainability.check-required-properties-for-lambda-if-the-deployment-package-is-a-zip-file.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.warn-when-properties-are-configured-to-only-work-with-the-package-command
+    rulePath: ./rules/cfn/cfn.maintainability.warn-when-properties-are-configured-to-only-work-with-the-package-command.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-obsolete-dependson-configuration-for-resources
+    rulePath: ./rules/cfn/cfn.maintainability.check-obsolete-dependson-configuration-for-resources.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.availability-zone-parameters-should-not-be-hardcoded
+    rulePath: ./rules/cfn/cfn.maintainability.availability-zone-parameters-should-not-be-hardcoded.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-resources-with-updatereplacepolicy-deletionpolicy-have-both
+    rulePath: ./rules/cfn/cfn.maintainability.check-resources-with-updatereplacepolicy-deletionpolicy-have-both.rule.yaml
+    presets:
+      - strict
+  - id: cfn.security.check-iam-permission-configuration
+    rulePath: ./rules/cfn/cfn.security.check-iam-permission-configuration.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: cfn.security.controlling-access-to-an-s3-bucket-should-be-done-with-bucket-policies
+    rulePath: ./rules/cfn/cfn.security.controlling-access-to-an-s3-bucket-should-be-done-with-bucket-policies.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: cfn.maintainability.metadata-interface-parameters-exist
+    rulePath: ./rules/cfn/cfn.maintainability.metadata-interface-parameters-exist.rule.yaml
+    presets:
+      - strict
+  - id: cfn.security.check-for-noecho-references
+    rulePath: ./rules/cfn/cfn.security.check-for-noecho-references.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: cfn.maintainability.check-outputs-using-importvalue
+    rulePath: ./rules/cfn/cfn.maintainability.check-outputs-using-importvalue.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-if-mappings-are-used
+    rulePath: ./rules/cfn/cfn.maintainability.check-if-mappings-are-used.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.check-if-conditions-are-used
+    rulePath: ./rules/cfn/cfn.maintainability.check-if-conditions-are-used.rule.yaml
+    presets:
+      - strict
+  - id: cfn.maintainability.fn-equals-will-always-return-true-or-false
+    rulePath: ./rules/cfn/cfn.maintainability.fn-equals-will-always-return-true-or-false.rule.yaml
+    presets:
+      - strict

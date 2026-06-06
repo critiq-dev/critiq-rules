@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-if-refs-exist.rule.yaml
+fixtures:
+  - name: flags E1012 finding
+    observationPath: ./fixtures/cfn.correctness.check-if-refs-exist/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-if-refs-exist
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-if-refs-exist/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

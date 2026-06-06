@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.metadata-interface-parameters-exist
+  title: Metadata interface parameters exist
+  summary: Metadata interface parameters exist
+  rationale: cfn-lint reports W4001 when Metadata interface parameters exist.
+  aliases:
+    - CFLIN-W4001
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w4001
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W4001
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Metadata interface parameters exist
+    summary: "${captures.finding.text} matches cfn-lint W4001."
+  remediation:
+    summary: Resolve the cfn-lint W4001 finding in this CloudFormation template.

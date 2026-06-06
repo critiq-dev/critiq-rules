@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.useless-unset
+  title: Remove useless unset calls
+  summary: Calling unset on literals or non-variables has no effect.
+  rationale: Useless unset calls add noise and suggest the author misunderstood PHP unset semantics.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.useless-unset
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: low
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove useless unset calls
+    summary: "`${captures.issue.text}` matches php.correctness.useless-unset."
+  remediation:
+    summary: Useless unset calls add noise and suggest the author misunderstood PHP unset semantics.

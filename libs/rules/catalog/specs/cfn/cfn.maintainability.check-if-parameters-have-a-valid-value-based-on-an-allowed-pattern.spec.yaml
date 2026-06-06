@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.check-if-parameters-have-a-valid-value-based-on-an-allowed-pattern.rule.yaml
+fixtures:
+  - name: flags W2031 finding
+    observationPath: ./fixtures/cfn.maintainability.check-if-parameters-have-a-valid-value-based-on-an-allowed-pattern/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.check-if-parameters-have-a-valid-value-based-on-an-allowed-pattern
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.check-if-parameters-have-a-valid-value-based-on-an-allowed-pattern/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

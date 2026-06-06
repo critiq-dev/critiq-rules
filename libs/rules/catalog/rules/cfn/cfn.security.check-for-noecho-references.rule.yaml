@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.security.check-for-noecho-references
+  title: Check for noecho references
+  summary: Check for noecho references
+  rationale: cfn-lint reports W4002 when Check for noecho references.
+  aliases:
+    - CFLIN-W4002
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w4002
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+  references:
+    - kind: url
+      title: AWS CloudFormation Linter (W4002)
+      url: https://github.com/aws-cloudformation/cfn-lint
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W4002
+emit:
+  finding:
+    category: security.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check for noecho references
+    summary: "${captures.finding.text} matches cfn-lint W4002."
+  remediation:
+    summary: Resolve the cfn-lint W4002 finding in this CloudFormation template.

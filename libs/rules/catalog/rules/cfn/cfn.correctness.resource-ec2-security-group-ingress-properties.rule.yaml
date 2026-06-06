@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.resource-ec2-security-group-ingress-properties
+  title: Resource ec2 security group ingress properties
+  summary: Resource ec2 security group ingress properties
+  rationale: cfn-lint reports E2506 when Resource ec2 security group ingress properties.
+  aliases:
+    - CFLIN-E2506
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e2506
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E2506
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Resource ec2 security group ingress properties
+    summary: "${captures.finding.text} matches cfn-lint E2506."
+  remediation:
+    summary: Resolve the cfn-lint E2506 finding in this CloudFormation template.

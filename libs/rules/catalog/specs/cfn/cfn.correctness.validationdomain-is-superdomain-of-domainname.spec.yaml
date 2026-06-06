@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.validationdomain-is-superdomain-of-domainname.rule.yaml
+fixtures:
+  - name: flags E3503 finding
+    observationPath: ./fixtures/cfn.correctness.validationdomain-is-superdomain-of-domainname/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.validationdomain-is-superdomain-of-domainname
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.validationdomain-is-superdomain-of-domainname/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

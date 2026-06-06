@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.default-value-cannot-use-refs
+  title: Default value cannot use refs
+  summary: Default value cannot use refs
+  rationale: cfn-lint reports E2014 when Default value cannot use refs.
+  aliases:
+    - CFLIN-E2014
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e2014
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E2014
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Default value cannot use refs
+    summary: "${captures.finding.text} matches cfn-lint E2014."
+  remediation:
+    summary: Resolve the cfn-lint E2014 finding in this CloudFormation template.

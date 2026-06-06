@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-if-property-values-adhere-to-a-specific-pattern.rule.yaml
+fixtures:
+  - name: flags E3031 finding
+    observationPath: ./fixtures/cfn.correctness.check-if-property-values-adhere-to-a-specific-pattern/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-if-property-values-adhere-to-a-specific-pattern
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-if-property-values-adhere-to-a-specific-pattern/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

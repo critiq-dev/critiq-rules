@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.check-if-parameters-are-used
+  title: Check if parameters are used
+  summary: Check if parameters are used
+  rationale: cfn-lint reports W2001 when Check if parameters are used.
+  aliases:
+    - CFLIN-W2001
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w2001
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W2001
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check if parameters are used
+    summary: "${captures.finding.text} matches cfn-lint W2001."
+  remediation:
+    summary: Resolve the cfn-lint W2001 finding in this CloudFormation template.

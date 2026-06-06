@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.case-insensitive-define
+  title: Avoid case-insensitive define calls
+  summary: The third argument to define() for case-insensitive constants is deprecated.
+  rationale: Case-insensitive constants behave inconsistently across PHP versions and should be replaced with normal constants.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.case-insensitive-define
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - php
+  message:
+    title: Avoid case-insensitive define calls
+    summary: "`${captures.issue.text}` matches php.correctness.case-insensitive-define."
+  remediation:
+    summary: Case-insensitive constants behave inconsistently across PHP versions and should be replaced with normal constants.

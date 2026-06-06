@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.invalid-regex-literal.rule.yaml
+fixtures:
+  - name: flags invalid pattern
+    sourcePath: ./fixtures/php.correctness.invalid-regex-literal/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.invalid-regex-literal
+  - name: ignores valid pattern
+    sourcePath: ./fixtures/php.correctness.invalid-regex-literal/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

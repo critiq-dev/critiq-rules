@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.fn-equals-will-always-return-true-or-false
+  title: "Fn::equals will always return true or false"
+  summary: "Fn::equals will always return true or false"
+  rationale: "cfn-lint reports W8003 when Fn::equals will always return true or false."
+  aliases:
+    - CFLIN-W8003
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w8003
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W8003
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: "Fn::equals will always return true or false"
+    summary: "${captures.finding.text} matches cfn-lint W8003."
+  remediation:
+    summary: Resolve the cfn-lint W8003 finding in this CloudFormation template.

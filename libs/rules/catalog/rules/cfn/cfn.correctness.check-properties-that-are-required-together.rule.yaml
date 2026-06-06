@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-properties-that-are-required-together
+  title: Check properties that are required together
+  summary: Check properties that are required together
+  rationale: cfn-lint reports E2521 when Check properties that are required together.
+  aliases:
+    - CFLIN-E2521
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e2521
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E2521
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check properties that are required together
+    summary: "${captures.finding.text} matches cfn-lint E2521."
+  remediation:
+    summary: Resolve the cfn-lint E2521 finding in this CloudFormation template.

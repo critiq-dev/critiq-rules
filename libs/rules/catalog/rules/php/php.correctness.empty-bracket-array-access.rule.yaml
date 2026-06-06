@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.empty-bracket-array-access
+  title: Avoid empty bracket array reads
+  summary: "Reading from an array with `$value[]` appends null and returns the new element."
+  rationale: Empty bracket reads are rarely intentional and usually indicate a mistaken append or missing index.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.empty-bracket-array-access
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Avoid empty bracket array reads
+    summary: "`${captures.issue.text}` matches php.correctness.empty-bracket-array-access."
+  remediation:
+    summary: Empty bracket reads are rarely intentional and usually indicate a mistaken append or missing index.

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.security.controlling-access-to-an-s3-bucket-should-be-done-with-bucket-policies.rule.yaml
+fixtures:
+  - name: flags W3045 finding
+    observationPath: ./fixtures/cfn.security.controlling-access-to-an-s3-bucket-should-be-done-with-bucket-policies/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.security.controlling-access-to-an-s3-bucket-should-be-done-with-bucket-policies
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.security.controlling-access-to-an-s3-bucket-should-be-done-with-bucket-policies/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

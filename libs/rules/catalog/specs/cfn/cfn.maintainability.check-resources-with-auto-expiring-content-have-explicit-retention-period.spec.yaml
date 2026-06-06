@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.check-resources-with-auto-expiring-content-have-explicit-retention-period.rule.yaml
+fixtures:
+  - name: flags I3013 finding
+    observationPath: ./fixtures/cfn.maintainability.check-resources-with-auto-expiring-content-have-explicit-retention-period/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.check-resources-with-auto-expiring-content-have-explicit-retention-period
+      allSeverities:
+        - low
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.check-resources-with-auto-expiring-content-have-explicit-retention-period/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

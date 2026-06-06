@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.findinmap-validation-of-configuration.rule.yaml
+fixtures:
+  - name: flags E1011 finding
+    observationPath: ./fixtures/cfn.correctness.findinmap-validation-of-configuration/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.findinmap-validation-of-configuration
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.findinmap-validation-of-configuration/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

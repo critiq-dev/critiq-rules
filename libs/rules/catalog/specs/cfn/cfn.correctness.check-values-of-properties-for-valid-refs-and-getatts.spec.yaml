@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-values-of-properties-for-valid-refs-and-getatts.rule.yaml
+fixtures:
+  - name: flags E3008 finding
+    observationPath: ./fixtures/cfn.correctness.check-values-of-properties-for-valid-refs-and-getatts/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-values-of-properties-for-valid-refs-and-getatts
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-values-of-properties-for-valid-refs-and-getatts/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

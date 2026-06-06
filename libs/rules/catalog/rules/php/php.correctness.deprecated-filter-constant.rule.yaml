@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.deprecated-filter-constant
+  title: Replace deprecated filter constants
+  summary: Several FILTER_* constants are deprecated and should not be used in new code.
+  rationale: Deprecated filter constants may be removed and can silently change sanitization behavior across PHP versions.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.deprecated-filter-constant
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - php
+  message:
+    title: Replace deprecated filter constants
+    summary: "`${captures.issue.text}` matches php.correctness.deprecated-filter-constant."
+  remediation:
+    summary: Deprecated filter constants may be removed and can silently change sanitization behavior across PHP versions.

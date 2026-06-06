@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.snapstart-supports-the-configured-runtime.rule.yaml
+fixtures:
+  - name: flags E2530 finding
+    observationPath: ./fixtures/cfn.correctness.snapstart-supports-the-configured-runtime/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.snapstart-supports-the-configured-runtime
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.snapstart-supports-the-configured-runtime/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

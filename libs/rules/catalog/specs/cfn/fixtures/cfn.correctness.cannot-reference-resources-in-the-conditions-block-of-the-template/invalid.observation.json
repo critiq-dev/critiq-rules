@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-e1026",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "E1026: Cannot reference resources in the conditions block of the template",
+          "props": {
+            "ruleId": "E1026",
+            "directoryCode": "CFLIN-E1026",
+            "message": "Cannot reference resources in the conditions block of the template"
+          }
+        }
+      ]
+    }
+  }
+}

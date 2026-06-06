@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.availability-zone-parameters-should-not-be-hardcoded
+  title: Availability zone parameters should not be hardcoded
+  summary: Availability zone parameters should not be hardcoded
+  rationale: cfn-lint reports W3010 when Availability zone parameters should not be hardcoded.
+  aliases:
+    - CFLIN-W3010
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w3010
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W3010
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Availability zone parameters should not be hardcoded
+    summary: "${captures.finding.text} matches cfn-lint W3010."
+  remediation:
+    summary: Resolve the cfn-lint W3010 finding in this CloudFormation template.

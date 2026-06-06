@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.template-description-limit.rule.yaml
+fixtures:
+  - name: flags E1003 finding
+    observationPath: ./fixtures/cfn.correctness.template-description-limit/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.template-description-limit
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.template-description-limit/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,2 +1,3 @@
 <?php
-Promise.all($items->map(fn($item) => task($item)));
+
+GuzzleHttp\Promise\all($items);

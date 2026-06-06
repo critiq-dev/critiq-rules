@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.validate-route53-recordsets
+  title: Validate route53 recordsets
+  summary: Validate route53 recordsets
+  rationale: cfn-lint reports E3020 when Validate route53 recordsets.
+  aliases:
+    - CFLIN-E3020
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3020
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3020
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Validate route53 recordsets
+    summary: "${captures.finding.text} matches cfn-lint E3020."
+  remediation:
+    summary: Resolve the cfn-lint E3020 finding in this CloudFormation template.

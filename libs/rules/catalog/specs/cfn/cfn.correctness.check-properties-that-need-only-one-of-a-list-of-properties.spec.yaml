@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.check-properties-that-need-only-one-of-a-list-of-properties.rule.yaml
+fixtures:
+  - name: flags E2523 finding
+    observationPath: ./fixtures/cfn.correctness.check-properties-that-need-only-one-of-a-list-of-properties/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.check-properties-that-need-only-one-of-a-list-of-properties
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.check-properties-that-need-only-one-of-a-list-of-properties/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

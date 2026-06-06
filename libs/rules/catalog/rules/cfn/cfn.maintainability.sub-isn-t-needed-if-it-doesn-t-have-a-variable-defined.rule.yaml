@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.sub-isn-t-needed-if-it-doesn-t-have-a-variable-defined
+  title: "Sub isn't needed if it doesn't have a variable defined"
+  summary: "Sub isn't needed if it doesn't have a variable defined"
+  rationale: "cfn-lint reports W1020 when Sub isn't needed if it doesn't have a variable defined."
+  aliases:
+    - CFLIN-W1020
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w1020
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W1020
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: "Sub isn't needed if it doesn't have a variable defined"
+    summary: "${captures.finding.text} matches cfn-lint W1020."
+  remediation:
+    summary: Resolve the cfn-lint W1020 finding in this CloudFormation template.

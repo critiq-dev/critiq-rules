@@ -1,0 +1,32 @@
+{
+  "path": "template.yaml",
+  "language": "all",
+  "text": "AWSTemplateFormatVersion: \"2010-09-09\"\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-i2530",
+          "kind": "cfn.lint.finding",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "I2530: Validate that snapstart is configured for >= java11 runtimes",
+          "props": {
+            "ruleId": "I2530",
+            "directoryCode": "CFLIN-I2530",
+            "message": "Validate that snapstart is configured for >= java11 runtimes"
+          }
+        }
+      ]
+    }
+  }
+}

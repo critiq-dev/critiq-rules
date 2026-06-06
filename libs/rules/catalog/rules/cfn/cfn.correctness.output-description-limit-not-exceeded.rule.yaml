@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.output-description-limit-not-exceeded
+  title: Output description limit not exceeded
+  summary: Output description limit not exceeded
+  rationale: cfn-lint reports E6012 when Output description limit not exceeded.
+  aliases:
+    - CFLIN-E6012
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e6012
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E6012
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Output description limit not exceeded
+    summary: "${captures.finding.text} matches cfn-lint E6012."
+  remediation:
+    summary: Resolve the cfn-lint E6012 finding in this CloudFormation template.

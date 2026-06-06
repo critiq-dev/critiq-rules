@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.template-size-limit
+  title: Template size limit
+  summary: Template size limit
+  rationale: cfn-lint reports E1002 when Template size limit.
+  aliases:
+    - CFLIN-E1002
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e1002
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E1002
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Template size limit
+    summary: "${captures.finding.text} matches cfn-lint E1002."
+  remediation:
+    summary: Resolve the cfn-lint E1002 finding in this CloudFormation template.

@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.validate-that-snapstart-is-properly-configured
+  title: Validate that snapstart is properly configured
+  summary: Validate that snapstart is properly configured
+  rationale: cfn-lint reports W2530 when Validate that snapstart is properly configured.
+  aliases:
+    - CFLIN-W2530
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - w2530
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: W2530
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: medium
+    confidence: 0.85
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Validate that snapstart is properly configured
+    summary: "${captures.finding.text} matches cfn-lint W2530."
+  remediation:
+    summary: Resolve the cfn-lint W2530 finding in this CloudFormation template.

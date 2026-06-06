@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-state-machine-definition-for-proper-syntax
+  title: Check state machine definition for proper syntax
+  summary: Check state machine definition for proper syntax
+  rationale: cfn-lint reports E2532 when Check state machine definition for proper syntax.
+  aliases:
+    - CFLIN-E2532
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e2532
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E2532
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check state machine definition for proper syntax
+    summary: "${captures.finding.text} matches cfn-lint E2532."
+  remediation:
+    summary: Resolve the cfn-lint E2532 finding in this CloudFormation template.

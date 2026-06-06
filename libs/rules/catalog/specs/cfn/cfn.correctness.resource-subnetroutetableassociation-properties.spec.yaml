@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.correctness.resource-subnetroutetableassociation-properties.rule.yaml
+fixtures:
+  - name: flags E3022 finding
+    observationPath: ./fixtures/cfn.correctness.resource-subnetroutetableassociation-properties/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.correctness.resource-subnetroutetableassociation-properties
+      allSeverities:
+        - high
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.correctness.resource-subnetroutetableassociation-properties/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.resource-name-limit.rule.yaml
+fixtures:
+  - name: flags I3012 finding
+    observationPath: ./fixtures/cfn.maintainability.resource-name-limit/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.resource-name-limit
+      allSeverities:
+        - low
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.resource-name-limit/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

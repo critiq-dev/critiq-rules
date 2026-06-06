@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.maintainability.mapping-limit
+  title: Mapping limit
+  summary: Mapping limit
+  rationale: cfn-lint reports I7010 when Mapping limit.
+  aliases:
+    - CFLIN-I7010
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - i7010
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: I7010
+emit:
+  finding:
+    category: maintainability.configuration
+    severity: low
+    confidence: 0.8
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Mapping limit
+    summary: "${captures.finding.text} matches cfn-lint I7010."
+  remediation:
+    summary: Resolve the cfn-lint I7010 finding in this CloudFormation template.

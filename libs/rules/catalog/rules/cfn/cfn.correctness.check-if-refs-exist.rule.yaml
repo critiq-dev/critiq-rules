@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-if-refs-exist
+  title: Check if refs exist
+  summary: Check if refs exist
+  rationale: cfn-lint reports E1012 when Check if refs exist.
+  aliases:
+    - CFLIN-E1012
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e1012
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E1012
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check if refs exist
+    summary: "${captures.finding.text} matches cfn-lint E1012."
+  remediation:
+    summary: Resolve the cfn-lint E1012 finding in this CloudFormation template.

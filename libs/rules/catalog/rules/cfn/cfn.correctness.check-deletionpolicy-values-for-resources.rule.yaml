@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: cfn.correctness.check-deletionpolicy-values-for-resources
+  title: Check deletionpolicy values for resources
+  summary: Check deletionpolicy values for resources
+  rationale: cfn-lint reports E3035 when Check deletionpolicy values for resources.
+  aliases:
+    - CFLIN-E3035
+  tags:
+    - cfn
+    - cfn-lint
+    - cloudformation
+    - e3035
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+  detection:
+    kind: pattern
+scope:
+  languages:
+    - all
+  paths:
+    include:
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.json"
+    exclude:
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: cfn.lint.finding
+    bind: finding
+    where:
+      - path: ruleId
+        equals: E3035
+emit:
+  finding:
+    category: correctness.configuration
+    severity: high
+    confidence: 0.9
+    tags:
+      - cfn
+      - cloudformation
+  message:
+    title: Check deletionpolicy values for resources
+    summary: "${captures.finding.text} matches cfn-lint E3035."
+  remediation:
+    summary: Resolve the cfn-lint E3035 finding in this CloudFormation template.

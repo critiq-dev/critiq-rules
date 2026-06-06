@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/cfn/cfn.maintainability.availability-zone-parameters-should-not-be-hardcoded.rule.yaml
+fixtures:
+  - name: flags W3010 finding
+    observationPath: ./fixtures/cfn.maintainability.availability-zone-parameters-should-not-be-hardcoded/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - cfn.maintainability.availability-zone-parameters-should-not-be-hardcoded
+      allSeverities:
+        - medium
+  - name: ignores unrelated findings
+    observationPath: ./fixtures/cfn.maintainability.availability-zone-parameters-should-not-be-hardcoded/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []
