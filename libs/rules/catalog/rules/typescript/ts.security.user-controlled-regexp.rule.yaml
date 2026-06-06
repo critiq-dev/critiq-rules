@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.user-controlled-regexp
+  title: Avoid user-controlled regular expression patterns
+  summary: Regular expression construction should not consume request-derived pattern strings without validation.
+  rationale: Attacker-controlled regex patterns can trigger catastrophic backtracking and block the Node.js event loop.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-1333
+      title: Inefficient Regular Expression Complexity
+    - kind: owasp
+      title: Denial of Service Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html
+  tags:
+    - security
+    - redos
+    - input-validation
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+  paths:
+    exclude:
+      - "**/build/**"
+      - "**/scripts/**"
+      - "**/docs/**"
+      - "**/vendor/**"
+      - "**/lib/**"
+match:
+  fact:
+    kind: security.user-controlled-regexp
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: medium
+    confidence: 0.84
+    tags:
+      - security
+      - redos
+      - input-validation
+  message:
+    title: Validate regex pattern before `${captures.issue.text}`
+    summary: "`${captures.issue.text}` builds a regular expression from request-controlled input."
+  remediation:
+    summary: Use fixed or allowlisted regex patterns, or validate and bound user-supplied patterns before compiling them.

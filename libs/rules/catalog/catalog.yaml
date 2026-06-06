@@ -1303,6 +1303,18 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.security.path-join-user-input
+    rulePath: ./rules/typescript/ts.security.path-join-user-input.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
+  - id: ts.security.express-insecure-listen
+    rulePath: ./rules/typescript/ts.security.express-insecure-listen.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.permissive-file-permissions
     rulePath: ./rules/typescript/ts.security.permissive-file-permissions.rule.yaml
     presets:
@@ -1473,6 +1485,12 @@ rules:
     presets:
       - strict
       - security
+  - id: ts.security.user-controlled-regexp
+    rulePath: ./rules/typescript/ts.security.user-controlled-regexp.rule.yaml
+    presets:
+      - recommended
+      - strict
+      - security
   - id: ts.security.exposed-directory-listing
     rulePath: ./rules/typescript/ts.security.exposed-directory-listing.rule.yaml
     presets:
@@ -1578,6 +1596,12 @@ rules:
   - id: py.security.flask-unsafe-upload-filename
     rulePath: ./rules/python/py.security.flask-unsafe-upload-filename.rule.yaml
     presets:
+      - strict
+      - security
+  - id: py.security.path-traversal-user-input
+    rulePath: ./rules/python/py.security.path-traversal-user-input.rule.yaml
+    presets:
+      - recommended
       - strict
       - security
   - id: py.security.flask-missing-upload-body-limit

@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.express-insecure-listen.rule.yaml
+fixtures:
+  - name: flags plain HTTP server bootstrap
+    sourcePath: ./fixtures/ts.security.express-insecure-listen/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.express-insecure-listen
+        - ts.security.express-insecure-listen
+      allSeverities:
+        - high
+        - high
+  - name: ignores HTTPS bootstrap and dev-only listeners
+    sourcePath: ./fixtures/ts.security.express-insecure-listen/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

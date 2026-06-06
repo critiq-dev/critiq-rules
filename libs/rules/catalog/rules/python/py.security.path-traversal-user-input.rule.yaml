@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.path-traversal-user-input
+  title: Avoid user-controlled filesystem path segments in Python
+  summary: Python path construction and file delivery helpers should not consume request- or route-derived segments without validation.
+  rationale: Building paths from external input enables traversal outside trusted storage roots before reads, writes, or downloads occur.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-22
+      title: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
+    - kind: owasp
+      title: Path Traversal
+      url: https://owasp.org/www-community/attacks/Path_Traversal
+  tags:
+    - security
+    - filesystem
+    - path-traversal
+    - python
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    exclude:
+      - "**/build/**"
+      - "**/scripts/**"
+      - "**/docs/**"
+match:
+  fact:
+    kind: python.security.path-traversal-user-input
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - filesystem
+      - path-traversal
+      - python
+  message:
+    title: Validate user input used by `${captures.issue.text}`
+    summary: "`${captures.issue.text}` builds a filesystem path from external input without an evident trusted-root validation step."
+  remediation:
+    summary: Resolve paths under a fixed base directory and validate or allowlist user-supplied segments before joining, opening, or sending files.

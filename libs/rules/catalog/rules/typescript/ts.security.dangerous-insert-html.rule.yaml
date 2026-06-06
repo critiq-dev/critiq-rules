@@ -25,6 +25,11 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/build/**"
+      - "**/scripts/**"
+      - "**/docs/**"
 match:
   fact:
     kind: security.dangerous-insert-html

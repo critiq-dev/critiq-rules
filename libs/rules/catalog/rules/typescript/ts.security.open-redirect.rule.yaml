@@ -27,6 +27,11 @@ scope:
     - javascript
     - java
     - go
+  paths:
+    exclude:
+      - "**/lib/**"
+      - "**/node_modules/**"
+      - "**/vendor/**"
 match:
   fact:
     kind: security.open-redirect

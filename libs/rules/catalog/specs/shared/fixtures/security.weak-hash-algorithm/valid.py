@@ -2,4 +2,4 @@ import hashlib
 
 
 def checksum(payload: bytes):
-    return hashlib.sha256(payload).hexdigest()
+    return hashlib.md5(payload).hexdigest()

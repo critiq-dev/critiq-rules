@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.path-join-user-input.rule.yaml
+fixtures:
+  - name: flags request-controlled path.join segments
+    sourcePath: ./fixtures/filesystem-safety/path-join.invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.path-join-user-input
+        - ts.security.path-join-user-input
+      allSeverities:
+        - high
+        - high
+  - name: ignores constant and validated path joins
+    sourcePath: ./fixtures/filesystem-safety/path-join.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

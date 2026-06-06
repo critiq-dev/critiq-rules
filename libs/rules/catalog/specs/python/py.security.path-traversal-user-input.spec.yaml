@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.path-traversal-user-input.rule.yaml
+fixtures:
+  - name: flags request-tainted path construction in Python
+    sourcePath: ./fixtures/py.security.path-traversal-user-input/invalid.py
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - py.security.path-traversal-user-input
+        - py.security.path-traversal-user-input
+        - py.security.path-traversal-user-input
+      allSeverities:
+        - high
+        - high
+        - high
+  - name: ignores constant pathlib joins
+    sourcePath: ./fixtures/py.security.path-traversal-user-input/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

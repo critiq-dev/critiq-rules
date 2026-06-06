@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.security.user-controlled-regexp.rule.yaml
+fixtures:
+  - name: flags request-controlled RegExp construction
+    sourcePath: ./fixtures/ts.security.user-controlled-regexp/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.security.user-controlled-regexp
+        - ts.security.user-controlled-regexp
+      allSeverities:
+        - medium
+        - medium
+  - name: ignores static regex compilation
+    sourcePath: ./fixtures/ts.security.user-controlled-regexp/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

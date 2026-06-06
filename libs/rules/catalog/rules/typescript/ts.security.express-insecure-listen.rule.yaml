@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.express-insecure-listen
+  title: Avoid insecure HTTP server bootstrap in production entrypoints
+  summary: Application servers should terminate TLS locally or document trusted edge termination before exposing plain HTTP listeners.
+  rationale: Bootstrapping Express, Fastify, Nest, or raw HTTP servers without HTTPS exposes traffic to interception and downgrade attacks when no compensating TLS layer exists.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Protection Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html
+  tags:
+    - security
+    - transport
+    - express
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+  paths:
+    exclude:
+      - "**/build/**"
+      - "**/scripts/**"
+      - "**/docs/**"
+      - "**/*.spec.*"
+      - "**/*.test.*"
+match:
+  fact:
+    kind: security.express-insecure-listen
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - transport
+      - express
+  message:
+    title: Protect `${captures.issue.text}` with TLS or documented edge termination
+    summary: "`${captures.issue.text}` starts a plain HTTP listener without local HTTPS bootstrap or a documented TLS termination guard."
+  remediation:
+    summary: Use `https.createServer` with valid credentials, terminate TLS at a trusted reverse proxy, or restrict the listener to explicit development-only guards.

@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.security.path-join-user-input
+  title: Avoid user-controlled path segments in path.join and path.resolve
+  summary: Path construction APIs should not consume request- or upload-derived segments without a trusted root and validation.
+  rationale: Joining external input into filesystem paths can enable directory traversal outside the intended base directory.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-22
+      title: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
+    - kind: owasp
+      title: Path Traversal
+      url: https://owasp.org/www-community/attacks/Path_Traversal
+  tags:
+    - security
+    - filesystem
+    - path-traversal
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+  paths:
+    exclude:
+      - "**/build/**"
+      - "**/scripts/**"
+      - "**/docs/**"
+match:
+  fact:
+    kind: security.path-join-user-input
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - filesystem
+      - path-traversal
+  message:
+    title: Validate path segments passed to `${captures.issue.text}`
+    summary: "`${captures.issue.text}` joins external input into a filesystem path without a validated trusted root."
+  remediation:
+    summary: Resolve files under a fixed base directory and validate or allowlist user-supplied segments before joining paths.

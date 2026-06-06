@@ -1,5 +1,5 @@
 import hashlib
 
 
-def checksum(payload: bytes):
-    return hashlib.md5(payload).hexdigest()
+def sign_session(payload: bytes, secret: bytes):
+    return hashlib.sha1(payload + secret).hexdigest()
