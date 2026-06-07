@@ -4,6 +4,8 @@ metadata:
   id: ts.correctness.duplicate-function-parameter
   title: Duplicate function parameter names
   summary: A function declares the same parameter name more than once.
+  aliases:
+    - JS-0006
   rationale: Duplicate parameters are confusing and usually indicate a copy-paste or merge mistake.
   tags:
     - correctness

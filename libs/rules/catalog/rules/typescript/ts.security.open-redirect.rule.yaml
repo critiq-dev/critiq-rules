@@ -27,6 +27,7 @@ scope:
     - javascript
     - java
     - go
+    - python
   paths:
     exclude:
       - "**/lib/**"

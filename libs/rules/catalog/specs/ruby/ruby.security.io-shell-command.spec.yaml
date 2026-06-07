@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.io-shell-command.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.security.io-shell-command/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.io-shell-command
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.security.io-shell-command/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

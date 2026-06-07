@@ -5,6 +5,8 @@ metadata:
   title: Assignment used as a conditional test
   summary: Control-flow conditions should compare values, not perform assignments.
   rationale: Using `=` where `===` was intended is a common defect; assignments in conditions also obscure data flow.
+  aliases:
+    - JS-0001
   tags:
     - correctness
     - language

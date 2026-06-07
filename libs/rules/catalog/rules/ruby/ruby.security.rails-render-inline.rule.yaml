@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.rails-render-inline
+  title: Avoid rendering inline templates or text
+  summary: >-
+    Inline and text render modes bypass view escaping and are easy to misuse for cross-site scripting.
+  rationale: >-
+    Inline and text render modes bypass view escaping and are easy to misuse for cross-site scripting.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Cross-site Scripting (XSS)
+    - kind: owasp
+      title: Cross Site Scripting Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+    - kind: url
+      title: Ruby on Rails security guide
+      url: https://guides.rubyonrails.org/security.html
+  tags:
+    - security
+    - rails
+    - xss
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.rails-render-inline
+    bind: issue
+emit:
+  finding:
+    category: security.output-encoding
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.security.rails-render-inline`."
+  remediation:
+    summary: >-
+      Inline and text render modes bypass view escaping and are easy to misuse for cross-site scripting.

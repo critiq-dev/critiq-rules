@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.io-shell-command
+  title: Avoid IO class reads that may invoke shell commands
+  summary: >-
+    IO.read and related IO class methods can spawn subprocesses when the path starts with a pipe.
+  rationale: >-
+    IO.read and related IO class methods can spawn subprocesses when the path starts with a pipe.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-78
+      title: Improper Neutralization of Special Elements used in an OS Command
+    - kind: url
+      title: RuboCop Security/IoMethods
+      url: https://docs.rubocop.org/rubocop/cops_security.html#securityiometrics
+  tags:
+    - security
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.io-shell-command
+    bind: issue
+emit:
+  finding:
+    category: security.command-injection
+    severity: critical
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.security.io-shell-command`."
+  remediation:
+    summary: >-
+      IO.read and related IO class methods can spawn subprocesses when the path starts with a pipe.

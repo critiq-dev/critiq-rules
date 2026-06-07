@@ -4,6 +4,8 @@ metadata:
   id: ts.correctness.self-assignment
   title: Self assignment
   summary: An assignment uses the same expression on the left and right side.
+  aliases:
+    - JS-0088
   rationale: Self-assignments are almost always dead code or a typo where a different value was intended.
   tags:
     - correctness

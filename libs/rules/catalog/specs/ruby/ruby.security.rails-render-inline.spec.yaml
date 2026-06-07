@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-render-inline.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.security.rails-render-inline/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-render-inline
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.security.rails-render-inline/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.rails-skip-validation
+  title: Avoid ActiveRecord updates that skip validations
+  summary: >-
+    Methods such as update_column and touch persist data without running model validations.
+  rationale: >-
+    Methods such as update_column and touch persist data without running model validations.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: url
+      title: Active Record validations guide
+      url: https://guides.rubyonrails.org/active_record_validations.html#skipping-validations
+  tags:
+    - security
+    - rails
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.rails-skip-validation
+    bind: issue
+emit:
+  finding:
+    category: security.data-integrity
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.security.rails-skip-validation`."
+  remediation:
+    summary: >-
+      Methods such as update_column and touch persist data without running model validations.

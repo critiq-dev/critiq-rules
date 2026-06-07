@@ -1,0 +1,2 @@
+class AppFailure < Exception
+end

@@ -4,6 +4,8 @@ metadata:
   id: ts.correctness.assignment-to-import-binding
   title: Assignment to an imported binding
   summary: Code assigns to or updates a symbol declared by an import.
+  aliases:
+    - JS-0035
   rationale: ES module imports are read-only bindings; reassignment fails at runtime and signals a mistaken refactor.
   tags:
     - correctness

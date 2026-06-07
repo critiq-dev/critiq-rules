@@ -4,6 +4,8 @@ metadata:
   id: ts.correctness.identical-comparison-operands
   title: Identical comparison operands
   summary: Both sides of a comparison use the same source text.
+  aliases:
+    - JS-0089
   rationale: Comparing an expression to itself is either always true or always false and usually indicates a copy-paste defect.
   tags:
     - correctness

@@ -4,6 +4,8 @@ metadata:
   id: ts.correctness.async-promise-executor
   title: Async Promise executor function
   summary: The executor passed to `new Promise` is declared `async`.
+  aliases:
+    - JS-0031
   rationale: Async executors defer errors and can swallow rejections; prefer a synchronous executor that calls `resolve`/`reject`.
   tags:
     - correctness

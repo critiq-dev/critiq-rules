@@ -41,3 +41,16 @@ fixtures:
         - ts.security.open-redirect
       allSeverities:
         - high
+  - name: flags Python redirects driven by request query parameters
+    sourcePath: ./fixtures/ts.security.open-redirect/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.open-redirect
+      allSeverities:
+        - high
+  - name: ignores fixed-path Python redirects
+    sourcePath: ./fixtures/ts.security.open-redirect/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

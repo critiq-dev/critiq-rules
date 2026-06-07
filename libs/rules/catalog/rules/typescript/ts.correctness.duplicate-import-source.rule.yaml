@@ -4,6 +4,8 @@ metadata:
   id: ts.correctness.duplicate-import-source
   title: Duplicate imports from the same module
   summary: The file imports from the same module path more than once.
+  aliases:
+    - JS-0232
   rationale: Multiple import declarations for one module increase bundle noise and can diverge over time.
   tags:
     - correctness

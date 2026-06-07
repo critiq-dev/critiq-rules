@@ -1830,8 +1830,16 @@ rules:
     rulePath: ./rules/ruby/ruby.bug-risk.assignment-in-condition.rule.yaml
     presets:
       - strict
+  - id: ruby.bug-risk.deprecated-openssl-api
+    rulePath: ./rules/ruby/ruby.bug-risk.deprecated-openssl-api.rule.yaml
+    presets:
+      - strict
   - id: ruby.bug-risk.deprecated-uri-escape
     rulePath: ./rules/ruby/ruby.bug-risk.deprecated-uri-escape.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.deprecated-uri-regexp
+    rulePath: ./rules/ruby/ruby.bug-risk.deprecated-uri-regexp.rule.yaml
     presets:
       - strict
   - id: ruby.bug-risk.division-by-zero
@@ -1842,12 +1850,20 @@ rules:
     rulePath: ./rules/ruby/ruby.bug-risk.duplicate-hash-keys.rule.yaml
     presets:
       - strict
+  - id: ruby.bug-risk.error-inherits-exception
+    rulePath: ./rules/ruby/ruby.bug-risk.error-inherits-exception.rule.yaml
+    presets:
+      - strict
   - id: ruby.bug-risk.exception-class-overwritten
     rulePath: ./rules/ruby/ruby.bug-risk.exception-class-overwritten.rule.yaml
     presets:
       - strict
   - id: ruby.bug-risk.raw-sql-without-squish
     rulePath: ./rules/ruby/ruby.bug-risk.raw-sql-without-squish.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.rescue-exception
+    rulePath: ./rules/ruby/ruby.bug-risk.rescue-exception.rule.yaml
     presets:
       - strict
   - id: ruby.security.debugger-call
@@ -1862,6 +1878,11 @@ rules:
       - security
   - id: ruby.security.insecure-json-load
     rulePath: ./rules/ruby/ruby.security.insecure-json-load.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.io-shell-command
+    rulePath: ./rules/ruby/ruby.security.io-shell-command.rule.yaml
     presets:
       - strict
       - security
@@ -1885,6 +1906,11 @@ rules:
     presets:
       - strict
       - security
+  - id: ruby.security.rails-http-digest-auth
+    rulePath: ./rules/ruby/ruby.security.rails-http-digest-auth.rule.yaml
+    presets:
+      - strict
+      - security
   - id: ruby.security.rails-link-to-blank-without-noopener
     rulePath: ./rules/ruby/ruby.security.rails-link-to-blank-without-noopener.rule.yaml
     presets:
@@ -1892,6 +1918,11 @@ rules:
       - security
   - id: ruby.security.rails-open-redirect
     rulePath: ./rules/ruby/ruby.security.rails-open-redirect.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.rails-render-inline
+    rulePath: ./rules/ruby/ruby.security.rails-render-inline.rule.yaml
     presets:
       - strict
       - security
@@ -1917,6 +1948,11 @@ rules:
       - security
   - id: ruby.security.rails-unsafe-strong-parameters
     rulePath: ./rules/ruby/ruby.security.rails-unsafe-strong-parameters.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: ruby.security.rails-skip-validation
+    rulePath: ./rules/ruby/ruby.security.rails-skip-validation.rule.yaml
     presets:
       - strict
       - security

@@ -5,6 +5,8 @@ metadata:
   title: Empty block statement
   summary: A control-flow or try/catch branch uses an empty `{}` block.
   rationale: Empty blocks hide missing logic, swallowed errors, or incomplete refactors and often mask bugs.
+  aliases:
+    - JS-0009
   tags:
     - correctness
     - language

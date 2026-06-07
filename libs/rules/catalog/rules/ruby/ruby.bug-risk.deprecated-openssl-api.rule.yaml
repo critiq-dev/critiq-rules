@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.deprecated-openssl-api
+  title: Avoid deprecated OpenSSL constant constructors
+  summary: >-
+    OpenSSL::Cipher and OpenSSL::Digest constant APIs are deprecated; prefer string algorithm names.
+  rationale: >-
+    OpenSSL::Cipher and OpenSSL::Digest constant APIs are deprecated; prefer string algorithm names.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.deprecated-openssl-api
+    bind: issue
+emit:
+  finding:
+    category: correctness.crypto
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.bug-risk.deprecated-openssl-api`."
+  remediation:
+    summary: >-
+      OpenSSL::Cipher and OpenSSL::Digest constant APIs are deprecated; prefer string algorithm names.

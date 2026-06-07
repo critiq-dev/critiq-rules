@@ -1,0 +1,1 @@
+output = IO.read('|whoami')

@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.deprecated-uri-regexp
+  title: Avoid deprecated URI.regexp
+  summary: >-
+    URI.regexp is deprecated and removed in modern Ruby releases.
+  rationale: >-
+    URI.regexp is deprecated and removed in modern Ruby releases.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.deprecated-uri-regexp
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.bug-risk.deprecated-uri-regexp`."
+  remediation:
+    summary: >-
+      URI.regexp is deprecated and removed in modern Ruby releases.

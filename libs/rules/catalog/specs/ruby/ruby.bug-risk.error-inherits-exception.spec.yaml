@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.error-inherits-exception.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.bug-risk.error-inherits-exception/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.error-inherits-exception
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.bug-risk.error-inherits-exception/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

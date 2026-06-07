@@ -75,7 +75,7 @@ Use a **major tag** (`@v1`) or pin a **commit SHA** for supply-chain control. Mo
 
 ## Catalog At A Glance
 
-Today the catalog includes `635` rules across `18` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+Today the catalog includes `643` rules across `18` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |

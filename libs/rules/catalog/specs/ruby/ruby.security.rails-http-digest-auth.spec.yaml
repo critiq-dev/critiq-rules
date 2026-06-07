@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-http-digest-auth.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.security.rails-http-digest-auth/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-http-digest-auth
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.security.rails-http-digest-auth/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

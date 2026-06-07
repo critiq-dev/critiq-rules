@@ -4,6 +4,8 @@ metadata:
   id: ts.correctness.duplicate-object-key
   title: Duplicate keys in object literal
   summary: An object literal repeats the same static property name.
+  aliases:
+    - JS-0007
   rationale: Later entries silently override earlier ones, hiding bugs during refactors.
   tags:
     - correctness

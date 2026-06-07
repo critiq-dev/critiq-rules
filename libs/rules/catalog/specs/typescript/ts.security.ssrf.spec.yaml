@@ -36,3 +36,19 @@ fixtures:
         - ts.security.ssrf
       allSeverities:
         - high
+  - name: flags Python requests.get with request-derived URL
+    sourcePath: ./fixtures/ts.security.ssrf/request-controlled-fetch.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.ssrf
+      allSeverities:
+        - high
+  - name: flags Python requests.get to private metadata host
+    sourcePath: ./fixtures/ts.security.ssrf/private-host.invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.security.ssrf
+      allSeverities:
+        - high

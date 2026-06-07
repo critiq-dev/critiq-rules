@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.security.rails-http-digest-auth
+  title: Avoid Rails HTTP digest authentication helpers
+  summary: >-
+    authenticate_with_http_digest and authenticate_or_request_with_http_digest are vulnerable to denial-of-service attacks in affected Rails versions.
+  rationale: >-
+    authenticate_with_http_digest and authenticate_or_request_with_http_digest are vulnerable to denial-of-service attacks in affected Rails versions.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+    - kind: url
+      title: Ruby on Rails security guide
+      url: https://guides.rubyonrails.org/security.html
+  tags:
+    - security
+    - rails
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.security.rails-http-digest-auth
+    bind: issue
+emit:
+  finding:
+    category: security.authentication
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.security.rails-http-digest-auth`."
+  remediation:
+    summary: >-
+      authenticate_with_http_digest and authenticate_or_request_with_http_digest are vulnerable to denial-of-service attacks in affected Rails versions.

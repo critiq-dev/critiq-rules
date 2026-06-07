@@ -4,6 +4,8 @@ metadata:
   id: ts.correctness.duplicate-switch-case
   title: Duplicate switch case labels
   summary: A switch repeats the same case discriminant.
+  aliases:
+    - JS-0008
   rationale: Unreachable duplicate cases usually mean a merge error or incomplete refactor.
   tags:
     - correctness

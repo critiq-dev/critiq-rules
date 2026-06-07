@@ -5,6 +5,8 @@ metadata:
   title: Reassignment of catch binding
   summary: The catch clause parameter is assigned or updated after it is bound.
   rationale: Catch bindings are immutable in strict mode and confusing in sloppy mode; reassignment usually indicates a mistaken mutation of the caught error.
+  aliases:
+    - JS-0011
   tags:
     - correctness
     - language

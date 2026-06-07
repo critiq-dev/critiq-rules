@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.security.rails-skip-validation.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.security.rails-skip-validation/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.security.rails-skip-validation
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.security.rails-skip-validation/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []
