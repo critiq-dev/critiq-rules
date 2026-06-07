@@ -5,6 +5,8 @@ metadata:
   title: Avoid dynamic PHP code execution
   summary: >-
     Do not execute runtime-generated PHP via eval, string assert, or create_function.
+  aliases:
+    - PHP-A1000
   rationale: >-
     Dynamic execution turns untrusted or mutable input into executable code and expands injection risk.
   detection:

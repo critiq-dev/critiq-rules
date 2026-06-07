@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.switch-case-fallthrough.rule.yaml
+fixtures:
+  - name: flags switch-case-fallthrough
+    observationPath: ./fixtures/ts.correctness.switch-case-fallthrough/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.switch-case-fallthrough
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.switch-case-fallthrough/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

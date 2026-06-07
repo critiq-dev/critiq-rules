@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.regexp-empty-character-class
+  title: Empty character class in regular expression
+  summary: The regular expression pattern contains an empty character class that never matches.
+  rationale: Empty `[]` classes are almost always accidental and make patterns silently fail to match.
+  aliases:
+    - JS-0010
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-038
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.regexp-empty-character-class
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - language
+  message:
+    title: Remove or fix empty regex character classes
+    summary: "The pattern `${captures.issue.text}` includes `[]`, which matches nothing."
+  remediation:
+    summary: Add intended characters inside the class or remove the empty class from the pattern.

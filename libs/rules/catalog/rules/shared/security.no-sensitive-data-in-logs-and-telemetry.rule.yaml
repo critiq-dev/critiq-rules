@@ -4,6 +4,8 @@ metadata:
   id: security.no-sensitive-data-in-logs-and-telemetry
   title: Avoid sensitive data in logs and telemetry
   summary: Sensitive fields should not be sent to logging, tracing, or analytics sinks.
+  aliases:
+    - PHP-A1011
   rationale: Observability payloads often leave the service boundary and can expose secrets, account identifiers, or personal data if they carry raw request or user fields.
   detection:
     kind: pattern

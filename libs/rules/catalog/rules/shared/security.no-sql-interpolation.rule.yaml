@@ -4,6 +4,8 @@ metadata:
   id: security.no-sql-interpolation
   title: Avoid raw or interpolated SQL
   summary: Database query sinks must not receive request-driven or dynamically interpolated SQL text.
+  aliases:
+    - PHP-A1002
   rationale: Raw or interpolated SQL can let attackers control query structure when values are not passed separately.
   detection:
     kind: pattern

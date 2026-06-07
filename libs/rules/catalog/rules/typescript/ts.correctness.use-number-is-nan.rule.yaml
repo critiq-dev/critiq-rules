@@ -5,6 +5,8 @@ metadata:
   title: Use Number.isNaN for NaN checks
   summary: Do not compare values to NaN with `===` or `==`.
   rationale: NaN is not equal to itself; identity comparisons are always false.
+  aliases:
+    - JS-0027
   tags:
     - correctness
     - language

@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.reassign-function-declaration
+  title: Reassignment of function declaration
+  summary: A declared function name is later reassigned, which breaks hoisting expectations.
+  rationale: Rebinding function declarations obscures call targets and often hides logic errors during refactors.
+  aliases:
+    - JS-0015
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-039
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.reassign-function-declaration
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - language
+  message:
+    title: Do not reassign function declarations
+    summary: "`${captures.issue.text}` reassigns a function declaration binding."
+  remediation:
+    summary: Use a separate variable for the new function value or convert the declaration to a `const` arrow function.

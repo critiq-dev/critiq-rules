@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.break-continue-outside-loop
   title: Use break and continue only inside loops or switch
   summary: "break and continue outside a loop or switch block are invalid control flow."
+  aliases:
+    - PHP-W1027
   rationale: Misplaced break or continue statements usually indicate unfinished refactors or copy-paste errors.
   tags:
     - correctness

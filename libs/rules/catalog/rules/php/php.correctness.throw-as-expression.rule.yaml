@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.throw-as-expression
+  title: Throw expressions require PHP 8.0+
+  summary: Throw expressions require PHP 8.0+
+  rationale: Throw expressions require PHP 8.0+
+  aliases:
+    - PHP-W1017
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.throw-as-expression
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Throw expressions require PHP 8.0+
+    summary: "`${captures.issue.text}` matches php.correctness.throw-as-expression."
+  remediation:
+    summary: Throw expressions require PHP 8.0+

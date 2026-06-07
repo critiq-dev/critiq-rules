@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.unused-closure-use-variable
+  title: Closure use variables must be referenced
+  summary: Closure use variables must be referenced
+  rationale: Closure use variables must be referenced
+  aliases:
+    - PHP-W1039
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.unused-closure-use-variable
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Closure use variables must be referenced
+    summary: "`${captures.issue.text}` matches php.correctness.unused-closure-use-variable."
+  remediation:
+    summary: Closure use variables must be referenced

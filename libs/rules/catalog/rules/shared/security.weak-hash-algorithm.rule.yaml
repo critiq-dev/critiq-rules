@@ -4,6 +4,8 @@ metadata:
   id: security.weak-hash-algorithm
   title: Avoid weak hash algorithms
   summary: Cryptographic hashing should use modern, collision-resistant algorithms.
+  aliases:
+    - PHP-A1004
   rationale: Weak digests such as MD5 and SHA-1 are vulnerable to collisions and should not be used for security-sensitive hashing.
   detection:
     kind: pattern

@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.empty-array-literal-slot
   title: Remove empty slots from array literals
   summary: Array literals with consecutive commas define empty slots that are easy to miss during review.
+  aliases:
+    - PHP-W1001
   rationale: Empty array slots usually indicate typos or incomplete edits and can produce unexpected sparse arrays.
   tags:
     - correctness

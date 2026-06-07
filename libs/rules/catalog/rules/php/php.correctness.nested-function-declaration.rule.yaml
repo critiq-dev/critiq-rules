@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.nested-function-declaration
   title: Avoid nested function declarations
   summary: Declaring functions inside other functions is discouraged and hard to test.
+  aliases:
+    - PHP-W1023
   rationale: Nested functions create hidden scope and make code harder to reuse, mock, and reason about.
   tags:
     - correctness

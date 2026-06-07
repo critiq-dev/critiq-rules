@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "export function f(obj: object) { return obj.hasOwnProperty('x'); }\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-correctness.prototype-builtin-called-directly",
+          "kind": "language.prototype-builtin-called-directly",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 2
+          },
+          "text": "export function f(obj: object) { return obj.hasOwnProperty('x'); }",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

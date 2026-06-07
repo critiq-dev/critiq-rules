@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.trait-as-attribute
+  title: Traits cannot be used as attributes
+  summary: Traits cannot be used as attributes
+  rationale: Traits cannot be used as attributes
+  aliases:
+    - PHP-W1016
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.trait-as-attribute
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Traits cannot be used as attributes
+    summary: "`${captures.issue.text}` matches php.correctness.trait-as-attribute."
+  remediation:
+    summary: Traits cannot be used as attributes

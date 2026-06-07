@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.incomplete-arrow-function
+  title: Arrow functions require => body
+  summary: Arrow functions require => body
+  rationale: Arrow functions require => body
+  aliases:
+    - PHP-W1018
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.incomplete-arrow-function
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Arrow functions require => body
+    summary: "`${captures.issue.text}` matches php.correctness.incomplete-arrow-function."
+  remediation:
+    summary: Arrow functions require => body

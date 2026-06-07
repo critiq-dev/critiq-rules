@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "export const bad = /* switch-case-fallthrough */ 1;",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-language.switch-case-fallthrough",
+          "kind": "language.switch-case-fallthrough",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 51
+          },
+          "text": "export const bad = /* switch-case-fallthrough */ 1;",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.class-implements-non-interface
+  title: Classes can only implement interfaces
+  summary: Classes can only implement interfaces
+  rationale: Classes can only implement interfaces
+  aliases:
+    - PHP-W1008
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.class-implements-non-interface
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Classes can only implement interfaces
+    summary: "`${captures.issue.text}` matches php.correctness.class-implements-non-interface."
+  remediation:
+    summary: Classes can only implement interfaces

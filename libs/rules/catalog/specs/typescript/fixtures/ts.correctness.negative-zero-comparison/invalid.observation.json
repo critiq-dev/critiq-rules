@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "export const bad = /* negative-zero-comparison */ 1;",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-language.negative-zero-comparison",
+          "kind": "language.negative-zero-comparison",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 52
+          },
+          "text": "export const bad = /* negative-zero-comparison */ 1;",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

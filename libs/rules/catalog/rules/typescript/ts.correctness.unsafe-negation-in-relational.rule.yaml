@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.unsafe-negation-in-relational
+  title: Negated left operand in relational expression
+  summary: A relational or membership test applies unary `!` to the left operand instead of negating the whole comparison.
+  rationale: Expressions like `!key in object` parse as `(!key) in object`, which is usually not what authors intend.
+  aliases:
+    - JS-0019
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-042
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.unsafe-negation-in-relational
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - language
+  message:
+    title: Parenthesize negated relational comparisons
+    summary: "`${captures.issue.text}` negates only the left operand of a relational or membership operator."
+  remediation:
+    summary: Wrap the full comparison in parentheses, for example `!(left in right)` or `!(left instanceof Type)`.

@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.interface-extends-non-interface
+  title: Interfaces can only extend interfaces
+  summary: Interfaces can only extend interfaces
+  rationale: Interfaces can only extend interfaces
+  aliases:
+    - PHP-W1009
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.interface-extends-non-interface
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Interfaces can only extend interfaces
+    summary: "`${captures.issue.text}` matches php.correctness.interface-extends-non-interface."
+  remediation:
+    summary: Interfaces can only extend interfaces

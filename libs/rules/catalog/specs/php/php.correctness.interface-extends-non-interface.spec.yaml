@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.interface-extends-non-interface.rule.yaml
+fixtures:
+  - name: flags php.correctness.interface-extends-non-interface
+    sourcePath: ./fixtures/php.correctness.interface-extends-non-interface/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.interface-extends-non-interface
+  - name: ignores valid code for php.correctness.interface-extends-non-interface
+    sourcePath: ./fixtures/php.correctness.interface-extends-non-interface/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

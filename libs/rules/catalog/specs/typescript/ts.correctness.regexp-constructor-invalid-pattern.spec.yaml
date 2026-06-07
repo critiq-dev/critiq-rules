@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.regexp-constructor-invalid-pattern.rule.yaml
+fixtures:
+  - name: flags correctness.regexp constructor invalid pattern
+    observationPath: ./fixtures/ts.correctness.regexp-constructor-invalid-pattern/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.regexp-constructor-invalid-pattern
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.regexp-constructor-invalid-pattern/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

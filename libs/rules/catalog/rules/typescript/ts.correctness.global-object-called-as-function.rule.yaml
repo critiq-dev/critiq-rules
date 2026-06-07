@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.global-object-called-as-function
+  title: Global object invoked as a function
+  summary: A built-in namespace object such as `Math` or `JSON` is called like a function.
+  rationale: Global namespace objects are not constructors or callables; calling them throws or returns unexpected results.
+  aliases:
+    - JS-0020
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-043
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.global-object-called-as-function
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - language
+  message:
+    title: Do not call global namespace objects
+    summary: "`${captures.issue.text}` invokes a global namespace object as a function."
+  remediation:
+    summary: Call the intended static method on the namespace object instead of invoking the object itself.

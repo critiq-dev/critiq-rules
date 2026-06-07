@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-increment-operand
+  title: Increment or decrement only valid lvalues
+  summary: Increment or decrement only valid lvalues
+  rationale: Increment or decrement only valid lvalues
+  aliases:
+    - PHP-E1006
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-increment-operand
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Increment or decrement only valid lvalues
+    summary: "`${captures.issue.text}` matches php.correctness.invalid-increment-operand."
+  remediation:
+    summary: Increment or decrement only valid lvalues

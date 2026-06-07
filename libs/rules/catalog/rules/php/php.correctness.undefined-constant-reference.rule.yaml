@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.undefined-constant-reference
+  title: Reference only defined constants
+  summary: Reference only defined constants
+  rationale: Reference only defined constants
+  aliases:
+    - PHP-W1038
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.undefined-constant-reference
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Reference only defined constants
+    summary: "`${captures.issue.text}` matches php.correctness.undefined-constant-reference."
+  remediation:
+    summary: Reference only defined constants

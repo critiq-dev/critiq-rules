@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.error-suppression-operator
   title: Avoid the error suppression operator
   summary: The `@` operator hides warnings and errors instead of handling them explicitly.
+  aliases:
+    - PHP-W1078
   rationale: Suppressed failures make debugging harder and can mask security or data integrity issues.
   tags:
     - correctness

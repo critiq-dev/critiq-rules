@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.reassign-function-declaration.rule.yaml
+fixtures:
+  - name: flags correctness.reassign function declaration
+    observationPath: ./fixtures/ts.correctness.reassign-function-declaration/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.reassign-function-declaration
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.reassign-function-declaration/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

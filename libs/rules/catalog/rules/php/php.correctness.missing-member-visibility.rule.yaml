@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.missing-member-visibility
   title: Declare explicit member visibility
   summary: Class properties and methods should declare public, protected, or private visibility.
+  aliases:
+    - PHP-W1088
   rationale: Missing visibility relies on legacy defaults and makes class contracts harder to review.
   tags:
     - correctness

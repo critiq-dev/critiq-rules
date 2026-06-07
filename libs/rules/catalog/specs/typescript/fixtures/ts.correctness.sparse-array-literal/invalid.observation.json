@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "export const a = [1, , 3];\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-correctness.sparse-array-literal",
+          "kind": "language.sparse-array-literal",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 2
+          },
+          "text": "export const a = [1, , 3];",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

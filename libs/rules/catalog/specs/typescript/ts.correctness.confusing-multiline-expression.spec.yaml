@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.confusing-multiline-expression.rule.yaml
+fixtures:
+  - name: flags confusing-multiline-expression
+    observationPath: ./fixtures/ts.correctness.confusing-multiline-expression/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.confusing-multiline-expression
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.confusing-multiline-expression/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

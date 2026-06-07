@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.reassign-class-member
+  title: Reassigning class member
+  summary: Detects reassigning class member issues in JavaScript and TypeScript source.
+  rationale: Reassigning class member patterns are a common source of bugs and confusing runtime behavior.
+  aliases:
+    - JS-0228
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.reassign-class-member
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix reassigning class member
+    summary: "`${captures.issue.text}` matches ts.correctness.reassign-class-member."
+  remediation:
+    summary: Refactor the code to remove the reassigning class member pattern.

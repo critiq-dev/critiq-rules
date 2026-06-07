@@ -5,6 +5,8 @@ metadata:
   title: Avoid predictable or user-supplied session IDs
   summary: >-
     session_id must not be set from weak hash helpers, uniqid, or request-derived values.
+  aliases:
+    - PHP-A1008
   rationale: >-
     Predictable or attacker-controlled session identifiers enable fixation and session hijacking.
   detection:

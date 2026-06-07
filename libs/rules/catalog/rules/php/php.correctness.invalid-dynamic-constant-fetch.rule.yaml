@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-dynamic-constant-fetch
+  title: Avoid dynamic class constant fetch
+  summary: Avoid dynamic class constant fetch
+  rationale: Avoid dynamic class constant fetch
+  aliases:
+    - PHP-W1006
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-dynamic-constant-fetch
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Avoid dynamic class constant fetch
+    summary: "`${captures.issue.text}` matches php.correctness.invalid-dynamic-constant-fetch."
+  remediation:
+    summary: Avoid dynamic class constant fetch

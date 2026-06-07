@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.empty-destructuring-pattern
+  title: Empty destructuring pattern
+  summary: Detects empty destructuring pattern issues in JavaScript and TypeScript source.
+  rationale: Empty destructuring pattern patterns are a common source of bugs and confusing runtime behavior.
+  aliases:
+    - JS-0058
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.empty-destructuring-pattern
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix empty destructuring pattern
+    summary: "`${captures.issue.text}` matches ts.correctness.empty-destructuring-pattern."
+  remediation:
+    summary: Refactor the code to remove the empty destructuring pattern pattern.

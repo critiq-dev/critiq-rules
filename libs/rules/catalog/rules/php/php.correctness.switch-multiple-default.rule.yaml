@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.switch-multiple-default
   title: Use only one default case per switch
   summary: A switch statement must not declare more than one default branch.
+  aliases:
+    - PHP-E1114
   rationale: Multiple default cases are invalid PHP and indicate a copy-paste or merge mistake.
   tags:
     - correctness

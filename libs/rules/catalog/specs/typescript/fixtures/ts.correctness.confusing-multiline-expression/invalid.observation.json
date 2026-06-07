@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "export const bad = /* confusing-multiline-expression */ 1;",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-language.confusing-multiline-expression",
+          "kind": "language.confusing-multiline-expression",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 58
+          },
+          "text": "export const bad = /* confusing-multiline-expression */ 1;",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

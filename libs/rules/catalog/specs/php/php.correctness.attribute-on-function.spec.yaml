@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.attribute-on-function.rule.yaml
+fixtures:
+  - name: flags php.correctness.attribute-on-function
+    sourcePath: ./fixtures/php.correctness.attribute-on-function/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.attribute-on-function
+  - name: ignores valid code for php.correctness.attribute-on-function
+    sourcePath: ./fixtures/php.correctness.attribute-on-function/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

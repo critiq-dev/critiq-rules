@@ -5,6 +5,8 @@ metadata:
   title: Harden PHP XML parsing against external entities
   summary: >-
     XML parsing should disable external entities and avoid LIBXML_NOENT or libxml_disable_entity_loader(false).
+  aliases:
+    - PHP-A1010
   rationale: >-
     Unsafe XML parser configuration enables XXE attacks that can leak files and reach internal services.
   detection:

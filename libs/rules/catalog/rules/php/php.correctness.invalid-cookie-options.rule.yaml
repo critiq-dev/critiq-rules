@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.invalid-cookie-options
   title: Use valid cookie option keys
   summary: setcookie and setrawcookie option arrays only accept documented keys.
+  aliases:
+    - PHP-E1116
   rationale: Invalid cookie option keys are ignored at runtime and can leave security attributes unset.
   tags:
     - correctness

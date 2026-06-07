@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.switch-case-fallthrough
+  title: Switch case fallthrough
+  summary: Detects switch case fallthrough issues in JavaScript and TypeScript source.
+  rationale: Switch case fallthrough patterns are a common source of bugs and confusing runtime behavior.
+  aliases:
+    - JS-0064
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.switch-case-fallthrough
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix switch case fallthrough
+    summary: "`${captures.issue.text}` matches ts.correctness.switch-case-fallthrough."
+  remediation:
+    summary: Refactor the code to remove the switch case fallthrough pattern.

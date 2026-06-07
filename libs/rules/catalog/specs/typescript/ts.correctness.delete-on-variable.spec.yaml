@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.delete-on-variable.rule.yaml
+fixtures:
+  - name: flags delete-on-variable
+    observationPath: ./fixtures/ts.correctness.delete-on-variable/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.delete-on-variable
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.delete-on-variable/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

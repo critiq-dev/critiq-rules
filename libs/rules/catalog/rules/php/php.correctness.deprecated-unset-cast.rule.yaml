@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.deprecated-unset-cast
   title: Remove deprecated (unset) casts
   summary: "The `(unset)` cast is deprecated and should not be used in modern PHP code."
+  aliases:
+    - PHP-W1003
   rationale: Deprecated casts break on newer PHP versions and hide intent compared to explicit unset calls.
   tags:
     - correctness

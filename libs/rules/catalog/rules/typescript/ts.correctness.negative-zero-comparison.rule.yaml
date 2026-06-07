@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.negative-zero-comparison
+  title: Comparison with negative zero
+  summary: Detects comparison with negative zero issues in JavaScript and TypeScript source.
+  rationale: Comparison with negative zero patterns are a common source of bugs and confusing runtime behavior.
+  aliases:
+    - JS-0033
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.negative-zero-comparison
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix comparison with negative zero
+    summary: "`${captures.issue.text}` matches ts.correctness.negative-zero-comparison."
+  remediation:
+    summary: Refactor the code to remove the comparison with negative zero pattern.

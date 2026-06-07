@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.duplicate-declaration
   title: Remove duplicate declarations
   summary: Functions, classes, traits, and interfaces must be declared only once per file.
+  aliases:
+    - PHP-W1007
   rationale: Duplicate declarations cause fatal errors and usually indicate incomplete refactors or copy-paste mistakes.
   tags:
     - correctness

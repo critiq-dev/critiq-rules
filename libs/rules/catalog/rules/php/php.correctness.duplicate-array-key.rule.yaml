@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.duplicate-array-key
   title: Avoid duplicate keys in array literals
   summary: Repeated keys in an array literal overwrite earlier entries.
+  aliases:
+    - PHP-W1000
   rationale: Silent key replacement hides bugs and can invalidate intended configuration values.
   tags:
     - correctness

@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.function-comparison
   title: Avoid comparing function values
   summary: Comparing functions or callables with equality operators is unreliable.
+  aliases:
+    - PHP-W1089
   rationale: Function comparisons rarely express intent correctly and usually indicate a logic bug.
   tags:
     - correctness

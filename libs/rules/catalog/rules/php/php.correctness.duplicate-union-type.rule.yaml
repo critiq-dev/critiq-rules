@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.duplicate-union-type
+  title: Avoid duplicate types in union declarations
+  summary: Avoid duplicate types in union declarations
+  rationale: Avoid duplicate types in union declarations
+  aliases:
+    - PHP-T1005
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.duplicate-union-type
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Avoid duplicate types in union declarations
+    summary: "`${captures.issue.text}` matches php.correctness.duplicate-union-type."
+  remediation:
+    summary: Avoid duplicate types in union declarations

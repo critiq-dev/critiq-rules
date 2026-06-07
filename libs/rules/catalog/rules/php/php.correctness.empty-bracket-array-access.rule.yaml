@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.empty-bracket-array-access
   title: Avoid empty bracket array reads
   summary: "Reading from an array with `$value[]` appends null and returns the new element."
+  aliases:
+    - PHP-W1002
   rationale: Empty bracket reads are rarely intentional and usually indicate a mistaken append or missing index.
   tags:
     - correctness

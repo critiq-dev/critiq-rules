@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.trait-as-attribute.rule.yaml
+fixtures:
+  - name: flags php.correctness.trait-as-attribute
+    sourcePath: ./fixtures/php.correctness.trait-as-attribute/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.trait-as-attribute
+  - name: ignores valid code for php.correctness.trait-as-attribute
+    sourcePath: ./fixtures/php.correctness.trait-as-attribute/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

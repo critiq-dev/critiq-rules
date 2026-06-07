@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "export const bad = /* regexp-multicodepoint-character-class */ 1;",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-language.regexp-multicodepoint-character-class",
+          "kind": "language.regexp-multicodepoint-character-class",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 65
+          },
+          "text": "export const bad = /* regexp-multicodepoint-character-class */ 1;",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

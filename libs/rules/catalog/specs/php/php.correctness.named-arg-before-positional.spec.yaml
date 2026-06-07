@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.named-arg-before-positional.rule.yaml
+fixtures:
+  - name: flags php.correctness.named-arg-before-positional
+    sourcePath: ./fixtures/php.correctness.named-arg-before-positional/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.named-arg-before-positional
+  - name: ignores valid code for php.correctness.named-arg-before-positional
+    sourcePath: ./fixtures/php.correctness.named-arg-before-positional/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

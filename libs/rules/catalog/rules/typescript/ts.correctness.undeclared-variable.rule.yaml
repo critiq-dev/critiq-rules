@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.undeclared-variable
+  title: Undeclared variable reference
+  summary: Detects undeclared variable reference issues in JavaScript and TypeScript source.
+  rationale: Undeclared variable reference patterns are a common source of bugs and confusing runtime behavior.
+  aliases:
+    - JS-0125
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.undeclared-variable
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix undeclared variable reference
+    summary: "`${captures.issue.text}` matches ts.correctness.undeclared-variable."
+  remediation:
+    summary: Refactor the code to remove the undeclared variable reference pattern.

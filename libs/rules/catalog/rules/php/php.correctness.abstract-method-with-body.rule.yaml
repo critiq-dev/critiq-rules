@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.abstract-method-with-body
+  title: Abstract methods must not have a body
+  summary: Abstract methods must not have a body
+  rationale: Abstract methods must not have a body
+  aliases:
+    - PHP-E1118
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.abstract-method-with-body
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Abstract methods must not have a body
+    summary: "`${captures.issue.text}` matches php.correctness.abstract-method-with-body."
+  remediation:
+    summary: Abstract methods must not have a body

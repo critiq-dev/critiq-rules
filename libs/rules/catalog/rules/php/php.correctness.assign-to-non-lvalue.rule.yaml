@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.assign-to-non-lvalue
+  title: Assignment target must be an lvalue
+  summary: Assignment target must be an lvalue
+  rationale: Assignment target must be an lvalue
+  aliases:
+    - PHP-W1032
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.assign-to-non-lvalue
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Assignment target must be an lvalue
+    summary: "`${captures.issue.text}` matches php.correctness.assign-to-non-lvalue."
+  remediation:
+    summary: Assignment target must be an lvalue

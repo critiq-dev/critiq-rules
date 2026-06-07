@@ -1,0 +1,39 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.declaration-in-nested-block
+  title: Function or var declaration in nested block
+  summary: A `function` or `var` declaration appears inside a nested block instead of the enclosing scope top level.
+  rationale: Nested function and `var` declarations have confusing hoisting semantics and differ across engines in non-strict legacy code.
+  aliases:
+    - JS-0016
+    - JS-0073
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-040
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.declaration-in-nested-block
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Move declarations out of nested blocks
+    summary: "`${captures.issue.text}` declares a function or `var` inside a nested block."
+  remediation:
+    summary: Hoist the declaration to the module or function body top level, or use block-scoped `let`/`const` when appropriate.

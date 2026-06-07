@@ -132,6 +132,11 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.correctness.declaration-in-nested-block
+    rulePath: ./rules/typescript/ts.correctness.declaration-in-nested-block.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.correctness.duplicate-function-parameter
     rulePath: ./rules/typescript/ts.correctness.duplicate-function-parameter.rule.yaml
     presets:
@@ -197,6 +202,16 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.correctness.sparse-array-literal
+    rulePath: ./rules/typescript/ts.correctness.sparse-array-literal.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.global-object-called-as-function
+    rulePath: ./rules/typescript/ts.correctness.global-object-called-as-function.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.correctness.identical-comparison-operands
     rulePath: ./rules/typescript/ts.correctness.identical-comparison-operands.rule.yaml
     presets:
@@ -217,8 +232,28 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.correctness.prototype-builtin-called-directly
+    rulePath: ./rules/typescript/ts.correctness.prototype-builtin-called-directly.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.correctness.reassign-catch-binding
     rulePath: ./rules/typescript/ts.correctness.reassign-catch-binding.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.reassign-function-declaration
+    rulePath: ./rules/typescript/ts.correctness.reassign-function-declaration.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.regexp-constructor-invalid-pattern
+    rulePath: ./rules/typescript/ts.correctness.regexp-constructor-invalid-pattern.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.regexp-empty-character-class
+    rulePath: ./rules/typescript/ts.correctness.regexp-empty-character-class.rule.yaml
     presets:
       - recommended
       - strict
@@ -227,8 +262,113 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.correctness.unsafe-negation-in-relational
+    rulePath: ./rules/typescript/ts.correctness.unsafe-negation-in-relational.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.correctness.use-number-is-nan
     rulePath: ./rules/typescript/ts.correctness.use-number-is-nan.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.confusing-multiline-expression
+    rulePath: ./rules/typescript/ts.correctness.confusing-multiline-expression.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.negative-zero-comparison
+    rulePath: ./rules/typescript/ts.correctness.negative-zero-comparison.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.regexp-multicodepoint-character-class
+    rulePath: ./rules/typescript/ts.correctness.regexp-multicodepoint-character-class.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.setter-return-value
+    rulePath: ./rules/typescript/ts.correctness.setter-return-value.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.template-placeholder-in-string
+    rulePath: ./rules/typescript/ts.correctness.template-placeholder-in-string.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.regexp-useless-backreference
+    rulePath: ./rules/typescript/ts.correctness.regexp-useless-backreference.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.compound-assignment-with-await
+    rulePath: ./rules/typescript/ts.correctness.compound-assignment-with-await.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.invalid-variable-usage
+    rulePath: ./rules/typescript/ts.correctness.invalid-variable-usage.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.empty-destructuring-pattern
+    rulePath: ./rules/typescript/ts.correctness.empty-destructuring-pattern.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.switch-case-fallthrough
+    rulePath: ./rules/typescript/ts.correctness.switch-case-fallthrough.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.constructor-return-value
+    rulePath: ./rules/typescript/ts.correctness.constructor-return-value.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.restricted-object-property
+    rulePath: ./rules/typescript/ts.correctness.restricted-object-property.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.delete-on-variable
+    rulePath: ./rules/typescript/ts.correctness.delete-on-variable.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.restricted-global-variable
+    rulePath: ./rules/typescript/ts.correctness.restricted-global-variable.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.undeclared-variable
+    rulePath: ./rules/typescript/ts.correctness.undeclared-variable.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.unused-variable
+    rulePath: ./rules/typescript/ts.correctness.unused-variable.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.used-before-definition
+    rulePath: ./rules/typescript/ts.correctness.used-before-definition.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.reassign-class-member
+    rulePath: ./rules/typescript/ts.correctness.reassign-class-member.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.reassign-const-binding
+    rulePath: ./rules/typescript/ts.correctness.reassign-const-binding.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.duplicate-class-member
+    rulePath: ./rules/typescript/ts.correctness.duplicate-class-member.rule.yaml
     presets:
       - recommended
       - strict
@@ -603,6 +743,134 @@ rules:
       - strict
   - id: php.correctness.nested-switch
     rulePath: ./rules/php/php.correctness.nested-switch.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.psr-class-constant-naming
+    rulePath: ./rules/php/php.correctness.psr-class-constant-naming.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.psr-method-camel-case
+    rulePath: ./rules/php/php.correctness.psr-method-camel-case.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.trait-class-constant
+    rulePath: ./rules/php/php.correctness.trait-class-constant.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.abstract-method-with-body
+    rulePath: ./rules/php/php.correctness.abstract-method-with-body.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-increment-operand
+    rulePath: ./rules/php/php.correctness.invalid-increment-operand.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.duplicate-union-type
+    rulePath: ./rules/php/php.correctness.duplicate-union-type.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.nullable-mixed-type
+    rulePath: ./rules/php/php.correctness.nullable-mixed-type.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.attribute-on-class-constant
+    rulePath: ./rules/php/php.correctness.attribute-on-class-constant.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-dynamic-constant-fetch
+    rulePath: ./rules/php/php.correctness.invalid-dynamic-constant-fetch.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.class-implements-non-interface
+    rulePath: ./rules/php/php.correctness.class-implements-non-interface.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.interface-extends-non-interface
+    rulePath: ./rules/php/php.correctness.interface-extends-non-interface.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-extends-target
+    rulePath: ./rules/php/php.correctness.invalid-extends-target.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.instantiate-abstract-class
+    rulePath: ./rules/php/php.correctness.instantiate-abstract-class.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-constructor-promotion
+    rulePath: ./rules/php/php.correctness.invalid-constructor-promotion.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.trait-as-attribute
+    rulePath: ./rules/php/php.correctness.trait-as-attribute.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.throw-as-expression
+    rulePath: ./rules/php/php.correctness.throw-as-expression.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.incomplete-arrow-function
+    rulePath: ./rules/php/php.correctness.incomplete-arrow-function.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.attribute-on-closure
+    rulePath: ./rules/php/php.correctness.attribute-on-closure.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.attribute-on-function
+    rulePath: ./rules/php/php.correctness.attribute-on-function.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.assign-to-non-lvalue
+    rulePath: ./rules/php/php.correctness.assign-to-non-lvalue.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.undefined-constant-reference
+    rulePath: ./rules/php/php.correctness.undefined-constant-reference.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.unused-closure-use-variable
+    rulePath: ./rules/php/php.correctness.unused-closure-use-variable.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-isset-argument
+    rulePath: ./rules/php/php.correctness.invalid-isset-argument.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-type-cast
+    rulePath: ./rules/php/php.correctness.invalid-type-cast.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.void-match-arm
+    rulePath: ./rules/php/php.correctness.void-match-arm.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.unused-import
+    rulePath: ./rules/php/php.correctness.unused-import.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.redundant-final-method
+    rulePath: ./rules/php/php.correctness.redundant-final-method.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-return-typehint
+    rulePath: ./rules/php/php.correctness.invalid-return-typehint.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.named-arg-before-positional
+    rulePath: ./rules/php/php.correctness.named-arg-before-positional.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-arrow-function-typehint
+    rulePath: ./rules/php/php.correctness.invalid-arrow-function-typehint.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-closure-return-typehint
+    rulePath: ./rules/php/php.correctness.invalid-closure-return-typehint.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.interface-implements-keyword
+    rulePath: ./rules/php/php.correctness.interface-implements-keyword.rule.yaml
     presets:
       - strict
   - id: php.correctness.invalid-cookie-options

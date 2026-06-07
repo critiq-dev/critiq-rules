@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.regexp-empty-character-class.rule.yaml
+fixtures:
+  - name: flags correctness.regexp empty character class
+    observationPath: ./fixtures/ts.correctness.regexp-empty-character-class/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.regexp-empty-character-class
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.regexp-empty-character-class/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

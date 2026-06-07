@@ -5,6 +5,8 @@ metadata:
   title: Infinite Loop
   summary: Detect obvious infinite loops
   rationale: Detect obvious infinite loops:while (true) and for(;;) without break, return, or throw in the loop body.
+  aliases:
+    - JS-0092
   tags:
     - correctness
     - rules-catalog

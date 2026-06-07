@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "export const bad = /* setter-return-value */ 1;",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-language.setter-return-value",
+          "kind": "language.setter-return-value",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 47
+          },
+          "text": "export const bad = /* setter-return-value */ 1;",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

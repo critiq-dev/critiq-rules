@@ -5,6 +5,8 @@ metadata:
   title: Avoid include/require with user-controlled paths
   summary: >-
     Include and require statements must not load files from request-derived or tainted path values.
+  aliases:
+    - PHP-A1001
   rationale: >-
     User-controlled includes can load attacker-chosen PHP and lead to remote code execution.
   detection:

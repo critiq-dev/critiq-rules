@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.psr-method-camel-case.rule.yaml
+fixtures:
+  - name: flags php.correctness.psr-method-camel-case
+    sourcePath: ./fixtures/php.correctness.psr-method-camel-case/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.psr-method-camel-case
+  - name: ignores valid code for php.correctness.psr-method-camel-case
+    sourcePath: ./fixtures/php.correctness.psr-method-camel-case/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

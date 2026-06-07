@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-isset-argument
+  title: isset argument must be a variable reference
+  summary: isset argument must be a variable reference
+  rationale: isset argument must be a variable reference
+  aliases:
+    - PHP-W1040
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-isset-argument
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: isset argument must be a variable reference
+    summary: "`${captures.issue.text}` matches php.correctness.invalid-isset-argument."
+  remediation:
+    summary: isset argument must be a variable reference

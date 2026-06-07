@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.psr-class-constant-naming.rule.yaml
+fixtures:
+  - name: flags php.correctness.psr-class-constant-naming
+    sourcePath: ./fixtures/php.correctness.psr-class-constant-naming/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.psr-class-constant-naming
+  - name: ignores valid code for php.correctness.psr-class-constant-naming
+    sourcePath: ./fixtures/php.correctness.psr-class-constant-naming/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

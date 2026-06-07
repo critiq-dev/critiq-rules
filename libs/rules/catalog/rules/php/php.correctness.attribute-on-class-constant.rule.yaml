@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.attribute-on-class-constant
+  title: Attributes cannot target class constants
+  summary: Attributes cannot target class constants
+  rationale: Attributes cannot target class constants
+  aliases:
+    - PHP-W1005
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.attribute-on-class-constant
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Attributes cannot target class constants
+    summary: "`${captures.issue.text}` matches php.correctness.attribute-on-class-constant."
+  remediation:
+    summary: Attributes cannot target class constants

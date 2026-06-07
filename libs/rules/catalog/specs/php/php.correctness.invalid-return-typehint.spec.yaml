@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.invalid-return-typehint.rule.yaml
+fixtures:
+  - name: flags php.correctness.invalid-return-typehint
+    sourcePath: ./fixtures/php.correctness.invalid-return-typehint/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.invalid-return-typehint
+  - name: ignores valid code for php.correctness.invalid-return-typehint
+    sourcePath: ./fixtures/php.correctness.invalid-return-typehint/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

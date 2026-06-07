@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.sparse-array-literal
+  title: Sparse array literal
+  summary: An array literal contains empty slots that create a sparse array.
+  rationale: Sparse arrays have surprising iteration semantics and often indicate typos or incomplete edits.
+  aliases:
+    - JS-0023
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-045
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.sparse-array-literal
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Avoid sparse array literals
+    summary: "`${captures.issue.text}` creates an array with empty slots."
+  remediation:
+    summary: Fill missing entries explicitly or use a dense data structure when holes are not intentional.

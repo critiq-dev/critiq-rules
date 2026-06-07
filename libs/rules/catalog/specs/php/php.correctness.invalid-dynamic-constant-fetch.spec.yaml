@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.invalid-dynamic-constant-fetch.rule.yaml
+fixtures:
+  - name: flags php.correctness.invalid-dynamic-constant-fetch
+    sourcePath: ./fixtures/php.correctness.invalid-dynamic-constant-fetch/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.invalid-dynamic-constant-fetch
+  - name: ignores valid code for php.correctness.invalid-dynamic-constant-fetch
+    sourcePath: ./fixtures/php.correctness.invalid-dynamic-constant-fetch/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

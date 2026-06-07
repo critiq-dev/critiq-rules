@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.sparse-array-literal.rule.yaml
+fixtures:
+  - name: flags correctness.sparse array literal
+    observationPath: ./fixtures/ts.correctness.sparse-array-literal/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.sparse-array-literal
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.sparse-array-literal/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.used-before-definition.rule.yaml
+fixtures:
+  - name: flags used-before-definition
+    observationPath: ./fixtures/ts.correctness.used-before-definition/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.used-before-definition
+      allSeverities:
+        - high
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.used-before-definition/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

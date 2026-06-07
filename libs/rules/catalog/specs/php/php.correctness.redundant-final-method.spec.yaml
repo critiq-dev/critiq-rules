@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.redundant-final-method.rule.yaml
+fixtures:
+  - name: flags php.correctness.redundant-final-method
+    sourcePath: ./fixtures/php.correctness.redundant-final-method/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.redundant-final-method
+  - name: ignores valid code for php.correctness.redundant-final-method
+    sourcePath: ./fixtures/php.correctness.redundant-final-method/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

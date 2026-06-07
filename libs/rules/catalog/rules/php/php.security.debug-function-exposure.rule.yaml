@@ -5,6 +5,8 @@ metadata:
   title: Remove debug dump helpers from production PHP
   summary: >-
     var_dump, print_r, debug_zval_dump, and xdebug helpers should not ship in application code paths.
+  aliases:
+    - PHP-A1012
   rationale: >-
     Debug helpers can leak secrets, PII, and internal object state to logs or HTTP responses.
   detection:

@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.template-placeholder-in-string
+  title: Template placeholder in regular string
+  summary: Detects template placeholder in regular string issues in JavaScript and TypeScript source.
+  rationale: Template placeholder in regular string patterns are a common source of bugs and confusing runtime behavior.
+  aliases:
+    - JS-0038
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.template-placeholder-in-string
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix template placeholder in regular string
+    summary: "`${captures.issue.text}` matches ts.correctness.template-placeholder-in-string."
+  remediation:
+    summary: Refactor the code to remove the template placeholder in regular string pattern.

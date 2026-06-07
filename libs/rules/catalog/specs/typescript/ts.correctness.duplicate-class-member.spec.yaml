@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.duplicate-class-member.rule.yaml
+fixtures:
+  - name: flags duplicate-class-member
+    observationPath: ./fixtures/ts.correctness.duplicate-class-member/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.duplicate-class-member
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.duplicate-class-member/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "export const bad = /* template-placeholder-in-string */ 1;",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-language.template-placeholder-in-string",
+          "kind": "language.template-placeholder-in-string",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 58
+          },
+          "text": "export const bad = /* template-placeholder-in-string */ 1;",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

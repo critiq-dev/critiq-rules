@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.unreachable-after-return
   title: Remove unreachable statements after return or throw
   summary: Code after `return` or `throw` in the same block never runs.
+  aliases:
+    - PHP-W1074
   rationale: Unreachable statements usually indicate dead code, incomplete refactors, or missing control-flow fixes.
   tags:
     - correctness

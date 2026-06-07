@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.duplicate-class-member
+  title: Duplicate class member
+  summary: Detects duplicate class member issues in JavaScript and TypeScript source.
+  rationale: Duplicate class member patterns are a common source of bugs and confusing runtime behavior.
+  aliases:
+    - JS-0231
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.duplicate-class-member
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix duplicate class member
+    summary: "`${captures.issue.text}` matches ts.correctness.duplicate-class-member."
+  remediation:
+    summary: Refactor the code to remove the duplicate class member pattern.

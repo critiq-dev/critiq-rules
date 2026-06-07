@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.nullable-mixed-type
+  title: Nullable mixed type is not allowed
+  summary: Nullable mixed type is not allowed
+  rationale: Nullable mixed type is not allowed
+  aliases:
+    - PHP-T1006
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.nullable-mixed-type
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Nullable mixed type is not allowed
+    summary: "`${captures.issue.text}` matches php.correctness.nullable-mixed-type."
+  remediation:
+    summary: Nullable mixed type is not allowed

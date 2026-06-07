@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.unused-import
+  title: Remove unused import statements
+  summary: Remove unused import statements
+  rationale: Remove unused import statements
+  aliases:
+    - PHP-W1069
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.unused-import
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove unused import statements
+    summary: "`${captures.issue.text}` matches php.correctness.unused-import."
+  remediation:
+    summary: Remove unused import statements

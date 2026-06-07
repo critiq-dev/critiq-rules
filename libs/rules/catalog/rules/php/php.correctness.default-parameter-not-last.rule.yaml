@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.default-parameter-not-last
   title: Place default parameters last
   summary: Parameters with default values must appear after required parameters.
+  aliases:
+    - PHP-W1079
   rationale: Misordered defaults are invalid PHP and break callers that rely on positional arguments.
   tags:
     - correctness

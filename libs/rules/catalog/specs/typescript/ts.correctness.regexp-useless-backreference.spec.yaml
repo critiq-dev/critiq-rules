@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.regexp-useless-backreference.rule.yaml
+fixtures:
+  - name: flags regexp-useless-backreference
+    observationPath: ./fixtures/ts.correctness.regexp-useless-backreference/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.regexp-useless-backreference
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.regexp-useless-backreference/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

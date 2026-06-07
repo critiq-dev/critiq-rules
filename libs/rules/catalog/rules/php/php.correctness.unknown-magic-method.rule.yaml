@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.unknown-magic-method
   title: Use only supported magic methods
   summary: PHP recognizes a fixed set of double-underscore magic methods.
+  aliases:
+    - PHP-W1081
   rationale: Unknown magic methods are never invoked by the runtime and usually indicate typos or dead code.
   tags:
     - correctness

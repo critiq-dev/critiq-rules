@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.deprecated-libxml-entity-loader
   title: Remove deprecated libxml_disable_entity_loader calls
   summary: libxml_disable_entity_loader() is deprecated and no longer needed on supported PHP versions.
+  aliases:
+    - PHP-W1086
   rationale: The helper is deprecated and can give a false sense of protection compared to modern libxml defaults.
   tags:
     - correctness

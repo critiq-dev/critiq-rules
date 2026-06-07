@@ -1,0 +1,3 @@
+<?php
+#[Deprecated]
+function run() {}

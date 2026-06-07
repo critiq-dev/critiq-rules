@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-constructor-promotion
+  title: Invalid constructor property promotion
+  summary: Invalid constructor property promotion
+  rationale: Invalid constructor property promotion
+  aliases:
+    - PHP-W1013
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-constructor-promotion
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Invalid constructor property promotion
+    summary: "`${captures.issue.text}` matches php.correctness.invalid-constructor-promotion."
+  remediation:
+    summary: Invalid constructor property promotion

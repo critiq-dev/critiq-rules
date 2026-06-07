@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.empty-destructuring-pattern.rule.yaml
+fixtures:
+  - name: flags empty-destructuring-pattern
+    observationPath: ./fixtures/ts.correctness.empty-destructuring-pattern/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.empty-destructuring-pattern
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.empty-destructuring-pattern/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

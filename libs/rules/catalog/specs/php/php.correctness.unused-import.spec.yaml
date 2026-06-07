@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.unused-import.rule.yaml
+fixtures:
+  - name: flags php.correctness.unused-import
+    sourcePath: ./fixtures/php.correctness.unused-import/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.unused-import
+  - name: ignores valid code for php.correctness.unused-import
+    sourcePath: ./fixtures/php.correctness.unused-import/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

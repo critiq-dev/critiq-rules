@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.empty-code-block
   title: Remove empty code blocks
   summary: Empty control-flow blocks hide missing logic or unfinished branches.
+  aliases:
+    - PHP-W1085
   rationale: Empty blocks make intent unclear and often survive incomplete refactors.
   tags:
     - correctness

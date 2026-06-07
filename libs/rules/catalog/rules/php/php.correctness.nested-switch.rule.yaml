@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.nested-switch
   title: Avoid nested switch statements
   summary: Switch statements nested inside other switch statements are hard to follow.
+  aliases:
+    - PHP-W1091
   rationale: Nested switch blocks increase cognitive load and often hide missing decomposition or polymorphism.
   tags:
     - correctness

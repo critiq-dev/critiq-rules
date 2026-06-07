@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.regexp-constructor-invalid-pattern
+  title: Invalid pattern string in RegExp constructor
+  summary: A string literal passed to `RegExp` or `new RegExp` is not a valid regular expression.
+  rationale: Invalid constructor patterns throw at runtime and are easy to miss when the pattern is built from a static string.
+  aliases:
+    - JS-0017
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-041
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.regexp-constructor-invalid-pattern
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix the RegExp constructor pattern
+    summary: "The RegExp constructor is called with an invalid pattern literal near `${captures.issue.text}`."
+  remediation:
+    summary: Correct the pattern syntax or build the expression with a validated helper before constructing the RegExp.

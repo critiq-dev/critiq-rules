@@ -4,6 +4,9 @@ metadata:
   id: php.correctness.abstract-method-outside-abstract-class
   title: Keep abstract methods inside abstract classes
   summary: Only abstract classes may declare abstract methods.
+  aliases:
+    - PHP-E1115
+    - PHP-W1030
   rationale: Abstract methods in concrete classes cannot be implemented correctly and will fail at compile time.
   tags:
     - correctness

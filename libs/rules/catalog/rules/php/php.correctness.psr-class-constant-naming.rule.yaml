@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.psr-class-constant-naming
+  title: Use PSR-12 uppercase snake case for class constants
+  summary: Use PSR-12 uppercase snake case for class constants
+  rationale: Use PSR-12 uppercase snake case for class constants
+  aliases:
+    - PHP-C1000
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.psr-class-constant-naming
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Use PSR-12 uppercase snake case for class constants
+    summary: "`${captures.issue.text}` matches php.correctness.psr-class-constant-naming."
+  remediation:
+    summary: Use PSR-12 uppercase snake case for class constants

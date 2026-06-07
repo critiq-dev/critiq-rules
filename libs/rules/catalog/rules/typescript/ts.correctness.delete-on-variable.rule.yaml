@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.delete-on-variable
+  title: Delete operator on variable
+  summary: Detects delete operator on variable issues in JavaScript and TypeScript source.
+  rationale: Delete operator on variable patterns are a common source of bugs and confusing runtime behavior.
+  aliases:
+    - JS-0120
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.delete-on-variable
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix delete operator on variable
+    summary: "`${captures.issue.text}` matches ts.correctness.delete-on-variable."
+  remediation:
+    summary: Refactor the code to remove the delete operator on variable pattern.

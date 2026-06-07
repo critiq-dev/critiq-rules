@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.invalid-extends-target.rule.yaml
+fixtures:
+  - name: flags php.correctness.invalid-extends-target
+    sourcePath: ./fixtures/php.correctness.invalid-extends-target/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.invalid-extends-target
+  - name: ignores valid code for php.correctness.invalid-extends-target
+    sourcePath: ./fixtures/php.correctness.invalid-extends-target/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.useless-unset
   title: Remove useless unset calls
   summary: Calling unset on literals or non-variables has no effect.
+  aliases:
+    - PHP-W1036
   rationale: Useless unset calls add noise and suggest the author misunderstood PHP unset semantics.
   tags:
     - correctness

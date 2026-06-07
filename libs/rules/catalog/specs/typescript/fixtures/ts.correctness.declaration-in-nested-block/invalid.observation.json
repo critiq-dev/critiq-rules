@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "if (true) {\n  function nested() {}\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-correctness.declaration-in-nested-block",
+          "kind": "language.declaration-in-nested-block",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 2
+          },
+          "text": "if (true) {\n  function nested() {}\n}",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

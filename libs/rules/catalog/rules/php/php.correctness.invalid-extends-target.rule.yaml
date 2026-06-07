@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-extends-target
+  title: Invalid extends target for declaration
+  summary: Invalid extends target for declaration
+  rationale: Invalid extends target for declaration
+  aliases:
+    - PHP-W1010
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-extends-target
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Invalid extends target for declaration
+    summary: "`${captures.issue.text}` matches php.correctness.invalid-extends-target."
+  remediation:
+    summary: Invalid extends target for declaration

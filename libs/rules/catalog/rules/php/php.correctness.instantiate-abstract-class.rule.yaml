@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.instantiate-abstract-class
+  title: Do not instantiate abstract classes
+  summary: Do not instantiate abstract classes
+  rationale: Do not instantiate abstract classes
+  aliases:
+    - PHP-W1012
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.instantiate-abstract-class
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Do not instantiate abstract classes
+    summary: "`${captures.issue.text}` matches php.correctness.instantiate-abstract-class."
+  remediation:
+    summary: Do not instantiate abstract classes

@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.attribute-on-function
+  title: Attributes are not valid on functions
+  summary: Attributes are not valid on functions
+  rationale: Attributes are not valid on functions
+  aliases:
+    - PHP-W1022
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.attribute-on-function
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Attributes are not valid on functions
+    summary: "`${captures.issue.text}` matches php.correctness.attribute-on-function."
+  remediation:
+    summary: Attributes are not valid on functions

@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.trait-class-constant
+  title: Avoid class constants inside traits
+  summary: Avoid class constants inside traits
+  rationale: Avoid class constants inside traits
+  aliases:
+    - PHP-E1113
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.trait-class-constant
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Avoid class constants inside traits
+    summary: "`${captures.issue.text}` matches php.correctness.trait-class-constant."
+  remediation:
+    summary: Avoid class constants inside traits

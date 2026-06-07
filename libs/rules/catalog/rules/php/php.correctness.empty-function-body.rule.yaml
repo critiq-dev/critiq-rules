@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.empty-function-body
   title: Implement or remove empty functions
   summary: Non-abstract functions with empty bodies hide missing behavior.
+  aliases:
+    - PHP-W1080
   rationale: Empty function bodies often indicate stubs that were never completed or dead placeholders.
   tags:
     - correctness

@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-type-cast
+  title: Use valid PHP cast types
+  summary: Use valid PHP cast types
+  rationale: Use valid PHP cast types
+  aliases:
+    - PHP-W1042
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-type-cast
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Use valid PHP cast types
+    summary: "`${captures.issue.text}` matches php.correctness.invalid-type-cast."
+  remediation:
+    summary: Use valid PHP cast types

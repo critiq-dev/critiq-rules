@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.psr-method-camel-case
+  title: Use camelCase for class method names
+  summary: Use camelCase for class method names
+  rationale: Use camelCase for class method names
+  aliases:
+    - PHP-C1001
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.psr-method-camel-case
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Use camelCase for class method names
+    summary: "`${captures.issue.text}` matches php.correctness.psr-method-camel-case."
+  remediation:
+    summary: Use camelCase for class method names

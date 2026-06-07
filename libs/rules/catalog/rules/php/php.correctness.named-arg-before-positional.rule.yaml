@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.named-arg-before-positional
+  title: Positional arguments cannot follow named arguments
+  summary: Positional arguments cannot follow named arguments
+  rationale: Positional arguments cannot follow named arguments
+  aliases:
+    - PHP-W1020
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.named-arg-before-positional
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Positional arguments cannot follow named arguments
+    summary: "`${captures.issue.text}` matches php.correctness.named-arg-before-positional."
+  remediation:
+    summary: Positional arguments cannot follow named arguments

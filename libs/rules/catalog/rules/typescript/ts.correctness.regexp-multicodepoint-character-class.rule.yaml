@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.regexp-multicodepoint-character-class
+  title: Multi-code-point character in regex class
+  summary: Detects multi-code-point character in regex class issues in JavaScript and TypeScript source.
+  rationale: Multi-code-point character in regex class patterns are a common source of bugs and confusing runtime behavior.
+  aliases:
+    - JS-0036
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.regexp-multicodepoint-character-class
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix multi-code-point character in regex class
+    summary: "`${captures.issue.text}` matches ts.correctness.regexp-multicodepoint-character-class."
+  remediation:
+    summary: Refactor the code to remove the multi-code-point character in regex class pattern.

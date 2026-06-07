@@ -5,6 +5,8 @@ metadata:
   title: Invalid typeof comparison string
   summary: Compare typeof results only to known typeof strings.
   rationale: typeof returns a fixed set of strings; other comparisons are always false.
+  aliases:
+    - JS-0028
   tags:
     - correctness
     - language

@@ -4,6 +4,9 @@ metadata:
   id: php.correctness.nullsafe-returned-by-reference
   title: Do not return nullsafe access by reference
   summary: By-reference arrow functions cannot safely return nullsafe property access.
+  aliases:
+    - PHP-W1019
+    - PHP-W1026
   rationale: Nullsafe access may evaluate to null, which cannot be returned by reference and triggers runtime errors.
   tags:
     - correctness

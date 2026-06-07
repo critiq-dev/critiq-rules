@@ -5,6 +5,9 @@ metadata:
   title: Harden PHP session and cookie security flags
   summary: >-
     Session/cookie configuration should keep secure, httpOnly, and safe same-site posture for authenticated contexts.
+  aliases:
+    - PHP-A1003
+    - PHP-A1005
   rationale: >-
     Weak cookie/session flags increase theft and replay risk across XSS, mixed transport, and cross-site request contexts.
   detection:

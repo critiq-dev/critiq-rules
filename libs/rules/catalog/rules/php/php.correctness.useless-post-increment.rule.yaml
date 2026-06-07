@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.useless-post-increment
   title: Remove useless post-increment statements
   summary: Standalone post-increment statements with discarded results are usually mistakes.
+  aliases:
+    - PHP-W1090
   rationale: Post-increment statements that do not feed a larger expression often indicate dead or accidental code.
   tags:
     - correctness

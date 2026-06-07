@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.compound-assignment-with-await.rule.yaml
+fixtures:
+  - name: flags compound-assignment-with-await
+    observationPath: ./fixtures/ts.correctness.compound-assignment-with-await/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.compound-assignment-with-await
+      allSeverities:
+        - high
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.compound-assignment-with-await/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

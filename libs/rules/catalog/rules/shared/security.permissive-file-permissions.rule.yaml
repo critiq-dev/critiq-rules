@@ -4,6 +4,8 @@ metadata:
   id: security.permissive-file-permissions
   title: Avoid world-readable or world-writable file permissions
   summary: File creation and permission changes should not grant broad local access.
+  aliases:
+    - PHP-A1006
   rationale: Broad permissions expose application data to local users or processes that should not read or modify it.
   detection:
     kind: pattern

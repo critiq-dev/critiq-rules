@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.interface-implements-keyword
+  title: Interfaces cannot use implements
+  summary: Interfaces cannot use implements
+  rationale: Interfaces cannot use implements
+  aliases:
+    - PHP-W1008
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.interface-implements-keyword
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Interfaces cannot use implements
+    summary: "`${captures.issue.text}` matches php.correctness.interface-implements-keyword."
+  remediation:
+    summary: Interfaces cannot use implements

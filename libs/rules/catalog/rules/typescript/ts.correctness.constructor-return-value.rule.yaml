@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.constructor-return-value
+  title: Return value in constructor
+  summary: Detects return value in constructor issues in JavaScript and TypeScript source.
+  rationale: Return value in constructor patterns are a common source of bugs and confusing runtime behavior.
+  aliases:
+    - JS-0109
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.constructor-return-value
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Fix return value in constructor
+    summary: "`${captures.issue.text}` matches ts.correctness.constructor-return-value."
+  remediation:
+    summary: Refactor the code to remove the return value in constructor pattern.

@@ -5,6 +5,8 @@ metadata:
   title: Reject or throw non-Error values
   summary: Promise rejections and async throws should use Error objects.
   rationale: Non-Error rejections lose stack traces and are harder to handle consistently in async code.
+  aliases:
+    - JS-0114
   tags:
     - correctness
     - async

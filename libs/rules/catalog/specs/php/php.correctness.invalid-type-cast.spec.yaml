@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.invalid-type-cast.rule.yaml
+fixtures:
+  - name: flags php.correctness.invalid-type-cast
+    sourcePath: ./fixtures/php.correctness.invalid-type-cast/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.invalid-type-cast
+  - name: ignores valid code for php.correctness.invalid-type-cast
+    sourcePath: ./fixtures/php.correctness.invalid-type-cast/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

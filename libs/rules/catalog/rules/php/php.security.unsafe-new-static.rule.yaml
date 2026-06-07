@@ -4,6 +4,8 @@ metadata:
   id: php.security.unsafe-new-static
   title: Avoid unsafe new static() instantiation
   summary: "Using `new static()` can instantiate unexpected subclasses and weaken type guarantees."
+  aliases:
+    - PHP-W1014
   rationale: "Late static binding with `new static()` can bypass intended class boundaries and create objects outside expected inheritance chains."
   detection:
     kind: pattern

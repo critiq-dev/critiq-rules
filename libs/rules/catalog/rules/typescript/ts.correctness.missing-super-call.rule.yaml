@@ -5,6 +5,8 @@ metadata:
   title: Missing super() in subclass constructor
   summary: Subclass constructors must call super() before using this.
   rationale: Derived classes must initialize the base class; omitting super() is a runtime error when this is accessed.
+  aliases:
+    - JS-0226
   tags:
     - correctness
     - language

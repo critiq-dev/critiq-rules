@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "export const bad = /* restricted-object-property */ 1;",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-language.restricted-object-property",
+          "kind": "language.restricted-object-property",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 54
+          },
+          "text": "export const bad = /* restricted-object-property */ 1;",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

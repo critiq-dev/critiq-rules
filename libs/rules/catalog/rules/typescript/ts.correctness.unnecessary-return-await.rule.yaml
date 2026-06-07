@@ -5,6 +5,8 @@ metadata:
   title: Unnecessary Return Await
   summary: Remove redundant return await
   rationale: Remove redundant return await:return await in async functions outside try/catch adds stack overhead without changing behavior.
+  aliases:
+    - JS-0111
   tags:
     - correctness
     - rules-catalog

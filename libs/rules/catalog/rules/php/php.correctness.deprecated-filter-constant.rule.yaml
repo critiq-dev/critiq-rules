@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.deprecated-filter-constant
   title: Replace deprecated filter constants
   summary: Several FILTER_* constants are deprecated and should not be used in new code.
+  aliases:
+    - PHP-W1084
   rationale: Deprecated filter constants may be removed and can silently change sanitization behavior across PHP versions.
   tags:
     - correctness

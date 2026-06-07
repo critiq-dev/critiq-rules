@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.undeclared-variable.rule.yaml
+fixtures:
+  - name: flags undeclared-variable
+    observationPath: ./fixtures/ts.correctness.undeclared-variable/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.undeclared-variable
+      allSeverities:
+        - high
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.undeclared-variable/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

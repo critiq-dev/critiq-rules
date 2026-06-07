@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.negative-zero-comparison.rule.yaml
+fixtures:
+  - name: flags negative-zero-comparison
+    observationPath: ./fixtures/ts.correctness.negative-zero-comparison/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.negative-zero-comparison
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.negative-zero-comparison/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

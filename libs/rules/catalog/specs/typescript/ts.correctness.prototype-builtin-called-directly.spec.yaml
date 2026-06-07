@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.prototype-builtin-called-directly.rule.yaml
+fixtures:
+  - name: flags correctness.prototype builtin called directly
+    observationPath: ./fixtures/ts.correctness.prototype-builtin-called-directly/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.prototype-builtin-called-directly
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.prototype-builtin-called-directly/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.invalid-isset-argument.rule.yaml
+fixtures:
+  - name: flags php.correctness.invalid-isset-argument
+    sourcePath: ./fixtures/php.correctness.invalid-isset-argument/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.invalid-isset-argument
+  - name: ignores valid code for php.correctness.invalid-isset-argument
+    sourcePath: ./fixtures/php.correctness.invalid-isset-argument/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.reassign-const-binding.rule.yaml
+fixtures:
+  - name: flags reassign-const-binding
+    observationPath: ./fixtures/ts.correctness.reassign-const-binding/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.reassign-const-binding
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.reassign-const-binding/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

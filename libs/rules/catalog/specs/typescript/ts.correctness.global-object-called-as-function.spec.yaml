@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.global-object-called-as-function.rule.yaml
+fixtures:
+  - name: flags correctness.global object called as function
+    observationPath: ./fixtures/ts.correctness.global-object-called-as-function/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.global-object-called-as-function
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.global-object-called-as-function/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

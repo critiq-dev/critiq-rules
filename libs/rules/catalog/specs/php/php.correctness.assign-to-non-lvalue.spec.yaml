@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.assign-to-non-lvalue.rule.yaml
+fixtures:
+  - name: flags php.correctness.assign-to-non-lvalue
+    sourcePath: ./fixtures/php.correctness.assign-to-non-lvalue/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.assign-to-non-lvalue
+  - name: ignores valid code for php.correctness.assign-to-non-lvalue
+    sourcePath: ./fixtures/php.correctness.assign-to-non-lvalue/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

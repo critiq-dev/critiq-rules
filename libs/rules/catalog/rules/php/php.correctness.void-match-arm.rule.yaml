@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.void-match-arm
+  title: Match arms must return a value
+  summary: Match arms must return a value
+  rationale: Match arms must return a value
+  aliases:
+    - PHP-W1045
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.void-match-arm
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Match arms must return a value
+    summary: "`${captures.issue.text}` matches php.correctness.void-match-arm."
+  remediation:
+    summary: Match arms must return a value

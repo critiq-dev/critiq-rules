@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.unsafe-negation-in-relational.rule.yaml
+fixtures:
+  - name: flags correctness.unsafe negation in relational
+    observationPath: ./fixtures/ts.correctness.unsafe-negation-in-relational/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.unsafe-negation-in-relational
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.unsafe-negation-in-relational/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.declaration-in-nested-block.rule.yaml
+fixtures:
+  - name: flags correctness.declaration in nested block
+    observationPath: ./fixtures/ts.correctness.declaration-in-nested-block/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.declaration-in-nested-block
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.declaration-in-nested-block/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

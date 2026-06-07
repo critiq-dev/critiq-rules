@@ -1,0 +1,28 @@
+{
+  "path": "src/sample.ts",
+  "language": "typescript",
+  "text": "export const bad = /* restricted-global-variable */ 1;",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-language.restricted-global-variable",
+          "kind": "language.restricted-global-variable",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 54
+          },
+          "text": "export const bad = /* restricted-global-variable */ 1;",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.restricted-object-property.rule.yaml
+fixtures:
+  - name: flags restricted-object-property
+    observationPath: ./fixtures/ts.correctness.restricted-object-property/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.restricted-object-property
+      allSeverities:
+        - high
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.restricted-object-property/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

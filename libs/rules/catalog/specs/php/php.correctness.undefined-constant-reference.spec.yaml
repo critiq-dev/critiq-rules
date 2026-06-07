@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.undefined-constant-reference.rule.yaml
+fixtures:
+  - name: flags php.correctness.undefined-constant-reference
+    sourcePath: ./fixtures/php.correctness.undefined-constant-reference/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.undefined-constant-reference
+  - name: ignores valid code for php.correctness.undefined-constant-reference
+    sourcePath: ./fixtures/php.correctness.undefined-constant-reference/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

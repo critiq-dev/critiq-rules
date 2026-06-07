@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.nullable-mixed-type.rule.yaml
+fixtures:
+  - name: flags php.correctness.nullable-mixed-type
+    sourcePath: ./fixtures/php.correctness.nullable-mixed-type/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.nullable-mixed-type
+  - name: ignores valid code for php.correctness.nullable-mixed-type
+    sourcePath: ./fixtures/php.correctness.nullable-mixed-type/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

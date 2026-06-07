@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.prototype-builtin-called-directly
+  title: Object.prototype builtin called directly
+  summary: A method from `Object.prototype` is invoked directly on a receiver object.
+  rationale: Direct prototype calls break when objects null-prototype or shadow built-in methods; use `Object.hasOwn` or `Object.prototype.*.call` instead.
+  aliases:
+    - JS-0021
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-044
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.prototype-builtin-called-directly
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - language
+  message:
+    title: Avoid direct Object.prototype method calls
+    summary: "`${captures.issue.text}` calls an Object.prototype builtin on a dynamic receiver."
+  remediation:
+    summary: Prefer `Object.hasOwn(obj, key)` or `Object.prototype.hasOwnProperty.call(obj, key)` for prototype-safe checks.

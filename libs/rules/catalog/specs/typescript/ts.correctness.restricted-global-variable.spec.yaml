@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.restricted-global-variable.rule.yaml
+fixtures:
+  - name: flags restricted-global-variable
+    observationPath: ./fixtures/ts.correctness.restricted-global-variable/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.restricted-global-variable
+      allSeverities:
+        - medium
+  - name: allows clean sample
+    observationPath: ./fixtures/ts.correctness.restricted-global-variable/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

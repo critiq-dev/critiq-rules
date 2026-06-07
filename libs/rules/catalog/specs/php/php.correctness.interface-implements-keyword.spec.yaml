@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.interface-implements-keyword.rule.yaml
+fixtures:
+  - name: flags php.correctness.interface-implements-keyword
+    sourcePath: ./fixtures/php.correctness.interface-implements-keyword/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.interface-implements-keyword
+  - name: ignores valid code for php.correctness.interface-implements-keyword
+    sourcePath: ./fixtures/php.correctness.interface-implements-keyword/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

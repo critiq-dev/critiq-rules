@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.redundant-final-method
+  title: Final methods are redundant in final classes
+  summary: Final methods are redundant in final classes
+  rationale: Final methods are redundant in final classes
+  aliases:
+    - PHP-W1082
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.redundant-final-method
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - php
+  message:
+    title: Final methods are redundant in final classes
+    summary: "`${captures.issue.text}` matches php.correctness.redundant-final-method."
+  remediation:
+    summary: Final methods are redundant in final classes

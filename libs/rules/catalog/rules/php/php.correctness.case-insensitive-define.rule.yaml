@@ -4,6 +4,8 @@ metadata:
   id: php.correctness.case-insensitive-define
   title: Avoid case-insensitive define calls
   summary: The third argument to define() for case-insensitive constants is deprecated.
+  aliases:
+    - PHP-W1083
   rationale: Case-insensitive constants behave inconsistently across PHP versions and should be replaced with normal constants.
   tags:
     - correctness
