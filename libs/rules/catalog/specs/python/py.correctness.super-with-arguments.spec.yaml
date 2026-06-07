@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.correctness.super-with-arguments.rule.yaml
+fixtures:
+  - name: flags super() with arguments
+    sourcePath: ./fixtures/py.correctness.super-with-arguments/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.correctness.super-with-arguments
+  - name: accepts parameterless super()
+    sourcePath: ./fixtures/py.correctness.super-with-arguments/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

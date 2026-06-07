@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.hardcoded-temp-directory
+  aliases:
+    - BAN-B108
+  title: Avoid hardcoded temporary directory paths
+  summary: Temporary paths should use tempfile module instead of string literals
+  rationale: Hardcoded temporary directory paths can lead to predictable file locations, enabling symlink races, unauthorized access, and insecure file handling.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-377
+      title: Insecure Temporary File
+  tags:
+    - security
+    - python
+    - filesystem
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.hardcoded-temp-directory
+    bind: issue
+emit:
+  finding:
+    category: security.file
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - python
+      - filesystem
+  message:
+    title: Use tempfile module instead of `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a hardcoded temporary directory path."
+  remediation:
+    summary: Use `tempfile.mkdtemp()` or `tempfile.TemporaryDirectory()` to create secure, unpredictable temporary directories.

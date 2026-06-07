@@ -1,0 +1,1 @@
+context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)

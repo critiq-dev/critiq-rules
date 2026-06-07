@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.correctness.useless-return
+  aliases:
+    - PY-W0004
+  title: Avoid bare return at end of function body
+  summary: A bare return at the end of a function adds no value and should be removed
+  rationale: Bare return statements at the end of a function body are redundant as functions implicitly return None.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-398
+      title: Indicator of Poor Code Quality
+  tags:
+    - correctness
+    - python
+    - quality
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.correctness.useless-return
+    bind: issue
+emit:
+  finding:
+    category: correctness.source
+    severity: low
+    confidence: 0.95
+    tags:
+      - correctness
+      - python
+      - quality
+  message:
+    title: Remove useless return in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` contains a bare return at the end of a function body."
+  remediation:
+    summary: Remove the bare return statement as the function already returns None implicitly.

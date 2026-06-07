@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.correctness.global-statement.rule.yaml
+fixtures:
+  - name: flags global statement
+    sourcePath: ./fixtures/py.correctness.global-statement/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.correctness.global-statement
+  - name: accepts nonlocal
+    sourcePath: ./fixtures/py.correctness.global-statement/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.weak-hash-algorithm.rule.yaml
+fixtures:
+  - name: flags SHA-1 usage for session signing
+    sourcePath: ./fixtures/py.security.weak-hash-algorithm/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.weak-hash-algorithm
+  - name: accepts SHA-256 for session signing
+    sourcePath: ./fixtures/py.security.weak-hash-algorithm/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

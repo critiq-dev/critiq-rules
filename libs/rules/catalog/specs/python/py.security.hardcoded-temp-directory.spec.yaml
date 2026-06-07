@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.hardcoded-temp-directory.rule.yaml
+fixtures:
+  - name: flags hardcoded-temp-directory violation
+    sourcePath: ./fixtures/py.security.hardcoded-temp-directory/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.hardcoded-temp-directory
+  - name: accepts hardcoded-temp-directory compliant code
+    sourcePath: ./fixtures/py.security.hardcoded-temp-directory/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

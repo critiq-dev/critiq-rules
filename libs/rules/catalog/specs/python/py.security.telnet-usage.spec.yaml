@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.telnet-usage.rule.yaml
+fixtures:
+  - name: flags telnet-usage violation
+    sourcePath: ./fixtures/py.security.telnet-usage/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.telnet-usage
+  - name: accepts telnet-usage compliant code
+    sourcePath: ./fixtures/py.security.telnet-usage/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

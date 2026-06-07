@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.request-path-file-read.rule.yaml
+fixtures:
+  - name: flags file read with request-controlled path
+    sourcePath: ./fixtures/py.security.request-path-file-read/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.request-path-file-read
+  - name: accepts static file path
+    sourcePath: ./fixtures/py.security.request-path-file-read/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

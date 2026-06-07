@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.insecure-ssl-version
+  aliases:
+    - BAN-B507
+  title: Avoid insecure SSL/TLS protocol versions
+  summary: SSLv2, SSLv3, and TLSv1 are known to be vulnerable to protocol-level attacks
+  rationale: SSLv2, SSLv3, and early TLS versions have known vulnerabilities including POODLE, BEAST, and downgrade attacks. Only TLS 1.2 and TLS 1.3 should be used.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+  tags:
+    - security
+    - python
+    - transport
+    - ssl
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.insecure-ssl-version
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: high
+    confidence: 0.95
+    tags:
+      - security
+      - python
+      - transport
+      - ssl
+  message:
+    title: Upgrade SSL/TLS version in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses an insecure or deprecated SSL/TLS protocol version."
+  remediation:
+    summary: Use TLS 1.2 or higher (e.g. `ssl.PROTOCOL_TLSv1_2` or `ssl.PROTOCOL_TLS`). Prefer letting the library negotiate the highest available version.

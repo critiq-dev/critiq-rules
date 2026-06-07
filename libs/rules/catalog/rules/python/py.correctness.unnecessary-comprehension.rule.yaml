@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.correctness.unnecessary-comprehension
+  aliases:
+    - PY-W0005
+  title: Avoid unnecessary comprehension wrapped in list() or set()
+  summary: Wrapping a list comprehension in list() or set() is redundant and should be simplified
+  rationale: Python list comprehensions already produce a list, so wrapping them in list() performs unnecessary work. Use the comprehension directly or a generator expression.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-398
+      title: Indicator of Poor Code Quality
+  tags:
+    - correctness
+    - python
+    - quality
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.correctness.unnecessary-comprehension
+    bind: issue
+emit:
+  finding:
+    category: correctness.source
+    severity: low
+    confidence: 0.90
+    tags:
+      - correctness
+      - python
+      - quality
+  message:
+    title: Simplify unnecessary comprehension in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` wraps a comprehension in list() or set() unnecessarily."
+  remediation:
+    summary: Remove the list() or set() wrapper and use the comprehension directly, or use the underlying iterable if no transformation is needed.

@@ -1937,6 +1937,100 @@ rules:
     presets:
       - strict
       - security
+  - id: py.correctness.assert-outside-test
+    rulePath: ./rules/python/py.correctness.assert-outside-test.rule.yaml
+    presets:
+      - strict
+  - id: py.correctness.redefined-builtin
+    rulePath: ./rules/python/py.correctness.redefined-builtin.rule.yaml
+    presets:
+      - strict
+  - id: py.correctness.global-statement
+    rulePath: ./rules/python/py.correctness.global-statement.rule.yaml
+    presets:
+      - strict
+  - id: py.correctness.super-with-arguments
+    rulePath: ./rules/python/py.correctness.super-with-arguments.rule.yaml
+    presets:
+      - strict
+  - id: py.correctness.useless-return
+    rulePath: ./rules/python/py.correctness.useless-return.rule.yaml
+    presets:
+      - strict
+  - id: py.correctness.unnecessary-comprehension
+    rulePath: ./rules/python/py.correctness.unnecessary-comprehension.rule.yaml
+    presets:
+      - strict
+  - id: py.security.hardcoded-temp-directory
+    rulePath: ./rules/python/py.security.hardcoded-temp-directory.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.insecure-cipher
+    rulePath: ./rules/python/py.security.insecure-cipher.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.insecure-cipher-mode
+    rulePath: ./rules/python/py.security.insecure-cipher-mode.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.insecure-xml-parser
+    rulePath: ./rules/python/py.security.insecure-xml-parser.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.telnet-usage
+    rulePath: ./rules/python/py.security.telnet-usage.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.ftp-usage
+    rulePath: ./rules/python/py.security.ftp-usage.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.insecure-crypto-import
+    rulePath: ./rules/python/py.security.insecure-crypto-import.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.xmlrpc-import
+    rulePath: ./rules/python/py.security.xmlrpc-import.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.weak-crypto-key
+    rulePath: ./rules/python/py.security.weak-crypto-key.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.insecure-ssl-version
+    rulePath: ./rules/python/py.security.insecure-ssl-version.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.ssh-host-key-validation
+    rulePath: ./rules/python/py.security.ssh-host-key-validation.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.mako-insecure-templates
+    rulePath: ./rules/python/py.security.mako-insecure-templates.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.insecure-urllib-method
+    rulePath: ./rules/python/py.security.insecure-urllib-method.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.wildcard-subprocess-injection
+    rulePath: ./rules/python/py.security.wildcard-subprocess-injection.rule.yaml
+    presets:
+      - strict
+      - security
   - id: java.security.android-screenshot-exposure
     rulePath: ./rules/java/java.security.android-screenshot-exposure.rule.yaml
     presets:

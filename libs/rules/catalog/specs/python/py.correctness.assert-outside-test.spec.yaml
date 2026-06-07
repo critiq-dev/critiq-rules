@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.correctness.assert-outside-test.rule.yaml
+fixtures:
+  - name: flags assert-outside-test violation
+    sourcePath: ./fixtures/py.correctness.assert-outside-test/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.correctness.assert-outside-test
+  - name: accepts assert-outside-test compliant code
+    sourcePath: ./fixtures/py.correctness.assert-outside-test/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

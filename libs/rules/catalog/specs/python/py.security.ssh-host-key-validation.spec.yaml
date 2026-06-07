@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.ssh-host-key-validation.rule.yaml
+fixtures:
+  - name: flags ssh-host-key-validation violation
+    sourcePath: ./fixtures/py.security.ssh-host-key-validation/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.ssh-host-key-validation
+  - name: accepts ssh-host-key-validation compliant code
+    sourcePath: ./fixtures/py.security.ssh-host-key-validation/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

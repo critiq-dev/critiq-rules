@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.ftp-usage.rule.yaml
+fixtures:
+  - name: flags ftp-usage violation
+    sourcePath: ./fixtures/py.security.ftp-usage/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.ftp-usage
+  - name: accepts ftp-usage compliant code
+    sourcePath: ./fixtures/py.security.ftp-usage/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

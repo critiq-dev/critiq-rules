@@ -1,0 +1,57 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.weak-hash-algorithm
+  aliases:
+    - BAN-B303
+    - BAN-B324
+  title: Avoid weak cryptographic hash algorithms
+  summary: Python security-sensitive hashing should use SHA-256 or stronger, not MD5 or SHA-1.
+  rationale: SHA-1 and MD5 are collision-vulnerable and unsuitable for signatures, session tokens, or integrity checks in production services.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+    - kind: owasp
+      title: Cryptographic Storage Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
+  tags:
+    - security
+    - python
+    - crypto
+    - hashing
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: security.weak-hash-algorithm
+    bind: issue
+emit:
+  finding:
+    category: security.crypto
+    severity: medium
+    confidence: 0.95
+    tags:
+      - security
+      - python
+      - crypto
+      - hashing
+  message:
+    title: Replace weak hash in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a weak hash algorithm vulnerable to collision attacks."
+  remediation:
+    summary: Replace SHA-1 or MD5 with SHA-256 (or stronger). For password hashing, use `bcrypt`, `scrypt`, or `argon2`.

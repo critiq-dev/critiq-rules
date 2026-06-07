@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.unsafe-deserialization.rule.yaml
+fixtures:
+  - name: flags pickle.loads with untrusted data
+    sourcePath: ./fixtures/py.security.unsafe-deserialization/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.unsafe-deserialization
+  - name: accepts json.loads safe deserialization
+    sourcePath: ./fixtures/py.security.unsafe-deserialization/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

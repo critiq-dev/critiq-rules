@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.weak-crypto-key.rule.yaml
+fixtures:
+  - name: flags weak-crypto-key violation
+    sourcePath: ./fixtures/py.security.weak-crypto-key/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.weak-crypto-key
+  - name: accepts weak-crypto-key compliant code
+    sourcePath: ./fixtures/py.security.weak-crypto-key/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

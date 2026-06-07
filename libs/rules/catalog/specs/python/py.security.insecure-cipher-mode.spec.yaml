@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.insecure-cipher-mode.rule.yaml
+fixtures:
+  - name: flags insecure-cipher-mode violation
+    sourcePath: ./fixtures/py.security.insecure-cipher-mode/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.insecure-cipher-mode
+  - name: accepts insecure-cipher-mode compliant code
+    sourcePath: ./fixtures/py.security.insecure-cipher-mode/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

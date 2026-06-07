@@ -1,0 +1,56 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.insecure-http-transport
+  aliases:
+    - BAN-B107
+  title: Avoid cleartext HTTP for API calls
+  summary: Python outbound requests should use HTTPS, not plain HTTP, when calling external services.
+  rationale: Cleartext HTTP exposes request bodies, headers, and responses to eavesdropping and man-in-the-middle interception.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+    - kind: owasp
+      title: Transport Layer Protection Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html
+  tags:
+    - security
+    - python
+    - transport
+    - encryption
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: security.insecure-http-transport
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: high
+    confidence: 0.95
+    tags:
+      - security
+      - python
+      - transport
+      - encryption
+  message:
+    title: Use HTTPS in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` sends a request over cleartext HTTP instead of HTTPS."
+  remediation:
+    summary: Replace `http://` with `https://` for all outbound API calls. Use HTTPS for all service-to-service communication.

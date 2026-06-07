@@ -1,0 +1,56 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.request-path-file-read
+  aliases:
+    - BAN-B108
+  title: Avoid reading files using request-controlled paths
+  summary: Python file read operations should not consume request-controlled path segments.
+  rationale: Attacker-controlled file paths can traverse directories and read arbitrary files outside the intended root.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-22
+      title: Improper Limitation of a Pathname to a Restricted Directory
+    - kind: owasp
+      title: File Upload Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+  tags:
+    - security
+    - python
+    - filesystem
+    - path-traversal
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: security.request-path-file-read
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.90
+    tags:
+      - security
+      - python
+      - filesystem
+      - path-traversal
+  message:
+    title: Avoid request-controlled file path in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` reads a file using a request-controlled path, enabling path traversal."
+  remediation:
+    summary: Validate and sanitize user-supplied path segments. Use a allowlisted file map or restrict traversal outside the intended root directory.

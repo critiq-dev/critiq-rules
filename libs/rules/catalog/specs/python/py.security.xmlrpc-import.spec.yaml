@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.xmlrpc-import.rule.yaml
+fixtures:
+  - name: flags xmlrpc-import violation
+    sourcePath: ./fixtures/py.security.xmlrpc-import/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.xmlrpc-import
+  - name: accepts xmlrpc-import compliant code
+    sourcePath: ./fixtures/py.security.xmlrpc-import/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

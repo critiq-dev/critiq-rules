@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.mako-insecure-templates
+  aliases:
+    - BAN-B702
+  title: Avoid insecure Mako template configuration
+  summary: Mako templates with empty default_filters or disable_unicode=True are vulnerable to XSS
+  rationale: Mako templates configured without output filters (`default_filters=[]`) or with unicode escaping disabled (`disable_unicode=True`) render user-controlled data as raw HTML, enabling cross-site scripting (XSS) attacks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-79
+      title: Improper Neutralization of Input During Web Page Generation
+  tags:
+    - security
+    - python
+    - injection
+    - xss
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.mako-insecure-templates
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - python
+      - injection
+      - xss
+  message:
+    title: Add output filters to Mako template in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` configures a Mako template with insecure default filters."
+  remediation:
+    summary: Set `default_filters=['h']` to enable HTML escaping by default, or specify an explicit safe filter list per template.

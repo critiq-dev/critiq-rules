@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.wildcard-subprocess-injection.rule.yaml
+fixtures:
+  - name: flags wildcard-subprocess-injection violation
+    sourcePath: ./fixtures/py.security.wildcard-subprocess-injection/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.wildcard-subprocess-injection
+  - name: accepts wildcard-subprocess-injection compliant code
+    sourcePath: ./fixtures/py.security.wildcard-subprocess-injection/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

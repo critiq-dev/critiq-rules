@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.insecure-xml-parser.rule.yaml
+fixtures:
+  - name: flags insecure-xml-parser violation
+    sourcePath: ./fixtures/py.security.insecure-xml-parser/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.insecure-xml-parser
+  - name: accepts insecure-xml-parser compliant code
+    sourcePath: ./fixtures/py.security.insecure-xml-parser/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

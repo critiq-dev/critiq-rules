@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.ssh-host-key-validation
+  aliases:
+    - BAN-B507
+  title: Ensure SSH host key validation is enabled
+  summary: AutoAddPolicy disables SSH host key verification, enabling MITM attacks
+  rationale: Using `AutoAddPolicy` or `WarningPolicy` for SSH host key checking bypasses host key verification, allowing man-in-the-middle attackers to intercept SSH connections without detection.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-295
+      title: Improper Certificate Validation
+  tags:
+    - security
+    - python
+    - transport
+    - ssh
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.ssh-host-key-validation
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - python
+      - transport
+      - ssh
+  message:
+    title: Enable host key verification in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a host key policy that disables verification."
+  remediation:
+    summary: Use `RejectPolicy` or implement a custom host key verification callback. Only use `AutoAddPolicy` for first-connection trust-on-first-use (TOFU) with user confirmation.

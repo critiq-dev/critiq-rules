@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.ftp-usage
+  aliases:
+    - BAN-B321
+  title: Avoid cleartext FTP protocol
+  summary: FTP transmits credentials and data without encryption
+  rationale: FTP sends authentication credentials and file data in plaintext over the network, exposing sensitive information to interception and man-in-the-middle attacks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+  tags:
+    - security
+    - python
+    - transport
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.ftp-usage
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: high
+    confidence: 0.95
+    tags:
+      - security
+      - python
+      - transport
+  message:
+    title: Replace FTP with secure transport in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` imports or uses the insecure FTP protocol."
+  remediation:
+    summary: Use SFTP/SSH-based transport like `paramiko.Transport` or FTPS for encrypted file transfers.

@@ -1,0 +1,56 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.tls-verification-disabled
+  aliases:
+    - BAN-B501
+  title: Do not disable TLS certificate verification
+  summary: Python HTTPS clients should not set `verify=False`, which disables server certificate validation.
+  rationale: Disabling TLS verification exposes connections to man-in-the-middle attacks by accepting any certificate presented by the server.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-295
+      title: Improper Certificate Validation
+    - kind: owasp
+      title: Certificate Pinning Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Pinning_Cheat_Sheet.html
+  tags:
+    - security
+    - python
+    - transport
+    - tls
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: security.tls-verification-disabled
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: high
+    confidence: 0.95
+    tags:
+      - security
+      - python
+      - transport
+      - tls
+  message:
+    title: Enable TLS verification in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` disables TLS certificate verification with `verify=False`."
+  remediation:
+    summary: Remove `verify=False` or set `verify=True`. For internal dev environments, configure a trusted internal CA rather than disabling verification.

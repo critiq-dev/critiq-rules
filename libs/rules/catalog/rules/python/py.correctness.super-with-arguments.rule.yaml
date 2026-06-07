@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.correctness.super-with-arguments
+  aliases:
+    - PY-W0003
+  title: Use parameterless super() in Python 3
+  summary: Python 3 supports super() without arguments in class methods
+  rationale: Passing the class and self to super() is an older Python 2 pattern that is verbose and error-prone when refactoring class names.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-398
+      title: Indicator of Poor Code Quality
+  tags:
+    - correctness
+    - python
+    - quality
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.correctness.super-with-arguments
+    bind: issue
+emit:
+  finding:
+    category: correctness.source
+    severity: low
+    confidence: 0.95
+    tags:
+      - correctness
+      - python
+      - quality
+  message:
+    title: Use parameterless super() in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` passes class and self to super() unnecessarily."
+  remediation:
+    summary: Replace super(ClassName, self) with super() for cleaner, more maintainable Python 3 code.

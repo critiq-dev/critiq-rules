@@ -1,0 +1,56 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.command-execution-with-request-input
+  aliases:
+    - BAN-B603
+  title: Avoid command execution with request-controlled input
+  summary: Python process execution helpers must not receive request-controlled arguments.
+  rationale: Request-controlled process execution can become remote code execution when attackers choose the binary or influence shell parsing.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-78
+      title: OS Command Injection
+    - kind: owasp
+      title: OS Command Injection Defense Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
+  tags:
+    - security
+    - python
+    - injection
+    - command-execution
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: security.command-execution-with-request-input
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: critical
+    confidence: 0.90
+    tags:
+      - security
+      - python
+      - injection
+      - command-execution
+  message:
+    title: Avoid request-controlled command execution in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` executes a process using request-controlled command data."
+  remediation:
+    summary: Dispatch only allowlisted binaries, keep shell mode disabled, and validate or constrain subcommands before execution.

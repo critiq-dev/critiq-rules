@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.insecure-crypto-import
+  aliases:
+    - BAN-B413
+  title: Avoid low-level crypto library imports
+  summary: Low-level cryptography.hazmat and pycrypto imports bypass safer high-level APIs
+  rationale: Direct use of low-level cryptographic primitives from cryptography.hazmat or pycrypto bypasses safe defaults and requires expert knowledge to avoid subtle security flaws. High-level APIs like Fernet provide secure defaults.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+  tags:
+    - security
+    - python
+    - crypto
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.insecure-crypto-import
+    bind: issue
+emit:
+  finding:
+    category: security.crypto
+    severity: medium
+    confidence: 0.85
+    tags:
+      - security
+      - python
+      - crypto
+  message:
+    title: Prefer high-level crypto API over `${captures.issue.text}`
+    summary: "`${captures.issue.text}` imports a low-level cryptographic primitive directly."
+  remediation:
+    summary: Use high-level APIs like `cryptography.fernet.Fernet` for symmetric encryption or `cryptography.hazmat.primitives.asymmetric` through the recipes layer.

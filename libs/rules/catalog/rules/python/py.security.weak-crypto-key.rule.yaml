@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.weak-crypto-key
+  aliases:
+    - BAN-B505
+  title: Avoid weak cryptographic key sizes
+  summary: RSA/DSA keys below 3072 bits are insufficient for modern security
+  rationale: RSA and DSA keys smaller than 3072 bits can be factored with sufficient computational resources. NIST recommends at least 2048 bits for legacy compatibility and 3072 bits for new deployments.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-326
+      title: Inadequate Encryption Strength
+  tags:
+    - security
+    - python
+    - crypto
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.weak-crypto-key
+    bind: issue
+emit:
+  finding:
+    category: security.crypto
+    severity: high
+    confidence: 0.95
+    tags:
+      - security
+      - python
+      - crypto
+  message:
+    title: Increase key size in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` generates a cryptographic key with insufficient bit length."
+  remediation:
+    summary: Use at least 3072-bit RSA/DSA keys (e.g. `RSA.generate(4096)`) for production deployments.

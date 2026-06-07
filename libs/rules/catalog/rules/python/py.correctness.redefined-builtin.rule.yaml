@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.correctness.redefined-builtin
+  aliases:
+    - PY-W0001
+  title: Avoid redefining Python builtins
+  summary: Function definitions should not shadow builtin names like list, dict, str, or int
+  rationale: Shadowing builtins with function definitions can cause unexpected behavior and bugs in code that relies on standard Python functions.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-480
+      title: Use of Incorrect Operator
+  tags:
+    - correctness
+    - python
+    - quality
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.correctness.redefined-builtin
+    bind: issue
+emit:
+  finding:
+    category: correctness.source
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - python
+      - quality
+  message:
+    title: Function shadows builtin in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` defines a function that shadows a Python builtin name."
+  remediation:
+    summary: Rename the function to avoid shadowing standard library names like list, dict, str, etc.

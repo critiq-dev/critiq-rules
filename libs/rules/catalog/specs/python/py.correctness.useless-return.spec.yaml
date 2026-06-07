@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.correctness.useless-return.rule.yaml
+fixtures:
+  - name: flags useless return
+    sourcePath: ./fixtures/py.correctness.useless-return/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.correctness.useless-return
+  - name: accepts explicit return None
+    sourcePath: ./fixtures/py.correctness.useless-return/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

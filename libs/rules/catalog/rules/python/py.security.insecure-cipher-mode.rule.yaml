@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.insecure-cipher-mode
+  aliases:
+    - BAN-B305
+  title: Avoid ECB cipher mode
+  summary: ECB mode is deterministic and reveals patterns in plaintext
+  rationale: ECB (Electronic Codebook) mode encrypts identical plaintext blocks into identical ciphertext blocks, revealing data patterns. It should never be used for encrypting more than a single block.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+  tags:
+    - security
+    - python
+    - crypto
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.insecure-cipher-mode
+    bind: issue
+emit:
+  finding:
+    category: security.crypto
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - python
+      - crypto
+  message:
+    title: Replace ECB mode with authenticated encryption in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses ECB cipher mode which reveals plaintext patterns."
+  remediation:
+    summary: Use an authenticated encryption mode like GCM (e.g. `AES.MODE_GCM`) or CBC with HMAC.

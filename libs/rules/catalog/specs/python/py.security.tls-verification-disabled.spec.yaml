@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.tls-verification-disabled.rule.yaml
+fixtures:
+  - name: flags TLS verification disabled via verify=False
+    sourcePath: ./fixtures/py.security.tls-verification-disabled/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.tls-verification-disabled
+  - name: accepts TLS with verification enabled
+    sourcePath: ./fixtures/py.security.tls-verification-disabled/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

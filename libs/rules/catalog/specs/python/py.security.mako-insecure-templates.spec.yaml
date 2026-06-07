@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.mako-insecure-templates.rule.yaml
+fixtures:
+  - name: flags mako-insecure-templates violation
+    sourcePath: ./fixtures/py.security.mako-insecure-templates/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.mako-insecure-templates
+  - name: accepts mako-insecure-templates compliant code
+    sourcePath: ./fixtures/py.security.mako-insecure-templates/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

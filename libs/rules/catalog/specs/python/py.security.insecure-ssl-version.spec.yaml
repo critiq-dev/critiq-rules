@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.insecure-ssl-version.rule.yaml
+fixtures:
+  - name: flags insecure-ssl-version violation
+    sourcePath: ./fixtures/py.security.insecure-ssl-version/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.insecure-ssl-version
+  - name: accepts insecure-ssl-version compliant code
+    sourcePath: ./fixtures/py.security.insecure-ssl-version/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

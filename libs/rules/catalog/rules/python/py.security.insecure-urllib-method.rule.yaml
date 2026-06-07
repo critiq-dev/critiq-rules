@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.insecure-urllib-method
+  aliases:
+    - BAN-B309
+  title: Avoid insecure urllib URL fetching methods
+  summary: urllib.urlopen() and urlretrieve() do not validate TLS certificates by default
+  rationale: urllib functions like `urlopen()` and `urlretrieve()` do not perform proper TLS certificate validation by default, making HTTPS connections vulnerable to man-in-the-middle attacks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-319
+      title: Cleartext Transmission of Sensitive Information
+  tags:
+    - security
+    - python
+    - transport
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.insecure-urllib-method
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: medium
+    confidence: 0.9
+    tags:
+      - security
+      - python
+      - transport
+  message:
+    title: Replace urllib with requests in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses urllib functions with insecure defaults."
+  remediation:
+    summary: Use the `requests` library which performs TLS certificate validation by default. For urllib, explicitly configure an SSL context with certificate verification enabled.

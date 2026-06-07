@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.xmlrpc-import
+  aliases:
+    - BAN-B414
+  title: Avoid XML-RPC protocol usage
+  summary: XML-RPC uses XML serialization that is vulnerable to DTD attacks
+  rationale: XML-RPC relies on XML parsing which can be exploited through DTD-based attacks including entity expansion (billion laughs) and external entity injection. Modern RPC should use safer serialization formats.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-611
+      title: Improper Restriction of XML External Entity Reference
+  tags:
+    - security
+    - python
+    - transport
+    - xml
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.xmlrpc-import
+    bind: issue
+emit:
+  finding:
+    category: security.transport
+    severity: medium
+    confidence: 0.85
+    tags:
+      - security
+      - python
+      - transport
+      - xml
+  message:
+    title: Replace XML-RPC with safer transport in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` imports or uses XML-RPC which is vulnerable to XML attacks."
+  remediation:
+    summary: Use REST/JSON APIs with `requests` or gRPC/Protobuf for modern RPC communication.

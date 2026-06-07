@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.insecure-http-transport.rule.yaml
+fixtures:
+  - name: flags HTTP request to external API
+    sourcePath: ./fixtures/py.security.insecure-http-transport/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.insecure-http-transport
+  - name: accepts HTTPS request with timeout
+    sourcePath: ./fixtures/py.security.insecure-http-transport/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

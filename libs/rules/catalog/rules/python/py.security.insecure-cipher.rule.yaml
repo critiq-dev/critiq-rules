@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.insecure-cipher
+  aliases:
+    - BAN-B304
+  title: Avoid insecure cryptographic ciphers
+  summary: Weak ciphers like DES, ARC2, ARC4, and Blowfish should not be used
+  rationale: DES, ARC2, ARC4, and Blowfish are cryptographically weak algorithms that are susceptible to brute-force and known-plaintext attacks. Modern applications should use AES or other strong algorithms.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-327
+      title: Use of a Broken or Risky Cryptographic Algorithm
+  tags:
+    - security
+    - python
+    - crypto
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.insecure-cipher
+    bind: issue
+emit:
+  finding:
+    category: security.crypto
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - python
+      - crypto
+  message:
+    title: Replace weak cipher in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` imports or uses a cryptographically weak cipher."
+  remediation:
+    summary: Use AES (e.g. `from Crypto.Cipher import AES`) or another strong, modern cipher instead.

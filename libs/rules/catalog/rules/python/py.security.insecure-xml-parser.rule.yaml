@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.insecure-xml-parser
+  aliases:
+    - BAN-B409
+  title: Avoid insecure XML parsers
+  summary: Standard library XML parsers are vulnerable to XXE and entity expansion attacks
+  rationale: Python's standard library XML parsers (xml.etree, xml.dom, xml.sax) process external entities and DTDs by default, enabling XML External Entity (XXE) and billion laughs attacks.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-611
+      title: Improper Restriction of XML External Entity Reference
+  tags:
+    - security
+    - python
+    - injection
+    - xml
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.insecure-xml-parser
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - python
+      - injection
+      - xml
+  message:
+    title: Replace insecure XML parser in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a standard library XML parser vulnerable to XXE."
+  remediation:
+    summary: Use `defusedxml` (e.g. `from defusedxml.ElementTree import parse`) which disables external entity processing by default.

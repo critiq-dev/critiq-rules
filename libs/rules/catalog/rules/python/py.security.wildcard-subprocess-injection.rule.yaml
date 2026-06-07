@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.wildcard-subprocess-injection
+  aliases:
+    - BAN-B603
+  title: Avoid wildcard expansion in subprocess calls
+  summary: Shell wildcards in subprocess calls can be expanded unexpectedly, enabling injection
+  rationale: When `shell=True` is used in subprocess calls, shell wildcards (`*`, `?`, `[]`) are expanded by the shell. Combined with untrusted input, this can lead to command injection or unexpected file operations (e.g., `rm -rf /tmp/*` expanding to delete unintended files).
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-78
+      title: Improper Neutralization of Special Elements used in an OS Command
+  tags:
+    - security
+    - python
+    - injection
+    - subprocess
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.security.wildcard-subprocess-injection
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: high
+    confidence: 0.9
+    tags:
+      - security
+      - python
+      - injection
+      - subprocess
+  message:
+    title: Avoid shell wildcards in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses shell wildcards in a subprocess call with `shell=True`."
+  remediation:
+    summary: Pass arguments as a list instead of a shell string, and set `shell=False`. Use explicit file paths without wildcards (e.g., `subprocess.run(["rm", "-rf", "/tmp/tempfile"], shell=False)`).

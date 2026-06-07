@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.insecure-crypto-import.rule.yaml
+fixtures:
+  - name: flags insecure-crypto-import violation
+    sourcePath: ./fixtures/py.security.insecure-crypto-import/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.insecure-crypto-import
+  - name: accepts insecure-crypto-import compliant code
+    sourcePath: ./fixtures/py.security.insecure-crypto-import/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

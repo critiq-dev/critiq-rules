@@ -1,0 +1,56 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.unsafe-deserialization
+  aliases:
+    - BAN-B301
+  title: Avoid unsafe deserialization with pickle
+  summary: Python deserialization of untrusted data via `pickle` can enable arbitrary code execution.
+  rationale: pickle.loads on attacker-controlled input can execute arbitrary Python code, leading to full remote code execution.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-502
+      title: Deserialization of Untrusted Data
+    - kind: owasp
+      title: Deserialization Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html
+  tags:
+    - security
+    - python
+    - deserialization
+    - injection
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: security.unsafe-deserialization
+    bind: issue
+emit:
+  finding:
+    category: security.deserialization
+    severity: high
+    confidence: 0.92
+    tags:
+      - security
+      - python
+      - deserialization
+      - injection
+  message:
+    title: Replace unsafe deserialization in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` deserializes untrusted data via `pickle`, which can execute arbitrary code."
+  remediation:
+    summary: Use `json` or another safe serialization format for user-controlled input. Never unpickle untrusted data.

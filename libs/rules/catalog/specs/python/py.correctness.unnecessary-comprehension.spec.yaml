@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.correctness.unnecessary-comprehension.rule.yaml
+fixtures:
+  - name: flags unnecessary list comprehension wrapper
+    sourcePath: ./fixtures/py.correctness.unnecessary-comprehension/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.correctness.unnecessary-comprehension
+  - name: accepts direct list constructor
+    sourcePath: ./fixtures/py.correctness.unnecessary-comprehension/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

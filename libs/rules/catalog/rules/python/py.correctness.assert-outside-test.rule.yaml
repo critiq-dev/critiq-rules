@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.correctness.assert-outside-test
+  aliases:
+    - BAN-B502
+  title: Avoid assert statements in production code
+  summary: assert statements should only appear in test files
+  rationale: Assert statements are stripped when Python runs in optimized mode (-O), so they are not a reliable mechanism for production checks. Use explicit exceptions instead.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-1078
+      title: Inappropriate Use of Assert
+  tags:
+    - correctness
+    - python
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.correctness.assert-outside-test
+    bind: issue
+emit:
+  finding:
+    category: correctness.source
+    severity: low
+    confidence: 0.85
+    tags:
+      - correctness
+      - python
+  message:
+    title: Replace assert with explicit check in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses an assert statement outside of a test file."
+  remediation:
+    summary: Replace assert statements with explicit if/raise ValueError or appropriate runtime checks.

@@ -1,0 +1,5 @@
+DEBUG = False
+ALLOWED_HOSTS = ['example.com']
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+

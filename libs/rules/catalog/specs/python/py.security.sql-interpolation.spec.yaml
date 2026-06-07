@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.sql-interpolation.rule.yaml
+fixtures:
+  - name: flags SQL query with f-string interpolation
+    sourcePath: ./fixtures/py.security.sql-interpolation/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.sql-interpolation
+  - name: accepts parameterized query
+    sourcePath: ./fixtures/py.security.sql-interpolation/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

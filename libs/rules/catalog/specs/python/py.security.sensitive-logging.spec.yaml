@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.sensitive-logging.rule.yaml
+fixtures:
+  - name: flags sensitive data in log statement
+    sourcePath: ./fixtures/py.security.sensitive-logging/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.sensitive-logging
+  - name: accepts clean log statement
+    sourcePath: ./fixtures/py.security.sensitive-logging/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

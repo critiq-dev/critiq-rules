@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.security.command-execution-with-request-input.rule.yaml
+fixtures:
+  - name: flags subprocess with shell=True and unsanitized input
+    sourcePath: ./fixtures/py.security.command-execution-with-request-input/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.security.command-execution-with-request-input
+  - name: accepts subprocess with argument list
+    sourcePath: ./fixtures/py.security.command-execution-with-request-input/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []

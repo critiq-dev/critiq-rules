@@ -1,0 +1,56 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.sql-interpolation
+  aliases:
+    - BAN-B608
+  title: Avoid SQL query string interpolation
+  summary: Python SQL queries should not be built via f-string or string-formatting with user input.
+  rationale: String interpolation concatenates user data directly into SQL, enabling injection attacks that bypass parameterized safeguards.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-89
+      title: Improper Neutralization of Special Elements used in an SQL Command
+    - kind: owasp
+      title: SQL Injection Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+  tags:
+    - security
+    - python
+    - injection
+    - sql
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: security.sql-interpolation
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: critical
+    confidence: 0.90
+    tags:
+      - security
+      - python
+      - injection
+      - sql
+  message:
+    title: Use parameterized query instead of `${captures.issue.text}`
+    summary: "`${captures.issue.text}` builds a SQL query via string interpolation with user input."
+  remediation:
+    summary: Use parameterized queries with placeholders and bound arguments instead of f-string or format-based SQL construction.

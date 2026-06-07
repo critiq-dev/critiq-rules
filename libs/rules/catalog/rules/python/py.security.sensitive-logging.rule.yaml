@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.security.sensitive-logging
+  aliases:
+    - BAN-W101
+  title: Prevent sensitive data in Python log statements
+  summary: Python log statements should not include tokens, secrets, or personal data that could leak in log output.
+  rationale: Logs are often persisted and may have broader access than the source itself. Leaking secrets or personal data in logs violates compliance and security policies.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-532
+      title: Insertion of Sensitive Information into Log File
+  tags:
+    - security
+    - python
+    - logging
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: security.sensitive-data-in-logs-and-telemetry
+    bind: issue
+emit:
+  finding:
+    category: security.data
+    severity: medium
+    confidence: 0.85
+    tags:
+      - security
+      - python
+      - logging
+  message:
+    title: Sensitive data logged in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` may write sensitive data to logs."
+  remediation:
+    summary: Redact or remove secrets, tokens, and personal identifiers from log statements.

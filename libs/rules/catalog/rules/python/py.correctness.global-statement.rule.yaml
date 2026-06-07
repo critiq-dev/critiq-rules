@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: py.correctness.global-statement
+  aliases:
+    - PY-W0002
+  title: Avoid global statements in Python
+  summary: Using global variables is an anti-pattern that can lead to hard-to-debug side effects
+  rationale: Global state makes code harder to reason about, test, and parallelize. Prefer passing state explicitly or using class-based state management.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-562
+      title: Return of Stack Variable Address
+  tags:
+    - correctness
+    - python
+    - quality
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - python
+  paths:
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/migrations/**"
+match:
+  fact:
+    kind: python.correctness.global-statement
+    bind: issue
+emit:
+  finding:
+    category: correctness.source
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - python
+      - quality
+  message:
+    title: Global statement in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a global declaration for mutable state."
+  remediation:
+    summary: Refactor to pass state through function parameters or class instances instead of global variables.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/python/py.correctness.redefined-builtin.rule.yaml
+fixtures:
+  - name: flags redefined builtin function
+    sourcePath: ./fixtures/py.correctness.redefined-builtin/invalid.py
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - py.correctness.redefined-builtin
+  - name: accepts non-shadowing function name
+    sourcePath: ./fixtures/py.correctness.redefined-builtin/valid.py
+    expect:
+      findingCount: 0
+      allRuleIds: []
