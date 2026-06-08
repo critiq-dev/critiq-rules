@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.clone-on-double-reference
+  title: "Avoid `.clone()` on a double reference"
+  summary: "Calling `.clone()` on `&&T` clones the inner `&T`, not the underlying `T`."
+  rationale: >-
+    When iterating over `&collection` (a shared reference), the iteration
+    variable is a `&&T` — a reference to a reference. Calling `.clone()`
+    on such a value copies the inner reference `&T`, not the value `T`.
+    Dereference first to clone the actual value.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.clone-on-double-reference
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.78
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "`.clone()` on a double reference in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` clones `&T` instead of `T`. Dereference first to clone the value: `(*x).clone()`."
+  remediation:
+    summary: "Dereference the double reference before cloning: use `(*x).clone()` instead of `x.clone()`."

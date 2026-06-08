@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.iter-next-in-for-loop.rule.yaml
+fixtures:
+  - name: flags iter-next-in-for-loop
+    sourcePath: ./fixtures/rust.correctness.iter-next-in-for-loop/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.iter-next-in-for-loop
+  - name: accepts safe alternative for iter-next-in-for-loop
+    sourcePath: ./fixtures/rust.correctness.iter-next-in-for-loop/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.identical-binary-operands
+  title: "Binary operation with identical left and right operands"
+  summary: "Binary operation where both sides are identical, likely a copy-paste error."
+  rationale: >-
+    A binary operation with the same expression on both sides is almost always
+    a copy-paste error. For example, `a < b || a < b` should probably be
+    `a < b && b < a` or `a < b || b < c`.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.identical-binary-operands
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.8
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Binary operation with identical left and right operands"
+    summary: "'${captures.issue.text}' has identical expressions on both sides of the operator, likely a copy-paste error."
+  remediation:
+    summary: "Replace one side with the intended expression. If both sides are intentional, extract to a named variable."

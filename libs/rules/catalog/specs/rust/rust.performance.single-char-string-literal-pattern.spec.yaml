@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.performance.single-char-string-literal-pattern.rule.yaml
+fixtures:
+  - name: flags single-char string literal in find
+    sourcePath: ./fixtures/rust.performance.single-char-string-literal-pattern/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.performance.single-char-string-literal-pattern
+  - name: allows char literals and multi-char strings
+    sourcePath: ./fixtures/rust.performance.single-char-string-literal-pattern/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

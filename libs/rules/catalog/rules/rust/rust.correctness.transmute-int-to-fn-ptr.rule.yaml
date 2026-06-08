@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-int-to-fn-ptr
+  title: "Transmute between integer literal and fn ptr"
+  summary: "`transmute` used to convert an integer to a function pointer."
+  rationale: >-
+    Transmuting integers to function pointers creates invalid function pointers
+    that cause undefined behavior when called.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1027
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-int-to-fn-ptr
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Transmute between integer literal and fn ptr"
+    summary: "'${captures.issue.text}' transmutes an integer to a function pointer, which creates an invalid function pointer."
+  remediation:
+    summary: "If you need to store or retrieve function pointers from integers, use a lookup table or registry pattern instead of transmute."

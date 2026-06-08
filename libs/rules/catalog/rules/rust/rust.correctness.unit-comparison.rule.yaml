@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.unit-comparison
+  title: "Comparing unit values"
+  summary: "Comparing two block expressions that both return `()` is likely unintended."
+  rationale: >-
+    Block expressions that end with a semicolon return the unit type `()`.
+    Comparing two such blocks is always `true` (they are always equal to themselves)
+    and is probably the result of accidental semicolons.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1016
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.unit-comparison
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Comparing unit values"
+    summary: "'${captures.issue.text}' compares two block expressions that both return `()`. This is likely unintended."
+  remediation:
+    summary: "Remove the semicolons inside the block expressions if you meant to compare their last expression values."

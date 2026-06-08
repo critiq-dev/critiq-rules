@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.map-followed-by-count
+  title: "Avoid `.map()` followed by `.count()` without effect"
+  summary: "Calling `.map()` before `.count()` has no effect on the count result."
+  rationale: >-
+    The `.map()` iterator adapter transforms each element but does not
+    change the number of elements. Calling `.count()` immediately after
+    `.map()` wastes computation since the map transformation is discarded.
+    Use `.filter()` if conditional counting is intended, or remove `.map()`.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.map-followed-by-count
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.82
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "`.map()` followed by `.count()` is a no-op in `${captures.issue.text}`"
+    summary: "The `.map()` in `${captures.issue.text}` does not affect `.count()`. Use `.filter()` if the intent was conditional counting."
+  remediation:
+    summary: "Replace `.map(...).count()` with `.filter(...).count()` if conditional counting is intended, or remove `.map()` if only `.count()` is needed."

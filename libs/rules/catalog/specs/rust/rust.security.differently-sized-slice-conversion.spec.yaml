@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.differently-sized-slice-conversion.rule.yaml
+fixtures:
+  - name: flags differently sized slice conversion
+    sourcePath: ./fixtures/rust.security.differently-sized-slice-conversion/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.differently-sized-slice-conversion
+  - name: accepts safe conversion
+    sourcePath: ./fixtures/rust.security.differently-sized-slice-conversion/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

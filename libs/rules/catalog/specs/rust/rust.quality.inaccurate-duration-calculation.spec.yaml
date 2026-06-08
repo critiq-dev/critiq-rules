@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.inaccurate-duration-calculation.rule.yaml
+fixtures:
+  - name: flags subsec_micros() / 1_000
+    sourcePath: ./fixtures/rust.quality.inaccurate-duration-calculation/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.inaccurate-duration-calculation
+  - name: accepts subsec_millis() direct call
+    sourcePath: ./fixtures/rust.quality.inaccurate-duration-calculation/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

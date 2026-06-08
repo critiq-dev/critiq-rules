@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.potentially-incomplete-ascii-range.rule.yaml
+fixtures:
+  - name: flags exclusive ASCII range
+    sourcePath: ./fixtures/rust.quality.potentially-incomplete-ascii-range/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.potentially-incomplete-ascii-range
+  - name: accepts inclusive range
+    sourcePath: ./fixtures/rust.quality.potentially-incomplete-ascii-range/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

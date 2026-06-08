@@ -1,0 +1,13 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.non-octal-permissions.rule.yaml
+fixtures:
+  - name: flags non-octal permission values
+    sourcePath: ./fixtures/rust.correctness.non-octal-permissions/invalid.rs
+    expect:
+      findingCount: 2
+  - name: accepts octal permission values
+    sourcePath: ./fixtures/rust.correctness.non-octal-permissions/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

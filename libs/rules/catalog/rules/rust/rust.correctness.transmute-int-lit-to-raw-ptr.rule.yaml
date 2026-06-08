@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-int-lit-to-raw-ptr
+  title: "Transmute between literal and raw pointer"
+  summary: "`transmute` used to convert an integer literal to a raw pointer."
+  rationale: >-
+    Transmuting integer literals to raw pointers creates dangling or invalid pointers
+    that defeat Rust's safety guarantees.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1028
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-int-lit-to-raw-ptr
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Transmute between literal and raw pointer"
+    summary: "'${captures.issue.text}' transmutes an integer literal to a raw pointer, creating an invalid pointer."
+  remediation:
+    summary: "Use `ptr::from_exposed_addr` or `ptr::with_exposed_provenance` for legitimate conversions, or avoid pointer-from-integer patterns entirely."

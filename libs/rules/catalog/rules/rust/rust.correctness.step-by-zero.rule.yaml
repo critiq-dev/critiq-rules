@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.step-by-zero
+  title: "`.step_by(0)` will always panic"
+  summary: "Calling `.step_by(0)` on an iterator panics when the iterator is consumed."
+  rationale: >-
+    The `step_by` method requires a non-zero step. Passing zero causes a runtime
+    panic when the iterator is consumed. This is a guaranteed runtime error.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.step-by-zero
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.95
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "`.step_by(0)` will always panic"
+    summary: "'${captures.issue.text}' calls `step_by(0)` which panics when the iterator is consumed."
+  remediation:
+    summary: "Use a non-zero step value. If zero is intentional, use `std::iter::empty()` or `continue` instead."

@@ -1,0 +1,61 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.actix-namedfile-path-traversal
+  title: Potential path traversal via actix::NamedFile::open
+  summary: >-
+    Using `actix_web::files::NamedFile::open` or `actix_files::NamedFile::open` with
+    an unsanitized user-controlled path can lead to directory traversal.
+  rationale: >-
+    When `NamedFile::open` is called with a path derived from user input without
+    proper validation, an attacker can access files outside the intended directory
+    by including `../` sequences or absolute paths.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-22
+      title: Improper Limitation of a Pathname to a Restricted Directory (Path Traversal)
+    - kind: url
+      title: CWE-22
+      url: https://cwe.mitre.org/data/definitions/22.html
+  tags:
+    - security
+    - rust
+    - path-traversal
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1014
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.actix-namedfile-path-traversal
+    bind: issue
+emit:
+  finding:
+    category: security.path-traversal
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - path-traversal
+  message:
+    title: Path traversal risk in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` may allow directory traversal via user-controlled path."
+  remediation:
+    summary: >-
+      Validate and sanitize the path before passing it to `NamedFile::open`.
+      Reject paths containing `../` or absolute paths if they are not expected.
+      Use a whitelist of allowed filenames or base paths.

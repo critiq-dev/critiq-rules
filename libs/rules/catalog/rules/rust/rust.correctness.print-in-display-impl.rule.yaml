@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.print-in-display-impl
+  title: "print! in Display implementation"
+  summary: "`print!` or `println!` used inside a `Display` implementation."
+  rationale: >-
+    Calling `print!`/`println!` inside `Display::fmt` writes directly to stdout and
+    bypasses the formatter. The correct API is `write!(f, ...)`.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1034
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.print-in-display-impl
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.90
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "print! in Display implementation"
+    summary: "'${captures.issue.text}' calls `print!`/`println!` inside a `Display` implementation. This writes to stdout instead of the formatter."
+  remediation:
+    summary: "Replace `print!`/`println!` with `write!(f, ...)` or `writeln!(f, ...)` to write to the formatter."

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.global-write-permission.rule.yaml
+fixtures:
+  - name: flags world-writable permissions
+    sourcePath: ./fixtures/rust.security.global-write-permission/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.global-write-permission
+  - name: accepts restrictive permissions
+    sourcePath: ./fixtures/rust.security.global-write-permission/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

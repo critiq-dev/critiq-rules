@@ -970,6 +970,106 @@ rules:
     rulePath: ./rules/rust/rust.correctness.unchecked-index.rule.yaml
     presets:
       - strict
+  - id: rust.correctness.syntax-error
+    rulePath: ./rules/rust/rust.correctness.syntax-error.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.self-not-self-type
+    rulePath: ./rules/rust/rust.correctness.self-not-self-type.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.invalid-regex-literal
+    rulePath: ./rules/rust/rust.correctness.invalid-regex-literal.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.step-by-zero
+    rulePath: ./rules/rust/rust.correctness.step-by-zero.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.iter-next-in-for-loop
+    rulePath: ./rules/rust/rust.correctness.iter-next-in-for-loop.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.empty-range-expression
+    rulePath: ./rules/rust/rust.correctness.empty-range-expression.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.erasing-operation
+    rulePath: ./rules/rust/rust.correctness.erasing-operation.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.identical-binary-operands
+    rulePath: ./rules/rust/rust.correctness.identical-binary-operands.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.ignored-future-value
+    rulePath: ./rules/rust/rust.correctness.ignored-future-value.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.mistyped-suffix
+    rulePath: ./rules/rust/rust.correctness.mistyped-suffix.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.forget-drop-on-reference
+    rulePath: ./rules/rust/rust.correctness.forget-drop-on-reference.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.forget-drop-on-copy-type
+    rulePath: ./rules/rust/rust.correctness.forget-drop-on-copy-type.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.nan-comparison
+    rulePath: ./rules/rust/rust.correctness.nan-comparison.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.non-octal-permissions
+    rulePath: ./rules/rust/rust.correctness.non-octal-permissions.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.non-binding-let-on-lock
+    rulePath: ./rules/rust/rust.correctness.non-binding-let-on-lock.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.unit-argument
+    rulePath: ./rules/rust/rust.correctness.unit-argument.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.unit-comparison
+    rulePath: ./rules/rust/rust.correctness.unit-comparison.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.transmute-integer-to-nonzero
+    rulePath: ./rules/rust/rust.correctness.transmute-integer-to-nonzero.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.transmute-int-to-fn-ptr
+    rulePath: ./rules/rust/rust.correctness.transmute-int-to-fn-ptr.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.transmute-int-lit-to-raw-ptr
+    rulePath: ./rules/rust/rust.correctness.transmute-int-lit-to-raw-ptr.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.transmute-float-char-to-ref-or-ptr
+    rulePath: ./rules/rust/rust.correctness.transmute-float-char-to-ref-or-ptr.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.transmute-integer-to-char
+    rulePath: ./rules/rust/rust.correctness.transmute-integer-to-char.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.transmute-number-to-slice-or-array
+    rulePath: ./rules/rust/rust.correctness.transmute-number-to-slice-or-array.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.transmute-tuple-to-slice-or-array
+    rulePath: ./rules/rust/rust.correctness.transmute-tuple-to-slice-or-array.rule.yaml
+    presets:
+      - strict
+  - id: rust.correctness.print-in-display-impl
+    rulePath: ./rules/rust/rust.correctness.print-in-display-impl.rule.yaml
+    presets:
+      - strict
   - id: rust.performance.no-regex-construction-in-loop
     rulePath: ./rules/rust/rust.performance.no-regex-construction-in-loop.rule.yaml
     presets:
@@ -980,6 +1080,42 @@ rules:
       - strict
   - id: rust.performance.no-unbounded-concurrency
     rulePath: ./rules/rust/rust.performance.no-unbounded-concurrency.rule.yaml
+    presets:
+      - strict
+  - id: rust.performance.single-char-string-literal-pattern
+    rulePath: ./rules/rust/rust.performance.single-char-string-literal-pattern.rule.yaml
+    presets:
+      - strict
+  - id: rust.quality.potentially-incomplete-ascii-range
+    rulePath: ./rules/rust/rust.quality.potentially-incomplete-ascii-range.rule.yaml
+    presets:
+      - strict
+  - id: rust.quality.inaccurate-duration-calculation
+    rulePath: ./rules/rust/rust.quality.inaccurate-duration-calculation.rule.yaml
+    presets:
+      - strict
+  - id: rust.quality.map-followed-by-count
+    rulePath: ./rules/rust/rust.quality.map-followed-by-count.rule.yaml
+    presets:
+      - strict
+  - id: rust.quality.iter-nth-instead-of-get
+    rulePath: ./rules/rust/rust.quality.iter-nth-instead-of-get.rule.yaml
+    presets:
+      - strict
+  - id: rust.quality.iter-count-instead-of-len
+    rulePath: ./rules/rust/rust.quality.iter-count-instead-of-len.rule.yaml
+    presets:
+      - strict
+  - id: rust.quality.replace-same-pattern-and-replacement
+    rulePath: ./rules/rust/rust.quality.replace-same-pattern-and-replacement.rule.yaml
+    presets:
+      - strict
+  - id: rust.quality.clone-on-double-reference
+    rulePath: ./rules/rust/rust.quality.clone-on-double-reference.rule.yaml
+    presets:
+      - strict
+  - id: rust.quality.non-owned-rc-pointer-into-vec
+    rulePath: ./rules/rust/rust.quality.non-owned-rc-pointer-into-vec.rule.yaml
     presets:
       - strict
   - id: ts.react.no-cascaded-effect-fetches
@@ -2031,6 +2167,51 @@ rules:
     presets:
       - strict
       - security
+  - id: py.security.command-execution-with-request-input
+    rulePath: ./rules/python/py.security.command-execution-with-request-input.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.hardcoded-credentials
+    rulePath: ./rules/python/py.security.hardcoded-credentials.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.insecure-http-transport
+    rulePath: ./rules/python/py.security.insecure-http-transport.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.request-path-file-read
+    rulePath: ./rules/python/py.security.request-path-file-read.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.sensitive-logging
+    rulePath: ./rules/python/py.security.sensitive-logging.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.sql-interpolation
+    rulePath: ./rules/python/py.security.sql-interpolation.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.tls-verification-disabled
+    rulePath: ./rules/python/py.security.tls-verification-disabled.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.unsafe-deserialization
+    rulePath: ./rules/python/py.security.unsafe-deserialization.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: py.security.weak-hash-algorithm
+    rulePath: ./rules/python/py.security.weak-hash-algorithm.rule.yaml
+    presets:
+      - strict
+      - security
   - id: java.security.android-screenshot-exposure
     rulePath: ./rules/java/java.security.android-screenshot-exposure.rule.yaml
     presets:
@@ -2425,6 +2606,46 @@ rules:
       - security
   - id: rust.security.weak-tls-cipher
     rulePath: ./rules/rust/rust.security.weak-tls-cipher.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.open-redirect
+    rulePath: ./rules/rust/rust.security.open-redirect.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.invisible-unicode
+    rulePath: ./rules/rust/rust.security.invisible-unicode.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.const-to-mut-ptr
+    rulePath: ./rules/rust/rust.security.const-to-mut-ptr.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.raw-slice-to-ptr
+    rulePath: ./rules/rust/rust.security.raw-slice-to-ptr.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.differently-sized-slice-conversion
+    rulePath: ./rules/rust/rust.security.differently-sized-slice-conversion.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.actix-namedfile-path-traversal
+    rulePath: ./rules/rust/rust.security.actix-namedfile-path-traversal.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.potentially-vulnerable-regex
+    rulePath: ./rules/rust/rust.security.potentially-vulnerable-regex.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.global-write-permission
+    rulePath: ./rules/rust/rust.security.global-write-permission.rule.yaml
     presets:
       - strict
       - security

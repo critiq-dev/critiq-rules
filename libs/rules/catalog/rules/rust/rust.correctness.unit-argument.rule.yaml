@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.unit-argument
+  title: "Potential unit value passed as function argument"
+  summary: "A value from a method that returns `()` may be unintentionally passed as a function argument."
+  rationale: >-
+    Methods like `Vec::extend`, `Vec::push`, and `HashMap::insert` return the
+    unit type `()`. If the result is bound with `let` and then passed to a
+    function, the function receives `()` instead of the expected collection.
+    Detection is best-effort and may produce false positives.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1015
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.unit-argument
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.7
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Potential unit value passed as function argument"
+    summary: "'${captures.issue.text}' may pass a unit `()` value as a function argument."
+  remediation:
+    summary: "If intentional, extract the function call into a separate statement and pass `()` explicitly. Otherwise, decouple the mutation from the `let` binding."

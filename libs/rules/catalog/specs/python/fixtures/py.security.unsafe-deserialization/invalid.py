@@ -1,4 +1,5 @@
+from flask import request
 import pickle
 
-payload = b"cos\nsystem\n(S'ls'\ntR."
+payload = request.args.get("data")
 config = pickle.loads(payload)

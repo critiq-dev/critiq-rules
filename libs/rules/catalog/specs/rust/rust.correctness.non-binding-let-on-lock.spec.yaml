@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.non-binding-let-on-lock.rule.yaml
+fixtures:
+  - name: flags non-binding let on lock
+    sourcePath: ./fixtures/rust.correctness.non-binding-let-on-lock/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.non-binding-let-on-lock
+  - name: accepts named binding on lock
+    sourcePath: ./fixtures/rust.correctness.non-binding-let-on-lock/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

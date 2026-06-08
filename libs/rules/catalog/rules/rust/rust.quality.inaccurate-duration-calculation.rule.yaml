@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.inaccurate-duration-calculation
+  title: "Use Duration subsec methods instead of manual division"
+  summary: "Manual division of `subsec_micros()` or `subsec_nanos()` can be inaccurate."
+  rationale: >-
+    Calling `subsec_micros() / 1_000` instead of `subsec_millis()` or
+    `subsec_nanos() / 1_000` instead of `subsec_micros()` introduces
+    unnecessary integer division that may lose precision. Use the dedicated
+    methods provided by the standard library.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.inaccurate-duration-calculation
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Use built-in subsec method instead of `${captures.issue.text}`"
+    summary: "Manual division `${captures.issue.text}` may produce inaccurate results. Use `subsec_millis()` or `subsec_micros()` directly."
+  remediation:
+    summary: "Replace `subsec_micros() / 1_000` with `subsec_millis()`, and `subsec_nanos() / 1_000` with `subsec_micros()`."

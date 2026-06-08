@@ -19,7 +19,7 @@ metadata:
     - logging
     - rules-catalog
   stability: stable
-  appliesTo: block
+  appliesTo: function
 scope:
   languages:
     - python

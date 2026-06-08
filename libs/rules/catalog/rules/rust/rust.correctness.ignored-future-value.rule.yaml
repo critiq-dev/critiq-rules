@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.ignored-future-value
+  title: Do not drop futures without awaiting
+  summary: An async function was called without awaiting or storing its returned Future.
+  rationale: >-
+    Calling an async function from a synchronous context without `.await`ing,
+    assigning, or returning the produced `Future` drops it immediately without
+    execution. The intended side-effects or computation never happen.
+  tags:
+    - correctness
+    - rust
+    - concurrency
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1035
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.ignored-future-value
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+      - concurrency
+  message:
+    title: Dropped future — await or store the result
+    summary: "'${captures.issue.text}' calls an async function without awaiting or storing its result. The future is dropped and never executes."
+  remediation:
+    summary: >-
+      Await the future with `.await`, store it in a variable, return it, or
+      spawn it onto a runtime with `tokio::spawn`.

@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.mistyped-suffix
+  title: "Possibly mistyped integer suffix"
+  summary: "Integer literal suffix like `_32` or `_64` may be a typo for `_u32` or `_i64`."
+  rationale: >-
+    Integer literals ending with plain numeric suffixes like `_32` or `_64`
+    are likely typos for the Rust type suffixes `_u32`, `_i32`, `_u64`, or `_i64`.
+    The compiler interprets these as part of the numeric literal, not as a type annotation,
+    which may produce unexpected integer types.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1009
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.mistyped-suffix
+    bind: issue
+emit:
+  finding:
+    category: correctness.typographic
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Possibly mistyped integer suffix"
+    summary: "'${captures.issue.text}' may be a typo for a Rust type suffix such as `_u32` or `_i64`."
+  remediation:
+    summary: "Replace numeric suffix with the appropriate Rust integer type suffix (e.g. `_u32`, `_i64`)."

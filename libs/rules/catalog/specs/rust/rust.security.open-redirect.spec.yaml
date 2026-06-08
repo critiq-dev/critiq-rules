@@ -1,0 +1,14 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.open-redirect.rule.yaml
+fixtures:
+  - name: reports finding with user-controlled redirect
+    sourcePath: ./fixtures/rust.security.open-redirect/invalid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: accepts safe redirect
+    sourcePath: ./fixtures/rust.security.open-redirect/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

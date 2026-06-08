@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.iter-next-in-for-loop
+  title: "For loop over `.next()` iterates `Option`, not the iterator"
+  summary: "Iterating over `.next()` in a for loop iterates over the Option result, not the remaining iterator elements."
+  rationale: >-
+    Calling `.next()` inside a `for` loop expression iterates over the `Option<T>`
+    returned by `.next()`, not over the remaining elements of the original iterator.
+    This means the loop body executes at most once (or zero times if the iterator is empty).
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.iter-next-in-for-loop
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "For loop over `.next()` iterates `Option`, not the iterator"
+    summary: "'${captures.issue.text}' iterates over the `Option` returned by `.next()` instead of the remaining iterator elements."
+  remediation:
+    summary: "Use `.skip(1)` to skip the first element, or call `.next()` separately before the loop."

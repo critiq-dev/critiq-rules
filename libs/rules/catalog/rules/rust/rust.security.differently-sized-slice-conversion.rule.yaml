@@ -1,0 +1,61 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.differently-sized-slice-conversion
+  title: Conversion between differently sized raw slices
+  summary: >-
+    Casting between raw slices of different element sizes can produce out-of-bounds
+    access and memory corruption.
+  rationale: >-
+    Converting a `*const [T1]` to `*const [T2]` where `T1` and `T2` have different
+    sizes changes how memory is interpreted. When the target type is smaller, reads
+    extend beyond the original allocation; when it is larger, reads underflow.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-704
+      title: Incorrect Type Conversion or Cast
+    - kind: url
+      title: CWE-704
+      url: https://cwe.mitre.org/data/definitions/704.html
+  tags:
+    - security
+    - rust
+    - unsafe-code
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1013
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.differently-sized-slice-conversion
+    bind: issue
+emit:
+  finding:
+    category: security.unsafe-code
+    severity: high
+    confidence: 0.80
+    tags:
+      - security
+      - rust
+      - unsafe-code
+  message:
+    title: Differently sized slice conversion in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` casts between slices of different element sizes."
+  remediation:
+    summary: >-
+      Avoid casting between slices of different element sizes. If conversion
+      is necessary, use safe methods like `copy_from_slice` or cast element by
+      element with explicit bounds checking.

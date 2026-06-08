@@ -1,0 +1,64 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.open-redirect
+  title: Open redirect from possibly tainted source
+  summary: >-
+    URLs returned from redirect helpers that include user-controlled input may
+    enable open redirect attacks, bypassing domain validation.
+  rationale: >-
+    An open redirect vulnerability occurs when user input flows into a redirect
+    destination without validation, allowing attackers to craft URLs that redirect
+    users to malicious sites.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-601
+      title: URL Redirection to Untrusted Site (Open Redirect)
+    - kind: url
+      title: CWE-601
+      url: https://cwe.mitre.org/data/definitions/601.html
+    - kind: owasp
+      title: OWASP Open Redirect
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html
+  tags:
+    - security
+    - rust
+    - url-redirection
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1009
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+      - "**/benches/**"
+match:
+  fact:
+    kind: rust.security.open-redirect
+    bind: issue
+emit:
+  finding:
+    category: security.url-redirection
+    severity: high
+    confidence: 0.80
+    tags:
+      - security
+      - rust
+      - url-redirection
+  message:
+    title: Open redirect detected in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` may redirect users to an attacker-controlled destination."
+  remediation:
+    summary: >-
+      Validate and sanitize user-controlled redirect targets. Use a whitelist of
+      allowed destinations or apply URL validation before returning a redirect response.

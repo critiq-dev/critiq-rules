@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.empty-range-expression
+  title: "Empty range expression with start greater than end"
+  summary: "Range expression where start > end, producing an empty range or runtime panic."
+  rationale: >-
+    A range expression with a start value greater than the end value creates an
+    empty range that iterates zero times. For slice indexing, `&arr[3..0]` will
+    panic at runtime. This is almost always a logic error.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.empty-range-expression
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Empty range expression with start greater than end"
+    summary: "'${captures.issue.text}' creates a range where start is greater than end, producing zero iterations or a slice panic."
+  remediation:
+    summary: "Swap the range bounds, or use `.rev()` to iterate in reverse."

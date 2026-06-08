@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.potentially-vulnerable-regex.rule.yaml
+fixtures:
+  - name: flags regex with nested quantifiers
+    sourcePath: ./fixtures/rust.security.potentially-vulnerable-regex/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.potentially-vulnerable-regex
+  - name: accepts safe regex pattern
+    sourcePath: ./fixtures/rust.security.potentially-vulnerable-regex/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

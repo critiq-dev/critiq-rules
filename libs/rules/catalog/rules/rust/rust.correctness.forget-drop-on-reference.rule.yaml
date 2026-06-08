@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.forget-drop-on-reference
+  title: "Called `mem::forget` or `mem::drop` on a reference"
+  summary: "`mem::forget` / `mem::drop` on a reference drops only the reference, not the underlying value."
+  rationale: >-
+    Calling `std::mem::forget` or `std::mem::drop` on a reference forgets
+    (or drops) the reference itself, which effectively does nothing.
+    The underlying referenced value remains unaffected.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1010
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.forget-drop-on-reference
+    bind: issue
+emit:
+  finding:
+    category: correctness.memory
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Called `mem::forget` or `mem::drop` on a reference"
+    summary: "'${captures.issue.text}' calls forget/drop on a reference. The underlying value is not affected."
+  remediation:
+    summary: "If you meant to forget/drop the value, remove the `&` reference operator."

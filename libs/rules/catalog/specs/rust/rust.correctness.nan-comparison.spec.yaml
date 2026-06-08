@@ -1,0 +1,13 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.nan-comparison.rule.yaml
+fixtures:
+  - name: flags NaN comparison
+    sourcePath: ./fixtures/rust.correctness.nan-comparison/invalid.rs
+    expect:
+      findingCount: 3
+  - name: accepts is_nan() call
+    sourcePath: ./fixtures/rust.correctness.nan-comparison/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

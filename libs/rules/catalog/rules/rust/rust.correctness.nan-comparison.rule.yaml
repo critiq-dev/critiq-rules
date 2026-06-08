@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.nan-comparison
+  title: "Comparison with NaN"
+  summary: "Comparing a float value with NaN using `==` or `!=` is always false or true."
+  rationale: >-
+    NaN is not equal to anything, including itself. Comparisons using `==` or `!=`
+    with `f32::NAN` or `f64::NAN` are always false (for `==`) or always true (for `!=`).
+    Use `.is_nan()` instead.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1012
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.nan-comparison
+    bind: issue
+emit:
+  finding:
+    category: correctness.floating-point
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Comparison with NaN"
+    summary: "'${captures.issue.text}' compares a value with NaN. Use `.is_nan()` instead."
+  remediation:
+    summary: "Replace `x == f32::NAN` / `x != f32::NAN` with `x.is_nan()` / `!x.is_nan()`."

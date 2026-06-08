@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.step-by-zero.rule.yaml
+fixtures:
+  - name: flags step-by-zero
+    sourcePath: ./fixtures/rust.correctness.step-by-zero/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.step-by-zero
+  - name: accepts safe alternative for step-by-zero
+    sourcePath: ./fixtures/rust.correctness.step-by-zero/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

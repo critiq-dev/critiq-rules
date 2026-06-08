@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-float-char-to-ref-or-ptr
+  title: "Transmute from float or char to reference or pointer"
+  summary: "`transmute` used to reinterpret a float or char value as a reference or pointer."
+  rationale: >-
+    Floats and chars do not have valid bit patterns for pointers/references;
+    transmuting them produces invalid references that cause undefined behavior on dereference.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1029
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-float-char-to-ref-or-ptr
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Transmute from float or char to reference or pointer"
+    summary: "'${captures.issue.text}' reinterprets a float or char value as a reference or pointer, producing an invalid reference."
+  remediation:
+    summary: "Do not transmute float/char values to pointers. Use proper conversion APIs or data structures to associate data with references."

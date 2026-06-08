@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.iter-count-instead-of-len.rule.yaml
+fixtures:
+  - name: flags .iter().count()
+    sourcePath: ./fixtures/rust.quality.iter-count-instead-of-len/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.iter-count-instead-of-len
+  - name: accepts .len()
+    sourcePath: ./fixtures/rust.quality.iter-count-instead-of-len/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

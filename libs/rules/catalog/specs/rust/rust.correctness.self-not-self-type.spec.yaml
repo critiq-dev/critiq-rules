@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.self-not-self-type.rule.yaml
+fixtures:
+  - name: flags self-not-self-type
+    sourcePath: ./fixtures/rust.correctness.self-not-self-type/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.self-not-self-type
+  - name: accepts safe alternative for self-not-self-type
+    sourcePath: ./fixtures/rust.correctness.self-not-self-type/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

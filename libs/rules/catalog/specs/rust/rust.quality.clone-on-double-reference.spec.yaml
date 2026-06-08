@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.clone-on-double-reference.rule.yaml
+fixtures:
+  - name: flags .clone() on double reference
+    sourcePath: ./fixtures/rust.quality.clone-on-double-reference/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.clone-on-double-reference
+  - name: accepts deref then clone
+    sourcePath: ./fixtures/rust.quality.clone-on-double-reference/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

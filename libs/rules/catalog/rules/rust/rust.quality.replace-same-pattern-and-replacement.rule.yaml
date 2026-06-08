@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.replace-same-pattern-and-replacement
+  title: "Avoid `.replace()` with identical pattern and replacement"
+  summary: "Calls to `.replace()` or `.replacen()` with identical pattern and replacement have no effect."
+  rationale: >-
+    Passing the same value as both the pattern and replacement to
+    `.replace()` or `.replacen()` produces a no-op call. This is almost
+    always a logic error where the replacement string was not updated.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.replace-same-pattern-and-replacement
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.88
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Pattern and replacement are the same in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` replaces a pattern with an identical replacement — this is a no-op."
+  remediation:
+    summary: "Ensure the replacement argument differs from the pattern argument, or remove the `.replace()` call."

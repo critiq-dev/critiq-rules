@@ -1,0 +1,61 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.const-to-mut-ptr
+  title: Conversion of const pointer to mutable pointer
+  summary: >-
+    Converting a `*const T` to `*mut T` violates Rust's aliasing guarantees and can
+    introduce undefined behavior.
+  rationale: >-
+    Casting a const pointer to a mutable pointer bypasses Rust's immutability
+    guarantees. Even with unsafe blocks, this pattern is dangerous and should
+    be carefully audited.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-787
+      title: Out-of-bounds Write
+    - kind: url
+      title: CWE-787
+      url: https://cwe.mitre.org/data/definitions/787.html
+  tags:
+    - security
+    - rust
+    - unsafe-code
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1011
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.const-to-mut-ptr
+    bind: issue
+emit:
+  finding:
+    category: security.unsafe-code
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - unsafe-code
+  message:
+    title: Const-to-mut pointer conversion in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` converts a const pointer to a mutable pointer."
+  remediation:
+    summary: >-
+      Avoid `*const T` to `*mut T` casts. If mutation is required, use
+      `Cell` or `RefCell` for interior mutability, or redesign to use
+      shared ownership patterns.

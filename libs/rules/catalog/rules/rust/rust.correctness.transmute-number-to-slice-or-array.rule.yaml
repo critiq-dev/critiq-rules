@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-number-to-slice-or-array
+  title: "Transmute between numeric type and array or slice"
+  summary: "`transmute` used to reinterpret a numeric value as an array or slice."
+  rationale: >-
+    Transmuting between numeric types and arrays/slices can create fat pointers with
+    invalid metadata (length), leading to out-of-bounds reads/writes and undefined behavior.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1031
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-number-to-slice-or-array
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Transmute between numeric type and array or slice"
+    summary: "'${captures.issue.text}' transmutes between a numeric type and an array or slice. This can create invalid slice metadata."
+  remediation:
+    summary: "Use `slice::from_raw_parts` with the correct length, or convert elements individually instead of transmuting the entire value."

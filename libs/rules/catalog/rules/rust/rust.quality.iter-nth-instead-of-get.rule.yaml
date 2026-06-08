@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.iter-nth-instead-of-get
+  title: "Use `.get()` instead of `.iter().nth()`"
+  summary: "`.iter().nth(idx)` on collections supporting indexing is less performant than `.get(idx)`."
+  rationale: >-
+    Calling `.iter().nth(idx)` on a Vec, slice, or similar collection
+    iterates through all elements up to the nth position. Use `.get(idx)`
+    or `.get_mut(idx)` for O(1) direct indexing when the collection
+    supports it.
+  tags:
+    - performance
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.iter-nth-instead-of-get
+    bind: issue
+emit:
+  finding:
+    category: performance
+    severity: medium
+    confidence: 0.85
+    tags:
+      - performance
+      - rust
+  message:
+    title: "Use `.get()` instead of `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` iterates to find the nth element. Use `.get(idx)` for direct indexing."
+  remediation:
+    summary: "Replace `.iter().nth(idx)` with `.get(idx)`, and `.iter_mut().nth(idx)` with `.get_mut(idx)`."

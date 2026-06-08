@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.transmute-int-to-fn-ptr.rule.yaml
+fixtures:
+  - name: flags transmute int to fn ptr
+    sourcePath: ./fixtures/rust.correctness.transmute-int-to-fn-ptr/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.transmute-int-to-fn-ptr
+  - name: accepts safe alternative for transmute int to fn ptr
+    sourcePath: ./fixtures/rust.correctness.transmute-int-to-fn-ptr/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.actix-namedfile-path-traversal.rule.yaml
+fixtures:
+  - name: flags NamedFile::open with tainted path
+    sourcePath: ./fixtures/rust.security.actix-namedfile-path-traversal/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.actix-namedfile-path-traversal
+  - name: accepts safe usage
+    sourcePath: ./fixtures/rust.security.actix-namedfile-path-traversal/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

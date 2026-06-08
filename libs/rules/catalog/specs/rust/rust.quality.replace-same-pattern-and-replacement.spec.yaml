@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.replace-same-pattern-and-replacement.rule.yaml
+fixtures:
+  - name: flags replace with same pattern and replacement
+    sourcePath: ./fixtures/rust.quality.replace-same-pattern-and-replacement/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.replace-same-pattern-and-replacement
+  - name: accepts replace with different pattern and replacement
+    sourcePath: ./fixtures/rust.quality.replace-same-pattern-and-replacement/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

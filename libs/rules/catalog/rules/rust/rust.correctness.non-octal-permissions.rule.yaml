@@ -1,0 +1,60 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.non-octal-permissions
+  title: "Non-octal Unix permission value"
+  summary: "Unix file permissions should be specified as octal literals (e.g., `0o755`) to avoid misconfiguration."
+  rationale: >-
+    Using non-octal values to set Unix file permissions can result in unintended
+    permission modes. Octal literals (`0o755`) map directly to permission bits,
+    while decimal values like `755` produce completely different permissions.
+  tags:
+    - correctness
+    - security
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1013
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-266
+      title: Incorrect Privilege Assignment
+    - kind: url
+      title: CWE-266 Incorrect Privilege Assignment
+      url: https://cwe.mitre.org/data/definitions/266.html
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.non-octal-permissions
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - security
+      - rust
+  message:
+    title: "Non-octal Unix permission value"
+    summary: "'${captures.issue.text}' uses a non-octal value for file permissions. Use `0o` prefix for octal."
+  remediation:
+    summary: "Replace decimal permission values with octal literals (e.g., `755` → `0o755`)."

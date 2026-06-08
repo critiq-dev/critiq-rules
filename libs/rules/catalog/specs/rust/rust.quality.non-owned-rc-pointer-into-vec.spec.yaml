@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.non-owned-rc-pointer-into-vec.rule.yaml
+fixtures:
+  - name: flags Rc::new() then clone push
+    sourcePath: ./fixtures/rust.quality.non-owned-rc-pointer-into-vec/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.non-owned-rc-pointer-into-vec
+  - name: accepts Rc::new() inside push
+    sourcePath: ./fixtures/rust.quality.non-owned-rc-pointer-into-vec/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

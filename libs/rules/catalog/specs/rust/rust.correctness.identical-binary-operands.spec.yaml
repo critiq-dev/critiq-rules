@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.identical-binary-operands.rule.yaml
+fixtures:
+  - name: flags identical-binary-operands
+    sourcePath: ./fixtures/rust.correctness.identical-binary-operands/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.identical-binary-operands
+  - name: accepts safe alternative for identical-binary-operands
+    sourcePath: ./fixtures/rust.correctness.identical-binary-operands/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

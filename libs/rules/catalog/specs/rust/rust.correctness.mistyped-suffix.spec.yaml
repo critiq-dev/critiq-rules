@@ -1,0 +1,13 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.mistyped-suffix.rule.yaml
+fixtures:
+  - name: flags mistyped integer suffix
+    sourcePath: ./fixtures/rust.correctness.mistyped-suffix/invalid.rs
+    expect:
+      findingCount: 2
+  - name: accepts valid type suffixes
+    sourcePath: ./fixtures/rust.correctness.mistyped-suffix/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

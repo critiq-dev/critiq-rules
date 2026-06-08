@@ -1,0 +1,61 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.global-write-permission
+  title: Setting global write permission on file
+  summary: >-
+    Using world-writable permissions (0o777, 0o666) on files or directories allows
+    any user to modify them, creating a security risk.
+  rationale: >-
+    World-writable permissions allow any user on the system to modify the file or
+    directory, which can lead to privilege escalation, data tampering, or
+    unauthorized access.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-732
+      title: Incorrect Permission Assignment for Critical Resource
+    - kind: url
+      title: CWE-732
+      url: https://cwe.mitre.org/data/definitions/732.html
+  tags:
+    - security
+    - rust
+    - permissions
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1016
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.global-write-permission
+    bind: issue
+emit:
+  finding:
+    category: security.permissions
+    severity: critical
+    confidence: 0.90
+    tags:
+      - security
+      - rust
+      - permissions
+  message:
+    title: Global write permission set in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` sets world-writable permissions on a file or directory."
+  remediation:
+    summary: >-
+      Avoid world-writable permissions. Use restrictive masks like `0o600` for
+      files or `0o700` for directories. Only grant the minimum permissions
+      necessary for intended users or groups.

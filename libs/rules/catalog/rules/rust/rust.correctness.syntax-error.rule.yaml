@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.syntax-error
+  title: "Syntax error in Rust source"
+  summary: "Source contains invalid syntax such as multi-character char literals or unclosed strings."
+  rationale: >-
+    Common syntax errors like multi-character character literals (`'ab'`) or
+    unclosed string literals will prevent compilation. This rule provides
+    best-effort detection for patterns that a parser would catch.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.syntax-error
+    bind: issue
+emit:
+  finding:
+    category: correctness.syntax
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Syntax error in Rust source"
+    summary: "'${captures.issue.text}' contains a syntax error that will prevent compilation."
+  remediation:
+    summary: "Fix the syntax error -- check character literals, string delimiters, and numeric literals."

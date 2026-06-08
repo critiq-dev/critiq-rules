@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.self-not-self-type
+  title: "Replace lowercase `self` with `Self` in type position"
+  summary: "`self` used in return type or type position where uppercase `Self` is expected."
+  rationale: >-
+    Using lowercase `self` in return types, type parameters, or trait implementations
+    refers to the current module, not the implementing type. This is almost always
+    a bug and should use `Self` instead.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.self-not-self-type
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Replace lowercase `self` with `Self` in type position"
+    summary: "'${captures.issue.text}' uses lowercase `self` where uppercase `Self` is expected."
+  remediation:
+    summary: "Replace `self` with `Self` in return types, type parameters, and trait implementations."

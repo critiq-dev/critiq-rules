@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.iter-nth-instead-of-get.rule.yaml
+fixtures:
+  - name: flags .iter().nth()
+    sourcePath: ./fixtures/rust.quality.iter-nth-instead-of-get/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.iter-nth-instead-of-get
+  - name: accepts .get()
+    sourcePath: ./fixtures/rust.quality.iter-nth-instead-of-get/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

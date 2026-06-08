@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.raw-slice-to-ptr.rule.yaml
+fixtures:
+  - name: flags raw slice to pointer
+    sourcePath: ./fixtures/rust.security.raw-slice-to-ptr/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.raw-slice-to-ptr
+  - name: accepts safe pattern
+    sourcePath: ./fixtures/rust.security.raw-slice-to-ptr/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

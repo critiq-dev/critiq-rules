@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.transmute-number-to-slice-or-array.rule.yaml
+fixtures:
+  - name: flags transmute number to slice or array
+    sourcePath: ./fixtures/rust.correctness.transmute-number-to-slice-or-array/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.transmute-number-to-slice-or-array
+  - name: accepts safe alternative for transmute number to slice or array
+    sourcePath: ./fixtures/rust.correctness.transmute-number-to-slice-or-array/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

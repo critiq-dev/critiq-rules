@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.non-owned-rc-pointer-into-vec
+  title: "Insert owned Rc values into vectors instead of pointers to non-owned values"
+  summary: "Pushing an `Rc::clone()` from an `Rc` defined outside a vector ties cleanup to the vector lifetime."
+  rationale: >-
+    Creating an `Rc` outside the vector and then pushing a clone of it
+    means the `Rc` pointer lives separately from the vector, creating
+    unclear ownership. Creating the `Rc` inside the `push()` call makes
+    ownership explicit and the lifetime clearer.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.non-owned-rc-pointer-into-vec
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.75
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Non-owned Rc pointer inserted into vector at `${captures.issue.text}`"
+    summary: "The Rc pointer in `${captures.issue.text}` is cloned from an external binding. Consider creating the Rc inside the `push` call instead."
+  remediation:
+    summary: "Create the `Rc::new(...)` inside `push()` or `insert()` to make ownership explicit: `v.push(Rc::new(val))`."

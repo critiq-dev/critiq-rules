@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.ignored-future-value.rule.yaml
+fixtures:
+  - name: flags ignored future value
+    sourcePath: ./fixtures/rust.correctness.ignored-future-value/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.ignored-future-value
+  - name: accepts properly awaited future
+    sourcePath: ./fixtures/rust.correctness.ignored-future-value/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

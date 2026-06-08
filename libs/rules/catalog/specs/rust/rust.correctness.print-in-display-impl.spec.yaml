@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.print-in-display-impl.rule.yaml
+fixtures:
+  - name: flags print! in Display::fmt
+    sourcePath: ./fixtures/rust.correctness.print-in-display-impl/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.print-in-display-impl
+  - name: accepts write! in Display::fmt
+    sourcePath: ./fixtures/rust.correctness.print-in-display-impl/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

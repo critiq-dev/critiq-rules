@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.erasing-operation
+  title: "Operation trivially evaluates to zero"
+  summary: "An arithmetic or bitwise operation that always evaluates to zero."
+  rationale: >-
+    Expressions like `x * 0`, `x & 0`, or `0 / x` always evaluate to zero
+    regardless of the other operand. These are almost always logic errors
+    (e.g., using `*` instead of `+`, or `&` instead of `|`).
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.erasing-operation
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Operation trivially evaluates to zero"
+    summary: "'${captures.issue.text}' is an erasing operation that always evaluates to zero."
+  remediation:
+    summary: "Review the expression -- multiplying by zero, bitwise-AND with zero, or dividing zero are almost always logic errors."

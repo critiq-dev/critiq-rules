@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.invalid-regex-literal
+  title: "Invalid regex pattern in regex constructor"
+  summary: "Regex pattern contains invalid syntax such as reversed character ranges."
+  rationale: >-
+    Invalid regex patterns passed to `Regex::new` or `RegexBuilder::new` will
+    cause a runtime panic when the regex is compiled. Common issues include
+    reversed character ranges like `[z-a]` or `[9-0]`.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.invalid-regex-literal
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Invalid regex pattern in regex constructor"
+    summary: "'${captures.issue.text}' contains an invalid regex pattern that will fail at runtime."
+  remediation:
+    summary: "Fix the regex pattern -- check for reversed character ranges, unbalanced brackets, or invalid escape sequences."

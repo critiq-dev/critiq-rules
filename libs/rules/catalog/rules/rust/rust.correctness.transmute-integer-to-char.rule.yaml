@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-integer-to-char
+  title: "Transmute from integer type to char"
+  summary: "`transmute` used to convert an integer to a `char`."
+  rationale: >-
+    Not all integer values are valid Unicode scalar values. Transmuting an arbitrary
+    integer to `char` can produce an invalid char, causing undefined behavior.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1030
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-integer-to-char
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.90
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Transmute from integer type to char"
+    summary: "'${captures.issue.text}' transmutes an integer to `char`. Not all integer values are valid Unicode scalar values."
+  remediation:
+    summary: "Use `char::from_u32(value)` which returns `Option<char>` and safely handles invalid values."

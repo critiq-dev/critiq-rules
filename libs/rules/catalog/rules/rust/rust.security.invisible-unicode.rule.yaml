@@ -1,0 +1,60 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.invisible-unicode
+  title: Invisible Unicode character detected
+  summary: >-
+    Invisible Unicode characters such as zero-width spaces, bidi markers, and
+    BOM characters can be used for Trojan Source attacks.
+  rationale: >-
+    Invisible or control Unicode characters can alter the logic of source code
+    without being visible during code review. These include zero-width spaces,
+    bidi overrides, and other invisible formatting characters.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-1007
+      title: Inadequate Encoding for Output
+    - kind: url
+      title: Trojan Source (CVE-2021-42574)
+      url: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-42574
+  tags:
+    - security
+    - rust
+    - code-injection
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1010
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.invisible-unicode
+    bind: issue
+emit:
+  finding:
+    category: security.code-injection
+    severity: high
+    confidence: 0.90
+    tags:
+      - security
+      - rust
+      - code-injection
+  message:
+    title: Invisible Unicode character detected in `${captures.issue.text}`
+    summary: "An invisible Unicode character was found in the source code."
+  remediation:
+    summary: >-
+      Remove invisible Unicode characters from source files. Use a linter
+      or character filter to prevent these characters from being committed.

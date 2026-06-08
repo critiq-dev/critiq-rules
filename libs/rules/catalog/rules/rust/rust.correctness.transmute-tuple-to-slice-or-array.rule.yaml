@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-tuple-to-slice-or-array
+  title: "Transmute between tuple and array or slice"
+  summary: "`transmute` used to reinterpret a tuple as an array or slice."
+  rationale: >-
+    Tuples and arrays/slices have different memory layouts. Transmuting between them
+    can produce slices with invalid lengths, causing out-of-bounds access and undefined behavior.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1032
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-tuple-to-slice-or-array
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Transmute between tuple and array or slice"
+    summary: "'${captures.issue.text}' transmutes between a tuple and an array or slice. This can produce invalid slice metadata."
+  remediation:
+    summary: "Convert tuple fields to array elements explicitly, or use `bytemuck` with proper alignment and layout guarantees."

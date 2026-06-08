@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.potentially-incomplete-ascii-range
+  title: "Do not use exclusive range for ASCII letter/number ranges"
+  summary: "Exclusive range operator `..` between character literals like `'a'..'z'` excludes the upper bound."
+  rationale: >-
+    When iterating over ASCII letters or digits with an exclusive range `'a'..'z'`,
+    the upper bound `'z'` is excluded, which is almost always a mistake. Use
+    `..=` for inclusive ranges to cover the full intended set.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.potentially-incomplete-ascii-range
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Use inclusive range `..=` instead of `${captures.issue.text}`"
+    summary: "Exclusive range `${captures.issue.text}` excludes the upper character. Use `..=` for full-range iteration."
+  remediation:
+    summary: "Replace `..` with `..=` or explicitly adjust bounds: `'a'..='z'` or `'a'..='y'`."

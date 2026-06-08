@@ -1,0 +1,61 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.potentially-vulnerable-regex
+  title: Potentially vulnerable regex crate version usage
+  summary: >-
+    Usage of `regex::Regex::new` with patterns containing nested quantifiers may
+    be susceptible to ReDoS attacks when using a vulnerable crate version.
+  rationale: >-
+    Regular expressions with nested quantifiers such as `(a+)+` can exhibit
+    catastrophic backtracking, leading to denial of service. Additionally, the
+    `regex` crate version should be checked for known CVEs.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-1333
+      title: Inefficient Regular Expression Complexity (ReDoS)
+    - kind: url
+      title: CWE-1333
+      url: https://cwe.mitre.org/data/definitions/1333.html
+  tags:
+    - security
+    - rust
+    - denial-of-service
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1015
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.potentially-vulnerable-regex
+    bind: issue
+emit:
+  finding:
+    category: security.denial-of-service
+    severity: high
+    confidence: 0.70
+    tags:
+      - security
+      - rust
+      - denial-of-service
+  message:
+    title: Potentially vulnerable regex pattern in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` may use a regex with nested quantifiers or a vulnerable crate version."
+  remediation:
+    summary: >-
+      Avoid nested quantifiers like `(a+)+` in regex patterns. Update the `regex` crate
+      to the latest version to mitigate known vulnerabilities. Consider using `regex::RegexSet`
+      or simpler patterns to reduce backtracking risk.

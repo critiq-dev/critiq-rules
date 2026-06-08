@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.performance.single-char-string-literal-pattern
+  title: "Found single-character string literal pattern"
+  summary: >-
+    Detects use of single-character string literals where a char would be more performant.
+  rationale: >-
+    Methods like `.split()`, `.find()`, `.contains()`, and `.starts_with()` accept
+    both &str and char via the Pattern trait. When a single character is needed,
+    a char literal (`'x'`) is cheaper to match than a string literal (`"x"`)
+    because it avoids UTF-8 boundary scanning.
+  tags:
+    - performance
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.performance.single-char-string-literal-pattern
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - rust
+  message:
+    title: "Found single-character string literal pattern"
+    summary: "'${captures.issue.text}' uses a single-character string literal where a char would be more performant."
+  remediation:
+    summary: "Replace the single-character string literal with a char (e.g. `'x'` instead of `\"x\"`)."

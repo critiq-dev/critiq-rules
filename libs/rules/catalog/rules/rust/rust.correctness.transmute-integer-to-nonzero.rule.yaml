@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-integer-to-nonzero
+  title: "Transmute between integer and NonZero type"
+  summary: "`transmute` used to convert between an integer type and a `NonZero` type."
+  rationale: >-
+    Transmuting between integer and NonZero types bypasses NonZero's safety invariant
+    of non-zeroness, leading to undefined behavior.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1026
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-integer-to-nonzero
+    bind: issue
+emit:
+  finding:
+    category: correctness.runtime
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Transmute between integer and NonZero type"
+    summary: "'${captures.issue.text}' transmutes between an integer type and a NonZero type, bypassing NonZero's safety invariant."
+  remediation:
+    summary: "Use `NonZero::new(value).unwrap()` or `value.get()` to safely convert between the types."

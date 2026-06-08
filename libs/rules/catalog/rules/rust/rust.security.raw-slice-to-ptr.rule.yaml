@@ -1,0 +1,60 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.raw-slice-to-ptr
+  title: Raw pointer obtained from slice reference
+  summary: >-
+    Creating a raw pointer from a slice reference using `as *const` or `as *mut`
+    can lead to dangling pointers if the slice reference lifetime is not respected.
+  rationale: >-
+    Converting a slice reference `&[..]` to a raw pointer bypasses Rust's
+    reference lifetime tracking. The resulting pointer may dangle if the
+    original slice is dropped before the pointer is used.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-119
+      title: Improper Restriction of Operations within the Bounds of a Memory Buffer
+    - kind: url
+      title: CWE-119
+      url: https://cwe.mitre.org/data/definitions/119.html
+  tags:
+    - security
+    - rust
+    - unsafe-code
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1012
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.raw-slice-to-ptr
+    bind: issue
+emit:
+  finding:
+    category: security.unsafe-code
+    severity: high
+    confidence: 0.82
+    tags:
+      - security
+      - rust
+      - unsafe-code
+  message:
+    title: Raw pointer from slice reference in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` obtains a raw pointer from a slice reference."
+  remediation:
+    summary: >-
+      Use `.as_ptr()` or `.as_mut_ptr()` on the slice instead of casting
+      `&slice[..]` with `as`. Ensure the original slice outlives the pointer.

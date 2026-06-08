@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.non-binding-let-on-lock
+  title: "Non-binding `let` on a synchronization lock"
+  summary: "`let _ = lock.lock()` immediately drops the lock guard instead of holding the lock."
+  rationale: >-
+    A non-binding `let _ = <expr>` drops the right-hand side immediately.
+    When used with synchronization locks (`Mutex::lock()`, `RwLock::read()`),
+    the guard is dropped instead of living to the end of the scope,
+    leaving the critical section unprotected.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1014
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.non-binding-let-on-lock
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Non-binding `let` on a synchronization lock"
+    summary: "'${captures.issue.text}' — the lock guard is immediately dropped. Use `let _lock =` instead."
+  remediation:
+    summary: "Replace `let _ = lock.lock()` with `let _lock = lock.lock()` to retain the guard, or use `std::mem::drop(lock)` if intentional."
