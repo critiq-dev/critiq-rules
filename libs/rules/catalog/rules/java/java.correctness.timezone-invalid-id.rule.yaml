@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.timezone-invalid-id
+  title: "TimeZone.getTimeZone() should be passed correct timezone IDs"
+  summary: "`TimeZone.getTimeZone()` silently returns GMT for unrecognized IDs instead of throwing. Hardcoded strings should be valid timezone IDs."
+  rationale: "Unlike `ZoneId.of()`, `TimeZone.getTimeZone()` does not throw for invalid IDs — it silently returns GMT. This makes it easy to miss typos in timezone strings. Always validate timezone IDs or use `TimeZone.getAvailableIDs()` to check."
+  aliases:
+    - JAVA-E1093
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.timezone-invalid-id
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-misuse
+    severity: high
+    confidence: 0.40
+    tags:
+      - correctness
+      - java
+  message:
+    title: "TimeZone.getTimeZone() is called with a hardcoded string in `${captures.issue.text}`"
+    summary: "Unrecognized timezone IDs silently return GMT. Verify the ID is valid or use `ZoneId.of()` which throws on invalid input."
+  remediation:
+    summary: "Use `TimeZone.getAvailableIDs()` to check if the ID is valid, or use `ZoneId.of()` with a valid IANA timezone ID."

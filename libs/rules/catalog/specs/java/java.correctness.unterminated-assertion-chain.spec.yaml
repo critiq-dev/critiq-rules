@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unterminated-assertion-chain.rule.yaml
+fixtures:
+  - name: flags bare assertThat() without assertion chain
+    sourcePath: ./fixtures/java.correctness.unterminated-assertion-chain/invalid.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.correctness.unterminated-assertion-chain
+        - java.correctness.unterminated-assertion-chain
+      allSeverities:
+        - high
+        - high
+  - name: allows properly terminated assertThat() chain
+    sourcePath: ./fixtures/java.correctness.unterminated-assertion-chain/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

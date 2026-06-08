@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.inefficient-string-constructor.rule.yaml
+fixtures:
+  - name: flags new String with literal
+    sourcePath: ./fixtures/java.performance.inefficient-string-constructor/inefficient-string-constructor.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.inefficient-string-constructor
+      allSeverities:
+        - high
+  - name: allows normal string usage
+    sourcePath: ./fixtures/java.performance.inefficient-string-constructor/inefficient-string-constructor.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

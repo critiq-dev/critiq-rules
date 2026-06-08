@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.explicit-gc.rule.yaml
+fixtures:
+  - name: flags System.gc() and Runtime.getRuntime().gc()
+    sourcePath: ./fixtures/java.performance.explicit-gc/explicit-gc.invalid.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.performance.explicit-gc
+        - java.performance.explicit-gc
+      allSeverities:
+        - high
+        - high
+  - name: allows code without gc calls
+    sourcePath: ./fixtures/java.performance.explicit-gc/explicit-gc.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

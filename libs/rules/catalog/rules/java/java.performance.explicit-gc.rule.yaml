@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.explicit-gc
+  title: "Explicit invocation of garbage collection is detrimental"
+  summary: "Explicit calls to `System.gc()` or `Runtime.getRuntime().gc()` trigger full GC cycles that degrade performance."
+  rationale: "Explicit garbage collection calls force a stop-the-world full GC cycle, which is detrimental to application performance outside of specific benchmarking or diagnostic scenarios. The JVM is better equipped to decide when GC should run. Remove explicit GC calls to let the JVM manage memory efficiently."
+  aliases:
+    - JAVA-P0065
+  tags:
+    - performance
+    - java
+    - allocation
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.explicit-gc
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: high
+    confidence: 0.95
+    tags:
+      - performance
+      - java
+  message:
+    title: "Explicit GC call in `${captures.issue.text}` is detrimental"
+    summary: "`${captures.issue.text}` triggers a full stop-the-world garbage collection cycle. Remove this call and let the JVM manage memory."
+  remediation:
+    summary: "Remove the explicit `System.gc()` or `Runtime.getRuntime().gc()` call."

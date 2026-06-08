@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.unsupported-method-call
+  title: Call to method that always throws UnsupportedOperationException
+  summary: A final method that throws UnsupportedOperationException is called from another method, which will always fail at runtime.
+  rationale: If a method is declared as final (or is in a final class) and its body throws UnsupportedOperationException, calling that method will always result in an exception. This represents dead code or a logic error in the caller.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - JAVA-E1048
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.unsupported-method-call
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-usage
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Call to method that throws UnsupportedOperationException
+    summary: "`${captures.issue.text}` calls a final method that always throws UnsupportedOperationException."
+  remediation:
+    summary: Remove the call or implement the throwing method properly.

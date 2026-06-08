@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.parameter-reassignment
+  title: Parameter reassignment
+  summary: Reassigning a method parameter is confusing and can mask bugs; prefer a local variable.
+  rationale: Reassigning a method parameter makes the code harder to read and debug because the parameter's value changes within the method body. This is a well-known best practice violation (similar to why `final` is recommended for parameters). Create a separate local variable instead.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-S0352
+  tags:
+    - correctness
+    - java
+    - defensive-programming
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.parameter-reassignment
+    bind: issue
+emit:
+  finding:
+    category: correctness.defensive-programming
+    severity: low
+    confidence: 0.88
+    tags:
+      - correctness
+      - java
+  message:
+    title: Reassign method parameter in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` reassigns a method parameter. Use a local variable instead."
+  remediation:
+    summary: "Declare a new local variable instead of reassigning the parameter (e.g. `var newValue = parameter`)"

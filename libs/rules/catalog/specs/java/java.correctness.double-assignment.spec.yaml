@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.double-assignment.rule.yaml
+fixtures:
+  - name: flags double assignment
+    sourcePath: ./fixtures/java.correctness.double-assignment/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.double-assignment
+  - name: allows assignment with intervening read
+    sourcePath: ./fixtures/java.correctness.double-assignment/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.instant-unsupported-temporal-unit
+  title: "Instant should not be passed unsupported temporal unit types"
+  summary: "`Instant.plus()`, `Instant.minus()`, and `Instant.until()` throw `UnsupportedTemporalTypeException` when called with date-based units such as WEEKS, MONTHS, or YEARS."
+  rationale: "`Instant` represents an instantaneous point on the time-line and does not support date-based fields. Using `ChronoUnit.WEEKS`, `MONTHS`, `YEARS`, `DECADES`, `CENTURIES`, `MILLENNIA`, `ERAS`, or `FOREVER` with `Instant.plus()`, `minus()`, or `until()` throws `UnsupportedTemporalTypeException`. Use `ChronoUnit.DAYS`, `HOURS`, `MINUTES`, `SECONDS`, `NANOS`, etc. instead."
+  aliases:
+    - JAVA-E1094
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.instant-unsupported-temporal-unit
+    bind: issue
+emit:
+  finding:
+    category: correctness.exceptions
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: "Date-based ChronoUnit used with Instant method in `${captures.issue.text}`"
+    summary: "Instant does not support date-based temporal units (WEEKS, MONTHS, YEARS, etc.). Use time-based units like DAYS, HOURS, MINUTES, or SECONDS."
+  remediation:
+    summary: "Replace date-based ChronoUnit (WEEKS, MONTHS, YEARS) with time-based units (DAYS, HOURS, MINUTES, SECONDS, NANOS)."

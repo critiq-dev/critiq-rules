@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.class-isinstance-on-class.rule.yaml
+fixtures:
+  - name: flags .class.isInstance() pattern
+    observationPath: ./fixtures/java.correctness.class-isinstance-on-class/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.class-isinstance-on-class
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

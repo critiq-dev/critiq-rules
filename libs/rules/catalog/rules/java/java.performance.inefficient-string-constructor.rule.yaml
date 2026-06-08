@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.inefficient-string-constructor
+  title: "Inefficient use of String constructor"
+  summary: "`new String(String)` creates an unnecessary copy; use the string literal directly."
+  rationale: "The `String(String)` constructor creates a copy of the argument string, which is almost never needed. String literals are interned and can be used directly. Using `new String(\"literal\")` allocates an unnecessary object and should be replaced with the literal itself."
+  aliases:
+    - JAVA-P0062
+    - JAVA-S0062
+  tags:
+    - performance
+    - java
+    - allocation
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.inefficient-string-constructor
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: high
+    confidence: 0.90
+    tags:
+      - performance
+      - java
+  message:
+    title: "Unnecessary String copy in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` creates an unnecessary copy of a string literal. Use the literal directly."
+  remediation:
+    summary: "Replace `new String(\"...\")` with the string literal `\"...\"` directly."

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.comparator-downcast-sign-flip.rule.yaml
+fixtures:
+  - name: flags (short)(a - b) in compare method
+    sourcePath: ./fixtures/java.correctness.comparator-downcast-sign-flip/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.comparator-downcast-sign-flip
+  - name: allows Long.compare usage
+    sourcePath: ./fixtures/java.correctness.comparator-downcast-sign-flip/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

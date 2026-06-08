@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.sync-on-get-class
+  title: Synchronizing on the result of getClass()
+  summary: Synchronizing on `getClass()` locks on the runtime Class object, which can vary for subclasses.
+  rationale: The Class object returned by getClass() is the actual runtime class, which may differ across subclasses and cause unexpected lock behavior.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1021
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.sync-on-get-class
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: Avoid synchronizing on getClass()
+    summary: Locking on `getClass()` binds the lock to the runtime class, not a fixed object, making synchronization unreliable across class hierarchies.
+  remediation:
+    summary: Synchronize on a private final lock object or on `ClassName.class` for a fixed lock.

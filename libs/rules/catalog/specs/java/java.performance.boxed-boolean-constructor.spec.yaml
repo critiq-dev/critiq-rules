@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.boxed-boolean-constructor.rule.yaml
+fixtures:
+  - name: flags new Boolean() constructor
+    sourcePath: ./fixtures/java.performance.boxed-boolean-constructor/boxed-boolean-constructor.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.boxed-boolean-constructor
+      allSeverities:
+        - high
+  - name: allows Boolean.valueOf()
+    sourcePath: ./fixtures/java.performance.boxed-boolean-constructor/boxed-boolean-constructor.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

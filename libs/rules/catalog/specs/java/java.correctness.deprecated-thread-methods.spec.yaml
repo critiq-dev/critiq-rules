@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.deprecated-thread-methods.rule.yaml
+fixtures:
+  - name: flags thread.stop() call
+    sourcePath: ./fixtures/java.correctness.deprecated-thread-methods/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.deprecated-thread-methods
+  - name: allows Thread.sleep() and thread.interrupt()
+    sourcePath: ./fixtures/java.correctness.deprecated-thread-methods/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

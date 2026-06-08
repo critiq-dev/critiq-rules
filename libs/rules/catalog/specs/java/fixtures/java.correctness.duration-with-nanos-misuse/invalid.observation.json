@@ -1,0 +1,28 @@
+{
+  "path": "src/Example.java",
+  "language": "java",
+  "text": "class Example { Duration d = Duration.ofSeconds(1).withNanos(500_000_000); }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.duration-with-nanos-misuse",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 76
+          },
+          "text": ".withNanos(500_000_000)",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

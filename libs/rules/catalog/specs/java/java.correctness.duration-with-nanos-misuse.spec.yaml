@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.duration-with-nanos-misuse.rule.yaml
+fixtures:
+  - name: flags Duration.withNanos() call
+    observationPath: ./fixtures/java.correctness.duration-with-nanos-misuse/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.duration-with-nanos-misuse
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

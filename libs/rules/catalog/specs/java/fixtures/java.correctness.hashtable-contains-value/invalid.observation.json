@@ -1,0 +1,28 @@
+{
+  "path": "src/HashtableContainsDemo.java",
+  "language": "java",
+  "text": "import java.util.Hashtable; class Demo { boolean check(Hashtable<String, String> t) { return t.contains(\"key\"); } }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.hashtable-contains-value",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 99
+          },
+          "text": "Hashtable<String, String> t) { return t.contains(\"key\"); } }",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.url-in-collection
+  title: "Maps and Sets of URLs can be performance hogs"
+  summary: "`java.net.URL` performs DNS resolution on `equals()` and `hashCode()`, making Map and Set operations unexpectedly expensive."
+  rationale: "The `URL` class resolves the hostname to an IP address during `equals()` and `hashCode()` calls (CWE-400). This means every Map lookup, insertion, or Set membership test involving URLs performs a potentially blocking network call. Use `URI` or `String` instead of `URL` as collection key types to avoid DNS resolution overhead."
+  aliases:
+    - JAVA-P0057
+    - JAVA-S0057
+  tags:
+    - performance
+    - java
+    - allocation
+    - rules-catalog
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.url-in-collection
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: critical
+    confidence: 0.95
+    tags:
+      - performance
+      - java
+  message:
+    title: "Use `URI` or `String` instead of `URL` as Map/Set key type in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` uses URL as a key type. URL.equals() performs DNS resolution, causing severe performance degradation in collections."
+  remediation:
+    summary: "Replace `URL` with `URI` or `String` in Map and Set type parameters to avoid DNS resolution on equals() and hashCode()."

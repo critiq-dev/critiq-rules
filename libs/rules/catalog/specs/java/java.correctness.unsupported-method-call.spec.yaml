@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unsupported-method-call.rule.yaml
+fixtures:
+  - name: flags call to final method that throws UnsupportedOperationException
+    sourcePath: ./fixtures/java.correctness.unsupported-method-call/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.unsupported-method-call
+  - name: allows non-final method with UnsupportedOperationException
+    sourcePath: ./fixtures/java.correctness.unsupported-method-call/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

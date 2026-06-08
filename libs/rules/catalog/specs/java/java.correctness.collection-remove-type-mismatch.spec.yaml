@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.collection-remove-type-mismatch.rule.yaml
+fixtures:
+  - name: flags Collection.remove with numeric argument on string-typed collection
+    sourcePath: ./fixtures/java.correctness.collection-remove-type-mismatch/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.collection-remove-type-mismatch
+  - name: allows Collection.remove with matching type
+    sourcePath: ./fixtures/java.correctness.collection-remove-type-mismatch/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

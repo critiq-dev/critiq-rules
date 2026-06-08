@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.non-terminating-loop.rule.yaml
+fixtures:
+  - name: flags non-terminating while(true) loop
+    sourcePath: ./fixtures/java.correctness.non-terminating-loop/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.non-terminating-loop
+  - name: allows while(true) with break
+    sourcePath: ./fixtures/java.correctness.non-terminating-loop/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

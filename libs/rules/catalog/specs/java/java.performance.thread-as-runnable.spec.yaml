@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.thread-as-runnable.rule.yaml
+fixtures:
+  - name: flags Thread passed to executor
+    sourcePath: ./fixtures/java.performance.thread-as-runnable/thread-as-runnable.invalid.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.performance.thread-as-runnable
+        - java.performance.thread-as-runnable
+      allSeverities:
+        - high
+        - high
+  - name: allows Runnable passed directly
+    sourcePath: ./fixtures/java.performance.thread-as-runnable/thread-as-runnable.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

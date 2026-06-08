@@ -1,0 +1,28 @@
+{
+  "path": "src/Example.java",
+  "language": "java",
+  "text": "class Example { private List<String> items; Example(List<String> items) { this.items = items; } }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.mutable-data-exposed",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 95
+          },
+          "text": "this.items = items",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "path": "src/Example.java",
+  "language": "java",
+  "text": "class Example { boolean check(Object obj) { return String.class.isInstance(obj); } }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.class-isinstance-on-class",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 79
+          },
+          "text": "String.class.isInstance(obj)",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

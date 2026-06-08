@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unescaped-whitespace.rule.yaml
+fixtures:
+  - name: flags Pattern.compile with unescaped whitespace escape
+    sourcePath: ./fixtures/java.correctness.unescaped-whitespace/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.unescaped-whitespace
+  - name: allows Pattern.compile with properly escaped regex
+    sourcePath: ./fixtures/java.correctness.unescaped-whitespace/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.boxed-integer-constructor.rule.yaml
+fixtures:
+  - name: flags new Integer() and new Long() constructors
+    sourcePath: ./fixtures/java.performance.boxed-integer-constructor/boxed-integer-constructor.invalid.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.performance.boxed-integer-constructor
+        - java.performance.boxed-integer-constructor
+      allSeverities:
+        - high
+        - high
+  - name: allows Integer.valueOf() and Long.valueOf()
+    sourcePath: ./fixtures/java.performance.boxed-integer-constructor/boxed-integer-constructor.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

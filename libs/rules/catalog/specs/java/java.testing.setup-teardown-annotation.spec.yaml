@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.testing.setup-teardown-annotation.rule.yaml
+fixtures:
+  - name: flags setUp without @Before annotation in test file
+    sourcePath: ./fixtures/java.testing.setup-teardown-annotation/src/test/java/BadTest.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.testing.setup-teardown-annotation
+  - name: allows setUp with @Before annotation
+    sourcePath: ./fixtures/java.testing.setup-teardown-annotation/src/test/java/GoodTest.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,28 @@
+{
+  "path": "src/Example.java",
+  "language": "java",
+  "text": "class Example { String get(Map<String,String> m, String k) { return m.get(k).toString(); } }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.possible-null-access",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 78
+          },
+          "text": "m.get(k).toString()",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

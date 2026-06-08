@@ -1,0 +1,28 @@
+{
+  "path": "src/Example.java",
+  "language": "java",
+  "text": "class Example { int find(String text) { return text.indexOf(0, \"target\"); } }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.indexof-reversed-arguments",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 72
+          },
+          "text": "indexOf(0, \"target\")",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "path": "src/TimeZoneDemo.java",
+  "language": "java",
+  "text": "class Demo { java.util.TimeZone get() { return java.util.TimeZone.getTimeZone(\"invalid_tz\"); } }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.timezone-invalid-id",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 84
+          },
+          "text": "TimeZone.getTimeZone(\"invalid_tz\")",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

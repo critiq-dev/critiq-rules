@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.boxed-double-constructor.rule.yaml
+fixtures:
+  - name: flags new Float() and new Double() constructors
+    sourcePath: ./fixtures/java.performance.boxed-double-constructor/boxed-double-constructor.invalid.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.performance.boxed-double-constructor
+        - java.performance.boxed-double-constructor
+      allSeverities:
+        - high
+        - high
+  - name: allows Float.valueOf() and Double.valueOf()
+    sourcePath: ./fixtures/java.performance.boxed-double-constructor/boxed-double-constructor.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

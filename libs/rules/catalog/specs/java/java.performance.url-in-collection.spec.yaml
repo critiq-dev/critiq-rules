@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.url-in-collection.rule.yaml
+fixtures:
+  - name: flags Map with URL key type
+    sourcePath: ./fixtures/java.performance.url-in-collection/url-in-collection.invalid.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.performance.url-in-collection
+        - java.performance.url-in-collection
+      allSeverities:
+        - critical
+        - critical
+  - name: allows Map with URL as value type
+    sourcePath: ./fixtures/java.performance.url-in-collection/url-in-collection.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unconditional-recursion.rule.yaml
+fixtures:
+  - name: flags unconditional recursive call
+    sourcePath: ./fixtures/java.correctness.unconditional-recursion/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.unconditional-recursion
+  - name: allows guarded recursive call
+    sourcePath: ./fixtures/java.correctness.unconditional-recursion/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.static-date-field.rule.yaml
+fixtures:
+  - name: flags public static SimpleDateFormat field
+    sourcePath: ./fixtures/java.correctness.static-date-field/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.static-date-field
+  - name: allows private DateTimeFormatter field
+    sourcePath: ./fixtures/java.correctness.static-date-field/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

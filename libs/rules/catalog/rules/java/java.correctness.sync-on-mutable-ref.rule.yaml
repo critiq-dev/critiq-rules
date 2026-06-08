@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.sync-on-mutable-ref
+  title: Synchronizing on a mutable reference
+  summary: Synchronizing on a non-final field means the lock object can be reassigned, breaking synchronization guarantees.
+  rationale: Synchronizing on a non-final field is unsafe because the field can be reassigned at runtime, causing threads to synchronize on different objects.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1051
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.sync-on-mutable-ref
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.70
+    tags:
+      - correctness
+      - java
+  message:
+    title: Avoid synchronizing on a non-final field
+    summary: The lock object can be reassigned at runtime, making synchronization unreliable.
+  remediation:
+    summary: Use a private final lock object or make the field final.

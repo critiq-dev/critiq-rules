@@ -85,7 +85,7 @@ npm run smoke:packaged-cli
 
 ## Catalog At A Glance
 
-Today the catalog includes `703` rules across `18` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+Today the catalog includes `842` rules across `18` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |
@@ -130,7 +130,7 @@ Critiq keeps the OSS catalog intentionally high-signal.
 
 ## More Rules In This Catalog
 
-The catalog also includes these `113` additional rules beyond the highlights above.
+The catalog also includes these `121` additional rules beyond the highlights above.
 
 ### Security
 

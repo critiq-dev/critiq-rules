@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.non-terminating-loop
+  title: Non-terminating loop
+  summary: A loop with an unconditionally true condition has no break or return statement, causing it to run indefinitely.
+  rationale: A while(true) or for(;;) loop without a break, return, or System.exit() inside its body will never terminate, leading to program hang. This is typically a bug unless the loop is intentionally infinite (e.g., server event loops).
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - JAVA-E1046
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.non-terminating-loop
+    bind: issue
+emit:
+  finding:
+    category: correctness.control-flow
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - java
+  message:
+    title: Non-terminating loop
+    summary: "`${captures.issue.text}` has no exit condition, break, or return, so it runs indefinitely."
+  remediation:
+    summary: Add a break, return, or a bounded condition to the loop to allow termination.

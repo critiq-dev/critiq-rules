@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.read-resolve-return-type.rule.yaml
+fixtures:
+  - name: flags readResolve with non-Object return type
+    sourcePath: ./fixtures/java.correctness.read-resolve-return-type/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.read-resolve-return-type
+  - name: allows readResolve with Object return type
+    sourcePath: ./fixtures/java.correctness.read-resolve-return-type/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

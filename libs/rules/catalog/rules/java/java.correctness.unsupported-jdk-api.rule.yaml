@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.unsupported-jdk-api
+  title: Unsupported JDK-internal APIs should not be used
+  summary: Importing or using sun.* or com.sun.* internal APIs introduces portability issues and risks breakage across JDK versions.
+  rationale: Internal JDK APIs (sun.*, com.sun.* packages) are undocumented, unsupported, and may change or be removed without notice. Java 9 introduced module system restrictions that prevent access to many of these APIs. Use public replacement APIs instead.
+  references:
+    - kind: cwe
+      id: CWE-1104
+      title: Use of Unmaintained Third-Party Components
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - JAVA-E1030
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.unsupported-jdk-api
+    bind: issue
+emit:
+  finding:
+    category: correctness.portability
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: Use of internal JDK API
+    summary: The code imports or references an unsupported internal JDK API (`sun.*` or `com.sun.*`). These are not part of the public Java specification and may break across JDK versions.
+  remediation:
+    summary: Replace the internal API call with the public equivalent. For example, use `java.util.Base64` instead of `sun.misc.BASE64Encoder`.

@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.throw-null
+  title: "Avoid throwing null"
+  summary: "`throw null;` throws a `NullPointerException` at the throw site instead of communicating intent. Throw a proper exception instance."
+  rationale: "Java allows `throw null;` because the JVM specification requires the operand to be a reference type, and null is a valid reference. However, this throws a `NullPointerException` rather than the intended exception type, making debugging harder and obscuring developer intent. Always throw a meaningful exception type."
+  aliases:
+    - JAVA-E1097
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.throw-null
+    bind: issue
+emit:
+  finding:
+    category: correctness.exceptions
+    severity: critical
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: "throw null will produce NullPointerException in `${captures.issue.text}`"
+    summary: "`throw null;` throws a NullPointerException instead of a meaningful exception. Replace with a proper exception type."
+  remediation:
+    summary: 'Replace `throw null;` with `throw new AppropriateException("message");` using a meaningful exception type.'

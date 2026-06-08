@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.serialization-method-signature
+  title: Custom serialization method declared with incorrect signature
+  summary: Serializable classes declaring writeObject, readObject, or readObjectNoData must use exactly the correct signatures expected by the serialization API.
+  rationale: Java's serialization mechanism calls writeObject, readObject, and readObjectNoData by reflection using exact signature matching. If the access modifier, return type, or parameter types are wrong, the method is silently ignored and default serialization behavior applies.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - JAVA-E1033
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.serialization-method-signature
+    bind: issue
+emit:
+  finding:
+    category: correctness.serialization
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: Incorrect serialization method signature
+    summary: The serialization method `${captures.issue.text}` does not match the required signature. writeObject must be `private void writeObject(java.io.ObjectOutputStream out) throws IOException`, readObject must be `private void readObject(java.io.ObjectInputStream in) throws IOException`, and readObjectNoData must be `private void readObjectNoData() throws ObjectStreamException`.
+  remediation:
+    summary: Correct the method signature to match the expected pattern. Ensure private access, void return type, correct parameter types, and the proper throws clause.

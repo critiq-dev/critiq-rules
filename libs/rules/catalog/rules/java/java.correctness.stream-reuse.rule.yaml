@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.stream-reuse
+  title: Stream consumed more than once
+  summary: A Stream variable has multiple terminal operations invoked on it.
+  rationale: Java Streams are single-use; after a terminal operation the stream is consumed and throws IllegalStateException on reuse.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1019
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.stream-reuse
+    bind: issue
+emit:
+  finding:
+    category: correctness.streams
+    severity: high
+    confidence: 0.8
+    tags:
+      - correctness
+      - java
+  message:
+    title: Stream is consumed more than once
+    summary: A terminal operation is called on a Stream that has already been consumed, causing IllegalStateException.
+  remediation:
+    summary: Create a new Stream for each terminal operation, or collect the stream into a collection first.

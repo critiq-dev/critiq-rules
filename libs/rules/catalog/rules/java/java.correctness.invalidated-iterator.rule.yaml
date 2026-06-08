@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.invalidated-iterator
+  title: Do not modify collections while iterating
+  summary: Modifying a collection with `add()`, `remove()`, or `clear()` inside a for-each loop will throw a ConcurrentModificationException.
+  rationale: The iterator obtained by a for-each loop does not expect structural modifications to the underlying collection. Calling add/remove/clear invalidates the iterator and throws ConcurrentModificationException at runtime.
+  aliases:
+    - JAVA-E1085
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.invalidated-iterator
+    bind: issue
+emit:
+  finding:
+    category: correctness.collections
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Iterator invalidated by collection modification in `${captures.issue.text}`
+    summary: "A collection is structurally modified inside a for-each loop, which will throw a ConcurrentModificationException."
+  remediation:
+    summary: Use an explicit Iterator with `iterator.remove()`, collect items for later removal, or use `removeIf()` for conditional removal during iteration.

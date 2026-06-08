@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.optional-null
+  title: Optional variable or return value set to null
+  summary: An Optional-typed variable is assigned null or a method returns null for an Optional return type.
+  rationale: Optional is designed to represent absence without null. Assigning null to an Optional defeats its purpose and risks NullPointerException.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1022
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.optional-null
+    bind: issue
+emit:
+  finding:
+    category: correctness.nullability
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Optional variable or return value assigned null
+    summary: An Optional-typed variable or method return is set to null instead of using Optional.empty() or Optional.ofNullable().
+  remediation:
+    summary: Use Optional.empty() to represent absence, or Optional.ofNullable(value) for nullable values.

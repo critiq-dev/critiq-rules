@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.serialization-method-signature.rule.yaml
+fixtures:
+  - name: flags writeObject with wrong access modifier
+    sourcePath: ./fixtures/java.correctness.serialization-method-signature/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.serialization-method-signature
+  - name: allows correct serialization method signatures
+    sourcePath: ./fixtures/java.correctness.serialization-method-signature/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.nan-comparison.rule.yaml
+fixtures:
+  - name: flags x == Double.NaN comparison
+    sourcePath: ./fixtures/java.correctness.nan-comparison/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.nan-comparison
+  - name: allows Double.isNaN(x)
+    sourcePath: ./fixtures/java.correctness.nan-comparison/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

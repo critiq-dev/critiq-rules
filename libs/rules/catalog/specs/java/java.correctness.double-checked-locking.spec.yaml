@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.double-checked-locking.rule.yaml
+fixtures:
+  - name: flags double-checked locking without volatile
+    sourcePath: ./fixtures/java.correctness.double-checked-locking/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.double-checked-locking
+  - name: allows double-checked locking with volatile
+    sourcePath: ./fixtures/java.correctness.double-checked-locking/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

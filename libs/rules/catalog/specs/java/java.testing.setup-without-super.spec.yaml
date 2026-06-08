@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.testing.setup-without-super.rule.yaml
+fixtures:
+  - name: flags setUp without super.setUp call
+    sourcePath: ./fixtures/java.testing.setup-without-super/src/test/java/BadTest.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.testing.setup-without-super
+  - name: allows setUp with super.setUp call
+    sourcePath: ./fixtures/java.testing.setup-without-super/src/test/java/GoodTest.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

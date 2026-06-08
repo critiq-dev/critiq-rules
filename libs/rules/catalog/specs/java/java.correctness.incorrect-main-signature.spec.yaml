@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.incorrect-main-signature.rule.yaml
+fixtures:
+  - name: flags main without static
+    sourcePath: ./fixtures/java.correctness.incorrect-main-signature/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.incorrect-main-signature
+  - name: allows standard main signature
+    sourcePath: ./fixtures/java.correctness.incorrect-main-signature/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

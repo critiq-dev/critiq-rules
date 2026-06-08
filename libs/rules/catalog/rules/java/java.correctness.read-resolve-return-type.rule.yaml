@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.read-resolve-return-type
+  title: readResolve must return Object
+  summary: The readResolve method in a Serializable class must have a return type of Object. A non-Object return type will cause the method to be silently ignored during deserialization.
+  rationale: Java's serialization mechanism uses readResolve to replace the deserialized object. Per the Java Object Serialization Specification (§3.6), readResolve must be declared as `ANY-ACCESS-MODIFIER Object readResolve() throws ObjectStreamException`. A covariant return type may work in some JVM implementations but is not guaranteed.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - JAVA-E1032
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.read-resolve-return-type
+    bind: issue
+emit:
+  finding:
+    category: correctness.serialization
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: readResolve method must return Object
+    summary: "`${captures.issue.text}` has a non-Object return type. The serialization mechanism requires `Object` as the return type for `readResolve`."
+  remediation:
+    summary: Change the return type of `readResolve` to `Object` and cast the return value inside the method body.

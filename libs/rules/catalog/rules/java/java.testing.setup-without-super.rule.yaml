@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.testing.setup-without-super
+  title: setUp method does not call super.setUp
+  summary: "JUnit 3 `setUp()` methods in test classes that extend `TestCase` must call `super.setUp()` for base class initialization."
+  rationale: "When a test class overrides `setUp()` from a superclass (including `TestCase`), the overridden method should call `super.setUp()` to preserve the base class initialization behavior. Failing to do so can leave test infrastructure uninitialized, leading to subtle failures or resource leaks."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-S0337
+  tags:
+    - correctness
+    - testing
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*Test.java"
+      - "**/*Tests.java"
+      - "**/src/test/**/*.java"
+match:
+  fact:
+    kind: java.testing.setup-without-super
+    bind: issue
+emit:
+  finding:
+    category: correctness.testing
+    severity: high
+    confidence: 0.90
+    tags:
+      - testing
+      - java
+  message:
+    title: setUp method missing super.setUp() call
+    summary: "`${captures.issue.text}` overrides setUp() but does not call `super.setUp()`. Add `super.setUp()` as the first statement."
+  remediation:
+    summary: "Add `super.setUp();` as the first statement in `setUp()` to ensure base class initialization."

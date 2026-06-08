@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.array-index-bounds.rule.yaml
+fixtures:
+  - name: flags array[array.length] access
+    sourcePath: ./fixtures/java.correctness.array-index-bounds/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.array-index-bounds
+  - name: allows array[array.length - 1] access
+    sourcePath: ./fixtures/java.correctness.array-index-bounds/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.boxed-boolean-conditional.rule.yaml
+fixtures:
+  - name: flags boxed Boolean in conditional
+    sourcePath: ./fixtures/java.correctness.boxed-boolean-conditional/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.boxed-boolean-conditional
+  - name: allows guarded boxed Boolean
+    sourcePath: ./fixtures/java.correctness.boxed-boolean-conditional/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

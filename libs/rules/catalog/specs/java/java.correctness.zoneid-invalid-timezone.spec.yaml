@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.zoneid-invalid-timezone.rule.yaml
+fixtures:
+  - name: flags ZoneId.of() with hardcoded string
+    observationPath: ./fixtures/java.correctness.zoneid-invalid-timezone/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.zoneid-invalid-timezone
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

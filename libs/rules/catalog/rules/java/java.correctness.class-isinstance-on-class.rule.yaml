@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.class-isinstance-on-class
+  title: "Use `instanceof` instead of `Class.isInstance()`"
+  summary: "Calling `.class.isInstance(obj)` should be replaced with `obj instanceof Type` for clarity and type safety."
+  rationale: "`SomeClass.class.isInstance(obj)` is equivalent to `obj instanceof SomeClass`, but the `instanceof` operator is more readable, type-safe at compile time, and is the idiomatic Java pattern for runtime type checking."
+  aliases:
+    - JAVA-E1091
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.class-isinstance-on-class
+    bind: issue
+emit:
+  finding:
+    category: correctness.code-style
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: "Use `instanceof` instead of `.class.isInstance()` in `${captures.issue.text}`"
+    summary: "`SomeClass.class.isInstance(obj)` should be replaced with `obj instanceof SomeClass` for readability and compile-time type safety."
+  remediation:
+    summary: "Replace `X.class.isInstance(obj)` with `obj instanceof X`."

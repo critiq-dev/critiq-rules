@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.array-compared-to-non-array.rule.yaml
+fixtures:
+  - name: flags array compared to string literal
+    sourcePath: ./fixtures/java.correctness.array-compared-to-non-array/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.array-compared-to-non-array
+  - name: allows array compared to another array
+    sourcePath: ./fixtures/java.correctness.array-compared-to-non-array/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

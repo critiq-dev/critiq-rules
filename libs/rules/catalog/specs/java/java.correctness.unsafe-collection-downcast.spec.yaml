@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unsafe-collection-downcast.rule.yaml
+fixtures:
+  - name: flags unsafe collection downcast without instanceof guard
+    sourcePath: ./fixtures/java.correctness.unsafe-collection-downcast/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.unsafe-collection-downcast
+  - name: allows collection downcast with instanceof guard
+    sourcePath: ./fixtures/java.correctness.unsafe-collection-downcast/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

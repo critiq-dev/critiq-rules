@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.sync-on-get-class.rule.yaml
+fixtures:
+  - name: flags synchronized on getClass()
+    sourcePath: ./fixtures/java.correctness.sync-on-get-class/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.sync-on-get-class
+  - name: allows synchronized on dedicated lock object
+    sourcePath: ./fixtures/java.correctness.sync-on-get-class/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

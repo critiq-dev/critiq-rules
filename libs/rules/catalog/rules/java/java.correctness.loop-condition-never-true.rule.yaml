@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.loop-condition-never-true
+  title: Loop condition is never true
+  summary: A loop condition that evaluates to false at compile time means the loop body will never execute.
+  rationale: Using a literal false value (or equivalent) as a loop condition guarantees the loop body never executes, which indicates dead code. This is often a debugging leftover or a logic error.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - JAVA-E1045
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.loop-condition-never-true
+    bind: issue
+emit:
+  finding:
+    category: correctness.control-flow
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: Loop condition is never true
+    summary: "`${captures.issue.text}` will never execute its body since the condition is always false."
+  remediation:
+    summary: Remove the dead loop or fix the condition to evaluate to true when iteration is needed.

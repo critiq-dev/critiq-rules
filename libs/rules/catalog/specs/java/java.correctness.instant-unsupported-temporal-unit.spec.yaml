@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.instant-unsupported-temporal-unit.rule.yaml
+fixtures:
+  - name: flags Instant.plus() with ChronoUnit.WEEKS
+    observationPath: ./fixtures/java.correctness.instant-unsupported-temporal-unit/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.instant-unsupported-temporal-unit
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

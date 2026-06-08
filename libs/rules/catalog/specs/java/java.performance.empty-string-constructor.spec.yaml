@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.empty-string-constructor.rule.yaml
+fixtures:
+  - name: flags new String() no-arg
+    sourcePath: ./fixtures/java.performance.empty-string-constructor/empty-string-constructor.invalid.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.performance.empty-string-constructor
+        - java.performance.empty-string-constructor
+      allSeverities:
+        - high
+        - high
+  - name: allows empty string literal
+    sourcePath: ./fixtures/java.performance.empty-string-constructor/empty-string-constructor.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

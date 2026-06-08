@@ -1,0 +1,28 @@
+{
+  "path": "src/Example.java",
+  "language": "java",
+  "text": "class Example { List<String> create() { return Collections.nCopies(\"ten\", 10); } }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.ncopies-argument-order",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 81
+          },
+          "text": "Collections.nCopies(\"ten\", 10)",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

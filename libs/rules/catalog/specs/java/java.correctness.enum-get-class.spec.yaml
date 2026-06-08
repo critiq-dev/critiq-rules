@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.enum-get-class.rule.yaml
+fixtures:
+  - name: flags getClass() in enum body
+    sourcePath: ./fixtures/java.correctness.enum-get-class/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.enum-get-class
+  - name: allows getDeclaringClass() in enum body
+    sourcePath: ./fixtures/java.correctness.enum-get-class/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

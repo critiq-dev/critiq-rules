@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unsupported-jdk-api.rule.yaml
+fixtures:
+  - name: flags import of sun.misc internal API
+    sourcePath: ./fixtures/java.correctness.unsupported-jdk-api/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.unsupported-jdk-api
+  - name: allows java.util.Base64 import
+    sourcePath: ./fixtures/java.correctness.unsupported-jdk-api/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

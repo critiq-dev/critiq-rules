@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.sync-on-mutable-ref.rule.yaml
+fixtures:
+  - name: flags synchronized on non-final field
+    sourcePath: ./fixtures/java.correctness.sync-on-mutable-ref/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.sync-on-mutable-ref
+  - name: allows synchronized on final field
+    sourcePath: ./fixtures/java.correctness.sync-on-mutable-ref/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

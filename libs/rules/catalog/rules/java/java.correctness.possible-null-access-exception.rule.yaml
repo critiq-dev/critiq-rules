@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.possible-null-access-exception
+  title: Avoid possible null access in catch or finally blocks
+  summary: Dereferencing a variable in a catch or finally block may throw a NullPointerException if the variable was assigned from a failed operation.
+  rationale: Variables assigned before or during a try block may be null when the catch or finally block executes, leading to a secondary NullPointerException that masks the original failure.
+  aliases:
+    - JAVA-E1084
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.possible-null-access-exception
+    bind: issue
+emit:
+  finding:
+    category: correctness.null-safety
+    severity: critical
+    confidence: 0.65
+    tags:
+      - correctness
+      - java
+  message:
+    title: Possible null access in exception handler from `${captures.issue.text}`
+    summary: "A variable is dereferenced in a catch or finally block without a null check, which may throw a NullPointerException when the handler runs."
+  remediation:
+    summary: Add a null check before dereferencing variables in catch and finally blocks, or initialize them to safe defaults before the try block.

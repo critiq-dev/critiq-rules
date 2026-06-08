@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.empty-string-constructor
+  title: "Use \"\" instead of new String() to create empty strings"
+  summary: "`new String()` creates an unnecessary object; use the empty string literal `\"\"` instead."
+  rationale: "The no-argument `String()` constructor creates a new empty String object. The empty string literal `\"\"` is interned and more efficient. Replace `new String()` with `\"\"` to avoid unnecessary allocations."
+  aliases:
+    - JAVA-P0063
+    - JAVA-S0063
+  tags:
+    - performance
+    - java
+    - allocation
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.empty-string-constructor
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: high
+    confidence: 0.92
+    tags:
+      - performance
+      - java
+  message:
+    title: "Use `\"\"` instead of `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` allocates an unnecessary empty String object. Use the string literal `\"\"` instead."
+  remediation:
+    summary: "Replace `new String()` with `\"\"` (empty string literal)."

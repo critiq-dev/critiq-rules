@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.prepared-statement-in-loop
+  title: PreparedStatement creation inside a loop
+  summary: Creating PreparedStatement or CallableStatement inside a loop causes repeated database parsing and compilation, leading to performance degradation and potential resource exhaustion.
+  rationale: PreparedStatements should be created outside loops and reused with different parameters to avoid repeated SQL parsing and compilation. Creating them inside loops can also exhaust the database statement cache.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+  aliases:
+    - JAVA-S0329
+  tags:
+    - correctness
+    - java
+    - jdbc
+    - performance
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.prepared-statement-in-loop
+    bind: issue
+emit:
+  finding:
+    category: correctness.jdbc
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+      - jdbc
+  message:
+    title: Move PreparedStatement creation outside the loop in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` creates a PreparedStatement or CallableStatement inside a loop. Move it outside and reuse with different parameters."
+  remediation:
+    summary: "Create the PreparedStatement before the loop and set parameters inside using `setString`, `setInt`, etc."

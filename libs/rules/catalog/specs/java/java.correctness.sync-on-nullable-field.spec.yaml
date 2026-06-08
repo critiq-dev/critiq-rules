@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.sync-on-nullable-field.rule.yaml
+fixtures:
+  - name: flags synchronized on nullable field
+    sourcePath: ./fixtures/java.correctness.sync-on-nullable-field/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.sync-on-nullable-field
+  - name: allows synchronized on initialized field
+    sourcePath: ./fixtures/java.correctness.sync-on-nullable-field/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

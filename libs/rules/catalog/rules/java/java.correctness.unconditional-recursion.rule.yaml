@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.unconditional-recursion
+  title: Unconditional recursive call in method body
+  summary: A method calls itself without a conditional guard, causing infinite recursion.
+  rationale: Unconditional self-recursion will always execute, leading to a StackOverflowError at runtime.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1017
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.unconditional-recursion
+    bind: issue
+emit:
+  finding:
+    category: correctness.recursion
+    severity: critical
+    confidence: 0.7
+    tags:
+      - correctness
+      - java
+  message:
+    title: "Method `${captures.issue.text}` recursively calls itself unconditionally"
+    summary: A method recursively calls itself without an if/while/for guard, which will always cause infinite recursion at runtime.
+  remediation:
+    summary: Add a base-case guard (if/while/for condition) before the recursive call.

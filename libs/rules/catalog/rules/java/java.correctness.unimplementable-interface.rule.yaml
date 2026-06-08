@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.unimplementable-interface
+  title: Interface method clashes with Object method
+  summary: An interface declares a method that clashes with a final or differently-typed method in Object, making the interface impossible to implement correctly.
+  rationale: Certain Object methods (wait, notify, notifyAll, getClass) are final and cannot be overridden. Others (toString, clone, equals, hashCode, finalize) have specific contract requirements. Declaring them with wrong signatures in an interface creates a contract that can never be satisfied by any implementation.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - JAVA-E1041
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.unimplementable-interface
+    bind: issue
+emit:
+  finding:
+    category: correctness.typing
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - java
+  message:
+    title: Interface method clashes with Object method
+    summary: "`${captures.issue.text}` in an interface clashes with a method inherited from Object and cannot be implemented correctly."
+  remediation:
+    summary: Rename the method or change its signature so it does not conflict with Object's final or contract-restricted methods.

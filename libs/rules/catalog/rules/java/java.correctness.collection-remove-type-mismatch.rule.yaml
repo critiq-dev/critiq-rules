@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.collection-remove-type-mismatch
+  title: Wrong argument type for Collection remove method
+  summary: Passing a numeric literal to Collection.remove() on a collection with a non-numeric generic type will silently fail to remove the intended element.
+  rationale: Although Collection.remove(Object) accepts any Object, passing an argument of the wrong type (e.g., an int to a List<String>) will never match an existing element. The remove call may succeed in removing a value that happens to match the object's equals/hashCode, but typically represents a bug.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - JAVA-E1036
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.collection-remove-type-mismatch
+    bind: issue
+emit:
+  finding:
+    category: correctness.types
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Possible type mismatch in Collection.remove()
+    summary: "`${captures.issue.text}` passes a numeric literal to `remove()` on a collection with a non-numeric generic type. This may never match an intended element."
+  remediation:
+    summary: Verify that the argument type matches the collection's generic type. If the collection is `List<String>`, pass a `String` argument to `remove()`.

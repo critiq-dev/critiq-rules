@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.testing.teardown-without-super.rule.yaml
+fixtures:
+  - name: flags tearDown without super.tearDown call
+    sourcePath: ./fixtures/java.testing.teardown-without-super/src/test/java/BadTest.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.testing.teardown-without-super
+  - name: allows tearDown with super.tearDown call
+    sourcePath: ./fixtures/java.testing.teardown-without-super/src/test/java/GoodTest.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

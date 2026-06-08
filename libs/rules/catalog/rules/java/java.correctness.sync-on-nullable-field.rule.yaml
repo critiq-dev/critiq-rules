@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.sync-on-nullable-field
+  title: Possibly null fields synchronized on
+  summary: Synchronizing on a field that may be null will throw NullPointerException at runtime.
+  rationale: The field has no initializer and is used as a synchronization lock. If the field is null when synchronized is reached, a NullPointerException is thrown.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1060
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.sync-on-nullable-field
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: critical
+    confidence: 0.65
+    tags:
+      - correctness
+      - java
+  message:
+    title: Synchronizing on a nullable field
+    summary: The field used as a lock may be null, causing NullPointerException at runtime.
+  remediation:
+    summary: Initialize the lock field at declaration, or guard with Objects.requireNonNull() before synchronizing.

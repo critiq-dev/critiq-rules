@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.double-assignment
+  title: Double assignment of variable detected
+  summary: A local variable is assigned twice consecutively without being read between the assignments.
+  rationale: The first assignment value is overwritten before being used, indicating dead code or a logic error.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1063
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.double-assignment
+    bind: issue
+emit:
+  finding:
+    category: correctness.general
+    severity: high
+    confidence: 0.60
+    tags:
+      - correctness
+      - java
+  message:
+    title: Double assignment without intervening read
+    summary: The first assigned value is never read before being overwritten, indicating dead code or a logic error.
+  remediation:
+    summary: Remove the first assignment if unused, or verify the intended logic is correct.

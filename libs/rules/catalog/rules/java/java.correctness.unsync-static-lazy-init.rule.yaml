@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.unsync-static-lazy-init
+  title: Unsynchronized lazy initialization of static value
+  summary: Static field lazy initialization without synchronization can expose partially constructed objects to other threads.
+  rationale: Without synchronization or a holder class, one thread may see a partially initialized static field due to the Java Memory Model.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1053
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.unsync-static-lazy-init
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: critical
+    confidence: 0.75
+    tags:
+      - correctness
+      - java
+  message:
+    title: Unsynchronized static lazy initialization
+    summary: The static field is lazily initialized without synchronization, risking visibility of a partially constructed object.
+  remediation:
+    summary: Use a synchronized block, a synchronized method, or the holder-class idiom for thread-safe lazy initialization.

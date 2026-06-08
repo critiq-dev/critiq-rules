@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.invalid-serial-version-uid.rule.yaml
+fixtures:
+  - name: flags invalid serialVersionUID declaration
+    sourcePath: ./fixtures/java.correctness.invalid-serial-version-uid/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.invalid-serial-version-uid
+  - name: allows properly declared serialVersionUID
+    sourcePath: ./fixtures/java.correctness.invalid-serial-version-uid/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

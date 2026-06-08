@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.sync-on-public-field
+  title: Public fields synchronized on
+  summary: Synchronizing on a public field allows external code to interfere with synchronization.
+  rationale: A public field used as a lock is visible to all code, which can synchronize on the same object and cause deadlock or interfere with locking contracts.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1061
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.sync-on-public-field
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.70
+    tags:
+      - correctness
+      - java
+  message:
+    title: Synchronizing on a public field
+    summary: External code can synchronize on the same public lock, potentially causing deadlock or interference.
+  remediation:
+    summary: Use a private lock object for internal synchronization.

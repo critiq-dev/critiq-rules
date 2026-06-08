@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.thread-as-runnable
+  title: "Thread passed where Runnable expected"
+  summary: "Passing `new Thread(runnable)` to an executor or scheduler creates unnecessary Thread objects."
+  rationale: "ExecutorService, ScheduledExecutorService, and similar APIs accept Runnable directly. Wrapping a Runnable in a new Thread() adds object allocation overhead and bypasses the executor's thread pool management. Pass the Runnable directly instead."
+  aliases:
+    - JAVA-S0056
+  tags:
+    - performance
+    - java
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.thread-as-runnable
+    bind: issue
+emit:
+  finding:
+    category: performance.concurrency
+    severity: high
+    confidence: 0.72
+    tags:
+      - performance
+      - java
+  message:
+    title: "Pass Runnable directly to `${captures.issue.text}` instead of wrapping in new Thread()"
+    summary: "`${captures.issue.text}` creates an unnecessary Thread object. Executor services already manage pooled threads; pass the Runnable directly."
+  remediation:
+    summary: "Replace `executor.submit(new Thread(task))` with `executor.submit(task)` and similar patterns."

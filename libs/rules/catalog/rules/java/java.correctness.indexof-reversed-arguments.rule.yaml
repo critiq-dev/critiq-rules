@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.indexof-reversed-arguments
+  title: "Avoid reversed arguments to `String.indexOf()`"
+  summary: "Calling `indexOf()` with an integer as the first argument and a string as the second likely has the arguments reversed."
+  rationale: "`String.indexOf(int ch, int fromIndex)` takes a character code as the first argument and a starting position as the second. Passing `indexOf(0, \"str\")` compiles because `0` is a valid char code and `\"str\"` is treated as `fromIndex`. The developer likely meant `indexOf(\"str\")` or `indexOf(\"str\", 0)`."
+  aliases:
+    - JAVA-E1089
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.indexof-reversed-arguments
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-misuse
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: "Arguments to `indexOf()` appear to be reversed in `${captures.issue.text}`"
+    summary: "Calling `indexOf(int, String)` suggests the arguments are reversed. The first argument should be the character to find, the second the start position."
+  remediation:
+    summary: "Use `indexOf(\"str\")` to search for a substring, or `indexOf(\"str\", fromIndex)` to specify a start position. Use a character literal for single-character searches."

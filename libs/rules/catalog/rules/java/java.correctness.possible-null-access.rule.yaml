@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.possible-null-access
+  title: Avoid possible null access on collection or map lookups
+  summary: Chaining a method call on a `.get()`, `.poll()`, or `.peek()` result may throw a NullPointerException.
+  rationale: Collection and map lookups can return null for missing keys; dereferencing the result without a null check will throw a NullPointerException at runtime.
+  aliases:
+    - JAVA-E1083
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.possible-null-access
+    bind: issue
+emit:
+  finding:
+    category: correctness.null-safety
+    severity: critical
+    confidence: 0.72
+    tags:
+      - correctness
+      - java
+  message:
+    title: Possible null access from `${captures.issue.text}`
+    summary: "The result of a `.get()`, `.poll()`, or `.peek()` call is dereferenced without a null check, which may throw a NullPointerException."
+  remediation:
+    summary: Assign the result to a local variable, check for null, and handle the absent case before dereferencing.

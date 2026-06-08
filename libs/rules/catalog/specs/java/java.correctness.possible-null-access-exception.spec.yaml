@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.possible-null-access-exception.rule.yaml
+fixtures:
+  - name: flags possible null access in catch block
+    observationPath: ./fixtures/java.correctness.possible-null-access-exception/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.possible-null-access-exception
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

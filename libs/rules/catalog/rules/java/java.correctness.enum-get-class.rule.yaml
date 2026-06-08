@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.enum-get-class
+  title: getClass should not be used with enums whose members have custom bodies
+  summary: Calling getClass() inside an enum body returns the anonymous subclass for constants with custom bodies, not the enum class itself. Prefer getDeclaringClass().
+  rationale: When an enum constant has a custom body, getClass() returns the anonymous subclass rather than the enum class. The safe alternative getDeclaringClass() always returns the enum class regardless of custom bodies.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1106
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.enum-get-class
+    bind: issue
+emit:
+  finding:
+    category: correctness.general
+    severity: medium
+    confidence: 0.75
+    tags:
+      - correctness
+      - java
+  message:
+    title: getClass() called inside enum body
+    summary: Calling getClass() inside an enum body can return unexpected results. Use getDeclaringClass() to reliably get the enum class.
+  remediation:
+    summary: Replace getClass() with getDeclaringClass() to always obtain the correct enum class regardless of custom constant bodies.

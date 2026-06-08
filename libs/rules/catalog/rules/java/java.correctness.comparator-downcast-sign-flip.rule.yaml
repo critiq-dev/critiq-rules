@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.comparator-downcast-sign-flip
+  title: Downcast may flip integer sign in comparator method
+  summary: Narrowing casts (short, byte, int) of subtraction results inside compare/compareTo methods can overflow and flip the comparison sign, producing incorrect ordering.
+  rationale: Comparing values by casting (short)(a - b) or (int)(a - b) discards overflow bits, potentially returning the wrong sign for large values. Use Long.compare or Integer.compare instead.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1102
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.comparator-downcast-sign-flip
+    bind: issue
+emit:
+  finding:
+    category: correctness.general
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Narrowing cast of subtraction may flip comparison sign
+    summary: Casting (a - b) to a narrower type inside a comparator can overflow and produce incorrect ordering. Use Long.compare(a, b) or Integer.compare(a, b) instead.
+  remediation:
+    summary: Replace `(short)(a - b)` or similar narrow casts with `Long.compare(a, b)` or `Integer.compare(a, b)` to avoid overflow sign flips.

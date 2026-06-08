@@ -616,6 +616,14 @@ rules:
     rulePath: ./rules/go/go.performance.no-unbounded-concurrency.rule.yaml
     presets:
       - strict
+  - id: java.performance.empty-string-constructor
+    rulePath: ./rules/java/java.performance.empty-string-constructor.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.inefficient-string-constructor
+    rulePath: ./rules/java/java.performance.inefficient-string-constructor.rule.yaml
+    presets:
+      - strict
   - id: java.performance.no-regex-construction-in-loop
     rulePath: ./rules/java/java.performance.no-regex-construction-in-loop.rule.yaml
     presets:
@@ -626,6 +634,34 @@ rules:
       - strict
   - id: java.performance.no-unbounded-concurrency
     rulePath: ./rules/java/java.performance.no-unbounded-concurrency.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.thread-as-runnable
+    rulePath: ./rules/java/java.performance.thread-as-runnable.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.url-in-collection
+    rulePath: ./rules/java/java.performance.url-in-collection.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.string-to-string
+    rulePath: ./rules/java/java.performance.string-to-string.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.explicit-gc
+    rulePath: ./rules/java/java.performance.explicit-gc.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.boxed-boolean-constructor
+    rulePath: ./rules/java/java.performance.boxed-boolean-constructor.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.boxed-integer-constructor
+    rulePath: ./rules/java/java.performance.boxed-integer-constructor.rule.yaml
+    presets:
+      - strict
+  - id: java.performance.boxed-double-constructor
+    rulePath: ./rules/java/java.performance.boxed-double-constructor.rule.yaml
     presets:
       - strict
   - id: php.correctness.duplicate-array-key
@@ -2329,6 +2365,252 @@ rules:
     rulePath: ./rules/java/java.correctness.return-in-finally.rule.yaml
     presets:
       - strict
+  - id: java.correctness.unconditional-recursion
+    rulePath: ./rules/java/java.correctness.unconditional-recursion.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.double-checked-locking
+    rulePath: ./rules/java/java.correctness.double-checked-locking.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.stream-reuse
+    rulePath: ./rules/java/java.correctness.stream-reuse.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.array-index-bounds
+    rulePath: ./rules/java/java.correctness.array-index-bounds.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.sync-on-get-class
+    rulePath: ./rules/java/java.correctness.sync-on-get-class.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.optional-null
+    rulePath: ./rules/java/java.correctness.optional-null.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.stringbuilder-char-ctor
+    rulePath: ./rules/java/java.correctness.stringbuilder-char-ctor.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.static-date-field
+    rulePath: ./rules/java/java.correctness.static-date-field.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.unescaped-whitespace
+    rulePath: ./rules/java/java.correctness.unescaped-whitespace.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.unsupported-jdk-api
+    rulePath: ./rules/java/java.correctness.unsupported-jdk-api.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.nan-comparison
+    rulePath: ./rules/java/java.correctness.nan-comparison.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.read-resolve-return-type
+    rulePath: ./rules/java/java.correctness.read-resolve-return-type.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.serialization-method-signature
+    rulePath: ./rules/java/java.correctness.serialization-method-signature.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.serializable-superclass
+    rulePath: ./rules/java/java.correctness.serializable-superclass.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.collection-remove-type-mismatch
+    rulePath: ./rules/java/java.correctness.collection-remove-type-mismatch.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.annotation-check-always-false
+    rulePath: ./rules/java/java.correctness.annotation-check-always-false.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.hashcode-on-array
+    rulePath: ./rules/java/java.correctness.hashcode-on-array.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.invalid-serial-version-uid
+    rulePath: ./rules/java/java.correctness.invalid-serial-version-uid.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.loop-condition-never-true
+    rulePath: ./rules/java/java.correctness.loop-condition-never-true.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.non-terminating-loop
+    rulePath: ./rules/java/java.correctness.non-terminating-loop.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.unimplementable-interface
+    rulePath: ./rules/java/java.correctness.unimplementable-interface.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.unsafe-collection-downcast
+    rulePath: ./rules/java/java.correctness.unsafe-collection-downcast.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.unsupported-method-call
+    rulePath: ./rules/java/java.correctness.unsupported-method-call.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.boxed-boolean-conditional
+    rulePath: ./rules/java/java.correctness.boxed-boolean-conditional.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.double-assignment
+    rulePath: ./rules/java/java.correctness.double-assignment.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.sync-on-mutable-ref
+    rulePath: ./rules/java/java.correctness.sync-on-mutable-ref.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.sync-on-nullable-field
+    rulePath: ./rules/java/java.correctness.sync-on-nullable-field.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.sync-on-public-field
+    rulePath: ./rules/java/java.correctness.sync-on-public-field.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.system-exit
+    rulePath: ./rules/java/java.correctness.system-exit.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.thread-static-misuse
+    rulePath: ./rules/java/java.correctness.thread-static-misuse.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.unsync-static-lazy-init
+    rulePath: ./rules/java/java.correctness.unsync-static-lazy-init.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.invalid-time-constants
+    rulePath: ./rules/java/java.correctness.invalid-time-constants.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.comparator-downcast-sign-flip
+    rulePath: ./rules/java/java.correctness.comparator-downcast-sign-flip.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.cacheloader-null-return
+    rulePath: ./rules/java/java.correctness.cacheloader-null-return.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.incorrect-main-signature
+    rulePath: ./rules/java/java.correctness.incorrect-main-signature.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.enum-get-class
+    rulePath: ./rules/java/java.correctness.enum-get-class.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.deprecated-thread-methods
+    rulePath: ./rules/java/java.correctness.deprecated-thread-methods.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.possible-null-access
+    rulePath: ./rules/java/java.correctness.possible-null-access.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.possible-null-access-exception
+    rulePath: ./rules/java/java.correctness.possible-null-access-exception.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.invalidated-iterator
+    rulePath: ./rules/java/java.correctness.invalidated-iterator.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.mutable-data-exposed
+    rulePath: ./rules/java/java.correctness.mutable-data-exposed.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.duration-with-nanos-misuse
+    rulePath: ./rules/java/java.correctness.duration-with-nanos-misuse.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.indexof-reversed-arguments
+    rulePath: ./rules/java/java.correctness.indexof-reversed-arguments.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.ncopies-argument-order
+    rulePath: ./rules/java/java.correctness.ncopies-argument-order.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.class-isinstance-on-class
+    rulePath: ./rules/java/java.correctness.class-isinstance-on-class.rule.yaml
+    presets:
+      - recommended
+      - strict
+  # Batch 15 (JAVA-E) — bug risk / framework rules
+  - id: java.correctness.zoneid-invalid-timezone
+    rulePath: ./rules/java/java.correctness.zoneid-invalid-timezone.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.timezone-invalid-id
+    rulePath: ./rules/java/java.correctness.timezone-invalid-id.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.instant-unsupported-temporal-unit
+    rulePath: ./rules/java/java.correctness.instant-unsupported-temporal-unit.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.iterable-path-type
+    rulePath: ./rules/java/java.correctness.iterable-path-type.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.throw-null
+    rulePath: ./rules/java/java.correctness.throw-null.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.hashtable-contains-value
+    rulePath: ./rules/java/java.correctness.hashtable-contains-value.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.unterminated-assertion-chain
+    rulePath: ./rules/java/java.correctness.unterminated-assertion-chain.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: java.correctness.prepared-statement-in-loop
+    rulePath: ./rules/java/java.correctness.prepared-statement-in-loop.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.assertion-in-production
+    rulePath: ./rules/java/java.correctness.assertion-in-production.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.array-compared-to-non-array
+    rulePath: ./rules/java/java.correctness.array-compared-to-non-array.rule.yaml
+    presets:
+      - strict
+  - id: java.correctness.parameter-reassignment
+    rulePath: ./rules/java/java.correctness.parameter-reassignment.rule.yaml
+    presets:
+      - strict
   - id: java.security.insecure-cipher-mode
     rulePath: ./rules/java/java.security.insecure-cipher-mode.rule.yaml
     presets:
@@ -2733,6 +3015,18 @@ rules:
     rulePath: ./rules/java/java.testing.http-client-in-unit-test.rule.yaml
     presets:
       - recommended
+      - strict
+  - id: java.testing.setup-teardown-annotation
+    rulePath: ./rules/java/java.testing.setup-teardown-annotation.rule.yaml
+    presets:
+      - strict
+  - id: java.testing.setup-without-super
+    rulePath: ./rules/java/java.testing.setup-without-super.rule.yaml
+    presets:
+      - strict
+  - id: java.testing.teardown-without-super
+    rulePath: ./rules/java/java.testing.teardown-without-super.rule.yaml
+    presets:
       - strict
   - id: php.testing.mark-test-skipped-without-ticket-reference
     rulePath: ./rules/php/php.testing.mark-test-skipped-without-ticket-reference.rule.yaml

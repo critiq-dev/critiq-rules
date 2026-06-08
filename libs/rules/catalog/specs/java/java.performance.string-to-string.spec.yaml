@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.string-to-string.rule.yaml
+fixtures:
+  - name: flags toString() on string literal
+    sourcePath: ./fixtures/java.performance.string-to-string/string-to-string.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.string-to-string
+      allSeverities:
+        - high
+  - name: allows string literal without toString()
+    sourcePath: ./fixtures/java.performance.string-to-string/string-to-string.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.double-checked-locking
+  title: Double-checked locking without volatile field
+  summary: A double-checked locking pattern on a non-volatile field is unsafe.
+  rationale: Without volatile, the JVM may reorder writes so that a thread sees a partially constructed object.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1018
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.double-checked-locking
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.7
+    tags:
+      - correctness
+      - java
+  message:
+    title: Double-checked locking on non-volatile field
+    summary: The double-checked locking pattern is used on a field that is not declared volatile, which is unsafe under the Java memory model.
+  remediation:
+    summary: Declare the field as volatile, or use an inner static holder class for lazy initialization.

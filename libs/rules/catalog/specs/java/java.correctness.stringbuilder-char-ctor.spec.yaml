@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.stringbuilder-char-ctor.rule.yaml
+fixtures:
+  - name: flags StringBuilder with char literal
+    sourcePath: ./fixtures/java.correctness.stringbuilder-char-ctor/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.stringbuilder-char-ctor
+  - name: allows StringBuilder with string literal
+    sourcePath: ./fixtures/java.correctness.stringbuilder-char-ctor/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

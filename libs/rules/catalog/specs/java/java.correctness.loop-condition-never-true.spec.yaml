@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.loop-condition-never-true.rule.yaml
+fixtures:
+  - name: flags while(false) loop
+    sourcePath: ./fixtures/java.correctness.loop-condition-never-true/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.loop-condition-never-true
+  - name: allows while with variable condition
+    sourcePath: ./fixtures/java.correctness.loop-condition-never-true/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

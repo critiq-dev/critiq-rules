@@ -5,6 +5,9 @@ metadata:
   title: Compare arrays with Arrays.equals
   summary: Array.equals compares references, not contents.
   rationale: Reference equality on arrays is almost always a logic bug.
+  aliases:
+    - JAVA-S0348
+    - JAVA-S0349
   tags:
     - correctness
     - java

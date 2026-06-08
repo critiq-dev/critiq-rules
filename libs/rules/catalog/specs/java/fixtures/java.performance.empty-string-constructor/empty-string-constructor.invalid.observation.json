@@ -1,0 +1,41 @@
+{
+  "path": "src/BadEmptyString.java",
+  "language": "java",
+  "text": "class BadEmptyString {\n  String getEmpty() {\n    return new String();\n  }\n\n  String initEmpty() {\n    String s = new String();\n    return s;\n  }\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.performance.empty-string-constructor",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 3,
+            "startColumn": 12,
+            "endLine": 3,
+            "endColumn": 24
+          },
+          "text": "new String()",
+          "props": {}
+        },
+        {
+          "id": "fact-2",
+          "kind": "java.performance.empty-string-constructor",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 7,
+            "startColumn": 15,
+            "endLine": 7,
+            "endColumn": 27
+          },
+          "text": "new String()",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

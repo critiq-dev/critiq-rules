@@ -1,0 +1,28 @@
+{
+  "path": "src/InstantDemo.java",
+  "language": "java",
+  "text": "import java.time.Instant; import java.time.temporal.ChronoUnit; class Demo { Instant get() { return Instant.now().plus(1, ChronoUnit.WEEKS); } }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.instant-unsupported-temporal-unit",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 119
+          },
+          "text": ".plus(1, ChronoUnit.WEEKS)",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

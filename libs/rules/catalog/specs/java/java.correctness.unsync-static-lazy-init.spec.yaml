@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unsync-static-lazy-init.rule.yaml
+fixtures:
+  - name: flags unsynchronized static lazy init
+    sourcePath: ./fixtures/java.correctness.unsync-static-lazy-init/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.unsync-static-lazy-init
+  - name: allows synchronized static init
+    sourcePath: ./fixtures/java.correctness.unsync-static-lazy-init/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

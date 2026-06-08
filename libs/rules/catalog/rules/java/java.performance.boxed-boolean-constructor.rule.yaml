@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.boxed-boolean-constructor
+  title: "Boolean constructor is inefficient"
+  summary: "`new Boolean(value)` creates a new object instance; use `Boolean.valueOf()` or autoboxing instead."
+  rationale: "The `Boolean(boolean)` constructor always creates a new object instance, while `Boolean.valueOf(boolean)` returns cached singletons (`Boolean.TRUE` / `Boolean.FALSE`). Since Java 9, the `Boolean` constructor has been deprecated in favor of `valueOf()`. Replace `new Boolean(...)` with `Boolean.valueOf(...)` or rely on autoboxing."
+  aliases:
+    - JAVA-P0066
+  tags:
+    - performance
+    - java
+    - allocation
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.boxed-boolean-constructor
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: high
+    confidence: 0.93
+    tags:
+      - performance
+      - java
+  message:
+    title: "Inefficient Boolean constructor in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` creates a new Boolean instance. Use `Boolean.valueOf(...)` to reuse cached instances."
+  remediation:
+    summary: "Replace `new Boolean(value)` with `Boolean.valueOf(value)` or rely on autoboxing."

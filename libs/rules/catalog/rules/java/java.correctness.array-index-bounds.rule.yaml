@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.array-index-bounds
+  title: Array or list access with out-of-bounds index
+  summary: An array, list, or string is accessed at length()/size(), which is always one past the last valid index.
+  rationale: Array indices range from 0 to length-1. Accessing index `length` throws ArrayIndexOutOfBoundsException.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1020
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.array-index-bounds
+    bind: issue
+emit:
+  finding:
+    category: correctness.bounds
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - java
+  message:
+    title: Potential index out of bounds access in `${captures.issue.text}`
+    summary: An index expression uses length()/size() as the upper bound, which is always one element past the valid range.
+  remediation:
+    summary: Use `length - 1` or `size() - 1` to access the last element, or verify the index is valid before access.

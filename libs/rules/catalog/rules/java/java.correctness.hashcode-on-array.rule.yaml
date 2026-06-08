@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.hashcode-on-array
+  title: hashCode() called on an array
+  summary: Calling hashCode() directly on an array uses Object's identity-based hashCode rather than a content-based hash code.
+  rationale: Arrays inherit Object.hashCode(), which returns the identity hash code, not a hash derived from array contents. This means two arrays with identical elements will have different hash codes. Use Arrays.hashCode() instead.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - JAVA-E1044
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.hashcode-on-array
+    bind: issue
+emit:
+  finding:
+    category: correctness.equality
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: hashCode() called on array
+    summary: "`${captures.issue.text}` calls hashCode() directly on an array, using identity-based hash instead of content-based hash."
+  remediation:
+    summary: Use `Arrays.hashCode(array)` instead of `array.hashCode()`.

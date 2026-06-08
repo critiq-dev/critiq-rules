@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.annotation-check-always-false.rule.yaml
+fixtures:
+  - name: flags annotation check with SOURCE retention
+    sourcePath: ./fixtures/java.correctness.annotation-check-always-false/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.annotation-check-always-false
+  - name: allows annotation check with RUNTIME retention
+    sourcePath: ./fixtures/java.correctness.annotation-check-always-false/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

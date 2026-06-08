@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.prepared-statement-in-loop.rule.yaml
+fixtures:
+  - name: flags PreparedStatement creation inside for loop
+    sourcePath: ./fixtures/java.correctness.prepared-statement-in-loop/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.prepared-statement-in-loop
+  - name: allows PreparedStatement creation outside loop
+    sourcePath: ./fixtures/java.correctness.prepared-statement-in-loop/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

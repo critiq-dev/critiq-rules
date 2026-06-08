@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.assertion-in-production.rule.yaml
+fixtures:
+  - name: flags assert statement in production code
+    sourcePath: ./fixtures/java.correctness.assertion-in-production/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.assertion-in-production
+  - name: allows assertThat in production code
+    sourcePath: ./fixtures/java.correctness.assertion-in-production/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

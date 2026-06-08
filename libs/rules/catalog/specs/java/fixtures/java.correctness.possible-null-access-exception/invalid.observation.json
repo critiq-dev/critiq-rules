@@ -1,0 +1,28 @@
+{
+  "path": "src/Example.java",
+  "language": "java",
+  "text": "class Example { int read(String path) { InputStream in = null; try { in = new FileInputStream(path); return in.read(); } catch (IOException e) { return in.available(); } } }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.possible-null-access-exception",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 170
+          },
+          "text": "in.available()",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

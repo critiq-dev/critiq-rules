@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.invalid-time-constants.rule.yaml
+fixtures:
+  - name: flags LocalDate.of with month > 12
+    sourcePath: ./fixtures/java.correctness.invalid-time-constants/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.invalid-time-constants
+  - name: allows valid date/time constants
+    sourcePath: ./fixtures/java.correctness.invalid-time-constants/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

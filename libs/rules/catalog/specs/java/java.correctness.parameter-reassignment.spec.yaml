@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.parameter-reassignment.rule.yaml
+fixtures:
+  - name: flags parameter reassignment in method body
+    sourcePath: ./fixtures/java.correctness.parameter-reassignment/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.parameter-reassignment
+  - name: allows field assignment via this.param
+    sourcePath: ./fixtures/java.correctness.parameter-reassignment/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.string-to-string
+  title: "toString invoked on a string value is useless"
+  summary: "Calling `toString()` on a string literal or string variable creates an unnecessary identity copy."
+  rationale: "Invoking `toString()` on a `String` value is a no-op — it simply returns `this`. The call is unnecessary and may indicate confusion about the runtime type of a value. Remove the `.toString()` call to clarify intent and avoid misleading readers."
+  aliases:
+    - JAVA-P0064
+  tags:
+    - performance
+    - java
+    - allocation
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.string-to-string
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: high
+    confidence: 0.88
+    tags:
+      - performance
+      - java
+  message:
+    title: "Unnecessary `.toString()` call on string value in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` invokes `toString()` on a value that is already a String. This call is a no-op and should be removed."
+  remediation:
+    summary: "Remove the `.toString()` call — the value is already a String."

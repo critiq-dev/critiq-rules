@@ -1,0 +1,28 @@
+{
+  "path": "src/IterablePathDemo.java",
+  "language": "java",
+  "text": "import java.nio.file.Path; import java.util.Collection; class Demo { void process(Iterable<Path> paths) {} }",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "java.correctness.iterable-path-type",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 99
+          },
+          "text": "Iterable<Path>",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

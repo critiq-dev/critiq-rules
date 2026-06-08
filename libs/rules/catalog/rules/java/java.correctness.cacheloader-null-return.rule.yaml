@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.cacheloader-null-return
+  title: CacheLoader load method should not return null
+  summary: Returning null from a CacheLoader.load() method causes InvalidCacheLoadException at runtime. Guava caches do not support null values.
+  rationale: CacheLoader.load() must never return null. Guava caches treat null returns as failures and throw InvalidCacheLoadException. The method should either return a non-null value or throw an exception.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1104
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.cacheloader-null-return
+    bind: issue
+emit:
+  finding:
+    category: correctness.exceptions
+    severity: medium
+    confidence: 0.7
+    tags:
+      - correctness
+      - java
+  message:
+    title: CacheLoader.load() returns null which will throw InvalidCacheLoadException
+    summary: The load() method of a CacheLoader subclass returns null. Guava caches do not allow null values and will throw InvalidCacheLoadException.
+  remediation:
+    summary: Return a non-null value, use Optional, or throw an exception instead of returning null from CacheLoader.load().

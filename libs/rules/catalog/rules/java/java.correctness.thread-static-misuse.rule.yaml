@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.thread-static-misuse
+  title: Thread instance calling static Thread methods
+  summary: Calling static Thread methods like sleep(), yield(), or interrupted() on a Thread instance is misleading because they operate on the current thread, not the instance.
+  rationale: Thread.sleep(), Thread.yield(), and Thread.interrupted() are static methods that always act on the current thread. Calling them on a Thread instance suggests they affect that instance, which is incorrect.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1062
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.thread-static-misuse
+    bind: issue
+emit:
+  finding:
+    category: correctness.general
+    severity: critical
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: Static Thread method called on instance
+    summary: The static method operates on the current thread, not the instance it appears to be called on.
+  remediation:
+    summary: Call `Thread.sleep(...)` directly instead of calling through a Thread instance.

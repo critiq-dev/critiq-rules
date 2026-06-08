@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.serializable-superclass.rule.yaml
+fixtures:
+  - name: flags Serializable class with non-Serializable superclass
+    sourcePath: ./fixtures/java.correctness.serializable-superclass/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.serializable-superclass
+  - name: allows class with Serializable superclass
+    sourcePath: ./fixtures/java.correctness.serializable-superclass/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.system-exit.rule.yaml
+fixtures:
+  - name: flags System.exit calls
+    sourcePath: ./fixtures/java.correctness.system-exit/system-exit.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.system-exit
+      allSeverities:
+        - high
+  - name: allows code without System.exit
+    sourcePath: ./fixtures/java.correctness.system-exit/system-exit.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

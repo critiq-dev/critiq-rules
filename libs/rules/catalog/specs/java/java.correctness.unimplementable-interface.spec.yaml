@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unimplementable-interface.rule.yaml
+fixtures:
+  - name: flags interface with Object-clashing method
+    sourcePath: ./fixtures/java.correctness.unimplementable-interface/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.unimplementable-interface
+  - name: allows interface without clashing methods
+    sourcePath: ./fixtures/java.correctness.unimplementable-interface/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

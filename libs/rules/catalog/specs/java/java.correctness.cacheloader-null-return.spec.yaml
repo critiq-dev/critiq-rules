@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.cacheloader-null-return.rule.yaml
+fixtures:
+  - name: flags CacheLoader load() returning null
+    sourcePath: ./fixtures/java.correctness.cacheloader-null-return/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.cacheloader-null-return
+  - name: allows load() returning non-null
+    sourcePath: ./fixtures/java.correctness.cacheloader-null-return/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.boxed-boolean-conditional
+  title: Boxed Boolean in conditional expressions
+  summary: Using a boxed Boolean directly in a conditional can throw NullPointerException if the value is null.
+  rationale: Auto-unboxing a null Boolean in if/while/ternary expressions throws NullPointerException at runtime.
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+  aliases:
+    - JAVA-E1054
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.boxed-boolean-conditional
+    bind: issue
+emit:
+  finding:
+    category: correctness.general
+    severity: high
+    confidence: 0.80
+    tags:
+      - correctness
+      - java
+  message:
+    title: Boxed Boolean in conditional expression
+    summary: Unboxing a null Boolean will throw NullPointerException.
+  remediation:
+    summary: Use `Boolean.TRUE.equals(flag)` or `boolean` primitive type, or guard with a null check before the conditional.

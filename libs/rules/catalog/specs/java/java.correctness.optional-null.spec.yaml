@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.optional-null.rule.yaml
+fixtures:
+  - name: flags Optional variable assigned null
+    sourcePath: ./fixtures/java.correctness.optional-null/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.optional-null
+  - name: allows Optional.empty() assignment
+    sourcePath: ./fixtures/java.correctness.optional-null/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
