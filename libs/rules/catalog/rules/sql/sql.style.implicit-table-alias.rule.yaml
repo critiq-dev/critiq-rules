@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.implicit-table-alias
+  aliases:
+    - SQL-L011
+  title: Implicit aliasing of table detected
+  summary: Avoid implicit table aliases without the AS keyword
+  rationale: "Implicit table aliases (e.g. FROM users u) are less readable and can be confused with other SQL constructs. Prefer explicit AS for clarity."
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.implicit-table-alias
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.9
+    tags:
+      - sql
+      - style
+  message:
+    title: Implicit table alias detected
+    summary: "``${captures.issue.text}`` uses an implicit alias without the ``AS`` keyword"
+  remediation:
+    summary: "Add the AS keyword before the alias (e.g. FROM users AS u)."

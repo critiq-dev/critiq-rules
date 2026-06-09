@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.distinct-with-parenthesis.rule.yaml
+fixtures:
+  - name: flags DISTINCT with parentheses
+    sourcePath: ./fixtures/sql.style.distinct-with-parenthesis/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.style.distinct-with-parenthesis
+  - name: passes DISTINCT without parentheses
+    sourcePath: ./fixtures/sql.style.distinct-with-parenthesis/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

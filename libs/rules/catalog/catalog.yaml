@@ -885,6 +885,10 @@ rules:
     rulePath: ./rules/php/php.correctness.instantiate-abstract-class.rule.yaml
     presets:
       - strict
+  - id: php.correctness.instanceof-invalid-type
+    rulePath: ./rules/php/php.correctness.instanceof-invalid-type.rule.yaml
+    presets:
+      - strict
   - id: php.correctness.invalid-constructor-promotion
     rulePath: ./rules/php/php.correctness.invalid-constructor-promotion.rule.yaml
     presets:
@@ -963,6 +967,42 @@ rules:
       - strict
   - id: php.correctness.invalid-cookie-options
     rulePath: ./rules/php/php.correctness.invalid-cookie-options.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.missing-return-statement
+    rulePath: ./rules/php/php.correctness.missing-return-statement.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.throw-non-exception
+    rulePath: ./rules/php/php.correctness.throw-non-exception.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.uninitialized-typed-property
+    rulePath: ./rules/php/php.correctness.uninitialized-typed-property.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.unused-constructor-parameter
+    rulePath: ./rules/php/php.correctness.unused-constructor-parameter.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.echo-invalid-value
+    rulePath: ./rules/php/php.correctness.echo-invalid-value.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.print-invalid-value
+    rulePath: ./rules/php/php.correctness.print-invalid-value.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.invalid-string-interpolation-type
+    rulePath: ./rules/php/php.correctness.invalid-string-interpolation-type.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.undefined-static-property
+    rulePath: ./rules/php/php.correctness.undefined-static-property.rule.yaml
+    presets:
+      - strict
+  - id: php.correctness.attribute-on-property
+    rulePath: ./rules/php/php.correctness.attribute-on-property.rule.yaml
     presets:
       - strict
   - id: php.performance.expensive-loop-condition
@@ -4154,5 +4194,57 @@ rules:
       - strict
   - id: cfn.maintainability.fn-equals-will-always-return-true-or-false
     rulePath: ./rules/cfn/cfn.maintainability.fn-equals-will-always-return-true-or-false.rule.yaml
+    presets:
+      - strict
+  - id: sql.correctness.undefined-reference
+    rulePath: ./rules/sql/sql.correctness.undefined-reference.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.ambiguous-distinct
+    rulePath: ./rules/sql/sql.style.ambiguous-distinct.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.column-expression-without-alias
+    rulePath: ./rules/sql/sql.style.column-expression-without-alias.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.distinct-with-parenthesis
+    rulePath: ./rules/sql/sql.style.distinct-with-parenthesis.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.duplicate-table-aliases
+    rulePath: ./rules/sql/sql.style.duplicate-table-aliases.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.implicit-column-alias
+    rulePath: ./rules/sql/sql.style.implicit-column-alias.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.implicit-table-alias
+    rulePath: ./rules/sql/sql.style.implicit-table-alias.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.inconsistent-capitalization
+    rulePath: ./rules/sql/sql.style.inconsistent-capitalization.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.inconsistent-keyword-case
+    rulePath: ./rules/sql/sql.style.inconsistent-keyword-case.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.keyword-as-identifier
+    rulePath: ./rules/sql/sql.style.keyword-as-identifier.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.trailing-select-comma
+    rulePath: ./rules/sql/sql.style.trailing-select-comma.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.unqualified-references
+    rulePath: ./rules/sql/sql.style.unqualified-references.rule.yaml
+    presets:
+      - strict
+  - id: sql.style.unused-table-alias
+    rulePath: ./rules/sql/sql.style.unused-table-alias.rule.yaml
     presets:
       - strict

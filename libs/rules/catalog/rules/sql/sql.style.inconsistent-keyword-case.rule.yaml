@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.inconsistent-keyword-case
+  aliases:
+    - SQL-L010
+  title: Inconsistent capitalisation of keywords
+  summary: SQL keywords should be consistently cased throughout a file
+  rationale: Mixing uppercase and lowercase SQL keywords reduces readability and suggests inconsistent coding habits.
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.inconsistent-keyword-case
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.9
+    tags:
+      - sql
+      - style
+  message:
+    title: Inconsistent keyword casing in SQL
+    summary: "``${captures.issue.text}`` mixes uppercase and lowercase SQL keywords"
+  remediation:
+    summary: Use consistent casing for all SQL keywords throughout the file (e.g. all UPPER or all lower).

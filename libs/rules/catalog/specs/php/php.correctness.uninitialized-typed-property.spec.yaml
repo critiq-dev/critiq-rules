@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.uninitialized-typed-property.rule.yaml
+fixtures:
+  - name: flags typed property without default and no constructor assignment
+    sourcePath: ./fixtures/php.correctness.uninitialized-typed-property/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.uninitialized-typed-property
+  - name: ignores typed property with default or constructor assignment
+    sourcePath: ./fixtures/php.correctness.uninitialized-typed-property/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

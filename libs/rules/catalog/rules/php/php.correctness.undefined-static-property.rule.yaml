@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.undefined-static-property
+  title: Do not access undefined static properties
+  summary: Accessing a static property that is not declared on the target class will produce a runtime notice and return null.
+  aliases:
+    - PHP-W1034
+  rationale: PHP raises an undefined property notice when accessing a static property that was never declared on the class. This is a common mistake when class APIs evolve or when property names are mistyped. The fix is to declare the static property or correct the access.
+  detection:
+    kind: pattern
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.undefined-static-property
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.80
+    tags:
+      - correctness
+      - php
+  message:
+    title: Static property ${captures.issue.text} is not defined on the target class
+    summary: "${captures.issue.text} is accessed via static property syntax but the declaring class has no static property with that name."
+  remediation:
+    summary: Ensure the static property is declared on the class with the correct name, or fix the static access to reference an existing property.

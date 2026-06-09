@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.keyword-as-identifier
+  aliases:
+    - SQL-L029
+  title: Keyword used as identifier
+  summary: Avoid using SQL keywords as table aliases
+  rationale: Using SQL keywords as aliases (e.g. SELECT sum.a FROM foo AS sum) makes queries harder to read and can cause parse errors or subtle bugs.
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.keyword-as-identifier
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.9
+    tags:
+      - sql
+      - style
+  message:
+    title: Keyword used as table alias
+    summary: "``${captures.issue.text}`` uses a reserved SQL keyword as an alias"
+  remediation:
+    summary: Rename the alias to a non-keyword identifier.

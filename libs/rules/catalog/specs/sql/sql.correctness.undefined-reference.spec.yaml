@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.correctness.undefined-reference.rule.yaml
+fixtures:
+  - name: flags undefined table reference
+    sourcePath: ./fixtures/sql.correctness.undefined-reference/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.correctness.undefined-reference
+  - name: passes valid reference
+    sourcePath: ./fixtures/sql.correctness.undefined-reference/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

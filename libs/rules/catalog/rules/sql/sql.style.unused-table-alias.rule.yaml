@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.unused-table-alias
+  aliases:
+    - SQL-L025
+  title: Unused table alias
+  summary: Each table alias should be referenced in the query
+  rationale: An unused table alias (e.g. SELECT a FROM foo AS zoo where zoo is never referenced) is dead code that adds noise and can confuse readers.
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.unused-table-alias
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.85
+    tags:
+      - sql
+      - style
+  message:
+    title: Unused table alias
+    summary: "``${captures.issue.text}`` defines a table alias that is never referenced"
+  remediation:
+    summary: Remove the unused alias or qualify a column reference with it.

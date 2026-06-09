@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.missing-return-statement
+  title: Add missing return statement
+  summary: Functions and methods with non-void return types should contain at least one return statement.
+  aliases:
+    - PHP-E1004
+  rationale: A function or method declared with a return type that never reaches a return statement will cause a runtime error.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.missing-return-statement
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.55
+    tags:
+      - correctness
+      - php
+  message:
+    title: Add missing return statement
+    summary: "`${captures.issue.text}` has a return type declaration but no return statement."
+  remediation:
+    summary: Ensure every code path in a typed function or method returns a value matching the declared return type.

@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.invalid-string-interpolation-type.rule.yaml
+fixtures:
+  - name: flags invalid string interpolation with array
+    sourcePath: ./fixtures/php.correctness.invalid-string-interpolation-type/invalid.php
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - php.correctness.invalid-string-interpolation-type
+        - php.correctness.invalid-string-interpolation-type
+  - name: ignores simple variable interpolation
+    sourcePath: ./fixtures/php.correctness.invalid-string-interpolation-type/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.echo-invalid-value
+  title: Do not echo non-string values
+  summary: echo should only be called with string-convertible scalar values. Objects, arrays, and arrays using array() syntax cannot be meaningfully converted to strings by echo and may produce warnings.
+  aliases:
+    - PHP-W1041
+  rationale: Using echo with non-scalar values like objects or arrays produces unexpected output or warnings. Objects must implement __toString() for meaningful output; arrays always produce "Array" which is almost never the intent.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.echo-invalid-value
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - php
+  message:
+    title: echo called with non-string value
+    summary: "`${captures.issue.text}` passes a non-scalar value to echo, which may produce a warning or unexpected output."
+  remediation:
+    summary: Convert the value to a string before echoing, or use var_dump / print_r for debugging output. For arrays, iterate and echo each element individually.

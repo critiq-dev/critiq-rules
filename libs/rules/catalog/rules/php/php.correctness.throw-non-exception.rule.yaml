@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.throw-non-exception
+  title: Only throw Exception and Error instances
+  summary: Throw statements should only raise objects that extend Exception or Error.
+  aliases:
+    - PHP-E1001
+  rationale: Throwing an object that is not an Exception or Error violates PHP type contracts and causes fatal errors.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.throw-non-exception
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.55
+    tags:
+      - correctness
+      - php
+  message:
+    title: Throw only Exception and Error instances
+    summary: "`${captures.issue.text}` may throw a class that is not a valid exception class."
+  remediation:
+    summary: Ensure thrown objects extend \\Exception or \\Error, or implement Throwable.

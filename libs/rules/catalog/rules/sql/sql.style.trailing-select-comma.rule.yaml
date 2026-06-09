@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.trailing-select-comma
+  aliases:
+    - SQL-L038
+  title: Trailing comma in SELECT clause
+  summary: Remove trailing commas before FROM in SELECT statements
+  rationale: Trailing commas in SELECT clauses (e.g. SELECT a, b, FROM foo) are invalid in standard SQL and cause syntax errors in most databases.
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.trailing-select-comma
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.9
+    tags:
+      - sql
+      - style
+  message:
+    title: Trailing comma in SELECT clause
+    summary: "``${captures.issue.text}`` contains a trailing comma before ``FROM``"
+  remediation:
+    summary: Remove the trailing comma before the FROM keyword.

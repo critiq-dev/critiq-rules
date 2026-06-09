@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.correctness.undefined-reference
+  aliases:
+    - SQL-L026
+  title: Undefined table or alias reference
+  summary: Qualify column references with known tables or aliases only
+  rationale: Referencing an undefined table or alias (e.g. SELECT vee.a FROM foo where vee is not a known table or alias) indicates a likely typo or logic error.
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.correctness.undefined-reference
+    bind: issue
+emit:
+  finding:
+    category: sql.correctness
+    severity: high
+    confidence: 0.7
+    tags:
+      - sql
+      - correctness
+  message:
+    title: Undefined reference to table or alias
+    summary: "``${captures.issue.text}`` references a table or alias not defined in the current query scope"
+  remediation:
+    summary: Verify the referenced table or alias name is correct and spelled consistently.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.ambiguous-distinct.rule.yaml
+fixtures:
+  - name: flags ambiguous DISTINCT
+    sourcePath: ./fixtures/sql.style.ambiguous-distinct/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.style.ambiguous-distinct
+  - name: passes simple DISTINCT
+    sourcePath: ./fixtures/sql.style.ambiguous-distinct/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

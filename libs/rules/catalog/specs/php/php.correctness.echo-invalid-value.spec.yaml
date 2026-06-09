@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.echo-invalid-value.rule.yaml
+fixtures:
+  - name: flags echo with object instantiation
+    sourcePath: ./fixtures/php.correctness.echo-invalid-value/invalid.php
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - php.correctness.echo-invalid-value
+        - php.correctness.echo-invalid-value
+  - name: ignores echo with string
+    sourcePath: ./fixtures/php.correctness.echo-invalid-value/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

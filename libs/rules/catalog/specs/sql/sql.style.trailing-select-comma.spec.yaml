@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.trailing-select-comma.rule.yaml
+fixtures:
+  - name: flags trailing comma before FROM
+    sourcePath: ./fixtures/sql.style.trailing-select-comma/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.style.trailing-select-comma
+  - name: passes no trailing comma
+    sourcePath: ./fixtures/sql.style.trailing-select-comma/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

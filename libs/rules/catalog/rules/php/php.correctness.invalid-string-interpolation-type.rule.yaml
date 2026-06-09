@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-string-interpolation-type
+  title: Avoid using non-scalar types in string interpolation
+  summary: String interpolation with objects, arrays, or array literals using `${...}` syntax produces unexpected results. The resulting string will contain "Object" or "Array" rather than a meaningful representation.
+  aliases:
+    - PHP-W1043
+  rationale: PHP's string interpolation converts objects and arrays to the strings "Object" and "Array" respectively, which is almost never the intended output. Objects must implement __toString() and arrays must be handled explicitly.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-string-interpolation-type
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.7
+    tags:
+      - correctness
+      - php
+  message:
+    title: Non-scalar type used in string interpolation
+    summary: "`${captures.issue.text}` uses a non-scalar expression inside string interpolation. The result will not be the intended value."
+  remediation:
+    summary: Convert the value to a string explicitly before interpolation, or use sprintf for structured formatting.

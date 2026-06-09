@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.unqualified-references.rule.yaml
+fixtures:
+  - name: flags unqualified references in multi-table query
+    sourcePath: ./fixtures/sql.style.unqualified-references/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.style.unqualified-references
+  - name: passes qualified references
+    sourcePath: ./fixtures/sql.style.unqualified-references/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

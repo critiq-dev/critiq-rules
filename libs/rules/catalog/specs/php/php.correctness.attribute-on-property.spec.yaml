@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.attribute-on-property.rule.yaml
+fixtures:
+  - name: flags attribute with wrong target on property
+    sourcePath: ./fixtures/php.correctness.attribute-on-property/invalid.php
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - php.correctness.attribute-on-property
+        - php.correctness.attribute-on-property
+  - name: ignores attribute with correct target or unknown
+    sourcePath: ./fixtures/php.correctness.attribute-on-property/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.column-expression-without-alias
+  aliases:
+    - SQL-L013
+  title: Column expression without alias detected
+  summary: Complex column expressions should include an explicit alias
+  rationale: Column expressions like function calls and arithmetic without an alias produce hard-to-reference result columns.
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.column-expression-without-alias
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.9
+    tags:
+      - sql
+      - style
+  message:
+    title: Column expression without alias
+    summary: "``${captures.issue.text}`` is a column expression without an explicit alias"
+  remediation:
+    summary: "Add an explicit alias (e.g. SELECT COUNT(*) AS user_count)."

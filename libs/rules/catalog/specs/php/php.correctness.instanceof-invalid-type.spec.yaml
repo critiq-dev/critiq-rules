@@ -1,0 +1,20 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.instanceof-invalid-type.rule.yaml
+fixtures:
+  - name: flags instanceof self outside class scope
+    sourcePath: ./fixtures/php.correctness.instanceof-invalid-type/invalid.php
+    expect:
+      findingCount: 6
+      allRuleIds:
+        - php.correctness.instanceof-invalid-type
+        - php.correctness.instanceof-invalid-type
+        - php.correctness.instanceof-invalid-type
+        - php.correctness.instanceof-invalid-type
+        - php.correctness.instanceof-invalid-type
+        - php.correctness.instanceof-invalid-type
+  - name: allows instanceof with valid identifiers inside class
+    sourcePath: ./fixtures/php.correctness.instanceof-invalid-type/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

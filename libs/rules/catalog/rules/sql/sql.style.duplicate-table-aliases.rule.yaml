@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.duplicate-table-aliases
+  aliases:
+    - SQL-L020
+  title: Duplicate table aliases
+  summary: Each table alias should be unique within a query
+  rationale: Duplicate table aliases cause ambiguous column references and runtime errors.
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.duplicate-table-aliases
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: critical
+    confidence: 0.9
+    tags:
+      - sql
+      - style
+  message:
+    title: Duplicate table alias
+    summary: "``${captures.issue.text}`` repeats a table alias used elsewhere in the query"
+  remediation:
+    summary: Use a unique alias for each table reference.

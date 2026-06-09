@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.unused-constructor-parameter.rule.yaml
+fixtures:
+  - name: flags unused constructor parameter
+    sourcePath: ./fixtures/php.correctness.unused-constructor-parameter/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.unused-constructor-parameter
+  - name: ignores used constructor parameters
+    sourcePath: ./fixtures/php.correctness.unused-constructor-parameter/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.implicit-table-alias.rule.yaml
+fixtures:
+  - name: flags implicit table alias
+    sourcePath: ./fixtures/sql.style.implicit-table-alias/invalid.sql
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - sql.style.implicit-table-alias
+        - sql.style.implicit-table-alias
+  - name: passes explicit table alias
+    sourcePath: ./fixtures/sql.style.implicit-table-alias/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

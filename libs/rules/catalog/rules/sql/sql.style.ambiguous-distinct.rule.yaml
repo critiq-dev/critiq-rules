@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.ambiguous-distinct
+  aliases:
+    - SQL-L021
+  title: Ambiguous use of DISTINCT
+  summary: DISTINCT with multiple columns including computed expressions may be ambiguous
+  rationale: When DISTINCT is used with 3+ columns including computed expressions, the DISTINCT may not apply as intended to all columns.
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.ambiguous-distinct
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.7
+    tags:
+      - sql
+      - style
+  message:
+    title: Ambiguous use of DISTINCT
+    summary: "``${captures.issue.text}`` uses ``DISTINCT`` with multiple columns including computed expressions"
+  remediation:
+    summary: Consider using a derived table or GROUP BY instead of DISTINCT when mixing simple and computed columns.

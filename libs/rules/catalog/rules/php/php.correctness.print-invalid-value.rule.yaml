@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.print-invalid-value
+  title: Do not print non-string values
+  summary: print should only be used with strings. Objects, arrays, and array() expressions cannot be meaningfully converted to strings by print.
+  aliases:
+    - PHP-W1044
+  rationale: Using print with non-scalar values like objects or arrays produces unexpected output or warnings. Objects must implement __toString() for meaningful output; arrays always produce "Array" which is almost never the intent.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.print-invalid-value
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - php
+  message:
+    title: print called with non-string value
+    summary: "`${captures.issue.text}` passes a non-scalar value to print, which may produce a warning or unexpected output."
+  remediation:
+    summary: Convert the value to a string before printing, or use var_dump / print_r for debugging output.

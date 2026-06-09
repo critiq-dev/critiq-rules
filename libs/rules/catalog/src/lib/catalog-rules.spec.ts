@@ -90,6 +90,7 @@ describe('rules catalog rule specs', () => {
       'ruby',
       'rust',
       'shared',
+      'sql',
       'typescript',
     ]);
     expect(referencedFixturePaths.every((fixturePath) => fixturePath.startsWith('./fixtures/'))).toBe(

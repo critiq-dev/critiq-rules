@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.inconsistent-keyword-case.rule.yaml
+fixtures:
+  - name: flags mixed keyword casing
+    sourcePath: ./fixtures/sql.style.inconsistent-keyword-case/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.style.inconsistent-keyword-case
+  - name: passes consistent keyword casing
+    sourcePath: ./fixtures/sql.style.inconsistent-keyword-case/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

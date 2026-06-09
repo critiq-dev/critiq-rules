@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.unused-constructor-parameter
+  title: Remove unused constructor parameters
+  summary: Constructor parameters that are not referenced in the constructor body should be removed.
+  aliases:
+    - PHP-W1037
+  rationale: Unused constructor parameters are dead code that clutter the interface. They suggest incomplete refactoring or misunderstanding of the constructor signature. Promoting properties with `public`/`protected`/`private` implicitly creates and assigns the property, so they are excluded.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.unused-constructor-parameter
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - correctness
+      - php
+  message:
+    title: Remove unused constructor parameter
+    summary: "Parameter `${captures.issue.text}` is never referenced in the constructor body."
+  remediation:
+    summary: Remove the unused parameter or add a reference in the constructor body. Consider promoting with `public`/`protected`/`private` if the parameter should become a property.

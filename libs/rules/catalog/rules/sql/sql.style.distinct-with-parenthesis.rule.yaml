@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.distinct-with-parenthesis
+  aliases:
+    - SQL-L015
+  title: DISTINCT with parenthesis
+  summary: Avoid using parentheses after DISTINCT as if it were a function call
+  rationale: "DISTINCT is a keyword modifier, not a function. DISTINCT(col) can be misleading; prefer DISTINCT col."
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.distinct-with-parenthesis
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.9
+    tags:
+      - sql
+      - style
+  message:
+    title: DISTINCT used as a function call
+    summary: "``${captures.issue.text}`` uses ``DISTINCT`` with parentheses as if it were a function"
+  remediation:
+    summary: "Remove the parentheses (e.g. SELECT DISTINCT name instead of SELECT DISTINCT(name))."

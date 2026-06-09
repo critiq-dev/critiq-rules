@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.duplicate-table-aliases.rule.yaml
+fixtures:
+  - name: flags duplicate table alias
+    sourcePath: ./fixtures/sql.style.duplicate-table-aliases/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.style.duplicate-table-aliases
+  - name: passes unique table aliases
+    sourcePath: ./fixtures/sql.style.duplicate-table-aliases/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

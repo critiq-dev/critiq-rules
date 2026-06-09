@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.uninitialized-typed-property
+  title: Initialize typed properties
+  summary: Typed class properties without a default value should be initialized in the constructor.
+  aliases:
+    - PHP-E1008
+  rationale: Accessing a typed property before initialization causes a runtime TypeError.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.uninitialized-typed-property
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.55
+    tags:
+      - correctness
+      - php
+  message:
+    title: Initialize typed property in constructor or with default value
+    summary: "`${captures.issue.text}` is a typed property without a default value and may not be initialized before access."
+  remediation:
+    summary: Assign a default value at declaration or initialize the property in the class constructor.

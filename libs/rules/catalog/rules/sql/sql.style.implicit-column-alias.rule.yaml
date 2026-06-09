@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.implicit-column-alias
+  aliases:
+    - SQL-L012
+  title: Implicit aliasing of column detected
+  summary: Avoid implicit column aliases without the AS keyword
+  rationale: "Implicit column aliases (e.g. SELECT name n) are less readable than explicit AS aliases."
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.implicit-column-alias
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.9
+    tags:
+      - sql
+      - style
+  message:
+    title: Implicit column alias detected
+    summary: "``${captures.issue.text}`` uses an implicit alias without the ``AS`` keyword"
+  remediation:
+    summary: "Add the AS keyword before the alias (e.g. SELECT name AS n)."

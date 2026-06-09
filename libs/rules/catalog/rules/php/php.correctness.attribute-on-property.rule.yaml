@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.attribute-on-property
+  title: Attribute class cannot be used with property
+  summary: An attribute that does not target properties should not be applied to a property declaration.
+  aliases:
+    - PHP-W1035
+  rationale: PHP 8.0+ attributes declare their allowed targets via the #[Attribute] attribute. Using an attribute on a property when it does not specify TARGET_PROPERTY (or TARGET_ALL) will be ignored or may produce unexpected behavior at runtime.
+  detection:
+    kind: pattern
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.attribute-on-property
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - correctness
+      - php
+  message:
+    title: Attribute ${captures.issue.text} cannot be applied to a property
+    summary: "${captures.issue.text} targets an attribute class that does not allow TARGET_PROPERTY."
+  remediation:
+    summary: Ensure the attribute class declares TARGET_PROPERTY in its #[Attribute] definition, or remove the attribute from the property.

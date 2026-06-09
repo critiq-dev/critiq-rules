@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.keyword-as-identifier.rule.yaml
+fixtures:
+  - name: flags keyword used as alias
+    sourcePath: ./fixtures/sql.style.keyword-as-identifier/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.style.keyword-as-identifier
+  - name: passes non-keyword alias
+    sourcePath: ./fixtures/sql.style.keyword-as-identifier/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

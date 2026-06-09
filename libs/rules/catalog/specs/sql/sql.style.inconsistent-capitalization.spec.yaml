@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.inconsistent-capitalization.rule.yaml
+fixtures:
+  - name: flags inconsistent capitalization
+    sourcePath: ./fixtures/sql.style.inconsistent-capitalization/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.style.inconsistent-capitalization
+  - name: passes consistent capitalization
+    sourcePath: ./fixtures/sql.style.inconsistent-capitalization/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

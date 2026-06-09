@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.undefined-static-property.rule.yaml
+fixtures:
+  - name: flags undefined static property access
+    sourcePath: ./fixtures/php.correctness.undefined-static-property/invalid.php
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - php.correctness.undefined-static-property
+        - php.correctness.undefined-static-property
+        - php.correctness.undefined-static-property
+  - name: ignores valid static property accesses
+    sourcePath: ./fixtures/php.correctness.undefined-static-property/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

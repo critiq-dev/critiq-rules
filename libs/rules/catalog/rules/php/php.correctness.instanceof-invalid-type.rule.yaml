@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.instanceof-invalid-type
+  title: Class used with instanceof is not a valid type
+  summary: instanceof should only be used with valid class, interface, or trait names.
+  aliases:
+    - PHP-E1009
+  rationale: Using instanceof with self or parent outside a class scope, or with keywords,
+    literals, and other non-class operands, produces a fatal error or always-false comparison
+    that indicates a bug.
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.instanceof-invalid-type
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - correctness
+      - php
+  message:
+    title: instanceof used with an invalid type
+    summary: "`${captures.issue.text}` uses instanceof with an operand that is not a valid class, interface, or trait name."
+  remediation:
+    summary: Replace the instanceof operand with a valid class, interface, or trait name, or use a variable holding the class name.

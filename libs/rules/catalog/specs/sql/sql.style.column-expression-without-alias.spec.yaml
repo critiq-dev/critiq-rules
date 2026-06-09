@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.column-expression-without-alias.rule.yaml
+fixtures:
+  - name: flags column expression without alias
+    sourcePath: ./fixtures/sql.style.column-expression-without-alias/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.style.column-expression-without-alias
+  - name: passes column expression with alias
+    sourcePath: ./fixtures/sql.style.column-expression-without-alias/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

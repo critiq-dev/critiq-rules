@@ -23,6 +23,9 @@
       ],
       "@critiq/example-starter-pack": [
         "examples/starter-pack/src/index.ts"
+      ],
+      "@critiq/adapter-sql": [
+        "../critiq-core/libs/adapters/sql/src/index.ts"
       ]
     }
   },

@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.inconsistent-capitalization
+  aliases:
+    - SQL-L014
+  title: Inconsistent capitalization detected
+  summary: Identifiers should be consistently capitalized throughout a file
+  rationale: Inconsistent capitalization of table and column names reduces readability and can lead to confusion.
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.inconsistent-capitalization
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.85
+    tags:
+      - sql
+      - style
+  message:
+    title: Inconsistent identifier capitalization
+    summary: "Identifiers in ``${captures.issue.text}`` use inconsistent capitalization"
+  remediation:
+    summary: Use consistent casing for each table and column name throughout the file.

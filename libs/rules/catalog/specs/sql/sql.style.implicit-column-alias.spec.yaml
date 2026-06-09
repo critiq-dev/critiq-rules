@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.implicit-column-alias.rule.yaml
+fixtures:
+  - name: flags implicit column alias
+    sourcePath: ./fixtures/sql.style.implicit-column-alias/invalid.sql
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - sql.style.implicit-column-alias
+        - sql.style.implicit-column-alias
+  - name: passes explicit column alias
+    sourcePath: ./fixtures/sql.style.implicit-column-alias/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []

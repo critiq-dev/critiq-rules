@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: sql.style.unqualified-references
+  aliases:
+    - SQL-L027
+  title: Unqualified column references in multi-table query
+  summary: Qualify column references with table name or alias when querying multiple tables
+  rationale: Unqualified column references in multi-table queries (e.g. SELECT a, b FROM foo JOIN bar) are ambiguous and can produce different results when table schemas change.
+  detection:
+    kind: pattern
+  tags:
+    - sql
+    - style
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - sql
+match:
+  fact:
+    kind: sql.style.unqualified-references
+    bind: issue
+emit:
+  finding:
+    category: sql.style
+    severity: high
+    confidence: 0.7
+    tags:
+      - sql
+      - style
+  message:
+    title: Unqualified column reference
+    summary: "``${captures.issue.text}`` contains unqualified column references in a multi-table query"
+  remediation:
+    summary: Prefix each column reference with its corresponding table name or alias.

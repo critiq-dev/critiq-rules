@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.print-invalid-value.rule.yaml
+fixtures:
+  - name: flags print with non-scalar value
+    sourcePath: ./fixtures/php.correctness.print-invalid-value/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.print-invalid-value
+  - name: ignores print with string
+    sourcePath: ./fixtures/php.correctness.print-invalid-value/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

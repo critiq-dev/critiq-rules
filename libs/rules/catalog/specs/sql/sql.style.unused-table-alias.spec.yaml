@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/sql/sql.style.unused-table-alias.rule.yaml
+fixtures:
+  - name: flags unused table alias
+    sourcePath: ./fixtures/sql.style.unused-table-alias/invalid.sql
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - sql.style.unused-table-alias
+  - name: passes used table alias
+    sourcePath: ./fixtures/sql.style.unused-table-alias/valid.sql
+    expect:
+      findingCount: 0
+      allRuleIds: []
