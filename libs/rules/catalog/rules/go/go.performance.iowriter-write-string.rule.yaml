@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.iowriter-write-string
+  title: Use `(io.StringWriter).WriteString` for writing strings
+  summary: Prefer `w.WriteString(s)` over `w.Write([]byte(s))` to avoid `[]byte` allocation, or over `io.WriteString(w, s)` which incurs dynamic dispatch.
+  rationale: >-
+    `w.Write([]byte(s))` allocates a `[]byte` copy of the string. If `w` implements
+    `io.StringWriter`, calling `WriteString(s)` directly avoids the allocation.
+    `io.WriteString(w, s)` also works but has dynamic dispatch overhead.
+  aliases:
+    - GO-P4008
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.performance.iowriter-write-string
+    bind: issue
+emit:
+  finding:
+    category: performance.optimization
+    severity: high
+    confidence: 0.9
+    tags:
+      - performance
+      - go
+  message:
+    title: Use `WriteString` instead of `Write([]byte(...))` or `io.WriteString`
+    summary: "Replace `${captures.issue.text}` with a direct `w.WriteString(...)` call when the writer implements `io.StringWriter`."
+  remediation:
+    summary: "Replace `w.Write([]byte(s))` with `w.WriteString(s)`, or `io.WriteString(w, s)` with `w.WriteString(s)`."

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.squirrel-unsafe-quoting.rule.yaml
+fixtures:
+  - name: flags squirrel.Expr with fmt.Sprintf interpolation
+    sourcePath: ./fixtures/go.security.squirrel-unsafe-quoting/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.squirrel-unsafe-quoting
+  - name: accepts squirrel.Eq map syntax
+    sourcePath: ./fixtures/go.security.squirrel-unsafe-quoting/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

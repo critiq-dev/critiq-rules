@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.duplicate-switch-cases
+  title: Duplicate case in switch statement
+  summary: Duplicate case values mean the second case is unreachable.
+  rationale: >-
+    A switch with two cases that have the same literal value will never execute
+    the second case. This is typically a copy-paste error where the case value
+    should be different.
+  aliases:
+    - CRT-D0007
+  tags:
+    - correctness
+    - go
+    - dead-code
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.duplicate-switch-cases
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - go
+      - dead-code
+  message:
+    title: Duplicate case `${captures.issue.text}` in switch statement
+    summary: "The switch contains two cases with the same value. The second case is unreachable."
+  remediation:
+    summary: >-
+      Remove or consolidate the duplicate case value into a single case.

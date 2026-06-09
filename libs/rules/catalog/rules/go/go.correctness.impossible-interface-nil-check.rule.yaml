@@ -1,0 +1,56 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.impossible-interface-nil-check
+  title: "Impossible interface nil check"
+  summary: >-
+    Interface value compared to nil when the underlying concrete type is always
+    non-nil. The nil check is always false because an interface holding a nil
+    concrete pointer is not itself nil.
+  rationale: >-
+    In Go, an interface value is nil only when both the type and value are nil.
+    A function returning `*MyError` (concrete pointer) assigned to an `error`
+    interface variable produces a non-nil interface even when the concrete
+    pointer is nil. The subsequent `if err != nil` check is always true,
+    masking potential bugs. For more detail, see the Go FAQ on nil error values.
+  aliases:
+    - GO-W1001
+  tags:
+    - correctness
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.impossible-interface-nil-check
+    bind: issue
+emit:
+  finding:
+    category: correctness.semantics
+    severity: high
+    confidence: 0.35
+    tags:
+      - correctness
+      - go
+      - experimental
+  message:
+    title: Interface nil check is always true
+    summary: >-
+      ${captures.issue.text} assigns a concrete pointer type to an error
+      interface — the nil check will never fire.
+  remediation:
+    summary: >-
+      Return `error` directly from the function instead of a concrete pointer
+      type, or check nil on the concrete value before assigning to the
+      interface. See the Go FAQ on nil error values for more details.

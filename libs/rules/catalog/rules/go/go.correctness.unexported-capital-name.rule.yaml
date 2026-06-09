@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.unexported-capital-name
+  title: Un-exportable symbol starts with capital
+  summary: Unexported types with exported fields may indicate a design inconsistency.
+  rationale: >-
+    An unexported (lowercase) struct type with exported (uppercase) fields is
+    often unintentional. If the type is not exported, its fields should typically
+    also be unexported to avoid leaking implementation details through the
+    package boundary. Legitimate exceptions include fields like `ID` or `URL`.
+  aliases:
+    - GO-R3005
+  tags:
+    - correctness
+    - go
+    - design
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.unexported-capital-name
+    bind: issue
+emit:
+  finding:
+    category: correctness.design
+    severity: medium
+    confidence: 0.7
+    tags:
+      - correctness
+      - go
+      - design
+  message:
+    title: Unexported type `${captures.issue.text}` has exported fields
+    summary: >-
+      An unexported struct type contains fields starting with an uppercase
+      letter. Consider whether the fields should also be unexported.
+  remediation:
+    summary: >-
+      Either export the type by capitalizing its name, or make the fields
+      unexported by starting them with a lowercase letter.

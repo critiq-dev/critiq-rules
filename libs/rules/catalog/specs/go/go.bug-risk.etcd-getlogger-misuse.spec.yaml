@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.bug-risk.etcd-getlogger-misuse.rule.yaml
+fixtures:
+  - name: flags etcd GetLogger misuse
+    sourcePath: ./fixtures/go.bug-risk.etcd-getlogger-misuse/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.bug-risk.etcd-getlogger-misuse
+  - name: accepts no GetLogger call
+    sourcePath: ./fixtures/go.bug-risk.etcd-getlogger-misuse/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

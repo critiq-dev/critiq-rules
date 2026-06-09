@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.duplicate-function-arguments.rule.yaml
+fixtures:
+  - name: flags duplicate consecutive arguments
+    sourcePath: ./fixtures/go.correctness.duplicate-function-arguments/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.duplicate-function-arguments
+  - name: accepts distinct arguments
+    sourcePath: ./fixtures/go.correctness.duplicate-function-arguments/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

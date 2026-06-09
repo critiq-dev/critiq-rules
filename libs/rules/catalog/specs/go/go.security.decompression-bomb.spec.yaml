@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.decompression-bomb.rule.yaml
+fixtures:
+  - name: flags io.Copy with decompression reader without size limit
+    sourcePath: ./fixtures/go.security.decompression-bomb/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.decompression-bomb
+  - name: accepts io.CopyN with limited read
+    sourcePath: ./fixtures/go.security.decompression-bomb/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

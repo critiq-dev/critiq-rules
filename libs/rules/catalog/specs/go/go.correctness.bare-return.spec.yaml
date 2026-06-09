@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.bare-return.rule.yaml
+fixtures:
+  - name: flags bare return in named-return function
+    sourcePath: ./fixtures/go.correctness.bare-return/invalid.go
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - go.correctness.bare-return
+        - go.correctness.bare-return
+  - name: accepts explicit return values
+    sourcePath: ./fixtures/go.correctness.bare-return/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,57 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.deprecated-redis-methods
+  title: "Use of deprecated Redis methods"
+  summary: >-
+    Call to deprecated go-redis method (XTrim, XTrimApprox, ZAddCh, ZAddNXCh,
+    ZAddXXCh, ZIncr, ZIncrNX, ZIncrXX). These methods have been removed or
+    replaced in newer versions of the library.
+  rationale: >-
+    Deprecated Redis methods like XTrim, XTrimApprox, ZAddCh, ZAddNXCh,
+    ZAddXXCh, ZIncr, ZIncrNX, and ZIncrXX have been removed in newer go-redis
+    versions. Calling them will cause a compilation error or runtime panic.
+    Use their replacements (XTrimMaxLen, ZAddArgs, etc.) instead.
+  aliases:
+    - GO-W1000
+  tags:
+    - bug-risk
+    - go
+    - redis
+    - framework
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.deprecated-redis-methods
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.framework
+    severity: high
+    confidence: 0.82
+    tags:
+      - bug-risk
+      - go
+      - redis
+  message:
+    title: Deprecated Redis method called
+    summary: >-
+      ${captures.issue.text} calls a deprecated go-redis method. Use the
+      replacement method instead.
+  remediation:
+    summary: >-
+      Use the modern go-redis API. Replace `XTrim` with `XTrimMaxLen`,
+      `XTrimApprox` with `XTrimMaxLenApprox`, `ZAddCh`/`ZAddNXCh`/`ZAddXXCh`
+      with `ZAddArgs`, and `ZIncr`/`ZIncrNX`/`ZIncrXX` with `ZAddArgs`.

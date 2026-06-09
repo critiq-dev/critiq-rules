@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.fmt-fprint.rule.yaml
+fixtures:
+  - name: flags Write([]byte(fmt.Sprintf(...))) pattern
+    sourcePath: ./fixtures/go.performance.fmt-fprint/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.fmt-fprint
+  - name: allows direct fmt.Fprint usage
+    sourcePath: ./fixtures/go.performance.fmt-fprint/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

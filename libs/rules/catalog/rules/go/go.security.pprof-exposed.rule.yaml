@@ -7,6 +7,8 @@ metadata:
     Importing `net/http/pprof` or registering `/debug/pprof` handlers on the default mux exposes debugging endpoints to remote callers.
   rationale: >-
     Exposed pprof endpoints leak heap, goroutine, and CPU profiles and can be used for denial-of-service or sensitive data harvesting.
+  aliases:
+    - GO-S2108
   detection:
     kind: pattern
   references:

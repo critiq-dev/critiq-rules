@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.boolean-literal-in-expression.rule.yaml
+fixtures:
+  - name: flags boolean literal comparison
+    sourcePath: ./fixtures/go.correctness.boolean-literal-in-expression/invalid.go
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - go.correctness.boolean-literal-in-expression
+        - go.correctness.boolean-literal-in-expression
+  - name: accepts plain boolean usage
+    sourcePath: ./fixtures/go.correctness.boolean-literal-in-expression/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

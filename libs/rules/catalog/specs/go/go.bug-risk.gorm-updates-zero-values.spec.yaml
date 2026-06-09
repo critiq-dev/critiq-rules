@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.bug-risk.gorm-updates-zero-values.rule.yaml
+fixtures:
+  - name: flags Updates(Struct{...}) call
+    sourcePath: ./fixtures/go.bug-risk.gorm-updates-zero-values/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.bug-risk.gorm-updates-zero-values
+  - name: accepts file without struct Updates
+    sourcePath: ./fixtures/go.bug-risk.gorm-updates-zero-values/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

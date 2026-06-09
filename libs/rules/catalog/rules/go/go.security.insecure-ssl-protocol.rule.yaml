@@ -7,6 +7,8 @@ metadata:
     `tls.VersionSSL30`, SSLv2, or SSLv3 string literals indicate use of broken legacy protocols.
   rationale: >-
     SSLv2 and SSLv3 contain unrecoverable cryptographic weaknesses (POODLE, DROWN) and must not be negotiated.
+  aliases:
+    - GO-S1021
   detection:
     kind: pattern
   references:

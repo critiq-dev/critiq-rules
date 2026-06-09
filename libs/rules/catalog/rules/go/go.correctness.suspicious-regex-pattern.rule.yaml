@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.suspicious-regex-pattern
+  title: Suspicious unescaped dot in regex pattern
+  summary: An unescaped dot (`.`) in a regex pattern matches any character, not a literal dot.
+  rationale: >-
+    When using `regexp.Compile` or `regexp.MustCompile`, an unescaped dot in the
+    pattern matches any character (wildcard). For matching literal dots (e.g., in
+    domain names like `google.com`), the dot must be escaped as `\.`.
+  aliases:
+    - CRT-D0019
+  tags:
+    - correctness
+    - go
+    - bug-risk
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.suspicious-regex-pattern
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.75
+    tags:
+      - correctness
+      - go
+      - bug-risk
+  message:
+    title: Unescaped dot in regex pattern
+    summary: "Unescaped dot (`.`) in regex matches any character — escape it as `\\.` for a literal dot"
+  remediation:
+    summary: >-
+      Escape literal dots in regex patterns by replacing `.` with `\\.`. For
+      example, `google.com` should be `google\\.com`.

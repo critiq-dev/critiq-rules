@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.impossible-interface-nil-check.rule.yaml
+fixtures:
+  - name: flags impossible interface nil check
+    sourcePath: ./fixtures/go.correctness.impossible-interface-nil-check/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.impossible-interface-nil-check
+  - name: accepts direct concrete type comparison
+    sourcePath: ./fixtures/go.correctness.impossible-interface-nil-check/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.non-idiomatic-slice-zeroing.rule.yaml
+fixtures:
+  - name: flags three-clause for loop with zero assignment
+    sourcePath: ./fixtures/go.performance.non-idiomatic-slice-zeroing/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.non-idiomatic-slice-zeroing
+  - name: allows idiomatic range-based zeroing
+    sourcePath: ./fixtures/go.performance.non-idiomatic-slice-zeroing/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

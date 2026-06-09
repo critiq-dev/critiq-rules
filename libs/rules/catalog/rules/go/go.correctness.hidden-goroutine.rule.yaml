@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.hidden-goroutine
+  title: Function body wraps entirety in hidden goroutine
+  summary: >-
+    A function whose entire body consists of a single `go func()` call
+    obscures the concurrent nature of the operation and makes error
+    handling and cancellation invisible to the caller.
+  rationale: >-
+    Wrapping an entire function body in a goroutine (`go func() { ... }()`)
+    hides the fact that the function runs concurrently. This makes it
+    impossible for the caller to await completion, handle errors, or
+    cancel the operation. Prefer explicit goroutine invocation at the
+    call site with proper error propagation via channels or errgroups.
+  aliases:
+    - GO-E1007
+  tags:
+    - correctness
+    - go
+    - concurrency
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.hidden-goroutine
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.55
+    tags:
+      - correctness
+      - go
+      - concurrency
+  message:
+    title: Function body is entirely wrapped in an anonymous goroutine
+    summary: "`${captures.issue.text}` wraps its entire body in `go func()` — concurrency is hidden from callers"
+  remediation:
+    summary: >-
+      Remove the enclosing goroutine and let the caller decide whether to
+      invoke the function concurrently. Use `errgroup.Group` or channels
+      for error propagation and cancellation.

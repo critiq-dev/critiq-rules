@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.terminal-call-with-defer
+  title: Terminal call in function with deferred cleanup
+  summary: os.Exit/log.Fatal skips deferred calls, leaving resources in an inconsistent state.
+  rationale: >-
+    Functions that use defer for cleanup (closing files, releasing locks,
+    flushing buffers) must not call os.Exit or log.Fatal before the deferred
+    calls run. These calls terminate the program immediately, skipping deferred
+    cleanup.
+  aliases:
+    - CRT-D0011
+  tags:
+    - correctness
+    - go
+    - resource-leak
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.terminal-call-with-defer
+    bind: issue
+emit:
+  finding:
+    category: correctness.exceptions
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - go
+      - resource-leak
+  message:
+    title: Terminal call `${captures.issue.text}` in function with deferred cleanup
+    summary: "A function containing defer statements also calls os.Exit or log.Fatal, which skips deferred cleanup."
+  remediation:
+    summary: >-
+      Use return and propagate the error instead, or call deferred cleanup
+      explicitly before os.Exit.

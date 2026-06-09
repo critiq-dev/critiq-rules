@@ -6,6 +6,7 @@ metadata:
   summary: Process execution helpers must not receive request-controlled executables or shell-interpreted arguments.
   aliases:
     - PHP-A1009
+    - GO-S1015
   rationale: Request-controlled process execution can become remote code execution when attackers choose the binary or influence shell parsing.
   detection:
     kind: pattern

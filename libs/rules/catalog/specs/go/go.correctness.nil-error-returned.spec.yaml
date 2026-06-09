@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.nil-error-returned.rule.yaml
+fixtures:
+  - name: flags return nil, nil
+    sourcePath: ./fixtures/go.correctness.nil-error-returned/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.nil-error-returned
+  - name: accepts return val, nil
+    sourcePath: ./fixtures/go.correctness.nil-error-returned/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

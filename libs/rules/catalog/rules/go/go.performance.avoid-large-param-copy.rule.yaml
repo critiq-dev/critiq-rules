@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.avoid-large-param-copy
+  title: Avoid passing large arrays by value as function parameters
+  summary: Function parameters that are large fixed-size arrays (>80 bytes) cause excessive copying when passed by value.
+  rationale: >-
+    When a large array is passed by value to a function, the entire array is copied
+    onto the stack. This can be expensive for large arrays. Use a pointer to the array
+    or a slice to avoid the copy.
+  aliases:
+    - CRT-P0003
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.performance.avoid-large-param-copy
+    bind: issue
+emit:
+  finding:
+    category: performance.parameter
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - go
+  message:
+    title: Pass large array parameter by pointer instead of by value
+    summary: "`${captures.issue.text}` copies a large array on every call."
+  remediation:
+    summary: "Change the parameter type to a pointer (e.g., `*[1024]int`) or use a slice (`[]int`) to avoid copying the entire array."

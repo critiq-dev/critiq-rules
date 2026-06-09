@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.avoid-large-loop-copy.rule.yaml
+fixtures:
+  - name: flags range over slice of large arrays
+    sourcePath: ./fixtures/go.performance.avoid-large-loop-copy/tests/bad_test.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.avoid-large-loop-copy
+  - name: allows index-based access
+    sourcePath: ./fixtures/go.performance.avoid-large-loop-copy/tests/good_test.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

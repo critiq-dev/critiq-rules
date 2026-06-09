@@ -1,0 +1,59 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.doc.malformed-deprecated-comment
+  title: Malformed deprecated doc comment
+  summary: >-
+    Go doc comment does not follow the `// Deprecated:` convention.
+    Use `// Deprecated: <explanation>` so tools like `go doc` and
+    `gopls` can mark the symbol as deprecated.
+  rationale: >-
+    The Go convention for deprecation comments requires `// Deprecated:` with a
+    capital D and a colon immediately after the word. Comments like
+    `// deprecated, use X instead` or `// Deprecated, use X instead` are
+    malformed and will not be recognized by Go tooling (gopls, go doc).
+  aliases:
+    - GO-D4001
+  tags:
+    - doc
+    - go
+    - documentation
+    - rules-catalog
+  stability: experimental
+  detection:
+    kind: pattern
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.doc.malformed-deprecated-comment
+    bind: issue
+emit:
+  finding:
+    category: doc.convention
+    severity: high
+    confidence: 0.9
+    tags:
+      - doc
+      - go
+      - documentation
+  message:
+    title: Malformed deprecated doc comment
+    summary: >-
+      The comment `${captures.issue.text}` does not follow the Go
+      `// Deprecated:` convention. Use `// Deprecated: explanation` so
+      that tools recognize the deprecation.
+  remediation:
+    summary: >-
+      Change the comment to use the conventional format:
+      `// Deprecated: <explanation>`. For example,
+      `// Deprecated: use NewFoo instead.`

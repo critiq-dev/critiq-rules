@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.signedness-casting.rule.yaml
+fixtures:
+  - name: flags narrowing cast
+    sourcePath: ./fixtures/go.correctness.signedness-casting/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.signedness-casting
+  - name: accepts file without narrowing casts
+    sourcePath: ./fixtures/go.correctness.signedness-casting/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

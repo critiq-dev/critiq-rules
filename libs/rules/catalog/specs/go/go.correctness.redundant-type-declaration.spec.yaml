@@ -1,0 +1,20 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.redundant-type-declaration.rule.yaml
+fixtures:
+  - name: flags redundant type declarations for multiple types
+    sourcePath: ./fixtures/go.correctness.redundant-type-declaration/invalid.go
+    expect:
+      findingCount: 6
+      allRuleIds:
+        - go.correctness.redundant-type-declaration
+        - go.correctness.redundant-type-declaration
+        - go.correctness.redundant-type-declaration
+        - go.correctness.redundant-type-declaration
+        - go.correctness.redundant-type-declaration
+        - go.correctness.redundant-type-declaration
+  - name: accepts type annotations when RHS is not a matching literal
+    sourcePath: ./fixtures/go.correctness.redundant-type-declaration/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.incomplete-nil-check.rule.yaml
+fixtures:
+  - name: flags xs != nil && xs[0]
+    sourcePath: ./fixtures/go.correctness.incomplete-nil-check/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.incomplete-nil-check
+  - name: accepts len(xs) > 0 && xs[0]
+    sourcePath: ./fixtures/go.correctness.incomplete-nil-check/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

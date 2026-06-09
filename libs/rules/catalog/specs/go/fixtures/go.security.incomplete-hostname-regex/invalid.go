@@ -1,0 +1,8 @@
+package main
+
+import "regexp"
+
+func validateHostname(input string) bool {
+	re := regexp.MustCompile("[a-zA-Z0-9.-]+")
+	return re.MatchString(input)
+}

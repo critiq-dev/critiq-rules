@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.avoid-large-range-copy
+  title: Avoid copying large arrays in range loops
+  summary: Ranging over a large fixed-size array copies the entire array value per iteration.
+  rationale: >-
+    When ranging over a large array by value, Go copies the entire array at each iteration.
+    Use a pointer to the array (`&xs`) to avoid copying the entire array on each iteration.
+  aliases:
+    - CRT-P0005
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.performance.avoid-large-range-copy
+    bind: issue
+emit:
+  finding:
+    category: performance.copy
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - go
+  message:
+    title: Range over large array by pointer to avoid copy
+    summary: "`${captures.issue.text}` copies a large array value on each iteration."
+  remediation:
+    summary: "Use `for _, x := range &xs` instead of `for _, x := range xs` to avoid copying the array."

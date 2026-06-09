@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.off-by-one-index.rule.yaml
+fixtures:
+  - name: flags arr[len(arr)] off-by-one
+    sourcePath: ./fixtures/go.correctness.off-by-one-index/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.off-by-one-index
+  - name: accepts safe arr[len(arr)-1]
+    sourcePath: ./fixtures/go.correctness.off-by-one-index/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.integer-truncation
+  title: Potentially lossy integer truncation in comparison
+  summary: Narrowing an integer type before comparison may lose precision.
+  rationale: >-
+    When a wider integer type is narrowed (e.g., `int16(x)` where `x` is int32)
+    and then compared, the narrowing truncates the value before the comparison.
+    This can lead to incorrect results if the wider type holds values outside
+    the narrower type's range. Prefer widening the smaller type instead.
+  aliases:
+    - CRT-D0020
+  tags:
+    - correctness
+    - go
+    - bug-risk
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.integer-truncation
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.65
+    tags:
+      - correctness
+      - go
+      - bug-risk
+  message:
+    title: Lossy integer truncation in comparison
+    summary: "Comparing a value after narrowing conversion may lose precision — widen the smaller type instead"
+  remediation:
+    summary: >-
+      Instead of narrowing the wider type, widen the smaller type before
+      comparison. For example, replace `int16(x) < y` with `x < int32(y)`
+      where `x` is int32 and `y` is int16.

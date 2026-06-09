@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.http-dir-path-traversal
+  title: Avoid exposing the root filesystem via http.Dir
+  summary: >-
+    `http.Dir("/")` or `http.Dir("\\")` used with `http.FileServer` or `http.StripPrefix` exposes the entire filesystem, enabling directory traversal.
+  rationale: >-
+    Serving files from the root directory allows callers to read arbitrary files on the server, including configuration, secrets, and system files. Always restrict file serving to a specific subdirectory using relative paths.
+  aliases:
+    - GO-S2111
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-22
+      title: Improper Limitation of a Pathname to a Restricted Directory (Path Traversal)
+    - kind: owasp
+      title: Path Traversal
+      url: https://owasp.org/www-community/attacks/Path_Traversal
+  tags:
+    - security
+    - go
+    - path-traversal
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.http-dir-path-traversal
+    bind: issue
+emit:
+  finding:
+    category: security.path-traversal
+    severity: high
+    confidence: 0.82
+    tags:
+      - security
+      - go
+  message:
+    title: Restrict http.Dir to a subdirectory near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` serves files from the filesystem root, enabling directory traversal."
+  remediation:
+    summary: >-
+      Replace `http.Dir("/")` with a relative path such as `http.Dir("./public")` and validate that the directory contains only intended content.

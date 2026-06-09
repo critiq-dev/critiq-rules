@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.combine-append-calls
+  title: Combine multiple append calls into a single call
+  summary: Consecutive `append` calls to the same slice can be combined into a single call.
+  rationale: >-
+    Each separate `append` call may trigger a memory allocation because the total number
+    of elements is unknown beforehand. A single call allocates memory once to accommodate
+    all elements, reducing heap allocations and improving performance.
+  aliases:
+    - CRT-P0001
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.performance.combine-append-calls
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - go
+  message:
+    title: Combine multiple append calls into a single call
+    summary: "`${captures.issue.text}` shows consecutive append calls on the same slice."
+  remediation:
+    summary: "Combine consecutive `append` calls into one: `xs = append(xs, 1, 2, 3)` instead of separate `xs = append(xs, 1)` / `xs = append(xs, 2)` calls."

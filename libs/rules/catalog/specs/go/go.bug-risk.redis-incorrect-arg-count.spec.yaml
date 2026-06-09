@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.bug-risk.redis-incorrect-arg-count.rule.yaml
+fixtures:
+  - name: flags MemoryUsage call
+    sourcePath: ./fixtures/go.bug-risk.redis-incorrect-arg-count/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.bug-risk.redis-incorrect-arg-count
+  - name: accepts file without redis variadic calls
+    sourcePath: ./fixtures/go.bug-risk.redis-incorrect-arg-count/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.unsafe-defer-close.rule.yaml
+fixtures:
+  - name: flags defer f.Close() without Sync
+    sourcePath: ./fixtures/go.security.unsafe-defer-close/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.unsafe-defer-close
+  - name: accepts f.Close() with Sync call
+    sourcePath: ./fixtures/go.security.unsafe-defer-close/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

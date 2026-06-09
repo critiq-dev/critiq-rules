@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.gorm-where-zero-values
+  title: GORM Where with struct silently excludes zero-value fields
+  summary: >-
+    `db.Where(&Struct{...})` silently ignores zero-value fields (0, "",
+    false, nil) in the WHERE clause, leading to unintended broader queries.
+  rationale: >-
+    GORM's `Where()` with a struct argument omits zero-value fields from the
+    generated SQL. For example `db.Where(&User{Name: "", Age: 0})` produces
+    an empty WHERE clause. Use map arguments or pointer fields to include
+    zero values intentionally.
+  aliases:
+    - GO-E1004
+  tags:
+    - bug-risk
+    - go
+    - gorm
+    - framework
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.gorm-where-zero-values
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.framework
+    severity: high
+    confidence: 0.75
+    tags:
+      - bug-risk
+      - go
+      - gorm
+  message:
+    title: GORM Where with struct ignores zero-value fields
+    summary: "`${captures.issue.text}` passes a struct to `Where()` — zero-value fields will be silently dropped"
+  remediation:
+    summary: >-
+      Use a `map[string]interface{}` argument instead of a struct, or use
+      pointer fields in your struct so nil vs zero can be distinguished.

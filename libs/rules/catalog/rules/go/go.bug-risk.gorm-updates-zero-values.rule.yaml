@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.gorm-updates-zero-values
+  title: GORM Updates with struct silently excludes zero-value fields
+  summary: >-
+    `db.Updates(Struct{...})` or `db.Model(...).Updates(Struct{...})`
+    silently skips zero-value fields (0, "", false, nil), potentially
+    leaving stale data in the database.
+  rationale: >-
+    GORM's `Updates()` with a struct argument omits zero-value fields from
+    the UPDATE statement. For example `db.Model(&user).Updates(&User{Name: ""})`
+    will NOT clear the Name column. Use map arguments or `Select` to explicitly
+    specify which columns to update.
+  aliases:
+    - GO-E1005
+  tags:
+    - bug-risk
+    - go
+    - gorm
+    - framework
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.gorm-updates-zero-values
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.framework
+    severity: high
+    confidence: 0.75
+    tags:
+      - bug-risk
+      - go
+      - gorm
+  message:
+    title: GORM Updates with struct skips zero-value fields
+    summary: "`${captures.issue.text}` passes a struct to `Updates()` — zero-value fields will not be updated"
+  remediation:
+    summary: >-
+      Use `db.Model(&user).Select("*").Updates(map[string]interface{}{...})`
+      or use a map argument to include zero values. Alternatively, use pointer
+      fields in your model to distinguish nil from zero.

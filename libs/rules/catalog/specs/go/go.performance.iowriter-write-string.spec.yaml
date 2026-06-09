@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.iowriter-write-string.rule.yaml
+fixtures:
+  - name: flags Write([]byte(...)) conversion pattern
+    sourcePath: ./fixtures/go.performance.iowriter-write-string/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.iowriter-write-string
+  - name: allows direct WriteString call
+    sourcePath: ./fixtures/go.performance.iowriter-write-string/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.combine-append-calls.rule.yaml
+fixtures:
+  - name: flags consecutive append calls on same variable
+    sourcePath: ./fixtures/go.performance.combine-append-calls/tests/bad_test.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.combine-append-calls
+  - name: allows combined single append call
+    sourcePath: ./fixtures/go.performance.combine-append-calls/tests/good_test.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

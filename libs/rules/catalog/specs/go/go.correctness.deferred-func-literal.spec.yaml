@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.deferred-func-literal.rule.yaml
+fixtures:
+  - name: flags deferred func literal with single call body
+    sourcePath: ./fixtures/go.correctness.deferred-func-literal/invalid.go
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - go.correctness.deferred-func-literal
+        - go.correctness.deferred-func-literal
+  - name: accepts direct defer without wrapping closure
+    sourcePath: ./fixtures/go.correctness.deferred-func-literal/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

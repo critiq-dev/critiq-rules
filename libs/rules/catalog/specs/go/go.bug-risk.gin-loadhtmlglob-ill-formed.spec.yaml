@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.bug-risk.gin-loadhtmlglob-ill-formed.rule.yaml
+fixtures:
+  - name: flags gin.LoadHTMLGlob call
+    sourcePath: ./fixtures/go.bug-risk.gin-loadhtmlglob-ill-formed/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.bug-risk.gin-loadhtmlglob-ill-formed
+  - name: accepts file without gin.LoadHTMLGlob
+    sourcePath: ./fixtures/go.bug-risk.gin-loadhtmlglob-ill-formed/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

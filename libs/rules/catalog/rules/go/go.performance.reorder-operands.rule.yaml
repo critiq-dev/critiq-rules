@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.reorder-operands
+  title: Reorder boolean expression operands for short-circuit optimization
+  summary: Boolean `&&`/`||` expressions should place cheap operands on the left so expensive calls are skipped when possible.
+  rationale: >-
+    In `f(x) || y`, `y` is always evaluated even when `f(x)` returns `true`.
+    Reorder to `y || f(x)` so the cheap check short-circuits the expensive call.
+  aliases:
+    - GO-P3001
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.performance.reorder-operands
+    bind: issue
+emit:
+  finding:
+    category: performance.optimization
+    severity: high
+    confidence: 0.4
+    tags:
+      - performance
+      - go
+  message:
+    title: Reorder operands for short-circuit optimization
+    summary: "Boolean expression `${captures.issue.text}` places an expensive call on the left. Move the cheaper check first."
+  remediation:
+    summary: Move the cheaper/constant operand to the left of `&&`/`||` so the expensive call is skipped when possible.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.hidden-goroutine.rule.yaml
+fixtures:
+  - name: flags function body wrapped in go func
+    sourcePath: ./fixtures/go.correctness.hidden-goroutine/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.hidden-goroutine
+  - name: accepts normal function
+    sourcePath: ./fixtures/go.correctness.hidden-goroutine/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

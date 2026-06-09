@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.integer-truncation.rule.yaml
+fixtures:
+  - name: flags int16(x) < y truncation
+    sourcePath: ./fixtures/go.correctness.integer-truncation/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.integer-truncation
+  - name: accepts a < b without truncation
+    sourcePath: ./fixtures/go.correctness.integer-truncation/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

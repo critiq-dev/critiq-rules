@@ -616,6 +616,58 @@ rules:
     rulePath: ./rules/go/go.performance.no-unbounded-concurrency.rule.yaml
     presets:
       - strict
+  - id: go.performance.combine-append-calls
+    rulePath: ./rules/go/go.performance.combine-append-calls.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.avoid-large-param-copy
+    rulePath: ./rules/go/go.performance.avoid-large-param-copy.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.avoid-string-index-alloc
+    rulePath: ./rules/go/go.performance.avoid-string-index-alloc.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.avoid-large-range-copy
+    rulePath: ./rules/go/go.performance.avoid-large-range-copy.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.avoid-large-loop-copy
+    rulePath: ./rules/go/go.performance.avoid-large-loop-copy.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.reorder-operands
+    rulePath: ./rules/go/go.performance.reorder-operands.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.non-idiomatic-slice-zeroing
+    rulePath: ./rules/go/go.performance.non-idiomatic-slice-zeroing.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.utf8-decode-rune
+    rulePath: ./rules/go/go.performance.utf8-decode-rune.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.fmt-fprint
+    rulePath: ./rules/go/go.performance.fmt-fprint.rule.yaml
+    presets:
+      - strict
+  - id: go.performance.iowriter-write-string
+    rulePath: ./rules/go/go.performance.iowriter-write-string.rule.yaml
+    presets:
+      - strict
+  - id: go.doc.malformed-deprecated-comment
+    rulePath: ./rules/go/go.doc.malformed-deprecated-comment.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.poorly-formed-nilness-guards
+    rulePath: ./rules/go/go.bug-risk.poorly-formed-nilness-guards.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.compound-assignment-misuse
+    rulePath: ./rules/go/go.bug-risk.compound-assignment-misuse.rule.yaml
+    presets:
+      - strict
   - id: java.performance.empty-string-constructor
     rulePath: ./rules/java/java.performance.empty-string-constructor.rule.yaml
     presets:
@@ -3078,6 +3130,11 @@ rules:
     presets:
       - strict
       - security
+  - id: go.security.incomplete-hostname-regex
+    rulePath: ./rules/go/go.security.incomplete-hostname-regex.rule.yaml
+    presets:
+      - strict
+      - security
   - id: go.security.insecure-rand-seed
     rulePath: ./rules/go/go.security.insecure-rand-seed.rule.yaml
     presets:
@@ -3105,6 +3162,11 @@ rules:
       - security
   - id: go.security.sensitive-data-egress
     rulePath: ./rules/go/go.security.sensitive-data-egress.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.squirrel-unsafe-quoting
+    rulePath: ./rules/go/go.security.squirrel-unsafe-quoting.rule.yaml
     presets:
       - strict
       - security
@@ -3163,6 +3225,31 @@ rules:
     presets:
       - strict
       - security
+  - id: go.security.decompression-bomb
+    rulePath: ./rules/go/go.security.decompression-bomb.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.http-dir-path-traversal
+    rulePath: ./rules/go/go.security.http-dir-path-traversal.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.weak-file-permission
+    rulePath: ./rules/go/go.security.weak-file-permission.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.unsafe-defer-close
+    rulePath: ./rules/go/go.security.unsafe-defer-close.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: go.security.tainted-value-sink
+    rulePath: ./rules/go/go.security.tainted-value-sink.rule.yaml
+    presets:
+      - strict
+      - security
   - id: go.correctness.defer-close-before-check
     rulePath: ./rules/go/go.correctness.defer-close-before-check.rule.yaml
     presets:
@@ -3189,6 +3276,160 @@ rules:
       - strict
   - id: go.correctness.waitgroup-add-in-goroutine
     rulePath: ./rules/go/go.correctness.waitgroup-add-in-goroutine.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.unreachable-switch-case
+    rulePath: ./rules/go/go.correctness.unreachable-switch-case.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.unnecessary-dereference
+    rulePath: ./rules/go/go.correctness.unnecessary-dereference.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.duplicate-function-arguments
+    rulePath: ./rules/go/go.correctness.duplicate-function-arguments.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.duplicate-branch-body
+    rulePath: ./rules/go/go.correctness.duplicate-branch-body.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.duplicate-switch-cases
+    rulePath: ./rules/go/go.correctness.duplicate-switch-cases.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.identical-binary-operands
+    rulePath: ./rules/go/go.correctness.identical-binary-operands.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.flag-pointer-immediate-deref
+    rulePath: ./rules/go/go.correctness.flag-pointer-immediate-deref.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.terminal-call-with-defer
+    rulePath: ./rules/go/go.correctness.terminal-call-with-defer.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.nil-error-returned
+    rulePath: ./rules/go/go.correctness.nil-error-returned.rule.yaml
+    presets:
+      - strict
+  # Batch 04 (CRT-D) — correctness rules
+  - id: go.correctness.off-by-one-index
+    rulePath: ./rules/go/go.correctness.off-by-one-index.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.incomplete-nil-check
+    rulePath: ./rules/go/go.correctness.incomplete-nil-check.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.boolean-simplification
+    rulePath: ./rules/go/go.correctness.boolean-simplification.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.suspicious-regex-pattern
+    rulePath: ./rules/go/go.correctness.suspicious-regex-pattern.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.integer-truncation
+    rulePath: ./rules/go/go.correctness.integer-truncation.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.deferred-func-literal
+    rulePath: ./rules/go/go.correctness.deferred-func-literal.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.redundant-type-declaration
+    rulePath: ./rules/go/go.correctness.redundant-type-declaration.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.gin-loadhtmlglob-ill-formed
+    rulePath: ./rules/go/go.bug-risk.gin-loadhtmlglob-ill-formed.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.redis-incorrect-arg-count
+    rulePath: ./rules/go/go.bug-risk.redis-incorrect-arg-count.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.redis-unimplemented-method
+    rulePath: ./rules/go/go.bug-risk.redis-unimplemented-method.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.etcd-invalid-compare-operator
+    rulePath: ./rules/go/go.bug-risk.etcd-invalid-compare-operator.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.gorm-where-zero-values
+    rulePath: ./rules/go/go.bug-risk.gorm-where-zero-values.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.gorm-updates-zero-values
+    rulePath: ./rules/go/go.bug-risk.gorm-updates-zero-values.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.deprecated-redis-methods
+    rulePath: ./rules/go/go.bug-risk.deprecated-redis-methods.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.etcd-getlogger-misuse
+    rulePath: ./rules/go/go.bug-risk.etcd-getlogger-misuse.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.gorm-skip-default-transaction
+    rulePath: ./rules/go/go.bug-risk.gorm-skip-default-transaction.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.gorm-dry-run-enabled
+    rulePath: ./rules/go/go.bug-risk.gorm-dry-run-enabled.rule.yaml
+    presets:
+      - strict
+  - id: go.bug-risk.reflect-makefunc-usage
+    rulePath: ./rules/go/go.bug-risk.reflect-makefunc-usage.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.signedness-casting
+    rulePath: ./rules/go/go.correctness.signedness-casting.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.hidden-goroutine
+    rulePath: ./rules/go/go.correctness.hidden-goroutine.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.impossible-interface-nil-check
+    rulePath: ./rules/go/go.correctness.impossible-interface-nil-check.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.duplicate-if-else-condition
+    rulePath: ./rules/go/go.correctness.duplicate-if-else-condition.rule.yaml
+    presets:
+      - strict
+  # Batch 07 (GO-R) — GO-R family rules
+  - id: go.correctness.interface-any-preferred
+    rulePath: ./rules/go/go.correctness.interface-any-preferred.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.unnecessary-else-return
+    rulePath: ./rules/go/go.correctness.unnecessary-else-return.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.bare-return
+    rulePath: ./rules/go/go.correctness.bare-return.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.boolean-literal-in-expression
+    rulePath: ./rules/go/go.correctness.boolean-literal-in-expression.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.unexported-capital-name
+    rulePath: ./rules/go/go.correctness.unexported-capital-name.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.http-nobody-nil
+    rulePath: ./rules/go/go.correctness.http-nobody-nil.rule.yaml
+    presets:
+      - strict
+  - id: go.correctness.string-concat-simplify
+    rulePath: ./rules/go/go.correctness.string-concat-simplify.rule.yaml
     presets:
       - strict
   - id: php.security.insecure-cors-wildcard-with-credentials

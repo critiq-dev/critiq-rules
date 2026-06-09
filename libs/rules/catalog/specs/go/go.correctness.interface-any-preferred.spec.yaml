@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.interface-any-preferred.rule.yaml
+fixtures:
+  - name: flags interface{} usage
+    sourcePath: ./fixtures/go.correctness.interface-any-preferred/invalid.go
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - go.correctness.interface-any-preferred
+        - go.correctness.interface-any-preferred
+  - name: accepts code using any
+    sourcePath: ./fixtures/go.correctness.interface-any-preferred/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.unnecessary-dereference.rule.yaml
+fixtures:
+  - name: flags unnecessary dereference for field access, double deref, and index access
+    sourcePath: ./fixtures/go.correctness.unnecessary-dereference/invalid.go
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - go.correctness.unnecessary-dereference
+        - go.correctness.unnecessary-dereference
+        - go.correctness.unnecessary-dereference
+  - name: accepts code without unnecessary dereferences
+    sourcePath: ./fixtures/go.correctness.unnecessary-dereference/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

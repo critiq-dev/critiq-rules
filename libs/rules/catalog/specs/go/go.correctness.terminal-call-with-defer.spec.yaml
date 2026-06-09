@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.terminal-call-with-defer.rule.yaml
+fixtures:
+  - name: flags terminal call with defer in same function
+    sourcePath: ./fixtures/go.correctness.terminal-call-with-defer/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.terminal-call-with-defer
+  - name: accepts defer without terminal call
+    sourcePath: ./fixtures/go.correctness.terminal-call-with-defer/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

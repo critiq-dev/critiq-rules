@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.duplicate-if-else-condition.rule.yaml
+fixtures:
+  - name: flags duplicate if/else condition
+    sourcePath: ./fixtures/go.correctness.duplicate-if-else-condition/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.duplicate-if-else-condition
+  - name: accepts different conditions
+    sourcePath: ./fixtures/go.correctness.duplicate-if-else-condition/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

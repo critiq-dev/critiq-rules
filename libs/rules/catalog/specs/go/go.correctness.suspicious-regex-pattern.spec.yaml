@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.suspicious-regex-pattern.rule.yaml
+fixtures:
+  - name: flags unescaped dot in regex
+    sourcePath: ./fixtures/go.correctness.suspicious-regex-pattern/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.suspicious-regex-pattern
+  - name: accepts escaped dot in regex
+    sourcePath: ./fixtures/go.correctness.suspicious-regex-pattern/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

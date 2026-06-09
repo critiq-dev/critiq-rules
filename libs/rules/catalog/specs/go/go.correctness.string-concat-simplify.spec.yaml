@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.string-concat-simplify.rule.yaml
+fixtures:
+  - name: flags strings.Join with empty separator
+    sourcePath: ./fixtures/go.correctness.string-concat-simplify/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.string-concat-simplify
+  - name: accepts strings.Join with non-empty separator
+    sourcePath: ./fixtures/go.correctness.string-concat-simplify/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

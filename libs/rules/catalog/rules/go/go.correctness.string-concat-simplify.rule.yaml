@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.string-concat-simplify
+  title: String concatenation can be simplified
+  summary: String concatenation patterns like `strings.Join(parts, "")` or `fmt.Sprintf("%s%s", a, b)` can be simplified.
+  rationale: >-
+    Using `strings.Join` with an empty separator is equivalent to direct string
+    concatenation but is less readable. Similarly, `fmt.Sprintf` with only `%s`
+    placeholders can be replaced with `strings.Join` or direct concatenation
+    for clarity and performance.
+  aliases:
+    - GO-R4003
+  tags:
+    - correctness
+    - go
+    - simplification
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.string-concat-simplify
+    bind: issue
+emit:
+  finding:
+    category: correctness.simplification
+    severity: medium
+    confidence: 0.75
+    tags:
+      - correctness
+      - go
+      - simplification
+  message:
+    title: String concatenation can be simplified in `${captures.issue.text}`
+    summary: >-
+      This string concatenation pattern can be simplified. Use direct
+      concatenation or `strings.Join` for clarity.
+  remediation:
+    summary: >-
+      Replace `strings.Join(parts, "")` with direct concatenation, or
+      replace `fmt.Sprintf("%s%s...", a, b)` with `a + b`.

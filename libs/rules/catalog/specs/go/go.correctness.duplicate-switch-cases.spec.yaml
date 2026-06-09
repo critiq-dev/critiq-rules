@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.duplicate-switch-cases.rule.yaml
+fixtures:
+  - name: flags duplicate case values in switch
+    sourcePath: ./fixtures/go.correctness.duplicate-switch-cases/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.duplicate-switch-cases
+  - name: accepts distinct case values
+    sourcePath: ./fixtures/go.correctness.duplicate-switch-cases/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

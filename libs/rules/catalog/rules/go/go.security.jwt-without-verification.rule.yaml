@@ -7,6 +7,8 @@ metadata:
     Parsing JWTs with `jwt.Parse` and a nil keyfunc, `jwt.ParseUnverified`, or `jwt.Decode` skips signature verification and lets attackers forge tokens.
   rationale: >-
     Trusting unverified JWTs allows attackers to impersonate users or escalate privileges by crafting tokens with arbitrary claims.
+  aliases:
+    - GO-S1019
   detection:
     kind: pattern
   references:

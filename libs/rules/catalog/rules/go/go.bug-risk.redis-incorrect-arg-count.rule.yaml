@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.redis-incorrect-arg-count
+  title: Redis variadic function called with wrong argument count
+  summary: >-
+    Redis variadic methods such as `MemoryUsage`, `ZPopMax`, `ZPopMin`, and
+    `BitPos` accept a specific number of arguments. Passing too many will
+    cause a runtime panic.
+  rationale: >-
+    go-redis variadic methods have strict argument expectations. For example,
+    `MemoryUsage(key, samples...)` expects a key + up to one extra arg.
+    `ZPopMax(key, count)` expects exactly key + count. Passing extra arguments
+    causes a panic. Audit each call site against the Redis command spec.
+  aliases:
+    - GO-E1001
+  tags:
+    - bug-risk
+    - go
+    - redis
+    - framework
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.redis-incorrect-arg-count
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.framework
+    severity: high
+    confidence: 0.75
+    tags:
+      - bug-risk
+      - go
+      - redis
+  message:
+    title: Redis variadic method may receive incorrect argument count
+    summary: "`${captures.issue.text}` calls a Redis variadic method — verify the argument count against the spec"
+  remediation:
+    summary: >-
+      Check the Redis command spec for the expected argument count. Remove
+      any extra arguments. Use a linter or code review to audit each call site.

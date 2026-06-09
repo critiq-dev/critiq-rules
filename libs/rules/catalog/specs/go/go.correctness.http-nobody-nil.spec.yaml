@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.http-nobody-nil.rule.yaml
+fixtures:
+  - name: flags http.NewRequest with nil body
+    sourcePath: ./fixtures/go.correctness.http-nobody-nil/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.http-nobody-nil
+  - name: accepts http.NewRequest with http.NoBody
+    sourcePath: ./fixtures/go.correctness.http-nobody-nil/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

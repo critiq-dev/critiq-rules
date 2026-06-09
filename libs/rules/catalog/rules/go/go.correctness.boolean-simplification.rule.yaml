@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.boolean-simplification
+  title: Boolean expression can be simplified
+  summary: Complex boolean expressions like `x > y - 1` or `x < y || x == y` can be written more concisely.
+  rationale: >-
+    Expressions such as `x > y - 1` can be written as `x >= y`, and
+    `x < y || x == y` can be simplified to `x <= y`. Simplified expressions are
+    easier to read and less error-prone.
+  aliases:
+    - CRT-D0018
+  tags:
+    - correctness
+    - go
+    - clarity
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.boolean-simplification
+    bind: issue
+emit:
+  finding:
+    category: correctness.clarity
+    severity: high
+    confidence: 0.7
+    tags:
+      - correctness
+      - go
+      - clarity
+  message:
+    title: Boolean expression can be simplified
+    summary: "This boolean expression can be simplified to a single comparison"
+  remediation:
+    summary: >-
+      Simplify `x > y - 1` to `x >= y`. Simplify `x < y || x == y` to
+      `x <= y`. Simplify `x > y || x == y` to `x >= y`.

@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.compound-assignment-misuse
+  title: "Audit: Possibly odd compound assignment operators '+=' or '-='"
+  summary: >-
+    The expression uses the same variable on both sides of a compound
+    assignment (e.g. `x += x + y`), which simplifies to a non-obvious
+    result (`2x + y`). This may indicate a typo or unintentional logic.
+  rationale: >-
+    Patterns like `x += x + y` effectively compute `x = 2x + y`, which is
+    likely unintended. The developer probably meant `x += y`. Similarly
+    `x -= x - y` computes `x = y` instead of a simple decrement. These
+    patterns warrant manual review.
+  aliases:
+    - GO-E1009
+  tags:
+    - bug-risk
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.compound-assignment-misuse
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.framework
+    severity: critical
+    confidence: 0.7
+    tags:
+      - bug-risk
+      - go
+  message:
+    title: Suspicious compound assignment found
+    summary: >-
+      ${captures.issue.text} repeats the same variable on both sides of a
+      compound assignment — please review.
+  remediation:
+    summary: >-
+      Simplify to the intended expression. For example, `x += y` instead of
+      `x += x + y`, or `x -= y` instead of `x -= x - y`.

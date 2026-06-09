@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.unnecessary-else-return
+  title: Early return in if-then-else
+  summary: When an if-body ends with a return/break/continue, the else branch is unnecessary.
+  rationale: >-
+    If the if-body unconditionally exits (return, break, continue), the else
+    branch does not need to be wrapped in an else block. Removing the else
+    reduces nesting and improves readability.
+  aliases:
+    - GO-R3002
+  tags:
+    - correctness
+    - go
+    - clarity
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.unnecessary-else-return
+    bind: issue
+emit:
+  finding:
+    category: correctness.style
+    severity: high
+    confidence: 0.75
+    tags:
+      - correctness
+      - go
+      - clarity
+  message:
+    title: Unnecessary else after early return/break/continue
+    summary: >-
+      The if-body in `${captures.issue.text}` terminates unconditionally.
+      Move the else-body out of the else block to reduce nesting.
+  remediation:
+    summary: >-
+      Remove the else block and dedent its body. For example:
+      `if x > 0 { return x }; return 0` instead of
+      `if x > 0 { return x } else { return 0 }`.

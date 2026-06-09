@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.bare-return
+  title: Use of bare return statements
+  summary: Bare returns in named-return functions return the current values of return parameters, which can be surprising.
+  rationale: >-
+    A bare `return` in a function with named return parameters returns the
+    current values of those parameters. While valid Go, bare returns can be
+    confusing to readers who must scan the function body to determine what
+    values are being returned.
+  aliases:
+    - GO-R3003
+  tags:
+    - correctness
+    - go
+    - clarity
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.bare-return
+    bind: issue
+emit:
+  finding:
+    category: correctness.style
+    severity: medium
+    confidence: 0.8
+    tags:
+      - correctness
+      - go
+      - clarity
+  message:
+    title: Bare return in named-return function
+    summary: >-
+      A bare `return` statement in `${captures.issue.text}` relies on named
+      return parameters. Consider using an explicit return for clarity.
+  remediation:
+    summary: >-
+      Replace bare `return` with `return result` (or the name of the return
+      parameter) to make the returned value explicit.

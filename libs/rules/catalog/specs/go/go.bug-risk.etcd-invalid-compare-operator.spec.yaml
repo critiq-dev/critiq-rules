@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.bug-risk.etcd-invalid-compare-operator.rule.yaml
+fixtures:
+  - name: flags etcd Compare call
+    sourcePath: ./fixtures/go.bug-risk.etcd-invalid-compare-operator/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.bug-risk.etcd-invalid-compare-operator
+  - name: accepts file without etcd Compare
+    sourcePath: ./fixtures/go.bug-risk.etcd-invalid-compare-operator/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

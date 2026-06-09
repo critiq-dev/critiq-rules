@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.avoid-string-index-alloc.rule.yaml
+fixtures:
+  - name: flags strings.Index with string() conversion
+    sourcePath: ./fixtures/go.performance.avoid-string-index-alloc/tests/bad_test.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.avoid-string-index-alloc
+  - name: allows bytes.Index usage
+    sourcePath: ./fixtures/go.performance.avoid-string-index-alloc/tests/good_test.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

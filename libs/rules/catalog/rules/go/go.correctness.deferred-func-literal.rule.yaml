@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.deferred-func-literal
+  title: Deferred function literal can be simplified
+  summary: A `defer func() { bar() }()` wrapping a single call can be simplified to `defer bar()`.
+  rationale: >-
+    Wrapping a single function call in a deferred anonymous function is unnecessary
+    noise. The call can be deferred directly. Multi-statement bodies, bodies containing
+    control flow, and function literals with parameters are excluded because they
+    cannot be simplified.
+  aliases:
+    - GO-C4005
+  tags:
+    - correctness
+    - go
+    - simplification
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.deferred-func-literal
+    bind: issue
+emit:
+  finding:
+    category: correctness.style
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - go
+      - simplification
+  message:
+    title: Simplify deferred function literal to direct call
+    summary: >-
+      The expression `${captures.issue.text}` wraps a single function call in a
+      deferred anonymous function. It can be written as `defer call()` instead.
+  remediation:
+    summary: >-
+      Replace `defer func() { fn() }()` with `defer fn()`. The deferred call is
+      equivalent without the wrapping closure.

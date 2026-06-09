@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.redis-unimplemented-method
+  title: Unimplemented Redis method call would panic
+  summary: >-
+    `Sync(ctx)` and `Quit(ctx)` are listed in the go-redis interface but
+    are not implemented — calling them panics at runtime.
+  rationale: >-
+    The go-redis library provides `Sync()` and `Quit()` as interface methods
+    for compatibility, but their implementations panic with "not implemented".
+    These methods should never be called. Use the standard Redis `CLIENT LIST`
+    or `QUIT` commands through `Do()` instead.
+  aliases:
+    - GO-E1002
+  tags:
+    - bug-risk
+    - go
+    - redis
+    - framework
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.redis-unimplemented-method
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.framework
+    severity: high
+    confidence: 0.75
+    tags:
+      - bug-risk
+      - go
+      - redis
+  message:
+    title: Unimplemented Redis method will panic at runtime
+    summary: "`${captures.issue.text}` calls a Redis method that is not implemented in go-redis"
+  remediation:
+    summary: >-
+      Remove the call to `Sync()` or `Quit()`. Use `redisClient.Do(ctx, "CLIENT LIST")`
+      or `redisClient.Close()` instead.

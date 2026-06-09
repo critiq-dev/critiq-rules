@@ -1,0 +1,64 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.squirrel-unsafe-quoting
+  title: Use safe parameterized queries with squirrel query builder
+  summary: >-
+    `squirrel.Expr` (or `sq.Expr`) with `fmt.Sprintf` interpolation constructs
+    SQL queries via string formatting, enabling SQL injection when arguments
+    contain untrusted data.
+  rationale: >-
+    String interpolation in query construction bypasses placeholder-based
+    parameterization, allowing attackers to inject SQL through user-controlled
+    input. Use `squirrel.Eq{}`, `squirrel.Eq{}`, or other safe builders that
+    emit parameterized queries.
+  aliases:
+    - GO-S1017
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-89
+      title: SQL Injection
+    - kind: owasp
+      title: SQL Injection Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+  tags:
+    - security
+    - go
+    - sql-injection
+    - squirrel
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.squirrel-unsafe-quoting
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: high
+    confidence: 0.5
+    tags:
+      - security
+      - go
+      - sql-injection
+  message:
+    title: Use parameterized query instead of squirrel.Expr with string interpolation
+    summary: "`${captures.issue.text}` uses `squirrel.Expr` with `fmt.Sprintf` instead of safe builders like `squirrel.Eq{}`."
+  remediation:
+    summary: >-
+      Replace `squirrel.Expr(fmt.Sprintf(...))` with safe builders such as
+      `squirrel.Eq{"field": value}` or `squirrel.Expr("field = ?", value)`
+      with placeholder syntax.

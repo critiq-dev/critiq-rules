@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.avoid-large-param-copy.rule.yaml
+fixtures:
+  - name: flags large array parameter
+    sourcePath: ./fixtures/go.performance.avoid-large-param-copy/tests/bad_test.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.avoid-large-param-copy
+  - name: allows pointer or slice parameters
+    sourcePath: ./fixtures/go.performance.avoid-large-param-copy/tests/good_test.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

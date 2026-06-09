@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.nil-error-returned
+  title: Returning nil value with nil error
+  summary: Returning nil, nil may indicate a missing result or an error that should be returned instead.
+  rationale: >-
+    Returning nil for both the value and the error in a function that returns
+    (any, error) is often a mistake. The caller may expect a non-nil value on
+    success, or an error should be returned to indicate why the value is nil.
+  aliases:
+    - CRT-D0013
+  tags:
+    - correctness
+    - go
+    - bug-risk
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.nil-error-returned
+    bind: issue
+emit:
+  finding:
+    category: correctness.exceptions
+    severity: high
+    confidence: 0.65
+    tags:
+      - correctness
+      - go
+      - bug-risk
+  message:
+    title: Returning nil value with nil error
+    summary: "Returning nil, nil in a function that returns (value, error) is suspicious. Provide a meaningful value or return an error."
+  remediation:
+    summary: >-
+      Return a meaningful value alongside nil, or return a non-nil error to
+      explain why the value is nil.

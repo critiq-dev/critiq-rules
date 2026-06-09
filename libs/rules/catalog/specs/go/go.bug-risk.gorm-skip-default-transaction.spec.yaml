@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.bug-risk.gorm-skip-default-transaction.rule.yaml
+fixtures:
+  - name: flags SkipDefaultTransaction set to false
+    sourcePath: ./fixtures/go.bug-risk.gorm-skip-default-transaction/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.bug-risk.gorm-skip-default-transaction
+  - name: accepts SkipDefaultTransaction set to true
+    sourcePath: ./fixtures/go.bug-risk.gorm-skip-default-transaction/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

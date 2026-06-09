@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.utf8-decode-rune.rule.yaml
+fixtures:
+  - name: flags []rune(str)[0] allocation pattern
+    sourcePath: ./fixtures/go.performance.utf8-decode-rune/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.utf8-decode-rune
+  - name: allows utf8.DecodeRuneInString usage
+    sourcePath: ./fixtures/go.performance.utf8-decode-rune/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

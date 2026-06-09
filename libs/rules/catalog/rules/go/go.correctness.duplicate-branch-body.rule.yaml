@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.duplicate-branch-body
+  title: Duplicate body in adjacent branches
+  summary: Adjacent if-else branches have identical bodies. One branch is likely dead or wrong.
+  rationale: >-
+    When two consecutive branches in an if-else chain produce the same outcome,
+    one of the branches is suspicious. Either the conditions overlap or a
+    copy-paste error duplicated the body.
+  aliases:
+    - CRT-D0006
+  tags:
+    - correctness
+    - go
+    - bug-risk
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.duplicate-branch-body
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.75
+    tags:
+      - correctness
+      - go
+      - bug-risk
+  message:
+    title: Duplicate body in adjacent branches
+    summary: "Two adjacent if-else branches have identical bodies (limited to single-line bodies)."
+  remediation:
+    summary: >-
+      Merge branches with the same outcome, or fix the branch condition or body
+      logic.

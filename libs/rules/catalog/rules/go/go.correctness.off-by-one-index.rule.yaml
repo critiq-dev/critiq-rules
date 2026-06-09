@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.off-by-one-index
+  title: Off-by-one index access
+  summary: Indexing an array or slice at len(arr) reads one past the last valid element.
+  rationale: >-
+    Accessing `arr[len(arr)]` panics at runtime because valid indices range from
+    0 to len(arr)-1. The correct access is `arr[len(arr)-1]` for the last element.
+  aliases:
+    - CRT-D0015
+  tags:
+    - correctness
+    - go
+    - bug-risk
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.off-by-one-index
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - go
+      - bug-risk
+  message:
+    title: Index at `len(arr)` is off-by-one
+    summary: "Indexing array/slice at `len(arr)` is off-by-one — last valid index is `len(arr)-1`"
+  remediation:
+    summary: >-
+      Use `arr[len(arr)-1]` to access the last element, or ensure the index is
+      strictly less than `len(arr)`.

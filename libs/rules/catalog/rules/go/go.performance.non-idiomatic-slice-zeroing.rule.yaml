@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.non-idiomatic-slice-zeroing
+  title: Use `for i := range` for slice zeroing instead of three-clause for loop
+  summary: A three-clause `for i := 0; i < len(s); i++ { s[i] = <zero> }` is slower and less idiomatic than `for i := range s { s[i] = <zero> }`.
+  rationale: >-
+    Go's compiler optimizes `for i := range s { s[i] = 0 }` but not the explicit
+    three-clause index form. The range-based form is also clearer and less error-prone.
+  aliases:
+    - GO-P4001
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.performance.non-idiomatic-slice-zeroing
+    bind: issue
+emit:
+  finding:
+    category: performance.optimization
+    severity: high
+    confidence: 0.9
+    tags:
+      - performance
+      - go
+  message:
+    title: Non-idiomatic slice zeroing loop
+    summary: "Replace `for i := 0; i < len(...); i++ { s[i] = <zero> }` with `for i := range s { s[i] = <zero> }`."
+  remediation:
+    summary: "Replace the three-clause `for` loop with `for i := range s { s[i] = <zero> }` for better compiler optimization."

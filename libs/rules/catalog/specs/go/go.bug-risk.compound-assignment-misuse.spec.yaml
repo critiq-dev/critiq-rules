@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.bug-risk.compound-assignment-misuse.rule.yaml
+fixtures:
+  - name: flags suspicious compound assignment x += x + y
+    sourcePath: ./fixtures/go.bug-risk.compound-assignment-misuse/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.bug-risk.compound-assignment-misuse
+  - name: accepts simple compound assignment x += y
+    sourcePath: ./fixtures/go.bug-risk.compound-assignment-misuse/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

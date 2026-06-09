@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.interface-any-preferred
+  title: Use `any` instead of `interface{}`
+  summary: Go 1.18 introduced `any` as an alias for `interface{}`. Prefer `any` for brevity.
+  rationale: >-
+    Since Go 1.18, `any` is a built-in alias for `interface{}`. Using `any`
+    is shorter and clearer. The `interface{}` syntax is older and more verbose.
+  aliases:
+    - GO-R3001
+  tags:
+    - correctness
+    - go
+    - clarity
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.interface-any-preferred
+    bind: issue
+emit:
+  finding:
+    category: correctness.style
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - go
+      - clarity
+  message:
+    title: Use `any` instead of `interface{}` in `${captures.issue.text}`
+    summary: >-
+      The `interface{}` type can be replaced with `any` (available since Go 1.18)
+      for shorter and clearer code.
+  remediation:
+    summary: >-
+      Replace `interface{}` with `any`. For example, `map[string]interface{}`
+      becomes `map[string]any`.

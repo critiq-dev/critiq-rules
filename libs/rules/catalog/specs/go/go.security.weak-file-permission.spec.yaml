@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.weak-file-permission.rule.yaml
+fixtures:
+  - name: flags os.WriteFile with permissive mode > 0600
+    sourcePath: ./fixtures/go.security.weak-file-permission/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.weak-file-permission
+  - name: accepts os.WriteFile with safe mode 0600
+    sourcePath: ./fixtures/go.security.weak-file-permission/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

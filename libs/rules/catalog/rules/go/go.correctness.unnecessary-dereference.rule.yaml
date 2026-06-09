@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.unnecessary-dereference
+  title: Unnecessary dereference expressions
+  summary: Unnecessary pointer dereference when accessing struct fields or indexing — Go auto-dereferences pointers in these contexts.
+  rationale: >-
+    Go automatically dereferences pointers when accessing struct fields (`ptr.field`
+    instead of `(*ptr).field`) and when indexing into arrays, slices, or maps
+    (`ptr[index]` instead of `(*ptr)[index]`). The explicit dereference is redundant
+    and adds noise to the code.
+  aliases:
+    - CRT-S0012
+    - GO-R4004
+  tags:
+    - correctness
+    - go
+    - simplification
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.unnecessary-dereference
+    bind: issue
+emit:
+  finding:
+    category: correctness.style
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - go
+      - simplification
+  message:
+    title: Unnecessary dereference in `${captures.issue.text}`
+    summary: >-
+      The pointer dereference `${captures.issue.text}` is unnecessary — Go
+      auto-dereferences pointers for field access and indexing.
+  remediation:
+    summary: >-
+      Remove the unnecessary dereference. Use `ptr.field` instead of
+      `(*ptr).field`, or `(*ptr).field` instead of `(**ptr).field`.

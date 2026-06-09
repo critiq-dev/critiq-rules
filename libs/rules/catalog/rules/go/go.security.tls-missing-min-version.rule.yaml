@@ -7,6 +7,8 @@ metadata:
     `tls.Config` literals should set `MinVersion` to a modern protocol (`tls.VersionTLS12` or newer) to avoid downgrade attacks.
   rationale: >-
     Without `MinVersion`, the Go standard library accepts legacy TLS versions that are vulnerable to known protocol attacks.
+  aliases:
+    - GO-S1020
   detection:
     kind: pattern
   references:

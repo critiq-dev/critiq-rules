@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.utf8-decode-rune
+  title: Use `utf8.DecodeRuneInString` instead of `[]rune(string)[0]`
+  summary: The `[]rune(str)[0]` pattern allocates a rune slice. Use `utf8.DecodeRuneInString(str)` for single-rune access.
+  rationale: >-
+    Converting a string to `[]rune` allocates a new slice. For single-rune access,
+    `utf8.DecodeRuneInString` avoids the allocation entirely.
+  aliases:
+    - GO-P4006
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.performance.utf8-decode-rune
+    bind: issue
+emit:
+  finding:
+    category: performance.optimization
+    severity: high
+    confidence: 0.9
+    tags:
+      - performance
+      - go
+  message:
+    title: Use `utf8.DecodeRuneInString` instead of `[]rune(string)[0]`
+    summary: "Replace `${captures.issue.text}` with `utf8.DecodeRuneInString(str)` to avoid rune slice allocation."
+  remediation:
+    summary: "Replace `[]rune(str)[0]` with `r, _ := utf8.DecodeRuneInString(str)`."

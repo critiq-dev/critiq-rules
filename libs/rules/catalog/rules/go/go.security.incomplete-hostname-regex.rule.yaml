@@ -1,0 +1,64 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.incomplete-hostname-regex
+  title: Use a complete and anchored regular expression for hostname validation
+  summary: >-
+    Regex patterns used for hostname validation should use start (`^`) and end
+    (`$`) anchors, escape literal dots, and avoid overly permissive character
+    classes that allow subdomains or non-hostname input through.
+  rationale: >-
+    Unanchored or unescaped hostname regexes accept malicious or malformed
+    input (e.g. `evil.com.evildomain.com`), enabling SSRF, open redirects,
+    and domain validation bypasses.
+  aliases:
+    - GO-S1016
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-185
+      title: Incorrect Regular Expression
+    - kind: owasp
+      title: Input Validation Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+  tags:
+    - security
+    - go
+    - regex
+    - hostname
+    - validation
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.incomplete-hostname-regex
+    bind: issue
+emit:
+  finding:
+    category: security.validation
+    severity: medium
+    confidence: 0.55
+    tags:
+      - security
+      - go
+      - regex
+  message:
+    title: Anchor hostname regex at start and end in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses a regex that may accept broader input than intended for hostname validation."
+  remediation:
+    summary: >-
+      Anchor the pattern with `^` and `$`, escape literal dots with `\\.`, and
+      restrict character classes to valid hostname characters. For example:
+      `^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*$`.

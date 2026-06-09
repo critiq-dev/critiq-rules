@@ -1,0 +1,58 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.gorm-dry-run-enabled
+  title: "GORM DryRun is enabled"
+  summary: >-
+    `DryRun` is set to `true` in gorm.Config. When DryRun is enabled, GORM
+    generates SQL statements without executing them. If actual execution is
+    needed, DryRun should be disabled.
+  rationale: >-
+    GORM's `DryRun` mode generates SQL statements and returns them without
+    sending them to the database. This is useful for debugging or logging but
+    should not be enabled in production code that actually writes to the
+    database. If `DryRun: true` is set accidentally, all write operations will
+    silently be no-ops.
+  aliases:
+    - GO-W1005
+  tags:
+    - bug-risk
+    - go
+    - gorm
+    - framework
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.gorm-dry-run-enabled
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.framework
+    severity: high
+    confidence: 0.88
+    tags:
+      - bug-risk
+      - go
+      - gorm
+  message:
+    title: GORM DryRun is enabled
+    summary: >-
+      ${captures.issue.text} enables DryRun mode — SQL will be generated but
+      not executed.
+  remediation:
+    summary: >-
+      If database execution is needed, set `DryRun: false` or remove the
+      `DryRun` field to use the default. Keep `DryRun: true` only for debug
+      or logging-only scenarios.

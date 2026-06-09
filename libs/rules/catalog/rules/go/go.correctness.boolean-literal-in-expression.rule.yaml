@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.boolean-literal-in-expression
+  title: Boolean literals in logic expressions
+  summary: Expressions like `flag == true` or `flag != false` can be simplified to the bare boolean value or its negation.
+  rationale: >-
+    Comparing a boolean value to `true` or `false` is redundant. `flag == true`
+    is equivalent to `flag`, and `flag == false` is equivalent to `!flag`.
+    Removing the comparison makes the intent clearer.
+  aliases:
+    - GO-R3004
+  tags:
+    - correctness
+    - go
+    - clarity
+    - simplification
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.boolean-literal-in-expression
+    bind: issue
+emit:
+  finding:
+    category: correctness.style
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - go
+      - clarity
+      - simplification
+  message:
+    title: Redundant boolean comparison in `${captures.issue.text}`
+    summary: >-
+      Comparing a boolean value to a literal `true` or `false` is redundant.
+      Use the bare boolean or its negation instead.
+  remediation:
+    summary: >-
+      Replace `flag == true` with `flag`, and `flag == false` with `!flag`.

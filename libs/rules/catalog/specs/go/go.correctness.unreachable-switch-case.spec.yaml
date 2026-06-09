@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.unreachable-switch-case.rule.yaml
+fixtures:
+  - name: flags case after return without fallthrough
+    sourcePath: ./fixtures/go.correctness.unreachable-switch-case/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.unreachable-switch-case
+  - name: accepts fallthrough between cases
+    sourcePath: ./fixtures/go.correctness.unreachable-switch-case/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

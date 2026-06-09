@@ -1,0 +1,59 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.etcd-getlogger-misuse
+  title: "etcd client GetLogger used as general-purpose logger"
+  summary: >-
+    GetLogger is an internal method on etcd's client type. Using it as a
+    general-purpose application logger is a misuse pattern; the returned
+    logger is configured for etcd's internal use.
+  rationale: >-
+    The etcd client v3 exposes a `GetLogger()` method that returns the
+    client's internal logger. This logger is configured for etcd's diagnostics,
+    not for application-level logging. Using it may produce unexpected output
+    format, miss application-level log levels, or break if the etcd client
+    changes its internal logging. Use a proper application-level logging
+    framework instead.
+  aliases:
+    - GO-W1003
+  tags:
+    - bug-risk
+    - go
+    - etcd
+    - framework
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.etcd-getlogger-misuse
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.framework
+    severity: high
+    confidence: 0.75
+    tags:
+      - bug-risk
+      - go
+      - etcd
+  message:
+    title: etcd GetLogger should not be used as application logger
+    summary: >-
+      ${captures.issue.text} calls the etcd client's internal `GetLogger()`.
+      Use a dedicated application logging framework instead.
+  remediation:
+    summary: >-
+      Replace `client.GetLogger()` with an application-level logging framework
+      such as `log/slog`, `logrus`, or `zap`. The etcd client's logger is
+      intended for etcd's internal diagnostics only.

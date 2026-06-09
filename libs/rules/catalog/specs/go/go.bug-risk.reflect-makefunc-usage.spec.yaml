@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.bug-risk.reflect-makefunc-usage.rule.yaml
+fixtures:
+  - name: flags reflect.MakeFunc usage
+    sourcePath: ./fixtures/go.bug-risk.reflect-makefunc-usage/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.bug-risk.reflect-makefunc-usage
+  - name: accepts code without MakeFunc
+    sourcePath: ./fixtures/go.bug-risk.reflect-makefunc-usage/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.avoid-string-index-alloc
+  title: Avoid string() conversion in strings.Index calls
+  summary: Using `strings.Index(string(x), ...)` with a `[]byte` argument causes an unnecessary allocation.
+  rationale: >-
+    Converting a `[]byte` to `string` for use with `strings.Index` allocates a new string.
+    Prefer `bytes.Index` (or similar `bytes` package functions) to avoid the conversion
+    and allocation entirely.
+  aliases:
+    - CRT-P0004
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.performance.avoid-string-index-alloc
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - go
+  message:
+    title: Avoid string() conversion in strings.Index
+    summary: "`${captures.issue.text}` converts a `[]byte` to `string` which allocates memory."
+  remediation:
+    summary: "Use `bytes.Index` instead of `strings.Index` to avoid the `string()` conversion allocation."

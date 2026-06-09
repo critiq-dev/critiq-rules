@@ -1,0 +1,59 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.tainted-value-sink
+  title: Avoid using tainted values in SQL and command sinks
+  summary: >-
+    User-controlled input (parameters named `input`, `data`, `body`, etc.) should not reach SQL execution or OS command sinks via `fmt.Sprintf` string interpolation.
+  rationale: >-
+    Building SQL queries or shell commands by interpolating user input with `fmt.Sprintf` enables SQL injection and command injection attacks. Use parameterized queries or sanitized APIs instead.
+  aliases:
+    - GO-S7000
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-89
+      title: Improper Neutralization of Special Elements used in an SQL Command (SQL Injection)
+    - kind: cwe
+      id: CWE-78
+      title: Improper Neutralization of Special Elements used in an OS Command (OS Command Injection)
+    - kind: owasp
+      title: SQL Injection Prevention Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+  tags:
+    - security
+    - go
+    - injection
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.tainted-value-sink
+    bind: issue
+emit:
+  finding:
+    category: security.injection
+    severity: high
+    confidence: 0.4
+    tags:
+      - security
+      - go
+      - experimental
+  message:
+    title: Use parameterized query instead of interpolation near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` passes a potentially tainted value through `fmt.Sprintf` into a SQL or command sink."
+  remediation:
+    summary: >-
+      Replace `fmt.Sprintf` interpolation with parameterized queries (`db.ExecContext(ctx, query, args...)`) for SQL or use `exec.Command(name, arg...)` with separate arguments for OS commands.

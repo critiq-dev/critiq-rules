@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.redundant-type-declaration
+  title: Redundant type in variable declaration
+  summary: The explicit type in `var count int = 10` is unnecessary — Go can infer it from the RHS literal.
+  rationale: >-
+    When a variable is declared with `var name Type = literal`, Go's type inference
+    can determine the type from the literal value. The explicit type annotation is
+    redundant and adds noise. Prefer `var name = literal` for clarity.
+  aliases:
+    - GO-C5001
+  tags:
+    - correctness
+    - go
+    - simplification
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.redundant-type-declaration
+    bind: issue
+emit:
+  finding:
+    category: correctness.style
+    severity: high
+    confidence: 0.8
+    tags:
+      - correctness
+      - go
+      - simplification
+  message:
+    title: Redundant type declaration in `${captures.issue.text}`
+    summary: >-
+      The type annotation is redundant because Go can infer it from the literal
+      value on the right-hand side.
+  remediation:
+    summary: >-
+      Remove the explicit type. Write `var name = value` instead of
+      `var name Type = value`.

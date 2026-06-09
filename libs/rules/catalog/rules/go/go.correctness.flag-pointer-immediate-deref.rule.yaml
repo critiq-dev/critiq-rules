@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.flag-pointer-immediate-deref
+  title: Immediate dereference of flag pointer
+  summary: Dereferencing the flag pointer at the call site defeats the purpose of using a flag method.
+  rationale: >-
+    Using *flag.String(...) immediately dereferences the pointer returned by
+    the flag function. The correct pattern is to assign the pointer to a
+    variable and dereference it after flag.Parse().
+  aliases:
+    - CRT-D0009
+  tags:
+    - correctness
+    - go
+    - bug-risk
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.flag-pointer-immediate-deref
+    bind: issue
+emit:
+  finding:
+    category: correctness.style
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - go
+      - bug-risk
+  message:
+    title: Immediate dereference of flag pointer in `${captures.issue.text}`
+    summary: "Dereferencing a flag pointer immediately at the call site may evaluate before flag.Parse() is called."
+  remediation:
+    summary: >-
+      Assign the flag pointer to a variable, call flag.Parse(), then dereference
+      the pointer where the value is needed.

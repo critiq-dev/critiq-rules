@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.unexported-capital-name.rule.yaml
+fixtures:
+  - name: flags unexported struct with capitalized fields
+    sourcePath: ./fixtures/go.correctness.unexported-capital-name/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.unexported-capital-name
+  - name: accepts exported struct with capitalized fields
+    sourcePath: ./fixtures/go.correctness.unexported-capital-name/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

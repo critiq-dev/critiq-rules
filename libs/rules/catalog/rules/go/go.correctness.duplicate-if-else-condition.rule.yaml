@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.duplicate-if-else-condition
+  title: "if and else condition are the same"
+  summary: >-
+    The same boolean expression appears on both an `if` and the following
+    `else if` branch. This is likely a copy-paste error; the second condition
+    should probably be different.
+  rationale: >-
+    Identical conditions in `if` and `else if` branches mean the else-if body
+    is dead code — the `if` body always executes when the condition is true,
+    and the `else if` body executes only when the same condition is true again
+    (which is impossible in a single-evaluation model). This typically indicates
+    the developer forgot to update the condition after copying.
+  aliases:
+    - GO-W1002
+  tags:
+    - correctness
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.duplicate-if-else-condition
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.6
+    tags:
+      - correctness
+      - go
+  message:
+    title: Duplicate condition in if and else-if
+    summary: >-
+      ${captures.issue.text} — the condition is identical to the preceding if
+      branch. The else-if body is dead code.
+  remediation:
+    summary: >-
+      Review the logic and change the second condition to the intended
+      expression, or merge the branches if they are truly identical.

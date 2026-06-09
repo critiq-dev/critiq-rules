@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.avoid-large-loop-copy
+  title: Avoid copying large array elements in range loops
+  summary: Ranging over a slice of large fixed-size arrays copies each element by value.
+  rationale: >-
+    When ranging over a slice of large arrays (e.g., `[][1024]byte`), each iteration
+    copies the array element by value. Use index-based access with a pointer to avoid
+    the per-iteration copy.
+  aliases:
+    - CRT-P0006
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+match:
+  fact:
+    kind: go.performance.avoid-large-loop-copy
+    bind: issue
+emit:
+  finding:
+    category: performance.copy
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - go
+  message:
+    title: Avoid copying large array elements in range loop
+    summary: "`${captures.issue.text}` copies a large array element on each iteration."
+  remediation:
+    summary: "Use index-based access: `for i := range xs { x := &xs[i]; ... }` to avoid per-iteration copies."

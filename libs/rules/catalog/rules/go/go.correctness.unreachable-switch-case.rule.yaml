@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.unreachable-switch-case
+  title: Unreachable case in switch statement
+  summary: Case after return/break/panic without fallthrough is unreachable.
+  rationale: >-
+    When a case body ends with an unconditional exit (return, break, continue,
+    panic, os.Exit, log.Fatal) and does not end with fallthrough, the subsequent
+    cases can never execute. This is likely a dead code path or a missing
+    break/fallthrough.
+  aliases:
+    - CRT-D0004
+  tags:
+    - correctness
+    - go
+    - dead-code
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.unreachable-switch-case
+    bind: issue
+emit:
+  finding:
+    category: correctness.exceptions
+    severity: high
+    confidence: 0.8
+    tags:
+      - correctness
+      - go
+      - dead-code
+  message:
+    title: Remove or fix unreachable case `${captures.issue.text}`
+    summary: "This case comes after an unconditional exit (return/break/panic) in the preceding case body without a fallthrough."
+  remediation:
+    summary: >-
+      Remove the dead case or add a fallthrough keyword if the fall-through is
+      intentional.

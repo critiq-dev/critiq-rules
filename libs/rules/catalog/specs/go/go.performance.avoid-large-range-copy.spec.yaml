@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.avoid-large-range-copy.rule.yaml
+fixtures:
+  - name: flags range over large array
+    sourcePath: ./fixtures/go.performance.avoid-large-range-copy/tests/bad_test.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.avoid-large-range-copy
+  - name: allows range over pointer to array
+    sourcePath: ./fixtures/go.performance.avoid-large-range-copy/tests/good_test.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

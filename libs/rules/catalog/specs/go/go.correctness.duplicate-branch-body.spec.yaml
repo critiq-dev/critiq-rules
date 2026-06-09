@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.duplicate-branch-body.rule.yaml
+fixtures:
+  - name: flags duplicate branch bodies in else-if chain
+    sourcePath: ./fixtures/go.correctness.duplicate-branch-body/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.duplicate-branch-body
+  - name: accepts distinct branch bodies
+    sourcePath: ./fixtures/go.correctness.duplicate-branch-body/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.bug-risk.deprecated-redis-methods.rule.yaml
+fixtures:
+  - name: flags deprecated redis method XTrim
+    sourcePath: ./fixtures/go.bug-risk.deprecated-redis-methods/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.bug-risk.deprecated-redis-methods
+  - name: accepts valid redis method XAdd
+    sourcePath: ./fixtures/go.bug-risk.deprecated-redis-methods/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

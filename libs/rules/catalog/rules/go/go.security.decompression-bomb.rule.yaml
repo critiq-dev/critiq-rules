@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.decompression-bomb
+  title: Guard against decompression bomb denial-of-service
+  summary: >-
+    `io.Copy` or `io.CopyBuffer` with an uncompressed reader from a decompressor (`gzip.NewReader`, `zlib.NewReader`, etc.) without a size limit can exhaust memory or disk in a decompression bomb attack.
+  rationale: >-
+    An attacker can send a small compressed payload that decompresses to many times its original size, causing denial-of-service via memory exhaustion or disk filling. Use `io.CopyN` or `io.LimitReader` to cap the decompressed output.
+  aliases:
+    - GO-S2110
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-409
+      title: Improper Handling of Highly Compressed Data (Data Amplification)
+    - kind: owasp
+      title: Denial of Service Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html
+  tags:
+    - security
+    - go
+    - denial-of-service
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.decompression-bomb
+    bind: issue
+emit:
+  finding:
+    category: security.denial-of-service
+    severity: critical
+    confidence: 0.65
+    tags:
+      - security
+      - go
+  message:
+    title: Limit decompressed output size near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` copies decompressor output without a size limit, risking decompression bomb exhaustion."
+  remediation:
+    summary: >-
+      Replace `io.Copy` with `io.CopyN` or wrap the decompressor reader with `io.LimitReader` to cap decompressed output to an acceptable maximum (e.g., 100MB).

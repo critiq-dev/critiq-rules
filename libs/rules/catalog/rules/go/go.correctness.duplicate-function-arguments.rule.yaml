@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.duplicate-function-arguments
+  title: Duplicate function arguments
+  summary: Consecutive identical arguments may indicate a copy-paste error.
+  rationale: >-
+    Passing the same identifier as two consecutive arguments to a function call
+    is often a copy-paste mistake. The second argument should typically reference
+    a different value.
+  aliases:
+    - CRT-D0005
+  tags:
+    - correctness
+    - go
+    - bug-risk
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.duplicate-function-arguments
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.8
+    tags:
+      - correctness
+      - go
+      - bug-risk
+  message:
+    title: Duplicate argument `${captures.issue.text}` passed to function
+    summary: "Two adjacent arguments in the function call are identical identifiers. This may be a copy-paste error."
+  remediation:
+    summary: >-
+      Verify that both arguments should reference different values. If
+      intentional, suppress the warning.

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.doc.malformed-deprecated-comment.rule.yaml
+fixtures:
+  - name: flags malformed deprecated comments
+    sourcePath: ./fixtures/go.doc.malformed-deprecated-comment/invalid.go
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - go.doc.malformed-deprecated-comment
+        - go.doc.malformed-deprecated-comment
+        - go.doc.malformed-deprecated-comment
+  - name: accepts valid deprecated comments
+    sourcePath: ./fixtures/go.doc.malformed-deprecated-comment/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

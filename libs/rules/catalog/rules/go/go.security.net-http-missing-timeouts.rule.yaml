@@ -7,6 +7,9 @@ metadata:
     Public Go HTTP servers should use `http.Server` with read, write, idle, and header timeouts instead of convenience `ListenAndServe` helpers or incomplete literals.
   rationale: >-
     Missing timeouts enable slowloris-style resource exhaustion and hung connections on internet-facing services.
+  aliases:
+    - GO-S2112
+    - GO-S2114
   detection:
     kind: pattern
   references:

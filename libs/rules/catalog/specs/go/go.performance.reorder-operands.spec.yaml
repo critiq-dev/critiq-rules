@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.performance.reorder-operands.rule.yaml
+fixtures:
+  - name: flags function-call before cheap operand in boolean expression
+    sourcePath: ./fixtures/go.performance.reorder-operands/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.performance.reorder-operands
+  - name: allows cheap operand before expensive call
+    sourcePath: ./fixtures/go.performance.reorder-operands/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

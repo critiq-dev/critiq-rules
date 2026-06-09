@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.tainted-value-sink.rule.yaml
+fixtures:
+  - name: flags db.ExecContext with fmt.Sprintf using user input param
+    sourcePath: ./fixtures/go.security.tainted-value-sink/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.tainted-value-sink
+  - name: accepts parameterized db query without interpolation
+    sourcePath: ./fixtures/go.security.tainted-value-sink/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

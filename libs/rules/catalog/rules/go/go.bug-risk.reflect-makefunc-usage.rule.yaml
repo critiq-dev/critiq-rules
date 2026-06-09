@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.reflect-makefunc-usage
+  title: "Use of reflect.MakeFunc — audit required"
+  summary: >-
+    `reflect.MakeFunc` dynamically constructs a function at runtime. This is
+    a powerful but dangerous operation — audit that type safety is preserved.
+  rationale: >-
+    `reflect.MakeFunc` creates a wrapper function around a given `reflect.Value`
+    (typically a function value). Misuse can lead to type confusion, runtime
+    panics, or unexpected behavior. Most usages are legitimate but warrant
+    manual review.
+  aliases:
+    - GO-W1006
+  tags:
+    - bug-risk
+    - go
+    - reflection
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.reflect-makefunc-usage
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.reflection
+    severity: high
+    confidence: 0.85
+    tags:
+      - bug-risk
+      - go
+      - reflection
+  message:
+    title: reflect.MakeFunc usage — audit required
+    summary: >-
+      ${captures.issue.text} uses `reflect.MakeFunc`. Please audit that type
+      safety is preserved at runtime.
+  remediation:
+    summary: >-
+      Review the `reflect.MakeFunc` call to ensure type safety. Consider
+      whether the dynamic function construction can be replaced with a
+      statically-typed alternative.

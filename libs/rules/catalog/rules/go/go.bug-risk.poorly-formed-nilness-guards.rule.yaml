@@ -1,0 +1,57 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.poorly-formed-nilness-guards
+  title: Poorly formed nilness guards may cause nil pointer dereference
+  summary: >-
+    The expression uses `== nil &&` (short-circuits to the dereference when
+    the value IS nil) or `!= nil ||` (short-circuits to the dereference when
+    the value IS nil). Both patterns risk a nil pointer dereference.
+  rationale: >-
+    Go's short-circuit evaluation means `x == nil && x.Method()` proceeds to
+    `x.Method()` when `x` is nil (the AND continues because the left operand
+    is true). Similarly `x != nil || x.Method()` proceeds to `x.Method()`
+    when `x` is nil (the OR continues because the left operand is false).
+    The correct guard for dereferencing is `x != nil && x.Method()` or
+    `x == nil || x.Method()`.
+  aliases:
+    - GO-E1008
+  tags:
+    - bug-risk
+    - go
+    - framework
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.poorly-formed-nilness-guards
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.framework
+    severity: critical
+    confidence: 0.85
+    tags:
+      - bug-risk
+      - go
+  message:
+    title: Poorly formed nilness guard may panic
+    summary: >-
+      ${captures.issue.text} uses a nilness guard pattern that will
+      dereference nil instead of protecting against it.
+  remediation:
+    summary: >-
+      Swap the comparison operator or operand order so the nil check
+      correctly guards the dereference. Use `x != nil && x.method()` or
+      `x == nil || x.method()` instead.

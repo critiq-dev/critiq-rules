@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.unsafe-defer-close
+  title: Handle deferred Close errors explicitly
+  summary: >-
+    `defer f.Close()` silently discards the error returned by `Close()`. For writable files, this can mask data loss when buffered writes fail on close.
+  rationale: >-
+    The `Close()` method on `*os.File` and other `io.Closer` implementations can return errors (e.g., flush failures, disk-full). A deferred call without error handling may silently lose data. Consider handling the close error explicitly or calling `f.Sync()` before deferring close.
+  aliases:
+    - GO-S2307
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-754
+      title: Improper Check for Unusual or Exceptional Conditions
+    - kind: url
+      title: Effective Go - Defer
+      url: https://go.dev/doc/effective_go#defer
+  tags:
+    - security
+    - go
+    - error-handling
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.unsafe-defer-close
+    bind: issue
+emit:
+  finding:
+    category: security.exceptions
+    severity: high
+    confidence: 0.55
+    tags:
+      - security
+      - go
+  message:
+    title: Handle close error instead of deferring near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` defers a close call without capturing potential write errors."
+  remediation:
+    summary: >-
+      Call `f.Sync()` before the deferred `f.Close()`, or handle `f.Close()` explicitly with error checking instead of deferring it.

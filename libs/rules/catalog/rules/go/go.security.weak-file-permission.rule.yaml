@@ -1,0 +1,56 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.security.weak-file-permission
+  title: Avoid overly permissive file permissions
+  summary: >-
+    `os.WriteFile` or `os.OpenFile` with permission bits above `0600` (owner read/write) may expose sensitive data to other users on the system.
+  rationale: >-
+    Overly permissive file modes (e.g., `0744`, `0777`) allow group or world access to files that may contain credentials, tokens, or sensitive data. Restrict to `0600` or `0400` for sensitive files.
+  aliases:
+    - GO-S2306
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-276
+      title: Incorrect Default Permissions
+    - kind: owasp
+      title: File Permission Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/File_Permission_Cheat_Sheet.html
+  tags:
+    - security
+    - go
+    - filesystem
+    - permissions
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.security.weak-file-permission
+    bind: issue
+emit:
+  finding:
+    category: security.misconfiguration
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - go
+  message:
+    title: Restrict file permissions near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses permission bits above `0600` which may expose sensitive data."
+  remediation:
+    summary: >-
+      Use `0600` (owner read/write) or `0400` (owner read-only) for sensitive files. Avoid group or world access unless explicitly required and reviewed.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.incomplete-hostname-regex.rule.yaml
+fixtures:
+  - name: flags unanchored hostname regex pattern
+    sourcePath: ./fixtures/go.security.incomplete-hostname-regex/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.incomplete-hostname-regex
+  - name: accepts anchored hostname regex pattern
+    sourcePath: ./fixtures/go.security.incomplete-hostname-regex/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

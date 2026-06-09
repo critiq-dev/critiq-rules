@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.incomplete-nil-check
+  title: Incomplete nil check on slice
+  summary: Checking `xs != nil` before indexing a slice is not sufficient — a non-nil empty slice still panics on index access.
+  rationale: >-
+    In Go, a nil slice has no elements, but an empty (non-nil) slice also has no
+    elements. Checking `xs != nil && xs[0] == ...` panics on an empty non-nil
+    slice. Use `len(xs) > 0` to guard against both nil and empty slices.
+  aliases:
+    - CRT-D0017
+  tags:
+    - correctness
+    - go
+    - bug-risk
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.incomplete-nil-check
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.8
+    tags:
+      - correctness
+      - go
+      - bug-risk
+  message:
+    title: Incomplete nil check on slice
+    summary: "Nil check on slice before index access — use `len(xs) > 0` instead to guard against empty non-nil slices"
+  remediation:
+    summary: >-
+      Replace `xs != nil && xs[index]` with `len(xs) > 0 && xs[index]` to
+      correctly handle both nil and empty slices.

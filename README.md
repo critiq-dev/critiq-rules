@@ -85,14 +85,14 @@ npm run smoke:packaged-cli
 
 ## Catalog At A Glance
 
-Today the catalog includes `842` rules across `18` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
+Today the catalog includes `900` rules across `18` categories, with `recommended`, `strict`, `security`, and `experimental` presets.
 
 | Category | Rules | What it looks after |
 | --- | ---: | --- |
 | CloudFormation | 157 | AWS CloudFormation and SAM template validation via wrapped cfn-lint (`cfn.correctness.*`, `cfn.maintainability.*`, `cfn.security.*`) |
 | Security | 93 | Injection, auth and session gaps, unsafe transport, sensitive data exposure, dependency policy, unsafe file and HTML handling |
 | Python | 9 | Django, DRF, Flask, and FastAPI deployment and framework safety |
-| Correctness | 18 | Async bugs, null access, control-flow mistakes, missing fallbacks, race conditions |
+| Correctness | 23 | Async bugs, null access, control-flow mistakes, missing fallbacks, race conditions |
 | Performance | 10 | Repeated IO, wasted async sequencing, hot-path loops, large retained objects, render churn |
 | Quality | 10 | Error handling gaps, oversized functions, coupling, duplicated logic, and weak test coverage |
 | Logging | 2 | Console usage and unsafe logging patterns |

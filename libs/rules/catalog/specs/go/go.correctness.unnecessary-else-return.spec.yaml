@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.unnecessary-else-return.rule.yaml
+fixtures:
+  - name: flags if-else with return in if-body
+    sourcePath: ./fixtures/go.correctness.unnecessary-else-return/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.unnecessary-else-return
+  - name: accepts if without else
+    sourcePath: ./fixtures/go.correctness.unnecessary-else-return/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

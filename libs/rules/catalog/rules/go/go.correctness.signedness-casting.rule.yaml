@@ -1,0 +1,56 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.signedness-casting
+  title: Integer signedness lost through narrowing cast
+  summary: >-
+    Narrowing an integer type (e.g., `int8(x)`, `uint16(y)`) can lose
+    precision or produce unexpected results when the source value exceeds
+    the target type's range.
+  rationale: >-
+    Converting between integer types of different widths truncates the value.
+    For example, `int8(int16(200))` produces `-56` due to overflow. When
+    the result of `strconv.Atoi` or another integer expression is cast to a
+    narrower type, validate the value fits before converting, or widen the
+    target type instead.
+  aliases:
+    - GO-E1006
+  tags:
+    - correctness
+    - go
+    - bug-risk
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.signedness-casting
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.55
+    tags:
+      - correctness
+      - go
+      - bug-risk
+  message:
+    title: Narrowing integer cast may lose signedness
+    summary: "`${captures.issue.text}` narrows an integer value — the result may overflow or lose precision"
+  remediation:
+    summary: >-
+      Validate the source value fits within the target type's range before
+      casting, or widen the target type instead. For `strconv.Atoi` results,
+      check the value against `math.MinInt8` / `math.MaxInt8` etc. before
+      narrowing.

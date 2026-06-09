@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.security.http-dir-path-traversal.rule.yaml
+fixtures:
+  - name: flags http.FileServer with root Dir
+    sourcePath: ./fixtures/go.security.http-dir-path-traversal/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.security.http-dir-path-traversal
+  - name: accepts http.FileServer with relative Dir
+    sourcePath: ./fixtures/go.security.http-dir-path-traversal/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

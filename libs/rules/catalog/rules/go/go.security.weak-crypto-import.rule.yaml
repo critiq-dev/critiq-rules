@@ -7,6 +7,9 @@ metadata:
     Production Go code should not import `crypto/md5`, `crypto/sha1`, `crypto/des`, or `crypto/rc4` for security-sensitive purposes.
   rationale: >-
     MD5 and SHA-1 are broken hash functions, DES has an obsolete key size, and RC4 has known biases; using them as cryptographic primitives degrades confidentiality and integrity.
+  aliases:
+    - GO-S1022
+    - GO-S1023
   detection:
     kind: pattern
   references:

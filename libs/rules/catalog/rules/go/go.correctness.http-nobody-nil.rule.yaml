@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.http-nobody-nil
+  title: http.NoBody instead of nil
+  summary: Use http.NoBody for HTTP requests with no body instead of nil.
+  rationale: >-
+    When creating an HTTP request with `http.NewRequest` or
+    `http.NewRequestWithContext` where no body is needed, pass `http.NoBody`
+    instead of `nil`. `http.NoBody` is an explicit sentinel that indicates
+    no body is intended, while `nil` can be ambiguous.
+  aliases:
+    - GO-R4001
+  tags:
+    - correctness
+    - go
+    - api-usage
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.http-nobody-nil
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-usage
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - go
+      - api-usage
+  message:
+    title: Use `http.NoBody` instead of `nil` in `${captures.issue.text}`
+    summary: >-
+      An HTTP request is created with a `nil` body. Use `http.NoBody` instead
+      to explicitly signal no body is intended.
+  remediation:
+    summary: >-
+      Replace `nil` with `http.NoBody` as the body argument.
+      For example, `http.NewRequest("GET", url, http.NoBody)`.

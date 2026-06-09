@@ -1,0 +1,57 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.bug-risk.gorm-skip-default-transaction
+  title: "GORM SkipDefaultTransaction set to false"
+  summary: >-
+    Setting `SkipDefaultTransaction` to `false` in gorm.Config causes GORM to
+    wrap every operation in a transaction. Audit if this is intentional.
+  rationale: >-
+    GORM's default behavior is to wrap every `Create`, `Update`, `Delete`
+    operation in a transaction. Setting `SkipDefaultTransaction: false`
+    explicitly enables this default, which may cause unintended performance
+    overhead for batch or read-heavy workloads. The setting should be
+    intentionally reviewed.
+  aliases:
+    - GO-W1004
+  tags:
+    - bug-risk
+    - go
+    - gorm
+    - framework
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.bug-risk.gorm-skip-default-transaction
+    bind: issue
+emit:
+  finding:
+    category: bug-risk.framework
+    severity: high
+    confidence: 0.88
+    tags:
+      - bug-risk
+      - go
+      - gorm
+  message:
+    title: GORM SkipDefaultTransaction set to false
+    summary: >-
+      ${captures.issue.text} explicitly enables default transactions.
+      Verify this is intentional for your workload.
+  remediation:
+    summary: >-
+      If per-operation transactions are not needed, set
+      `SkipDefaultTransaction: true` to improve performance. Otherwise, keep
+      the explicit setting with an explanatory comment.

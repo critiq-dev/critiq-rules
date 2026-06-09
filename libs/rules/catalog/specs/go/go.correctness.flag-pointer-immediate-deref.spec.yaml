@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.flag-pointer-immediate-deref.rule.yaml
+fixtures:
+  - name: flags immediate flag pointer dereference
+    sourcePath: ./fixtures/go.correctness.flag-pointer-immediate-deref/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.flag-pointer-immediate-deref
+  - name: accepts proper flag pointer assignment
+    sourcePath: ./fixtures/go.correctness.flag-pointer-immediate-deref/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

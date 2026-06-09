@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.correctness.boolean-simplification.rule.yaml
+fixtures:
+  - name: flags x > y - 1
+    sourcePath: ./fixtures/go.correctness.boolean-simplification/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.correctness.boolean-simplification
+  - name: accepts x >= y
+    sourcePath: ./fixtures/go.correctness.boolean-simplification/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.performance.fmt-fprint
+  title: Use `fmt.Fprint` instead of `Write` + `fmt.Sprint`
+  summary: Prefer `fmt.Fprint(w, ...)` over `w.Write([]byte(fmt.Sprintf(...)))` for writing formatted output.
+  rationale: >-
+    `fmt.Fprint` writes directly to the writer without the intermediate `[]byte`
+    allocation that `w.Write([]byte(fmt.Sprintf(...)))` incurs.
+  aliases:
+    - GO-P4007
+  tags:
+    - performance
+    - go
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.performance.fmt-fprint
+    bind: issue
+emit:
+  finding:
+    category: performance.optimization
+    severity: high
+    confidence: 0.9
+    tags:
+      - performance
+      - go
+  message:
+    title: Use `fmt.Fprint` instead of `Write` + `fmt.Sprint`
+    summary: "Replace `w.Write([]byte(fmt.Sprintf(...)))` with `fmt.Fprint(w, ...)` to avoid intermediate allocation."
+  remediation:
+    summary: "Replace `w.Write([]byte(fmt.Sprintf(...)))` with `fmt.Fprint(w, ...)`."

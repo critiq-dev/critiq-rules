@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: go.correctness.identical-binary-operands
+  title: Binary operation with identical operands
+  summary: Identical expressions on both sides of an operator is likely a copy-paste error.
+  rationale: >-
+    Using the same expression on both sides of a binary operator (e.g., x == x,
+    a < b || a < b) does not change the outcome and indicates a bug or
+    tautology.
+  aliases:
+    - CRT-D0008
+  tags:
+    - correctness
+    - go
+    - bug-risk
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - go
+  paths:
+    include:
+      - "**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "**/testdata/**"
+      - "**/vendor/**"
+match:
+  fact:
+    kind: go.correctness.identical-binary-operands
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.8
+    tags:
+      - correctness
+      - go
+      - bug-risk
+  message:
+    title: Binary operation with identical operands in `${captures.issue.text}`
+    summary: "Both sides of the operator are the same expression. This is likely a copy-paste bug."
+  remediation:
+    summary: >-
+      Replace one side with the intended expression or extract to a variable.

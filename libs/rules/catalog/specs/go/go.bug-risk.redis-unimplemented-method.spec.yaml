@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/go/go.bug-risk.redis-unimplemented-method.rule.yaml
+fixtures:
+  - name: flags Sync(ctx) call
+    sourcePath: ./fixtures/go.bug-risk.redis-unimplemented-method/invalid.go
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - go.bug-risk.redis-unimplemented-method
+  - name: accepts file without Sync/Quit calls
+    sourcePath: ./fixtures/go.bug-risk.redis-unimplemented-method/valid.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
