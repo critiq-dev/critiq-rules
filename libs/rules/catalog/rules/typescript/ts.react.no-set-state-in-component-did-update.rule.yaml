@@ -5,6 +5,8 @@ metadata:
   title: Guard setState in componentDidUpdate
   summary: Unconditional setState in componentDidUpdate can recurse through renders when props or state change on every pass.
   rationale: Updates should compare against prevProps or prevState so the component only re-renders when inputs actually changed.
+  aliases:
+    - JS-0443
   tags:
     - react
     - ui

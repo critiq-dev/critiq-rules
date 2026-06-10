@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-invalid-markup-characters
+  title: Invalid characters in JSX markup
+  summary: Control characters and zero-width Unicode codepoints in JSX text content can cause rendering anomalies and accessibility issues.
+  rationale: Non-printable characters in rendered text are invisible to users but may break layout, screen readers, or text-processing pipelines.
+  aliases:
+    - JS-0454
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.invalid-markup-characters
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.85
+    tags:
+      - react
+      - ui
+  message:
+    title: Remove invalid characters from JSX text
+    summary: JSX text content contains invisible control or zero-width characters.
+  remediation:
+    summary: Strip or replace non-printable and zero-width characters from JSX text content.

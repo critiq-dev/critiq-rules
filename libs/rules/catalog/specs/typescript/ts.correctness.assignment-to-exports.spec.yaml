@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.assignment-to-exports.rule.yaml
+fixtures:
+  - name: flags exports reassignment
+    sourcePath: ./fixtures/ts.correctness.assignment-to-exports/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.assignment-to-exports
+      allSeverities:
+        - high
+  - name: allows exports.* and module.exports
+    sourcePath: ./fixtures/ts.correctness.assignment-to-exports/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

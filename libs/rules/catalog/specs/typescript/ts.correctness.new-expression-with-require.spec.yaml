@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.new-expression-with-require.rule.yaml
+fixtures:
+  - name: flags new require() expression
+    sourcePath: ./fixtures/ts.correctness.new-expression-with-require/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.new-expression-with-require
+      allSeverities:
+        - high
+  - name: allows regular require() call
+    sourcePath: ./fixtures/ts.correctness.new-expression-with-require/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

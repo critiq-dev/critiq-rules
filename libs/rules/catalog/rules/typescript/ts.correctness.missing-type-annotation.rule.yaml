@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.missing-type-annotation
+  title: Missing type annotation
+  summary: Add explicit type annotations where TypeScript cannot infer the type.
+  rationale: Explicit type annotations improve readability and catch type errors at declaration sites.
+  aliases:
+    - JS-0386
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: typescript.missing-type-annotation
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.70
+    tags:
+      - correctness
+      - language
+  message:
+    title: Add explicit type annotation
+    summary: "`${captures.issue.text}` is missing an explicit type annotation."
+  remediation:
+    summary: Add an explicit type annotation to improve clarity and enable better type checking.

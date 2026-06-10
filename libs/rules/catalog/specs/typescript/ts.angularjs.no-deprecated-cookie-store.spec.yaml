@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.angularjs.no-deprecated-cookie-store.rule.yaml
+fixtures:
+  - name: flags $cookieStore reference in AngularJS file
+    sourcePath: ./fixtures/ts.angularjs.no-deprecated-cookie-store/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.angularjs.no-deprecated-cookie-store
+      allSeverities:
+        - high
+  - name: allows non-AngularJS code with cookieStore variable
+    sourcePath: ./fixtures/ts.angularjs.no-deprecated-cookie-store/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

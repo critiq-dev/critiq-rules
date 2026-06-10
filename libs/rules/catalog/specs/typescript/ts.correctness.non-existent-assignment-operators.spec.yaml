@@ -1,0 +1,27 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.non-existent-assignment-operators.rule.yaml
+fixtures:
+  - name: flags =+ typo
+    sourcePath: ./fixtures/ts.correctness.non-existent-assignment-operators/invalid-equal-plus.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.non-existent-assignment-operators
+  - name: flags =- typo
+    sourcePath: ./fixtures/ts.correctness.non-existent-assignment-operators/invalid-equal-minus.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.non-existent-assignment-operators
+  - name: flags =! typo
+    sourcePath: ./fixtures/ts.correctness.non-existent-assignment-operators/invalid-equal-bang.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.non-existent-assignment-operators
+  - name: allows valid compound assignment
+    sourcePath: ./fixtures/ts.correctness.non-existent-assignment-operators/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

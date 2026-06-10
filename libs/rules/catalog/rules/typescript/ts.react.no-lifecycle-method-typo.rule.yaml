@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-lifecycle-method-typo
+  title: Typo in lifecycle method name
+  summary: A misspelled lifecycle method name will never be called by React, leading to silent runtime bugs.
+  rationale: React only calls exact lifecycle method names. A typo means the method is dead code and the intended lifecycle behavior never runs.
+  aliases:
+    - JS-0453
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.lifecycle-method-typo
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.82
+    tags:
+      - react
+      - ui
+  message:
+    title: Correct lifecycle method spelling
+    summary: "${captures.issue.text} looks like a misspelled React lifecycle method."
+  remediation:
+    summary: Fix the method name to match the correct React lifecycle spelling.

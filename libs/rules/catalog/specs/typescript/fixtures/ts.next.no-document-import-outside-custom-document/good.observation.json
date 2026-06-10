@@ -1,0 +1,14 @@
+{
+  "path": "src/pages/_document.ts",
+  "language": "typescript",
+  "text": "import Document from 'next/document';\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

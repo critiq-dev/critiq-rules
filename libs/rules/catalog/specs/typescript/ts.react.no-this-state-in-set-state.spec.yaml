@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-this-state-in-set-state.rule.yaml
+fixtures:
+  - name: flags this.state read inside setState object argument
+    sourcePath: ./fixtures/ts.react.no-this-state-in-set-state/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-this-state-in-set-state
+      allSeverities:
+        - high
+  - name: allows prevState updater pattern
+    sourcePath: ./fixtures/ts.react.no-this-state-in-set-state/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

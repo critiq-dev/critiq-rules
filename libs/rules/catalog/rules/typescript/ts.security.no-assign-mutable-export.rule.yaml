@@ -14,6 +14,8 @@ metadata:
     - kind: owasp
       title: Secure Configuration Cheat Sheet
       url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+  aliases:
+    - JS-E1009
   tags:
     - security
     - express

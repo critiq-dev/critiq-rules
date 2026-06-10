@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.prefer-includes-over-indexof.rule.yaml
+fixtures:
+  - name: flags indexOf !== -1 comparison
+    sourcePath: ./fixtures/ts.correctness.prefer-includes-over-indexof/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.prefer-includes-over-indexof
+      allSeverities:
+        - medium
+  - name: allows includes usage
+    sourcePath: ./fixtures/ts.correctness.prefer-includes-over-indexof/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

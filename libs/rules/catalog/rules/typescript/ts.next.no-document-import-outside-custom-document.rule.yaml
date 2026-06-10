@@ -1,0 +1,39 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.next.no-document-import-outside-custom-document
+  title: Avoid importing next/document outside the custom document file
+  summary: next/document should only be imported in pages/_document.(ts|tsx) or src/pages/_document.(ts|tsx).
+  rationale: The next/document module is designed exclusively for customizing the HTML document shell in Next.js Pages Router. Importing it in other files indicates a misunderstanding of Next.js rendering architecture and may cause runtime errors or confusing component boundaries.
+  aliases:
+    - JS-E1002
+  tags:
+    - next
+    - react
+    - correctness
+    - rules-catalog
+    - public-directory-parity
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.next.document-import-outside-custom-document
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: high
+    confidence: 0.95
+    tags:
+      - next
+      - react
+      - correctness
+  message:
+    title: Move next/document import to _document file
+    summary: "next/document is imported outside of _document.tsx — this module only works in the custom document file."
+  remediation:
+    summary: Remove the next/document import or move it to pages/_document.(ts|tsx).

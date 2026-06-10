@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.duplicate-export
+  title: Avoid duplicate named exports
+  summary: Module should not export the same name more than once.
+  rationale: Duplicate exports are confusing and may cause unexpected behavior. The last duplicate wins at runtime, but the redundancy makes the module contract unclear and can hide real export conflicts.
+  aliases:
+    - JS-E1004
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.duplicate-export
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - language
+  message:
+    title: Remove duplicate export
+    summary: "`${captures.issue.text}` is exported more than once."
+  remediation:
+    summary: Remove the duplicate export declaration, keeping only one definition of the name.

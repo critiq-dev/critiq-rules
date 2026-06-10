@@ -10,8 +10,25 @@ const badgePath = resolve(
   workspaceRoot,
   'docs/assets/badges/rules-count.json',
 );
+const metadataPath = resolve(
+  workspaceRoot,
+  'libs/rules/catalog/catalog-metadata.json',
+);
 const rulesRoot = resolve(workspaceRoot, 'libs/rules/catalog/rules');
 const readmePattern = /`\d+` rules across `\d+` categories/;
+
+const LANGUAGE_LABEL_MAP = {
+  typescript: 'TypeScript',
+  go: 'Go',
+  java: 'Java',
+  php: 'PHP',
+  python: 'Python',
+  ruby: 'Ruby',
+  rust: 'Rust',
+  cfn: 'CloudFormation',
+  sql: 'SQL',
+  shared: 'Shared',
+};
 
 function getRuleCategory(fileName) {
   const baseName = fileName.replace(/\.rule\.yaml$/, '');
@@ -24,9 +41,18 @@ function getRuleCategory(fileName) {
   return segments[0];
 }
 
+function getLanguageDirName(prefix) {
+  if (prefix === 'ts') return 'typescript';
+  if (prefix === 'py') return 'python';
+  if (prefix === 'cfn') return 'cfn';
+  if (prefix === 'security') return 'shared';
+  return prefix;
+}
+
 function collectCatalogStats(directory) {
   let ruleCount = 0;
   const categories = new Set();
+  const byLanguage = {};
 
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
     const absolutePath = resolve(directory, entry.name);
@@ -39,22 +65,31 @@ function collectCatalogStats(directory) {
         categories.add(category);
       }
 
+      for (const [lang, count] of Object.entries(nestedStats.byLanguage)) {
+        byLanguage[lang] = (byLanguage[lang] || 0) + count;
+      }
+
       continue;
     }
 
     if (entry.isFile() && entry.name.endsWith('.rule.yaml')) {
       ruleCount += 1;
       categories.add(getRuleCategory(entry.name));
+
+      const prefix = entry.name.split('.')[0];
+      const langKey = getLanguageDirName(prefix);
+      byLanguage[langKey] = (byLanguage[langKey] || 0) + 1;
     }
   }
 
   return {
     ruleCount,
     categories,
+    byLanguage,
   };
 }
 
-const { ruleCount, categories } = collectCatalogStats(rulesRoot);
+const { ruleCount, categories, byLanguage } = collectCatalogStats(rulesRoot);
 const categoryCount = categories.size;
 
 for (const readmePath of readmePaths) {
@@ -89,6 +124,26 @@ writeFileSync(
   )}\n`,
 );
 
+const sortedLanguages = Object.entries(byLanguage)
+  .sort(([, a], [, b]) => b - a)
+  .reduce((acc, [lang, count]) => {
+    acc[lang] = {
+      count,
+      label: LANGUAGE_LABEL_MAP[lang] ?? lang,
+    };
+    return acc;
+  }, {});
+
+const metadata = {
+  schemaVersion: 1,
+  totalRuleCount: ruleCount,
+  lastUpdated: new Date().toISOString(),
+  rulesByLanguage: sortedLanguages,
+};
+
+mkdirSync(dirname(metadataPath), { recursive: true });
+writeFileSync(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`);
+
 console.log(
-  `Updated README and badge artifacts for ${ruleCount} shipped rules.`,
+  `Updated README, badge, and catalog-metadata for ${ruleCount} shipped rules.`,
 );

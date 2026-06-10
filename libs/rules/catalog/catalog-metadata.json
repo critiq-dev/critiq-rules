@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "totalRuleCount": 990,
+  "lastUpdated": "2026-06-10T05:19:26.932Z",
+  "rulesByLanguage": {
+    "typescript": {
+      "count": 335,
+      "label": "TypeScript"
+    },
+    "cfn": {
+      "count": 157,
+      "label": "CloudFormation"
+    },
+    "java": {
+      "count": 106,
+      "label": "Java"
+    },
+    "php": {
+      "count": 97,
+      "label": "PHP"
+    },
+    "go": {
+      "count": 95,
+      "label": "Go"
+    },
+    "rust": {
+      "count": 75,
+      "label": "Rust"
+    },
+    "python": {
+      "count": 61,
+      "label": "Python"
+    },
+    "ruby": {
+      "count": 38,
+      "label": "Ruby"
+    },
+    "shared": {
+      "count": 13,
+      "label": "Shared"
+    },
+    "sql": {
+      "count": 13,
+      "label": "SQL"
+    }
+  }
+}

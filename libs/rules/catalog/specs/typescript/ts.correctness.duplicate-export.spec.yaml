@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.duplicate-export.rule.yaml
+fixtures:
+  - name: flags duplicate named export
+    sourcePath: ./fixtures/ts.correctness.duplicate-export/bad-duplicate-export.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.duplicate-export
+      allSeverities:
+        - high
+  - name: allows distinct named exports
+    sourcePath: ./fixtures/ts.correctness.duplicate-export/good-distinct-exports.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

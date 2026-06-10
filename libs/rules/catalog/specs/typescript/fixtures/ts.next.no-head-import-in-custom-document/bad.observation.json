@@ -1,0 +1,28 @@
+{
+  "path": "src/pages/_document.ts",
+  "language": "typescript",
+  "text": "import Head from 'next/head';\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "framework.next.head-import-in-custom-document",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 28
+          },
+          "text": "import Head from 'next/head'",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

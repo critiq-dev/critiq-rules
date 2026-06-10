@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.unused-expression
+  title: Unused expressions found
+  summary: Expression statement has no side effects and its result is discarded.
+  rationale: Expressions without side effects whose results are discarded indicate dead code or a programming mistake (e.g., `a && b` instead of `if (a) b()`).
+  aliases:
+    - JS-B003
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.unused-expression
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.70
+    tags:
+      - correctness
+      - language
+  message:
+    title: Remove or use the result of this expression
+    summary: "`${captures.issue.text}` has no side effects and its result is discarded."
+  remediation:
+    summary: Either assign the expression result to a variable, use it in a condition, or remove the dead code entirely.

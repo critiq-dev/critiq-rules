@@ -5,6 +5,8 @@ metadata:
   title: Array.sort without compare function
   summary: Provide a compare function when sorting non-string arrays.
   rationale: Default sort coerces elements to strings, which misorders numbers and many objects.
+  aliases:
+    - JS-0375
   tags:
     - correctness
     - language

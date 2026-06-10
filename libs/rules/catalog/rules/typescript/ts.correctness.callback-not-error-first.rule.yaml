@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.callback-not-error-first
+  title: Non-error-first callback pattern
+  summary: Ensure Node.js-style error-first callback pattern is followed.
+  rationale: Node.js conventions place the error as the first parameter; breaking this convention signals a potential bug or misunderstanding.
+  aliases:
+    - JS-0255
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-052
+    - public-directory-parity
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.callback-not-error-first
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.65
+    tags:
+      - correctness
+      - language
+  message:
+    title: Follow error-first callback convention
+    summary: "Callback first parameter is not `err` or `error`."
+  remediation:
+    summary: Reorder callback parameters so the error parameter comes first, or rename the first parameter to `err` or `error`.

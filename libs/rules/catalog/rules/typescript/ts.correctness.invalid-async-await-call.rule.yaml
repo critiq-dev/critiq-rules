@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.invalid-async-await-call
+  title: Await or for-await outside async function
+  summary: The `await` keyword and `for await...of` are only valid inside an `async` function.
+  rationale: Using await outside an async function causes a syntax error at runtime or parse time, making the program invalid.
+  aliases:
+    - JS-0294
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.invalid-async-await
+    bind: issue
+emit:
+  finding:
+    category: correctness.control-flow
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - language
+  message:
+    title: Move await inside async function
+    summary: "`${captures.issue.text}` is only valid inside an async function."
+  remediation:
+    summary: Wrap the enclosing function with the `async` keyword, or move the await expression into an async context. Top-level await is supported in ESM modules.

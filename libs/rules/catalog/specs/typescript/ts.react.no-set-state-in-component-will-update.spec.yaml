@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-set-state-in-component-will-update.rule.yaml
+fixtures:
+  - name: flags setState inside componentWillUpdate
+    sourcePath: ./fixtures/ts.react.no-set-state-in-component-will-update/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-set-state-in-component-will-update
+      allSeverities:
+        - high
+  - name: allows empty componentWillUpdate
+    sourcePath: ./fixtures/ts.react.no-set-state-in-component-will-update/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

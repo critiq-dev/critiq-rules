@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.angularjs.prefer-angular-is-string.rule.yaml
+fixtures:
+  - name: flags typeof x === "string" in AngularJS file
+    sourcePath: ./fixtures/ts.angularjs.prefer-angular-is-string/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.angularjs.prefer-angular-is-string
+      allSeverities:
+        - high
+  - name: allows angular.isString() usage
+    sourcePath: ./fixtures/ts.angularjs.prefer-angular-is-string/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

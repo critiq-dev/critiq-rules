@@ -1,0 +1,22 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-computed-missing-dependency.rule.yaml
+fixtures:
+  - name: flags computed property referencing external data
+    sourcePath: ./fixtures/ts.vue.no-computed-missing-dependency/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-computed-missing-dependency
+      allSeverities:
+        - high
+  - name: allows computed property using only this.* props
+    sourcePath: ./fixtures/ts.vue.no-computed-missing-dependency/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows computed with explicit dependencies array
+    sourcePath: ./fixtures/ts.vue.no-computed-missing-dependency/valid-explicit-deps.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

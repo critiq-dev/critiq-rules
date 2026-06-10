@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.angularjs.inject-function-assignments-only.rule.yaml
+fixtures:
+  - name: flags non-assignment statements inside inject() callbacks
+    sourcePath: ./fixtures/ts.angularjs.inject-function-assignments-only/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.angularjs.inject-function-assignments-only
+      allSeverities:
+        - high
+  - name: allows inject() callbacks with only assignments
+    sourcePath: ./fixtures/ts.angularjs.inject-function-assignments-only/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

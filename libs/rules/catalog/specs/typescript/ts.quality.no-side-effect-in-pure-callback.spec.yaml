@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.quality.no-side-effect-in-pure-callback.rule.yaml
+fixtures:
+  - name: flags getter with side effects
+    sourcePath: ./fixtures/ts.quality.no-side-effect-in-pure-callback/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.quality.no-side-effect-in-pure-callback
+        - ts.quality.no-side-effect-in-pure-callback
+      allSeverities:
+        - high
+        - high
+  - name: allows pure getters without side effects
+    sourcePath: ./fixtures/ts.quality.no-side-effect-in-pure-callback/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

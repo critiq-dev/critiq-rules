@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.vue.no-data-object-declaration
+  title: Deprecation of Object Declaration on data
+  summary: The `data` option in Vue components must be a function, not an object literal, to avoid shared state across instances.
+  rationale: When `data` is declared as a plain object, all component instances share the same reference. This causes cross-instance state corruption. Vue requires `data` to be a function that returns a fresh object for each instance.
+  aliases:
+    - JS-0629
+  tags:
+    - vue
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.vue.data-object-declaration
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.95
+    tags:
+      - vue
+      - correctness
+  message:
+    title: Replace object literal data with a function
+    summary: "${captures.issue.text} declares data as a plain object. Use a function that returns the object instead."
+  remediation:
+    summary: "Change `data: { ... }` to `data() { return { ... }; }` to ensure each component instance gets its own reactive state."

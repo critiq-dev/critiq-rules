@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.testing.no-legacy-test-waiter.rule.yaml
+fixtures:
+  - name: flags legacy waiter APIs imported from testing-library
+    sourcePath: ./fixtures/ts.testing.no-legacy-test-waiter/invalid.test.ts
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ts.testing.no-legacy-test-waiter
+        - ts.testing.no-legacy-test-waiter
+        - ts.testing.no-legacy-test-waiter
+      allSeverities:
+        - high
+        - high
+        - high
+  - name: allows waitFor and custom wait function
+    sourcePath: ./fixtures/ts.testing.no-legacy-test-waiter/valid.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

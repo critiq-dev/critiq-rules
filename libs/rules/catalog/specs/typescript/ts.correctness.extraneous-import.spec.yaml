@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.extraneous-import.rule.yaml
+fixtures:
+  - name: flags unused import
+    sourcePath: ./fixtures/ts.correctness.extraneous-import/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.extraneous-import
+      allSeverities:
+        - medium
+  - name: allows used import
+    sourcePath: ./fixtures/ts.correctness.extraneous-import/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

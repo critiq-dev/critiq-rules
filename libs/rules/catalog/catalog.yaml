@@ -112,6 +112,16 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.correctness.this-outside-class
+    rulePath: ./rules/typescript/ts.correctness.this-outside-class.rule.yaml
+    presets:
+      - experimental
+      - strict
+  - id: ts.correctness.unused-expression
+    rulePath: ./rules/typescript/ts.correctness.unused-expression.rule.yaml
+    presets:
+      - experimental
+      - strict
   - id: ts.correctness.unreachable-statement
     rulePath: ./rules/typescript/ts.correctness.unreachable-statement.rule.yaml
     presets:
@@ -189,6 +199,16 @@ rules:
       - strict
   - id: ts.correctness.no-misused-promises
     rulePath: ./rules/typescript/ts.correctness.no-misused-promises.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.no-confusing-label-in-switch
+    rulePath: ./rules/typescript/ts.correctness.no-confusing-label-in-switch.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.no-href-with-nuxt-link
+    rulePath: ./rules/typescript/ts.correctness.no-href-with-nuxt-link.rule.yaml
     presets:
       - recommended
       - strict
@@ -292,6 +312,11 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.correctness.simplify-boolean-return
+    rulePath: ./rules/typescript/ts.correctness.simplify-boolean-return.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.correctness.template-placeholder-in-string
     rulePath: ./rules/typescript/ts.correctness.template-placeholder-in-string.rule.yaml
     presets:
@@ -371,6 +396,202 @@ rules:
     rulePath: ./rules/typescript/ts.correctness.duplicate-class-member.rule.yaml
     presets:
       - recommended
+      - strict
+  - id: ts.correctness.duplicate-export
+    rulePath: ./rules/typescript/ts.correctness.duplicate-export.rule.yaml
+    presets:
+      - strict
+  - id: ts.correctness.namespace-import-unexported-name
+    rulePath: ./rules/typescript/ts.correctness.namespace-import-unexported-name.rule.yaml
+    presets:
+      - strict
+  - id: ts.correctness.non-existent-assignment-operators
+    rulePath: ./rules/typescript/ts.correctness.non-existent-assignment-operators.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.unresolved-import
+    rulePath: ./rules/typescript/ts.correctness.unresolved-import.rule.yaml
+    presets:
+      - strict
+  - id: ts.correctness.new-symbol-instance
+    rulePath: ./rules/typescript/ts.correctness.new-symbol-instance.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.var-declaration
+    rulePath: ./rules/typescript/ts.correctness.var-declaration.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.parse-int-on-number-literal
+    rulePath: ./rules/typescript/ts.correctness.parse-int-on-number-literal.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.assignment-to-exports
+    rulePath: ./rules/typescript/ts.correctness.assignment-to-exports.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.extraneous-import
+    rulePath: ./rules/typescript/ts.correctness.extraneous-import.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.flawed-string-comparison
+    rulePath: ./rules/typescript/ts.correctness.flawed-string-comparison.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.new-expression-with-require
+    rulePath: ./rules/typescript/ts.correctness.new-expression-with-require.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.callback-missing-error-handling
+    rulePath: ./rules/typescript/ts.correctness.callback-missing-error-handling.rule.yaml
+    presets:
+      - experimental
+  - id: ts.correctness.callback-not-error-first
+    rulePath: ./rules/typescript/ts.correctness.callback-not-error-first.rule.yaml
+    presets:
+      - experimental
+  - id: ts.correctness.invalid-shebang
+    rulePath: ./rules/typescript/ts.correctness.invalid-shebang.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.deprecated-api-usage
+    rulePath: ./rules/typescript/ts.correctness.deprecated-api-usage.rule.yaml
+    presets:
+      - strict
+  - id: ts.correctness.invalid-async-await-call
+    rulePath: ./rules/typescript/ts.correctness.invalid-async-await-call.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.no-ts-suppress-directive
+    rulePath: ./rules/typescript/ts.correctness.no-ts-suppress-directive.rule.yaml
+    presets:
+      - strict
+  - id: ts.correctness.missing-type-annotation
+    rulePath: ./rules/typescript/ts.correctness.missing-type-annotation.rule.yaml
+    presets:
+      - strict
+  - id: ts.correctness.prefer-as-const-over-literal-type
+    rulePath: ./rules/typescript/ts.correctness.prefer-as-const-over-literal-type.rule.yaml
+    presets:
+      - strict
+  - id: ts.correctness.prefer-includes-over-indexof
+    rulePath: ./rules/typescript/ts.correctness.prefer-includes-over-indexof.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.prefer-nullish-coalescing
+    rulePath: ./rules/typescript/ts.correctness.prefer-nullish-coalescing.rule.yaml
+    presets:
+      - strict
+  - id: ts.correctness.private-member-should-be-readonly
+    rulePath: ./rules/typescript/ts.correctness.private-member-should-be-readonly.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.correctness.require-outside-import
+    rulePath: ./rules/typescript/ts.correctness.require-outside-import.rule.yaml
+    presets:
+      - strict
+  - id: ts.angularjs.no-controller
+    rulePath: ./rules/typescript/ts.angularjs.no-controller.rule.yaml
+    presets:
+      - strict
+  - id: ts.angularjs.no-deprecated-cookie-store
+    rulePath: ./rules/typescript/ts.angularjs.no-deprecated-cookie-store.rule.yaml
+    presets:
+      - strict
+  - id: ts.angularjs.no-deprecated-directive-replace
+    rulePath: ./rules/typescript/ts.angularjs.no-deprecated-directive-replace.rule.yaml
+    presets:
+      - strict
+  - id: ts.angularjs.no-deprecated-http-success-error
+    rulePath: ./rules/typescript/ts.angularjs.no-deprecated-http-success-error.rule.yaml
+    presets:
+      - strict
+  - id: ts.angularjs.inject-function-assignments-only
+    rulePath: ./rules/typescript/ts.angularjs.inject-function-assignments-only.rule.yaml
+    presets:
+      - strict
+  - id: ts.angularjs.prefer-angular-for-each
+    rulePath: ./rules/typescript/ts.angularjs.prefer-angular-for-each.rule.yaml
+    presets:
+      - strict
+  - id: ts.angularjs.no-jquery-wrapping-angular-element
+    rulePath: ./rules/typescript/ts.angularjs.no-jquery-wrapping-angular-element.rule.yaml
+    presets:
+      - strict
+  - id: ts.angularjs.prefer-angular-is-string
+    rulePath: ./rules/typescript/ts.angularjs.prefer-angular-is-string.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-reserved-key-overwrite
+    rulePath: ./rules/typescript/ts.vue.no-reserved-key-overwrite.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-computed-mutation
+    rulePath: ./rules/typescript/ts.vue.no-computed-mutation.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.prefer-prop-type-constructor
+    rulePath: ./rules/typescript/ts.vue.prefer-prop-type-constructor.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-data-object-declaration
+    rulePath: ./rules/typescript/ts.vue.no-data-object-declaration.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.emits-validator-return-boolean
+    rulePath: ./rules/typescript/ts.vue.emits-validator-return-boolean.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-deprecated-keycodes-config
+    rulePath: ./rules/typescript/ts.vue.no-deprecated-keycodes-config.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-deprecated-listeners
+    rulePath: ./rules/typescript/ts.vue.no-deprecated-listeners.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-deprecated-model-option
+    rulePath: ./rules/typescript/ts.vue.no-deprecated-model-option.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-deprecated-scoped-slots
+    rulePath: ./rules/typescript/ts.vue.no-deprecated-scoped-slots.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-keycode-modifiers
+    rulePath: ./rules/typescript/ts.vue.no-keycode-modifiers.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-slot-property-access
+    rulePath: ./rules/typescript/ts.vue.no-slot-property-access.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.require-transition-conditional
+    rulePath: ./rules/typescript/ts.vue.require-transition-conditional.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-computed-missing-dependency
+    rulePath: ./rules/typescript/ts.vue.no-computed-missing-dependency.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-server-env-in-client-hooks
+    rulePath: ./rules/typescript/ts.vue.no-server-env-in-client-hooks.rule.yaml
+    presets:
+      - strict
+  - id: ts.vue.no-browser-globals-in-created
+    rulePath: ./rules/typescript/ts.vue.no-browser-globals-in-created.rule.yaml
+    presets:
       - strict
   - id: ts.quality.swallowed-error
     rulePath: ./rules/typescript/ts.quality.swallowed-error.rule.yaml
@@ -462,6 +683,14 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.quality.no-banned-type
+    rulePath: ./rules/typescript/ts.quality.no-banned-type.rule.yaml
+    presets:
+      - strict
+  - id: ts.quality.no-side-effect-in-pure-callback
+    rulePath: ./rules/typescript/ts.quality.no-side-effect-in-pure-callback.rule.yaml
+    presets:
+      - strict
   - id: ts.testing.no-focused-test
     rulePath: ./rules/typescript/ts.testing.no-focused-test.rule.yaml
     presets:
@@ -494,6 +723,16 @@ rules:
       - strict
   - id: ts.testing.no-test-only-code-in-production
     rulePath: ./rules/typescript/ts.testing.no-test-only-code-in-production.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.testing.no-legacy-test-waiter
+    rulePath: ./rules/typescript/ts.testing.no-legacy-test-waiter.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.testing.useless-assertion
+    rulePath: ./rules/typescript/ts.testing.useless-assertion.rule.yaml
     presets:
       - recommended
       - strict
@@ -1264,6 +1503,14 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.next.no-document-import-outside-custom-document
+    rulePath: ./rules/typescript/ts.next.no-document-import-outside-custom-document.rule.yaml
+    presets:
+      - strict
+  - id: ts.next.no-head-import-in-custom-document
+    rulePath: ./rules/typescript/ts.next.no-head-import-in-custom-document.rule.yaml
+    presets:
+      - strict
   - id: ts.react.no-index-as-key-in-dynamic-list
     rulePath: ./rules/typescript/ts.react.no-index-as-key-in-dynamic-list.rule.yaml
     presets:
@@ -1370,6 +1617,34 @@ rules:
     presets:
       - recommended
       - strict
+  - id: ts.react.no-set-state-in-component-will-update
+    rulePath: ./rules/typescript/ts.react.no-set-state-in-component-will-update.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.react.no-deprecated-is-mounted
+    rulePath: ./rules/typescript/ts.react.no-deprecated-is-mounted.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.react.no-should-component-update
+    rulePath: ./rules/typescript/ts.react.no-should-component-update.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-lifecycle-method-typo
+    rulePath: ./rules/typescript/ts.react.no-lifecycle-method-typo.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ts.react.no-invalid-markup-characters
+    rulePath: ./rules/typescript/ts.react.no-invalid-markup-characters.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-render-invalid-return-type
+    rulePath: ./rules/typescript/ts.react.no-render-invalid-return-type.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.react.no-target-blank-without-rel
     rulePath: ./rules/typescript/ts.react.no-target-blank-without-rel.rule.yaml
     presets:
@@ -1385,6 +1660,18 @@ rules:
     rulePath: ./rules/typescript/ts.react.no-this-in-function-component.rule.yaml
     presets:
       - recommended
+      - strict
+  - id: ts.react.no-unnecessary-fragment
+    rulePath: ./rules/typescript/ts.react.no-unnecessary-fragment.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-this-state-in-set-state
+    rulePath: ./rules/typescript/ts.react.no-this-state-in-set-state.rule.yaml
+    presets:
+      - strict
+  - id: ts.react.no-hooks-rule-violation
+    rulePath: ./rules/typescript/ts.react.no-hooks-rule-violation.rule.yaml
+    presets:
       - strict
   - id: security.no-sql-interpolation
     rulePath: ./rules/shared/security.no-sql-interpolation.rule.yaml
@@ -1446,6 +1733,11 @@ rules:
       - recommended
       - strict
       - security
+  - id: ts.runtime.process-exit-control-flow
+    rulePath: ./rules/typescript/ts.runtime.process-exit-control-flow.rule.yaml
+    presets:
+      - recommended
+      - strict
   - id: ts.security.unsafe-dirname-path-concat
     rulePath: ./rules/typescript/ts.security.unsafe-dirname-path-concat.rule.yaml
     presets:

@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.this-outside-class
+  title: Found `this` keyword outside of classes
+  summary: Do not use the `this` keyword outside of a class body.
+  rationale: Using `this` outside of a class typically refers to the global object (undefined in strict mode), which is rarely the intended behavior and can lead to subtle bugs.
+  aliases:
+    - JS-B002
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.this-outside-class
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - language
+  message:
+    title: Remove `this` usage outside of class
+    summary: "`${captures.issue.text}` uses `this` outside of a class body."
+  remediation:
+    summary: Refactor the code to avoid using `this` outside of a class. Replace `this` with the intended reference or use a local variable instead.

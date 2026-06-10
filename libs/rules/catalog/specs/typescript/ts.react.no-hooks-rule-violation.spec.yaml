@@ -1,0 +1,33 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-hooks-rule-violation.rule.yaml
+fixtures:
+  - name: flags hook inside conditional block
+    sourcePath: ./fixtures/ts.react.no-hooks-rule-violation/invalid-conditional.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-hooks-rule-violation
+      allSeverities:
+        - high
+  - name: flags hook inside loop
+    sourcePath: ./fixtures/ts.react.no-hooks-rule-violation/invalid-loop.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-hooks-rule-violation
+      allSeverities:
+        - high
+  - name: flags hook in non-component function
+    sourcePath: ./fixtures/ts.react.no-hooks-rule-violation/invalid-non-component.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-hooks-rule-violation
+      allSeverities:
+        - high
+  - name: allows hooks at top level of component and custom hook
+    sourcePath: ./fixtures/ts.react.no-hooks-rule-violation/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

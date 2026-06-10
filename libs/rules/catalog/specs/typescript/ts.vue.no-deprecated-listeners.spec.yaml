@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-deprecated-listeners.rule.yaml
+fixtures:
+  - name: flags this.$listeners usage
+    sourcePath: ./fixtures/ts.vue.no-deprecated-listeners/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-deprecated-listeners
+      allSeverities:
+        - medium
+  - name: allows using $attrs instead
+    sourcePath: ./fixtures/ts.vue.no-deprecated-listeners/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

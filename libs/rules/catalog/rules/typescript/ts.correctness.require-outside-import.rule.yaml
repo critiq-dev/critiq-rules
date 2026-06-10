@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.require-outside-import
+  title: Require outside import statement
+  summary: Use ES module `import` syntax instead of `require()` calls.
+  rationale: Prefer ES module `import` syntax over CommonJS `require()` in JavaScript and TypeScript files.
+  aliases:
+    - JS-0359
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.require-outside-import
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Replace require() with ES module import
+    summary: "`${captures.issue.text}` uses require() instead of import."
+  remediation:
+    summary: Replace the `require()` call with an ES module `import` statement.

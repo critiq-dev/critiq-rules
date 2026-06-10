@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.angularjs.no-deprecated-directive-replace
+  title: Avoid deprecated directive replace property
+  summary: "The `replace` property in AngularJS directive definitions is deprecated and removed in AngularJS 1.7+."
+  rationale: AngularJS removed the `replace` property from directive definition objects. It causes unexpected DOM behavior and is not compatible with component-based architecture.
+  aliases:
+    - JS-0531
+  tags:
+    - angularjs
+    - deprecated
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.angularjs.deprecated-directive-replace
+    bind: issue
+emit:
+  finding:
+    category: correctness.deprecated
+    severity: high
+    confidence: 0.81
+    tags:
+      - angularjs
+      - deprecated
+  message:
+    title: Remove deprecated directive replace property
+    summary: "`${captures.issue.text}` uses the deprecated `replace` property in a directive definition."
+  remediation:
+    summary: Remove the `replace` property from the directive definition. AngularJS no longer supports replacing the directive element with the template content. Wrap template content in the directive element instead.

@@ -1,0 +1,14 @@
+{
+  "path": "src/good-resolved-import.ts",
+  "language": "typescript",
+  "text": "import { foo } from './existent-module';\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

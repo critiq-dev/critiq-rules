@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-server-env-in-client-hooks.rule.yaml
+fixtures:
+  - name: flags process.server in client-side mounted hook
+    sourcePath: ./fixtures/ts.vue.no-server-env-in-client-hooks/bad-vue-nuxt-server-env-in-client-hook.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-server-env-in-client-hooks
+      allSeverities:
+        - high
+  - name: allows process.server in server-side asyncData hook
+    sourcePath: ./fixtures/ts.vue.no-server-env-in-client-hooks/good-vue-nuxt-server-env-in-server-hook.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

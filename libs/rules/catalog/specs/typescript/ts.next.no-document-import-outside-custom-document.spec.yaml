@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.next.no-document-import-outside-custom-document.rule.yaml
+fixtures:
+  - name: flags next/document import outside _document
+    observationPath: ./fixtures/ts.next.no-document-import-outside-custom-document/bad.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.next.no-document-import-outside-custom-document
+      allSeverities:
+        - high
+  - name: allows next/document import in _document
+    observationPath: ./fixtures/ts.next.no-document-import-outside-custom-document/good.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-deprecated-model-option.rule.yaml
+fixtures:
+  - name: flags model option in Options API
+    sourcePath: ./fixtures/ts.vue.no-deprecated-model-option/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-deprecated-model-option
+      allSeverities:
+        - medium
+  - name: allows component without model option
+    sourcePath: ./fixtures/ts.vue.no-deprecated-model-option/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

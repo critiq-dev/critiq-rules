@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.runtime.process-exit-control-flow.rule.yaml
+fixtures:
+  - name: flags process.exit in finally and after reachable code
+    sourcePath: ./fixtures/ts.runtime.process-exit-control-flow/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.runtime.process-exit-control-flow
+        - ts.runtime.process-exit-control-flow
+      allSeverities:
+        - high
+        - high
+  - name: allows process.exit after return and in CLI entrypoints
+    sourcePath: ./fixtures/ts.runtime.process-exit-control-flow/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

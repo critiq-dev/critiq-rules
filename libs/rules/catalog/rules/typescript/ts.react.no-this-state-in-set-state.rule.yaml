@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-this-state-in-set-state
+  title: Avoid this.state inside setState()
+  summary: Reading this.state inside setState() leads to stale state references because React batches updates asynchronously.
+  rationale: setState updates are asynchronous and may be batched; reading this.state directly inside the updater bypasses the guaranteed-latest state provided by the updater function parameter.
+  aliases:
+    - JS-0435
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.this-state-in-set-state
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.85
+    tags:
+      - react
+      - ui
+  message:
+    title: Use updater function parameter instead of this.state
+    summary: "${captures.issue.text} reads this.state inside a setState call, which may use stale state."
+  remediation:
+    summary: >-
+      Replace this.setState({ key: this.state.key + 1 }) with
+      this.setState(prevState => ({ key: prevState.key + 1 })) to guarantee latest state.

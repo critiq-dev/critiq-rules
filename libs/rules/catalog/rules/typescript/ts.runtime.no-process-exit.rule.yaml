@@ -14,10 +14,13 @@ metadata:
     - kind: owasp
       title: Secure Configuration Cheat Sheet
       url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+  aliases:
+    - JS-0263
   tags:
     - runtime
     - node
     - rules-catalog
+    - public-directory-parity
   stability: stable
   appliesTo: block
 scope:

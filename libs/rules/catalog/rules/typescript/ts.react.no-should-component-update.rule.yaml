@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-should-component-update
+  title: Avoid shouldComponentUpdate
+  summary: Manual shouldComponentUpdate overrides increase maintenance cost and are rarely needed with modern React.
+  rationale: PureComponent and React.memo provide shallow comparison out of the box. Hand-rolling shouldComponentUpdate is error-prone and duplicates built-in optimizations.
+  aliases:
+    - JS-0448
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.should-component-update
+    bind: issue
+emit:
+  finding:
+    category: maintainability.ui
+    severity: medium
+    confidence: 0.75
+    tags:
+      - react
+      - ui
+  message:
+    title: Prefer PureComponent or React.memo
+    summary: "${captures.issue.text} overrides shouldComponentUpdate — consider PureComponent or React.memo instead."
+  remediation:
+    summary: Replace extends Component with extends PureComponent, or wrap the component with React.memo for function components.

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.missing-type-annotation.rule.yaml
+fixtures:
+  - name: flags missing type annotation on parameter
+    sourcePath: ./fixtures/ts.correctness.missing-type-annotation/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.missing-type-annotation
+      allSeverities:
+        - medium
+  - name: allows explicitly typed parameter
+    sourcePath: ./fixtures/ts.correctness.missing-type-annotation/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

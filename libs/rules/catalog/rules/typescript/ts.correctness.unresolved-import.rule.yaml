@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.unresolved-import
+  title: Avoid unresolved module imports
+  summary: Import declarations should reference modules that exist on disk or in node_modules.
+  rationale: Importing a module that cannot be resolved will cause a build or runtime error. This typically happens after refactoring, file renames, or incorrect module paths.
+  aliases:
+    - JS-E1010
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.unresolved-import
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Import path does not resolve to a file or package
+    summary: "`${captures.issue.text}` could not be resolved to an existing module."
+  remediation:
+    summary: Update the import path or install the missing dependency.

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.vue.no-computed-mutation
+  title: Avoid mutating variables inside computed properties
+  summary: Computed properties should not produce side effects such as assignments or array mutations.
+  rationale: Vue computed properties must be pure functions that derive values from reactive data. Mutations inside computed getters violate the unidirectional data flow model and create unpredictable reactivity behavior.
+  aliases:
+    - JS-0615
+  tags:
+    - vue
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.vue.computed-mutation
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.80
+    tags:
+      - vue
+      - correctness
+  message:
+    title: Avoid mutation inside computed property
+    summary: "${captures.issue.text} mutates state inside a computed property getter."
+  remediation:
+    summary: Move the mutation to a method, watch, or action. Computed properties should only read reactive state and return a derived value.

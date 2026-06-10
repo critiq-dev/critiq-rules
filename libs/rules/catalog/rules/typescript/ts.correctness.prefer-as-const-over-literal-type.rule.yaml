@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.prefer-as-const-over-literal-type
+  title: Prefer as const over literal type annotation
+  summary: Use `as const` assertion instead of an explicit literal type annotation.
+  rationale: Using `as const` is more concise and idiomatic than declaring a literal type annotation.
+  aliases:
+    - JS-0360
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: typescript.prefer-as-const-over-literal-type
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Use `as const` instead of literal type annotation
+    summary: "`${captures.issue.text}` uses a literal type annotation instead of `as const`."
+  remediation:
+    summary: Replace the literal type annotation with an `as const` assertion on the value.

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.invalid-async-await-call.rule.yaml
+fixtures:
+  - name: flags await outside async function
+    sourcePath: ./fixtures/ts.correctness.invalid-async-await-call/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.invalid-async-await-call
+      allSeverities:
+        - high
+  - name: allows await inside async function
+    sourcePath: ./fixtures/ts.correctness.invalid-async-await-call/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

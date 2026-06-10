@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.unresolved-import.rule.yaml
+fixtures:
+  - name: flags import that cannot be resolved
+    observationPath: ./fixtures/ts.correctness.unresolved-import/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.unresolved-import
+      allSeverities:
+        - high
+  - name: allows import that resolves to existing module
+    observationPath: ./fixtures/ts.correctness.unresolved-import/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

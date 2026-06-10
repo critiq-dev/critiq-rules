@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.prefer-prop-type-constructor.rule.yaml
+fixtures:
+  - name: flags string literal prop type
+    sourcePath: ./fixtures/ts.vue.prefer-prop-type-constructor/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.prefer-prop-type-constructor
+      allSeverities:
+        - medium
+  - name: allows constructor type references
+    sourcePath: ./fixtures/ts.vue.prefer-prop-type-constructor/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

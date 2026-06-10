@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-deprecated-keycodes-config.rule.yaml
+fixtures:
+  - name: flags Vue.config.keyCodes assignment
+    sourcePath: ./fixtures/ts.vue.no-deprecated-keycodes-config/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-deprecated-keycodes-config
+      allSeverities:
+        - high
+  - name: allows code without Vue.config.keyCodes
+    sourcePath: ./fixtures/ts.vue.no-deprecated-keycodes-config/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

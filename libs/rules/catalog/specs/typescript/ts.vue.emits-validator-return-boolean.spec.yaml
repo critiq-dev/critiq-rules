@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.emits-validator-return-boolean.rule.yaml
+fixtures:
+  - name: flags emits validator without return
+    sourcePath: ./fixtures/ts.vue.emits-validator-return-boolean/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.emits-validator-return-boolean
+      allSeverities:
+        - high
+  - name: allows emits validator with boolean return
+    sourcePath: ./fixtures/ts.vue.emits-validator-return-boolean/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

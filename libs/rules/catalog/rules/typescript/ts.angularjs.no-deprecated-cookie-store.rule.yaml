@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.angularjs.no-deprecated-cookie-store
+  title: Avoid deprecated $cookieStore service
+  summary: "`$cookieStore` is a deprecated AngularJS service replaced by `$cookies`."
+  rationale: The `$cookieStore` service was removed in AngularJS 1.4+. Applications should migrate to the `ngCookies` module `$cookies` service for cookie management.
+  aliases:
+    - JS-0530
+  tags:
+    - angularjs
+    - deprecated
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.angularjs.deprecated-cookie-store
+    bind: issue
+emit:
+  finding:
+    category: correctness.deprecated
+    severity: high
+    confidence: 0.81
+    tags:
+      - angularjs
+      - deprecated
+  message:
+    title: Migrate from $cookieStore to $cookies
+    summary: "`${captures.issue.text}` references deprecated `$cookieStore` service."
+  remediation:
+    summary: Import `ngCookites` module and inject `$cookies` instead of `$cookieStore`. Use `$cookies.get(key)` and `$cookies.put(key, value)` for cookie read/write operations.

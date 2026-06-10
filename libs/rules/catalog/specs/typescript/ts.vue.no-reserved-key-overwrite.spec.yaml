@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-reserved-key-overwrite.rule.yaml
+fixtures:
+  - name: flags this.$el assignment inside Vue methods
+    sourcePath: ./fixtures/ts.vue.no-reserved-key-overwrite/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-reserved-key-overwrite
+      allSeverities:
+        - medium
+  - name: allows non-reserved key assignments in Vue context
+    sourcePath: ./fixtures/ts.vue.no-reserved-key-overwrite/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,39 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.deprecated-api-usage
+  title: Deprecated API usage
+  summary: Use of known deprecated APIs should be replaced with modern alternatives.
+  rationale: Deprecated APIs are removed in future versions and often have safer or more performant replacements.
+  detection:
+    kind: pattern
+  aliases:
+    - JS-0272
+  tags:
+    - correctness
+    - deprecation
+    - rules-catalog
+    - public-directory-parity
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.deprecated-api
+    bind: issue
+emit:
+  finding:
+    category: correctness.deprecation
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - deprecation
+  message:
+    title: Replace deprecated API
+    summary: "`${captures.issue.text}` uses a deprecated API. Prefer the modern replacement."
+  remediation:
+    summary: Use the modern replacement for the deprecated API. Check language and framework documentation for the recommended alternative.

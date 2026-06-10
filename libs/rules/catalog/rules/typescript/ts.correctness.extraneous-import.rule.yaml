@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.extraneous-import
+  title: Extraneous import
+  summary: Detected import declarations which import extraneous modules.
+  rationale: Importing modules whose bindings are never used makes the module graph larger and can confuse readers about actual dependencies.
+  aliases:
+    - JS-0257
+  tags:
+    - correctness
+    - modules
+    - rules-catalog
+    - crq-cor-050
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.extraneous-import
+    bind: issue
+emit:
+  finding:
+    category: correctness.modules
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - modules
+  message:
+    title: Remove unused import
+    summary: "`${captures.issue.text}` imports bindings that are never used."
+  remediation:
+    summary: Remove the unused import declaration or use the imported bindings in the file.

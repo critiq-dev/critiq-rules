@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.angularjs.no-jquery-wrapping-angular-element
+  title: Avoid wrapping angular.element with jQuery/$
+  summary: "Wrapping `angular.element()` objects with jQuery or `$()` is unnecessary and can cause issues."
+  rationale: The `angular.element()` function already returns a jqLite object with jQuery-like methods. Wrapping it again with `$()` or `jQuery()` is redundant and may cause interoperability issues between jqLite and jQuery.
+  aliases:
+    - JS-0561
+  tags:
+    - angularjs
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.angularjs.no-jquery-wrapping-angular-element
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.81
+    tags:
+      - angularjs
+      - correctness
+  message:
+    title: Remove redundant jQuery wrapping of angular.element
+    summary: "`${captures.issue.text}` wraps `angular.element()` with jQuery, which is redundant."
+  remediation:
+    summary: AngularJS's `angular.element()` already returns a jqLite wrapper. Use `angular.element(...)` directly instead of wrapping it with `$(angular.element(...))` or `jQuery(angular.element(...))`.

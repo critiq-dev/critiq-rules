@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-data-object-declaration.rule.yaml
+fixtures:
+  - name: flags object literal data in export default
+    sourcePath: ./fixtures/ts.vue.no-data-object-declaration/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-data-object-declaration
+      allSeverities:
+        - high
+  - name: allows function data
+    sourcePath: ./fixtures/ts.vue.no-data-object-declaration/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

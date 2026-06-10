@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.namespace-import-unexported-name
+  title: Avoid accessing unexported names through namespace imports
+  summary: Namespace import member access should reference names exported by the target module.
+  rationale: Accessing a name through a namespace import (import * as ns) that is not exported by the target module indicates a typo, a missing export, or a refactoring oversight. The expression will resolve to undefined at runtime without a compile error.
+  aliases:
+    - JS-E1007
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.namespace-import-unexported-name
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.8
+    tags:
+      - correctness
+      - language
+  message:
+    title: Namespace import references unexported name
+    summary: "`${captures.issue.text}` accesses a name not exported by the imported module."
+  remediation:
+    summary: Verify the spelling of the accessed name and ensure the target module exports it.

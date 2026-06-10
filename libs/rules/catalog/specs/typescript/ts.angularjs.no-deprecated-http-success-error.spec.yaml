@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.angularjs.no-deprecated-http-success-error.rule.yaml
+fixtures:
+  - name: flags $http.get().success() call
+    sourcePath: ./fixtures/ts.angularjs.no-deprecated-http-success-error/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.angularjs.no-deprecated-http-success-error
+      allSeverities:
+        - high
+  - name: allows then/catch based $http usage
+    sourcePath: ./fixtures/ts.angularjs.no-deprecated-http-success-error/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

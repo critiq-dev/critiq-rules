@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.vue.require-transition-conditional
+  title: Use conditional rendering with Transition
+  summary: "The `<Transition>` component should be used with conditional rendering to control enter/leave animations."
+  rationale: Vue's `<Transition>` component provides enter/leave animations for elements rendered conditionally with `v-if`, `v-show`, or dynamic components. Using `<Transition>` without a conditional pattern means no animation will trigger. This rule provides limited JS-level detection as a proxy for template-only patterns.
+  aliases:
+    - JS-0659
+  tags:
+    - vue
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.vue.transition-conditional
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.30
+    tags:
+      - vue
+      - correctness
+  message:
+    title: Ensure Transition wraps conditional content
+    summary: "${captures.issue.text} uses Transition/TransitionGroup. Ensure it wraps conditionally rendered content to trigger animations."
+  remediation:
+    summary: "Wrap content rendered with `v-if`, `v-show`, or dynamic components inside `<Transition>`. Without conditional rendering, the transition will not animate."

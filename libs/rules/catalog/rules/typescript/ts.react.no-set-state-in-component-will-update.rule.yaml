@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-set-state-in-component-will-update
+  title: Avoid setState in componentWillUpdate
+  summary: Synchronous state updates during the legacy will-update lifecycle can cause infinite re-rendering loops.
+  rationale: componentWillUpdate is deprecated and setState inside it may trigger additional render cycles. Migrate to componentDidUpdate with a guard or getDerivedStateFromProps.
+  aliases:
+    - JS-0459
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.set-state-in-component-will-update
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.85
+    tags:
+      - react
+      - ui
+  message:
+    title: Move setState out of componentWillUpdate
+    summary: "${captures.issue.text} calls setState inside componentWillUpdate."
+  remediation:
+    summary: Replace componentWillUpdate with componentDidUpdate and guard the setState with a prevProps or prevState comparison.

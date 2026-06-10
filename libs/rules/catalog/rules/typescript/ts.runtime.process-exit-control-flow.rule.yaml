@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.runtime.process-exit-control-flow
+  title: process.exit() in control flow
+  summary: "Avoid `process.exit()` in finally blocks or followed by reachable code."
+  rationale: "`process.exit()` in a finally block runs even after errors, and reachable code after exit creates dead code and logic errors."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-16
+      title: Configuration
+    - kind: owasp
+      title: Secure Configuration Cheat Sheet
+      url: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Configuration_Cheat_Sheet.html
+  aliases:
+    - JS-0270
+  tags:
+    - runtime
+    - node
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: runtime.process-exit-control-flow
+    bind: issue
+emit:
+  finding:
+    category: security.reliability
+    severity: high
+    confidence: 0.85
+    tags:
+      - runtime
+      - node
+  message:
+    title: Review process.exit() placement
+    summary: "`${captures.issue.text}` may terminate the process in an unexpected control flow context."
+  remediation:
+    summary: Use structured error handling (throw/try-catch) instead of process.exit() in finally blocks. Remove dead code after process.exit().

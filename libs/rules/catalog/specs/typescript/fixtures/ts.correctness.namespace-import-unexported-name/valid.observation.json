@@ -1,0 +1,14 @@
+{
+  "path": "src/good-ns-import.ts",
+  "language": "typescript",
+  "text": "import * as A from './a'; A.foo;\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}

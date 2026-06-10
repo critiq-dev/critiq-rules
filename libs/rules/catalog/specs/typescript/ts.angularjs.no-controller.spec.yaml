@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.angularjs.no-controller.rule.yaml
+fixtures:
+  - name: flags .controller() call on angular.module chain
+    sourcePath: ./fixtures/ts.angularjs.no-controller/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.angularjs.no-controller
+      allSeverities:
+        - high
+  - name: allows component-based AngularJS code
+    sourcePath: ./fixtures/ts.angularjs.no-controller/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

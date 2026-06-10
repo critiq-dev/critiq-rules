@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.parse-int-on-number-literal.rule.yaml
+fixtures:
+  - name: flags parseInt on number literal
+    sourcePath: ./fixtures/ts.correctness.parse-int-on-number-literal/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.parse-int-on-number-literal
+      allSeverities:
+        - medium
+  - name: allows parseInt on string or variable
+    sourcePath: ./fixtures/ts.correctness.parse-int-on-number-literal/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

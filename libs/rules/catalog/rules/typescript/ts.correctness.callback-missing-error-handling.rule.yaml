@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.callback-missing-error-handling
+  title: Callback missing error handling
+  summary: Require error handling in callbacks.
+  rationale: Callbacks that accept an error parameter but never reference it may silently swallow failures, making debugging difficult.
+  aliases:
+    - JS-0254
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-051
+    - public-directory-parity
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.callback-missing-error-handling
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.7
+    tags:
+      - correctness
+      - language
+  message:
+    title: Handle the error parameter in the callback
+    summary: "Callback accepts an error parameter but never uses it."
+  remediation:
+    summary: Check the error parameter and handle it (e.g., `if (err) return callback(err)`).

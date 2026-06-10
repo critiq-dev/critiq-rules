@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.vue.no-deprecated-scoped-slots
+  title: Prefer $slots over $scopedSlots
+  summary: "$scopedSlots was deprecated in Vue 2.6 and merged into $slots in Vue 3. Use $slots instead."
+  rationale: Vue 3 merges scoped slots and normal slots into a single $slots API. The $scopedSlots property is removed in Vue 3, so code referencing it will break. Use $slots.slotName() to access slot content instead.
+  aliases:
+    - JS-0653
+  tags:
+    - vue
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.vue.deprecated-scoped-slots
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.80
+    tags:
+      - vue
+      - correctness
+  message:
+    title: Replace $scopedSlots with $slots
+    summary: "${captures.issue.text} uses the deprecated $scopedSlots API. Use $slots instead."
+  remediation:
+    summary: "Replace `this.$scopedSlots` with `this.$slots`. In Vue 3, call the slot function: `this.$slots.slotName(args)` instead of `this.$scopedSlots.slotName(args)`."

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-render-invalid-return-type
+  title: Render must return valid React element
+  summary: A render method that returns a number, boolean, or plain object will produce an empty or broken UI.
+  rationale: React render methods must return JSX, fragments, strings, null, or boolean values. Numeric literals and plain objects are not valid React children.
+  aliases:
+    - JS-0467
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.render-return-value
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.88
+    tags:
+      - react
+      - ui
+  message:
+    title: Return a valid React element from render
+    summary: "render returns `${captures.issue.text}` which is not a valid React child."
+  remediation:
+    summary: Wrap the return value in a JSX element, fragment, or string. Use null to render nothing.

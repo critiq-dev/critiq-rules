@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.this-outside-class.rule.yaml
+fixtures:
+  - name: flags this outside of classes
+    sourcePath: ./fixtures/ts.correctness.this-outside-class/invalid.ts
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ts.correctness.this-outside-class
+        - ts.correctness.this-outside-class
+        - ts.correctness.this-outside-class
+      allSeverities:
+        - high
+        - high
+        - high
+  - name: allows this inside class methods and object methods
+    sourcePath: ./fixtures/ts.correctness.this-outside-class/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

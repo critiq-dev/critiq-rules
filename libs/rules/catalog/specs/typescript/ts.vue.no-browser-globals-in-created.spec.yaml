@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-browser-globals-in-created.rule.yaml
+fixtures:
+  - name: flags window in created hook
+    sourcePath: ./fixtures/ts.vue.no-browser-globals-in-created/bad-vue-browser-global-in-created.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-browser-globals-in-created
+      allSeverities:
+        - high
+  - name: allows window in mounted hook
+    sourcePath: ./fixtures/ts.vue.no-browser-globals-in-created/good-vue-browser-global-in-mounted.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

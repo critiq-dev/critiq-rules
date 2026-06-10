@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.angularjs.prefer-angular-for-each
+  title: Prefer angular.forEach over native Array.forEach
+  summary: "Use `angular.forEach` instead of native `Array.prototype.forEach` in AngularJS contexts."
+  rationale: AngularJS's `angular.forEach` provides consistent iteration behavior, works on both arrays and objects, and ensures proper AngularJS digest cycle compatibility.
+  aliases:
+    - JS-0556
+  tags:
+    - angularjs
+    - maintainability
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.angularjs.prefer-angular-for-each
+    bind: issue
+emit:
+  finding:
+    category: maintainability.ui
+    severity: high
+    confidence: 0.81
+    tags:
+      - angularjs
+      - maintainability
+  message:
+    title: Replace native .forEach() with angular.forEach()
+    summary: "`${captures.issue.text}` uses native `.forEach()` in an AngularJS context."
+  remediation:
+    summary: Replace `array.forEach(callback)` with `angular.forEach(array, callback)`. The angular.forEach variant works on objects too and follows AngularJS conventions.

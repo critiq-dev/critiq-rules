@@ -5,11 +5,14 @@ metadata:
   title: this used before super()
   summary: Do not use this or super members before calling super() in a subclass constructor.
   rationale: Accessing this before super() in a derived constructor throws at runtime.
+  aliases:
+    - JS-0235
   tags:
     - correctness
     - language
     - rules-catalog
     - crq-cor-035
+    - public-directory-parity
   stability: stable
   appliesTo: file
 scope:

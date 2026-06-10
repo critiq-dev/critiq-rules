@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.angularjs.no-jquery-wrapping-angular-element.rule.yaml
+fixtures:
+  - name: flags $(angular.element(...)) wrapping
+    sourcePath: ./fixtures/ts.angularjs.no-jquery-wrapping-angular-element/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.angularjs.no-jquery-wrapping-angular-element
+      allSeverities:
+        - high
+  - name: allows direct angular.element() usage
+    sourcePath: ./fixtures/ts.angularjs.no-jquery-wrapping-angular-element/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

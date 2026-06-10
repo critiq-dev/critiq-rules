@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.no-href-with-nuxt-link.rule.yaml
+fixtures:
+  - name: flags NuxtLink with href
+    sourcePath: ./fixtures/ts.correctness.no-href-with-nuxt-link/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.no-href-with-nuxt-link
+  - name: allows NuxtLink with to
+    sourcePath: ./fixtures/ts.correctness.no-href-with-nuxt-link/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

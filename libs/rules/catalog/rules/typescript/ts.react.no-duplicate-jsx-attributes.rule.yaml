@@ -5,6 +5,8 @@ metadata:
   title: Remove duplicate JSX attributes
   summary: Repeating the same prop on a JSX element makes the last value win silently and hides author intent.
   rationale: Duplicate attributes are usually copy-paste mistakes that change runtime behavior without type errors.
+  aliases:
+    - JS-0419
   tags:
     - react
     - ui

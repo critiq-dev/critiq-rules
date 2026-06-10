@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.vue.prefer-prop-type-constructor
+  title: Prefer prop type to be a constructor
+  summary: Vue prop types should reference constructor functions (e.g. String, Number) instead of string literals (e.g. "string").
+  rationale: Vue validates prop types by checking against constructor functions. A string literal like "string" bypasses runtime type validation and may cause confusion. Use the actual constructor (String, Number, Boolean, Array, Object) instead.
+  aliases:
+    - JS-0621
+  tags:
+    - vue
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.vue.invalid-prop-type
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.90
+    tags:
+      - vue
+      - correctness
+  message:
+    title: Replace string literal prop type with constructor
+    summary: "${captures.issue.text} uses a string literal as a prop type. Use the corresponding constructor instead."
+  remediation:
+    summary: "Replace the string literal with the matching JavaScript constructor. For example, use `String` instead of a string literal, `Number` instead of a number literal, `Boolean` instead of a boolean literal."

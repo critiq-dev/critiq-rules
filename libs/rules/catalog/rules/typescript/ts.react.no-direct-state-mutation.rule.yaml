@@ -5,6 +5,8 @@ metadata:
   title: Do not mutate React state directly
   summary: Assigning to `this.state` bypasses React change detection and produces stale UI.
   rationale: State updates must flow through setState or hooks so React can schedule renders and enforce immutability guarantees.
+  aliases:
+    - JS-0444
   tags:
     - react
     - ui

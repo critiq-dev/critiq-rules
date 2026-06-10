@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.vue.no-deprecated-model-option
+  title: Prefer v-model arguments over model option
+  summary: The `model` option was deprecated in Vue 3. Use `v-model` arguments and `emits` instead.
+  rationale: "Vue 2 allowed customizing v-model via `model: { prop, event }`. Vue 3 replaces this with multiple v-model bindings using v-model:propName syntax. The model option is removed in Vue 3."
+  aliases:
+    - JS-0654
+  tags:
+    - vue
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.vue.deprecated-model-option
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: medium
+    confidence: 0.65
+    tags:
+      - vue
+      - correctness
+  message:
+    title: Replace model option with v-model arguments
+    summary: "${captures.issue.text} uses the deprecated model option. Use v-model arguments with emits instead."
+  remediation:
+    summary: "Remove `model: { prop, event }` and define props/emits with the `update:propName` emit pattern. For example, emit `update:modelValue` instead of using the `input` event."

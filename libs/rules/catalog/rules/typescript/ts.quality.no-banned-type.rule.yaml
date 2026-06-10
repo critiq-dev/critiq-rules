@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.quality.no-banned-type
+  title: Avoid `any` type
+  summary: Using the `any` type defeats TypeScript's type safety guarantees.
+  rationale: The `any` type disables all type checking for the affected expression, hiding potential type errors.
+  aliases:
+    - JS-0296
+  tags:
+    - quality
+    - typescript
+    - rules-catalog
+    - public-directory-parity
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+match:
+  fact:
+    kind: quality.banned-type
+    bind: issue
+emit:
+  finding:
+    category: quality.type-safety
+    severity: medium
+    confidence: 0.7
+    tags:
+      - quality
+      - typescript
+  message:
+    title: Replace `any` type
+    summary: "`${captures.issue.text}` uses the `any` type. Use a specific type or `unknown` instead."
+  remediation:
+    summary: Replace `any` with a more specific type, or use `unknown` with proper type narrowing. Consider enabling `strict` mode in tsconfig.

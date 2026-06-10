@@ -1,0 +1,28 @@
+{
+  "path": "src/components/header.ts",
+  "language": "typescript",
+  "text": "import Document from 'next/document';\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "framework.next.document-import-outside-custom-document",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 39
+          },
+          "text": "import Document from 'next/document'",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

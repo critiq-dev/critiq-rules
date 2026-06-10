@@ -1,0 +1,39 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.next.no-head-import-in-custom-document
+  title: Avoid importing next/head in the custom document file
+  summary: pages/_document should use next/document's Head component, not next/head.
+  rationale: In Next.js, the custom document (pages/_document) should use the Head export from next/document, not next/head. Using next/head inside _document causes incorrect head element management and breaks the expected component hierarchy.
+  aliases:
+    - JS-E1003
+  tags:
+    - next
+    - react
+    - correctness
+    - rules-catalog
+    - public-directory-parity
+  stability: experimental
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.next.head-import-in-custom-document
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: high
+    confidence: 0.95
+    tags:
+      - next
+      - react
+      - correctness
+  message:
+    title: Use next/document's Head instead of next/head in _document
+    summary: "next/head is imported in _document.tsx — use Head from next/document instead."
+  remediation:
+    summary: Replace `import Head from 'next/head'` with `import { Head } from 'next/document'`.

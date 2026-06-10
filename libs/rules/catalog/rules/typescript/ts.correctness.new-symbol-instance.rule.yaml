@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.new-symbol-instance
+  title: new Symbol() instantiation
+  summary: Found new operator used with the `Symbol` object.
+  rationale: Symbol is not a constructor; calling `new Symbol()` throws a TypeError at runtime.
+  aliases:
+    - JS-0233
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-046
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.new-symbol-instance
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 1.0
+    tags:
+      - correctness
+      - language
+  message:
+    title: Do not use new with Symbol
+    summary: "`${captures.issue.text}` uses `new Symbol()`, which throws at runtime."
+  remediation:
+    summary: Replace `new Symbol(...)` with `Symbol(...)` — Symbol is not a constructor.

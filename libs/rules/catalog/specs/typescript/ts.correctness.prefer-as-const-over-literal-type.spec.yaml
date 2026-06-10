@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.prefer-as-const-over-literal-type.rule.yaml
+fixtures:
+  - name: flags literal type annotation
+    sourcePath: ./fixtures/ts.correctness.prefer-as-const-over-literal-type/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.prefer-as-const-over-literal-type
+      allSeverities:
+        - medium
+  - name: allows as const assertion
+    sourcePath: ./fixtures/ts.correctness.prefer-as-const-over-literal-type/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

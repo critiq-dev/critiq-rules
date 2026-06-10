@@ -7,5 +7,8 @@ module.exports = {
   },
   transformIgnorePatterns: ['[/\\\\]critiq-core[/\\\\]dist[/\\\\]'],
   moduleFileExtensions: ['ts', 'js', 'html'],
+  testPathIgnorePatterns: [
+    '<rootDir>/specs/typescript/fixtures/',
+  ],
   coverageDirectory: '../../../coverage/libs/rules/catalog'
 };

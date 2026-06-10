@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.callback-missing-error-handling.rule.yaml
+fixtures:
+  - name: flags callback ignoring error param
+    sourcePath: ./fixtures/ts.correctness.callback-missing-error-handling/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.callback-missing-error-handling
+      allSeverities:
+        - medium
+  - name: allows callback with error handling
+    sourcePath: ./fixtures/ts.correctness.callback-missing-error-handling/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

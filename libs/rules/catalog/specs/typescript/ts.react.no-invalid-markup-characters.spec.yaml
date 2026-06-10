@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-invalid-markup-characters.rule.yaml
+fixtures:
+  - name: flags JSX text with control characters
+    sourcePath: ./fixtures/ts.react.no-invalid-markup-characters/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-invalid-markup-characters
+      allSeverities:
+        - medium
+  - name: allows clean JSX text
+    sourcePath: ./fixtures/ts.react.no-invalid-markup-characters/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

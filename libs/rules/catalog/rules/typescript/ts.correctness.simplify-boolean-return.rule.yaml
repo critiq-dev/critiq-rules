@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.simplify-boolean-return
+  title: Complex boolean return
+  summary: Return statements that explicitly return true/false based on a condition can be simplified.
+  rationale: "`if (x) return true; else return false;` is equivalent to `return x;`. The complex form adds noise and makes the code harder to read."
+  aliases:
+    - JS-W1041
+  tags:
+    - correctness
+    - language
+    - simplification
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.complex-boolean-return
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - language
+  message:
+    title: Simplify boolean return
+    summary: "`${captures.issue.text}` can be simplified to a direct boolean return."
+  remediation:
+    summary: Replace the if/else or ternary with `return <condition>;`.

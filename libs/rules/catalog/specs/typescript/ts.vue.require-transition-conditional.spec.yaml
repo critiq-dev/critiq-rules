@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.require-transition-conditional.rule.yaml
+fixtures:
+  - name: flags Transition usage in JSX
+    sourcePath: ./fixtures/ts.vue.require-transition-conditional/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.require-transition-conditional
+      allSeverities:
+        - medium
+  - name: allows code without Transition usage
+    sourcePath: ./fixtures/ts.vue.require-transition-conditional/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

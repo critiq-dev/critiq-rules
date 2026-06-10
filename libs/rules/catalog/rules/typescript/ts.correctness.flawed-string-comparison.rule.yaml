@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.flawed-string-comparison
+  title: Flawed string comparison
+  summary: String comparison using identical operands or locale-sensitive operators may indicate a bug.
+  rationale: Comparing two identical string literals always yields the same result and suggests a copy-paste error. Relational operators on strings produce locale-sensitive results and may behave unexpectedly.
+  aliases:
+    - JS-W1040
+  tags:
+    - correctness
+    - language
+    - string
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.flawed-string-comparison
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Flawed string comparison
+    summary: "`${captures.issue.text}` is a string comparison that may indicate a bug."
+  remediation:
+    summary: Review the comparison operands. Use `.localeCompare()` for locale-aware string ordering, and verify identical string literal comparisons are intentional.

@@ -1,0 +1,39 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.no-confusing-label-in-switch
+  title: Confusing label inside switch
+  summary: Labeled statements inside switch blocks can be confused with case clauses.
+  rationale: Labels nested inside switch cases are rarely intentional and create confusing control flow that is hard to distinguish from case/default clauses.
+  aliases:
+    - JS-W1036
+  tags:
+    - correctness
+    - language
+    - switch
+    - readability
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.confusing-label-in-switch
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - language
+  message:
+    title: Confusing label inside switch
+    summary: "`${captures.issue.text}` is a labeled statement inside a switch block."
+  remediation:
+    summary: Remove the label or restructure the switch statement to avoid labeled statements inside cases.

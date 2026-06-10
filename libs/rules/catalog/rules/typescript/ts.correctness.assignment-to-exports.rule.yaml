@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.assignment-to-exports
+  title: Assignment to exports
+  summary: Detected direct assignment to the `exports` variable.
+  rationale: In CommonJS modules, reassigning `exports` breaks the `module.exports` reference, making all subsequent exports unreachable.
+  aliases:
+    - JS-0256
+  tags:
+    - correctness
+    - modules
+    - rules-catalog
+    - crq-cor-049
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.assignment-to-exports
+    bind: issue
+emit:
+  finding:
+    category: correctness.modules
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - modules
+  message:
+    title: Do not reassign exports
+    summary: "`${captures.issue.text}` reassigns `exports`, which breaks the module.exports reference."
+  remediation:
+    summary: Use `module.exports = ...` instead of `exports = ...`, or mutate individual `exports.*` properties.

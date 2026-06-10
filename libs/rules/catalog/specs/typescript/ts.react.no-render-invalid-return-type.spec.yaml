@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-render-invalid-return-type.rule.yaml
+fixtures:
+  - name: flags numeric literal render return
+    sourcePath: ./fixtures/ts.react.no-render-invalid-return-type/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-render-invalid-return-type
+      allSeverities:
+        - high
+  - name: allows JSX render return
+    sourcePath: ./fixtures/ts.react.no-render-invalid-return-type/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.next.no-head-import-in-custom-document.rule.yaml
+fixtures:
+  - name: flags next/head import in _document
+    observationPath: ./fixtures/ts.next.no-head-import-in-custom-document/bad.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.next.no-head-import-in-custom-document
+      allSeverities:
+        - high
+  - name: allows next/head import in regular page
+    observationPath: ./fixtures/ts.next.no-head-import-in-custom-document/good.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

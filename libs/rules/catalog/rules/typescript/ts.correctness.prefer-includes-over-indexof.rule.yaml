@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.prefer-includes-over-indexof
+  title: Prefer includes over indexOf comparison
+  summary: Use `.includes()` instead of `.indexOf()` comparison for readability.
+  rationale: Using `.includes()` is more readable and semantically clearer than comparing `.indexOf()` to -1 or 0.
+  aliases:
+    - JS-0363
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.prefer-includes-over-indexof
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.90
+    tags:
+      - correctness
+      - language
+  message:
+    title: Replace indexOf comparison with includes
+    summary: "`${captures.issue.text}` compares `.indexOf()` result when `.includes()` would be clearer."
+  remediation:
+    summary: Replace `.indexOf()` comparison with `.includes()` for better readability.

@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.angularjs.no-controller
+  title: Avoid .controller() in AngularJS
+  summary: "`controller()` method on an AngularJS module is discouraged in favor of component-based architecture."
+  rationale: AngularJS controller functions are a legacy pattern replaced by components. Components provide better encapsulation, lifecycle hooks, and bindings syntax that align with modern Angular conventions.
+  aliases:
+    - JS-0525
+  tags:
+    - angularjs
+    - deprecated
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.angularjs.discouraged-controller
+    bind: issue
+emit:
+  finding:
+    category: maintainability.ui
+    severity: high
+    confidence: 0.81
+    tags:
+      - angularjs
+      - deprecated
+  message:
+    title: Replace .controller() with .component()
+    summary: "`${captures.issue.text}` uses the deprecated .controller() pattern."
+  remediation:
+    summary: Replace the controller definition with a `.component()` call that defines bindings, template, and controller in a single component descriptor.

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.namespace-import-unexported-name.rule.yaml
+fixtures:
+  - name: flags access to unexported name through namespace import
+    observationPath: ./fixtures/ts.correctness.namespace-import-unexported-name/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.namespace-import-unexported-name
+      allSeverities:
+        - high
+  - name: allows access to exported name through namespace import
+    observationPath: ./fixtures/ts.correctness.namespace-import-unexported-name/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

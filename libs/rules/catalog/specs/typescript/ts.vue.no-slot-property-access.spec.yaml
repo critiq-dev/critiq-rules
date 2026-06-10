@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-slot-property-access.rule.yaml
+fixtures:
+  - name: flags this.$slots.default used as value
+    sourcePath: ./fixtures/ts.vue.no-slot-property-access/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-slot-property-access
+      allSeverities:
+        - high
+  - name: allows calling this.$slots.default() as function
+    sourcePath: ./fixtures/ts.vue.no-slot-property-access/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

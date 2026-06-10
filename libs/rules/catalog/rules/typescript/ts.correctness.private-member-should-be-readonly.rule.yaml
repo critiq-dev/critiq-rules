@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.private-member-should-be-readonly
+  title: Private members should be readonly
+  summary: Class members declared `private` that are never reassigned should be marked `readonly`.
+  rationale: Marking private members as `readonly` clarifies intent and prevents accidental mutation.
+  aliases:
+    - JS-0368
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: typescript.private-member-should-be-readonly
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - language
+  message:
+    title: Mark private member as readonly
+    summary: "`${captures.issue.text}` is a private member that could be marked `readonly`."
+  remediation:
+    summary: Add the `readonly` modifier to this private member to clarify that it is not reassigned after initialization.

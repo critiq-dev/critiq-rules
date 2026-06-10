@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-deprecated-scoped-slots.rule.yaml
+fixtures:
+  - name: flags this.$scopedSlots usage
+    sourcePath: ./fixtures/ts.vue.no-deprecated-scoped-slots/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-deprecated-scoped-slots
+      allSeverities:
+        - high
+  - name: allows this.$slots usage
+    sourcePath: ./fixtures/ts.vue.no-deprecated-scoped-slots/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

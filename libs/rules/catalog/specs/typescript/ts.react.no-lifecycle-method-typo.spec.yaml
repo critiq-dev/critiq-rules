@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-lifecycle-method-typo.rule.yaml
+fixtures:
+  - name: flags typo'd lifecycle method names
+    observationPath: ./fixtures/ts.react.no-lifecycle-method-typo/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-lifecycle-method-typo
+      allSeverities:
+        - high
+  - name: allows correct lifecycle method names
+    sourcePath: ./fixtures/ts.react.no-lifecycle-method-typo/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.no-confusing-label-in-switch.rule.yaml
+fixtures:
+  - name: flags label inside switch
+    sourcePath: ./fixtures/ts.correctness.no-confusing-label-in-switch/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.no-confusing-label-in-switch
+  - name: allows label outside switch
+    sourcePath: ./fixtures/ts.correctness.no-confusing-label-in-switch/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

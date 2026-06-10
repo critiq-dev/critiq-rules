@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-should-component-update.rule.yaml
+fixtures:
+  - name: flags shouldComponentUpdate on React component
+    sourcePath: ./fixtures/ts.react.no-should-component-update/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-should-component-update
+      allSeverities:
+        - medium
+  - name: allows PureComponent without shouldComponentUpdate
+    sourcePath: ./fixtures/ts.react.no-should-component-update/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

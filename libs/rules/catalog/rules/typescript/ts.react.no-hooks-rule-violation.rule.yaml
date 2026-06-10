@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-hooks-rule-violation
+  title: Avoid React hook violations
+  summary: React hooks must only be called at the top level of React function components or custom hooks, not inside conditions, loops, or regular functions.
+  rationale: React relies on call order to preserve hook state between renders. Conditional or looped hooks break this contract and cause subtle bugs like stale state, missing effects, or crashes.
+  aliases:
+    - JS-0820
+  tags:
+    - react
+    - hooks
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.react.hooks-rule-violation
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.80
+    tags:
+      - react
+      - hooks
+      - correctness
+  message:
+    title: Fix React hook violation
+    summary: "${captures.issue.text} calls a React hook in an invalid position. Hooks must only be called at the top level of a component or custom hook."
+  remediation:
+    summary: Move the hook call to the top level of the component or custom hook. Do not call hooks inside conditions, loops, or non-component functions.

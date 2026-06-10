@@ -1,0 +1,32 @@
+{
+  "path": "src/bad-ns-import.ts",
+  "language": "typescript",
+  "text": "import * as A from './a'; A.bar;\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "language.namespace-import-unexported-name",
+          "appliesTo": "file",
+          "range": {
+            "startLine": 1,
+            "startColumn": 21,
+            "endLine": 1,
+            "endColumn": 26
+          },
+          "text": "A.bar",
+          "props": {
+            "namespaceBinding": "A",
+            "accessedName": "bar",
+            "resolvedModule": "./a"
+          }
+        }
+      ]
+    }
+  }
+}

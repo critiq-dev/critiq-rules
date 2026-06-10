@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.callback-not-error-first.rule.yaml
+fixtures:
+  - name: flags non-error-first callback
+    sourcePath: ./fixtures/ts.correctness.callback-not-error-first/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.callback-not-error-first
+      allSeverities:
+        - medium
+  - name: allows error-first callback
+    sourcePath: ./fixtures/ts.correctness.callback-not-error-first/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

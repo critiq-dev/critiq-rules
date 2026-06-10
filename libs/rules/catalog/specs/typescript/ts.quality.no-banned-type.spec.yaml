@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.quality.no-banned-type.rule.yaml
+fixtures:
+  - name: flags any type usage
+    sourcePath: ./fixtures/ts.quality.no-banned-type/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.quality.no-banned-type
+      allSeverities:
+        - medium
+  - name: allows typed code without any
+    sourcePath: ./fixtures/ts.quality.no-banned-type/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

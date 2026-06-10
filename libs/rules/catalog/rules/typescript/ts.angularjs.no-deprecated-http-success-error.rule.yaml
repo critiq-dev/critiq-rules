@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.angularjs.no-deprecated-http-success-error
+  title: Avoid deprecated $http success/error methods
+  summary: "`.success()` and `.error()` on `$http` promise are deprecated in favor of `.then()` and `.catch()`."
+  rationale: The non-standard `.success()` and `.error()` methods were removed from AngularJS $http in version 1.6+. They do not follow standard Promise conventions and unwrap the response data, making error handling inconsistent.
+  aliases:
+    - JS-0532
+  tags:
+    - angularjs
+    - deprecated
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.angularjs.deprecated-http-success-error
+    bind: issue
+emit:
+  finding:
+    category: correctness.deprecated
+    severity: high
+    confidence: 0.81
+    tags:
+      - angularjs
+      - deprecated
+  message:
+    title: Replace .success/.error with .then/.catch
+    summary: "`${captures.issue.text}` uses deprecated `.success()` or `.error()` method on $http."
+  remediation:
+    summary: Replace `.success(function(data, status, headers, config))` with `.then(function(response) { ... })` and `.error(function(data, status, headers, config))` with `.catch(function(response) { ... })`. Access response data via `response.data`.

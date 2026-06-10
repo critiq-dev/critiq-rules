@@ -1,0 +1,27 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.testing.useless-assertion.rule.yaml
+fixtures:
+  - name: flags expect(true).toBe(true)
+    sourcePath: ./fixtures/ts.testing.useless-assertion/invalid-boolean-true.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.useless-assertion
+  - name: flags expect(false).toBe(false)
+    sourcePath: ./fixtures/ts.testing.useless-assertion/invalid-boolean-false.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.useless-assertion
+  - name: flags expect(1).toBe(1)
+    sourcePath: ./fixtures/ts.testing.useless-assertion/invalid-number.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.testing.useless-assertion
+  - name: allows meaningful assertions
+    sourcePath: ./fixtures/ts.testing.useless-assertion/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-unnecessary-fragment.rule.yaml
+fixtures:
+  - name: flags unnecessary fragment wrapping a single child
+    sourcePath: ./fixtures/ts.react.no-unnecessary-fragment/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-unnecessary-fragment
+      allSeverities:
+        - low
+  - name: allows fragments with multiple children
+    sourcePath: ./fixtures/ts.react.no-unnecessary-fragment/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

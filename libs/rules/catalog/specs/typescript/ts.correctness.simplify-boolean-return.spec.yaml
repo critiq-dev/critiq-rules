@@ -1,0 +1,25 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.simplify-boolean-return.rule.yaml
+fixtures:
+  - name: flags if-else return boolean
+    sourcePath: ./fixtures/ts.correctness.simplify-boolean-return/invalid-if-else.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.simplify-boolean-return
+      allSeverities:
+        - high
+  - name: flags ternary return boolean
+    sourcePath: ./fixtures/ts.correctness.simplify-boolean-return/invalid-ternary.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.simplify-boolean-return
+      allSeverities:
+        - high
+  - name: allows direct boolean return
+    sourcePath: ./fixtures/ts.correctness.simplify-boolean-return/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

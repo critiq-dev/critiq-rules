@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.no-ts-suppress-directive.rule.yaml
+fixtures:
+  - name: flags ts-suppress directive
+    sourcePath: ./fixtures/ts.correctness.no-ts-suppress-directive/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.correctness.no-ts-suppress-directive
+        - ts.correctness.no-ts-suppress-directive
+      allSeverities:
+        - high
+        - high
+  - name: allows file without ts directives
+    sourcePath: ./fixtures/ts.correctness.no-ts-suppress-directive/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

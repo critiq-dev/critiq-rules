@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.deprecated-api-usage.rule.yaml
+fixtures:
+  - name: flags deprecated API usage
+    sourcePath: ./fixtures/ts.correctness.deprecated-api-usage/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.correctness.deprecated-api-usage
+        - ts.correctness.deprecated-api-usage
+      allSeverities:
+        - high
+        - high
+  - name: allows modern API equivalents
+    sourcePath: ./fixtures/ts.correctness.deprecated-api-usage/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

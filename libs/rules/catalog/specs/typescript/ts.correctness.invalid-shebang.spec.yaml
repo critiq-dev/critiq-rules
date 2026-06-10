@@ -1,0 +1,19 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.invalid-shebang.rule.yaml
+fixtures:
+  - name: flags invalid shebang placement
+    sourcePath: ./fixtures/ts.correctness.invalid-shebang/invalid.ts
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ts.correctness.invalid-shebang
+        - ts.correctness.invalid-shebang
+      allSeverities:
+        - medium
+        - medium
+  - name: allows valid shebang at line 1 column 0
+    sourcePath: ./fixtures/ts.correctness.invalid-shebang/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

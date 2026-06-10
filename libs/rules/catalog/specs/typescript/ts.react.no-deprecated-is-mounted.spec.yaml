@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.react.no-deprecated-is-mounted.rule.yaml
+fixtures:
+  - name: flags this.isMounted call
+    sourcePath: ./fixtures/ts.react.no-deprecated-is-mounted/invalid.tsx
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.react.no-deprecated-is-mounted
+      allSeverities:
+        - high
+  - name: allows components without isMounted
+    sourcePath: ./fixtures/ts.react.no-deprecated-is-mounted/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

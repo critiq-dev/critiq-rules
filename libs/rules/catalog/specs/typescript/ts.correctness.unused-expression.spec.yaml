@@ -1,0 +1,25 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.unused-expression.rule.yaml
+fixtures:
+  - name: flags unused expressions
+    sourcePath: ./fixtures/ts.correctness.unused-expression/invalid.ts
+    expect:
+      findingCount: 5
+      allRuleIds:
+        - ts.correctness.unused-expression
+        - ts.correctness.unused-expression
+        - ts.correctness.unused-expression
+        - ts.correctness.unused-expression
+        - ts.correctness.unused-expression
+      allSeverities:
+        - medium
+        - medium
+        - medium
+        - medium
+        - medium
+  - name: allows expressions with side effects
+    sourcePath: ./fixtures/ts.correctness.unused-expression/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

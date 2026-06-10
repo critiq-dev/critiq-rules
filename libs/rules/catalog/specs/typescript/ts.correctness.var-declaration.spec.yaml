@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.var-declaration.rule.yaml
+fixtures:
+  - name: flags var declarations
+    sourcePath: ./fixtures/ts.correctness.var-declaration/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.var-declaration
+      allSeverities:
+        - medium
+  - name: allows let/const
+    sourcePath: ./fixtures/ts.correctness.var-declaration/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

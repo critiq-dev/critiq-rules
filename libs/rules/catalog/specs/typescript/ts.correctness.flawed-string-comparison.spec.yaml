@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.flawed-string-comparison.rule.yaml
+fixtures:
+  - name: flags identical string literal comparison
+    sourcePath: ./fixtures/ts.correctness.flawed-string-comparison/invalid-identical.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.flawed-string-comparison
+  - name: flags locale-sensitive string comparison
+    sourcePath: ./fixtures/ts.correctness.flawed-string-comparison/invalid-relational.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.flawed-string-comparison
+  - name: allows valid comparison
+    sourcePath: ./fixtures/ts.correctness.flawed-string-comparison/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

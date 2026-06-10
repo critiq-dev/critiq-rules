@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-keycode-modifiers.rule.yaml
+fixtures:
+  - name: flags numeric keycode assignment via Vue.config.keyCodes
+    sourcePath: ./fixtures/ts.vue.no-keycode-modifiers/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-keycode-modifiers
+      allSeverities:
+        - high
+  - name: allows non-numeric keycode assignment
+    sourcePath: ./fixtures/ts.vue.no-keycode-modifiers/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

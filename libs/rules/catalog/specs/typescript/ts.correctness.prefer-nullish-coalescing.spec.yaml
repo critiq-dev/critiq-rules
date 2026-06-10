@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.prefer-nullish-coalescing.rule.yaml
+fixtures:
+  - name: flags || with nullish default
+    sourcePath: ./fixtures/ts.correctness.prefer-nullish-coalescing/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.prefer-nullish-coalescing
+      allSeverities:
+        - medium
+  - name: allows valid ?? usage
+    sourcePath: ./fixtures/ts.correctness.prefer-nullish-coalescing/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

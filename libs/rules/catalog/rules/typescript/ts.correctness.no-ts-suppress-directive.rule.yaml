@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.no-ts-suppress-directive
+  title: TypeScript suppress directive
+  summary: Avoid `@ts-ignore`, `@ts-nocheck`, and `@ts-expect-error` directives.
+  rationale: Suppressing TypeScript checks hides type errors that can lead to runtime defects. Use proper types or explicit casts instead.
+  aliases:
+    - JS-0295
+  tags:
+    - correctness
+    - typescript
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+match:
+  fact:
+    kind: language.ts-suppress-directive
+    bind: issue
+emit:
+  finding:
+    category: correctness.type-safety
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - typescript
+  message:
+    title: Remove TypeScript suppress directive
+    summary: "`${captures.issue.text}` suppresses TypeScript type checking. Fix the underlying type issue instead."
+  remediation:
+    summary: Replace `@ts-ignore`, `@ts-nocheck`, or `@ts-expect-error` with proper type annotations, type guards, or explicit casts.

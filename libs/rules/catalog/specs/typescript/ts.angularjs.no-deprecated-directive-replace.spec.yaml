@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.angularjs.no-deprecated-directive-replace.rule.yaml
+fixtures:
+  - name: flags replace property in directive definition
+    sourcePath: ./fixtures/ts.angularjs.no-deprecated-directive-replace/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.angularjs.no-deprecated-directive-replace
+      allSeverities:
+        - high
+  - name: allows replace property in non-directive objects
+    sourcePath: ./fixtures/ts.angularjs.no-deprecated-directive-replace/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

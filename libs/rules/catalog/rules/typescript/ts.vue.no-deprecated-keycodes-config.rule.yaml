@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.vue.no-deprecated-keycodes-config
+  title: Avoid deprecated Vue.config.keyCodes
+  summary: "Vue.config.keyCodes was removed in Vue 3. Use key alias modifiers directly instead."
+  rationale: Vue 2 allowed custom keycode aliases via `Vue.config.keyCodes`. Vue 3 removes this API entirely and requires the use of standard key names. Directly reference key names with `@keyup.enter` rather than configuring custom numeric mappings.
+  aliases:
+    - JS-0657
+  tags:
+    - vue
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.vue.deprecated-keycodes-config
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.90
+    tags:
+      - vue
+      - correctness
+  message:
+    title: Replace Vue.config.keyCodes with key alias modifiers
+    summary: "${captures.issue.text} uses the deprecated Vue.config.keyCodes API. Use key alias modifiers instead."
+  remediation:
+    summary: "Remove `Vue.config.keyCodes` assignments. Reference key names directly in templates using `@keyup.enter`, `@keyup.escape`, or other standard key aliases supported by Vue 3."

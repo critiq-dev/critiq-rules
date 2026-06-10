@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.vue.no-computed-mutation.rule.yaml
+fixtures:
+  - name: flags assignment inside Options API computed
+    sourcePath: ./fixtures/ts.vue.no-computed-mutation/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.vue.no-computed-mutation
+      allSeverities:
+        - high
+  - name: allows pure computed with no side effects
+    sourcePath: ./fixtures/ts.vue.no-computed-mutation/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.angularjs.prefer-angular-for-each.rule.yaml
+fixtures:
+  - name: flags native .forEach() in AngularJS file
+    sourcePath: ./fixtures/ts.angularjs.prefer-angular-for-each/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.angularjs.prefer-angular-for-each
+      allSeverities:
+        - high
+  - name: allows angular.forEach() call
+    sourcePath: ./fixtures/ts.angularjs.prefer-angular-for-each/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

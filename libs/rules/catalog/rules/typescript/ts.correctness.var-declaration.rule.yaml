@@ -1,0 +1,38 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.var-declaration
+  title: var declaration instead of let or const
+  summary: Consider using `let` or `const` instead of `var`.
+  rationale: var declarations are function-scoped and can cause subtle hoisting bugs; let and const provide block scoping and clearer intent.
+  aliases:
+    - JS-0239
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - crq-cor-047
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.var-declaration
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 1.0
+    tags:
+      - correctness
+      - language
+  message:
+    title: Prefer let or const over var
+    summary: "`${captures.issue.text}` declares with `var` instead of `let` or `const`."
+  remediation:
+    summary: Replace `var` with `let` for reassignable bindings or `const` for constant bindings.

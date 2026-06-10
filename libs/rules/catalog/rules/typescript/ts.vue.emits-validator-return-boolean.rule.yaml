@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.vue.emits-validator-return-boolean
+  title: Emits validators must return a boolean
+  summary: "Emit event validators are expected to return a boolean value indicating whether the event payload is valid."
+  rationale: Vue emits validators, like prop validators, are expected to return a boolean. Returning non-boolean values or omitting the return statement can lead to unexpected behavior. Validators that return nothing or return non-boolean values make the emit always appear valid.
+  aliases:
+    - JS-0660
+  tags:
+    - vue
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.vue.emits-validator-return
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.75
+    tags:
+      - vue
+      - correctness
+  message:
+    title: Return boolean from emits validator
+    summary: "${captures.issue.text} has an emits validator that does not return a boolean. Add a boolean return statement."
+  remediation:
+    summary: "Ensure each emits validator function returns a boolean value. For example: `emits: { submit: (payload) => { return typeof payload === 'string'; } }`."

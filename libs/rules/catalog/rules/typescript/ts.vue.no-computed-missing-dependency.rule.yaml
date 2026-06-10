@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.vue.no-computed-missing-dependency
+  title: Declare external dependencies in computed properties
+  summary: Vue computed properties referencing data Vue cannot reactively track should declare explicit dependencies.
+  rationale: Vue 2 computed properties auto-track reactive dependencies accessed via `this.*` but cannot track module-level variables, window properties, or other non-reactive sources. Explicit `dependencies` arrays make the dependency contract visible and prevent stale computed values.
+  aliases:
+    - JS-0813
+  tags:
+    - vue
+    - correctness
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: framework.vue.computed-missing-dependency
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.72
+    tags:
+      - vue
+      - correctness
+  message:
+    title: Computed property references external dependency
+    summary: "Computed property `${captures.issue.text}` references external data that Vue cannot reactively track."
+  remediation:
+    summary: Add an explicit `dependencies` array to the computed property, or move the external reference to a reactive data property.

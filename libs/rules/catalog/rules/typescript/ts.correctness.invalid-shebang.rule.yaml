@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.correctness.invalid-shebang
+  title: Invalid shebang placement
+  summary: Shebang `#!` must appear on line 1 at column 0.
+  rationale: Shebangs on later lines or indented positions are ignored by the OS loader and indicate a misplaced or malformed hashbang.
+  aliases:
+    - JS-0271
+  tags:
+    - correctness
+    - language
+    - rules-catalog
+    - public-directory-parity
+  stability: stable
+  appliesTo: file
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: language.invalid-shebang
+    bind: issue
+emit:
+  finding:
+    category: correctness.control-flow
+    severity: medium
+    confidence: 0.95
+    tags:
+      - correctness
+      - language
+  message:
+    title: Move shebang to line 1 column 0
+    summary: "`${captures.issue.text}` is not at the required position — shebang must be the very first characters of the file."
+  remediation:
+    summary: Place `#!` on line 1 at column 0. Remove any leading whitespace or preceding statements.

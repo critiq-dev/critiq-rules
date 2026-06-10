@@ -1,0 +1,36 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.react.no-deprecated-is-mounted
+  title: Avoid deprecated isMounted method
+  summary: isMounted is a legacy anti-pattern that leads to stale references and masks async lifecycle bugs.
+  rationale: The isMounted pattern is removed in newer React versions and indicates a design where asynchronous work outlives the component. Use cancellation tokens or AbortController instead.
+  aliases:
+    - JS-0446
+  tags:
+    - react
+    - ui
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - typescript
+    - javascript
+match:
+  fact:
+    kind: ui.react.deprecated-is-mounted
+    bind: issue
+emit:
+  finding:
+    category: correctness.ui
+    severity: high
+    confidence: 0.9
+    tags:
+      - react
+      - ui
+  message:
+    title: Replace isMounted with cancelable async patterns
+    summary: "${captures.issue.text} uses the deprecated isMounted pattern."
+  remediation:
+    summary: Track the mounted state with a useRef flag or cancel subscriptions with AbortController and useEffect cleanup.

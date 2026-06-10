@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.require-outside-import.rule.yaml
+fixtures:
+  - name: flags require() outside import
+    sourcePath: ./fixtures/ts.correctness.require-outside-import/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.require-outside-import
+      allSeverities:
+        - high
+  - name: allows ES module import
+    sourcePath: ./fixtures/ts.correctness.require-outside-import/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

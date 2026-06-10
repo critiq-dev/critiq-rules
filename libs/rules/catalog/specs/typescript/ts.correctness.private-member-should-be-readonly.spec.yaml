@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/typescript/ts.correctness.private-member-should-be-readonly.rule.yaml
+fixtures:
+  - name: flags private member not marked readonly
+    sourcePath: ./fixtures/ts.correctness.private-member-should-be-readonly/invalid.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.correctness.private-member-should-be-readonly
+      allSeverities:
+        - medium
+  - name: allows private member mutated in methods
+    sourcePath: ./fixtures/ts.correctness.private-member-should-be-readonly/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

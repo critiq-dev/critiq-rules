@@ -1,0 +1,14 @@
+{
+  "path": "src/pages/index.ts",
+  "language": "typescript",
+  "text": "import Head from 'next/head';\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": []
+    }
+  }
+}
