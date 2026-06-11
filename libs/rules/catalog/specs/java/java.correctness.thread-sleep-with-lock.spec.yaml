@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.thread-sleep-with-lock.rule.yaml
+fixtures:
+  - name: flags Thread.sleep inside synchronized
+    sourcePath: ./fixtures/java.correctness.thread-sleep-with-lock/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.thread-sleep-with-lock
+  - name: allows sleep outside sync and sync without sleep
+    sourcePath: ./fixtures/java.correctness.thread-sleep-with-lock/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

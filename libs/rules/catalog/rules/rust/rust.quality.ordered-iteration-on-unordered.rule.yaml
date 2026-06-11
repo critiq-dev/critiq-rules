@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.ordered-iteration-on-unordered
+  title: "Avoid `.sorted()` on unordered collections"
+  summary: "Calling `.sorted()` on an unordered collection like HashMap or HashSet is misleading."
+  rationale: >-
+    HashMap, HashSet, and similar unordered collections do not guarantee
+    iteration order. Calling `.sorted()` (or `.sorted_by()`) on the
+    iterator implies a need for ordering, but the collection may not
+    produce deterministic iteration even after sorting if elements are
+    added or removed. Consider using BTreeMap or BTreeSet for ordered
+    iteration.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1081
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.ordered-iteration-on-unordered
+    bind: issue
+emit:
+  finding:
+    category: performance.unnecessary-allocation
+    severity: medium
+    confidence: 0.7
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "`.sorted()` on unordered collection in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` sorts an unordered collection. Use BTreeMap or BTreeSet if you need deterministic ordering."
+  remediation:
+    summary: "Consider using `BTreeMap`/`BTreeSet` for naturally ordered iteration, or ensure the sort is intentional and document why."

@@ -9,6 +9,7 @@ metadata:
     kind: pattern
   aliases:
     - JAVA-S0352
+    - JAVA-E0352
   tags:
     - correctness
     - java

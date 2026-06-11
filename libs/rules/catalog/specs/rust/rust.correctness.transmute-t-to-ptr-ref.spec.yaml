@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.transmute-t-to-ptr-ref.rule.yaml
+fixtures:
+  - name: flags transmute integer to ptr
+    sourcePath: ./fixtures/rust.correctness.transmute-t-to-ptr-ref/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.transmute-t-to-ptr-ref
+  - name: accepts proper pointer creation
+    sourcePath: ./fixtures/rust.correctness.transmute-t-to-ptr-ref/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

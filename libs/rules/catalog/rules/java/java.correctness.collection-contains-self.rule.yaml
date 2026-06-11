@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.collection-contains-self
+  title: Collections should not contain themselves
+  summary: A collection checks if it contains itself — likely a logic error.
+  rationale: Self-containment checks on collections are almost always unintentional typos where the wrong variable was used.
+  aliases:
+    - JAVA-E1076
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.collection-contains-self
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: critical
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: Collection contains check on itself in `${captures.issue.text}`
+    summary: "A collection checks for containment of itself, which is likely a logic error."
+  remediation:
+    summary: Use a different collection reference for the containment check.

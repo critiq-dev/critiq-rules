@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.enum-equals-method.rule.yaml
+fixtures:
+  - name: flags equals method in enum
+    sourcePath: ./fixtures/java.correctness.enum-equals-method/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.enum-equals-method
+  - name: allows enum without equals
+    sourcePath: ./fixtures/java.correctness.enum-equals-method/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

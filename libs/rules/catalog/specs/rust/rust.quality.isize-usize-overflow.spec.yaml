@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.isize-usize-overflow.rule.yaml
+fixtures:
+  - name: flags isize::MAX in range
+    sourcePath: ./fixtures/rust.quality.isize-usize-overflow/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.isize-usize-overflow
+  - name: accepts isize::MAX outside range
+    sourcePath: ./fixtures/rust.quality.isize-usize-overflow/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

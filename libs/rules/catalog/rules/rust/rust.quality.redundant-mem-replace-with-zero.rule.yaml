@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.redundant-mem-replace-with-zero
+  title: "Use `mem::take()` instead of `mem::replace` with zero value"
+  summary: "`mem::replace(&mut val, 0/false/\"\")` can be replaced with `mem::take(&mut val)`."
+  rationale: >-
+    Using `mem::replace(&mut val, 0)` or similar zero-like values is equivalent to
+    `mem::take(&mut val)` which is more idiomatic and readable.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1114
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.redundant-mem-replace-with-zero
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Use `mem::take()` instead of `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` replaces a value with a zero-like value to take ownership. Use `mem::take(&mut val)` instead."
+  remediation:
+    summary: "Replace `mem::replace(&mut val, 0/false/\"\")` with `mem::take(&mut val)`."

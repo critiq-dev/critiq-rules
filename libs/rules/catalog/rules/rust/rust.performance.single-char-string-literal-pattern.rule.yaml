@@ -16,6 +16,8 @@ metadata:
     - rules-catalog
   stability: experimental
   appliesTo: block
+  aliases:
+    - RS-P1100
 scope:
   languages:
     - rust

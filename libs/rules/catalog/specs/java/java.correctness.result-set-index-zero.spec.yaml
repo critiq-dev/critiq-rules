@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.result-set-index-zero.rule.yaml
+fixtures:
+  - name: flags ResultSet access with index 0
+    sourcePath: ./fixtures/java.correctness.result-set-index-zero/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.result-set-index-zero
+  - name: allows 1-based ResultSet access
+    sourcePath: ./fixtures/java.correctness.result-set-index-zero/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

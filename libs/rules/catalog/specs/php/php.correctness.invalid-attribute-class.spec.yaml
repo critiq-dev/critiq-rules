@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.invalid-attribute-class.rule.yaml
+fixtures:
+  - name: flags invalid #[Attribute] declarations
+    sourcePath: ./fixtures/php.correctness.invalid-attribute-class/invalid.php
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - php.correctness.invalid-attribute-class
+        - php.correctness.invalid-attribute-class
+        - php.correctness.invalid-attribute-class
+  - name: ignores valid #[Attribute] class with public constructor
+    sourcePath: ./fixtures/php.correctness.invalid-attribute-class/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

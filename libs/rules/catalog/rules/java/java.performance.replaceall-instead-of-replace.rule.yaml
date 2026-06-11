@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.replaceall-instead-of-replace
+  title: "String.replaceAll() with literal string argument"
+  summary: "Using `String.replaceAll()` with a literal (non-regex) string argument is less efficient than `String.replace()`."
+  rationale: "`replaceAll()` interprets its first argument as a regex pattern, incurring unnecessary compilation overhead even when the argument contains no special regex characters. `String.replace()` treats the first argument as a literal character sequence and has optimized intrinsic implementations."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+  aliases:
+    - JAVA-P1001
+  tags:
+    - performance
+    - java
+    - strings
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.replaceall-instead-of-replace
+    bind: issue
+emit:
+  finding:
+    category: performance.strings
+    severity: high
+    confidence: 0.90
+    tags:
+      - performance
+      - java
+  message:
+    title: "Use `String.replace()` instead of `replaceAll()` for literal strings in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` uses replaceAll() with a non-regex argument. Use replace() for literal string replacement."
+  remediation:
+    summary: "Replace `replaceAll(literal, replacement)` with `replace(literal, replacement)` to avoid unnecessary regex compilation."

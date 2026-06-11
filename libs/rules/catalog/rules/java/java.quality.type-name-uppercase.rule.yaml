@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.quality.type-name-uppercase
+  title: Type names must begin with an uppercase letter
+  summary: Class, interface, and enum names should start with an uppercase letter per Java naming conventions.
+  rationale: Following the standard Java naming convention (PascalCase for types) improves readability and consistency across the codebase.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-C1001
+  tags:
+    - quality
+    - java
+    - naming-convention
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+match:
+  fact:
+    kind: java.quality.type-name-uppercase
+    bind: issue
+emit:
+  finding:
+    category: quality.naming-convention
+    severity: low
+    confidence: 0.90
+    tags:
+      - quality
+      - java
+  message:
+    title: Rename type to start with uppercase letter
+    summary: "`${captures.issue.text}` declares a type whose name starts with a lowercase letter."
+  remediation:
+    summary: Rename the type to use PascalCase (e.g., `MyClass` instead of `myClass`).

@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.explicit-finalizer-invocation
+  title: Finalizers must not be explicitly invoked
+  summary: "Calling `.finalize()` explicitly is dangerous and deprecated."
+  rationale: Explicit finalizer invocation can resurrect objects, cause resource leaks, and produce unpredictable behavior. The JVM manages finalization automatically.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0094
+  tags:
+    - correctness
+    - java
+    - resource-management
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.explicit-finalizer-invocation
+    bind: issue
+emit:
+  finding:
+    category: correctness.resource-management
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: Explicit finalizer invocation
+    summary: "`${captures.issue.text}` is an explicit call to finalize(). The JVM manages finalization — never call it directly."
+  remediation:
+    summary: "Remove the explicit `.finalize()` call. Implement `AutoCloseable` and use try-with-resources instead."

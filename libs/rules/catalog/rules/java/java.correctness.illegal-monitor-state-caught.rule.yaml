@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.illegal-monitor-state-caught
+  title: IllegalMonitorStateException should not be handled
+  summary: IllegalMonitorStateException indicates a programming error; handling it masks the bug.
+  rationale: This exception signals incorrect `wait()`/`notify()` usage. Fix the synchronization logic instead of catching it.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0040
+  tags:
+    - correctness
+    - java
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.illegal-monitor-state-caught
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: Catching IllegalMonitorStateException masks synchronization bug
+    summary: "IllegalMonitorStateException should not be caught. Fix the synchronization logic instead."
+  remediation:
+    summary: Fix the synchronization logic that causes IllegalMonitorStateException rather than catching it.

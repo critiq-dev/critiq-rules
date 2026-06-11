@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.redundant-mem-replace-with-default
+  title: "Use `mem::take()` instead of `mem::replace` with `Default::default()`"
+  summary: "`mem::replace(&mut val, Default::default())` can be replaced with `mem::take(&mut val)`."
+  rationale: >-
+    `mem::take()` is a convenience wrapper for `mem::replace(&mut val, Default::default())`.
+    Prefer the more concise form.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1113
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.redundant-mem-replace-with-default
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Use `mem::take()` instead of `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` replaces a value with its default to take ownership. Use `mem::take(&mut val)` instead."
+  remediation:
+    summary: "Replace `mem::replace(&mut val, Default::default())` with `mem::take(&mut val)`."

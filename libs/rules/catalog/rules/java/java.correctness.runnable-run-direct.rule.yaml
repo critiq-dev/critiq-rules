@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.runnable-run-direct
+  title: Runnable's run() method called directly instead of using Thread.start()
+  summary: Calling `run()` on a Thread or Runnable directly bypasses the new thread and executes in the caller's thread.
+  rationale: Invoking `run()` directly instead of `start()` executes the Runnable's code synchronously in the current thread, defeating the purpose of threading. This is almost always a bug; use `start()` to launch a new thread.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0135
+  tags:
+    - correctness
+    - java
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.runnable-run-direct
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Direct call to run() instead of start()
+    summary: "`${captures.issue.text}` calls `run()` directly on a Thread or Runnable. Use `start()` to execute in a new thread."
+  remediation:
+    summary: "Replace `thread.run()` with `thread.start()` to execute the Runnable in a new thread."

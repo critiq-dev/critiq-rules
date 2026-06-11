@@ -13,6 +13,7 @@ metadata:
       title: Uncontrolled Resource Consumption
   aliases:
     - JAVA-S0329
+    - JAVA-P1003
   tags:
     - correctness
     - java

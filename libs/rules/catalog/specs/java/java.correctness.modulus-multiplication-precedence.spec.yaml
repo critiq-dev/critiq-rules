@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.modulus-multiplication-precedence.rule.yaml
+fixtures:
+  - name: flags ambiguous modulus-multiplication
+    sourcePath: ./fixtures/java.correctness.modulus-multiplication-precedence/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.modulus-multiplication-precedence
+  - name: allows explicit parentheses
+    sourcePath: ./fixtures/java.correctness.modulus-multiplication-precedence/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.missing-enum-switch-elements
+  title: Missing enum elements in switch cases
+  summary: Switch statements on enum types without a default label must cover all enum members.
+  rationale: If new enum members are added later and the switch is not updated, the code silently skips the new case — almost always a bug.
+  aliases:
+    - JAVA-E1082
+  tags:
+    - correctness
+    - java
+    - logic
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.missing-enum-switch-elements
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.82
+    tags:
+      - correctness
+      - java
+  message:
+    title: Switch on enum missing elements
+    summary: "Switch on enum type missing the following members: ${captures.issue.text}"
+  remediation:
+    summary: Add case labels for every enum member that is not covered, or add a default label to handle unknown values.

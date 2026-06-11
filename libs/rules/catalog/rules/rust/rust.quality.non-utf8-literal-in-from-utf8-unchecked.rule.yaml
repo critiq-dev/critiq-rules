@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.non-utf8-literal-in-from-utf8-unchecked
+  title: "Avoid non-UTF-8 literals in `str::from_utf8_unchecked`"
+  summary: "Passing a byte string literal with non-UTF-8 sequences to `str::from_utf8_unchecked` creates invalid UTF-8 strings that violate Rust's safety assumptions about `&str`."
+  rationale: >-
+    `str::from_utf8_unchecked` creates a `&str` from a byte slice without validation.
+    If the byte literal contains non-UTF-8 sequences, the resulting `&str` violates
+    the UTF-8 invariant that all safe Rust code depends on. This can cause undefined
+    behavior.
+  references:
+    - kind: cwe
+      id: CWE-172
+      title: Encoding Error
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1122
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.non-utf8-literal-in-from-utf8-unchecked
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Non-UTF-8 literal in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` passes a byte literal with non-UTF-8 sequences to `from_utf8_unchecked`, creating an invalid `&str`."
+  remediation:
+    summary: "Remove non-UTF-8 bytes from the literal, or use a `&[u8]` instead of `&str`."

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.invalid-regex-literal.rule.yaml
+fixtures:
+  - name: flags invalid regex pattern
+    sourcePath: ./fixtures/java.correctness.invalid-regex-literal/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.invalid-regex-literal
+  - name: allows valid regex patterns
+    sourcePath: ./fixtures/java.correctness.invalid-regex-literal/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

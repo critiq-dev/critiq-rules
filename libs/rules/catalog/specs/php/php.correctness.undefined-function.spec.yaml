@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.undefined-function.rule.yaml
+fixtures:
+  - name: flags undefined function calls
+    sourcePath: ./fixtures/php.correctness.undefined-function/invalid.php
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - php.correctness.undefined-function
+        - php.correctness.undefined-function
+        - php.correctness.undefined-function
+  - name: ignores defined and built-in function calls
+    sourcePath: ./fixtures/php.correctness.undefined-function/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

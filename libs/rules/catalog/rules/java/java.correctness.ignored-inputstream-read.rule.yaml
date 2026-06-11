@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.ignored-inputstream-read
+  title: Return value of InputStream.read() ignored
+  summary: Calling `read()` on an InputStream without using the return value discards data.
+  rationale: "InputStream.read() returns the number of bytes read. Ignoring this value can lead to data loss or incorrect assumptions about how many bytes were consumed."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0183
+  tags:
+    - correctness
+    - java
+    - resource
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.ignored-inputstream-read
+    bind: issue
+emit:
+  finding:
+    category: correctness.resource
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: InputStream.read() return value ignored
+    summary: The return value of `read()` is not captured or checked. The actual number of bytes read may differ from the buffer size.
+  remediation:
+    summary: Capture and check the return value of `read()`, for example `int n = is.read(buf);`

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.hasnext-invokes-next.rule.yaml
+fixtures:
+  - name: flags hasNext calling next
+    sourcePath: ./fixtures/java.correctness.hasnext-invokes-next/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.hasnext-invokes-next
+  - name: allows correct hasNext implementation
+    sourcePath: ./fixtures/java.correctness.hasnext-invokes-next/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

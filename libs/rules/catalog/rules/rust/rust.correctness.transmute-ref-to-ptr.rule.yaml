@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-ref-to-ptr
+  title: "Attempting to transmute a reference to a raw pointer"
+  summary: "Transmuting `&T` to `*const T` is unnecessary — use `as` casts instead."
+  rationale: >-
+    Transmuting a reference to a raw pointer is redundant. The `as` operator
+    can perform this conversion safely (`&T as *const T`). Using `transmute`
+    bypasses type-checking and may silently accept incorrect types.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1019
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-ref-to-ptr
+    bind: issue
+emit:
+  finding:
+    category: correctness.memory
+    severity: critical
+    confidence: 0.95
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Attempting to transmute a reference to a raw pointer"
+    summary: "'${captures.issue.text}' transmutes a reference to a raw pointer. Use `as` casts instead."
+  remediation:
+    summary: "Replace with `reference as *const T` or `reference as *mut T` rather than using `transmute`."

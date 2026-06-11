@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.keyset-instead-of-entryset
+  title: "Inefficient Map iteration with keySet() and get()"
+  summary: "Iterating over `Map.keySet()` and calling `Map.get(key)` for each key performs redundant hash lookups."
+  rationale: "Using `keySet()` + `get()` iterates the map keys and performs a separate hash lookup for each element. This is O(2n) instead of O(n). Use `entrySet()` to access both key and value directly without the extra lookup."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+  aliases:
+    - JAVA-P0361
+  tags:
+    - performance
+    - java
+    - collections
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.keyset-instead-of-entryset
+    bind: issue
+emit:
+  finding:
+    category: performance.collections
+    severity: high
+    confidence: 0.80
+    tags:
+      - performance
+      - java
+  message:
+    title: "Use `entrySet()` instead of `keySet()` + `get()` in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` iterates keySet() and calls get() for each key. Use entrySet() to avoid redundant hash lookups."
+  remediation:
+    summary: "Replace the iteration with `for (Map.Entry<K, V> entry : map.entrySet())` and access both key and value via `entry.getKey()` and `entry.getValue()`."

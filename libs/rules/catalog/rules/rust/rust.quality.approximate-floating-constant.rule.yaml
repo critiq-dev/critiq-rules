@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.approximate-floating-constant
+  title: "Found manual approximation of known floating constant"
+  summary: "Float literal approximates a known mathematical constant that should use `std::f64::consts::*` or `std::f32::consts::*`."
+  rationale: >-
+    Rust's standard library provides named constants for common mathematical
+    values such as `PI`, `E`, `TAU`, `SQRT_2`, and `FRAC_PI_2` in
+    `std::f64::consts` and `std::f32::consts`. Hard-coding approximate literal
+    values (e.g., `3.14` instead of `f64::consts::PI`) is less precise,
+    less readable, and may introduce subtle floating-point errors.
+  tags:
+    - style
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1207
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.approximate-floating-constant
+    bind: issue
+emit:
+  finding:
+    category: style.readability
+    severity: medium
+    confidence: 0.7
+    tags:
+      - style
+      - rust
+  message:
+    title: "Approximate floating constant `${captures.issue.text}` should use a named `f64::consts::*` constant"
+    summary: "`${captures.issue.text}` approximates a known mathematical constant. Use `std::f64::consts::*` or `std::f32::consts::*` for exact precision."
+  remediation:
+    summary: "Replace `${captures.issue.text}` with the appropriate `std::f64::consts::*` or `std::f32::consts::*` constant such as `PI`, `E`, `TAU`, `SQRT_2`, or `LN_2`."

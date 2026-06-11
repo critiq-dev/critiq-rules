@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.unhandled-io-result
+  title: "Found I/O operation with unhandled return value"
+  summary: "I/O operations return `Result` which should be handled to avoid silently ignoring errors."
+  rationale: >-
+    Functions like `File::open`, `fs::read_to_string`, and `fs::write` return
+    `Result` values. Discarding the `Result` silently ignores potential I/O
+    errors, which can lead to undetected failures at runtime.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1023
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.unhandled-io-result
+    bind: issue
+emit:
+  finding:
+    category: correctness.error-handling
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Found I/O operation with unhandled return value"
+    summary: "'${captures.issue.text}' — the `Result` from this I/O operation is discarded."
+  remediation:
+    summary: "Handle the `Result` with `?`, `.unwrap()`, `.expect()`, or pattern matching. Do not silently ignore I/O errors."

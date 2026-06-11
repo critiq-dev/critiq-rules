@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.assert-self-comparison
+  title: Objects should not be compared to themselves within assertions
+  summary: Assertions comparing a value to itself always pass and indicate a testing bug where a different expected value should be used.
+  rationale: Self-comparison in assertions (assertEquals(a, a), assertSame(a, a), assertTrue(a == a)) is a common copy-paste mistake. These assertions always pass and never validate actual behavior.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E1012
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+    - testing
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.assert-self-comparison
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+      - testing
+  message:
+    title: Self-comparison in assertion
+    summary: "`${captures.issue.text}` compares an object to itself. This assertion always passes and does not test anything meaningful."
+  remediation:
+    summary: Replace the self-comparison with the actual expected value. If testing equality contract, check equals/hashCode explicitly.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.iterable-iterator-returns-this.rule.yaml
+fixtures:
+  - name: flags iterator() returning this in Iterable+Iterator class
+    sourcePath: ./fixtures/java.correctness.iterable-iterator-returns-this/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.iterable-iterator-returns-this
+  - name: allows iterator() returning new instance
+    sourcePath: ./fixtures/java.correctness.iterable-iterator-returns-this/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

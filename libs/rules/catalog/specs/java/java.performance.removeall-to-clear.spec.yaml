@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.removeall-to-clear.rule.yaml
+fixtures:
+  - name: flags collection.removeAll(collection) instead of clear
+    sourcePath: ./fixtures/java.performance.removeall-to-clear/removeall-to-clear.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.removeall-to-clear
+      allSeverities:
+        - critical
+  - name: allows collection.clear() or removeAll with different argument
+    sourcePath: ./fixtures/java.performance.removeall-to-clear/removeall-to-clear.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

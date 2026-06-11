@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.builtin-type-shadow
+  title: "Do not shadow built-in types with local variables"
+  summary: "A local variable shadows a Rust built-in type name, which can confuse readers and hide type errors."
+  rationale: >-
+    Using a built-in type name (e.g., `String`, `i32`, `Vec`) as a variable
+    identifier shadows the type. This makes code harder to read and can
+    lead to confusing type errors when a type is unexpectedly shadowed.
+  tags:
+    - style
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1028
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.builtin-type-shadow
+    bind: issue
+emit:
+  finding:
+    category: style.readability
+    severity: medium
+    confidence: 0.9
+    tags:
+      - style
+      - rust
+  message:
+    title: "Variable `${captures.issue.text}` shadows a built-in type"
+    summary: "`${captures.issue.text}` shadows a Rust built-in type name. Choose a different name to avoid confusion and potential type errors."
+  remediation:
+    summary: "Rename the variable to avoid shadowing the built-in type. For example, use `my_string` instead of `String`, or `index` instead of `i32`."

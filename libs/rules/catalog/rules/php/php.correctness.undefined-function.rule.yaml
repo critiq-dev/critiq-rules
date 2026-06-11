@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.undefined-function
+  title: Undefined function call detected
+  summary: Calling a function that is not defined in the current file and is not a known PHP built-in function will cause a runtime fatal error.
+  aliases:
+    - PHP-E1000
+  rationale: "PHP raises a fatal error when calling an undefined function. Single-file heuristic checks for functions not defined in the current file and not in the built-in function registry. Functions in included files may cause false positives; confidence is set accordingly."
+  detection:
+    kind: pattern
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.undefined-function
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.60
+    tags:
+      - correctness
+      - php
+  message:
+    title: Call to undefined function ${captures.issue.text}
+    summary: "Function ${captures.issue.text}() is called but is not defined in the current file and is not a known PHP built-in function."
+  remediation:
+    summary: Ensure the function is defined (via a manual include check) or correct the function name to match an existing function.

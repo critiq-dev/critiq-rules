@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.undefined-variable.rule.yaml
+fixtures:
+  - name: flags use-before-define, $this in static, post-unset
+    sourcePath: ./fixtures/php.correctness.undefined-variable/invalid.php
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - php.correctness.undefined-variable
+        - php.correctness.undefined-variable
+        - php.correctness.undefined-variable
+  - name: ignores valid define-then-use and special constructs
+    sourcePath: ./fixtures/php.correctness.undefined-variable/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

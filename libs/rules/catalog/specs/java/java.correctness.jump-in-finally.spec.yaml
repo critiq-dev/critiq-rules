@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.jump-in-finally.rule.yaml
+fixtures:
+  - name: flags return inside finally block
+    sourcePath: ./fixtures/java.correctness.jump-in-finally/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.jump-in-finally
+  - name: allows finally block with cleanup only
+    sourcePath: ./fixtures/java.correctness.jump-in-finally/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.noallocation-method-creates-object
+  title: '@NoAllocation method performs object allocation'
+  summary: A method annotated @NoAllocation creates heap objects via `new`.
+  rationale: "The @NoAllocation annotation promises zero heap allocation. Creating objects with `new` inside the method body violates that contract and may cause performance regressions or library contract violations."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E1059
+  tags:
+    - correctness
+    - java
+    - allocation
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.noallocation-method-creates-object
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-usage
+    severity: medium
+    confidence: 0.78
+    tags:
+      - correctness
+      - java
+  message:
+    title: '@NoAllocation method allocates objects'
+    summary: "`${captures.issue.text}` creates a new object inside a @NoAllocation-annotated method."
+  remediation:
+    summary: Remove the allocation or remove the @NoAllocation annotation if allocation is intentional.

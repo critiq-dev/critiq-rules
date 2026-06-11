@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.bad-short-circuit-null-check
+  title: Bad short-circuiting null check
+  summary: Null check uses || instead of && causing a NullPointerException when the variable is null.
+  rationale: In `x != null || x.method()`, if x is null, the first condition is false, so x.method() executes and throws NPE. Use && for null-guarded access.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E1003
+  tags:
+    - correctness
+    - java
+    - defensive-programming
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.bad-short-circuit-null-check
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: Bad short-circuit null check
+    summary: Using `||` instead of `&&` after a null check causes a NullPointerException when the variable is null.
+  remediation:
+    summary: Change `x != null || x.method()` to `x != null && x.method()` so the method call is guarded by the null check.

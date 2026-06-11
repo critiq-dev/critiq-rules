@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.for-loop-mismatched-increment
+  title: For loop checks one variable but increments another
+  summary: The loop condition checks one variable but a different variable is being incremented.
+  rationale: "A for-loop that checks variable `i` in its condition but increments variable `j` is likely a bug. The loop may never terminate or may terminate early."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0214
+  tags:
+    - correctness
+    - java
+    - logic
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.for-loop-mismatched-increment
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: medium
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: For-loop increment variable does not match condition variable
+    summary: "`${captures.issue.text}` — the condition uses one variable but the increment changes a different variable."
+  remediation:
+    summary: Ensure the loop increment updates the same variable used in the condition.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.transmute-ptr-to-ptr.rule.yaml
+fixtures:
+  - name: flags transmute *const T to *mut T
+    sourcePath: ./fixtures/rust.correctness.transmute-ptr-to-ptr/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.transmute-ptr-to-ptr
+  - name: accepts direct cast for ptr-to-ptr
+    sourcePath: ./fixtures/rust.correctness.transmute-ptr-to-ptr/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

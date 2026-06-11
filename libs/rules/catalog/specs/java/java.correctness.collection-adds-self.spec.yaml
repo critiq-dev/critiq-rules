@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.collection-adds-self.rule.yaml
+fixtures:
+  - name: flags self-referential add
+    sourcePath: ./fixtures/java.correctness.collection-adds-self/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.collection-adds-self
+  - name: allows normal add on other collection
+    sourcePath: ./fixtures/java.correctness.collection-adds-self/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

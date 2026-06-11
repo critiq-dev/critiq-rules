@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.option-env-unwrap.rule.yaml
+fixtures:
+  - name: flags option_env!.unwrap()
+    sourcePath: ./fixtures/rust.quality.option-env-unwrap/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.option-env-unwrap
+  - name: accepts option_env!.unwrap_or()
+    sourcePath: ./fixtures/rust.quality.option-env-unwrap/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

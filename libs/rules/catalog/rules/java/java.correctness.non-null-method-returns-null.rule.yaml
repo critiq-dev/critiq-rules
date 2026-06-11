@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.non-null-method-returns-null
+  title: Methods annotated as non-nullable should not return null values
+  summary: Methods annotated @Nonnull, @NotNull, or @NonNull that contain explicit return null statements are buggy.
+  rationale: Returning null from a non-null annotated method defeats the purpose of the annotation and will cause NullPointerException at call sites.
+  aliases:
+    - JAVA-E1095
+  tags:
+    - correctness
+    - java
+    - null-safety
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.non-null-method-returns-null
+    bind: issue
+emit:
+  finding:
+    category: correctness.null-safety
+    severity: critical
+    confidence: 0.92
+    tags:
+      - correctness
+      - java
+  message:
+    title: Non-null method returns null
+    summary: "The method is annotated as non-nullable but contains a return null statement."
+  remediation:
+    summary: Remove the return null statement or change the method annotation to @Nullable if null is a valid return value.

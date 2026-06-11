@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.bad-short-circuit-null-check.rule.yaml
+fixtures:
+  - name: flags || instead of && after null check
+    sourcePath: ./fixtures/java.correctness.bad-short-circuit-null-check/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.bad-short-circuit-null-check
+  - name: allows correct short-circuit null check
+    sourcePath: ./fixtures/java.correctness.bad-short-circuit-null-check/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

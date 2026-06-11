@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.string-concat-in-loop.rule.yaml
+fixtures:
+  - name: flags String += inside for loop
+    sourcePath: ./fixtures/java.performance.string-concat-in-loop/string-concat-in-loop.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.string-concat-in-loop
+      allSeverities:
+        - high
+  - name: allows StringBuilder.append in loop
+    sourcePath: ./fixtures/java.performance.string-concat-in-loop/string-concat-in-loop.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

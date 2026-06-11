@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.readline-without-null-check.rule.yaml
+fixtures:
+  - name: flags readLine() used without null check
+    sourcePath: ./fixtures/java.correctness.readline-without-null-check/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.readline-without-null-check
+  - name: allows readLine() with null check
+    sourcePath: ./fixtures/java.correctness.readline-without-null-check/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

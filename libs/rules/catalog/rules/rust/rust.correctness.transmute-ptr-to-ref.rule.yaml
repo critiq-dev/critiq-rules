@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-ptr-to-ref
+  title: "Attempting to transmute a raw pointer to a reference"
+  summary: "Transmuting `*const T` to `&T` creates a reference with no lifetime guarantees."
+  rationale: >-
+    Transmuting a raw pointer to a reference is unsound because the resulting
+    reference has no lifetime bound. This can lead to dangling references and
+    undefined behavior. Use safe pointer-to-reference conversion patterns instead.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1018
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-ptr-to-ref
+    bind: issue
+emit:
+  finding:
+    category: correctness.memory
+    severity: critical
+    confidence: 0.95
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Attempting to transmute a raw pointer to a reference"
+    summary: "'${captures.issue.text}' transmutes a raw pointer to a reference, which is unsound without lifetime guarantees."
+  remediation:
+    summary: "Use safe conversion methods or ensure the reference lifetime is bounded. Prefer `as` casts with explicit lifetime annotations."

@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.inaccessible-property
+  title: Inaccessible property
+  summary: Accessing a property that is not visible from the current scope will cause a runtime error.
+  aliases:
+    - PHP-W1067
+  rationale: >-
+    PHP raises a fatal error when accessing private or protected properties from
+    outside their declared visibility scope. Single-file heuristic checks for private
+    parent properties accessed from child classes when the parent class is defined in
+    the same file. Cross-file parent classes are skipped to avoid false positives.
+  detection:
+    kind: pattern
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.inaccessible-property
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.55
+    tags:
+      - correctness
+      - php
+  message:
+    title: Inaccessible property ${captures.issue.text}
+    summary: >-
+      ${captures.issue.text} accesses a property that is not visible from the
+      current scope — PHP will raise a fatal error.
+  remediation:
+    summary: >-
+      Change the property visibility to allow access, or use a getter method.
+      Private parent properties cannot be accessed from child classes; protected
+      properties can only be accessed from within the class hierarchy.

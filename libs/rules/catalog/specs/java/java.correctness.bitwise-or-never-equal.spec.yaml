@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.bitwise-or-never-equal.rule.yaml
+fixtures:
+  - name: flags impossible bitwise-or comparison
+    sourcePath: ./fixtures/java.correctness.bitwise-or-never-equal/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.bitwise-or-never-equal
+  - name: allows valid comparison
+    sourcePath: ./fixtures/java.correctness.bitwise-or-never-equal/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

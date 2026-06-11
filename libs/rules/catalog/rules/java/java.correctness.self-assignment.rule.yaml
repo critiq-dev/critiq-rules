@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.self-assignment
+  title: Self assignment of local variable
+  summary: A local variable is assigned to itself, which has no effect.
+  rationale: "`x = x;` is a no-op and indicates either a typo or dead code. If the intent was to assign from a field, `this.x = x;` should be used."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0291
+  tags:
+    - correctness
+    - java
+    - logic
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.self-assignment
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: Self assignment of local variable
+    summary: "`${captures.issue.text}` assigns a variable to itself, which is a no-op."
+  remediation:
+    summary: Remove the self-assignment or use `this.x = x` if you intended to assign a parameter to a field.

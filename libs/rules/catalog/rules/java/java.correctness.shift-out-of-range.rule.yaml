@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.shift-out-of-range
+  title: Shift amounts outside the valid range may produce unexpected results
+  summary: Bit-shift operations with out-of-range amounts produce undefined or unexpected behavior for int and long operands.
+  rationale: Shifting an int by >= 32 or by a negative amount yields implementation-defined results. Long shifts must be in [0, 63].
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0399
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.shift-out-of-range
+    bind: issue
+emit:
+  finding:
+    category: correctness.arithmetic
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Shift amount outside valid range
+    summary: Shift amount is outside the valid bit-width range for the left operand type (0-31 for int, 0-63 for long).
+  remediation:
+    summary: Ensure shift amounts are non-negative and within the bit-width of the left operand (0-31 for int, 0-63 for long).

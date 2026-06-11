@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.replaceall-instead-of-replace.rule.yaml
+fixtures:
+  - name: flags replaceAll with literal string argument
+    sourcePath: ./fixtures/java.performance.replaceall-instead-of-replace/replaceall-instead-of-replace.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.replaceall-instead-of-replace
+      allSeverities:
+        - high
+  - name: allows String.replace with literal or replaceAll with regex
+    sourcePath: ./fixtures/java.performance.replaceall-instead-of-replace/replaceall-instead-of-replace.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

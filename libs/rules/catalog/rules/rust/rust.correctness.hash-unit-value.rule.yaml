@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.hash-unit-value
+  title: "Attempting to hash a unit value"
+  summary: "Hashing a unit value `()` via `Hash::hash` is a no-op — all unit values hash identically."
+  rationale: >-
+    The unit type `()` always hashes to the same value because every unit value
+    is identical. Calling `Hash::hash(&(), ...)` or `std::hash::Hash::hash(&(), ...)`
+    is likely a bug where a different value was intended to be hashed.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1017
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.hash-unit-value
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Attempting to hash a unit value"
+    summary: "'${captures.issue.text}' hashes a unit value `()`. All unit values hash identically, making this a no-op."
+  remediation:
+    summary: "Hash the actual value you intend to hash, not the unit `()` placeholder."

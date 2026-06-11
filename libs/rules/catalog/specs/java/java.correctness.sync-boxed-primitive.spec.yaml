@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.sync-boxed-primitive.rule.yaml
+fixtures:
+  - name: flags synchronized on boxed primitive
+    sourcePath: ./fixtures/java.correctness.sync-boxed-primitive/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.sync-boxed-primitive
+  - name: allows synchronized on dedicated lock object
+    sourcePath: ./fixtures/java.correctness.sync-boxed-primitive/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

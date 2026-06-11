@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.collection-adds-self
+  title: Collections should not be added to themselves
+  summary: A collection is being added to itself, which is likely a logic error.
+  rationale: Self-add operations on collections are almost always unintentional typos where the wrong variable was used.
+  aliases:
+    - JAVA-E1077
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.collection-adds-self
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: Collection added to itself in `${captures.issue.text}`
+    summary: "A collection is being added to itself, which is likely a logic error."
+  remediation:
+    summary: Use a different collection reference for the add operation.

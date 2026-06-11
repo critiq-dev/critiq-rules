@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.equals-null-check.rule.yaml
+fixtures:
+  - name: flags equals without null guard
+    sourcePath: ./fixtures/java.correctness.equals-null-check/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.equals-null-check
+  - name: allows equals with null guard
+    sourcePath: ./fixtures/java.correctness.equals-null-check/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

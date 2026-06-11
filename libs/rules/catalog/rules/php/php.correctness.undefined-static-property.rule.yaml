@@ -6,6 +6,7 @@ metadata:
   summary: Accessing a static property that is not declared on the target class will produce a runtime notice and return null.
   aliases:
     - PHP-W1034
+    - PHP-E1007
   rationale: PHP raises an undefined property notice when accessing a static property that was never declared on the class. This is a common mistake when class APIs evolve or when property names are mistyped. The fix is to declare the static property or correct the access.
   detection:
     kind: pattern

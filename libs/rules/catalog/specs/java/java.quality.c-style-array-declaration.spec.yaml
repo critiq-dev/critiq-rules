@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.quality.c-style-array-declaration.rule.yaml
+fixtures:
+  - name: flags C-style array declaration
+    sourcePath: ./fixtures/java.quality.c-style-array-declaration/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.quality.c-style-array-declaration
+  - name: allows Java-style array declaration
+    sourcePath: ./fixtures/java.quality.c-style-array-declaration/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.ordered-iteration-on-unordered.rule.yaml
+fixtures:
+  - name: flags sorted on HashMap
+    sourcePath: ./fixtures/rust.quality.ordered-iteration-on-unordered/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.ordered-iteration-on-unordered
+  - name: accepts no sorted call
+    sourcePath: ./fixtures/rust.quality.ordered-iteration-on-unordered/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

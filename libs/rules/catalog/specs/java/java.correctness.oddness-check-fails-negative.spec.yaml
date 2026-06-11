@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.oddness-check-fails-negative.rule.yaml
+fixtures:
+  - name: flags oddness check with == 1
+    sourcePath: ./fixtures/java.correctness.oddness-check-fails-negative/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.oddness-check-fails-negative
+  - name: allows correct parity checks
+    sourcePath: ./fixtures/java.correctness.oddness-check-fails-negative/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

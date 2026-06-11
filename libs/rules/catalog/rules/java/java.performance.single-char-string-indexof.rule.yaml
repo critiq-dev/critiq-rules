@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.single-char-string-indexof
+  title: "Single-character string literal in indexOf/lastIndexOf/contains"
+  summary: "Using a single-character `String` literal in `indexOf()`, `lastIndexOf()`, or `contains()` is less efficient than using a `char` literal."
+  rationale: "When searching for a single character, using the char overload (e.g., `s.indexOf('.')`) avoids creating a temporary String object and can use optimized intrinsic implementations. The String overload creates unnecessary garbage and performs worse."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+  aliases:
+    - JAVA-P1004
+  tags:
+    - performance
+    - java
+    - strings
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.single-char-string-indexof
+    bind: issue
+emit:
+  finding:
+    category: performance.strings
+    severity: high
+    confidence: 0.92
+    tags:
+      - performance
+      - java
+  message:
+    title: "Use char literal instead of single-character String in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` uses a single-character string literal. Use a char literal (single quotes) for better performance."
+  remediation:
+    summary: "Replace the single-character string literal with a char literal (e.g., replace `\".\"` with `'.'`)."

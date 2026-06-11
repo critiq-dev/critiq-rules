@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.jump-in-finally
+  title: Jump statements must not be used within finally blocks
+  summary: Using return, throw, or break in a finally block overrides any exception or return value from the try block.
+  rationale: Control flow statements (return, throw) in finally blocks suppress exceptions thrown in the corresponding try block and obscure the normal return path, leading to subtle bugs.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E1007
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.jump-in-finally
+    bind: issue
+emit:
+  finding:
+    category: correctness.control-flow
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Jump statement in finally block
+    summary: "`${captures.issue.text}` is a jump statement inside a finally block and will override any return value or exception from the try block."
+  remediation:
+    summary: Remove return, throw, and break statements from finally blocks. Keep finally blocks limited to cleanup operations.

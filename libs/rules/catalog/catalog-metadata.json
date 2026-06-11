@@ -1,31 +1,31 @@
 {
   "schemaVersion": 1,
-  "totalRuleCount": 990,
-  "lastUpdated": "2026-06-10T05:19:26.932Z",
+  "totalRuleCount": 1103,
+  "lastUpdated": "2026-06-10T22:18:24.631Z",
   "rulesByLanguage": {
     "typescript": {
       "count": 335,
       "label": "TypeScript"
     },
+    "java": {
+      "count": 184,
+      "label": "Java"
+    },
     "cfn": {
       "count": 157,
       "label": "CloudFormation"
     },
-    "java": {
-      "count": 106,
-      "label": "Java"
-    },
     "php": {
-      "count": 97,
+      "count": 106,
       "label": "PHP"
+    },
+    "rust": {
+      "count": 101,
+      "label": "Rust"
     },
     "go": {
       "count": 95,
       "label": "Go"
-    },
-    "rust": {
-      "count": 75,
-      "label": "Rust"
     },
     "python": {
       "count": 61,

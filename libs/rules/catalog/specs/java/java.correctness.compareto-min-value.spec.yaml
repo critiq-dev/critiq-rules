@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.compareto-min-value.rule.yaml
+fixtures:
+  - name: flags Integer.MIN_VALUE return in compareTo
+    sourcePath: ./fixtures/java.correctness.compareto-min-value/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.compareto-min-value
+  - name: allows -1 return in compareTo
+    sourcePath: ./fixtures/java.correctness.compareto-min-value/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

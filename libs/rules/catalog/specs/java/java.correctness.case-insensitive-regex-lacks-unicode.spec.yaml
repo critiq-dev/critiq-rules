@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.case-insensitive-regex-lacks-unicode.rule.yaml
+fixtures:
+  - name: flags CASE_INSENSITIVE without UNICODE_CASE
+    sourcePath: ./fixtures/java.correctness.case-insensitive-regex-lacks-unicode/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.case-insensitive-regex-lacks-unicode
+  - name: allows CASE_INSENSITIVE with UNICODE_CASE
+    sourcePath: ./fixtures/java.correctness.case-insensitive-regex-lacks-unicode/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

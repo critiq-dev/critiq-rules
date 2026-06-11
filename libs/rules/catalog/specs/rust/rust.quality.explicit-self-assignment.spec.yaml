@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.explicit-self-assignment.rule.yaml
+fixtures:
+  - name: flags explicit self-assignment
+    sourcePath: ./fixtures/rust.quality.explicit-self-assignment/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.explicit-self-assignment
+  - name: accepts normal assignment
+    sourcePath: ./fixtures/rust.quality.explicit-self-assignment/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

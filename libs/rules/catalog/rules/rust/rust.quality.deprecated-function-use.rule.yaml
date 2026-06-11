@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.deprecated-function-use
+  title: "Found use of deprecated function"
+  summary: "Usage of a known deprecated Rust standard library function, constant, or type."
+  rationale: >-
+    The Rust standard library deprecates functions, constants, and types over time
+    in favor of newer, safer alternatives. Using deprecated items may result in
+    compiler warnings, future breakage, or missed safety improvements. For example,
+    `std::mem::uninitialized()` should be replaced with `MaybeUninit<T>`,
+    `std::sync::ONCE_INIT` with `Once::new()`, and `std::sync::atomic::ATOMIC_BOOL_INIT`
+    with `AtomicBool::new(false)`.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1128
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.deprecated-function-use
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Deprecated function use in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` is a known deprecated API. Replace it with its recommended modern equivalent."
+  remediation:
+    summary: "Check the Rust standard library documentation for the recommended replacement of `${captures.issue.text}`. Common replacements include: `MaybeUninit<T>` for `mem::uninitialized()`, `Once::new()` for `ONCE_INIT`, `AtomicBool::new(false)` for `ATOMIC_BOOL_INIT`, and `trim_start_matches()` for `trim_left_matches()`."

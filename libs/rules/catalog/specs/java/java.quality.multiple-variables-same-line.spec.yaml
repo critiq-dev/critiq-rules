@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.quality.multiple-variables-same-line.rule.yaml
+fixtures:
+  - name: flags multiple variables on same line
+    sourcePath: ./fixtures/java.quality.multiple-variables-same-line/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.quality.multiple-variables-same-line
+  - name: allows single declarations per line
+    sourcePath: ./fixtures/java.quality.multiple-variables-same-line/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

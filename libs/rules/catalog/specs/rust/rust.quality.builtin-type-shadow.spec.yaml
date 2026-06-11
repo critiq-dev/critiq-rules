@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.builtin-type-shadow.rule.yaml
+fixtures:
+  - name: flags builtin type shadow
+    sourcePath: ./fixtures/rust.quality.builtin-type-shadow/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.builtin-type-shadow
+  - name: accepts non-builtin variable name
+    sourcePath: ./fixtures/rust.quality.builtin-type-shadow/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

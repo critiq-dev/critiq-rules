@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.ignored-inputstream-skip
+  title: Return value of InputStream.skip ignored
+  summary: Calling `skip()` on an InputStream without using the return value discards data.
+  rationale: "InputStream.skip() returns the actual number of bytes skipped, which may be less than requested. Ignoring this value can lead to incorrect stream positioning."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0184
+  tags:
+    - correctness
+    - java
+    - resource
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.ignored-inputstream-skip
+    bind: issue
+emit:
+  finding:
+    category: correctness.resource
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: InputStream.skip() return value ignored
+    summary: The return value of `skip()` is not captured or checked. Fewer bytes may have been skipped than requested.
+  remediation:
+    summary: Capture and check the return value of `skip()`, for example `long n = is.skip(100);`

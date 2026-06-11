@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.expensive-method-on-ui-thread.rule.yaml
+fixtures:
+  - name: flags @WorkerThread method called from @MainThread
+    sourcePath: ./fixtures/java.performance.expensive-method-on-ui-thread/expensive-method-on-ui-thread.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.expensive-method-on-ui-thread
+      allSeverities:
+        - high
+  - name: allows @WorkerThread method not called from @MainThread
+    sourcePath: ./fixtures/java.performance.expensive-method-on-ui-thread/expensive-method-on-ui-thread.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.doc.empty-javadoc-tag.rule.yaml
+fixtures:
+  - name: flags bare @param with no name
+    sourcePath: ./fixtures/java.doc.empty-javadoc-tag/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.doc.empty-javadoc-tag
+  - name: allows non-empty tags
+    sourcePath: ./fixtures/java.doc.empty-javadoc-tag/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

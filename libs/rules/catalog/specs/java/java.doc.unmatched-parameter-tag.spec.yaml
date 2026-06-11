@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.doc.unmatched-parameter-tag.rule.yaml
+fixtures:
+  - name: flags @param y when method has parameter x
+    sourcePath: ./fixtures/java.doc.unmatched-parameter-tag/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.doc.unmatched-parameter-tag
+  - name: allows matching @param tag
+    sourcePath: ./fixtures/java.doc.unmatched-parameter-tag/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

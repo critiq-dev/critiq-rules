@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.quality.type-name-uppercase.rule.yaml
+fixtures:
+  - name: flags lowercase type name
+    sourcePath: ./fixtures/java.quality.type-name-uppercase/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.quality.type-name-uppercase
+  - name: allows PascalCase type name
+    sourcePath: ./fixtures/java.quality.type-name-uppercase/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

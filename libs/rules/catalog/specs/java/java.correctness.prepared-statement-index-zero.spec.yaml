@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.prepared-statement-index-zero.rule.yaml
+fixtures:
+  - name: flags PreparedStatement with index 0
+    sourcePath: ./fixtures/java.correctness.prepared-statement-index-zero/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.prepared-statement-index-zero
+  - name: allows 1-based PreparedStatement access
+    sourcePath: ./fixtures/java.correctness.prepared-statement-index-zero/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

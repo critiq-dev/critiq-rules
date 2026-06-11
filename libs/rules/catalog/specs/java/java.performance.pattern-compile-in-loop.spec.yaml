@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.pattern-compile-in-loop.rule.yaml
+fixtures:
+  - name: flags Pattern.compile inside for loop
+    sourcePath: ./fixtures/java.performance.pattern-compile-in-loop/pattern-compile-in-loop.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.pattern-compile-in-loop
+      allSeverities:
+        - critical
+  - name: allows Pattern.compile outside of loop
+    sourcePath: ./fixtures/java.performance.pattern-compile-in-loop/pattern-compile-in-loop.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

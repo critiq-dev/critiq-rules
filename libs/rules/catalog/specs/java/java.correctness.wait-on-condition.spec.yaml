@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.wait-on-condition.rule.yaml
+fixtures:
+  - name: flags wait on Condition variable
+    sourcePath: ./fixtures/java.correctness.wait-on-condition/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.wait-on-condition
+  - name: allows Object.wait in synchronized block
+    sourcePath: ./fixtures/java.correctness.wait-on-condition/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

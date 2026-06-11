@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.wait-on-condition
+  title: Monitor wait must not be used on a Condition
+  summary: "Calling `.wait()` on a `java.util.concurrent.locks.Condition` object is incorrect. Use `condition.await()` instead."
+  rationale: Condition objects do not support Object.wait(). Using `.wait()` on a Condition will throw an IllegalMonitorStateException at runtime. Use `await()` on the Condition object instead.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0078
+  tags:
+    - correctness
+    - java
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.wait-on-condition
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: wait() called on Condition object
+    summary: "`.wait()` called on a Condition variable `${captures.issue.text}`. Use `await()` instead."
+  remediation:
+    summary: "Replace `condition.wait()` with `condition.await()`."

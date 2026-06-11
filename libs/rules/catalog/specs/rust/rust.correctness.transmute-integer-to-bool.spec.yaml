@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.transmute-integer-to-bool.rule.yaml
+fixtures:
+  - name: flags transmute integer to bool
+    sourcePath: ./fixtures/rust.correctness.transmute-integer-to-bool/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.transmute-integer-to-bool
+  - name: accepts safe != 0 conversion
+    sourcePath: ./fixtures/rust.correctness.transmute-integer-to-bool/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

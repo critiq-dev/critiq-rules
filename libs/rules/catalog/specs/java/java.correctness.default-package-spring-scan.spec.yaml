@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.default-package-spring-scan.rule.yaml
+fixtures:
+  - name: flags @SpringBootApplication in default package
+    sourcePath: ./fixtures/java.correctness.default-package-spring-scan/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.default-package-spring-scan
+  - name: allows @SpringBootApplication in named package
+    sourcePath: ./fixtures/java.correctness.default-package-spring-scan/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

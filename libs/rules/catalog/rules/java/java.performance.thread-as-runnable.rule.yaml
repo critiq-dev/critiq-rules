@@ -6,6 +6,7 @@ metadata:
   summary: "Passing `new Thread(runnable)` to an executor or scheduler creates unnecessary Thread objects."
   rationale: "ExecutorService, ScheduledExecutorService, and similar APIs accept Runnable directly. Wrapping a Runnable in a new Thread() adds object allocation overhead and bypasses the executor's thread pool management. Pass the Runnable directly instead."
   aliases:
+    - JAVA-E0056
     - JAVA-S0056
   tags:
     - performance

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.noallocation-method-creates-object.rule.yaml
+fixtures:
+  - name: flags object allocation inside @NoAllocation method
+    sourcePath: ./fixtures/java.correctness.noallocation-method-creates-object/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.noallocation-method-creates-object
+  - name: allows @NoAllocation method without allocation
+    sourcePath: ./fixtures/java.correctness.noallocation-method-creates-object/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

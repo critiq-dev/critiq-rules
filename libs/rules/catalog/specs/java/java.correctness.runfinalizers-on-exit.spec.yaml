@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.runfinalizers-on-exit.rule.yaml
+fixtures:
+  - name: flags runFinalizersOnExit call
+    sourcePath: ./fixtures/java.correctness.runfinalizers-on-exit/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.runfinalizers-on-exit
+  - name: allows normal Runtime.exec call
+    sourcePath: ./fixtures/java.correctness.runfinalizers-on-exit/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

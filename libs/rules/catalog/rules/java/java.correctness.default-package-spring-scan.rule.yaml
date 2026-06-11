@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.default-package-spring-scan
+  title: '@SpringBootApplication or @ComponentScan must not be used in the default package'
+  summary: Spring Boot applications in the default package cannot be scanned properly and will fail at runtime.
+  rationale: Spring Boot's component scanning relies on package declarations to locate beans, configurations, and auto-configuration. Classes in the default package are not scanned, silently causing missing beans.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E1009
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+    - spring
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.default-package-spring-scan
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework-configuration
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+      - spring
+  message:
+    title: Spring Boot application or component scan in default package
+    summary: "`${captures.issue.text}` is used in the default (unnamed) package. Spring Boot will not scan components correctly."
+  remediation:
+    summary: Move the application class to a named package (e.g., com.example) and ensure all Spring components are under a named package hierarchy.

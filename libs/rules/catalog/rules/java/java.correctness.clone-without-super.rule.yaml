@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.clone-without-super
+  title: Clone method does not call super.clone()
+  summary: "`clone()` methods should call `super.clone()` to create the correct object."
+  rationale: "Without `super.clone()`, the cloned object may not be properly initialized. `super.clone()` copies the object's internal state."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0048
+  tags:
+    - correctness
+    - java
+    - contract-violation
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.clone-without-super
+    bind: issue
+emit:
+  finding:
+    category: correctness.contract-violation
+    severity: high
+    confidence: 0.80
+    tags:
+      - correctness
+      - java
+  message:
+    title: clone() does not call super.clone()
+    summary: "`clone()` methods should call `super.clone()` to create the correct object."
+  remediation:
+    summary: "Add `super.clone()` call at the beginning of the `clone()` method."

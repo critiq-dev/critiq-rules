@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.threadgroup-deprecated-methods.rule.yaml
+fixtures:
+  - name: flags ThreadGroup.suspend() call
+    sourcePath: ./fixtures/java.correctness.threadgroup-deprecated-methods/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.threadgroup-deprecated-methods
+  - name: allows code without ThreadGroup calls
+    sourcePath: ./fixtures/java.correctness.threadgroup-deprecated-methods/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

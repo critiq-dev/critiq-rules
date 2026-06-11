@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.string-concat-in-loop
+  title: "String concatenation using `+` inside a loop"
+  summary: "String concatenation using `+=` or `= ... + ...` inside a loop creates many intermediate String objects, degrading performance."
+  rationale: "In Java, String is immutable. Each `+=` or `+` concatenation creates a new String object, copying the previous content. Inside a loop, this results in O(n²) memory allocation and copying. Use `StringBuilder.append()` instead, which grows the buffer efficiently. Note: Java 9+ invokes dynamic string concatenation via `invokedynamic`, reducing object allocation, but the pattern remains suboptimal for many iterations."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+  aliases:
+    - JAVA-P1006
+  tags:
+    - performance
+    - java
+    - strings
+    - rules-catalog
+  stability: stable
+  appliesTo: function
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.string-concat-in-loop
+    bind: issue
+emit:
+  finding:
+    category: performance.strings
+    severity: high
+    confidence: 0.75
+    tags:
+      - performance
+      - java
+  message:
+    title: "Use `StringBuilder.append()` instead of `+` concatenation inside loop in `${captures.issue.text}`"
+    summary: "String concatenation with `+` or `+=` inside a loop creates O(n²) temporary String objects."
+  remediation:
+    summary: "Declare a `StringBuilder` before the loop and use `append()` inside the loop body."

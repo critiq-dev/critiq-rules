@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.invalid-static-method.rule.yaml
+fixtures:
+  - name: flags static call to instance method
+    sourcePath: ./fixtures/php.correctness.invalid-static-method/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.invalid-static-method
+  - name: ignores valid static and instance calls
+    sourcePath: ./fixtures/php.correctness.invalid-static-method/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

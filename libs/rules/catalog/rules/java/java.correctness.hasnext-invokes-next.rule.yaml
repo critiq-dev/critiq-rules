@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.hasnext-invokes-next
+  title: Iterator hasNext should not invoke next
+  summary: Calling .next() inside a hasNext() implementation mutates iterator state during a query operation.
+  rationale: hasNext() is a query method and should not advance the iterator. Calling next() inside it skips elements and breaks iteration contracts.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0409
+  tags:
+    - correctness
+    - java
+    - collections
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.hasnext-invokes-next
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.70
+    tags:
+      - correctness
+      - java
+  message:
+    title: hasNext() should not call next()
+    summary: Calling .next() inside hasNext() advances the iterator during a query, which breaks the iteration contract.
+  remediation:
+    summary: Remove the .next() call from hasNext(). Use a peek/check method or restructure the iterator to track state without consuming elements.

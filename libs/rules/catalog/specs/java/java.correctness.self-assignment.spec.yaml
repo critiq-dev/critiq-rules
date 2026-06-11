@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.self-assignment.rule.yaml
+fixtures:
+  - name: flags self assignment of local variable
+    sourcePath: ./fixtures/java.correctness.self-assignment/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.self-assignment
+  - name: allows non-self assignment
+    sourcePath: ./fixtures/java.correctness.self-assignment/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

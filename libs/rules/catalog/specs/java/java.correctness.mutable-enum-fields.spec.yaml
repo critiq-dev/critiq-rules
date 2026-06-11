@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.mutable-enum-fields.rule.yaml
+fixtures:
+  - name: flags non-final enum fields
+    sourcePath: ./fixtures/java.correctness.mutable-enum-fields/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.mutable-enum-fields
+  - name: allows final enum fields
+    sourcePath: ./fixtures/java.correctness.mutable-enum-fields/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

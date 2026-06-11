@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.testing.wrong-assertion-argument-order.rule.yaml
+fixtures:
+  - name: flags wrong assertion order
+    sourcePath: ./fixtures/java.testing.wrong-assertion-argument-order/src/test/java/BadTest.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.testing.wrong-assertion-argument-order
+        - java.testing.wrong-assertion-argument-order
+  - name: allows correct assertion order
+    sourcePath: ./fixtures/java.testing.wrong-assertion-argument-order/src/test/java/GoodTest.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

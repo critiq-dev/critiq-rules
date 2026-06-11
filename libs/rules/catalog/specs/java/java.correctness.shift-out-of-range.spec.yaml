@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.shift-out-of-range.rule.yaml
+fixtures:
+  - name: flags out-of-range shift amounts
+    sourcePath: ./fixtures/java.correctness.shift-out-of-range/invalid.java
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - java.correctness.shift-out-of-range
+        - java.correctness.shift-out-of-range
+  - name: allows valid shift amounts
+    sourcePath: ./fixtures/java.correctness.shift-out-of-range/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

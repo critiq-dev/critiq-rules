@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.isize-usize-overflow
+  title: "Avoid overflowing enumeration with isize::MAX or usize::MAX"
+  summary: "Using `isize::MAX` or `usize::MAX` in a range expression can cause overflow."
+  rationale: >-
+    Using `isize::MAX`, `usize::MAX`, or similar maximum values in a range
+    expression (e.g., `0..=isize::MAX`) can cause overflow on the
+    underlying integer type. This is almost always a logic error where a
+    different bound was intended.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1075
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.isize-usize-overflow
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: high
+    confidence: 0.8
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Overflow-prone range with `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` used in a range expression can cause overflow. Use a smaller or more appropriate bound."
+  remediation:
+    summary: "Replace with a concrete numeric bound that cannot overflow, or use a checked range API."

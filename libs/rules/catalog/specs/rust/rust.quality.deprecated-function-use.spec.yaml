@@ -1,0 +1,12 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.deprecated-function-use.rule.yaml
+fixtures:
+  - name: flags deprecated function use
+    sourcePath: ./fixtures/rust.quality.deprecated-function-use/invalid.rs
+    expect:
+      findingCount: 4
+  - name: accepts normal function calls
+    sourcePath: ./fixtures/rust.quality.deprecated-function-use/valid.rs
+    expect:
+      findingCount: 0

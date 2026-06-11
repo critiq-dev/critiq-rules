@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.for-loop-mismatched-increment.rule.yaml
+fixtures:
+  - name: flags mismatched increment variable
+    sourcePath: ./fixtures/java.correctness.for-loop-mismatched-increment/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.for-loop-mismatched-increment
+  - name: allows correct increment variable
+    sourcePath: ./fixtures/java.correctness.for-loop-mismatched-increment/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

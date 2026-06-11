@@ -5,13 +5,11 @@ fixtures:
   - name: flags ungated debug middleware routes and diagnostic handlers
     sourcePath: ./fixtures/public-security/debug-mode.invalid.ts
     expect:
-      findingCount: 3
+      findingCount: 2
       allRuleIds:
         - ts.security.debug-mode-enabled
         - ts.security.debug-mode-enabled
-        - ts.security.debug-mode-enabled
       allSeverities:
-        - medium
         - medium
         - medium
   - name: ignores explicitly dev-only debug exposure

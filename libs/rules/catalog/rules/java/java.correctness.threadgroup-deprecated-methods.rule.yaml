@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.threadgroup-deprecated-methods
+  title: Avoid using deprecated ThreadGroup methods
+  summary: ThreadGroup.stop(), .suspend(), .resume(), .destroy(), and related methods are deprecated and unsafe.
+  rationale: ThreadGroup methods can cause deadlocks, resource leaks, and data races. Use java.util.concurrent alternatives.
+  aliases:
+    - JAVA-E1108
+  tags:
+    - correctness
+    - java
+    - concurrency
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.threadgroup-deprecated-methods
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: Deprecated ThreadGroup method call
+    summary: "The ThreadGroup method stop(), suspend(), resume(), destroy(), or a related deprecated method should not be used."
+  remediation:
+    summary: Replace ThreadGroup usage with java.util.concurrent executors and thread pools (ExecutorService, ThreadPoolExecutor). Avoid managing thread groups directly.

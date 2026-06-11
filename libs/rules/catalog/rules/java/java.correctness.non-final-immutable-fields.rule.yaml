@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.non-final-immutable-fields
+  title: Fields of immutable classes should be final
+  summary: Fields in a class annotated with @Immutable or @Value should be declared final.
+  rationale: An immutable class must guarantee that its state cannot change after construction. Non-final fields violate this contract even if the class is declared as immutable.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0055
+  tags:
+    - correctness
+    - java
+    - immutability
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.non-final-immutable-fields
+    bind: issue
+emit:
+  finding:
+    category: correctness.immutability
+    severity: medium
+    confidence: 0.80
+    tags:
+      - correctness
+      - java
+  message:
+    title: Non-final field in immutable class
+    summary: "Field `${captures.issue.text}` in an @Immutable or @Value class should be declared final."
+  remediation:
+    summary: "Add the `final` modifier to the field declaration."

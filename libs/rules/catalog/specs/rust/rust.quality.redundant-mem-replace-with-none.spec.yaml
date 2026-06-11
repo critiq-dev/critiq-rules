@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.redundant-mem-replace-with-none.rule.yaml
+fixtures:
+  - name: flags redundant mem::replace with None
+    sourcePath: ./fixtures/rust.quality.redundant-mem-replace-with-none/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.redundant-mem-replace-with-none
+  - name: accepts opt.take()
+    sourcePath: ./fixtures/rust.quality.redundant-mem-replace-with-none/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

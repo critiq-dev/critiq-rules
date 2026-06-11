@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.volatile-array-elements
+  title: Elements accessed from volatile reference to an array are not volatile
+  summary: Declaring an array reference as volatile does not make array element accesses volatile.
+  rationale: Only the array reference itself is volatile, not the elements. Each element access still goes through normal memory.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0027
+  tags:
+    - correctness
+    - java
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.volatile-array-elements
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Volatile array element access is not volatile
+    summary: Elements accessed from a volatile reference to an array are not volatile.
+  remediation:
+    summary: Use `java.util.concurrent.atomic.AtomicIntegerArray` or similar for volatile array element semantics.

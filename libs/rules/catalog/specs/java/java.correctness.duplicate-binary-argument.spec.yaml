@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.duplicate-binary-argument.rule.yaml
+fixtures:
+  - name: flags duplicate binary argument
+    sourcePath: ./fixtures/java.correctness.duplicate-binary-argument/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.duplicate-binary-argument
+  - name: allows distinct binary arguments
+    sourcePath: ./fixtures/java.correctness.duplicate-binary-argument/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

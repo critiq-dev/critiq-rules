@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.testing.wrong-assertion-argument-order
+  title: Wrong argument order in test assertions
+  summary: Test assertions should use the pattern `assertEquals(expected, actual)` where the first argument is the expected value (typically a literal) and the second is the actual value (typically an expression).
+  rationale: Swapping expected and actual arguments produces misleading failure messages that show the wrong values, making debugging slower.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-C1002
+  tags:
+    - testing
+    - java
+    - assertions
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*Test.java"
+      - "**/src/test/**"
+      - "**/tests/**"
+match:
+  fact:
+    kind: java.testing.wrong-assertion-argument-order
+    bind: issue
+emit:
+  finding:
+    category: testing.assertions
+    severity: high
+    confidence: 0.70
+    tags:
+      - testing
+      - java
+  message:
+    title: Swap arguments in assertion call
+    summary: "`${captures.issue.text}` has the expected and actual arguments swapped. The expected value should come first."
+  remediation:
+    summary: Pass the expected value as the first argument and the actual value as the second (e.g., `assertEquals(expected, actual)`).

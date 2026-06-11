@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-attribute-class
+  title: Invalid #[Attribute] class declaration
+  summary: The #[Attribute] attribute is applied to a class or interface that cannot be used as a valid PHP attribute.
+  aliases:
+    - PHP-W1015
+  rationale: >-
+    PHP attributes must target concrete (non-abstract) classes with a public constructor.
+    Applying #[Attribute] to an abstract class, interface, or a class with a private/protected
+    constructor will cause a runtime error when the attribute is resolved.
+  detection:
+    kind: pattern
+  tags:
+    - correctness
+    - php
+    - attributes
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-attribute-class
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - php
+  message:
+    title: Invalid #[Attribute] declaration in ${captures.issue.text}
+    summary: >-
+      ${captures.issue.text} declares #[Attribute] but is abstract, an interface,
+      or has a non-public constructor — PHP will refuse to resolve it as an attribute.
+  remediation:
+    summary: >-
+      Ensure the attribute class is concrete (not abstract, not an interface) and
+      has a public constructor. Remove #[Attribute] from interfaces and abstract classes
+      or make the constructor public.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.explicit-finalizer-invocation.rule.yaml
+fixtures:
+  - name: flags explicit finalize call
+    sourcePath: ./fixtures/java.correctness.explicit-finalizer-invocation/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.explicit-finalizer-invocation
+  - name: allows super.finalize in finalize method
+    sourcePath: ./fixtures/java.correctness.explicit-finalizer-invocation/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

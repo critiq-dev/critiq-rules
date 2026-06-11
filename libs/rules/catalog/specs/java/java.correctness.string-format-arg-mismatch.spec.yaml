@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.string-format-arg-mismatch.rule.yaml
+fixtures:
+  - name: flags mismatched format argument count
+    sourcePath: ./fixtures/java.correctness.string-format-arg-mismatch/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.string-format-arg-mismatch
+  - name: allows matching format arguments
+    sourcePath: ./fixtures/java.correctness.string-format-arg-mismatch/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

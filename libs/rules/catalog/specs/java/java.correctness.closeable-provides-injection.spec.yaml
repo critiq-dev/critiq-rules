@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.closeable-provides-injection.rule.yaml
+fixtures:
+  - name: flags @Provides returning Closeable type
+    sourcePath: ./fixtures/java.correctness.closeable-provides-injection/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.closeable-provides-injection
+  - name: allows @Provides returning non-Closeable type
+    sourcePath: ./fixtures/java.correctness.closeable-provides-injection/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

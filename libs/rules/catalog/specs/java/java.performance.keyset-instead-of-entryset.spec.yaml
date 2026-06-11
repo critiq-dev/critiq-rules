@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.keyset-instead-of-entryset.rule.yaml
+fixtures:
+  - name: flags keySet iterator with Map.get inside
+    sourcePath: ./fixtures/java.performance.keyset-instead-of-entryset/keyset-instead-of-entryset.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.keyset-instead-of-entryset
+      allSeverities:
+        - high
+  - name: allows entrySet usage
+    sourcePath: ./fixtures/java.performance.keyset-instead-of-entryset/keyset-instead-of-entryset.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

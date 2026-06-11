@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.doc.malformed-javadoc-comment.rule.yaml
+fixtures:
+  - name: flags @@param double at sign
+    sourcePath: ./fixtures/java.doc.malformed-javadoc-comment/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.doc.malformed-javadoc-comment
+  - name: allows normal @param tag
+    sourcePath: ./fixtures/java.doc.malformed-javadoc-comment/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

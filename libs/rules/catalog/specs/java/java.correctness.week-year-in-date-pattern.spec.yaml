@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.week-year-in-date-pattern.rule.yaml
+fixtures:
+  - name: flags YYYY date pattern without week year usage
+    sourcePath: ./fixtures/java.correctness.week-year-in-date-pattern/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.week-year-in-date-pattern
+  - name: allows yyyy date pattern
+    sourcePath: ./fixtures/java.correctness.week-year-in-date-pattern/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

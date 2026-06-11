@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.unsafe-getresource
+  title: Unsafe usage of getResource with relative path
+  summary: Using `getClass().getResource()` with a relative path may fail in subclasses.
+  rationale: "`getResource()` on a Class instance resolves relative to that class's package. Use absolute paths or `ClassLoader.getResource()`."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0029
+  tags:
+    - correctness
+    - java
+    - resource-loading
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.unsafe-getresource
+    bind: issue
+emit:
+  finding:
+    category: correctness.resource-loading
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Unsafe relative getResource call
+    summary: "`${captures.issue.text}` uses a relative path with getResource. This may fail when called on a subclass."
+  remediation:
+    summary: Prefer absolute path starting with `/` or use `Thread.currentThread().getContextClassLoader().getResource()`.

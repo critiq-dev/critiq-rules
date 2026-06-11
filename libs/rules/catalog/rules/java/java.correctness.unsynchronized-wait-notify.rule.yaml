@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.unsynchronized-wait-notify
+  title: wait()/notify() called without synchronization
+  summary: Object.wait(), notify(), or notifyAll() called outside a synchronized block.
+  rationale: "Calling wait(), notify(), or notifyAll() without holding the object's monitor throws IllegalMonitorStateException and indicates a concurrency bug."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0288
+  tags:
+    - correctness
+    - java
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.unsynchronized-wait-notify
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: wait()/notify() called without synchronization
+    summary: The call to `wait()`, `notify()`, or `notifyAll()` is not inside a synchronized block, which will throw IllegalMonitorStateException.
+  remediation:
+    summary: Wrap the call in a synchronized block on the same object, e.g. `synchronized (obj) { obj.wait(); }`

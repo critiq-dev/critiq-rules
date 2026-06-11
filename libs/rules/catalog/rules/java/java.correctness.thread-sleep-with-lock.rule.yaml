@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.thread-sleep-with-lock
+  title: Thread.sleep() should not be called while a lock is held
+  summary: Calling Thread.sleep() inside a synchronized block keeps the lock held, causing contention or deadlocks.
+  rationale: Thread.sleep() does not release the monitor lock. If called inside synchronized, other threads are blocked for the full sleep duration. Use wait(timeout) instead, which releases the lock.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0410
+  tags:
+    - correctness
+    - java
+    - concurrency
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.thread-sleep-with-lock
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: critical
+    confidence: 0.70
+    tags:
+      - correctness
+      - java
+  message:
+    title: Thread.sleep() inside synchronized block
+    summary: Calling Thread.sleep() while holding a lock blocks all other threads waiting for the same monitor.
+  remediation:
+    summary: Replace Thread.sleep() inside synchronized blocks with wait(timeout). If waiting outside synchronized is acceptable, move the sleep call outside the block.

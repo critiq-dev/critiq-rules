@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.constructor-starts-thread.rule.yaml
+fixtures:
+  - name: flags thread start in non-final class constructor
+    sourcePath: ./fixtures/java.correctness.constructor-starts-thread/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.constructor-starts-thread
+  - name: allows thread start in final class constructor
+    sourcePath: ./fixtures/java.correctness.constructor-starts-thread/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

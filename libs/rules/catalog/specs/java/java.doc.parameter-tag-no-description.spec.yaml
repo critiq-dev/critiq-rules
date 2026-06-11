@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.doc.parameter-tag-no-description.rule.yaml
+fixtures:
+  - name: flags @param tag with no description
+    sourcePath: ./fixtures/java.doc.parameter-tag-no-description/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.doc.parameter-tag-no-description
+  - name: allows @param tag with description
+    sourcePath: ./fixtures/java.doc.parameter-tag-no-description/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

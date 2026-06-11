@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.overloaded-equals.rule.yaml
+fixtures:
+  - name: flags overloaded equals with non-Object param
+    sourcePath: ./fixtures/java.correctness.overloaded-equals/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.overloaded-equals
+  - name: allows correct equals(Object) override
+    sourcePath: ./fixtures/java.correctness.overloaded-equals/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

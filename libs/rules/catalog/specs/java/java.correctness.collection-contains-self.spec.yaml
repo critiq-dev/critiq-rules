@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.collection-contains-self.rule.yaml
+fixtures:
+  - name: flags self-referential contains
+    sourcePath: ./fixtures/java.correctness.collection-contains-self/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.collection-contains-self
+  - name: allows normal contains on other collection
+    sourcePath: ./fixtures/java.correctness.collection-contains-self/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

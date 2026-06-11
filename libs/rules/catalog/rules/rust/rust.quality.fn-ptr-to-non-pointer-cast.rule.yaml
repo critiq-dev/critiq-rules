@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.fn-ptr-to-non-pointer-cast
+  title: "Avoid casting function pointer to non-pointer type"
+  summary: "Casting a function pointer to an integer type discards pointer metadata and is unsafe."
+  rationale: >-
+    In Rust, function pointers are not guaranteed to fit in integer types. Casting a
+    function pointer to `usize`, `u64`, or other integer types is implementation-defined
+    and may produce incorrect results on architectures with segmented pointer
+    representations.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1124
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.fn-ptr-to-non-pointer-cast
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.78
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Fn pointer to non-pointer cast in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` casts a function pointer to an integer type, which discards pointer metadata."
+  remediation:
+    summary: "Cast function pointers to `*const ()` or use `std::mem::transmute` with explicit size checks if integer conversion is required."

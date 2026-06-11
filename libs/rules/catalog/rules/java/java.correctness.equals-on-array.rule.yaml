@@ -8,6 +8,7 @@ metadata:
   aliases:
     - JAVA-S0348
     - JAVA-S0349
+    - JAVA-E0348
   tags:
     - correctness
     - java

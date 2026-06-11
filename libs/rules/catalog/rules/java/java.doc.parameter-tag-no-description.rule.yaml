@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.doc.parameter-tag-no-description
+  title: Javadoc @param tag has no description
+  summary: "@param tags must include a description of the parameter."
+  rationale: "A @param tag with no description adds no value. Either describe the parameter or remove the tag."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-D1005
+  tags:
+    - documentation
+    - java
+    - javadoc
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+match:
+  fact:
+    kind: java.doc.parameter-tag-no-description
+    bind: issue
+emit:
+  finding:
+    category: documentation.javadoc
+    severity: low
+    confidence: 0.85
+    tags:
+      - documentation
+      - java
+  message:
+    title: "@param tag is missing a description"
+    summary: "The `${captures.issue.text}` tag has a parameter name but no description."
+  remediation:
+    summary: "Add a description after the parameter name explaining its purpose."

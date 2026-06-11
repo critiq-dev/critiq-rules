@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.lost-increment-in-assignment.rule.yaml
+fixtures:
+  - name: flags x = x++ pattern
+    sourcePath: ./fixtures/java.correctness.lost-increment-in-assignment/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.lost-increment-in-assignment
+  - name: allows correct increment usage
+    sourcePath: ./fixtures/java.correctness.lost-increment-in-assignment/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

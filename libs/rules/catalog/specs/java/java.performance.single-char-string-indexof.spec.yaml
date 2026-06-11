@@ -1,0 +1,21 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.single-char-string-indexof.rule.yaml
+fixtures:
+  - name: flags single-char string literal in indexOf
+    sourcePath: ./fixtures/java.performance.single-char-string-indexof/single-char-string-indexof.invalid.java
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - java.performance.single-char-string-indexof
+        - java.performance.single-char-string-indexof
+        - java.performance.single-char-string-indexof
+      allSeverities:
+        - high
+        - high
+        - high
+  - name: allows char literal in indexOf
+    sourcePath: ./fixtures/java.performance.single-char-string-indexof/single-char-string-indexof.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

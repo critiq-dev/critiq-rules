@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.pattern-compile-in-loop
+  title: "Pattern.compile() inside a loop"
+  summary: "Calling `Pattern.compile()` inside a loop causes repeated regex compilation, leading to performance degradation."
+  rationale: "Regex compilation is expensive. `Pattern.compile()` should be moved outside loops and reused with `matcher()` to avoid recompiling the same pattern on every iteration."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+  aliases:
+    - JAVA-P0331
+  tags:
+    - performance
+    - java
+    - allocation
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.pattern-compile-in-loop
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: critical
+    confidence: 0.92
+    tags:
+      - performance
+      - java
+  message:
+    title: "Move `Pattern.compile()` outside the loop in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` calls Pattern.compile() inside a loop. Hoist it before the loop to avoid repeated regex compilation."
+  remediation:
+    summary: "Move `Pattern.compile()` before the loop and call `matcher()` inside with the loop variable."

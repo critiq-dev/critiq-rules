@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.case-insensitive-regex-lacks-unicode
+  title: Case insensitive regex does not properly handle Unicode input
+  summary: CASE_INSENSITIVE or (?i) without UNICODE_CASE or (?u) does not handle Unicode-aware case folding.
+  rationale: Without UNICODE_CASE, case-insensitive matching only handles ASCII characters. Unicode characters (e.g., accented letters, non-Latin scripts) will not be matched case-insensitively, leading to text processing bugs in internationalized applications.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E1010
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+    - i18n
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.case-insensitive-regex-lacks-unicode
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-usage
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+      - i18n
+  message:
+    title: Case-insensitive regex pattern without Unicode support
+    summary: "`${captures.issue.text}` uses case-insensitive matching without Unicode support. Add UNICODE_CASE or (?u) for proper internationalization."
+  remediation:
+    summary: Add Pattern.UNICODE_CASE (or (?u) flag) alongside CASE_INSENSITIVE flag for proper Unicode-aware case-insensitive matching.

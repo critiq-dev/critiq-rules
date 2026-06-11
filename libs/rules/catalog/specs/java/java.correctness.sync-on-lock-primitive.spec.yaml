@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.sync-on-lock-primitive.rule.yaml
+fixtures:
+  - name: flags synchronized on Lock instance
+    sourcePath: ./fixtures/java.correctness.sync-on-lock-primitive/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.sync-on-lock-primitive
+  - name: allows synchronized on plain Object
+    sourcePath: ./fixtures/java.correctness.sync-on-lock-primitive/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

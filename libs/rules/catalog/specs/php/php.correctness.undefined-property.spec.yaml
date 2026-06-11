@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.undefined-property.rule.yaml
+fixtures:
+  - name: flags undefined property access
+    sourcePath: ./fixtures/php.correctness.undefined-property/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.undefined-property
+  - name: ignores defined and skipped property access
+    sourcePath: ./fixtures/php.correctness.undefined-property/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

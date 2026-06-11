@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.clone-without-super.rule.yaml
+fixtures:
+  - name: flags clone without super.clone
+    sourcePath: ./fixtures/java.correctness.clone-without-super/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.clone-without-super
+  - name: allows clone with super.clone
+    sourcePath: ./fixtures/java.correctness.clone-without-super/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

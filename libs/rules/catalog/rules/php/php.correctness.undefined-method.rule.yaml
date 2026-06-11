@@ -1,0 +1,40 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.undefined-method
+  title: Undefined method call detected
+  summary: "Calling a method on $this, self::, or static:: that is not declared in the enclosing class will cause a runtime error."
+  aliases:
+    - PHP-E1002
+  rationale: "PHP raises an error when calling a method that does not exist on the class. Single-file heuristic checks the enclosing class body for declared methods. Classes extending other classes are skipped to avoid false positives from inherited methods."
+  detection:
+    kind: pattern
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.undefined-method
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.55
+    tags:
+      - correctness
+      - php
+  message:
+    title: Call to undefined method ${captures.issue.text}
+    summary: "Method ${captures.issue.text}() is called via $this->, self::, or static:: but is not declared in the enclosing class."
+  remediation:
+    summary: Declare the method on the class or correct the method name to reference an existing method.

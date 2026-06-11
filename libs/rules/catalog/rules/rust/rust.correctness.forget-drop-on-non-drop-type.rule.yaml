@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.forget-drop-on-non-drop-type
+  title: "Called `mem::forget` or `mem::drop` on a non-Drop type"
+  summary: "`mem::forget` / `mem::drop` on a type that does not implement `Drop` is a no-op."
+  rationale: >-
+    For types that do not implement the `Drop` trait, calling `std::mem::forget`
+    or `std::mem::drop` is a no-op because there is no drop glue to execute.
+    Primitive types like integers, booleans, and floats do not have drop
+    implementations.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1021
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.forget-drop-on-non-drop-type
+    bind: issue
+emit:
+  finding:
+    category: correctness.memory
+    severity: high
+    confidence: 0.7
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Called `mem::forget` or `mem::drop` on a non-Drop type"
+    summary: "'${captures.issue.text}' calls forget/drop on a type that likely does not implement `Drop`. This is a no-op."
+  remediation:
+    summary: "Remove the `mem::forget` or `mem::drop` call. Non-Drop types don't need explicit resource management."

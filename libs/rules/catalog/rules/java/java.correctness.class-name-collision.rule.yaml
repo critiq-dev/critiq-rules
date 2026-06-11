@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.class-name-collision
+  title: Class name collides with superclass simple name
+  summary: A class shares its simple name with a superclass referenced in the extends clause, causing ambiguity.
+  rationale: When a class name matches the simple name of its explicit superclass, it can lead to confusion and subtle bugs where the wrong type is referenced. The collision obscures the inheritance relationship and reduces code clarity.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0169
+  tags:
+    - correctness
+    - java
+    - types
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.class-name-collision
+    bind: issue
+emit:
+  finding:
+    category: correctness.types
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Class name collides with superclass name
+    summary: "Class `${captures.issue.text}` has the same simple name as its explicit superclass."
+  remediation:
+    summary: Rename the class or the superclass reference to avoid the name collision.

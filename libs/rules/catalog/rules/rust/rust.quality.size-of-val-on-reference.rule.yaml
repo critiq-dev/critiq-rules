@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.size-of-val-on-reference
+  title: "Avoid `size_of_val` on a reference"
+  summary: "`std::mem::size_of_val(&ref)` returns the size of the reference itself, not the pointed-to value."
+  rationale: >-
+    When the argument to `size_of_val` is already a reference, `&ref` creates a
+    double-reference and `size_of_val` returns the size of the pointer, not the
+    underlying type. This is confusing and almost always a bug.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1123
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.size-of-val-on-reference
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.75
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "`size_of_val` on reference in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` likely returns the size of the reference pointer rather than the pointed-to value."
+  remediation:
+    summary: "Use `std::mem::size_of::<T>()` with the value type, or pass the value directly without an extra `&`."

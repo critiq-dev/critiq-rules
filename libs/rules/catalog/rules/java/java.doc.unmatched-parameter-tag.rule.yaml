@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.doc.unmatched-parameter-tag
+  title: Unmatched @param tag in Javadoc
+  summary: "@param tags must reference declared method parameters."
+  rationale: "@param tags referencing non-existent parameters confuse readers. Remove or rename them to match the actual parameter list."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-D1004
+  tags:
+    - documentation
+    - java
+    - javadoc
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+match:
+  fact:
+    kind: java.doc.unmatched-parameter-tag
+    bind: issue
+emit:
+  finding:
+    category: documentation.javadoc
+    severity: low
+    confidence: 0.70
+    tags:
+      - documentation
+      - java
+  message:
+    title: "@param tag does not match any method parameter"
+    summary: "The `${captures.issue.text}` tag references a parameter that does not exist in the method signature."
+  remediation:
+    summary: "Remove the unmatched @param tag or rename it to match an actual parameter name."

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.illegal-monitor-state-caught.rule.yaml
+fixtures:
+  - name: flags caught IllegalMonitorStateException
+    sourcePath: ./fixtures/java.correctness.illegal-monitor-state-caught/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.illegal-monitor-state-caught
+  - name: allows caught InterruptedException
+    sourcePath: ./fixtures/java.correctness.illegal-monitor-state-caught/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

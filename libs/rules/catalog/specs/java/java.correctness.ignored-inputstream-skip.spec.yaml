@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.ignored-inputstream-skip.rule.yaml
+fixtures:
+  - name: flags ignored InputStream.skip()
+    sourcePath: ./fixtures/java.correctness.ignored-inputstream-skip/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.ignored-inputstream-skip
+  - name: allows captured return value
+    sourcePath: ./fixtures/java.correctness.ignored-inputstream-skip/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.non-null-method-returns-null.rule.yaml
+fixtures:
+  - name: flags @Nonnull method returning null
+    sourcePath: ./fixtures/java.correctness.non-null-method-returns-null/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.non-null-method-returns-null
+  - name: allows @Nonnull method returning non-null value
+    sourcePath: ./fixtures/java.correctness.non-null-method-returns-null/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

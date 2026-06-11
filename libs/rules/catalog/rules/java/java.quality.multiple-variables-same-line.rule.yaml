@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.quality.multiple-variables-same-line
+  title: Multiple variables must not be declared on the same line
+  summary: Declaring multiple variables on one line reduces readability and can hide initialization bugs.
+  rationale: One declaration per line makes the code easier to read, review, and refactor. It also avoids confusion between array and scalar declarations.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-C1003
+  tags:
+    - quality
+    - java
+    - code-style
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+match:
+  fact:
+    kind: java.quality.multiple-variables-same-line
+    bind: issue
+emit:
+  finding:
+    category: quality.code-style
+    severity: low
+    confidence: 0.90
+    tags:
+      - quality
+      - java
+  message:
+    title: Declare variables on separate lines
+    summary: "`${captures.issue.text}` declares multiple variables on the same line."
+  remediation:
+    summary: Split into separate declarations (e.g., `int a;\nint b = 5;` instead of `int a, b = 5;`).

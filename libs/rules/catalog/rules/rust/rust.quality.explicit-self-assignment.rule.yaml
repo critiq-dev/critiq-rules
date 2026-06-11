@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.explicit-self-assignment
+  title: "Avoid explicit self-assignment"
+  summary: "Assigning a value to itself is a no-op and likely indicates a copy-paste bug."
+  rationale: >-
+    An expression like `x = x` or `self.field = self.field` assigns a value
+    to the same variable or field it reads from, producing no effect. This
+    is almost always a copy-paste or refactoring mistake.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1013
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.explicit-self-assignment
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Self-assignment in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` assigns a value to itself. Verify the right-hand side references the correct variable or field."
+  remediation:
+    summary: "Check the right-hand side of the assignment — it likely references a different variable or field."

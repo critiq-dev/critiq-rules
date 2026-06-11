@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.forget-drop-on-non-drop-type.rule.yaml
+fixtures:
+  - name: flags forget/drop on non-Drop types
+    sourcePath: ./fixtures/rust.correctness.forget-drop-on-non-drop-type/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.forget-drop-on-non-drop-type
+  - name: accepts omitting forget/drop on primitives
+    sourcePath: ./fixtures/rust.correctness.forget-drop-on-non-drop-type/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

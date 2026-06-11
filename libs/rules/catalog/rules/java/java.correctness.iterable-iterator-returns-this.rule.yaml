@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.iterable-iterator-returns-this
+  title: Iterable must not return this from iterator()
+  summary: A class implementing both Iterable and Iterator that returns this from iterator() cannot support multiple concurrent iterations and violates the Iterator contract.
+  rationale: Returning this from iterator() means the collection is its own iterator, which prevents multiple iterations and can lead to ConcurrentModificationException or incorrect iteration state when nested.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E1015
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.iterable-iterator-returns-this
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-usage
+    severity: high
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Iterable.iterator() returns this
+    summary: The iterator() method in a class implementing both Iterable and Iterator returns this. This prevents multiple concurrent iterations and violates expected Iterator behavior.
+  remediation:
+    summary: Create a separate Iterator class instead of having the collection implement Iterator itself. Return a new iterator instance from iterator().

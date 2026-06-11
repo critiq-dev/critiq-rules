@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.expensive-method-on-ui-thread
+  title: "Expensive methods should not be invoked from performance critical threads"
+  summary: "Methods annotated with `@WorkerThread` or `@Expensive` are invoked from a `@MainThread`, `@UIThread`, or `@PerformanceCritical` context, potentially blocking the UI."
+  rationale: "Methods marked with `@WorkerThread` or `@Expensive` are intended for background execution. Calling them from a `@MainThread` or `@UIThread` context blocks the UI thread, leading to Application Not Responding (ANR) on Android or UI freezes on desktop. Offload the call to a background thread using an `ExecutorService`, `AsyncTask`, `HandlerThread`, or coroutine/structured concurrency."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-400
+      title: Uncontrolled Resource Consumption
+  aliases:
+    - JAVA-P1007
+  tags:
+    - performance
+    - java
+    - concurrency
+    - android
+    - rules-catalog
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.expensive-method-on-ui-thread
+    bind: issue
+emit:
+  finding:
+    category: performance.concurrency
+    severity: high
+    confidence: 0.80
+    tags:
+      - performance
+      - java
+  message:
+    title: "`${captures.issue.text}` is an expensive method called from a UI/main thread context"
+    summary: "A method annotated `@WorkerThread` or `@Expensive` is called from a `@MainThread` or `@UIThread` context, which may block the UI."
+  remediation:
+    summary: "Offload the call to a background thread using `ExecutorService`, `AsyncTask`, `HandlerThread`, or structured concurrency."

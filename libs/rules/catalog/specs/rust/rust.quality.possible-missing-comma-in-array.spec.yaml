@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.possible-missing-comma-in-array.rule.yaml
+fixtures:
+  - name: flags missing comma in array
+    sourcePath: ./fixtures/rust.quality.possible-missing-comma-in-array/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.possible-missing-comma-in-array
+  - name: accepts correct array
+    sourcePath: ./fixtures/rust.quality.possible-missing-comma-in-array/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

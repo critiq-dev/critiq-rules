@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.enum-equals-method
+  title: equals method defined for enumeration
+  summary: "An enum should not define an `equals()` method — enum equality is determined by identity."
+  rationale: The JVM guarantees that each enum constant is a singleton. Defining `equals()` in an enum is unnecessary and can break the contract if not implemented carefully.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0096
+  tags:
+    - correctness
+    - java
+    - types
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.enum-equals-method
+    bind: issue
+emit:
+  finding:
+    category: correctness.types
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: equals() defined in enum
+    summary: "The enum defines an `equals()` method. Enum constants are singletons — `equals()` is inherited from Object and should not be overridden."
+  remediation:
+    summary: "Remove the `equals()` method from the enum. Enum identity is sufficient."

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.getter-setter-sync-mismatch.rule.yaml
+fixtures:
+  - name: flags mismatched sync on getter/setter
+    sourcePath: ./fixtures/java.correctness.getter-setter-sync-mismatch/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.getter-setter-sync-mismatch
+  - name: allows both synchronized
+    sourcePath: ./fixtures/java.correctness.getter-setter-sync-mismatch/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

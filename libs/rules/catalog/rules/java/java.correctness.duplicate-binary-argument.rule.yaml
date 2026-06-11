@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.duplicate-binary-argument
+  title: Duplicate arguments in binary expression
+  summary: Same expression appears on both sides of a binary operator — likely a copy-paste bug.
+  rationale: When both sides of a `||` or `&&` are identical, one branch is dead or the condition is incorrect.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0034
+  tags:
+    - correctness
+    - java
+    - logic-error
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.duplicate-binary-argument
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic-error
+    severity: medium
+    confidence: 0.75
+    tags:
+      - correctness
+      - java
+  message:
+    title: Duplicate binary expression argument
+    summary: "`${captures.issue.text}` repeats the same expression on both sides of a binary operator — likely a copy-paste bug."
+  remediation:
+    summary: Review the condition — likely a copy-paste error where the second operand should be different.

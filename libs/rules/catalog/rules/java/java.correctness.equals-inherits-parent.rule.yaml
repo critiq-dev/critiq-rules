@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.equals-inherits-parent
+  title: equals method inherits parent without overriding
+  summary: A class defines an overloaded `equals` but does not override `equals(Object)`, so the parent's equals semantics are silently inherited.
+  rationale: When a subclass adds an `equals(SubType)` overload without overriding `equals(Object)`, collections and utility methods will use the parent's equals logic (often identity), which may differ from the subclass's intended comparison behavior.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0099
+  tags:
+    - correctness
+    - java
+    - types
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.equals-inherits-parent
+    bind: issue
+emit:
+  finding:
+    category: correctness.types
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Equals is overloaded, not overridden — inherits parent behavior
+    summary: "`${captures.issue.text}` overloads equals without overriding `equals(Object)`. The parent's equals implementation will be used."
+  remediation:
+    summary: "Add an `@Override public boolean equals(Object obj)` method to properly override equals."

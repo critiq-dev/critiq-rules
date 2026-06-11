@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-integer-to-bool
+  title: "Found transmute between an integer and a `bool`"
+  summary: "Transmuting an integer to bool can produce invalid boolean values."
+  rationale: >-
+    Transmuting an integer type to `bool` can produce bit patterns that are
+    not valid `bool` values (which must be 0x00 or 0x01). Using such values
+    in conditionals can cause undefined behavior. Use `!= 0` instead.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1025
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-integer-to-bool
+    bind: issue
+emit:
+  finding:
+    category: correctness.memory
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Found transmute between an integer and a `bool`"
+    summary: "'${captures.issue.text}' transmutes an integer to `bool`, which can produce invalid boolean values."
+  remediation:
+    summary: "Replace with `value != 0` or `value != 0u32` for a safe boolean conversion."

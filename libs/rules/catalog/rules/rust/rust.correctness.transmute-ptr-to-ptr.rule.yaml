@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-ptr-to-ptr
+  title: "Attempting to transmute one raw pointer to another"
+  summary: "Transmuting `*const T` to `*mut T` is safer through a reference cast."
+  rationale: >-
+    Transmuting between raw pointer types, especially `*const T` to `*mut T`,
+    is risky. A safer approach is to convert through a reference
+    (`&T as *const T as *mut T`) which preserves alignment guarantees.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1020
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-ptr-to-ptr
+    bind: issue
+emit:
+  finding:
+    category: correctness.memory
+    severity: critical
+    confidence: 0.9
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Attempting to transmute one raw pointer to another"
+    summary: "'${captures.issue.text}' transmutes between raw pointer types. Prefer casting through a reference."
+  remediation:
+    summary: "Cast through a reference: `&value as *const T as *mut T` instead of `transmute::<*const T, *mut T>`."

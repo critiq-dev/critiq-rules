@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.readline-without-null-check
+  title: readLine() result used without null check
+  summary: The result of `readLine()` is dereferenced without a null check.
+  rationale: "BufferedReader.readLine() returns null when the end of the stream is reached. Using the result without checking for null will throw a NullPointerException."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0220
+  tags:
+    - correctness
+    - java
+    - null-safety
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.readline-without-null-check
+    bind: issue
+emit:
+  finding:
+    category: correctness.null-safety
+    severity: high
+    confidence: 0.80
+    tags:
+      - correctness
+      - java
+  message:
+    title: readLine() result used without null check
+    summary: The result of `readLine()` may be null — dereferencing it without a check will cause a NullPointerException.
+  remediation:
+    summary: Add a null check before using the result, e.g. `String s = r.readLine(); if (s != null) { s.trim(); }`

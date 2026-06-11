@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.undefined-variable
+  title: Variable is used but not defined
+  summary: Using a variable that has not been defined in scope will cause a runtime notice.
+  aliases:
+    - PHP-W1066
+  rationale: >-
+    PHP emits a warning when reading an undefined variable. Single-file heuristic checks
+    function and method bodies for use-before-define, $this in static context, and
+    post-unset variable references. Nested closures, extract(), compact(), and cross-file
+    scopes are not analyzed, which may produce false negatives.
+  detection:
+    kind: pattern
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.undefined-variable
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.55
+    tags:
+      - correctness
+      - php
+  message:
+    title: Variable ${captures.issue.text} is used but may not be defined in scope
+    summary: >-
+      ${captures.issue.text} is referenced but was not found to be defined before
+      this point in the function scope.
+  remediation:
+    summary: >-
+      Declare and assign the variable before its first use, or ensure the variable
+      was initialized in all code paths before this reference.

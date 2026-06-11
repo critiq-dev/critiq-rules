@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.equals-null
+  title: Avoid using equals() to compare against null
+  summary: "Calling `.equals(null)` always returns false and may throw NullPointerException."
+  rationale: "If the receiver is null, a NullPointerException is thrown. Use `== null` for null checks."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0051
+  tags:
+    - correctness
+    - java
+    - null-safety
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.equals-null
+    bind: issue
+emit:
+  finding:
+    category: correctness.null-safety
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: equals() compared against null
+    summary: "Calling `.equals(null)` is dangerous — use `== null` instead."
+  remediation:
+    summary: "Use `variable == null` instead of `variable.equals(null)`."

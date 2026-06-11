@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.lost-increment-in-assignment
+  title: Increment/decrement lost during assignment to same variable
+  summary: Assigning a post-incremented variable to itself (e.g., x = x++) discards the increment because the old value is assigned back.
+  rationale: In x = x++, the post-increment returns the original value, which is then written over the incremented value, making the increment a no-op.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0396
+  tags:
+    - correctness
+    - java
+    - defensive-programming
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.lost-increment-in-assignment
+    bind: issue
+emit:
+  finding:
+    category: correctness.defensive-programming
+    severity: high
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: Increment lost in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` discards the increment because post-increment returns the old value and assigns it back to the same variable."
+  remediation:
+    summary: Either use `x++` alone, or assign from a different expression (e.g., `y = x++` or `x = x + 1`).

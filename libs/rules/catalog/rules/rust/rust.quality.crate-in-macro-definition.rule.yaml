@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.crate-in-macro-definition
+  title: "Use `$crate` instead of `crate` in macro definitions"
+  summary: "Inside `macro_rules!`, use `$crate::` to refer to the defining crate, not `crate::`."
+  rationale: >-
+    When a macro defined in one crate is used in another crate, `crate::`
+    inside the macro body resolves to the *caller's* crate root, not the
+    *defining* crate. Always use `$crate::` to ensure the correct path
+    resolution in exported macros.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1084
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.crate-in-macro-definition
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Use `$crate` instead of `crate` in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` inside a `macro_rules!` definition uses `crate::` which resolves to the caller's crate. Use `$crate::` instead."
+  remediation:
+    summary: "Replace `crate::` with `$crate::` inside the macro definition to ensure correct path resolution when the macro is used from other crates."

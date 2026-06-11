@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.impossible-toarray-downcast
+  title: Impossible downcast of toArray() result
+  summary: Casting the result of no-arg toArray() to a specific array type will throw ClassCastException.
+  rationale: Collection.toArray() returns Object[] and cannot be cast to a more specific array type. Use toArray(T[]) instead.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0386
+  tags:
+    - correctness
+    - java
+    - collections
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.impossible-toarray-downcast
+    bind: issue
+emit:
+  finding:
+    category: correctness.type-safety
+    severity: critical
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: Impossible downcast of toArray() result
+    summary: "`${captures.issue.text}` casts the no-arg toArray() to a specific array type, which will throw ClassCastException at runtime."
+  remediation:
+    summary: Use `toArray(new Foo[0])` or `toArray(new Foo[list.size()])` instead of casting the no-arg result.

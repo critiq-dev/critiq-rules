@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.servlet-mutable-fields
+  title: Mutable fields in HttpServlet subclasses
+  summary: Mutable fields in an HttpServlet subclass can cause thread-safety issues because servlets are typically shared across requests.
+  rationale: Servlets are singletons — a single instance handles multiple concurrent requests. Non-final mutable fields accessed without synchronization can produce corrupted state and unpredictable behavior.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0128
+    - JAVA-E0370
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.servlet-mutable-fields
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.75
+    tags:
+      - correctness
+      - java
+  message:
+    title: Mutable field in HttpServlet subclass
+    summary: "Field `${captures.issue.text}` in a servlet subclass is mutable and accessed without synchronization. Servlets are singletons shared across threads."
+  remediation:
+    summary: "Declare the field as `final` and use local variables or synchronization when accessing mutable state from servlet methods."

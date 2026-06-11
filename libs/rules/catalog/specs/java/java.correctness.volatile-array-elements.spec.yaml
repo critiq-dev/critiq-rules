@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.volatile-array-elements.rule.yaml
+fixtures:
+  - name: flags volatile array element access
+    sourcePath: ./fixtures/java.correctness.volatile-array-elements/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.volatile-array-elements
+  - name: allows volatile primitive field
+    sourcePath: ./fixtures/java.correctness.volatile-array-elements/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

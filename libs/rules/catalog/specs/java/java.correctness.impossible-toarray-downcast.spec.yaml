@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.impossible-toarray-downcast.rule.yaml
+fixtures:
+  - name: flags cast of no-arg toArray result
+    sourcePath: ./fixtures/java.correctness.impossible-toarray-downcast/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.impossible-toarray-downcast
+  - name: allows toArray with typed array argument
+    sourcePath: ./fixtures/java.correctness.impossible-toarray-downcast/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

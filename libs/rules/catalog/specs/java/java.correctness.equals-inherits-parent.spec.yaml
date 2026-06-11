@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.equals-inherits-parent.rule.yaml
+fixtures:
+  - name: flags subclass with overloaded equals but no override
+    sourcePath: ./fixtures/java.correctness.equals-inherits-parent/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.equals-inherits-parent
+  - name: allows subclass with both overloaded and overridden equals
+    sourcePath: ./fixtures/java.correctness.equals-inherits-parent/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

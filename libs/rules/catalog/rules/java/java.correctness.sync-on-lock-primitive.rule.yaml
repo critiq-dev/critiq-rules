@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.sync-on-lock-primitive
+  title: Synchronization on a Lock/concurrency primitive
+  summary: Synchronizing on a ReentrantLock or other lock primitive defeats the lock's purpose.
+  rationale: "Lock objects (ReentrantLock, ReadWriteLock, StampedLock) are designed for lock-based concurrency, not intrinsic synchronization. Using `synchronized(lock)` on a Lock instance is incorrect and indicates a concurrency design flaw."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0321
+  tags:
+    - correctness
+    - java
+    - concurrency
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.sync-on-lock-primitive
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: medium
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: Synchronizing on a Lock primitive
+    summary: "`${captures.issue.text}` synchronizes on a Lock/concurrency primitive, which is incorrect. Lock instances are designed for explicit locking via `lock()`/`unlock()`, not intrinsic synchronization."
+  remediation:
+    summary: Use `lock()` and `unlock()` on the Lock instance instead of `synchronized(lock){}`.

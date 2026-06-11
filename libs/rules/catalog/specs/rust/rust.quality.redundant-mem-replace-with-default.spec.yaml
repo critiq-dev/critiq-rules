@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.redundant-mem-replace-with-default.rule.yaml
+fixtures:
+  - name: flags redundant mem::replace with Default::default()
+    sourcePath: ./fixtures/rust.quality.redundant-mem-replace-with-default/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.redundant-mem-replace-with-default
+  - name: accepts mem::take()
+    sourcePath: ./fixtures/rust.quality.redundant-mem-replace-with-default/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

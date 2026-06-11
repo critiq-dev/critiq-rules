@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.non-utf8-literal-in-from-utf8-unchecked.rule.yaml
+fixtures:
+  - name: flags non-UTF-8 in from_utf8_unchecked
+    sourcePath: ./fixtures/rust.quality.non-utf8-literal-in-from-utf8-unchecked/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.non-utf8-literal-in-from-utf8-unchecked
+  - name: accepts valid UTF-8
+    sourcePath: ./fixtures/rust.quality.non-utf8-literal-in-from-utf8-unchecked/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.crate-in-macro-definition.rule.yaml
+fixtures:
+  - name: flags crate in macro def
+    sourcePath: ./fixtures/rust.quality.crate-in-macro-definition/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.crate-in-macro-definition
+  - name: accepts dollar-crate in macro def
+    sourcePath: ./fixtures/rust.quality.crate-in-macro-definition/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

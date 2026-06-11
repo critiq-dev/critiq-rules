@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.equals-null-check
+  title: equals method without null check
+  summary: "An `equals(Object)` implementation accesses fields or methods without a preceding null guard, risking NullPointerException."
+  rationale: "If the argument to equals is null, accessing its fields or calling methods on it will throw a NullPointerException. Always start equals with `if (o == null) return false;` or a null-safe pattern."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0110
+  tags:
+    - correctness
+    - java
+    - null-safety
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.equals-null-check
+    bind: issue
+emit:
+  finding:
+    category: correctness.null-safety
+    severity: high
+    confidence: 0.90
+    tags:
+      - correctness
+      - java
+  message:
+    title: equals() without null check
+    summary: "`${captures.issue.text}` does not guard against null before accessing members. Add a null check."
+  remediation:
+    summary: "Add `if (o == null) return false;` at the start of equals, or use `Objects.equals()` for field comparisons."

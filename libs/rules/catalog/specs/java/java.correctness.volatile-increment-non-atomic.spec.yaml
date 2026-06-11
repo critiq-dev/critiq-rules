@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.volatile-increment-non-atomic.rule.yaml
+fixtures:
+  - name: flags volatile increment
+    sourcePath: ./fixtures/java.correctness.volatile-increment-non-atomic/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.volatile-increment-non-atomic
+  - name: allows AtomicInteger.incrementAndGet
+    sourcePath: ./fixtures/java.correctness.volatile-increment-non-atomic/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

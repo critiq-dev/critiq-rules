@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.invalid-regex-literal
+  title: Invalid regex syntax must not be used
+  summary: The regex pattern string contains invalid syntax (e.g. unmatched brackets, reversed character range, or invalid escape).
+  rationale: Invalid regex patterns will throw PatternSyntaxException at runtime.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0394
+  tags:
+    - correctness
+    - java
+    - regex
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.invalid-regex-literal
+    bind: issue
+emit:
+  finding:
+    category: correctness.input-validation
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: Invalid regex syntax in `${captures.issue.text}`
+    summary: "The regex pattern contains invalid syntax (unmatched brackets, reversed range, or invalid escape) that will throw PatternSyntaxException."
+  remediation:
+    summary: Fix the regex pattern — ensure brackets are balanced, character ranges are ascending (`[a-z]` not `[z-a]`), and escape sequences are valid.

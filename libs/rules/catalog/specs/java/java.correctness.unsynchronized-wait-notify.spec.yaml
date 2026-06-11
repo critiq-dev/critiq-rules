@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unsynchronized-wait-notify.rule.yaml
+fixtures:
+  - name: flags wait() without synchronization
+    sourcePath: ./fixtures/java.correctness.unsynchronized-wait-notify/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.unsynchronized-wait-notify
+  - name: allows wait() inside synchronized block
+    sourcePath: ./fixtures/java.correctness.unsynchronized-wait-notify/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

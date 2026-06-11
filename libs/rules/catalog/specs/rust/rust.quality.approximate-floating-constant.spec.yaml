@@ -1,0 +1,12 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.approximate-floating-constant.rule.yaml
+fixtures:
+  - name: flags approximate floating constant
+    sourcePath: ./fixtures/rust.quality.approximate-floating-constant/invalid.rs
+    expect:
+      findingCount: 3
+  - name: accepts non-constant float literals
+    sourcePath: ./fixtures/rust.quality.approximate-floating-constant/valid.rs
+    expect:
+      findingCount: 0

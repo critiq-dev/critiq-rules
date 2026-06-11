@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.option-env-unwrap
+  title: "Avoid `unwrap()` on `option_env!()`"
+  summary: "Calling `.unwrap()` on `option_env!()` panics at compile-time if the environment variable is unset."
+  rationale: >-
+    `option_env!()` returns `Option<&'static str>`. Calling `.unwrap()` on
+    it will panic at compile time if the environment variable is not set,
+    defeating the purpose of using the `option_env!` variant. Prefer
+    `unwrap_or("default")` or `expect("descriptive message")`.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1016
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.option-env-unwrap
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.9
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "`option_env!().unwrap()` in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` will panic at compile time when the env var is unset. Use `.unwrap_or(default)` or `.expect(\"msg\")` instead."
+  remediation:
+    summary: "Replace `.unwrap()` with `.unwrap_or(\"default_value\")` for a safe fallback, or with `.expect(\"meaningful message\")` if the variable must be set."

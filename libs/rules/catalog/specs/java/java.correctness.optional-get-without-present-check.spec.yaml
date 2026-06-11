@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.optional-get-without-present-check.rule.yaml
+fixtures:
+  - name: flags Optional.get without isPresent check
+    sourcePath: ./fixtures/java.correctness.optional-get-without-present-check/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.optional-get-without-present-check
+  - name: allows Optional.get guarded by isPresent
+    sourcePath: ./fixtures/java.correctness.optional-get-without-present-check/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

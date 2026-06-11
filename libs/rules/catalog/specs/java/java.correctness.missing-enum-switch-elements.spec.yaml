@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.missing-enum-switch-elements.rule.yaml
+fixtures:
+  - name: flags switch on enum missing elements
+    sourcePath: ./fixtures/java.correctness.missing-enum-switch-elements/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.missing-enum-switch-elements
+  - name: allows switch with all enum members covered
+    sourcePath: ./fixtures/java.correctness.missing-enum-switch-elements/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

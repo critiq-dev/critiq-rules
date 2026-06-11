@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.unsafe-getresource.rule.yaml
+fixtures:
+  - name: flags relative getResource path
+    sourcePath: ./fixtures/java.correctness.unsafe-getresource/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.unsafe-getresource
+  - name: allows absolute getResource path
+    sourcePath: ./fixtures/java.correctness.unsafe-getresource/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

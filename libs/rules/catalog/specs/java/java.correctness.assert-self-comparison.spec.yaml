@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.assert-self-comparison.rule.yaml
+fixtures:
+  - name: flags assertEquals comparing object to itself
+    sourcePath: ./fixtures/java.correctness.assert-self-comparison/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.assert-self-comparison
+  - name: allows assertEquals comparing different objects
+    sourcePath: ./fixtures/java.correctness.assert-self-comparison/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

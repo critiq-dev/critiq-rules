@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.redundant-mem-replace-with-none
+  title: "Use `Option::take()` instead of `mem::replace` with `None`"
+  summary: "`mem::replace(&mut opt, None)` can be replaced with `opt.take()` which is simpler and more idiomatic."
+  rationale: >-
+    Using `mem::replace(&mut opt, None)` to take the value out of an `Option` is verbose.
+    `Option::take()` does the same thing in a single, clear call.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1112
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.redundant-mem-replace-with-none
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Use `.take()` instead of `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` replaces a value with `None` to take ownership. Use `opt.take()` instead."
+  remediation:
+    summary: "Replace `mem::replace(&mut opt, None)` with `opt.take()`."

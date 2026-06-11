@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.overloaded-equals
+  title: equals method is overloaded but not overridden
+  summary: A method named `equals` with a non-Object parameter type overloads rather than overrides equals.
+  rationale: Using `equals(SomeType obj)` instead of `equals(Object obj)` overloads the equals method without overriding it, so collections and utility methods will use Object.equals (identity) instead of the intended comparison logic.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0098
+  tags:
+    - correctness
+    - java
+    - types
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.overloaded-equals
+    bind: issue
+emit:
+  finding:
+    category: correctness.types
+    severity: medium
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: equals() is overloaded, not overridden
+    summary: "`${captures.issue.text}` overloads equals without overriding it. Change the parameter type to `Object`."
+  remediation:
+    summary: "Change the parameter type from a specific type to `Object` to properly override equals."

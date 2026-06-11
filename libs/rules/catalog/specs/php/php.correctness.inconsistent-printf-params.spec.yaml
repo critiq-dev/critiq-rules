@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.inconsistent-printf-params.rule.yaml
+fixtures:
+  - name: flags mismatched printf/sprintf/sscanf parameters
+    sourcePath: ./fixtures/php.correctness.inconsistent-printf-params/invalid.php
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - php.correctness.inconsistent-printf-params
+        - php.correctness.inconsistent-printf-params
+  - name: ignores correctly matched printf/sprintf/sscanf calls
+    sourcePath: ./fixtures/php.correctness.inconsistent-printf-params/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

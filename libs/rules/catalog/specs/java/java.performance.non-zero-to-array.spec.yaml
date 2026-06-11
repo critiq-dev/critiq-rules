@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.performance.non-zero-to-array.rule.yaml
+fixtures:
+  - name: flags toArray with non-zero sized array
+    sourcePath: ./fixtures/java.performance.non-zero-to-array/non-zero-to-array.invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.performance.non-zero-to-array
+      allSeverities:
+        - high
+  - name: allows toArray with zero-sized array
+    sourcePath: ./fixtures/java.performance.non-zero-to-array/non-zero-to-array.valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

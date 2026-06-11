@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.optional-get-without-present-check
+  title: Optional values must be checked before being accessed
+  summary: Calling Optional.get() without a preceding isPresent() check will throw NoSuchElementException when the Optional is empty.
+  rationale: Optional.get() throws if no value is present. Always guard with isPresent() or use orElse(), orElseThrow(), or orElseGet() to safely handle empty Optionals.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E1013
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.optional-get-without-present-check
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-usage
+    severity: high
+    confidence: 0.55
+    tags:
+      - correctness
+      - java
+  message:
+    title: Optional.get() called without presence check
+    summary: "`${captures.issue.text}` calls Optional.get() without a detectable isPresent() guard. This will throw NoSuchElementException if the Optional is empty."
+  remediation:
+    summary: Guard with isPresent() before calling get(), or use orElse(), orElseThrow(), or orElseGet() instead.

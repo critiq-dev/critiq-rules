@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.correctness.transmute-t-to-ptr-ref
+  title: "Found transmute between a type `T` and `*T` or `&T`"
+  summary: "Transmuting between a value type and its pointer/reference form is unsound."
+  rationale: >-
+    Transmuting an integer, float, or other non-pointer type to a pointer or
+    reference type creates an invalid reference from arbitrary bit patterns.
+    This is unsound and can segfault or produce undefined behavior.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-E1024
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.correctness.transmute-t-to-ptr-ref
+    bind: issue
+emit:
+  finding:
+    category: correctness.memory
+    severity: high
+    confidence: 0.9
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Found transmute between a type `T` and `*T` or `&T`"
+    summary: "'${captures.issue.text}' transmutes a non-pointer value to a pointer/reference, which is unsound."
+  remediation:
+    summary: "Avoid transmuting value types to pointers. If you need a pointer from a value, use `std::ptr::from_raw_parts` or allocate properly."

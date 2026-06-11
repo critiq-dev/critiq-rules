@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/php/php.correctness.inaccessible-property.rule.yaml
+fixtures:
+  - name: flags private parent property and protected outside hierarchy
+    sourcePath: ./fixtures/php.correctness.inaccessible-property/invalid.php
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - php.correctness.inaccessible-property
+  - name: ignores visible property access
+    sourcePath: ./fixtures/php.correctness.inaccessible-property/valid.php
+    expect:
+      findingCount: 0
+      allRuleIds: []

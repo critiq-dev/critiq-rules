@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.result-set-index-zero
+  title: ResultSet accessed with index 0
+  summary: JDBC ResultSet methods use 1-based indexing; index 0 is invalid.
+  rationale: Calling getString(0) or updateInt(0) on a ResultSet always throws SQLException. JDBC column indices start at 1.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0343
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.result-set-index-zero
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-usage
+    severity: critical
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: ResultSet accessed with index 0
+    summary: "`${captures.issue.text}` uses JDBC ResultSet with index 0, but JDBC indices start at 1. This will always throw SQLException."
+  remediation:
+    summary: Use 1-based column index (e.g., `getString(1)` for the first column).

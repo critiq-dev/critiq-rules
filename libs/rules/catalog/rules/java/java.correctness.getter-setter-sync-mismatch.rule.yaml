@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.getter-setter-sync-mismatch
+  title: Getter and setter method synchronization does not match
+  summary: One of a getter/setter pair is synchronized and the other is not.
+  rationale: When one accessor is synchronized and the other is not, concurrent access is not properly guarded, leading to potential data races and visibility issues.
+  aliases:
+    - JAVA-E1074
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.getter-setter-sync-mismatch
+    bind: issue
+emit:
+  finding:
+    category: correctness.concurrency
+    severity: high
+    confidence: 0.88
+    tags:
+      - correctness
+      - java
+  message:
+    title: Sync mismatch for getter/setter pair `${captures.issue.text}`
+    summary: "One accessor is synchronized but the other is not."
+  remediation:
+    summary: Either synchronize both the getter and setter, or use volatile or atomic fields for safe concurrent access.

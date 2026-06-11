@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.correctness.unhandled-io-result.rule.yaml
+fixtures:
+  - name: flags unhandled I/O result
+    sourcePath: ./fixtures/rust.correctness.unhandled-io-result/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.correctness.unhandled-io-result
+  - name: accepts handled I/O result with ?
+    sourcePath: ./fixtures/rust.correctness.unhandled-io-result/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

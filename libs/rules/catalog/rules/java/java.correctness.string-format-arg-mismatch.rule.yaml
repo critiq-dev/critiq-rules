@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.string-format-arg-mismatch
+  title: Arguments to String.format must match the provided format string
+  summary: The number of format specifiers in the format string does not match the number of arguments provided.
+  rationale: A mismatch causes MissingFormatArgumentException (too few arguments) or silently ignored extra arguments (too many).
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E1001
+  tags:
+    - correctness
+    - java
+    - input-validation
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.string-format-arg-mismatch
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-usage
+    severity: critical
+    confidence: 0.85
+    tags:
+      - correctness
+      - java
+  message:
+    title: String.format argument count mismatch
+    summary: The format string contains a different number of format specifiers than the number of arguments provided.
+  remediation:
+    summary: Ensure the format string specifier count matches the argument count. Use %n$s positional specifiers for reordering.

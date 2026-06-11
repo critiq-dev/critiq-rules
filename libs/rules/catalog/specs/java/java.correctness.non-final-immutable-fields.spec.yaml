@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.non-final-immutable-fields.rule.yaml
+fixtures:
+  - name: flags non-final field in @Immutable class
+    sourcePath: ./fixtures/java.correctness.non-final-immutable-fields/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.non-final-immutable-fields
+  - name: allows final field in @Immutable class
+    sourcePath: ./fixtures/java.correctness.non-final-immutable-fields/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

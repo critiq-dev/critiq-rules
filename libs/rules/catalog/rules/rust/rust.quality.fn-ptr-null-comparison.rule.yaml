@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.fn-ptr-null-comparison
+  title: "Avoid comparing function pointer to null"
+  summary: "Comparing a function pointer to null after casting to an integer is error-prone and unnecessary."
+  rationale: >-
+    Function pointers are guaranteed non-null in safe Rust. Comparing them to null via
+    an integer cast (`fn_ptr as usize == 0`) is unnecessary and may indicate incorrect
+    logic. Use `Option<fn()>` instead if nullability is needed.
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1115
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.fn-ptr-null-comparison
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.78
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Avoid fn pointer null comparison in `${captures.issue.text}`"
+    summary: "`${captures.issue.text}` compares a function pointer to null. Use `Option<fn()>` if the pointer can be absent."
+  remediation:
+    summary: "Use `Option<fn()>` instead of a raw function pointer for nullable callbacks."

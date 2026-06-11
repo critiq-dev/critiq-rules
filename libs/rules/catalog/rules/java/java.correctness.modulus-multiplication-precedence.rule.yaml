@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.modulus-multiplication-precedence
+  title: The `%` operator has higher precedence than `*` — ambiguous expression
+  summary: Mixing `%` and `*` without parentheses creates ambiguous precedence that may not match developer intent.
+  rationale: In Java, `%` and `*` have the same precedence and are left-associative. `a % b * c` is parsed as `(a % b) * c` which may not be what the developer intended.
+  aliases:
+    - JAVA-E1080
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.modulus-multiplication-precedence
+    bind: issue
+emit:
+  finding:
+    category: correctness.logic
+    severity: high
+    confidence: 0.86
+    tags:
+      - correctness
+      - java
+  message:
+    title: Ambiguous modulus/multiplication precedence in `${captures.issue.text}`
+    summary: "Mixing `%` and `*` without parentheses can lead to misreading the expression."
+  remediation:
+    summary: Add parentheses to clarify precedence — either `(a % b) * c` or `a % (b * c)` depending on intent.

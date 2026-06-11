@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.correctness.prepared-statement-index-zero
+  title: PreparedStatement parameter set with index 0
+  summary: JDBC PreparedStatement parameters use 1-based indexing; index 0 is invalid.
+  rationale: Setting a parameter at index 0 will always throw SQLException. JDBC parameter indices start at 1.
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-E0344
+  tags:
+    - correctness
+    - java
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.correctness.prepared-statement-index-zero
+    bind: issue
+emit:
+  finding:
+    category: correctness.api-usage
+    severity: critical
+    confidence: 0.95
+    tags:
+      - correctness
+      - java
+  message:
+    title: PreparedStatement parameter set with index 0
+    summary: "`${captures.issue.text}` uses PreparedStatement with index 0, but JDBC parameters start at 1. This will always throw SQLException."
+  remediation:
+    summary: Use 1-based parameter index (e.g., `setString(1, value)` for the first parameter).

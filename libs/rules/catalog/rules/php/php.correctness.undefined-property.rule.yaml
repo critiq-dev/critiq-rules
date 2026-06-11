@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.undefined-property
+  title: Undefined property access via $this->
+  summary: Accessing a property via $this-> that is not declared on the class will cause a runtime notice.
+  aliases:
+    - PHP-W1033
+  rationale: >-
+    PHP emits a warning when accessing an undefined instance property. Single-file
+    heuristic checks the enclosing class body for declared properties, including
+    typed properties and constructor-promoted properties. Classes with extends are
+    skipped to avoid false positives from inherited properties. Classes with __get
+    or __set magic methods are also skipped. Dynamically assigned properties (common
+    in Laravel Eloquent) are not detected, which may produce false negatives.
+  detection:
+    kind: pattern
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.undefined-property
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.55
+    tags:
+      - correctness
+      - php
+  message:
+    title: Access to undefined property ${captures.issue.text}
+    summary: >-
+      ${captures.issue.text} accesses a property via $this-> that is not declared
+      on the enclosing class — PHP will raise a warning.
+  remediation:
+    summary: >-
+      Declare the property on the class with the appropriate visibility and type,
+      or correct the property name. If dynamic properties are intended, declare
+      __get/__set magic methods on the class.

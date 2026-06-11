@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.inconsistent-printf-params
+  title: Call with inconsistent number of printf-style parameters
+  summary: The number of arguments passed to sprintf, sscanf, or fscanf does not match the number of format placeholders.
+  aliases:
+    - PHP-W1025
+  rationale: >-
+    Mismatched format placeholders and arguments in printf-family functions cause
+    unexpected output or runtime warnings. This check counts placeholders in the
+    format string and compares against the argument count. Dynamically constructed
+    format strings are not analyzed and may produce false negatives.
+  detection:
+    kind: pattern
+  tags:
+    - correctness
+    - php
+    - printf
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.inconsistent-printf-params
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.80
+    tags:
+      - correctness
+      - php
+  message:
+    title: Mismatched printf/sprintf/sscanf/fscanf parameters
+    summary: >-
+      The call at ${captures.issue.text} passes a number of arguments that does not
+      match the format string placeholders.
+  remediation:
+    summary: >-
+      Ensure the number of arguments after the format string matches the number of
+      format placeholders (%s, %d, %f, etc.) in the format string. Use sprintf/sscanf
+      with the correct argument count.

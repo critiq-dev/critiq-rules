@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.servlet-mutable-fields.rule.yaml
+fixtures:
+  - name: flags non-final mutable field in servlet
+    sourcePath: ./fixtures/java.correctness.servlet-mutable-fields/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.servlet-mutable-fields
+  - name: allows synchronized mutable field access in servlet
+    sourcePath: ./fixtures/java.correctness.servlet-mutable-fields/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

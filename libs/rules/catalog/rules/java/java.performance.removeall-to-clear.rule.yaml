@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.performance.removeall-to-clear
+  title: "removeAll should not be used to clear a collection"
+  summary: "Calling `collection.removeAll(collection)` is equivalent to `collection.clear()` but performs unnecessary iteration and element comparisons."
+  rationale: "`removeAll(collection)` on a collection with itself as the argument removes all elements that are contained in itself — effectively clearing the collection. However, this is O(n²) or worse depending on collection type, while `clear()` is O(1). Replace `collection.removeAll(collection)` with `collection.clear()`."
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-1079
+      title: Inefficient Algorithm
+  aliases:
+    - JAVA-P1005
+  tags:
+    - performance
+    - java
+    - collections
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+    exclude:
+      - "**/src/test/**"
+      - "**/tests/**"
+      - "**/*Test.java"
+match:
+  fact:
+    kind: java.performance.removeall-to-clear
+    bind: issue
+emit:
+  finding:
+    category: performance.collections
+    severity: critical
+    confidence: 0.85
+    tags:
+      - performance
+      - java
+  message:
+    title: "Use `clear()` instead of `removeAll(self)` in `${captures.issue.text}`"
+    summary: "`removeAll(collection)` with the collection itself as argument performs an O(n²) self-removal when `clear()` is O(1)."
+  remediation:
+    summary: "Replace `collection.removeAll(collection)` with `collection.clear()`."

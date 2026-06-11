@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: php.correctness.invalid-use-keyword
+  title: Invalid use of `use` keyword
+  summary: The `use` keyword is used in a context where it does not apply — inside interfaces, anonymous classes, or referencing a non-trait class.
+  aliases:
+    - PHP-W1011
+  rationale: >-
+    The `use` keyword in a class/interface/trait body imports a trait. Applying it
+    inside an interface or anonymous class is invalid. Using it with a non-trait
+    class name also causes a fatal error. Cross-file trait existence is not checked
+    in this single-file heuristic, which may produce false negatives.
+  detection:
+    kind: pattern
+  tags:
+    - correctness
+    - php
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - php
+  paths:
+    include:
+      - "**/*.php"
+match:
+  fact:
+    kind: php.correctness.invalid-use-keyword
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: critical
+    confidence: 0.75
+    tags:
+      - correctness
+      - php
+  message:
+    title: Invalid use of `use` keyword in ${captures.issue.text}
+    summary: >-
+      ${captures.issue.text} uses `use` in an interface body, anonymous class body,
+      or references a non-trait class — PHP will raise a fatal error.
+  remediation:
+    summary: >-
+      Remove the `use` statement from interface and anonymous class bodies.
+      When using `use` in a class body, ensure the referenced name is a trait.

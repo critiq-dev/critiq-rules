@@ -1,0 +1,5 @@
+class DuplicateBinaryArgumentInvalid {
+  boolean check(int x) {
+    return x == 0 || x == 0;
+  }
+}

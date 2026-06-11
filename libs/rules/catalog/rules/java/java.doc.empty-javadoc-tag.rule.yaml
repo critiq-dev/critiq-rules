@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: java.doc.empty-javadoc-tag
+  title: Javadoc tags must not be empty
+  summary: "Javadoc block tags must have content following the tag name."
+  rationale: "Empty tags like bare @param or @return can crash Javadoc processing tools and provide no documentation value."
+  detection:
+    kind: pattern
+  aliases:
+    - JAVA-D1006
+  tags:
+    - documentation
+    - java
+    - javadoc
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - java
+  paths:
+    include:
+      - "**/*.java"
+match:
+  fact:
+    kind: java.doc.empty-javadoc-tag
+    bind: issue
+emit:
+  finding:
+    category: documentation.javadoc
+    severity: low
+    confidence: 0.90
+    tags:
+      - documentation
+      - java
+  message:
+    title: "Empty Javadoc block tag"
+    summary: "The `${captures.issue.text}` tag has no content. Add a parameter name, description, or remove the tag."
+  remediation:
+    summary: "Provide content for the tag or remove it if unused."

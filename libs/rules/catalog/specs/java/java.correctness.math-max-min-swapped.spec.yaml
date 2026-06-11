@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.math-max-min-swapped.rule.yaml
+fixtures:
+  - name: flags swapped max/min arguments
+    sourcePath: ./fixtures/java.correctness.math-max-min-swapped/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.math-max-min-swapped
+  - name: allows correct max/min usage
+    sourcePath: ./fixtures/java.correctness.math-max-min-swapped/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []

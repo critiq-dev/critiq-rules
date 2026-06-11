@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.quality.unused-enumerate-or-zip-items
+  title: "Avoid unused `.enumerate()` or `.zip()` items"
+  summary: "One of the destructured variables from `.enumerate()` or `.zip()` is never used in the loop body."
+  rationale: >-
+    When iterating with `.enumerate()` or `.zip()`, both destructured values
+    should typically be used. An unused variable indicates dead code that
+    should be replaced with `_` or removed entirely (e.g., use `.count()`
+    or `.keys()` instead).
+  tags:
+    - correctness
+    - rust
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-W1039
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/testdata/**"
+      - "**/examples/**"
+      - "**/benches/**"
+      - "**/*_test.rs"
+      - "**/*.spec.rs"
+match:
+  fact:
+    kind: rust.quality.unused-enumerate-or-zip-items
+    bind: issue
+emit:
+  finding:
+    category: style.readability
+    severity: medium
+    confidence: 0.75
+    tags:
+      - correctness
+      - rust
+  message:
+    title: "Unused destructured variable in `${captures.issue.text}`"
+    summary: "One of the bound variables from `.enumerate()` or `.zip()` is never used in the loop body. Replace unused variables with `_` or remove the iterator adapter."
+  remediation:
+    summary: "Replace unused variables with `_`, or remove `.enumerate()` / `.zip()` if neither value is needed."

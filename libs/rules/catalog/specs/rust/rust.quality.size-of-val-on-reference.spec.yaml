@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.quality.size-of-val-on-reference.rule.yaml
+fixtures:
+  - name: flags size_of_val on reference
+    sourcePath: ./fixtures/rust.quality.size-of-val-on-reference/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.quality.size-of-val-on-reference
+  - name: accepts correct usage
+    sourcePath: ./fixtures/rust.quality.size-of-val-on-reference/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

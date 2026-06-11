@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/java/java.correctness.wait-notify-on-thread.rule.yaml
+fixtures:
+  - name: flags wait on Thread object
+    sourcePath: ./fixtures/java.correctness.wait-notify-on-thread/invalid.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.wait-notify-on-thread
+  - name: allows wait on dedicated lock object
+    sourcePath: ./fixtures/java.correctness.wait-notify-on-thread/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
