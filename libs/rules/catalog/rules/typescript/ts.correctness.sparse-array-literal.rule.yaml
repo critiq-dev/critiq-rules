@@ -26,8 +26,8 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: medium
-    confidence: 0.85
+    severity: low
+    confidence: 0.50
     tags:
       - correctness
       - language

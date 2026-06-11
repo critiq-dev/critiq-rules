@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.interpolation-in-single-quote
+  title: Interpolation in a single-quoted string
+  summary: >-
+    Single-quoted strings do not support interpolation. `#{expr}` inside a
+    single-quoted string is treated as a literal, which is likely unintended.
+  rationale: >-
+    Ruby only interpolates `#{}` in double-quoted strings and other
+    interpolation-aware contexts. Single-quoted strings treat `#{}` as literal
+    text.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.interpolation-in-single-quote
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.interpolation-in-single-quote`."
+  remediation:
+    summary: >-
+      Use double quotes for string interpolation: change
+      `'... #{expr} ...'` to `"... #{expr} ..."`.

@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.argument-overwritten-before-use
+  title: Function argument overwritten before use
+  summary: >-
+    A method parameter is reassigned on the first line of the method body
+    before any read. This discards the caller's value and likely indicates
+    a bug or unintended shadowing.
+  rationale: >-
+    When a method parameter is immediately overwritten, the value passed by
+    the caller is silently discarded. This often happens when a default
+    value expression is intended but the assignment is unconditional.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1064
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.argument-overwritten-before-use
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.7
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` assigns to a method parameter before the
+      parameter is read."
+  remediation:
+    summary: >-
+      Remove the assignment or change the parameter name. If you need a
+      default, use a default parameter value instead.

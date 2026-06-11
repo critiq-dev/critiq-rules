@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.unintended-string-concatenation.rule.yaml
+fixtures:
+  - name: flags adjacent strings without operator
+    sourcePath: ./fixtures/ruby.bug-risk.unintended-string-concatenation/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.unintended-string-concatenation
+  - name: accepts strings with comma
+    sourcePath: ./fixtures/ruby.bug-risk.unintended-string-concatenation/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

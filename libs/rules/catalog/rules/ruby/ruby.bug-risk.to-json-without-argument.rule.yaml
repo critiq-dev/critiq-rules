@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.to-json-without-argument
+  title: '#to_json requires an optional argument'
+  summary: >-
+    Calling `to_json` with no arguments was deprecated in older Ruby JSON
+    versions. The method now requires an argument (or uses the JSON
+    generator state from the wrapper).
+  rationale: >-
+    In Ruby's JSON library, `to_json` without an argument may produce
+    unexpected results or compatibility issues across Ruby versions. Pass
+    the generator state explicitly or use `JSON.generate`.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1069
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.to-json-without-argument
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.8
+    tags:
+      - ruby
+  message:
+    title: Pass an argument to `to_json`
+    summary: >-
+      "`#{captures.issue.text}` calls `to_json` without the required
+      argument."
+  remediation:
+    summary: >-
+      Pass the options or generator state argument to `to_json`, or use
+      `JSON.generate(value)` instead.

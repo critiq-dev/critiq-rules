@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.when-branch-without-body.rule.yaml
+fixtures:
+  - name: flags when branches without body
+    sourcePath: ./fixtures/ruby.bug-risk.when-branch-without-body/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.when-branch-without-body
+        - ruby.bug-risk.when-branch-without-body
+  - name: accepts when branches with body
+    sourcePath: ./fixtures/ruby.bug-risk.when-branch-without-body/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

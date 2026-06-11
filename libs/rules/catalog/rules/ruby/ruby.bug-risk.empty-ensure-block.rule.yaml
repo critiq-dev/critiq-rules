@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.empty-ensure-block
+  title: Avoid empty ensure blocks
+  summary: >-
+    An ensure block has no body. Either add cleanup code or remove the ensure
+    clause.
+  rationale: >-
+    An ensure block without a body is dead code. If no cleanup is needed, the
+    ensure clause should be removed entirely.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.empty-ensure-block
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.empty-ensure-block`."
+  remediation:
+    summary: >-
+      Add cleanup code inside the ensure block or remove the ensure clause
+      entirely if no cleanup is needed.

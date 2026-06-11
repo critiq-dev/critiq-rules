@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.circular-argument-reference
+  title: Avoid circular argument references
+  summary: >-
+    Default argument values that reference themselves are circular and always nil.
+  rationale: >-
+    An argument default that references its own name evaluates to nil because
+    the local variable is not yet bound at the time the default expression runs.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.circular-argument-reference
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.bug-risk.circular-argument-reference`."
+  remediation:
+    summary: >-
+      Remove the self-reference in the default argument. If a default value is
+      needed, use a literal or a method call.

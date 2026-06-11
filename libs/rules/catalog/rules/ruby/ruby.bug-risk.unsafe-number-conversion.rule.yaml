@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.unsafe-number-conversion
+  title: Unsafe number conversion
+  summary: >-
+    `Integer()`, `Float()`, `Rational()`, and `Complex()` can raise
+    `ArgumentError` on invalid input. Prefer safe alternatives or wrap in a
+    rescue block.
+  rationale: >-
+    Kernel conversion methods raise `ArgumentError` when the input is invalid.
+    Using `to_i` or `to_f` returns 0.0 for invalid input, and wrapping
+    `Integer(str)` in a rescue block provides explicit error handling.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.unsafe-number-conversion
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.unsafe-number-conversion`."
+  remediation:
+    summary: >-
+      Use `String#to_i` / `String#to_f` for lossy conversion, or wrap
+      `Integer(str)` in a `rescue ArgumentError` block for strict parsing.

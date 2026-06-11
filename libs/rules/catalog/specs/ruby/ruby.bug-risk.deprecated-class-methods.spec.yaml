@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.deprecated-class-methods.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-class-methods/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.deprecated-class-methods
+        - ruby.bug-risk.deprecated-class-methods
+        - ruby.bug-risk.deprecated-class-methods
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-class-methods/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

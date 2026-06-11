@@ -12,7 +12,7 @@
 
 `@critiq/rules` is the default rule catalog for [Critiq](https://critiq.dev) — deterministic static analysis rules for security, correctness, performance, and code quality across TypeScript, JavaScript, Go, Java, Python, PHP, Ruby, Rust, and CloudFormation.
 
-Currently shipping `1103` rules across `21` categories.
+Currently shipping `1153` rules across `21` categories.
 
 Use it with [`@critiq/cli`](https://www.npmjs.com/package/@critiq/cli):
 

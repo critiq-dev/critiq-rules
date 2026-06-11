@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.unsafe-safe-navigation-chain
+  title: Unsafe safe-navigation chain
+  summary: >-
+    A `&.` (safe navigation) call is followed by a non-safe method
+    chain. The chained call may receive `nil` and raise `NoMethodError`.
+  rationale: >-
+    When using `&.` the result may be `nil`. Chaining additional methods
+    without `&.` bypasses the nil safety. Chain with `&.` throughout or
+    use a local variable with a nil check.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.unsafe-safe-navigation-chain
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.unsafe-safe-navigation-chain`."
+  remediation:
+    summary: >-
+      Use `&.` for all chained calls after the initial safe navigation,
+      or assign to a local variable and check for nil.

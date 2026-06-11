@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.ineffective-access-modifier.rule.yaml
+fixtures:
+  - name: flags private at top level
+    sourcePath: ./fixtures/ruby.bug-risk.ineffective-access-modifier/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.ineffective-access-modifier
+  - name: accepts access modifier inside class
+    sourcePath: ./fixtures/ruby.bug-risk.ineffective-access-modifier/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

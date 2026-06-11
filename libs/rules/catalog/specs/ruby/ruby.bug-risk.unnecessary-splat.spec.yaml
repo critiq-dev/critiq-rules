@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.unnecessary-splat.rule.yaml
+fixtures:
+  - name: flags unnecessary splat patterns
+    sourcePath: ./fixtures/ruby.bug-risk.unnecessary-splat/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.unnecessary-splat
+        - ruby.bug-risk.unnecessary-splat
+  - name: accepts safe patterns
+    sourcePath: ./fixtures/ruby.bug-risk.unnecessary-splat/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

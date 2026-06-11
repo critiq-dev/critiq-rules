@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.regex-literal-in-condition
+  title: Regex literal used as condition
+  summary: >-
+    A regex literal is used directly as a condition expression. Without
+    `=~` or `.match?` the regex is always truthy, making the condition
+    behave unexpectedly.
+  rationale: >-
+    Regex literals in Ruby are always truthy. Using `/pattern/` directly in
+    an `if` or `unless` without `=~` or `.match?` means the condition is
+    always true, which is likely a bug.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.regex-literal-in-condition
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.regex-literal-in-condition`."
+  remediation:
+    summary: >-
+      Use `string =~ /pattern/` or `/pattern/.match?(string)` to actually
+      test the regex against a value.

@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.outer-variable-shadowed
+  title: Outer local variable is shadowed
+  summary: >-
+    A block parameter has the same name as a variable in the outer scope.
+    Inside the block, the outer variable is inaccessible.
+  rationale: >-
+    Shadowing makes the outer variable inaccessible inside the block, which
+    is often unintentional and can lead to subtle bugs or confusing code.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1066
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.outer-variable-shadowed
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.65
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}` shadows outer variable
+    summary: >-
+      "`${captures.issue.text}` reuses a name from the enclosing scope."
+  remediation:
+    summary: >-
+      Rename the block parameter to avoid shadowing the outer variable.

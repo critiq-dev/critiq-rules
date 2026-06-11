@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.with-object-value-unused
+  title: with_object called but object value unused
+  summary: >-
+    `with_object` or `each_with_object` is called but the block only receives
+    one argument. The accumulated object is silently discarded.
+  rationale: >-
+    When `with_object` is used with a single-argument block, the memo object
+    is created but never used. Either use both arguments or use a plain
+    iteration method.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.with-object-value-unused
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.with-object-value-unused`."
+  remediation:
+    summary: >-
+      Add a second block parameter to capture the accumulator object, or
+      replace with a plain `each` if no accumulator is needed.

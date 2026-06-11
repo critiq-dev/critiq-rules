@@ -1,0 +1,2 @@
+API_KEY = "abc123"
+TIMEOUT = 30

@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.duplicate-method-definitions
+  title: Avoid multiple method definitions with the same name in the same scope
+  summary: >-
+    Two def declarations with the same name exist in the same class, module, or
+    top-level scope. The second definition silently overwrites the first.
+  rationale: >-
+    Duplicate method definitions cause the first definition to be silently
+    overwritten. This is usually a copy-paste or merge conflict artifact.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.duplicate-method-definitions
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.duplicate-method-definitions`."
+  remediation:
+    summary: >-
+      Remove the duplicate method definition or rename one of the methods to
+      avoid unintended overwrites.

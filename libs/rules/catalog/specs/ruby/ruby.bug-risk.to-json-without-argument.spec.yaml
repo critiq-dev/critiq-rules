@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.to-json-without-argument.rule.yaml
+fixtures:
+  - name: flags to_json without arguments
+    sourcePath: ./fixtures/ruby.bug-risk.to-json-without-argument/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.to-json-without-argument
+        - ruby.bug-risk.to-json-without-argument
+  - name: accepts to_json with arguments
+    sourcePath: ./fixtures/ruby.bug-risk.to-json-without-argument/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

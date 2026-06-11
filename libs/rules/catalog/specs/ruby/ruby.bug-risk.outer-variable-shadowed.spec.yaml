@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.outer-variable-shadowed.rule.yaml
+fixtures:
+  - name: flags variable shadowing in block
+    sourcePath: ./fixtures/ruby.bug-risk.outer-variable-shadowed/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.outer-variable-shadowed
+  - name: accepts no shadowing
+    sourcePath: ./fixtures/ruby.bug-risk.outer-variable-shadowed/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

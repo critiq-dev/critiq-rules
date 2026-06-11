@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.unused-variable
       allSeverities:
-        - medium
+        - low
   - name: allows clean sample
     observationPath: ./fixtures/ts.correctness.unused-variable/valid.observation.json
     expect:

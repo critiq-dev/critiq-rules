@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.assignment-in-condition
       allSeverities:
-        - medium
+        - low
   - name: allows boolean comparison
     sourcePath: ./fixtures/ts.correctness.assignment-in-condition/valid.ts
     expect:

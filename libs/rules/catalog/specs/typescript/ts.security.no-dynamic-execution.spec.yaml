@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.security.no-dynamic-execution
       allSeverities:
-        - high
+        - low
       summaryContains:
         - executes dynamic code
   - name: ignores ordinary string processing
@@ -24,7 +24,7 @@ fixtures:
       allRuleIds:
         - ts.security.no-dynamic-execution
       allSeverities:
-        - high
+        - low
   - name: ignores ordinary timer callbacks
     sourcePath: ./fixtures/ts.security.no-dynamic-execution/valid-timer.ts
     expect:

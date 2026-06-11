@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.bad-magic-comment-order.rule.yaml
+fixtures:
+  - name: flags magic comment after code
+    sourcePath: ./fixtures/ruby.bug-risk.bad-magic-comment-order/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.bad-magic-comment-order
+  - name: accepts magic comment before code
+    sourcePath: ./fixtures/ruby.bug-risk.bad-magic-comment-order/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

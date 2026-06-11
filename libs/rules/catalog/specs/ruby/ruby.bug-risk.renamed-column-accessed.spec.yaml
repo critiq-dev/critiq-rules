@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.renamed-column-accessed.rule.yaml
+fixtures:
+  - name: flags rename_column in migration
+    sourcePath: ./fixtures/ruby.bug-risk.renamed-column-accessed/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.renamed-column-accessed
+  - name: accepts migration without rename
+    sourcePath: ./fixtures/ruby.bug-risk.renamed-column-accessed/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

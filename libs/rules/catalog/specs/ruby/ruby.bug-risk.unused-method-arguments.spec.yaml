@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.unused-method-arguments.rule.yaml
+fixtures:
+  - name: flags unused method argument convention violated
+    sourcePath: ./fixtures/ruby.bug-risk.unused-method-arguments/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.unused-method-arguments
+  - name: accepts correctly unused arguments
+    sourcePath: ./fixtures/ruby.bug-risk.unused-method-arguments/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

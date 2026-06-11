@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.invalid-rescue-type.rule.yaml
+fixtures:
+  - name: flags invalid rescue types
+    sourcePath: ./fixtures/ruby.bug-risk.invalid-rescue-type/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.invalid-rescue-type
+        - ruby.bug-risk.invalid-rescue-type
+        - ruby.bug-risk.invalid-rescue-type
+  - name: accepts valid rescue types
+    sourcePath: ./fixtures/ruby.bug-risk.invalid-rescue-type/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

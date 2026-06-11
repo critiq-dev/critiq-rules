@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.ineffective-access-modifier
+  title: Ineffective access modifier detected
+  summary: >-
+    A `private`, `protected`, or `public` modifier at top-level scope has no
+    effect. Access modifiers must be inside a class or module definition.
+  rationale: >-
+    Ruby access modifiers only affect method visibility inside class/module
+    bodies. Using them at top level is a no-op and likely indicates misplaced
+    code.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.ineffective-access-modifier
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.ineffective-access-modifier`."
+  remediation:
+    summary: >-
+      Remove the access modifier or move the code into a class/module where the
+      modifier applies.

@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.used-before-definition
       allSeverities:
-        - high
+        - low
   - name: allows clean sample
     observationPath: ./fixtures/ts.correctness.used-before-definition/valid.observation.json
     expect:

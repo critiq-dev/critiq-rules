@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.grouped-parentheses-in-call.rule.yaml
+fixtures:
+  - name: flags double parens in method call
+    sourcePath: ./fixtures/ruby.bug-risk.grouped-parentheses-in-call/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.grouped-parentheses-in-call
+  - name: accepts normal method call
+    sourcePath: ./fixtures/ruby.bug-risk.grouped-parentheses-in-call/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

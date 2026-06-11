@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.useless-access-modifier
+  title: Useless access modifier detected
+  summary: >-
+    A `private`, `protected`, or `public` modifier is redundant (applied
+    after the same modifier, or at end of class/end of module with no
+    methods in between).
+  rationale: >-
+    Duplicate or trailing access modifiers have no effect and confuse
+    readers. Every modifier should be followed by at least one method
+    definition.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1077
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.useless-access-modifier
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: low
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review useless access modifier `${captures.issue.text}`
+    summary: >-
+      "`#{captures.issue.text}` does not affect method visibility."
+  remediation:
+    summary: >-
+      Remove the redundant access modifier or move methods below it.

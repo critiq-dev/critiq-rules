@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.else-followed-by-expression
+  title: Avoid expressions on the same line as else
+  summary: >-
+    An expression follows else on the same line. This is almost always a typo
+    for elsif.
+  rationale: >-
+    An expression directly after else on the same line suggests the developer
+    intended to write elsif but accidentally wrote else followed by the
+    condition.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.else-followed-by-expression
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.else-followed-by-expression`."
+  remediation:
+    summary: >-
+      Replace else followed by an expression with elsif, or move the expression
+      to the body on the next line.

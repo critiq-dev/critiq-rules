@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.empty-expression
+  title: Avoid empty expressions ()
+  summary: >-
+    Empty parentheses () are used as an expression, which always evaluates to
+    nil and is almost always a mistake.
+  rationale: >-
+    An empty parenthesized expression () evaluates to nil. This is often a
+    leftover placeholder or a typo that should be removed or replaced.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.empty-expression
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.empty-expression`."
+  remediation:
+    summary: >-
+      Remove the empty parentheses or replace them with the intended expression.

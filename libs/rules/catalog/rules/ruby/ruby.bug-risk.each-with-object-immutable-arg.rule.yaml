@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.each-with-object-immutable-arg
+  title: Avoid calling each_with_object with an immutable argument
+  summary: >-
+    each_with_object is called with a numeric literal, nil, or boolean.
+    Mutations inside the block are silently lost because these types are
+    immutable.
+  rationale: >-
+    each_with_object expects a mutable object like an Array or Hash. Passing a
+    literal immutable value means the block argument is discarded after each
+    iteration, making the call ineffective.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.each-with-object-immutable-arg
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.each-with-object-immutable-arg`."
+  remediation:
+    summary: >-
+      Pass a mutable object such as an Array `[]` or Hash `{}` instead of an
+      immutable literal.

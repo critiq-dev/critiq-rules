@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.duplicate-constant-assignment
+  title: Duplicate assignments for a constant
+  summary: >-
+    Multiple assignments to the same constant were found. The previous value is
+    discarded, which is likely a developer mistake.
+  rationale: >-
+    Constants in Ruby warn when reassigned at runtime. Multiple static
+    assignments in the same file suggest unintended overwrites.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.duplicate-constant-assignment
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.duplicate-constant-assignment`."
+  remediation:
+    summary: >-
+      Remove the duplicate constant assignment or rename one of the constants to
+      avoid unintended overwrites.

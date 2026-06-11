@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.invalid-percent-symbol-array
+  title: Invalid construction of percent symbol array
+  summary: >-
+    `%i` and `%I` literal arrays (and `%w`/`%W` word arrays) use
+    non-alphanumeric delimiters. An unmatched opening delimiter causes a syntax
+    error.
+  rationale: >-
+    Percent literal arrays must have matching delimiters. An unclosed `%i[`
+    or `%w(` literal triggers a syntax error that can be hard to locate in
+    large files.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.invalid-percent-symbol-array
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.90
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.invalid-percent-symbol-array`."
+  remediation:
+    summary: >-
+      Close the percent literal with a matching delimiter. For `%i[`, close
+      with `]`. For `%i(`, close with `)`.

@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.end-in-method
+  title: Avoid `END` blocks inside methods
+  summary: >-
+    `END` registers a block to run at program exit. Using it inside a method is
+    invalid and the block will never execute.
+  rationale: >-
+    END blocks are registered at parse time for top-level scope only. An END
+    block inside a method is silently ignored and never executes.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.end-in-method
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.end-in-method`."
+  remediation:
+    summary: >-
+      Move the `END` block to top-level scope, or use `at_exit` if scoped
+      behavior is needed.

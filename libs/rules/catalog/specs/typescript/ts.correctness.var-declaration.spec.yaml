@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.var-declaration
       allSeverities:
-        - medium
+        - low
   - name: allows let/const
     sourcePath: ./fixtures/ts.correctness.var-declaration/valid.ts
     expect:

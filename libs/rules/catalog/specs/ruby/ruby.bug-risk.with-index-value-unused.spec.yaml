@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.with-index-value-unused.rule.yaml
+fixtures:
+  - name: flags each_with_index with single param
+    sourcePath: ./fixtures/ruby.bug-risk.with-index-value-unused/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.with-index-value-unused
+        - ruby.bug-risk.with-index-value-unused
+  - name: accepts each_with_index with two params
+    sourcePath: ./fixtures/ruby.bug-risk.with-index-value-unused/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

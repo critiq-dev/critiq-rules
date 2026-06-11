@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.declaration-in-nested-block
       allSeverities:
-        - medium
+        - low
   - name: allows clean sample
     observationPath: ./fixtures/ts.correctness.declaration-in-nested-block/valid.observation.json
     expect:

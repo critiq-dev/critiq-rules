@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.inconsistent-safe-navigation
+  title: Inconsistent safe navigation usage
+  summary: >-
+    The same receiver is accessed with both `&.` and bare `.` in close
+    proximity. This inconsistency suggests the nil-safety strategy is
+    applied inconsistently.
+  rationale: >-
+    Mixing `user&.name` and `user.age` on the same receiver object is
+    inconsistent. If the receiver can be nil, all accesses should use
+    `&.` for consistency.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.inconsistent-safe-navigation
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.8
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.inconsistent-safe-navigation`."
+  remediation:
+    summary: >-
+      Use `&.` consistently for all method calls on the same receiver,
+      or use `&.` on none of them.

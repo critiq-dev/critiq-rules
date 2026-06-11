@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.inconsistent-safe-navigation.rule.yaml
+fixtures:
+  - name: flags inconsistent safe-nav
+    sourcePath: ./fixtures/ruby.bug-risk.inconsistent-safe-navigation/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.inconsistent-safe-navigation
+  - name: accepts consistent safe-nav
+    sourcePath: ./fixtures/ruby.bug-risk.inconsistent-safe-navigation/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

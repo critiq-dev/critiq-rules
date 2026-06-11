@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.suppressed-exceptions
+  title: Suppressed exceptions detected
+  summary: >-
+    A rescue block has no body, silently swallowing all exceptions. Every
+    rescue should at minimum log the error or re-raise.
+  rationale: >-
+    An empty rescue body silently suppresses all exceptions of the rescued
+    type, making debugging and failure detection impossible.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1067
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.suppressed-exceptions
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}` swallows exceptions
+    summary: >-
+      "`${captures.issue.text}` has no body and silently suppresses
+      exceptions."
+  remediation:
+    summary: >-
+      Add a body to the rescue clause that logs the error, handles it, or
+      re-raises. Use the `=>` syntax to capture the exception.

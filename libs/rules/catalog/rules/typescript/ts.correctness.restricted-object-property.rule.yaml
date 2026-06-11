@@ -4,7 +4,7 @@ metadata:
   id: ts.correctness.restricted-object-property
   title: Restricted object property access
   summary: Detects restricted object property access issues in JavaScript and TypeScript source.
-  rationale: Restricted object property access patterns are a common source of bugs and confusing runtime behavior.
+  rationale: Restricted object property access is a style and safety concern, not a security issue; most flagged properties are deliberate surface reductions.
   aliases:
     - JS-0110
   tags:
@@ -25,13 +25,13 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: high
-    confidence: 0.85
+    severity: low
+    confidence: 0.50
     tags:
       - correctness
       - language
   message:
-    title: Fix restricted object property access
-    summary: "`${captures.issue.text}` matches ts.correctness.restricted-object-property."
+    title: Remove assignment to restricted property on built-in prototype
+    summary: "`${captures.issue.text}` assigns to a restricted property on a built-in prototype. Mutating built-in prototypes affects all instances globally and can cause unpredictable behavior across the entire application."
   remediation:
     summary: Refactor the code to remove the restricted object property access pattern.

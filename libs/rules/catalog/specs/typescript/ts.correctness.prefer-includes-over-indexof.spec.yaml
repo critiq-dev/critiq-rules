@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.prefer-includes-over-indexof
       allSeverities:
-        - medium
+        - low
   - name: allows includes usage
     sourcePath: ./fixtures/ts.correctness.prefer-includes-over-indexof/valid.ts
     expect:

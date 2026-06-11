@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.bad-rescue-ordering.rule.yaml
+fixtures:
+  - name: flags bad rescue ordering
+    sourcePath: ./fixtures/ruby.bug-risk.bad-rescue-ordering/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.bad-rescue-ordering
+  - name: accepts correct rescue ordering
+    sourcePath: ./fixtures/ruby.bug-risk.bad-rescue-ordering/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.restricted-object-property
       allSeverities:
-        - high
+        - low
   - name: allows clean sample
     observationPath: ./fixtures/ts.correctness.restricted-object-property/valid.observation.json
     expect:

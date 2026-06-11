@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.ignored-column-accessed.rule.yaml
+fixtures:
+  - name: flags ignored column in find_by
+    sourcePath: ./fixtures/ruby.bug-risk.ignored-column-accessed/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.ignored-column-accessed
+  - name: accepts non-ignored column usage
+    sourcePath: ./fixtures/ruby.bug-risk.ignored-column-accessed/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

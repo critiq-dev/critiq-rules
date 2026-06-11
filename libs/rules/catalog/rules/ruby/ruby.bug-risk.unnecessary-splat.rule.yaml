@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.unnecessary-splat
+  title: Unnecessary splat expression
+  summary: >-
+    Using the splat operator `*` on an array inside `[...]` or in a method
+    argument is redundant when the array could be used directly.
+  rationale: >-
+    `[*array]` creates a shallow copy of the array. `array` is equivalent and
+    clearer. `foo(*[a, b])` can be written as `foo(a, b)`. Redundant splats
+    add cognitive overhead without benefit.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.unnecessary-splat
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.unnecessary-splat`."
+  remediation:
+    summary: >-
+      Replace `[*array]` with `array` (or `array.dup` if you need a copy).
+      Replace `foo(*[a, b])` with `foo(a, b)`.

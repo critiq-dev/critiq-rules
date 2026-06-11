@@ -1,0 +1,45 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.deprecated-class-methods
+  title: Avoid deprecated class methods
+  summary: >-
+    File.exists?, Dir.exists?, and iterator? are deprecated.
+    Use File.exist?, Dir.exist?, and block_given? instead.
+  rationale: >-
+    File.exists? and Dir.exists? were removed in Ruby 3.0. The iterator?
+    method is deprecated in favour of block_given?.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.deprecated-class-methods
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.bug-risk.deprecated-class-methods`."
+  remediation:
+    summary: >-
+      Replace File.exists? with File.exist?, Dir.exists? with Dir.exist?,
+      and iterator? with block_given?.

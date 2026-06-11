@@ -4,7 +4,7 @@ metadata:
   id: ts.security.observable-timing-discrepancy
   title: Use constant-time secret comparison
   summary: Secrets and tokens should not be compared with ordinary equality operators.
-  rationale: Ordinary string comparison can leak timing differences that help attackers guess secret material.
+  rationale: Ordinary string comparison can leak timing differences that help attackers guess secret material. Note that the current heuristic is pattern-based without taint tracking and produces false positives on non-secret comparisons.
   detection:
     kind: pattern
   references:
@@ -32,8 +32,8 @@ match:
 emit:
   finding:
     category: security.cryptography
-    severity: high
-    confidence: 0.9
+    severity: medium
+    confidence: 0.55
     tags:
       - security
       - cryptography

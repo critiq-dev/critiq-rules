@@ -4,7 +4,7 @@ metadata:
   id: ts.correctness.used-before-definition
   title: Variable used before definition
   summary: Detects variable used before definition issues in JavaScript and TypeScript source.
-  rationale: Variable used before definition patterns are a common source of bugs and confusing runtime behavior.
+  rationale: Variable used-before-definition patterns are mostly hoisting and TDZ analysis artifacts; they rarely indicate real bugs.
   aliases:
     - JS-0129
     - JS-0357
@@ -26,8 +26,8 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: high
-    confidence: 0.85
+    severity: low
+    confidence: 0.50
     tags:
       - correctness
       - language

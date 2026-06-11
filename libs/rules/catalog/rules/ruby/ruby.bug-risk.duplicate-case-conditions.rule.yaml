@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.duplicate-case-conditions
+  title: Avoid duplicate conditions in case statements
+  summary: >-
+    A case statement has two identical when conditions. This is usually a
+    copy-paste mistake that causes the second matching branch to never execute.
+  rationale: >-
+    Duplicate when conditions in a case statement mean the second matching
+    branch is unreachable. This is almost always a copy-paste error.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.duplicate-case-conditions
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.duplicate-case-conditions`."
+  remediation:
+    summary: >-
+      Remove the duplicate when condition or change it to a unique value to
+      ensure all branches are reachable.

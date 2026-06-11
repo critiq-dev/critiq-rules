@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.invalid-percent-string-literal.rule.yaml
+fixtures:
+  - name: flags unclosed percent string
+    sourcePath: ./fixtures/ruby.bug-risk.invalid-percent-string-literal/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.invalid-percent-string-literal
+  - name: accepts closed percent string
+    sourcePath: ./fixtures/ruby.bug-risk.invalid-percent-string-literal/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

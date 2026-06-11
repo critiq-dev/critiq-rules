@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.non-local-exit-from-iterator.rule.yaml
+fixtures:
+  - name: flags return, break, next without values
+    sourcePath: ./fixtures/ruby.bug-risk.non-local-exit-from-iterator/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.non-local-exit-from-iterator
+        - ruby.bug-risk.non-local-exit-from-iterator
+        - ruby.bug-risk.non-local-exit-from-iterator
+  - name: accepts safe block code
+    sourcePath: ./fixtures/ruby.bug-risk.non-local-exit-from-iterator/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

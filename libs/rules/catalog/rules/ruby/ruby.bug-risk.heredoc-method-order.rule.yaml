@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.heredoc-method-order
+  title: Avoid chaining methods on heredoc without parentheses
+  summary: >-
+    `<<-SQL.squish` parses as calling `.squish` on the delimiter string
+    `'SQL'`, not on the heredoc body. Wrap the heredoc in parentheses:
+    `(<<-SQL).squish`.
+  rationale: >-
+    Ruby parses the method call as applying to the heredoc delimiter, not the
+    heredoc body. The delimiter is a string literal, so the method call succeeds
+    but produces unexpected results.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.heredoc-method-order
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.heredoc-method-order`."
+  remediation:
+    summary: >-
+      Wrap the heredoc in parentheses before calling methods:
+      `(<<-SQL).squish`.

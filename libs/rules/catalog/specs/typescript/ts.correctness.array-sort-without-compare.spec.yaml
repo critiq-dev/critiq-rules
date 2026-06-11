@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.array-sort-without-compare
       allSeverities:
-        - medium
+        - low
   - name: allows valid pattern
     sourcePath: ./fixtures/ts.correctness.array-sort-without-compare/valid.ts
     expect:

@@ -1,7 +1,7 @@
 {
   "path": "src/sample.ts",
   "language": "typescript",
-  "text": "export const bad = /* restricted-object-property */ 1;",
+  "text": "Array.prototype.customPush = myFunction;",
   "nodes": [],
   "semantics": {
     "controlFlow": {
@@ -17,10 +17,13 @@
             "startLine": 1,
             "startColumn": 1,
             "endLine": 1,
-            "endColumn": 54
+            "endColumn": 37
           },
-          "text": "export const bad = /* restricted-object-property */ 1;",
-          "props": {}
+          "text": "Array.prototype.customPush = myFunction;",
+          "props": {
+            "property": "prototype",
+            "object": "Array"
+          }
         }
       ]
     }

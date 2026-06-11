@@ -422,7 +422,6 @@ rules:
   - id: ts.correctness.var-declaration
     rulePath: ./rules/typescript/ts.correctness.var-declaration.rule.yaml
     presets:
-      - recommended
       - strict
   - id: ts.correctness.parse-int-on-number-literal
     rulePath: ./rules/typescript/ts.correctness.parse-int-on-number-literal.rule.yaml
@@ -3456,6 +3455,10 @@ rules:
     rulePath: ./rules/ruby/ruby.bug-risk.assignment-in-condition.rule.yaml
     presets:
       - strict
+  - id: ruby.bug-risk.bad-operand-order
+    rulePath: ./rules/ruby/ruby.bug-risk.bad-operand-order.rule.yaml
+    presets:
+      - strict
   - id: ruby.bug-risk.deprecated-openssl-api
     rulePath: ./rules/ruby/ruby.bug-risk.deprecated-openssl-api.rule.yaml
     presets:
@@ -3472,6 +3475,10 @@ rules:
     rulePath: ./rules/ruby/ruby.bug-risk.division-by-zero.rule.yaml
     presets:
       - strict
+  - id: ruby.bug-risk.duplicate-constant-assignment
+    rulePath: ./rules/ruby/ruby.bug-risk.duplicate-constant-assignment.rule.yaml
+    presets:
+      - strict
   - id: ruby.bug-risk.duplicate-hash-keys
     rulePath: ./rules/ruby/ruby.bug-risk.duplicate-hash-keys.rule.yaml
     presets:
@@ -3484,12 +3491,212 @@ rules:
     rulePath: ./rules/ruby/ruby.bug-risk.exception-class-overwritten.rule.yaml
     presets:
       - strict
+  - id: ruby.bug-risk.io-select-single-arg
+    rulePath: ./rules/ruby/ruby.bug-risk.io-select-single-arg.rule.yaml
+    presets:
+      - strict
   - id: ruby.bug-risk.raw-sql-without-squish
     rulePath: ./rules/ruby/ruby.bug-risk.raw-sql-without-squish.rule.yaml
     presets:
       - strict
   - id: ruby.bug-risk.rescue-exception
     rulePath: ./rules/ruby/ruby.bug-risk.rescue-exception.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.git-in-gemspec
+    rulePath: ./rules/ruby/ruby.bug-risk.git-in-gemspec.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.ignored-column-accessed
+    rulePath: ./rules/ruby/ruby.bug-risk.ignored-column-accessed.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.renamed-column-accessed
+    rulePath: ./rules/ruby/ruby.bug-risk.renamed-column-accessed.rule.yaml
+    presets:
+      - strict
+  # Batch 06 (RB-LI) — bug risk / framework rules
+  - id: ruby.bug-risk.deprecated-big-decimal-new
+    rulePath: ./rules/ruby/ruby.bug-risk.deprecated-big-decimal-new.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.symbol-boolean-name
+    rulePath: ./rules/ruby/ruby.bug-risk.symbol-boolean-name.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.circular-argument-reference
+    rulePath: ./rules/ruby/ruby.bug-risk.circular-argument-reference.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.deprecated-class-methods
+    rulePath: ./rules/ruby/ruby.bug-risk.deprecated-class-methods.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.disjunctive-assignment-in-constructor
+    rulePath: ./rules/ruby/ruby.bug-risk.disjunctive-assignment-in-constructor.rule.yaml
+    presets:
+      - strict
+  # Batch 07 (RB-LI)
+  - id: ruby.bug-risk.duplicate-case-conditions
+    rulePath: ./rules/ruby/ruby.bug-risk.duplicate-case-conditions.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.duplicate-method-definitions
+    rulePath: ./rules/ruby/ruby.bug-risk.duplicate-method-definitions.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.each-with-object-immutable-arg
+    rulePath: ./rules/ruby/ruby.bug-risk.each-with-object-immutable-arg.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.else-followed-by-expression
+    rulePath: ./rules/ruby/ruby.bug-risk.else-followed-by-expression.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.empty-ensure-block
+    rulePath: ./rules/ruby/ruby.bug-risk.empty-ensure-block.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.empty-expression
+    rulePath: ./rules/ruby/ruby.bug-risk.empty-expression.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.empty-interpolation
+    rulePath: ./rules/ruby/ruby.bug-risk.empty-interpolation.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.when-branch-without-body
+    rulePath: ./rules/ruby/ruby.bug-risk.when-branch-without-body.rule.yaml
+    presets:
+      - strict
+
+  # Batch 08 (RB-LI) — bug risk / framework rules
+  - id: ruby.bug-risk.end-in-method
+    rulePath: ./rules/ruby/ruby.bug-risk.end-in-method.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.return-in-ensure
+    rulePath: ./rules/ruby/ruby.bug-risk.return-in-ensure.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.flip-flop-operator
+    rulePath: ./rules/ruby/ruby.bug-risk.flip-flop-operator.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.heredoc-method-order
+    rulePath: ./rules/ruby/ruby.bug-risk.heredoc-method-order.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.unintended-string-concatenation
+    rulePath: ./rules/ruby/ruby.bug-risk.unintended-string-concatenation.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.ineffective-access-modifier
+    rulePath: ./rules/ruby/ruby.bug-risk.ineffective-access-modifier.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.interpolation-in-single-quote
+    rulePath: ./rules/ruby/ruby.bug-risk.interpolation-in-single-quote.rule.yaml
+    presets:
+      - strict
+
+  # Batch 09 (RB-LI) — bug risk / framework rules
+  - id: ruby.bug-risk.non-local-exit-from-iterator
+    rulePath: ./rules/ruby/ruby.bug-risk.non-local-exit-from-iterator.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.unsafe-number-conversion
+    rulePath: ./rules/ruby/ruby.bug-risk.unsafe-number-conversion.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.bad-magic-comment-order
+    rulePath: ./rules/ruby/ruby.bug-risk.bad-magic-comment-order.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.grouped-parentheses-in-call
+    rulePath: ./rules/ruby/ruby.bug-risk.grouped-parentheses-in-call.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.invalid-percent-string-literal
+    rulePath: ./rules/ruby/ruby.bug-risk.invalid-percent-string-literal.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.invalid-percent-symbol-array
+    rulePath: ./rules/ruby/ruby.bug-risk.invalid-percent-symbol-array.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.unnecessary-require
+    rulePath: ./rules/ruby/ruby.bug-risk.unnecessary-require.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.unnecessary-splat
+    rulePath: ./rules/ruby/ruby.bug-risk.unnecessary-splat.rule.yaml
+    presets:
+      - strict
+
+  # Batch 10 (RB-LI) — bug risk / framework rules
+  - id: ruby.bug-risk.with-index-value-unused
+    rulePath: ./rules/ruby/ruby.bug-risk.with-index-value-unused.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.with-object-value-unused
+    rulePath: ./rules/ruby/ruby.bug-risk.with-object-value-unused.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.regex-literal-in-condition
+    rulePath: ./rules/ruby/ruby.bug-risk.regex-literal-in-condition.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.predicate-method-without-parentheses
+    rulePath: ./rules/ruby/ruby.bug-risk.predicate-method-without-parentheses.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.invalid-rescue-type
+    rulePath: ./rules/ruby/ruby.bug-risk.invalid-rescue-type.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.unsafe-safe-navigation-chain
+    rulePath: ./rules/ruby/ruby.bug-risk.unsafe-safe-navigation-chain.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.inconsistent-safe-navigation
+    rulePath: ./rules/ruby/ruby.bug-risk.inconsistent-safe-navigation.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.safe-navigation-with-empty
+    rulePath: ./rules/ruby/ruby.bug-risk.safe-navigation-with-empty.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.argument-overwritten-before-use
+    rulePath: ./rules/ruby/ruby.bug-risk.argument-overwritten-before-use.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.bad-rescue-ordering
+    rulePath: ./rules/ruby/ruby.bug-risk.bad-rescue-ordering.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.outer-variable-shadowed
+    rulePath: ./rules/ruby/ruby.bug-risk.outer-variable-shadowed.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.suppressed-exceptions
+    rulePath: ./rules/ruby/ruby.bug-risk.suppressed-exceptions.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.to-json-without-argument
+    rulePath: ./rules/ruby/ruby.bug-risk.to-json-without-argument.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.unreachable-code
+    rulePath: ./rules/ruby/ruby.bug-risk.unreachable-code.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.unused-method-arguments
+    rulePath: ./rules/ruby/ruby.bug-risk.unused-method-arguments.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.useless-access-modifier
+    rulePath: ./rules/ruby/ruby.bug-risk.useless-access-modifier.rule.yaml
     presets:
       - strict
   - id: ruby.security.debugger-call

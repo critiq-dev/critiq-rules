@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.symbol-boolean-name.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.bug-risk.symbol-boolean-name/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.symbol-boolean-name
+        - ruby.bug-risk.symbol-boolean-name
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.bug-risk.symbol-boolean-name/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

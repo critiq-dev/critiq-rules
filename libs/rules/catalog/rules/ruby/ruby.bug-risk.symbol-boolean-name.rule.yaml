@@ -1,0 +1,44 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.symbol-boolean-name
+  title: Avoid :true and :false symbols
+  summary: >-
+    `:true` and `:false` symbols are usually typos for boolean literals.
+  rationale: >-
+    Using `:true` or `:false` where a boolean is intended suggests a mistake
+    that can lead to unexpected behavior in conditionals.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.symbol-boolean-name
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.bug-risk.symbol-boolean-name`."
+  remediation:
+    summary: >-
+      Replace `:true` with `true` and `:false` with `false` if a boolean literal
+      was intended.

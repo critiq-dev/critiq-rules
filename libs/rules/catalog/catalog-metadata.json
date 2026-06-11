@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "totalRuleCount": 1103,
-  "lastUpdated": "2026-06-10T22:18:24.631Z",
+  "totalRuleCount": 1153,
+  "lastUpdated": "2026-06-11T10:29:46.584Z",
   "rulesByLanguage": {
     "typescript": {
       "count": 335,
@@ -27,13 +27,13 @@
       "count": 95,
       "label": "Go"
     },
+    "ruby": {
+      "count": 88,
+      "label": "Ruby"
+    },
     "python": {
       "count": 61,
       "label": "Python"
-    },
-    "ruby": {
-      "count": 38,
-      "label": "Ruby"
     },
     "shared": {
       "count": 13,

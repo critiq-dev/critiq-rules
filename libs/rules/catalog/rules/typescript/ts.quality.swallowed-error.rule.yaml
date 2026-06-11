@@ -4,7 +4,10 @@ metadata:
   id: ts.quality.swallowed-error
   title: Errors swallowed silently
   summary: Catch blocks must log, reject, or rethrow failures instead of dropping them silently.
-  rationale: Silent catch blocks hide failures and make production diagnosis unnecessarily difficult.
+  rationale: >-
+    Silent catch blocks hide failures and make production diagnosis difficult.
+    Context-dependent callback propagation through error sinks is valid handling
+    and this rule may flag legitimate patterns.
   tags:
     - quality
     - error-handling
@@ -23,8 +26,8 @@ match:
 emit:
   finding:
     category: quality.error-handling
-    severity: medium
-    confidence: 0.95
+    severity: low
+    confidence: 0.55
     tags:
       - quality
       - error-handling

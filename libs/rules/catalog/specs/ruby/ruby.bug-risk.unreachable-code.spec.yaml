@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.unreachable-code.rule.yaml
+fixtures:
+  - name: flags unreachable code
+    sourcePath: ./fixtures/ruby.bug-risk.unreachable-code/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.unreachable-code
+        - ruby.bug-risk.unreachable-code
+  - name: accepts reachable code
+    sourcePath: ./fixtures/ruby.bug-risk.unreachable-code/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

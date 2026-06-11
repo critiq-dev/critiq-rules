@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.undeclared-variable
       allSeverities:
-        - high
+        - low
   - name: allows clean sample
     observationPath: ./fixtures/ts.correctness.undeclared-variable/valid.observation.json
     expect:

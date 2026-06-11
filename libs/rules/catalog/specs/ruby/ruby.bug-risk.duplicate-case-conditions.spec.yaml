@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.duplicate-case-conditions.rule.yaml
+fixtures:
+  - name: flags duplicate case conditions
+    sourcePath: ./fixtures/ruby.bug-risk.duplicate-case-conditions/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.duplicate-case-conditions
+        - ruby.bug-risk.duplicate-case-conditions
+  - name: accepts unique conditions
+    sourcePath: ./fixtures/ruby.bug-risk.duplicate-case-conditions/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

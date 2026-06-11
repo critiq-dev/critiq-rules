@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.invalid-percent-symbol-array.rule.yaml
+fixtures:
+  - name: flags unclosed percent array
+    sourcePath: ./fixtures/ruby.bug-risk.invalid-percent-symbol-array/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.invalid-percent-symbol-array
+  - name: accepts closed percent array
+    sourcePath: ./fixtures/ruby.bug-risk.invalid-percent-symbol-array/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

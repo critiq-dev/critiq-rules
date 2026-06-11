@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.empty-ensure-block.rule.yaml
+fixtures:
+  - name: flags empty ensure blocks
+    sourcePath: ./fixtures/ruby.bug-risk.empty-ensure-block/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.empty-ensure-block
+        - ruby.bug-risk.empty-ensure-block
+  - name: accepts ensure blocks with body
+    sourcePath: ./fixtures/ruby.bug-risk.empty-ensure-block/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

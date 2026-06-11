@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.reassign-function-declaration
       allSeverities:
-        - medium
+        - low
   - name: allows clean sample
     observationPath: ./fixtures/ts.correctness.reassign-function-declaration/valid.observation.json
     expect:

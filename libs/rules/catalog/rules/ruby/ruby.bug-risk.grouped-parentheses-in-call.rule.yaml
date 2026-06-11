@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.grouped-parentheses-in-call
+  title: Grouped parentheses found in function calls
+  summary: >-
+    Using double parentheses in a method call like `foo((a, b))` passes a
+    single argument instead of two. The inner parentheses create grouping via
+    comma operator, not multiple arguments.
+  rationale: >-
+    Double parentheses in method calls are a common Ruby mistake. The inner
+    parentheses group the arguments via the comma operator, passing only the
+    last expression as a single argument.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.grouped-parentheses-in-call
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.80
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.grouped-parentheses-in-call`."
+  remediation:
+    summary: >-
+      Remove the inner parentheses: `foo(a, b)`. If you need to pass an array,
+      use `foo([a, b])` explicitly.

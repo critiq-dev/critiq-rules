@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.sparse-array-literal
       allSeverities:
-        - medium
+        - low
   - name: allows clean sample
     observationPath: ./fixtures/ts.correctness.sparse-array-literal/valid.observation.json
     expect:

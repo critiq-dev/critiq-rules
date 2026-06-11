@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.heredoc-method-order.rule.yaml
+fixtures:
+  - name: flags heredoc with chained method
+    sourcePath: ./fixtures/ruby.bug-risk.heredoc-method-order/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.heredoc-method-order
+  - name: accepts heredoc wrapped in parens
+    sourcePath: ./fixtures/ruby.bug-risk.heredoc-method-order/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

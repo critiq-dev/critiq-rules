@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.bad-operand-order
+  title: Bad binary expression operand order
+  summary: >-
+    A literal appears on the left side of a binary expression where a variable
+    is expected on the left.
+  rationale: >-
+    Placing literals on the left side of operators (Yoda notation) reduces
+    readability. Variables should typically appear first.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.bad-operand-order
+    bind: issue
+emit:
+  finding:
+    category: maintainability.code-style
+    severity: medium
+    confidence: 0.8
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches `ruby.bug-risk.bad-operand-order`."
+  remediation:
+    summary: >-
+      Move the literal to the right side of the expression (e.g. `a + 1`
+      instead of `1 + a`).

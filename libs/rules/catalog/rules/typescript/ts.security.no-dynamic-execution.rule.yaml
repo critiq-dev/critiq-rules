@@ -4,7 +4,7 @@ metadata:
   id: ts.security.no-dynamic-execution
   title: Eval or dynamic code execution
   summary: Eval-like helpers, `vm` execution APIs, and string-evaluated timers should not execute dynamic code.
-  rationale: Dynamic execution turns data into code, widens the attack surface, and bypasses normal control flow.
+  rationale: Dynamic execution turns data into code and widens the attack surface. Without taint tracking, this rule fires on legitimate library and template code patterns where the input is fully controlled.
   detection:
     kind: pattern
   references:
@@ -31,8 +31,8 @@ match:
 emit:
   finding:
     category: security.execution
-    severity: high
-    confidence: 0.95
+    severity: low
+    confidence: 0.55
     tags:
       - security
       - execution

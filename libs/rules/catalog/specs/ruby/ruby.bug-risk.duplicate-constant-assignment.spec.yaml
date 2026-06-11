@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.duplicate-constant-assignment.rule.yaml
+fixtures:
+  - name: flags duplicate constant assignment
+    sourcePath: ./fixtures/ruby.bug-risk.duplicate-constant-assignment/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.duplicate-constant-assignment
+  - name: accepts single constant assignment
+    sourcePath: ./fixtures/ruby.bug-risk.duplicate-constant-assignment/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

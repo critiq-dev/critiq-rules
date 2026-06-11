@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.circular-argument-reference.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.bug-risk.circular-argument-reference/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.circular-argument-reference
+        - ruby.bug-risk.circular-argument-reference
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.bug-risk.circular-argument-reference/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

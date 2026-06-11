@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.duplicate-method-definitions.rule.yaml
+fixtures:
+  - name: flags duplicate method definitions
+    sourcePath: ./fixtures/ruby.bug-risk.duplicate-method-definitions/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.duplicate-method-definitions
+        - ruby.bug-risk.duplicate-method-definitions
+  - name: accepts unique method definitions
+    sourcePath: ./fixtures/ruby.bug-risk.duplicate-method-definitions/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

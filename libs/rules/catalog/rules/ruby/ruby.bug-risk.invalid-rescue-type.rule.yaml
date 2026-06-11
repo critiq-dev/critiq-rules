@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.invalid-rescue-type
+  title: Invalid rescue type
+  summary: >-
+    `rescue` is followed by a non-class expression such as `nil`, a
+    number, or a string literal. Rescue clauses must reference exception
+    classes.
+  rationale: >-
+    `rescue nil` silently swallows all exceptions. `rescue 42` and
+    `rescue "string"` are type errors that may raise `TypeError` at
+    runtime.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.invalid-rescue-type
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.invalid-rescue-type`."
+  remediation:
+    summary: >-
+      Replace with a specific exception class such as `rescue
+      StandardError`, or use `rescue => e` to capture all standard errors.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.flip-flop-operator.rule.yaml
+fixtures:
+  - name: flags flip-flop in condition
+    sourcePath: ./fixtures/ruby.bug-risk.flip-flop-operator/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.flip-flop-operator
+  - name: accepts range literal
+    sourcePath: ./fixtures/ruby.bug-risk.flip-flop-operator/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

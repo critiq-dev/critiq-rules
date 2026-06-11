@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.interpolation-in-single-quote.rule.yaml
+fixtures:
+  - name: flags interpolation in single-quoted string
+    sourcePath: ./fixtures/ruby.bug-risk.interpolation-in-single-quote/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.interpolation-in-single-quote
+  - name: accepts interpolation in double-quoted string
+    sourcePath: ./fixtures/ruby.bug-risk.interpolation-in-single-quote/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

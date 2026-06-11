@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.argument-overwritten-before-use.rule.yaml
+fixtures:
+  - name: flags parameter overwritten before use
+    sourcePath: ./fixtures/ruby.bug-risk.argument-overwritten-before-use/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.argument-overwritten-before-use
+        - ruby.bug-risk.argument-overwritten-before-use
+  - name: accepts parameter used correctly
+    sourcePath: ./fixtures/ruby.bug-risk.argument-overwritten-before-use/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

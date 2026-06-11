@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.disjunctive-assignment-in-constructor.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.bug-risk.disjunctive-assignment-in-constructor/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.disjunctive-assignment-in-constructor
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.bug-risk.disjunctive-assignment-in-constructor/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

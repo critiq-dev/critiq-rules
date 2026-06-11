@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.bad-operand-order.rule.yaml
+fixtures:
+  - name: flags bad operand order
+    sourcePath: ./fixtures/ruby.bug-risk.bad-operand-order/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.bad-operand-order
+  - name: accepts correct operand order
+    sourcePath: ./fixtures/ruby.bug-risk.bad-operand-order/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

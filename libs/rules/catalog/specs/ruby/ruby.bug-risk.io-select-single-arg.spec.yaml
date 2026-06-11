@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.io-select-single-arg.rule.yaml
+fixtures:
+  - name: flags IO.select with single arg
+    sourcePath: ./fixtures/ruby.bug-risk.io-select-single-arg/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.io-select-single-arg
+  - name: accepts IO.select with multiple args
+    sourcePath: ./fixtures/ruby.bug-risk.io-select-single-arg/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

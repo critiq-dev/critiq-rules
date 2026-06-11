@@ -12,7 +12,7 @@
 
 `@critiq/rules` is the default rule catalog for [Critiq](https://critiq.dev). Use it with [`@critiq/cli`](https://www.npmjs.com/package/@critiq/cli) to scan for bugs, security issues, performance problems, and risky changes before they reach production.
 
-Currently shipping `1103` rules across `21` categories.
+Currently shipping `1153` rules across `21` categories.
 
 ```bash
 npm install -D @critiq/cli @critiq/rules

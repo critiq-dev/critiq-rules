@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.deprecated-big-decimal-new.rule.yaml
+fixtures:
+  - name: flags issue
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-big-decimal-new/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.deprecated-big-decimal-new
+  - name: accepts safe code
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-big-decimal-new/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

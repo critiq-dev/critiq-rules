@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.unsafe-safe-navigation-chain.rule.yaml
+fixtures:
+  - name: flags unsafe safe-nav chains
+    sourcePath: ./fixtures/ruby.bug-risk.unsafe-safe-navigation-chain/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.unsafe-safe-navigation-chain
+        - ruby.bug-risk.unsafe-safe-navigation-chain
+  - name: accepts safe usage
+    sourcePath: ./fixtures/ruby.bug-risk.unsafe-safe-navigation-chain/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

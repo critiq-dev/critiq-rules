@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.git-in-gemspec.rule.yaml
+fixtures:
+  - name: flags git in gemspec
+    sourcePath: ./fixtures/ruby.bug-risk.git-in-gemspec/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.git-in-gemspec
+  - name: accepts dir glob
+    sourcePath: ./fixtures/ruby.bug-risk.git-in-gemspec/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.unnecessary-require
+  title: Unnecessary require statement
+  summary: >-
+    A `require` or `require_relative` statement that duplicates an earlier one
+    is unnecessary. Requiring `rubygems` is also unnecessary in modern Ruby.
+  rationale: >-
+    Duplicate `require` statements waste load time and may indicate confused
+    dependencies. Requiring `rubygems` is redundant since Ruby 1.9+ as it is
+    auto-loaded.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.unnecessary-require
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.90
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.unnecessary-require`."
+  remediation:
+    summary: >-
+      Remove the duplicate `require` statement. For `require 'rubygems'`, this
+      is auto-loaded in Ruby 1.9+.

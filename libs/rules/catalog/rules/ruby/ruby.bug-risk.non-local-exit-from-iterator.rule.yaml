@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.non-local-exit-from-iterator
+  title: Non-local exit from iterator without return value
+  summary: >-
+    `return` inside an iterator block exits the enclosing method, not just the
+    block. `break` and `next` without a value return `nil` to the iterator.
+  rationale: >-
+    Using `return` inside an iterator block like `.each` or `.map` exits the
+    entire enclosing method, which is often surprising. Bare `break` and `next`
+    without values also silently return `nil`, hiding bugs.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.non-local-exit-from-iterator
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.non-local-exit-from-iterator`."
+  remediation:
+    summary: >-
+      Use `next value` to skip with a value, or `break value` to exit with a
+      value. For early return from a method, restructure the logic so `return`
+      is not inside a block.

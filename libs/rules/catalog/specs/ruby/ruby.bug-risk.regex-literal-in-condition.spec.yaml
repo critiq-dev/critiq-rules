@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.regex-literal-in-condition.rule.yaml
+fixtures:
+  - name: flags regex literal in condition
+    sourcePath: ./fixtures/ruby.bug-risk.regex-literal-in-condition/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.regex-literal-in-condition
+        - ruby.bug-risk.regex-literal-in-condition
+  - name: accepts regex used with =~
+    sourcePath: ./fixtures/ruby.bug-risk.regex-literal-in-condition/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

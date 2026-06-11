@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.predicate-method-without-parentheses.rule.yaml
+fixtures:
+  - name: flags predicate method without parens
+    sourcePath: ./fixtures/ruby.bug-risk.predicate-method-without-parentheses/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.predicate-method-without-parentheses
+        - ruby.bug-risk.predicate-method-without-parentheses
+  - name: accepts predicate method with parens
+    sourcePath: ./fixtures/ruby.bug-risk.predicate-method-without-parentheses/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.security.observable-timing-discrepancy
       allSeverities:
-        - high
+        - medium
   - name: ignores constant-time comparisons
     sourcePath: ./fixtures/public-security/auth-files.valid.ts
     expect:

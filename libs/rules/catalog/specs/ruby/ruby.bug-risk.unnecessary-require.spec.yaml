@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.unnecessary-require.rule.yaml
+fixtures:
+  - name: flags duplicate require and rubygems
+    sourcePath: ./fixtures/ruby.bug-risk.unnecessary-require/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.unnecessary-require
+        - ruby.bug-risk.unnecessary-require
+  - name: accepts single requires
+    sourcePath: ./fixtures/ruby.bug-risk.unnecessary-require/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.with-object-value-unused.rule.yaml
+fixtures:
+  - name: flags each_with_object with single param
+    sourcePath: ./fixtures/ruby.bug-risk.with-object-value-unused/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.with-object-value-unused
+        - ruby.bug-risk.with-object-value-unused
+  - name: accepts each_with_object with two params
+    sourcePath: ./fixtures/ruby.bug-risk.with-object-value-unused/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.else-followed-by-expression.rule.yaml
+fixtures:
+  - name: flags else followed by expression
+    sourcePath: ./fixtures/ruby.bug-risk.else-followed-by-expression/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.else-followed-by-expression
+        - ruby.bug-risk.else-followed-by-expression
+        - ruby.bug-risk.else-followed-by-expression
+  - name: accepts proper else
+    sourcePath: ./fixtures/ruby.bug-risk.else-followed-by-expression/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

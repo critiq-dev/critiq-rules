@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.empty-interpolation.rule.yaml
+fixtures:
+  - name: flags empty interpolation
+    sourcePath: ./fixtures/ruby.bug-risk.empty-interpolation/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.empty-interpolation
+        - ruby.bug-risk.empty-interpolation
+  - name: accepts non-empty interpolation
+    sourcePath: ./fixtures/ruby.bug-risk.empty-interpolation/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

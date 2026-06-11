@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.unused-method-arguments
+  title: Unused method arguments detected
+  summary: >-
+    A method argument prefixed with underscore is used in the method body,
+    contradicting the convention that underscore-prefixed names indicate
+    intentionally unused parameters.
+  rationale: >-
+    The underscore prefix convention signals "I know this parameter is not
+    used." If the parameter IS used, the underscore is misleading and
+    should be removed.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1074
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.unused-method-arguments
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: low
+    confidence: 0.8
+    tags:
+      - ruby
+  message:
+    title: Review unused method argument `${captures.issue.text}`
+    summary: >-
+      "`#{captures.issue.text}` is marked as unused (underscore prefix)
+      but is referenced in method body."
+  remediation:
+    summary: >-
+      Remove the underscore prefix if the parameter is intentionally
+      used, or remove the parameter if it is truly unused.

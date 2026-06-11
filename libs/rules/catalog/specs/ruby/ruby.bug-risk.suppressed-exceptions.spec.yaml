@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.suppressed-exceptions.rule.yaml
+fixtures:
+  - name: flags empty rescue body
+    sourcePath: ./fixtures/ruby.bug-risk.suppressed-exceptions/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.suppressed-exceptions
+        - ruby.bug-risk.suppressed-exceptions
+  - name: accepts rescue with body
+    sourcePath: ./fixtures/ruby.bug-risk.suppressed-exceptions/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

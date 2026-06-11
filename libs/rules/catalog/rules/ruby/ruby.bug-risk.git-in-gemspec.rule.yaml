@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.git-in-gemspec
+  title: Avoid using 'git' to declare files in gemspec
+  summary: >-
+    Using backtick `git ls-files` inside a gemspec to list gem files couples
+    the build to the git binary and repository state.
+  rationale: >-
+    Shelling out to git in a gemspec reduces reproducibility and adds a
+    runtime dependency on git. Use Dir.glob instead.
+  aliases:
+    - RB-E1004
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.gemspec"
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.git-in-gemspec
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Replace backtick git command with Dir.glob
+    summary: "`${captures.issue.text}` executes git in a gemspec."
+  remediation:
+    summary: >-
+      Replace backtick git ls-files with Dir.glob, e.g.
+      `Dir.glob("lib/**/*")`.

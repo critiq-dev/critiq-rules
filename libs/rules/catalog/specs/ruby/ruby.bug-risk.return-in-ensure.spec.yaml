@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.return-in-ensure.rule.yaml
+fixtures:
+  - name: flags return inside ensure
+    sourcePath: ./fixtures/ruby.bug-risk.return-in-ensure/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.return-in-ensure
+  - name: accepts return in rescue only
+    sourcePath: ./fixtures/ruby.bug-risk.return-in-ensure/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

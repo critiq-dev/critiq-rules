@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.io-select-single-arg
+  title: IO.select with single argument detected
+  summary: >-
+    `IO.select` called with only one input/output array. This pattern is hard to
+    make compatible with the Ruby 3 scheduler.
+  rationale: >-
+    `IO.select` with a single IO argument should be replaced by
+    `io.wait_readable` or `io.wait_writable` for better scheduler compatibility.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.io-select-single-arg
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.io-select-single-arg`."
+  remediation:
+    summary: >-
+      Replace `IO.select([io], [], [], timeout)` with
+      `io.wait_readable(timeout)` or `IO.select([], [io], [], timeout)` with
+      `io.wait_writable(timeout)`.

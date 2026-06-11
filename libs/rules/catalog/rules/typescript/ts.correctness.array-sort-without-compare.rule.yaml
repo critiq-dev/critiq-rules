@@ -4,7 +4,7 @@ metadata:
   id: ts.correctness.array-sort-without-compare
   title: Array.sort without compare function
   summary: Provide a compare function when sorting non-string arrays.
-  rationale: Default sort coerces elements to strings, which misorders numbers and many objects.
+  rationale: Default sort coerces elements to strings, which misorders numbers; however default sort is correct for string arrays and this is a code-style hint in most codebases.
   aliases:
     - JS-0375
   tags:
@@ -25,8 +25,8 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: medium
-    confidence: 0.88
+    severity: low
+    confidence: 0.55
     tags:
       - correctness
       - language

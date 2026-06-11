@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.unintended-string-concatenation
+  title: Possible unintended string concatenation
+  summary: >-
+    Adjacent string literals without a comma or operator between them are
+    concatenated, which is likely a missing comma in an array or method
+    argument.
+  rationale: >-
+    Ruby concatenates adjacent string literals at parse time. When used in an
+    array literal or method argument list, the coder likely intended a comma
+    separator.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.unintended-string-concatenation
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.unintended-string-concatenation`."
+  remediation:
+    summary: >-
+      If this is intended concatenation, use an explicit `+` operator. If
+      elements in an array or arguments, insert the missing comma.

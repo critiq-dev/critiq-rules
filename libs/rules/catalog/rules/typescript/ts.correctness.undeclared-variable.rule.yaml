@@ -4,7 +4,7 @@ metadata:
   id: ts.correctness.undeclared-variable
   title: Undeclared variable reference
   summary: Detects undeclared variable reference issues in JavaScript and TypeScript source.
-  rationale: Undeclared variable reference patterns are a common source of bugs and confusing runtime behavior.
+  rationale: Undeclared variable reference patterns are scope-analysis hints that rarely represent runtime bugs; most are parser artifacts or dynamic-pattern noise.
   aliases:
     - JS-0125
     - JS-0423
@@ -26,8 +26,8 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: high
-    confidence: 0.85
+    severity: low
+    confidence: 0.50
     tags:
       - correctness
       - language

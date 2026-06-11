@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.useless-access-modifier.rule.yaml
+fixtures:
+  - name: flags useless access modifiers
+    sourcePath: ./fixtures/ruby.bug-risk.useless-access-modifier/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.useless-access-modifier
+        - ruby.bug-risk.useless-access-modifier
+  - name: accepts useful access modifiers
+    sourcePath: ./fixtures/ruby.bug-risk.useless-access-modifier/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

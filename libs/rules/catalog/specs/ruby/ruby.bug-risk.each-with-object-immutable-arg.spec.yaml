@@ -1,0 +1,18 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.each-with-object-immutable-arg.rule.yaml
+fixtures:
+  - name: flags each_with_object with immutable arg
+    sourcePath: ./fixtures/ruby.bug-risk.each-with-object-immutable-arg/invalid.rb
+    expect:
+      findingCount: 4
+      allRuleIds:
+        - ruby.bug-risk.each-with-object-immutable-arg
+        - ruby.bug-risk.each-with-object-immutable-arg
+        - ruby.bug-risk.each-with-object-immutable-arg
+        - ruby.bug-risk.each-with-object-immutable-arg
+  - name: accepts mutable args
+    sourcePath: ./fixtures/ruby.bug-risk.each-with-object-immutable-arg/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.flip-flop-operator
+  title: Avoid flip-flop operators
+  summary: >-
+    The flip-flop operator (`..`/`...` in conditionals) is deprecated since
+    Ruby 2.6 and has confusing evaluation semantics.
+  rationale: >-
+    Flip-flops toggle between true and false based on state transitions rather
+    than current values, leading to hard-to-read and hard-to-debug logic.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.flip-flop-operator
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.flip-flop-operator`."
+  remediation:
+    summary: >-
+      Replace the flip-flop with an explicit state variable or use
+      `Enumerable#slice_before`/`slice_after` for collection processing.

@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.unreachable-code
+  title: Unreachable code detected
+  summary: >-
+    Code following `return`, `raise`, `exit`, `abort`, `throw`, or `fail`
+    at the same indentation level will never execute.
+  rationale: >-
+    Statements after a control-flow-terminating keyword are unreachable.
+    They likely indicate dead code or a missing conditional guard.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1072
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.unreachable-code
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.7
+    tags:
+      - ruby
+  message:
+    title: Review unreachable code after `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` follows a `return`, `raise`, or similar
+      keyword and will never execute."
+  remediation:
+    summary: >-
+      Remove the unreachable code or restructure with a conditional
+      guard.

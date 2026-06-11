@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.unsafe-number-conversion.rule.yaml
+fixtures:
+  - name: flags Integer() call
+    sourcePath: ./fixtures/ruby.bug-risk.unsafe-number-conversion/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.unsafe-number-conversion
+  - name: accepts safe conversion
+    sourcePath: ./fixtures/ruby.bug-risk.unsafe-number-conversion/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

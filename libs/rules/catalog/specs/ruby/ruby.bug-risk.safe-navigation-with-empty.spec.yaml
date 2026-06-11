@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.safe-navigation-with-empty.rule.yaml
+fixtures:
+  - name: flags safe-nav empty in condition
+    sourcePath: ./fixtures/ruby.bug-risk.safe-navigation-with-empty/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.safe-navigation-with-empty
+        - ruby.bug-risk.safe-navigation-with-empty
+  - name: accepts safe-nav empty in assignment
+    sourcePath: ./fixtures/ruby.bug-risk.safe-navigation-with-empty/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

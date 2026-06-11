@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.quality.swallowed-error
       allSeverities:
-        - medium
+        - low
   - name: ignores catch blocks that preserve failure visibility
     sourcePath: ./fixtures/ts.quality.swallowed-error/valid.ts
     expect:

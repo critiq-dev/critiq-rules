@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.renamed-column-accessed
+  title: Renamed column accessed from ActiveRecord model
+  summary: >-
+    A migration renames a database column. Model files may still reference the
+    old column name.
+  rationale: >-
+    After a rename_column migration, the old column name may still be used in
+    model queries. This rule flags the rename operation so you can verify
+    model code is updated.
+  aliases:
+    - RB-E1012
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.renamed-column-accessed
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - ruby
+  message:
+    title: Verify model references for renamed column
+    summary: >-
+      "`${captures.issue.text}` renames a column. Check model files for
+      references to the old column name."
+  remediation:
+    summary: >-
+      Update model files to reference the new column name instead of the
+      renamed one.

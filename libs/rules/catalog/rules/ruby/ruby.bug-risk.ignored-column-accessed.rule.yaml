@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.ignored-column-accessed
+  title: Ignored column accessed from ActiveRecord model
+  summary: >-
+    An ActiveRecord model references a column that has been declared in
+    self.ignored_columns.
+  rationale: >-
+    When a column is listed in ignored_columns, ActiveRecord will not include
+    it in queries. Referencing it in query methods such as find_by or where
+    can produce unexpected results or errors.
+  aliases:
+    - RB-E1010
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.ignored-column-accessed
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Access ignored column `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` references a column declared in
+      self.ignored_columns."
+  remediation:
+    summary: >-
+      Remove the column from ignored_columns if it should be queryable, or
+      remove the query method call that references it.

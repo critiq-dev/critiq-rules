@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.disjunctive-assignment-in-constructor
+  title: Avoid unnecessary disjunctive assignment in constructors
+  summary: >-
+    Instance variables are nil until assigned, so `@var ||= value` in
+    initialize is redundant.
+  rationale: >-
+    Inside initialize, instance variables are always nil. Using ||= is
+    redundant because the variable is guaranteed unset. A plain = assignment
+    is clearer and avoids confusion about intent.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.disjunctive-assignment-in-constructor
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: "`${captures.issue.text}` matches `ruby.bug-risk.disjunctive-assignment-in-constructor`."
+  remediation:
+    summary: >-
+      Replace `@var ||= value` with `@var = value` inside initialize, since
+      instance variables are always nil at construction time.

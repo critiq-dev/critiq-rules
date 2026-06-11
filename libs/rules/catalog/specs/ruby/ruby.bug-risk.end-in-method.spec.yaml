@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.end-in-method.rule.yaml
+fixtures:
+  - name: flags END block inside method
+    sourcePath: ./fixtures/ruby.bug-risk.end-in-method/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.end-in-method
+  - name: accepts END at top level
+    sourcePath: ./fixtures/ruby.bug-risk.end-in-method/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

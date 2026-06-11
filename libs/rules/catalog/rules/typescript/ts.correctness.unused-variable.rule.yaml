@@ -4,7 +4,7 @@ metadata:
   id: ts.correctness.unused-variable
   title: Unused variable
   summary: Detects unused variable issues in JavaScript and TypeScript source.
-  rationale: Unused variable patterns are a common source of bugs and confusing runtime behavior.
+  rationale: Unused variables represent dead code and cleanup opportunities; they rarely indicate correctness bugs.
   aliases:
     - JS-0128
   tags:
@@ -25,8 +25,8 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: medium
-    confidence: 0.85
+    severity: low
+    confidence: 0.55
     tags:
       - correctness
       - language

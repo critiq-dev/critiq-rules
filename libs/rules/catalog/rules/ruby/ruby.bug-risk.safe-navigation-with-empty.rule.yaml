@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.safe-navigation-with-empty
+  title: Safe navigation with empty? in conditional
+  summary: >-
+    `&.empty?`, `&.blank?`, or `&.present?` is used in a conditional
+    context. When the receiver is nil, the safe navigation returns nil,
+    which is falsy regardless of the predicate result.
+  rationale: >-
+    `foo&.empty?` returns `nil` when `foo` is nil, and `nil` is falsy.
+    This means `if foo&.empty?` will behave as `false` for both
+    "foo is nil" and "foo is empty". Use `.empty?` only after a nil
+    check.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.safe-navigation-with-empty
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.safe-navigation-with-empty`."
+  remediation:
+    summary: >-
+      Check for nil explicitly: `if foo && foo.empty?`, or use a safe
+      alternative that handles nil separately.

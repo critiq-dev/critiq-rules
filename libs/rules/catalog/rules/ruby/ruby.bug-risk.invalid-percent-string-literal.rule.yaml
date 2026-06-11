@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.invalid-percent-string-literal
+  title: Invalid construction of percent string literal
+  summary: >-
+    `%q` and `%Q` string literals use non-alphanumeric delimiters. An unmatched
+    opening delimiter makes the literal span to the end of the file, likely
+    causing a syntax error.
+  rationale: >-
+    Percent string literals must have matching opening and closing delimiters.
+    An unclosed literal causes a syntax error or unexpected behavior as the
+    parser consumes the rest of the file.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.invalid-percent-string-literal
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.90
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.invalid-percent-string-literal`."
+  remediation:
+    summary: >-
+      Close the percent literal with a matching delimiter. For `%q(`, close
+      with `)`. For `%q{`, close with `}`.

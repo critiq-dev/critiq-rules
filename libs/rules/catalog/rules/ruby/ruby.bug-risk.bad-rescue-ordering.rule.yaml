@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.bad-rescue-ordering
+  title: Bad ordering of exception rescue detected
+  summary: >-
+    A more general exception class is rescued after a more specific one.
+    Ruby matches rescues top-to-bottom, so the specific handler never runs.
+  rationale: >-
+    Rescuing Exception after StandardError means Exception will never be
+    reached since StandardError is a subclass of Exception. Rescuers should
+    be ordered from most specific to most general.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1065
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.bad-rescue-ordering
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - ruby
+  message:
+    title: Review rescue ordering in `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` is a rescue that may be unreachable due to
+      a broader rescue earlier in the block."
+  remediation:
+    summary: >-
+      Order rescue clauses from most specific to most general exception
+      classes.

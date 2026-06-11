@@ -22,7 +22,7 @@ emit:
   finding:
     category: quality
     severity: low
-    confidence: 0.85
+    confidence: 0.45
     tags:
       - quality
   message:

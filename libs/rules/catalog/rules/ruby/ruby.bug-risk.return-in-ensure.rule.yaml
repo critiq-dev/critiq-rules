@@ -1,0 +1,47 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.return-in-ensure
+  title: Avoid `return` inside `ensure` blocks
+  summary: >-
+    A `return` inside an `ensure` block discards any exception that was raised,
+    silently swallowing errors.
+  rationale: >-
+    The ensure block runs regardless of whether an exception was raised. A
+    return statement in ensure overrides the exception, making it disappear.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.return-in-ensure
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.return-in-ensure`."
+  remediation:
+    summary: >-
+      Remove the `return` from the `ensure` block. Use the `rescue` block for
+      exception handling instead.

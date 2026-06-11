@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.empty-expression.rule.yaml
+fixtures:
+  - name: flags empty expressions
+    sourcePath: ./fixtures/ruby.bug-risk.empty-expression/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.empty-expression
+        - ruby.bug-risk.empty-expression
+        - ruby.bug-risk.empty-expression
+  - name: accepts non-empty or method-call parens
+    sourcePath: ./fixtures/ruby.bug-risk.empty-expression/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

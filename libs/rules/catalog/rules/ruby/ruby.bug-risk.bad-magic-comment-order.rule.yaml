@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.bad-magic-comment-order
+  title: Bad ordering of magic comments
+  summary: >-
+    Magic comments like `# frozen_string_literal: true` must appear before any
+    code in the file. When placed after code, they are ignored.
+  rationale: >-
+    Ruby interprets magic comments (frozen_string_literal, encoding, etc.) only
+    when they appear before any non-comment code. Placing them after code
+    silently disables the intended behavior.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.bad-magic-comment-order
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.bad-magic-comment-order`."
+  remediation:
+    summary: >-
+      Move the magic comment to the first line of the file (or second, after a
+      shebang line).
