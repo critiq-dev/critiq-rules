@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.unsafe-remove-dir-all.rule.yaml
+fixtures:
+  - name: flags remove_dir_all calls
+    sourcePath: ./fixtures/rust.security.unsafe-remove-dir-all/invalid.rs
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - rust.security.unsafe-remove-dir-all
+        - rust.security.unsafe-remove-dir-all
+  - name: accepts remove_file usage
+    sourcePath: ./fixtures/rust.security.unsafe-remove-dir-all/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

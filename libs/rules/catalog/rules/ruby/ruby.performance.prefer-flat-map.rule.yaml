@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.prefer-flat-map
+  title: Prefer `flat_map` over `map { ... }.flatten`
+  summary: >-
+    `.map { ... }.flatten` iterates the collection and then flattens the result
+    in a second pass. `flat_map` combines both operations in a single pass.
+  rationale: >-
+    Using `.flat_map` instead of `.map { ... }.flatten` avoids an intermediate
+    array allocation and a second iteration, reducing memory and CPU overhead.
+  aliases:
+    - RB-PR1011
+  tags:
+    - performance
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.performance.prefer-flat-map
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - ruby
+  message:
+    title: Replace `.map { ... }.flatten` with `flat_map`
+    summary: "`${captures.issue.text}` chains `.map` and `.flatten`. Use `.flat_map` instead."
+  remediation:
+    summary: >-
+      Replace `.map { ... }.flatten` with `.flat_map { ... }` to combine
+      mapping and flattening in a single pass.

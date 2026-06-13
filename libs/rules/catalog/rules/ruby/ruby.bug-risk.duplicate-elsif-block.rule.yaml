@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.duplicate-elsif-block
+  title: Avoid duplicate elsif conditions
+  summary: >-
+    An if-elsif chain has two consecutive elsif blocks with identical
+    conditions. This is likely a copy-paste error that causes the second
+    matching branch to never execute.
+  rationale: >-
+    Duplicate elsif conditions mean the second matching branch is unreachable
+    because the first will always match first. This is almost always a
+    copy-paste error where the condition was not updated.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1086
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.duplicate-elsif-block
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.7
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.duplicate-elsif-block`."
+  remediation:
+    summary: >-
+      Update the duplicate elsif condition to a unique value, or remove the
+      redundant branch.

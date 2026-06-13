@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.alter-queries-combine.rule.yaml
+fixtures:
+  - name: flags change_column calls
+    observationPath: ./fixtures/ruby.bug-risk.alter-queries-combine/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.alter-queries-combine
+  - name: accepts change_table
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

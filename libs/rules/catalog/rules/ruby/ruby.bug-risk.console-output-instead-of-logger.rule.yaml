@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.console-output-instead-of-logger
+  title: Replace output statements with logger
+  summary: >-
+    Uses `puts`, `print`, `p`, or `pp` instead of a structured logger for
+    diagnostic output.
+  rationale: >-
+    Console output (`puts`, `print`, `p`, `pp`) bypasses log levels, formatting,
+    and routing. Use a proper logger such as `Rails.logger` or `Logger` to
+    ensure output is configurable, filterable, and structured in production.
+  aliases:
+    - RB-RL1035
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+      - "**/spec/**"
+      - "**/test/**"
+      - "**/features/**"
+match:
+  fact:
+    kind: ruby.bug-risk.console-output-instead-of-logger
+    bind: issue
+emit:
+  finding:
+    category: maintainability
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Replace `${captures.issue.text}` with a logger call
+    summary: >-
+      "`${captures.issue.text}` writes to stdout. Use a structured logger
+      instead for configurable and filterable output."
+  remediation:
+    summary: >-
+      Replace the console output call with `Rails.logger.info(...)` or
+      `logger.info(...)`.

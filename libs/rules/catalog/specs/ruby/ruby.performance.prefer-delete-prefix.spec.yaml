@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.performance.prefer-delete-prefix.rule.yaml
+fixtures:
+  - name: flags gsub with \A-anchored regex
+    observationPath: ./fixtures/ruby.performance.prefer-delete-prefix/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.performance.prefer-delete-prefix
+      allSeverities:
+        - medium
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -13,6 +13,8 @@ metadata:
     parser consumes the rest of the file.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1044
   tags:
     - rules-catalog
     - ruby

@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.bad-date-usage
+  title: Use zone-aware date methods instead of Date/DateTime
+  summary: >-
+    Prefer `Time.zone` or `Date.current` over `Date.today`, `Date.parse`,
+    `DateTime.now`, or `DateTime.current`.
+  rationale: >-
+    Rails provides time-zone-aware helpers through `Time.zone` and
+    `Date.current`. Using `Date.today` or `DateTime.now` bypasses the
+    configured time zone, leading to incorrect dates in multi-timezone
+    applications.
+  aliases:
+    - RB-RL1014
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.bad-date-usage
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` may bypass time zone configuration"
+    summary: >-
+      "`${captures.issue.text}` uses a date method that ignores the configured
+      Rails time zone. Use `Time.zone.today`, `Date.current`, or
+      `Time.zone.parse` instead."
+  remediation:
+    summary: >-
+      Replace `Date.today` with `Date.current`, `DateTime.now` with
+      `Time.zone.now`, and `Date.parse` with `Date.parse` or
+      `Time.zone.parse`.

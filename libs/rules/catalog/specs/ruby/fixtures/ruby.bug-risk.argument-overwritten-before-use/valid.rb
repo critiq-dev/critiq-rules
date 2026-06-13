@@ -3,11 +3,7 @@ def process(name)
   puts cleaned
 end
 
-def lookup(cache, id)
-  result = cache[id] || default_id
-  client.find(result)
-end
-
-def greet(name = "world")
-  puts "Hello, #{name}"
+def calculate(value, factor)
+  result = value * factor
+  result * 2
 end

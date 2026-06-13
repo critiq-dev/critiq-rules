@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.console-output-instead-of-logger.rule.yaml
+fixtures:
+  - name: "flags puts call"
+    sourcePath: ./fixtures/ruby.bug-risk.console-output-instead-of-logger/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.console-output-instead-of-logger
+  - name: "accepts logger call"
+    sourcePath: ./fixtures/ruby.bug-risk.console-output-instead-of-logger/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

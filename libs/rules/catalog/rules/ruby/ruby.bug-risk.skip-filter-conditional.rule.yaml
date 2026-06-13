@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.skip-filter-conditional
+  title: if used with only or except in skip_* filter
+  summary: >-
+    Combining `only:`/`except:` with `if:`/`unless:` on a skip filter
+    creates confusing conditional logic.
+  rationale: >-
+    Using both `only:` (or `except:`) and `if:` (or `unless:`) on
+    `skip_before_action`, `skip_after_action`, or `skip_around_action`
+    produces hard-to-reason-about conditional semantics. Prefer using
+    only one conditional mechanism to keep filter logic understandable.
+  aliases:
+    - RB-RL1030
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.skip-filter-conditional
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "Skip filter uses both only/except and if/unless"
+    summary: >-
+      This skip filter uses both `only:`/`except:` and `if:`/`unless:`
+      options simultaneously, making the skipping logic difficult to
+      understand.
+  remediation:
+    summary: >-
+      Remove one of the conditional mechanisms. Prefer `only:`/`except:`
+      for action-based filtering or `if:`/`unless:` for dynamic conditions,
+      but not both.

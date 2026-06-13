@@ -11,6 +11,8 @@ metadata:
     implement the branch or intended to use a different control flow.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1019
   tags:
     - rules-catalog
     - ruby

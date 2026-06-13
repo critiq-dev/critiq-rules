@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.enum-duplicate-values.rule.yaml
+fixtures:
+  - name: flags duplicate enum values
+    sourcePath: ./fixtures/ruby.bug-risk.enum-duplicate-values/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.enum-duplicate-values
+  - name: accepts unique enum values
+    sourcePath: ./fixtures/ruby.bug-risk.enum-duplicate-values/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

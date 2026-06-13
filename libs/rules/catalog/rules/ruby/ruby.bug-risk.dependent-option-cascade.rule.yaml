@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.dependent-option-cascade
+  title: Use of dependent option detected
+  summary: >-
+    Association `dependent:` option can lead to unexpected cascade deletes
+    or orphaned records.
+  rationale: >-
+    Using `dependent:` on associations like `has_many`, `has_one`, or
+    `belongs_to` introduces implicit cascading behavior that can cause
+    unexpected data loss. Relying on application-level callback logic
+    for cleanup is generally more predictable and auditable.
+  aliases:
+    - RB-RL1026
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.dependent-option-cascade
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` uses dependent option"
+    summary: >-
+      "`${captures.issue.text}` specifies `dependent:`, creating implicit
+      cascade behavior. Consider explicit callback-based cleanup."
+  remediation:
+    summary: >-
+      Remove `dependent:` and handle record cleanup explicitly via callbacks
+      or service objects.

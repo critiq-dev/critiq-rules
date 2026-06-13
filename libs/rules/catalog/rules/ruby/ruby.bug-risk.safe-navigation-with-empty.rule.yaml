@@ -12,6 +12,8 @@ metadata:
     This means `if foo&.empty?` will behave as `false` for both
     "foo is nil" and "foo is empty". Use `.empty?` only after a nil
     check.
+  aliases:
+    - RB-LI1061
   detection:
     kind: pattern
   tags:

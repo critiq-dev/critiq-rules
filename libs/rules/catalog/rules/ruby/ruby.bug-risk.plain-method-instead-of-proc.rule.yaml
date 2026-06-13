@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.plain-method-instead-of-proc
+  title: Use lambda/proc instead of a plain method call
+  summary: >-
+    A `method(:name)` call is passed directly to a block-accepting method.
+    Use `&method(:name)` or an explicit block/lambda instead.
+  rationale: >-
+    When `method(:name)` is passed as a bare argument to an enumerable method,
+    it does not behave as a block reference. Use `&method(:name)` to convert
+    the method into a Proc, which is the idiomatic way to pass methods as blocks.
+  aliases:
+    - RB-RL1052
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.plain-method-instead-of-proc
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: "Use `&method(:...)` instead of bare `method(:...)`"
+    summary: "'${captures.issue.text}' passes a bare method reference. Use the `&method(:name)` syntax to convert it to a block."
+  remediation:
+    summary: >-
+      Replace `method(:name)` with `&method(:name)` to properly convert the
+      method into a block reference.

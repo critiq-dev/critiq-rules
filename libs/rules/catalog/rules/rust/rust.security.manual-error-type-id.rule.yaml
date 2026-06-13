@@ -1,0 +1,59 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.manual-error-type-id
+  title: Avoid overriding `Error::type_id` manually
+  summary: >-
+    Implementing `fn type_id` inside `impl Error for` blocks leaks internal type
+    details and breaks trait object safety guarantees.
+  rationale: >-
+    Manual `type_id` overrides violate the intended abstraction of the `Error`
+    trait and are associated with CVEs such as CVE-2019-12083.
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-200
+      title: Exposure of Sensitive Information to an Unauthorized Actor
+    - kind: url
+      title: CVE-2019-12083
+      url: https://nvd.nist.gov/vuln/detail/CVE-2019-12083
+  tags:
+    - security
+    - rust
+    - error-handling
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1001
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.manual-error-type-id
+    bind: issue
+emit:
+  finding:
+    category: security.unsafe-implementation
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - error-handling
+  message:
+    title: Remove manual `fn type_id` override in Error impl near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` manually overrides Error::type_id."
+  remediation:
+    summary: >-
+      Remove the `fn type_id` override from the `Error` implementation. Rely on
+      the trait's default implementation instead.

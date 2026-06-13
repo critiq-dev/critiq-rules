@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.relative-date-as-constant
+  title: Relative date/time assigned to a constant
+  summary: >-
+    Constants should not be assigned relative date/time expressions
+    because they are evaluated at load time, not at runtime.
+  rationale: >-
+    A constant like `EXPIRES = 1.week.since` is evaluated when the file
+    is loaded, not when the constant is referenced. This means the value
+    is frozen at load time and will be stale. Use a method or lambda
+    instead for dynamic date/time values.
+  aliases:
+    - RB-RL1046
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.relative-date-as-constant
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: "`${captures.issue.text}` assigns a relative date to a constant"
+    summary: >-
+      "`${captures.issue.text}` assigns a dynamic date/time value to a
+      constant. This will be frozen at load time."
+  remediation:
+    summary: >-
+      Replace the constant with a method call, or use a lambda:
+      `EXPIRES = -> { 1.week.since }`.

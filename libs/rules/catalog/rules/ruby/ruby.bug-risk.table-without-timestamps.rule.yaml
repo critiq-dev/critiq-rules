@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.table-without-timestamps
+  title: Tables should be created with timestamps
+  summary: >-
+    Add `t.timestamps` to `create_table` blocks to include `created_at` and
+    `updated_at` columns.
+  rationale: >-
+    Rails conventions expect all tables to include `created_at` and
+    `updated_at` timestamp columns. Skipping timestamps can break conventions
+    and make auditing record changes more difficult.
+  aliases:
+    - RB-RL1013
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - migration
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.table-without-timestamps
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+      - migration
+  message:
+    title: "`${captures.issue.text}` is missing timestamps"
+    summary: >-
+      "`${captures.issue.text}` does not include `t.timestamps`. Add timestamp
+      columns to follow Rails conventions."
+  remediation:
+    summary: >-
+      Add `t.timestamps` inside the `create_table` block.

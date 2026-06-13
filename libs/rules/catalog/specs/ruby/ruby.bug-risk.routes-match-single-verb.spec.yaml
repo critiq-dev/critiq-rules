@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.routes-match-single-verb.rule.yaml
+fixtures:
+  - name: flags match with single via option
+    sourcePath: ./fixtures/ruby.bug-risk.routes-match-single-verb/config/routes/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.routes-match-single-verb
+  - name: "accepts match with multiple verbs or via: :all"
+    sourcePath: ./fixtures/ruby.bug-risk.routes-match-single-verb/config/routes/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.class-name-should-be-string.rule.yaml
+fixtures:
+  - name: flags class_name with constant
+    sourcePath: ./fixtures/ruby.bug-risk.class-name-should-be-string/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.class-name-should-be-string
+  - name: accepts class_name with string
+    sourcePath: ./fixtures/ruby.bug-risk.class-name-should-be-string/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

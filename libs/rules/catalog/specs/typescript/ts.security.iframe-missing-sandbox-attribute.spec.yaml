@@ -13,3 +13,13 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: accepts iframe with allowFullScreen (trusted embed)
+    sourcePath: ./fixtures/javascript-public-security-directory/iframe-missing-sandbox.allowfullscreen-valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: accepts iframe with allow attribute (explicit permissions)
+    sourcePath: ./fixtures/javascript-public-security-directory/iframe-missing-sandbox.allow-valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

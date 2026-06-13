@@ -11,6 +11,8 @@ metadata:
     leftover placeholder or a typo that should be removed or replaced.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1017
   tags:
     - rules-catalog
     - ruby

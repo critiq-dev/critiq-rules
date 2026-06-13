@@ -3,7 +3,7 @@ def process(name)
   puts name
 end
 
-def lookup(id, cache)
-  id = cache[id] || default_id
-  client.find(id)
+def calculate(value, factor)
+  value = factor * 2
+  value * 3
 end

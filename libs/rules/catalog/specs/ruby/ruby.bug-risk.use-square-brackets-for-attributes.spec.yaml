@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.use-square-brackets-for-attributes.rule.yaml
+fixtures:
+  - name: "flags read_attribute/write_attribute calls"
+    sourcePath: ./fixtures/ruby.bug-risk.use-square-brackets-for-attributes/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.use-square-brackets-for-attributes
+  - name: accepts square bracket syntax
+    sourcePath: ./fixtures/ruby.bug-risk.use-square-brackets-for-attributes/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

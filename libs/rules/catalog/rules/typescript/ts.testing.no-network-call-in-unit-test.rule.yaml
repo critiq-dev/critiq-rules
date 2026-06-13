@@ -18,7 +18,13 @@ scope:
   paths:
     exclude:
       - "**/e2e/**"
+      - "**/browser/**"
+      - "**/smoke/**"
+      - "**/sandbox/**"
+      - "**/setup/**"
       - "**/*.integration.test.*"
+      - "**/*.browser.test.*"
+      - "**/*.smoke.test.*"
 match:
   fact:
     kind: testing.real-network-in-unit-test
@@ -26,7 +32,7 @@ match:
 emit:
   finding:
     category: quality.testing
-    severity: medium
+    severity: low
     confidence: 0.74
     tags:
       - testing

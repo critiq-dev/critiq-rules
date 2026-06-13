@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.invalid-integer-times
+  title: Invalid value for `Integer#times`
+  summary: >-
+    The `Integer#times` method is called with an integer literal value
+    that produces a no-op or unexpected behavior (`0.times`, `1.times`,
+    or negative values).
+  rationale: >-
+    `0.times` never iterates, `1.times` is equivalent to a single call
+    (use the method directly), and negative values raise an error or
+    produce confusing behavior. These patterns indicate a bug or
+    misunderstanding of the API.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1101
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.invalid-integer-times
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.90
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.invalid-integer-times`."
+  remediation:
+    summary: >-
+      Replace with a direct method call or adjust the iteration count to
+      a meaningful value greater than 1.

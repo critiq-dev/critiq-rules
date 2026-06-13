@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.identical-binary-operands.rule.yaml
+fixtures:
+  - name: flags identical binary operand patterns
+    sourcePath: ./fixtures/ruby.bug-risk.identical-binary-operands/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.identical-binary-operands
+        - ruby.bug-risk.identical-binary-operands
+        - ruby.bug-risk.identical-binary-operands
+  - name: accepts different operands and boolean idioms
+    sourcePath: ./fixtures/ruby.bug-risk.identical-binary-operands/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.self-assignment
+  title: Self assignment detected
+  summary: >-
+    A variable, constant, or multi-assignment is assigned to itself. This
+    is likely a copy-paste error that makes the assignment a no-op.
+  rationale: >-
+    Self-assignment (`foo = foo`) is redundant and indicates the developer
+    likely intended to assign from a different source. Constant
+    self-assignment (`FOO = FOO`) and multi-variable self-assignment
+    (`a, b = a, b`) are similarly suspicious.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1092
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.self-assignment
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.self-assignment`."
+  remediation:
+    summary: >-
+      Review the assignment. If the intent was to assign a computed value,
+      verify the source operand is correct. Otherwise, remove the
+      redundant assignment.

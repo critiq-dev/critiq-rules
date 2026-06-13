@@ -11,6 +11,8 @@ metadata:
     ensure clause should be removed entirely.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1016
   tags:
     - rules-catalog
     - ruby

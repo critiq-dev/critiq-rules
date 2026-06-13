@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.prefer-delete-suffix
+  title: Use delete_suffix instead of gsub with \z-anchored regex
+  summary: >-
+    Calling `gsub(/suffix\z/, '')` compiles and runs a regex to strip a literal
+    suffix. `String#delete_suffix` is faster and clearer.
+  rationale: >-
+    Using `gsub` with a `\z`-anchored regex and an empty replacement string
+    to strip a suffix incurs regex compilation and matching overhead.
+    `String#delete_suffix` performs a simple string comparison, which is
+    significantly faster and more readable.
+  aliases:
+    - RB-PR1027
+  detection:
+    kind: pattern
+  tags:
+    - performance
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.performance.prefer-delete-suffix
+    bind: issue
+emit:
+  finding:
+    category: performance.computation
+    severity: medium
+    confidence: 0.75
+    tags:
+      - performance
+      - ruby
+  message:
+    title: Replace `gsub(/...\z/, '')` with `delete_suffix`
+    summary: "'${captures.issue.text}' uses a regex to strip a suffix. Use `delete_suffix` instead."
+  remediation:
+    summary: >-
+      Replace `str.gsub(/suffix\z/, '')` with `str.delete_suffix('suffix')`.
+      `delete_suffix` avoids regex overhead and expresses intent more clearly.
+      Note: `delete_suffix` only works for literal suffixes — verify the regex
+      body contains no metacharacters before applying this change.

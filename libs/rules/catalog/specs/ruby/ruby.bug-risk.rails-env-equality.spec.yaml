@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.rails-env-equality.rule.yaml
+fixtures:
+  - name: flags Rails.env == "production"
+    sourcePath: ./fixtures/ruby.bug-risk.rails-env-equality/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.rails-env-equality
+        - ruby.bug-risk.rails-env-equality
+  - name: accepts predicate method
+    sourcePath: ./fixtures/ruby.bug-risk.rails-env-equality/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

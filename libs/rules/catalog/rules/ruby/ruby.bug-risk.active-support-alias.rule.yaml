@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.active-support-alias
+  title: Use of ActiveSupport alias instead of core Ruby method
+  summary: >-
+    An ActiveSupport alias method (`starts_with?`, `ends_with?`, `append`,
+    `prepend`) is used instead of the core Ruby equivalent.
+  rationale: >-
+    ActiveSupport provides aliases for Ruby core methods. Using the core
+    equivalents (`start_with?`, `end_with?`, `<<`, `unshift`) reduces
+    dependencies and improves portability.
+  aliases:
+    - RB-RL1004
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-support
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.active-support-alias
+    bind: issue
+emit:
+  finding:
+    category: correctness.deprecation
+    severity: medium
+    confidence: 0.8
+    tags:
+      - ruby
+  message:
+    title: "Prefer Ruby core method over ActiveSupport alias `${captures.issue.text}`"
+    summary: >-
+      "`${captures.issue.text}` is an ActiveSupport alias. Use the core Ruby
+      equivalent instead."
+  remediation:
+    summary: >-
+      Replace `starts_with?` with `start_with?`, `ends_with?` with `end_with?`,
+      `append` with `<<`, and `prepend` with `unshift`.

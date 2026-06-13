@@ -11,6 +11,8 @@ metadata:
     overwritten. This is usually a copy-paste or merge conflict artifact.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1013
   tags:
     - rules-catalog
     - ruby

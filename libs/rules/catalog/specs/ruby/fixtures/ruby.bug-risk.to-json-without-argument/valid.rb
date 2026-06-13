@@ -1,6 +1,5 @@
-require 'json'
-
 data = { name: "test" }
 serialized = data.to_json(state)
 
-json = JSON.generate(data)
+list = [1, 2, 3]
+output = JSON.generate(list)

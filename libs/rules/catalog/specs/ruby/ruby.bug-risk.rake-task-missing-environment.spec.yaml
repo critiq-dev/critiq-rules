@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.rake-task-missing-environment.rule.yaml
+fixtures:
+  - name: "flags task without environment dependency"
+    sourcePath: ./fixtures/ruby.bug-risk.rake-task-missing-environment/invalid.rake
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.rake-task-missing-environment
+  - name: "accepts task with environment dependency"
+    sourcePath: ./fixtures/ruby.bug-risk.rake-task-missing-environment/valid.rake
+    expect:
+      findingCount: 0
+      allRuleIds: []

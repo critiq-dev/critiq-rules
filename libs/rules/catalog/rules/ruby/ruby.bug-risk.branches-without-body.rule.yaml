@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.branches-without-body
+  title: If/Elsif/Unless branches without a body detected
+  summary: >-
+    An `if`, `elsif`, or `unless` branch has no body expression. Add
+    the intended behavior or remove the dead branch.
+  rationale: >-
+    A conditional branch without a body is dead code. The developer likely
+    forgot to implement the branch or intended a different control flow.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1094
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.branches-without-body
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.branches-without-body`."
+  remediation:
+    summary: >-
+      Add a body expression to the branch or remove it if the branch is
+      not needed.

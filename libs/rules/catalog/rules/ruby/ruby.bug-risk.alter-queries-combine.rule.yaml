@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.alter-queries-combine
+  title: Combine alter queries in migrations
+  summary: >-
+    Prefer `change_table` with multiple column changes over repeated
+    `change_column` calls.
+  rationale: >-
+    Combining column alterations in a single `change_table` block groups
+    related schema changes and reduces the number of database round-trips
+    during migration execution.
+  aliases:
+    - RB-RL1012
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - migration
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.alter-queries-combine
+    bind: issue
+emit:
+  finding:
+    category: performance.database
+    severity: low
+    confidence: 0.8
+    tags:
+      - ruby
+      - rails
+      - migration
+  message:
+    title: "`${captures.issue.text}` can be combined"
+    summary: >-
+      "`${captures.issue.text}` alters a column individually. Consider grouping
+      multiple column changes into a single `change_table` block."
+  remediation:
+    summary: >-
+      Replace multiple `change_column` calls with a `change_table` block that
+      contains all column changes.

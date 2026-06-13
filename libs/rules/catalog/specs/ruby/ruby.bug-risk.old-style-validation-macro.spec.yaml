@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.old-style-validation-macro.rule.yaml
+fixtures:
+  - name: "flags validates_presence_of"
+    sourcePath: ./fixtures/ruby.bug-risk.old-style-validation-macro/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.old-style-validation-macro
+  - name: "accepts modern validates syntax"
+    sourcePath: ./fixtures/ruby.bug-risk.old-style-validation-macro/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

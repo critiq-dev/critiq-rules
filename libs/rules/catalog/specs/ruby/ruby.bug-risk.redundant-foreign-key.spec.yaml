@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.redundant-foreign-key.rule.yaml
+fixtures:
+  - name: flags redundant foreign_key matching convention
+    sourcePath: ./fixtures/ruby.bug-risk.redundant-foreign-key/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.redundant-foreign-key
+  - name: accepts non-redundant foreign_key
+    sourcePath: ./fixtures/ruby.bug-risk.redundant-foreign-key/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

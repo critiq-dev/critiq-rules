@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.mixed-regex-captures.rule.yaml
+fixtures:
+  - name: flags mixed named and numbered captures
+    sourcePath: ./fixtures/ruby.bug-risk.mixed-regex-captures/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.mixed-regex-captures
+        - ruby.bug-risk.mixed-regex-captures
+  - name: accepts only named or only numbered captures
+    sourcePath: ./fixtures/ruby.bug-risk.mixed-regex-captures/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

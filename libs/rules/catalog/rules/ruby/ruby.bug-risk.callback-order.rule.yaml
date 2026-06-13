@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.callback-order
+  title: Incorrect order of ActiveRecord callbacks
+  summary: >-
+    ActiveRecord lifecycle callbacks (before_validation, after_validation,
+    before_save, around_save, before_create, around_create, after_create,
+    after_save, after_commit) should appear in that order within a class body.
+  rationale: >-
+    Declaring callbacks out of their natural lifecycle order is misleading
+    and can hide subtle timing bugs when callbacks depend on side-effects
+    established by earlier lifecycle phases.
+  aliases:
+    - RB-LI1103
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.callback-order
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - ruby
+  message:
+    title: Callback `${captures.issue.text}` appears out of lifecycle order
+    summary: >-
+      "`${captures.issue.text}` is declared after an earlier-lifecycle callback,
+      which may produce surprising execution order."
+  remediation:
+    summary: >-
+      Reorder callbacks to follow the standard lifecycle: before_validation,
+      after_validation, before_save, around_save, before_create, around_create,
+      after_create, after_save, after_commit.

@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.merge-single-key
+  title: Prefer direct assignment over `merge!` with a single key
+  summary: >-
+    `.merge!({key: value})` for a single key creates an intermediate hash.
+    Use direct assignment `self[:key] = value` instead.
+  rationale: >-
+    Creating a hash literal and passing it to `merge!` allocates a temporary
+    hash object. Direct key assignment avoids the intermediate allocation and
+    is more readable for single-key updates.
+  aliases:
+    - RB-PR1017
+  tags:
+    - performance
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.performance.merge-single-key
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - ruby
+  message:
+    title: Use direct assignment instead of single-key `merge!`
+    summary: "`${captures.issue.text}` creates a temporary hash for a single-key update. Use direct assignment."
+  remediation:
+    summary: >-
+      Replace `hash.merge!(key: value)` with `hash[:key] = value` to avoid
+      allocating a temporary hash object.

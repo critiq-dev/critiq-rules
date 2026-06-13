@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.redundant-foreign-key
+  title: Redundant `foreign_key` in ActiveRecord association
+  summary: >-
+    Explicit `foreign_key` matches the Rails default convention
+    (`<association_name>_id`). The explicit declaration is redundant.
+  rationale: >-
+    Rails automatically infers the foreign key column from the association name.
+    Declaring an explicit `foreign_key` that matches the default adds noise
+    without changing behavior.
+  aliases:
+    - RB-LI1105
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.redundant-foreign-key
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - ruby
+  message:
+    title: Redundant `foreign_key` on `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` declares an explicit foreign_key that matches
+      the Rails default convention."
+  remediation:
+    summary: >-
+      Remove the explicit `foreign_key` when it matches the Rails default
+      convention (`<association_name>_id`).

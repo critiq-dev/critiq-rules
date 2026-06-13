@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.performance.regex-match-over-match.rule.yaml
+fixtures:
+  - name: flags match in condition
+    observationPath: ./fixtures/ruby.performance.regex-match-over-match/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.performance.regex-match-over-match
+      allSeverities:
+        - medium
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

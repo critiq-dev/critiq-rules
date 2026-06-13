@@ -13,6 +13,8 @@ metadata:
     but produces unexpected results.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1026
   tags:
     - rules-catalog
     - ruby

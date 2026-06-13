@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.identical-binary-operands
+  title: Binary operator with identical operands detected
+  summary: >-
+    A binary expression uses the same variable for both the left and
+    right operand. This is likely a copy-paste error and produces a
+    predictable result that may not be intended.
+  rationale: >-
+    Expressions such as `a + a`, `a - a`, `a * a`, `a / a`, `a | a`,
+    `a & a`, `a ^ a`, or `a <=> a` with identical operands typically
+    indicate a bug where different values were meant to be used.
+    Logical operators (`||`, `&&`) are excluded as they follow idiomatic
+    patterns.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1093
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.identical-binary-operands
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.7
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.identical-binary-operands`."
+  remediation:
+    summary: >-
+      Verify that both operands should be identical. If not, replace the
+      incorrect operand with the intended value.

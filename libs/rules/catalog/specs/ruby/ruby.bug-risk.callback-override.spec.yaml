@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.callback-override.rule.yaml
+fixtures:
+  - name: flags duplicate after_commit with same method
+    sourcePath: ./fixtures/ruby.bug-risk.callback-override/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.callback-override
+  - name: accepts distinct callback method names
+    sourcePath: ./fixtures/ruby.bug-risk.callback-override/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

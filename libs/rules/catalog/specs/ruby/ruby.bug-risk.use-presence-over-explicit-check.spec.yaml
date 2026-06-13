@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.use-presence-over-explicit-check.rule.yaml
+fixtures:
+  - name: "flags a.present? ? a : nil"
+    sourcePath: ./fixtures/ruby.bug-risk.use-presence-over-explicit-check/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.use-presence-over-explicit-check
+  - name: "accepts a.presence"
+    sourcePath: ./fixtures/ruby.bug-risk.use-presence-over-explicit-check/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

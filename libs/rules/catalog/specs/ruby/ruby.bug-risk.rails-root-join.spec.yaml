@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.rails-root-join.rule.yaml
+fixtures:
+  - name: flags Rails.root + string concat
+    sourcePath: ./fixtures/ruby.bug-risk.rails-root-join/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.rails-root-join
+        - ruby.bug-risk.rails-root-join
+        - ruby.bug-risk.rails-root-join
+  - name: accepts Rails.root.join
+    sourcePath: ./fixtures/ruby.bug-risk.rails-root-join/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

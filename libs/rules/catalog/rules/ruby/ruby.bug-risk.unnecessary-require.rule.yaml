@@ -12,6 +12,9 @@ metadata:
     auto-loaded.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1049
+    - RB-LI1096
   tags:
     - rules-catalog
     - ruby

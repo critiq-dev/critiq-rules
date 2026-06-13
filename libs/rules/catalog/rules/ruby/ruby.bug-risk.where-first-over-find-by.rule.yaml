@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.where-first-over-find-by
+  title: Consider using where.first instead of find_by
+  summary: >-
+    `find_by` is not incorrect, but `where(...).first` is more explicit and
+    consistent with other query chain patterns.
+  rationale: >-
+    `find_by` is a valid Rails query method, but using `where(conditions).first`
+    is more explicit about returning a single record and is consistent with
+    chainable query builder patterns. This is a style suggestion, not a
+    correctness issue.
+  aliases:
+    - RB-RL1023
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-record
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.where-first-over-find-by
+    bind: issue
+emit:
+  finding:
+    category: correctness.performance
+    severity: low
+    confidence: 0.6
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "Consider `where(...).first` instead of `${captures.issue.text}`"
+    summary: >-
+      "`${captures.issue.text}` can be written as `where(...).first` for
+      consistency with query chain patterns."
+  remediation:
+    summary: >-
+      Replace `Model.find_by(column: value)` with
+      `Model.where(column: value).first`.

@@ -11,6 +11,8 @@ metadata:
     string and is always a placeholder that was never filled in.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1018
   tags:
     - rules-catalog
     - ruby

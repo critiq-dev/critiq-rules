@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.active-record-base-subclass
+  title: Rails 5+ models should subclass ApplicationRecord
+  summary: >-
+    Model class directly subclasses `ActiveRecord::Base` instead of
+    `ApplicationRecord`.
+  rationale: >-
+    Rails 5+ generators create models that inherit from `ApplicationRecord`.
+    Directly subclassing `ActiveRecord::Base` bypasses shared concerns,
+    default scopes, and other behavior defined in `ApplicationRecord`.
+  aliases:
+    - RB-RL1008
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-record
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.active-record-base-subclass
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` should subclass ApplicationRecord"
+    summary: >-
+      "`${captures.issue.text}` subclasses `ActiveRecord::Base` directly.
+      Inherit from `ApplicationRecord` instead to pick up shared configuration."
+  remediation:
+    summary: >-
+      Change `class SomeModel < ActiveRecord::Base` to
+      `class SomeModel < ApplicationRecord`.

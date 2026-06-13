@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.active-job-base-subclass.rule.yaml
+fixtures:
+  - name: flags direct ActiveJob::Base subclass
+    sourcePath: ./fixtures/ruby.bug-risk.active-job-base-subclass/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.active-job-base-subclass
+  - name: accepts ApplicationJob subclass
+    sourcePath: ./fixtures/ruby.bug-risk.active-job-base-subclass/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

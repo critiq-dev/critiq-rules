@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.helper-instance-variables.rule.yaml
+fixtures:
+  - name: flags instance variable in helper
+    sourcePath: ./fixtures/ruby.bug-risk.helper-instance-variables/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.helper-instance-variables
+  - name: accepts instance variable outside helper
+    sourcePath: ./fixtures/ruby.bug-risk.helper-instance-variables/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

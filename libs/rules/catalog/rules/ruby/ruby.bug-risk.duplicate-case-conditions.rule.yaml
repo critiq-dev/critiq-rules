@@ -11,6 +11,8 @@ metadata:
     branch is unreachable. This is almost always a copy-paste error.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1011
   tags:
     - rules-catalog
     - ruby

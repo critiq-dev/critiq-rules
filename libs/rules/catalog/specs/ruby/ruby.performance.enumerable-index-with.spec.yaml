@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.performance.enumerable-index-with.rule.yaml
+fixtures:
+  - name: "flags map+to_h with element as key"
+    sourcePath: ./fixtures/ruby.performance.enumerable-index-with/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.performance.enumerable-index-with
+  - name: "accepts .map without .to_h"
+    sourcePath: ./fixtures/ruby.performance.enumerable-index-with/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.use-blank-simplify
+  title: Simplify conditional using Object#blank?
+  summary: >-
+    Replace `obj.nil? || obj.empty?` with `obj.blank?` for simpler code.
+  rationale: >-
+    Rails' `blank?` method combines nil checking and empty checking into one
+    call, making the intent clearer and reducing duplication of the receiver.
+  aliases:
+    - RB-RL1011
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.use-blank-simplify
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: low
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` can be simplified with `blank?`"
+    summary: >-
+      "`${captures.issue.text}` checks for nil and empty on the same object.
+      Use `blank?` for a single-call check."
+  remediation:
+    summary: >-
+      Replace `obj.nil? || obj.empty?` with `obj.blank?`.

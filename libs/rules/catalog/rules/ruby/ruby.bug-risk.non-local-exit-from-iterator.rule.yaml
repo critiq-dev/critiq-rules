@@ -12,6 +12,8 @@ metadata:
     without values also silently return `nil`, hiding bugs.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1040
   tags:
     - rules-catalog
     - ruby

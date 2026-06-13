@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.allow-blank-with-delegate.rule.yaml
+fixtures:
+  - name: flags allow_blank with delegate
+    sourcePath: ./fixtures/ruby.bug-risk.allow-blank-with-delegate/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.allow-blank-with-delegate
+  - name: accepts allow_nil with delegate
+    sourcePath: ./fixtures/ruby.bug-risk.allow-blank-with-delegate/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.use-square-brackets-for-attributes
+  title: Square brackets are preferred for accessing/writing attributes
+  summary: >-
+    Uses `read_attribute` or `write_attribute` instead of the shorter
+    `self[:attr]` / `self[:attr] = val` syntax.
+  rationale: >-
+    ActiveModel provides `read_attribute` and `write_attribute` but the
+    square bracket syntax (`self[:attr]`, `self[:attr] = val`) is more
+    concise and idiomatic. The longer form offers no additional benefit.
+  aliases:
+    - RB-RL1041
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.use-square-brackets-for-attributes
+    bind: issue
+emit:
+  finding:
+    category: maintainability
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Replace `${captures.issue.text}` with bracket syntax
+    summary: >-
+      "`${captures.issue.text}` should use square brackets for attribute
+      access (e.g. `self[:attr]` / `self[:attr] = val`)."
+  remediation:
+    summary: >-
+      Replace `read_attribute(:attr)` with `self[:attr]` and
+      `write_attribute(:attr, val)` with `self[:attr] = val`.

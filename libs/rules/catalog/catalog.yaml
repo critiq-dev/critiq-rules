@@ -1376,6 +1376,54 @@ rules:
     rulePath: ./rules/ruby/ruby.performance.no-unbounded-concurrency.rule.yaml
     presets:
       - strict
+  - id: ruby.performance.no-static-size-computation
+    rulePath: ./rules/ruby/ruby.performance.no-static-size-computation.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.prefer-flat-map
+    rulePath: ./rules/ruby/ruby.performance.prefer-flat-map.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.efficient-hash-search
+    rulePath: ./rules/ruby/ruby.performance.efficient-hash-search.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.prefer-struct-over-openstruct
+    rulePath: ./rules/ruby/ruby.performance.prefer-struct-over-openstruct.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.range-cover-over-include
+    rulePath: ./rules/ruby/ruby.performance.range-cover-over-include.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.yield-over-block-call
+    rulePath: ./rules/ruby/ruby.performance.yield-over-block-call.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.regex-match-over-match
+    rulePath: ./rules/ruby/ruby.performance.regex-match-over-match.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.merge-single-key
+    rulePath: ./rules/ruby/ruby.performance.merge-single-key.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.enumerable-index-by
+    rulePath: ./rules/ruby/ruby.performance.enumerable-index-by.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.enumerable-index-with
+    rulePath: ./rules/ruby/ruby.performance.enumerable-index-with.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.prefer-delete-prefix
+    rulePath: ./rules/ruby/ruby.performance.prefer-delete-prefix.rule.yaml
+    presets:
+      - strict
+  - id: ruby.performance.prefer-delete-suffix
+    rulePath: ./rules/ruby/ruby.performance.prefer-delete-suffix.rule.yaml
+    presets:
+      - strict
   - id: rust.correctness.block-on-in-async
     rulePath: ./rules/rust/rust.correctness.block-on-in-async.rule.yaml
     presets:
@@ -3515,6 +3563,20 @@ rules:
     rulePath: ./rules/ruby/ruby.bug-risk.renamed-column-accessed.rule.yaml
     presets:
       - strict
+  # Batch 05 (RB-LI) — ambiguous method invocation rules
+  - id: ruby.bug-risk.ambiguous-block-association
+    rulePath: ./rules/ruby/ruby.bug-risk.ambiguous-block-association.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.ambiguous-operator-argument
+    rulePath: ./rules/ruby/ruby.bug-risk.ambiguous-operator-argument.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.ambiguous-regexp-literal
+    rulePath: ./rules/ruby/ruby.bug-risk.ambiguous-regexp-literal.rule.yaml
+    presets:
+      - strict
+
   # Batch 06 (RB-LI) — bug risk / framework rules
   - id: ruby.bug-risk.deprecated-big-decimal-new
     rulePath: ./rules/ruby/ruby.bug-risk.deprecated-big-decimal-new.rule.yaml
@@ -3699,6 +3761,228 @@ rules:
     rulePath: ./rules/ruby/ruby.bug-risk.useless-access-modifier.rule.yaml
     presets:
       - strict
+  # Batch 12 (RB-LI) — bug risk / framework rules
+  - id: ruby.bug-risk.useless-comparison
+    rulePath: ./rules/ruby/ruby.bug-risk.useless-comparison.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.else-without-rescue
+    rulePath: ./rules/ruby/ruby.bug-risk.else-without-rescue.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.useless-setter-call
+    rulePath: ./rules/ruby/ruby.bug-risk.useless-setter-call.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.mixed-regex-captures
+    rulePath: ./rules/ruby/ruby.bug-risk.mixed-regex-captures.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.unqualified-constant
+    rulePath: ./rules/ruby/ruby.bug-risk.unqualified-constant.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.duplicate-elsif-block
+    rulePath: ./rules/ruby/ruby.bug-risk.duplicate-elsif-block.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.unreachable-loop
+    rulePath: ./rules/ruby/ruby.bug-risk.unreachable-loop.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.multiple-rescues-for-same-exception
+    rulePath: ./rules/ruby/ruby.bug-risk.multiple-rescues-for-same-exception.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.self-assignment
+    rulePath: ./rules/ruby/ruby.bug-risk.self-assignment.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.identical-binary-operands
+    rulePath: ./rules/ruby/ruby.bug-risk.identical-binary-operands.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.branches-without-body
+    rulePath: ./rules/ruby/ruby.bug-risk.branches-without-body.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.trailing-comma-attribute
+    rulePath: ./rules/ruby/ruby.bug-risk.trailing-comma-attribute.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.equal-instead-of-equal
+    rulePath: ./rules/ruby/ruby.bug-risk.equal-instead-of-equal.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.invalid-integer-times
+    rulePath: ./rules/ruby/ruby.bug-risk.invalid-integer-times.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.callback-order
+    rulePath: ./rules/ruby/ruby.bug-risk.callback-order.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.callback-override
+    rulePath: ./rules/ruby/ruby.bug-risk.callback-override.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.constant-in-block
+    rulePath: ./rules/ruby/ruby.bug-risk.constant-in-block.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.irreversible-migration
+    rulePath: ./rules/ruby/ruby.bug-risk.irreversible-migration.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.redundant-foreign-key
+    rulePath: ./rules/ruby/ruby.bug-risk.redundant-foreign-key.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.routes-match-single-verb
+    rulePath: ./rules/ruby/ruby.bug-risk.routes-match-single-verb.rule.yaml
+    presets:
+      - recommended
+      - strict
+  # Batch 11 (RB-RL) — bug risk / framework rules
+  - id: ruby.bug-risk.deprecated-filter-methods
+    rulePath: ./rules/ruby/ruby.bug-risk.deprecated-filter-methods.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.active-record-alias
+    rulePath: ./rules/ruby/ruby.bug-risk.active-record-alias.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.active-record-method-override
+    rulePath: ./rules/ruby/ruby.bug-risk.active-record-method-override.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.active-support-alias
+    rulePath: ./rules/ruby/ruby.bug-risk.active-support-alias.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.controller-base-subclass
+    rulePath: ./rules/ruby/ruby.bug-risk.controller-base-subclass.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.active-job-base-subclass
+    rulePath: ./rules/ruby/ruby.bug-risk.active-job-base-subclass.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.action-mailer-base-subclass
+    rulePath: ./rules/ruby/ruby.bug-risk.action-mailer-base-subclass.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.active-record-base-subclass
+    rulePath: ./rules/ruby/ruby.bug-risk.active-record-base-subclass.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.assert-not-usage
+    rulePath: ./rules/ruby/ruby.bug-risk.assert-not-usage.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.deprecated-belongs-to-required
+    rulePath: ./rules/ruby/ruby.bug-risk.deprecated-belongs-to-required.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.use-blank-simplify
+    rulePath: ./rules/ruby/ruby.bug-risk.use-blank-simplify.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.alter-queries-combine
+    rulePath: ./rules/ruby/ruby.bug-risk.alter-queries-combine.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.table-without-timestamps
+    rulePath: ./rules/ruby/ruby.bug-risk.table-without-timestamps.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.bad-date-usage
+    rulePath: ./rules/ruby/ruby.bug-risk.bad-date-usage.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.use-delegate
+    rulePath: ./rules/ruby/ruby.bug-risk.use-delegate.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.allow-blank-with-delegate
+    rulePath: ./rules/ruby/ruby.bug-risk.allow-blank-with-delegate.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.all-each-to-find-each
+    rulePath: ./rules/ruby/ruby.bug-risk.all-each-to-find-each.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.deprecated-find-by-dynamic
+    rulePath: ./rules/ruby/ruby.bug-risk.deprecated-find-by-dynamic.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.enum-array-syntax
+    rulePath: ./rules/ruby/ruby.bug-risk.enum-array-syntax.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.enum-duplicate-values
+    rulePath: ./rules/ruby/ruby.bug-risk.enum-duplicate-values.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.rails-env-equality
+    rulePath: ./rules/ruby/ruby.bug-risk.rails-env-equality.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.exit-in-app-code
+    rulePath: ./rules/ruby/ruby.bug-risk.exit-in-app-code.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.rails-root-join
+    rulePath: ./rules/ruby/ruby.bug-risk.rails-root-join.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.where-first-over-find-by
+    rulePath: ./rules/ruby/ruby.bug-risk.where-first-over-find-by.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.has-and-belongs-to-many
+    rulePath: ./rules/ruby/ruby.bug-risk.has-and-belongs-to-many.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.dependent-option-cascade
+    rulePath: ./rules/ruby/ruby.bug-risk.dependent-option-cascade.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.helper-instance-variables
+    rulePath: ./rules/ruby/ruby.bug-risk.helper-instance-variables.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.http-methods-without-params
+    rulePath: ./rules/ruby/ruby.bug-risk.http-methods-without-params.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.deprecated-http-status-symbols
+    rulePath: ./rules/ruby/ruby.bug-risk.deprecated-http-status-symbols.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.skip-filter-conditional
+    rulePath: ./rules/ruby/ruby.bug-risk.skip-filter-conditional.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.missing-inverse-of
+    rulePath: ./rules/ruby/ruby.bug-risk.missing-inverse-of.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.undefined-action-filter
+    rulePath: ./rules/ruby/ruby.bug-risk.undefined-action-filter.rule.yaml
+    presets:
+      - strict
   - id: ruby.security.debugger-call
     rulePath: ./rules/ruby/ruby.security.debugger-call.rule.yaml
     presets:
@@ -3844,6 +4128,21 @@ rules:
     presets:
       - strict
       - security
+  - id: rust.security.manual-error-type-id
+    rulePath: ./rules/rust/rust.security.manual-error-type-id.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.misused-bitwise-xor
+    rulePath: ./rules/rust/rust.security.misused-bitwise-xor.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.missing-regex-anchor
+    rulePath: ./rules/rust/rust.security.missing-regex-anchor.rule.yaml
+    presets:
+      - strict
+      - security
   - id: rust.security.panic-in-async-handler
     rulePath: ./rules/rust/rust.security.panic-in-async-handler.rule.yaml
     presets:
@@ -3876,6 +4175,11 @@ rules:
       - security
   - id: rust.security.tls-missing-min-version
     rulePath: ./rules/rust/rust.security.tls-missing-min-version.rule.yaml
+    presets:
+      - strict
+      - security
+  - id: rust.security.unsafe-remove-dir-all
+    rulePath: ./rules/rust/rust.security.unsafe-remove-dir-all.rule.yaml
     presets:
       - strict
       - security
@@ -5238,5 +5542,92 @@ rules:
       - strict
   - id: sql.style.unused-table-alias
     rulePath: ./rules/sql/sql.style.unused-table-alias.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.non-null-column-without-default
+    rulePath: ./rules/ruby/ruby.bug-risk.non-null-column-without-default.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.console-output-instead-of-logger
+    rulePath: ./rules/ruby/ruby.bug-risk.console-output-instead-of-logger.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.incorrect-pluralization
+    rulePath: ./rules/ruby/ruby.bug-risk.incorrect-pluralization.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.use-presence-over-explicit-check
+    rulePath: ./rules/ruby/ruby.bug-risk.use-presence-over-explicit-check.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.use-present-to-simplify-conditional
+    rulePath: ./rules/ruby/ruby.bug-risk.use-present-to-simplify-conditional.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.rake-task-missing-environment
+    rulePath: ./rules/ruby/ruby.bug-risk.rake-task-missing-environment.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.use-square-brackets-for-attributes
+    rulePath: ./rules/ruby/ruby.bug-risk.use-square-brackets-for-attributes.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.redundant-allow-nil
+    rulePath: ./rules/ruby/ruby.bug-risk.redundant-allow-nil.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.plain-method-instead-of-proc
+    rulePath: ./rules/ruby/ruby.bug-risk.plain-method-instead-of-proc.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.time-without-zone
+    rulePath: ./rules/ruby/ruby.bug-risk.time-without-zone.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.invalid-rails-env-predicate
+    rulePath: ./rules/ruby/ruby.bug-risk.invalid-rails-env-predicate.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.old-style-validation-macro
+    rulePath: ./rules/ruby/ruby.bug-risk.old-style-validation-macro.rule.yaml
+    presets:
+      - recommended
+      - strict
+  - id: ruby.bug-risk.redundant-with-options-receiver
+    rulePath: ./rules/ruby/ruby.bug-risk.redundant-with-options-receiver.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.class-name-should-be-string
+    rulePath: ./rules/ruby/ruby.bug-risk.class-name-should-be-string.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.non-preferred-assert-falseness
+    rulePath: ./rules/ruby/ruby.bug-risk.non-preferred-assert-falseness.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.relative-date-as-constant
+    rulePath: ./rules/ruby/ruby.bug-risk.relative-date-as-constant.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.inconsistent-request-referrer
+    rulePath: ./rules/ruby/ruby.bug-risk.inconsistent-request-referrer.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.inconsistent-safe-navigation-try
+    rulePath: ./rules/ruby/ruby.bug-risk.inconsistent-safe-navigation-try.rule.yaml
+    presets:
+      - strict
+  - id: ruby.bug-risk.safe-navigation-with-blank
+    rulePath: ./rules/ruby/ruby.bug-risk.safe-navigation-with-blank.rule.yaml
     presets:
       - strict

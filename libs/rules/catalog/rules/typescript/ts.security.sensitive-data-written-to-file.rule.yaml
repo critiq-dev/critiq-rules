@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.sensitive-data-written-to-file
-  title: Avoid writing sensitive data to files
-  summary: Data exports and local file writes should not persist raw secrets or personal fields.
-  rationale: Static files, exports, and backups are easy to copy or retain beyond their intended lifetime.
+  title: Sensitive data written to file
+  summary: File writes that persist fields like passwords, tokens, secrets, credentials, or PII (email, SSN, phone) risk data exposure.
+  rationale: Static files, exports, backups, and logs are easy to copy or retain beyond their intended lifetime. Sensitive fields should be redacted or excluded before writing.
   detection:
     kind: pattern
   references:
@@ -25,6 +25,16 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/scripts/**"
+      - "**/deprecated-packages/**"
+      - "**/benchmarks/**"
 match:
   fact:
     kind: security.sensitive-data-written-to-file
@@ -32,7 +42,7 @@ match:
 emit:
   finding:
     category: security.privacy
-    severity: high
+    severity: medium
     confidence: 0.9
     tags:
       - security
@@ -40,8 +50,8 @@ emit:
       - filesystem
   message:
     title: Remove sensitive fields before `${captures.issue.text}`
-    summary: "`${captures.issue.text}` writes sensitive data into a local file sink."
+    summary: "`${captures.issue.text}` writes data containing sensitive fields (password, token, secret, credential, email, SSN, phone) to a file. This risks data exposure if the file is leaked, backed up, or retained beyond its intended lifetime."
   remediation:
-    summary: Redact, hash, or exclude the sensitive fields before writing the file.
+    summary: Remove sensitive fields (passwords, tokens, secrets, credentials, email, SSN, phone) before writing to a file. Destructure to exclude them, or hash/encrypt the values. Build scripts, benchmarks, test fixtures, and deprecated packages are exempt.
 
 

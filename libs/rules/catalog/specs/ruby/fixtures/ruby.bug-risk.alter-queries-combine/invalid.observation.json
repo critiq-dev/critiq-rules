@@ -1,0 +1,23 @@
+{
+  "path": "db/migrate/001_combine_columns.rb",
+  "language": "ruby",
+  "text": "change_column :users, :name, :string\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "ruby.bug-risk.alter-queries-combine",
+          "appliesTo": "block",
+          "range": { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 40 },
+          "text": "change_column :users, :name, :string",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

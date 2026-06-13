@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.redundant-with-options-receiver.rule.yaml
+fixtures:
+  - name: flags with_options using explicit receiver
+    sourcePath: ./fixtures/ruby.bug-risk.redundant-with-options-receiver/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.redundant-with-options-receiver
+  - name: accepts with_options without explicit receiver
+    sourcePath: ./fixtures/ruby.bug-risk.redundant-with-options-receiver/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

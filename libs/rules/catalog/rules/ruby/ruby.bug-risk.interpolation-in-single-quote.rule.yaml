@@ -12,6 +12,8 @@ metadata:
     text.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1030
   tags:
     - rules-catalog
     - ruby

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.time-without-zone.rule.yaml
+fixtures:
+  - name: "flags bare Time.now call"
+    sourcePath: ./fixtures/ruby.bug-risk.time-without-zone/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.time-without-zone
+  - name: "accepts Time.zone.now call"
+    sourcePath: ./fixtures/ruby.bug-risk.time-without-zone/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

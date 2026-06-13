@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.redundant-allow-nil.rule.yaml
+fixtures:
+  - name: "flags allow_nil with allow_blank both true"
+    sourcePath: ./fixtures/ruby.bug-risk.redundant-allow-nil/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.redundant-allow-nil
+  - name: "accepts only allow_blank: true"
+    sourcePath: ./fixtures/ruby.bug-risk.redundant-allow-nil/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

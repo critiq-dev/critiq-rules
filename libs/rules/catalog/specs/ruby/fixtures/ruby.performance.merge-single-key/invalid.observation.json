@@ -1,0 +1,28 @@
+{
+  "path": "src/example.rb",
+  "language": "ruby",
+  "text": "opts.merge!(timeout: 30)\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "ruby.performance.merge-single-key",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 24
+          },
+          "text": "opts.merge!(timeout: 30)",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

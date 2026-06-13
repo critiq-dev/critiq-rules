@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.inconsistent-safe-navigation-try
+  title: Use safe navigation `&.` instead of `.try!`
+  summary: >-
+    Use the safe navigation operator (`&.`) instead of `.try!()`.
+  rationale: >-
+    Ruby 2.3+ supports the safe navigation operator (`&.`), which is
+    more idiomatic and better understood than `.try!`. The `&.` operator
+    is a language-level feature, whereas `.try!` is a Rails-specific
+    method with different semantics (it still evaluates arguments).
+  aliases:
+    - RB-RL1049
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.inconsistent-safe-navigation-try
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` — use `&.` instead of `.try!`"
+    summary: >-
+      "`${captures.issue.text}` uses `.try!()`. Use the safe navigation
+      operator `&.` for Ruby 2.3+ codebases."
+  remediation:
+    summary: >-
+      Replace `.try!(:method)` with `&.method`.
+      For example, `user.try!(:name)` → `user&.name`.

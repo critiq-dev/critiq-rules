@@ -13,6 +13,8 @@ metadata:
     last expression as a single argument.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1043
   tags:
     - rules-catalog
     - ruby

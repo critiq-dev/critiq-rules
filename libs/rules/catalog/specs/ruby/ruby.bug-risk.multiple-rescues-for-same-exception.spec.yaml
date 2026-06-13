@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.multiple-rescues-for-same-exception.rule.yaml
+fixtures:
+  - name: flags duplicate rescue of same exception class
+    sourcePath: ./fixtures/ruby.bug-risk.multiple-rescues-for-same-exception/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.multiple-rescues-for-same-exception
+        - ruby.bug-risk.multiple-rescues-for-same-exception
+  - name: accepts rescue of different exception classes
+    sourcePath: ./fixtures/ruby.bug-risk.multiple-rescues-for-same-exception/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

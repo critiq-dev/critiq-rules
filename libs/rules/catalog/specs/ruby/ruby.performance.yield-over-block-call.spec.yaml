@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.performance.yield-over-block-call.rule.yaml
+fixtures:
+  - name: flags block call in method
+    observationPath: ./fixtures/ruby.performance.yield-over-block-call/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.performance.yield-over-block-call
+      allSeverities:
+        - medium
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

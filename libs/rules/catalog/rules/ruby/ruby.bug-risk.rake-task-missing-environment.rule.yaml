@@ -1,0 +1,46 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.rake-task-missing-environment
+  title: Rake task found without `:environment` task dependency
+  summary: >-
+    Rake tasks that load application code should declare `:environment` as a
+    dependency to ensure Rails is loaded before execution.
+  rationale: >-
+    Rake tasks that reference models, routes, or other Rails components will
+    fail if `:environment` is not declared as a dependency. Declaring
+    `:environment` loads the Rails application before the task body runs.
+  aliases:
+    - RB-RL1040
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rake"
+match:
+  fact:
+    kind: ruby.bug-risk.rake-task-missing-environment
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.8
+    tags:
+      - ruby
+  message:
+    title: Task `${captures.issue.text}` is missing `:environment` dependency
+    summary: >-
+      "Rake tasks loading Rails components should declare `:environment` as
+      a dependency."
+  remediation:
+    summary: >-
+      Add `:environment` as a dependency, e.g. `task my_task: :environment do`.

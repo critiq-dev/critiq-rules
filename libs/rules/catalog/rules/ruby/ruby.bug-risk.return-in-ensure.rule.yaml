@@ -11,6 +11,8 @@ metadata:
     return statement in ensure overrides the exception, making it disappear.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1021
   tags:
     - rules-catalog
     - ruby

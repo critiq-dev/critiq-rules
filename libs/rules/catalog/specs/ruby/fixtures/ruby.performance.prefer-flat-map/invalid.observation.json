@@ -1,0 +1,28 @@
+{
+  "path": "src/example.rb",
+  "language": "ruby",
+  "text": "items.map { |i| i.id }.flatten\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "ruby.performance.prefer-flat-map",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 30
+          },
+          "text": "items.map { |i| i.id }.flatten",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

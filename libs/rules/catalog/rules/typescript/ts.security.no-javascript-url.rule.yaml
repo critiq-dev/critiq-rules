@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-javascript-url
-  title: Avoid `javascript:` URLs
-  summary: Do not use `javascript:` URLs in string literals, template literals, or JSX link attributes.
-  rationale: "`javascript:` URLs execute attacker-controlled code when used as navigation targets."
+  title: "Avoid `javascript:` URLs in href, src, or navigation attributes"
+  summary: "`javascript:` URLs can execute arbitrary script when used as navigation targets in href, src, or action attributes."
+  rationale: "`javascript:` URLs execute attacker-controlled code when used as navigation targets. Only flag when the URL appears in contexts that could reach a browser — test assertions, sanitizer inputs, and type-test files are intentionally excluded."
   detection:
     kind: pattern
   references:
@@ -26,6 +26,16 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/__mocks__/**"
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/.github/actions/**"
+      - "**/types/**/*-tests.*"
 match:
   fact:
     kind: security.javascript-url
@@ -33,14 +43,36 @@ match:
 emit:
   finding:
     category: security.output-encoding
-    severity: high
-    confidence: 0.94
+    severity: medium
+    confidence: 0.85
     tags:
       - security
       - xss
   message:
-    title: "Avoid `javascript:` URLs"
-    summary: "`${captures.issue.text}` uses a `javascript:` URL that can execute arbitrary script."
+    title: "Avoid `javascript:` URLs in link attributes"
+    summary: "${captures.issue.text} uses a `javascript:` URL. When assigned to `href`, `src`, or `action` attributes, `javascript:` URLs execute arbitrary code in the user's browser and enable XSS attacks."
   remediation:
-    summary: "Use safe HTTPS links, in-app handlers, or explicit event callbacks instead of `javascript:` URLs."
+    summary: |-
+      Replace `javascript:` URLs with safe alternatives:
+      - Use `https://` links for external navigation
+      - Use in-app route handlers for internal navigation (e.g., React Router, Next.js `Link`)
+      - Use explicit event handlers (`onClick`, `onSubmit`) instead of `javascript:` in href
+
+      ### Unsafe example
+
+      ```html
+      <a href="javascript:doSomething()">click</a>
+      ```
+
+      ### Safe alternatives
+
+      ```tsx
+      <a href="https://example.com">External link</a>
+      <button onClick={() => doSomething()}>Click me</button>
+      <Link to="/path">Internal link</Link>
+      ```
+
+      ### References
+      - CWE-79: Cross-site Scripting (XSS)
+      - OWASP XSS Prevention Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
 

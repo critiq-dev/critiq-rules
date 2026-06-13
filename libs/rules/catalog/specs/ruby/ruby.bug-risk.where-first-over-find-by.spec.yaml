@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.where-first-over-find-by.rule.yaml
+fixtures:
+  - name: flags find_by for suggestion
+    sourcePath: ./fixtures/ruby.bug-risk.where-first-over-find-by/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.where-first-over-find-by
+  - name: accepts find_by_sql
+    sourcePath: ./fixtures/ruby.bug-risk.where-first-over-find-by/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -15,3 +15,13 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: ignores ReactDOM.render in DefinitelyTyped v15 type-tests (path exclusion)
+    sourcePath: ./fixtures/ts.react.no-deprecated-react-dom-root-api/types/react-dom/v15/react-dom-tests.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores ReactDOM.render in embed SDK package (path exclusion)
+    sourcePath: ./fixtures/ts.react.no-deprecated-react-dom-root-api/embed-react/element-click.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []

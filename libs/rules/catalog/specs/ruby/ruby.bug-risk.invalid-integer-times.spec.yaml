@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.invalid-integer-times.rule.yaml
+fixtures:
+  - name: flags invalid integer times patterns
+    sourcePath: ./fixtures/ruby.bug-risk.invalid-integer-times/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.invalid-integer-times
+        - ruby.bug-risk.invalid-integer-times
+  - name: accepts valid integer times usage
+    sourcePath: ./fixtures/ruby.bug-risk.invalid-integer-times/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

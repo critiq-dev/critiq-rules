@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.deprecated-belongs-to-required
+  title: Use optional instead of required in belongs_to
+  summary: >-
+    Replace `required: true` with `optional: false` in `belongs_to`
+    declarations for Rails 5+.
+  rationale: >-
+    Rails 5+ deprecated `required:` in favor of `optional:` for `belongs_to`
+    associations. The `optional: false` (default) enforces presence validation.
+    This was renamed for clarity.
+  aliases:
+    - RB-RL1010
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-record
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.deprecated-belongs-to-required
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+      - active-record
+  message:
+    title: "`${captures.issue.text}` uses deprecated `required:` option"
+    summary: >-
+      "`${captures.issue.text}` uses `required: true` which is deprecated in
+      Rails 5+. Use `optional: false` instead."
+  remediation:
+    summary: >-
+      Replace `belongs_to :association, required: true` with
+      `belongs_to :association, optional: false`.

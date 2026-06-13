@@ -13,6 +13,8 @@ metadata:
     iteration, making the call ineffective.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1014
   tags:
     - rules-catalog
     - ruby

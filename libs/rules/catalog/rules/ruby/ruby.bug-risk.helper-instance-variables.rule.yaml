@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.helper-instance-variables
+  title: Use of helper instance variables detected
+  summary: >-
+    Avoid instance variables in view helpers. Pass data explicitly as
+    local variables.
+  rationale: >-
+    Instance variables in helper modules create implicit coupling between
+    the view and the controller, making the code harder to refactor and
+    test. Prefer passing data as local variables or using presenters.
+  aliases:
+    - RB-RL1027
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.helper-instance-variables
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: low
+    confidence: 0.8
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "Helper uses instance variable `${captures.issue.text}`"
+    summary: >-
+      "`${captures.issue.text}` is used inside a helper module. Prefer
+      local variables or explicit parameters."
+  remediation:
+    summary: >-
+      Replace the instance variable with a local variable or pass the data
+      as an explicit parameter to the helper method.

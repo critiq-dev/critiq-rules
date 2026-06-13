@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.active-record-alias
+  title: Use of deprecated ActiveRecord method aliases
+  summary: >-
+    ActiveRecord method `update_attributes` or `update_attributes!` is called.
+    These are deprecated aliases for `update` and `update!`.
+  rationale: >-
+    Rails 6.1 deprecated `update_attributes` and `update_attributes!` in favor
+    of `update` and `update!`. The deprecated methods will be removed in
+    Rails 7.0+ and generate deprecation warnings.
+  aliases:
+    - RB-RL1002
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-record
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.active-record-alias
+    bind: issue
+emit:
+  finding:
+    category: correctness.deprecation
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` is deprecated — use `update` or `update!`"
+    summary: >-
+      "`${captures.issue.text}` is a deprecated ActiveRecord method alias.
+      Replace it with `update` or `update!`."
+  remediation:
+    summary: >-
+      Replace `update_attributes` with `update`, and `update_attributes!`
+      with `update!`.

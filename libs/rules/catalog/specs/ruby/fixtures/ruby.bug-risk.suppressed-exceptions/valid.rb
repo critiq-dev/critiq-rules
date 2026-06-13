@@ -5,13 +5,7 @@ rescue StandardError => e
 end
 
 begin
-  parse(user_input)
+  other_call
 rescue => e
-  raise
-end
-
-begin
-  load_data
-rescue StandardError
-  retry if retries < 3
+  puts e
 end

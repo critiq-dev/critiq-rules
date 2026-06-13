@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.irreversible-migration.rule.yaml
+fixtures:
+  - name: flags irreversible operation in change
+    sourcePath: ./fixtures/ruby.bug-risk.irreversible-migration/db/migrate/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.irreversible-migration
+  - name: accepts reversible change method
+    sourcePath: ./fixtures/ruby.bug-risk.irreversible-migration/db/migrate/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

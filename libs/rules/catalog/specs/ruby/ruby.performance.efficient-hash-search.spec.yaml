@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.performance.efficient-hash-search.rule.yaml
+fixtures:
+  - name: flags keys include call
+    observationPath: ./fixtures/ruby.performance.efficient-hash-search/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.performance.efficient-hash-search
+      allSeverities:
+        - medium
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

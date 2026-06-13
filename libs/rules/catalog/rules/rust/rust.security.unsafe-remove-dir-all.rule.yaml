@@ -1,0 +1,62 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.unsafe-remove-dir-all
+  title: Avoid `std::fs::remove_dir_all` without TOCTOU mitigations
+  summary: >-
+    `remove_dir_all` is vulnerable to TOCTOU (time-of-check-time-of-use) races
+    when the directory tree contains symbolic links.
+  rationale: >-
+    `std::fs::remove_dir_all` follows symlinks, enabling arbitrary file deletion
+    via directory traversal during removal (CWE-367).
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-367
+      title: Time-of-check Time-of-use (TOCTOU) Race Condition
+    - kind: url
+      title: CWE-367 TOCTOU
+      url: https://cwe.mitre.org/data/definitions/367.html
+  tags:
+    - security
+    - rust
+    - filesystem
+    - race-condition
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1002
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.unsafe-remove-dir-all
+    bind: issue
+emit:
+  finding:
+    category: security.filesystem
+    severity: high
+    confidence: 0.80
+    tags:
+      - security
+      - rust
+      - filesystem
+      - race-condition
+  message:
+    title: Guard `remove_dir_all` against symlink races near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` removes a directory tree without TOCTOU protection."
+  remediation:
+    summary: >-
+      Prefer `std::fs::remove_dir_all` only on trusted paths, or use an
+      alternative that handles symlinks explicitly (e.g. the `remove_dir_all`
+      crate with `#[cfg(not(target_os = "linux"))]` guards).

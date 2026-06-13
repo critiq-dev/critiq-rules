@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.constant-in-block
+  title: Constants defined within a block
+  summary: >-
+    A constant is defined with an uppercase identifier inside a method
+    body. Constants defined within methods are re-assigned on each call
+    and produce a warning.
+  rationale: >-
+    Defining a constant (`CONST = value`) inside a `def` block re-assigns
+    the constant on every method call, which generates a Ruby warning
+    (`already initialized constant`). Use a local variable or define the
+    constant at class/module scope instead.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1102
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.constant-in-block
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.80
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.constant-in-block`."
+  remediation:
+    summary: >-
+      Move the constant definition outside the method body, or use a local
+      variable (`var = value`) instead.

@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.equal-instead-of-equal
+  title: '`==` for comparison instead of `equal?` method'
+  summary: >-
+    The `object_id` method result is compared using `==` instead of the
+    `equal?` method. Using `equal?` is the idiomatic way to test object
+    identity in Ruby.
+  rationale: >-
+    `a.object_id == b.object_id` is equivalent to `a.equal?(b)` but the
+    latter is more idiomatic, readable, and avoids creating unnecessary
+    integer objects for comparison.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1100
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.equal-instead-of-equal
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.equal-instead-of-equal`."
+  remediation:
+    summary: >-
+      Use `a.equal?(b)` instead of comparing `object_id` values with `==`.

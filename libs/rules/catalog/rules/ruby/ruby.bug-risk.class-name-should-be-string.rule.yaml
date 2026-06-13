@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.class-name-should-be-string
+  title: Association class_name should be a string
+  summary: >-
+    The `class_name` option on associations should be a string literal,
+    not a constant reference.
+  rationale: >-
+    Using a constant like `class_name: Account` instead of
+    `class_name: 'Account'` relies on autoloading behavior and can
+    cause issues with eager loading and dependency resolution. String
+    literals are the canonical Rails convention.
+  aliases:
+    - RB-RL1044
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.class-name-should-be-string
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` uses a constant — use a string instead"
+    summary: >-
+      "`${captures.issue.text}` passes a constant to `class_name:`. Use a
+      string literal like `class_name: 'Account'` instead."
+  remediation:
+    summary: >-
+      Replace the constant with a string literal. For example,
+      `class_name: 'Account'` instead of `class_name: Account`.

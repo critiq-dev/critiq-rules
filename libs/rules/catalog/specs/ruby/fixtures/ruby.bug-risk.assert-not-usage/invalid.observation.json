@@ -1,0 +1,23 @@
+{
+  "path": "test/models/user_test.rb",
+  "language": "ruby",
+  "text": "assert !user.valid?\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "ruby.bug-risk.assert-not-usage",
+          "appliesTo": "block",
+          "range": { "startLine": 1, "startColumn": 1, "endLine": 1, "endColumn": 20 },
+          "text": "assert !user.valid?",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

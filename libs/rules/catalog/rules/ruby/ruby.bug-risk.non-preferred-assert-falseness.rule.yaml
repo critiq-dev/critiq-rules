@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.non-preferred-assert-falseness
+  title: Use `assert_not` over `refute`
+  summary: >-
+    Prefer `assert_not` over `refute` for negative assertions.
+  rationale: >-
+    Rails and Minitest support both `refute` and `assert_not`, but
+    `assert_not` is the preferred and more readable form. Using `refute`
+    is a legacy style that is less consistent with the broader `assert_*`
+    family of test methods.
+  aliases:
+    - RB-RL1045
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.non-preferred-assert-falseness
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: "Use `assert_not` instead of `${captures.issue.text}`"
+    summary: >-
+      "`${captures.issue.text}` uses `refute`. Use `assert_not` for
+      consistency with the `assert_*` family."
+  remediation:
+    summary: >-
+      Replace `refute` with `assert_not`. For example,
+      `refute value.nil?` → `assert_not value.nil?`.

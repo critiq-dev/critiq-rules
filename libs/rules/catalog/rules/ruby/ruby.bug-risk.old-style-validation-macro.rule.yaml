@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.old-style-validation-macro
+  title: Old-style attribute validation macro detected
+  summary: >-
+    Uses the deprecated `validates_*_of` macro. Prefer the modern `validates`
+    method with options.
+  rationale: >-
+    Rails deprecated the per-attribute validation macros (`validates_presence_of`,
+    `validates_numericality_of`, etc.) in favor of the unified `validates` method.
+    The modern `validates` syntax is more concise and composable.
+  aliases:
+    - RB-RL1057
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.old-style-validation-macro
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - ruby
+  message:
+    title: "Deprecated validation macro `${captures.issue.text}`"
+    summary: "'${captures.issue.text}' uses a deprecated per-attribute validation macro. Use `validates :attr, ...` instead."
+  remediation:
+    summary: >-
+      Replace `validates_presence_of :attr` with `validates :attr, presence: true`,
+      and similarly for other `validates_*_of` macros. See the Rails upgrade guide.

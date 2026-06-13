@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.allow-blank-with-delegate
+  title: Avoid allow_blank with delegate
+  summary: >-
+    Use `allow_nil` instead of `allow_blank` in `delegate` declarations.
+  rationale: >-
+    `allow_blank: true` in a `delegate` call silently swallows blank
+    (including falsey) values from the delegated method, which can mask bugs.
+    Prefer `allow_nil: true` to only suppress nil values.
+  aliases:
+    - RB-RL1016
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.allow-blank-with-delegate
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` uses `allow_blank: true`"
+    summary: >-
+      "`${captures.issue.text}` delegates with `allow_blank: true`. This
+      masks blank values. Consider `allow_nil: true` instead, which only
+      suppresses nil values."
+  remediation:
+    summary: >-
+      Replace `allow_blank: true` with `allow_nil: true` in the delegate
+      declaration.

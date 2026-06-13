@@ -16,6 +16,17 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/e2e/**"
+      - "**/*.integration.test.*"
+      - "**/*.browser.test.*"
+      - "**/*.e2e.test.*"
 match:
   fact:
     kind: async.blocking-call-in-async-flow
@@ -29,7 +40,7 @@ emit:
       - correctness
       - async
   message:
-    title: Avoid blocking sync calls in async flows
-    summary: "`${captures.issue.text}` uses a blocking sync API inside an async function."
+    title: Blocking sync call `${captures.issue.text}` inside async function
+    summary: "`${captures.issue.text}` uses a blocking sync API inside an async function, stalling the event loop and defeating the throughput benefit of async control flow."
   remediation:
-    summary: Replace the sync API with its asynchronous equivalent or move the blocking work out of the async request path.
+    summary: Replace the sync API with its async equivalent (await + promise-based API) or move the blocking work off the request path into a worker thread or CLI-only path.

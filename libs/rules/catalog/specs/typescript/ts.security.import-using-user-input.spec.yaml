@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.security.import-using-user-input
       allSeverities:
-        - high
+        - medium
   - name: ignores allowlisted module loading
     sourcePath: ./fixtures/public-security/module-response.valid.ts
     expect:
@@ -17,6 +17,11 @@ fixtures:
       allRuleIds: []
   - name: ignores module loading after allowlist validation
     sourcePath: ./fixtures/ts.security.import-using-user-input/valid-allowlist.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores static literal-string require calls
+    sourcePath: ./fixtures/ts.security.import-using-user-input/valid-static-require.ts
     expect:
       findingCount: 0
       allRuleIds: []

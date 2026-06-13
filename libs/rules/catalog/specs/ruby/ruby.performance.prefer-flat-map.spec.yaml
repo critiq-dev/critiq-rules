@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.performance.prefer-flat-map.rule.yaml
+fixtures:
+  - name: flags map flatten chain
+    observationPath: ./fixtures/ruby.performance.prefer-flat-map/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.performance.prefer-flat-map
+      allSeverities:
+        - medium
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

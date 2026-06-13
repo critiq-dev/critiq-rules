@@ -11,6 +11,8 @@ metadata:
     than current values, leading to hard-to-read and hard-to-debug logic.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1023
   tags:
     - rules-catalog
     - ruby

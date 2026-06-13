@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.misused-bitwise-xor.rule.yaml
+fixtures:
+  - name: flags integer literal XOR with exponent-like values
+    sourcePath: ./fixtures/rust.security.misused-bitwise-xor/invalid.rs
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - rust.security.misused-bitwise-xor
+        - rust.security.misused-bitwise-xor
+  - name: accepts pow() calls and flag XOR
+    sourcePath: ./fixtures/rust.security.misused-bitwise-xor/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

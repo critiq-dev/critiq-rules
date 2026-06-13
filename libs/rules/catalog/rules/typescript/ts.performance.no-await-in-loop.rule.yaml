@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-await-in-loop
-  title: No Await In Loop
-  summary: Avoid await inside loops
-  rationale: Avoid await inside loops:sequential awaits in loops multiply latency; batch work or use Promise.all when safe.
+  title: Sequential await in loop -- consider Promise.all() to parallelize
+  summary: Using await inside a loop serializes async operations, multiplying total latency.
+  rationale: Each await inside a loop pauses until the promise resolves before starting the next iteration. Collect promises into an array and await Promise.all instead.
   tags:
     - performance
     - rules-catalog
@@ -26,7 +26,7 @@ emit:
     tags:
       - performance
   message:
-    title: No Await In Loop
-    summary: "`${captures.issue.text}` matches ts.performance.no-await-in-loop."
+    title: Sequential await in loop
+    summary: "${captures.issue.text} uses await inside a loop -- this serializes async operations. If the operations are independent, collect promises and use Promise.all()."
   remediation:
-    summary: Avoid await inside loops:sequential awaits in loops multiply latency; batch work or use Promise.all when safe.
+    summary: Use Promise.all to run independent async operations concurrently, e.g. await Promise.all(items.map(item => process(item))).

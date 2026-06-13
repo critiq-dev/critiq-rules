@@ -16,6 +16,12 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/tests/**"
 match:
   fact:
     kind: async.unhandled-async-error
@@ -23,7 +29,7 @@ match:
 emit:
   finding:
     category: correctness.async
-    severity: high
+    severity: medium
     confidence: 0.85
     tags:
       - correctness

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.undefined-action-filter.rule.yaml
+fixtures:
+  - name: flags before_action without matching def
+    sourcePath: ./fixtures/ruby.bug-risk.undefined-action-filter/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.undefined-action-filter
+  - name: accepts before_action with matching def
+    sourcePath: ./fixtures/ruby.bug-risk.undefined-action-filter/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

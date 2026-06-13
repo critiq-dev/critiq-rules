@@ -11,6 +11,8 @@ metadata:
     `rescue nil` silently swallows all exceptions. `rescue 42` and
     `rescue "string"` are type errors that may raise `TypeError` at
     runtime.
+  aliases:
+    - RB-LI1057
   detection:
     kind: pattern
   tags:

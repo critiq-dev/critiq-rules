@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.deprecated-find-by-dynamic.rule.yaml
+fixtures:
+  - name: flags deprecated dynamic finder
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-find-by-dynamic/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.deprecated-find-by-dynamic
+        - ruby.bug-risk.deprecated-find-by-dynamic
+  - name: accepts modern find_by hash syntax
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-find-by-dynamic/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

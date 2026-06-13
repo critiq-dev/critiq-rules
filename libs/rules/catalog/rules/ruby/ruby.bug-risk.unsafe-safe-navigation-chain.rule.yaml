@@ -10,6 +10,8 @@ metadata:
     When using `&.` the result may be `nil`. Chaining additional methods
     without `&.` bypasses the nil safety. Chain with `&.` throughout or
     use a local variable with a nil check.
+  aliases:
+    - RB-LI1059
   detection:
     kind: pattern
   tags:

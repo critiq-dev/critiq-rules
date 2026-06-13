@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.efficient-hash-search
+  title: Prefer `key?` and `value?` over `.keys.include?` and `.values.include?`
+  summary: >-
+    `.keys.include?(...)` and `.values.include?(...)` allocate a new array
+    of all keys or values before searching. Use `key?` or `has_value?` instead.
+  rationale: >-
+    Extracting all keys or values into an array before checking membership
+    allocates an O(n) array. Using `key?` or `has_value?` searches without
+    intermediate allocation.
+  aliases:
+    - RB-PR1012
+  tags:
+    - performance
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.performance.efficient-hash-search
+    bind: issue
+emit:
+  finding:
+    category: performance.lookup
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - ruby
+  message:
+    title: Use `key?` or `has_value?` instead of `.keys.include?`/`.values.include?`
+    summary: "`${captures.issue.text}` allocates a temporary array to search the hash."
+  remediation:
+    summary: >-
+      Replace `.keys.include?(k)` with `.key?(k)` and `.values.include?(v)`
+      with `.has_value?(v)` to avoid intermediate array allocation.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.enum-array-syntax.rule.yaml
+fixtures:
+  - name: flags array-syntax enum
+    sourcePath: ./fixtures/ruby.bug-risk.enum-array-syntax/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.enum-array-syntax
+  - name: accepts hash-syntax enum
+    sourcePath: ./fixtures/ruby.bug-risk.enum-array-syntax/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

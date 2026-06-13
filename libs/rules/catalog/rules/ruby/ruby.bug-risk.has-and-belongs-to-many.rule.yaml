@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.has-and-belongs-to-many
+  title: Use of has_and_belongs_to_many detected
+  summary: >-
+    Use `has_many :through` instead of `has_and_belongs_to_many` for
+    more flexibility.
+  rationale: >-
+    `has_and_belongs_to_many` (HABTM) lacks support for additional attributes
+    on the join table, callbacks, and validations. Prefer `has_many :through`
+    with an explicit join model for better maintainability and extensibility.
+  aliases:
+    - RB-RL1025
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.has-and-belongs-to-many
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: medium
+    confidence: 0.95
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` uses has_and_belongs_to_many"
+    summary: >-
+      "`${captures.issue.text}` declares a HABTM association. Consider using
+      `has_many :through` with an explicit join model instead."
+  remediation:
+    summary: >-
+      Replace `has_and_belongs_to_many` with `has_many :through` and an
+      explicit join model.

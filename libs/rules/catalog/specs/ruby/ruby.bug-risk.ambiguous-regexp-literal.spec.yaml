@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.ambiguous-regexp-literal.rule.yaml
+fixtures:
+  - name: flags regex literal as argument
+    sourcePath: ./fixtures/ruby.bug-risk.ambiguous-regexp-literal/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.ambiguous-regexp-literal
+        - ruby.bug-risk.ambiguous-regexp-literal
+  - name: accepts division expression
+    sourcePath: ./fixtures/ruby.bug-risk.ambiguous-regexp-literal/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

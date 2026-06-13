@@ -1,0 +1,28 @@
+{
+  "path": "src/example.rb",
+  "language": "ruby",
+  "text": "(1..100).include?(n)\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "ruby.performance.range-cover-over-include",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 20
+          },
+          "text": "(1..100).include?(n)",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

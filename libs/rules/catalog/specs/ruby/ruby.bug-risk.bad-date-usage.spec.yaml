@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.bad-date-usage.rule.yaml
+fixtures:
+  - name: flags Date.today
+    sourcePath: ./fixtures/ruby.bug-risk.bad-date-usage/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.bad-date-usage
+  - name: accepts zone-aware date
+    sourcePath: ./fixtures/ruby.bug-risk.bad-date-usage/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

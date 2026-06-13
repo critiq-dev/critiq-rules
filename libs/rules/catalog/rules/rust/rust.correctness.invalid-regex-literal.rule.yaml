@@ -14,6 +14,8 @@ metadata:
     - rules-catalog
   stability: experimental
   appliesTo: block
+  aliases:
+    - RS-E1002
 scope:
   languages:
     - rust

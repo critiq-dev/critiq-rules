@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.deprecated-http-status-symbols.rule.yaml
+fixtures:
+  - name: flags symbolic status in render
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-http-status-symbols/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.deprecated-http-status-symbols
+  - name: accepts render without status symbol
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-http-status-symbols/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

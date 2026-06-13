@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.undefined-action-filter
+  title: Action filter is not defined in the scope it is used in
+  summary: >-
+    A `before_action` references a method that is not defined in the
+    current controller scope.
+  rationale: >-
+    When `before_action` refers to a method name that has no matching
+    `def` in the controller, a `NameError` will occur at runtime if the
+    method is not inherited. This check finds typos or missing method
+    definitions in the current file.
+  aliases:
+    - RB-RL1032
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.undefined-action-filter
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug
+    severity: high
+    confidence: 0.7
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` has no matching method"
+    summary: >-
+      "`${captures.issue.text}` references an action filter method that is
+      not defined in this file. Verify the method exists or check for typos."
+  remediation:
+    summary: >-
+      Define the missing method or correct the `before_action` reference
+      to match an existing method name.

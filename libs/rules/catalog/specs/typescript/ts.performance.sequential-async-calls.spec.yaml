@@ -9,9 +9,19 @@ fixtures:
       allRuleIds:
         - ts.performance.sequential-async-calls
       allSeverities:
-        - medium
+        - low
   - name: ignores parallelized async work
     sourcePath: ./fixtures/ts.performance.sequential-async-calls/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores sequential awaits in test file paths (path exclusion)
+    sourcePath: ./fixtures/ts.performance.sequential-async-calls/__tests__/good.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores sequential awaits in scripts directory (path exclusion)
+    sourcePath: ./fixtures/ts.performance.sequential-async-calls/scripts/build-script.ts
     expect:
       findingCount: 0
       allRuleIds: []

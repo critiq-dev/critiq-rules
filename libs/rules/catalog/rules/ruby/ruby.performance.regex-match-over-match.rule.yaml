@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.regex-match-over-match
+  title: Prefer `match?` over `match` for boolean checks
+  summary: >-
+    `.match(...)` used as a boolean condition allocates a MatchData object.
+    Use `.match?(...)` or `===` instead when the match result is not needed.
+  rationale: >-
+    `String#match` returns a MatchData object, incurring allocation overhead.
+    `String#match?` (Ruby 2.4+) returns a boolean without allocating, and is
+    significantly faster when only a boolean check is needed.
+  aliases:
+    - RB-PR1016
+  tags:
+    - performance
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.performance.regex-match-over-match
+    bind: issue
+emit:
+  finding:
+    category: performance.computation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - ruby
+  message:
+    title: Use `match?` instead of `match` for boolean checks
+    summary: "`${captures.issue.text}` uses `.match()` in a condition. Use `.match?()` to avoid MatchData allocation."
+  remediation:
+    summary: >-
+      Replace `.match(/pattern/)` with `.match?(/pattern/)` when the match
+      result is not captured, to avoid MatchData allocation overhead.

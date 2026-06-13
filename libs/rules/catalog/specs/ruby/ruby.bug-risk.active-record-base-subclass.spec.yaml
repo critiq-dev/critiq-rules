@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.active-record-base-subclass.rule.yaml
+fixtures:
+  - name: flags direct ActiveRecord::Base subclass
+    sourcePath: ./fixtures/ruby.bug-risk.active-record-base-subclass/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.active-record-base-subclass
+  - name: accepts ApplicationRecord subclass
+    sourcePath: ./fixtures/ruby.bug-risk.active-record-base-subclass/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

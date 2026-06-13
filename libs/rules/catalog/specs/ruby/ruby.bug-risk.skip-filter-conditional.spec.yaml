@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.skip-filter-conditional.rule.yaml
+fixtures:
+  - name: flags skip_before_action with only and if
+    sourcePath: ./fixtures/ruby.bug-risk.skip-filter-conditional/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.skip-filter-conditional
+  - name: accepts skip_before_action with only alone
+    sourcePath: ./fixtures/ruby.bug-risk.skip-filter-conditional/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

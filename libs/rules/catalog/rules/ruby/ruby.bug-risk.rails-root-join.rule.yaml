@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.rails-root-join
+  title: Use Rails.root.join instead of path concatenation
+  summary: >-
+    Path concatenation with `Rails.root` using `+` or `File.join` is
+    less idiomatic than using `Rails.root.join`.
+  rationale: >-
+    `Rails.root.join('dir', 'file')` returns a `Pathname` object with
+    cross-platform path separators and is the idiomatic Rails way to build
+    absolute paths. String concatenation with `Rails.root.to_s +` or
+    `File.join(Rails.root, ...)` works but is less clean.
+  aliases:
+    - RB-RL1022
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.rails-root-join
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: low
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "Use `Rails.root.join(...)` instead of `${captures.issue.text}`"
+    summary: >-
+      "`${captures.issue.text}` builds a path with string concatenation or
+      `File.join`. Use `Rails.root.join(...)` for cross-platform paths."
+  remediation:
+    summary: >-
+      Replace `Rails.root + '/public'` with
+      `Rails.root.join('public')` or `Rails.root.join('app', 'models')`.

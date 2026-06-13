@@ -13,6 +13,8 @@ metadata:
     `Integer(str)` in a rescue block provides explicit error handling.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1041
   tags:
     - rules-catalog
     - ruby

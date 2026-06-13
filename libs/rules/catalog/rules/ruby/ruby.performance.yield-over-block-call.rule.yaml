@@ -1,0 +1,41 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.yield-over-block-call
+  title: Prefer `yield` over explicit `block.call`
+  summary: >-
+    Methods that accept a block with `&block` and call it via `block.call`
+    should use implicit `yield` instead for better performance.
+  rationale: >-
+    Using `yield` is faster than capturing a block into a proc and calling
+    `.call` because it avoids proc allocation and method dispatch overhead.
+  aliases:
+    - RB-PR1015
+  tags:
+    - performance
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.performance.yield-over-block-call
+    bind: issue
+emit:
+  finding:
+    category: performance.computation
+    severity: medium
+    confidence: 0.5
+    tags:
+      - performance
+      - ruby
+  message:
+    title: Use `yield` instead of `block.call`
+    summary: "`${captures.issue.text}` captures a block and calls it explicitly. Use implicit `yield`."
+  remediation:
+    summary: >-
+      Remove the `&block` parameter and use implicit `yield` to invoke the
+      block, avoiding proc allocation and call overhead.

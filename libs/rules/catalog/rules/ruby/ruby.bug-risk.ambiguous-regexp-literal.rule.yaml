@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.ambiguous-regexp-literal
+  title: Ambiguous regular expression literal in method invocation
+  summary: >-
+    A regex literal `/pattern/` is used as a method argument without
+    parentheses. This can be confused with the division operator by
+    readers.
+  rationale: >-
+    `foo /bar/` could be parsed as `foo(/bar/)` (regex argument) or
+    `foo() / bar /` (division). Adding parentheses removes the ambiguity
+    for human readers.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.ambiguous-regexp-literal
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.ambiguous-regexp-literal`."
+  remediation:
+    summary: >-
+      Wrap the regex literal in parentheses to disambiguate, e.g.
+      `method(/pattern/)` instead of `method /pattern/`.

@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.testing.thread-sleep-in-unit-test
-  title: Avoid thread::sleep in Rust unit tests
-  summary: Sleeping in tests slows CI and hides synchronization bugs.
-  rationale: Prefer deterministic synchronization or tokio time advances.
+  title: Avoid blocking std::thread::sleep with long duration in Rust unit tests
+  summary: Long blocking sleeps (>100ms) in narrow unit tests slow CI and hide synchronization bugs.
+  rationale: Use tokio::time::sleep (async-safe), deterministic synchronization, or tokio time advances instead of blocking the test thread.
   tags:
     - testing
     - rust
@@ -27,7 +27,7 @@ emit:
       - testing
       - rust
   message:
-    title: Replace sleep in `${captures.issue.text}`
-    summary: "`${captures.issue.text}` blocks on real wall-clock time inside a test-like path."
+    title: Blocking sleep exceeding 100ms in Rust unit test
+    summary: "`${captures.issue.text}` blocks on wall-clock time inside a narrow unit test. Prefer async-safe alternatives."
   remediation:
-    summary: Use `tokio::time::pause`, condvars, or scoped integration tests for real delays.
+    summary: Use `tokio::time::pause`, `tokio::time::sleep` (non-blocking), `condvars`, or move to integration tests for real delays. Short sleeps (≤100ms) are allowed for event loop yielding.

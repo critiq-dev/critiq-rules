@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.unreachable-loop.rule.yaml
+fixtures:
+  - name: flags unconditional exit in loop
+    sourcePath: ./fixtures/ruby.bug-risk.unreachable-loop/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.unreachable-loop
+        - ruby.bug-risk.unreachable-loop
+  - name: accepts conditional exit in loop
+    sourcePath: ./fixtures/ruby.bug-risk.unreachable-loop/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

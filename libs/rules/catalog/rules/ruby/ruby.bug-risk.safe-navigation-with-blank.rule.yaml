@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.safe-navigation-with-blank
+  title: Safe navigation `&.` combined with `blank?` is redundant
+  summary: >-
+    The safe navigation operator `&.` already handles nil, making `blank?`
+    redundant when used with it.
+  rationale: >-
+    `foo&.blank?` calls `blank?` only when `foo` is not nil, and `blank?`
+    returns `true` for nil objects already. Using `&.blank?` is redundant —
+    `.blank?` alone on a nil-safe receiver is sufficient. Prefer
+    `foo.blank?` or `foo.nil?` for clarity.
+  aliases:
+    - RB-RL1050
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.safe-navigation-with-blank
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: "`${captures.issue.text}` — `&.` is redundant with `blank?`"
+    summary: >-
+      "`${captures.issue.text}` uses `&.blank?`. Since `.blank?` already
+      returns `true` for nil, the safe navigation is redundant."
+  remediation:
+    summary: >-
+      Replace `foo&.blank?` with `foo.blank?`.

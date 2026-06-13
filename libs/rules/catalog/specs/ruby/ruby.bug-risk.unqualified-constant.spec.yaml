@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.unqualified-constant.rule.yaml
+fixtures:
+  - name: flags unqualified constant in module context
+    sourcePath: ./fixtures/ruby.bug-risk.unqualified-constant/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.unqualified-constant
+  - name: accepts qualified constant reference
+    sourcePath: ./fixtures/ruby.bug-risk.unqualified-constant/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -13,3 +13,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: skips serialization context (res.json)
+    sourcePath: ./fixtures/ts.performance.no-json-parse-stringify-clone/serialization-context.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

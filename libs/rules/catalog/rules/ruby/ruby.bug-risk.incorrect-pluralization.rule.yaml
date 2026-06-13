@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.incorrect-pluralization
+  title: Incorrect pluralization grammar detected
+  summary: >-
+    Uses pluralized ActiveSupport duration or byte method names with `1` (e.g.
+    `1.days`) instead of the singular form (`1.day`).
+  rationale: >-
+    Ruby's ActiveSupport extensions provide both singular and plural forms for
+    time and byte methods. Using a pluralized form with `1` is grammatically
+    incorrect and may indicate confusion about the API. While both forms work,
+    the singular form is more idiomatic.
+  aliases:
+    - RB-RL1037
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.incorrect-pluralization
+    bind: issue
+emit:
+  finding:
+    category: style
+    severity: low
+    confidence: 0.9
+    tags:
+      - ruby
+  message:
+    title: Use singular form instead of `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` uses a plural method name with `1`. Use the
+      singular form (e.g. `1.day` instead of `1.days`)."
+  remediation:
+    summary: >-
+      Replace the plural form with the corresponding singular form (e.g.
+      `1.day` instead of `1.days`).

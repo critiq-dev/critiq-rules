@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.enumerable-index-with
+  title: Use index_with instead of map+to_h to create a hash from an enumerable
+  summary: >-
+    Uses `.map { |e| [e, e.value] }.to_h` which can be replaced with
+    `.index_with(&:value)` for clearer intent and better performance.
+  rationale: >-
+    ActiveSupport's `Enumerable#index_with` is specifically designed for the
+    common pattern of creating a hash where elements are keys and values are
+    derived from each element. It avoids creating an intermediate array and is
+    more readable than the equivalent `.map { |e| [e, e.value] }.to_h` pattern.
+  aliases:
+    - RB-RL1059
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - performance
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.performance.enumerable-index-with
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.7
+    tags:
+      - performance
+      - ruby
+  message:
+    title: "Use `.index_with(&:value)` instead of `.map { |e| [e, e.value] }.to_h`"
+    summary: "'${captures.issue.text}' builds a hash from `.map` + `.to_h`. Use `.index_with(&:value)` for better performance and clarity."
+  remediation:
+    summary: >-
+      Replace `.map { |e| [e, e.value] }.to_h` with `.index_with(&:value)`.
+      If the value expression is more complex than a simple attribute access,
+      use `.index_with { |e| complex_expression(e) }`.

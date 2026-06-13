@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.branches-without-body.rule.yaml
+fixtures:
+  - name: flags empty branch patterns
+    sourcePath: ./fixtures/ruby.bug-risk.branches-without-body/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.branches-without-body
+        - ruby.bug-risk.branches-without-body
+        - ruby.bug-risk.branches-without-body
+  - name: accepts branches with body and postfix
+    sourcePath: ./fixtures/ruby.bug-risk.branches-without-body/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

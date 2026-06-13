@@ -1,0 +1,28 @@
+{
+  "path": "src/example.rb",
+  "language": "ruby",
+  "text": "config = OpenStruct.new\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "ruby.performance.prefer-struct-over-openstruct",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 1,
+            "endColumn": 25
+          },
+          "text": "config = OpenStruct.new",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.deprecated-http-status-symbols
+  title: Use symbolic value of HTTP status codes
+  summary: >-
+    Prefer numeric HTTP status codes over symbolic references for clarity.
+  rationale: >-
+    Using symbolic HTTP status codes (e.g. `:ok`, `:not_found`) in
+    `render`, `head`, or `redirect_to` can be ambiguous and less
+    explicit than numeric codes. Numeric status codes provide clearer
+    intent and avoid dependency on Rails symbol-to-status mappings.
+  aliases:
+    - RB-RL1029
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.deprecated-http-status-symbols
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.75
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "Use of symbolic HTTP status code in response"
+    summary: >-
+      This call uses a symbolic HTTP status code. Prefer numeric codes
+      for clarity and to avoid ambiguity.
+  remediation:
+    summary: >-
+      Replace the symbolic status code with its numeric equivalent
+      (e.g., `:ok` → `200`, `:not_found` → `404`).

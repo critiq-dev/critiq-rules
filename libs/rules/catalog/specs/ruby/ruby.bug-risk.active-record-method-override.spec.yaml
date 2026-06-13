@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.active-record-method-override.rule.yaml
+fixtures:
+  - name: flags AR method override
+    sourcePath: ./fixtures/ruby.bug-risk.active-record-method-override/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.active-record-method-override
+        - ruby.bug-risk.active-record-method-override
+  - name: accepts safe patterns
+    sourcePath: ./fixtures/ruby.bug-risk.active-record-method-override/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

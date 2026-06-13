@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.deprecated-belongs-to-required.rule.yaml
+fixtures:
+  - name: "flags deprecated required: true"
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-belongs-to-required/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.deprecated-belongs-to-required
+  - name: accepts optional syntax
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-belongs-to-required/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

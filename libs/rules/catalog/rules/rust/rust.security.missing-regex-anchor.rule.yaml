@@ -1,0 +1,61 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: rust.security.missing-regex-anchor
+  title: Anchor regex patterns with `^` or `(?`
+  summary: >-
+    Regex patterns compiled with `Regex::new` should be anchored to avoid
+    unintended substring matches, which can lead to security bypasses.
+  rationale: >-
+    Unanchored regex patterns may match unintended substrings, enabling input
+    validation bypass (CWE-20, CWE-918).
+  detection:
+    kind: pattern
+  references:
+    - kind: cwe
+      id: CWE-20
+      title: Improper Input Validation
+    - kind: cwe
+      id: CWE-918
+      title: Server-Side Request Forgery (SSRF)
+  tags:
+    - security
+    - rust
+    - regex
+    - input-validation
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+  aliases:
+    - RS-S1008
+scope:
+  languages:
+    - rust
+  paths:
+    include:
+      - "**/*.rs"
+    exclude:
+      - "**/tests/**"
+      - "**/*_test.rs"
+      - "**/examples/**"
+match:
+  fact:
+    kind: rust.security.missing-regex-anchor
+    bind: issue
+emit:
+  finding:
+    category: security.input-validation
+    severity: high
+    confidence: 0.85
+    tags:
+      - security
+      - rust
+      - regex
+      - input-validation
+  message:
+    title: Anchor regex pattern with `^` or `(?` near `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses an unanchored regex pattern."
+  remediation:
+    summary: >-
+      Add a `^` anchor at the start of the regex pattern, or use `(?...)` for
+      flags followed by `^` to ensure the pattern matches from the beginning.

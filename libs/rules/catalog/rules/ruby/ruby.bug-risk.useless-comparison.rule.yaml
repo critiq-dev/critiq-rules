@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.useless-comparison
+  title: Avoid useless comparison with self
+  summary: >-
+    A variable is compared to itself using ==, !=, <, >, <=, >=, or ===. This
+    comparison always produces a known result and is likely a logic error.
+  rationale: >-
+    Comparing a variable to itself always yields a constant result (true for ==,
+    <=, >= and false for !=, <, >). This is almost certainly a bug from a
+    copy-paste or typo.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1079
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.useless-comparison
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.7
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.useless-comparison`."
+  remediation:
+    summary: >-
+      Replace with the intended comparison or remove the redundant
+      self-comparison.

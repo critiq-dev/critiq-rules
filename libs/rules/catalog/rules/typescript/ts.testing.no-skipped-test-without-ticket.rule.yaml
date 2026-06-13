@@ -28,7 +28,7 @@ emit:
       - testing
       - coverage
   message:
-    title: Add a ticket or suppression note for `${captures.issue.text}`
-    summary: "`${captures.issue.text}` skips a test without an adjacent issue key, GitHub issue URL, or TODO(expires) style note."
+    title: Skipped test lacks adequate justification — add a reason, ticket, or comment
+    summary: "`${captures.issue.text}` skips a test without a descriptive name, explicit reason string, ticket reference, or explanatory comment."
   remediation:
-    summary: Link the skip to a tracker id, add a short expiry note, or replace the skip with a focused assertion.
+    summary: Add a descriptive test name, explicit reason string, ticket reference, or explanatory comment to document why this test is skipped.

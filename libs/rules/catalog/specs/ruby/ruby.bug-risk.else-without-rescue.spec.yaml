@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.else-without-rescue.rule.yaml
+fixtures:
+  - name: flags else without rescue in begin
+    sourcePath: ./fixtures/ruby.bug-risk.else-without-rescue/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.else-without-rescue
+        - ruby.bug-risk.else-without-rescue
+  - name: accepts begin with rescue before else
+    sourcePath: ./fixtures/ruby.bug-risk.else-without-rescue/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

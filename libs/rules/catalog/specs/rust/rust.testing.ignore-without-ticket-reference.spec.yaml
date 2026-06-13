@@ -13,3 +13,13 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: valid_with_comment
+    sourcePath: ./fixtures/rust.testing.ignore-without-ticket-reference/tests/good_with_comment.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: valid_named_ignore
+    sourcePath: ./fixtures/rust.testing.ignore-without-ticket-reference/tests/good_named_ignore.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

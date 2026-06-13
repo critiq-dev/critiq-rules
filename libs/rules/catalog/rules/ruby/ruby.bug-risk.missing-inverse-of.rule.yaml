@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.missing-inverse-of
+  title: Inverse relation cannot be determined automatically
+  summary: >-
+    Declare `inverse_of:` on associations where Rails cannot
+    automatically determine the inverse.
+  rationale: >-
+    Without `inverse_of:`, Rails may not correctly identify the inverse
+    association, leading to unnecessary database queries and stale
+    in-memory objects. Explicitly declaring `inverse_of:` ensures that
+    associated objects are properly synchronized.
+  aliases:
+    - RB-RL1031
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.missing-inverse-of
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` is missing inverse_of"
+    summary: >-
+      "`${captures.issue.text}` does not declare `inverse_of:`. Rails
+      may fail to detect the inverse association automatically."
+  remediation:
+    summary: >-
+      Add `inverse_of:` to the association declaration pointing to the
+      corresponding opposite association name.

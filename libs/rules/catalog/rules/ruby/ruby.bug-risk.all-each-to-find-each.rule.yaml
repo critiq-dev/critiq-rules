@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.all-each-to-find-each
+  title: Replace Model.all.each with find_each
+  summary: >-
+    `Model.all.each` loads all records into memory. Use `find_each` for
+    batch processing.
+  rationale: >-
+    `Model.all.each` loads the entire result set into memory at once, which
+    can exhaust memory for large tables. `find_each` uses
+    `find_in_batches` internally to load records in batches of 1000,
+    keeping memory usage constant regardless of table size.
+  aliases:
+    - RB-RL1024
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-record
+    - performance
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.all-each-to-find-each
+    bind: issue
+emit:
+  finding:
+    category: correctness.performance
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "Use `find_each` instead of `${captures.issue.text}`"
+    summary: >-
+      "`${captures.issue.text}` loads all records into memory. Use
+      `find_each` for batch iteration."
+  remediation:
+    summary: >-
+      Replace `Model.all.each { |r| ... }` with
+      `Model.all.find_each { |r| ... }` to batch-process records.

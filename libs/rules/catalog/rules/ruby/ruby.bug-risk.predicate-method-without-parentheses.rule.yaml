@@ -11,6 +11,8 @@ metadata:
     In Ruby, `foo.nil? bar && baz` is parsed as
     `(foo.nil?(bar)) && baz`, not `foo.nil?(bar && baz)`. Adding
     parentheses makes the call unambiguous.
+  aliases:
+    - RB-LI1055
   detection:
     kind: pattern
   tags:

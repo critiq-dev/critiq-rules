@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.callback-order.rule.yaml
+fixtures:
+  - name: flags out-of-order callbacks
+    sourcePath: ./fixtures/ruby.bug-risk.callback-order/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.callback-order
+  - name: accepts correct callback ordering
+    sourcePath: ./fixtures/ruby.bug-risk.callback-order/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

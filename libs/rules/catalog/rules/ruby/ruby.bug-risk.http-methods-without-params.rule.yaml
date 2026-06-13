@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.http-methods-without-params
+  title: Use of http methods without params detected
+  summary: >-
+    Test HTTP helper methods like `get`, `post` should explicitly pass
+    a params argument for clarity.
+  rationale: >-
+    Omitting the `params:` argument in test HTTP calls (`get`, `post`,
+    `put`, `patch`, `delete`) can lead to brittle or unclear tests.
+    Explicitly passing `params: {}` makes the intent clear and avoids
+    reliance on Rails default behavior.
+  aliases:
+    - RB-RL1028
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - testing
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.http-methods-without-params
+    bind: issue
+emit:
+  finding:
+    category: correctness.testing
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+      - testing
+  message:
+    title: "`${captures.issue.text}` has no params argument"
+    summary: >-
+      "`${captures.issue.text}` calls an HTTP test helper without explicit
+      `params:`. Add `params: {}` for clarity."
+  remediation:
+    summary: >-
+      Add an explicit `params:` argument, even if empty.

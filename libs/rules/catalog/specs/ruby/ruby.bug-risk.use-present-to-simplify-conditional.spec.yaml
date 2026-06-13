@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.use-present-to-simplify-conditional.rule.yaml
+fixtures:
+  - name: "flags x != nil && !x.empty?"
+    sourcePath: ./fixtures/ruby.bug-risk.use-present-to-simplify-conditional/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.use-present-to-simplify-conditional
+  - name: accepts x.present?
+    sourcePath: ./fixtures/ruby.bug-risk.use-present-to-simplify-conditional/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

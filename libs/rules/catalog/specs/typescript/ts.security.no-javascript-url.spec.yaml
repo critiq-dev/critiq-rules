@@ -11,11 +11,16 @@ fixtures:
         - ts.security.no-javascript-url
         - ts.security.no-javascript-url
       allSeverities:
-        - high
-        - high
-        - high
+        - medium
+        - medium
+        - medium
   - name: ignores safe urls
     sourcePath: ./fixtures/ts.security.no-javascript-url/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores javascript urls in test files (path exclusion)
+    sourcePath: ./fixtures/ts.security.no-javascript-url/invalid.test.ts
     expect:
       findingCount: 0
       allRuleIds: []

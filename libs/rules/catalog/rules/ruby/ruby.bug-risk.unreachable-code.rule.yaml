@@ -34,7 +34,7 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: medium
+    severity: high
     confidence: 0.7
     tags:
       - ruby

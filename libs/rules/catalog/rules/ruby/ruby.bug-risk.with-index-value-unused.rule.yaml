@@ -10,6 +10,8 @@ metadata:
     When `with_index` is used with a single-argument block, the index value
     is computed but never used. Either use both arguments or omit the index
     entirely to make the intent clear.
+  aliases:
+    - RB-LI1052
   detection:
     kind: pattern
   tags:

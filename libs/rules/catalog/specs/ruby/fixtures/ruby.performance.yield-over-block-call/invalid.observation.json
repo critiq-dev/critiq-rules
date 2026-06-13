@@ -1,0 +1,28 @@
+{
+  "path": "src/example.rb",
+  "language": "ruby",
+  "text": "def with_timing(&block)\n  result = block.call\n  result\nend\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "ruby.performance.yield-over-block-call",
+          "appliesTo": "block",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 4,
+            "endColumn": 4
+          },
+          "text": "def with_timing(&block)\n  result = block.call\n  result\nend",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

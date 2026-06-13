@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.useless-comparison.rule.yaml
+fixtures:
+  - name: flags useless comparison with self
+    sourcePath: ./fixtures/ruby.bug-risk.useless-comparison/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.useless-comparison
+        - ruby.bug-risk.useless-comparison
+        - ruby.bug-risk.useless-comparison
+  - name: accepts comparison with other variable
+    sourcePath: ./fixtures/ruby.bug-risk.useless-comparison/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.equal-instead-of-equal.rule.yaml
+fixtures:
+  - name: flags object_id comparison via ==
+    sourcePath: ./fixtures/ruby.bug-risk.equal-instead-of-equal/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.equal-instead-of-equal
+  - name: accepts equal? method usage
+    sourcePath: ./fixtures/ruby.bug-risk.equal-instead-of-equal/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

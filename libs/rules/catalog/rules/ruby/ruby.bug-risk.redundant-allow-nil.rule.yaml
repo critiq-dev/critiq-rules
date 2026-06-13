@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.redundant-allow-nil
+  title: Redundant `allow_nil` detected
+  summary: >-
+    A `validates` declaration includes both `allow_nil: true` and
+    `allow_blank: true`. Since `allow_blank: true` already permits `nil`
+    values, the `allow_nil` option is redundant.
+  rationale: >-
+    In ActiveModel validations, `allow_blank: true` implicitly allows `nil`
+    values (since `nil.blank?` returns `true`). Specifying both
+    `allow_nil: true` and `allow_blank: true` is redundant. Only
+    `allow_blank: true` is needed.
+  aliases:
+    - RB-RL1042
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.redundant-allow-nil
+    bind: issue
+emit:
+  finding:
+    category: maintainability
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: "Redundant allow_nil: true with allow_blank: true"
+    summary: >-
+      "allow_nil: true is redundant when allow_blank: true is already
+      specified, since allow_blank covers nil values."
+  remediation:
+    summary: >-
+      Remove allow_nil: true from the validation. allow_blank: true
+      already permits nil values.

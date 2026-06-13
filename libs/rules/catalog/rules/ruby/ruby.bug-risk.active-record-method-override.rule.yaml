@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.active-record-method-override
+  title: Override of built-in ActiveRecord methods
+  summary: >-
+    An ActiveRecord model overrides a built-in ActiveRecord method such as
+    `save`, `create`, `destroy`, or `update`. This can cause subtle bugs when
+    ActiveRecord lifecycle expects the original behavior.
+  rationale: >-
+    Overriding built-in AR methods like `save`, `destroy`, or `create` is risky
+    because callbacks, transactions, and other lifecycle guarantees depend on
+    the original implementation. Consider using `before_*` / `after_*` callbacks
+    instead.
+  aliases:
+    - RB-RL1003
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-record
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.active-record-method-override
+    bind: issue
+emit:
+  finding:
+    category: correctness.bug-risk
+    severity: medium
+    confidence: 0.65
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` overrides a built-in ActiveRecord method"
+    summary: >-
+      "`${captures.issue.text}` is a built-in ActiveRecord method. Overriding
+      it in a model subclass can cause unexpected behavior. Prefer callbacks."
+  remediation:
+    summary: >-
+      Replace method overrides with ActiveRecord callbacks (`before_save`,
+      `after_destroy`, etc.) wherever possible.

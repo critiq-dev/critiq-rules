@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.assert-not-usage.rule.yaml
+fixtures:
+  - name: flags assert ! negation
+    observationPath: ./fixtures/ruby.bug-risk.assert-not-usage/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.assert-not-usage
+  - name: accepts assert_not
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

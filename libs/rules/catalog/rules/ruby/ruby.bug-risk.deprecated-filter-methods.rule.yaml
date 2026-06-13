@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.deprecated-filter-methods
+  title: Use of deprecated *_filter methods
+  summary: >-
+    Rails controller uses `before_filter`, `after_filter`, `around_filter`,
+    or similar legacy filter methods instead of the modern `*_action` equivalents.
+  rationale: >-
+    Rails 4.0 deprecated `*_filter` methods in favor of `*_action`. Using the
+    legacy methods generates deprecation warnings and may be removed in future
+    Rails versions.
+  aliases:
+    - RB-RL1001
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - deprecation
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.deprecated-filter-methods
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` is deprecated — use `*_action` instead"
+    summary: >-
+      "`${captures.issue.text}` is a legacy Rails filter method. Replace it
+      with the corresponding `*_action` method."
+  remediation:
+    summary: >-
+      Replace `*_filter` with the `*_action` equivalent:
+      `before_filter` → `before_action`, `after_filter` → `after_action`,
+      `around_filter` → `around_action`, etc.

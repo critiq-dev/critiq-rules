@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.else-without-rescue
+  title: Avoid else without rescue in begin block
+  summary: >-
+    A begin block contains an else clause but no rescue clause. In Ruby, else
+    in a begin block only runs when no exception is raised, which is useless
+    without rescue.
+  rationale: >-
+    Using else without rescue in a begin block is misleading. The else clause
+    executes only when no exception is raised, but without rescue there is no
+    exception handling at all, making the else clause behave like regular code.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1080
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.else-without-rescue
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.7
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.else-without-rescue`."
+  remediation:
+    summary: >-
+      Add a rescue clause before else, or remove the else clause if exception
+      handling is not needed.

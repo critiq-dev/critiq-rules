@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.exit-in-app-code
+  title: Call to exit/exit! detected in app code
+  summary: >-
+    Bare `exit` or `exit!` calls halt process execution and should be avoided
+    in application code.
+  rationale: >-
+    Calling `exit` or `exit!` in a web application controller, model, job, or
+    other app code immediately terminates the process instead of raising an
+    exception that can be handled. Use `raise` or return a proper error
+    response instead.
+  aliases:
+    - RB-RL1021
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.exit-in-app-code
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` halts process — use `raise` instead"
+    summary: >-
+      "`${captures.issue.text}` was found in application code. Prefer
+      raising exceptions or returning error responses."
+  remediation:
+    summary: >-
+      Replace `exit`/`exit!` with `raise` to signal errors, or handle the
+      condition through normal control flow.

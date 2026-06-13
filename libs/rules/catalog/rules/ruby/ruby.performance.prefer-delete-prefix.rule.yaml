@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.prefer-delete-prefix
+  title: Use delete_prefix instead of gsub with \A-anchored regex
+  summary: >-
+    Calling `gsub(/\Aprefix/, '')` compiles and runs a regex to strip a literal
+    prefix. `String#delete_prefix` is faster and clearer.
+  rationale: >-
+    Using `gsub` with a `\A`-anchored regex and an empty replacement string
+    to strip a prefix incurs regex compilation and matching overhead.
+    `String#delete_prefix` performs a simple string comparison, which is
+    significantly faster and more readable.
+  aliases:
+    - RB-PR1026
+  detection:
+    kind: pattern
+  tags:
+    - performance
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.performance.prefer-delete-prefix
+    bind: issue
+emit:
+  finding:
+    category: performance.computation
+    severity: medium
+    confidence: 0.75
+    tags:
+      - performance
+      - ruby
+  message:
+    title: Replace `gsub(/\A.../, '')` with `delete_prefix`
+    summary: "'${captures.issue.text}' uses a regex to strip a prefix. Use `delete_prefix` instead."
+  remediation:
+    summary: >-
+      Replace `str.gsub(/\Aprefix/, '')` with `str.delete_prefix('prefix')`.
+      `delete_prefix` avoids regex overhead and expresses intent more clearly.
+      Note: `delete_prefix` only works for literal prefixes — verify the regex
+      body contains no metacharacters before applying this change.

@@ -13,6 +13,8 @@ metadata:
     large files.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1045
   tags:
     - rules-catalog
     - ruby

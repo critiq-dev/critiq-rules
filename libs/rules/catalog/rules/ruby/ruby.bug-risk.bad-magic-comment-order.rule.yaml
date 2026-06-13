@@ -12,6 +12,8 @@ metadata:
     silently disables the intended behavior.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1042
   tags:
     - rules-catalog
     - ruby

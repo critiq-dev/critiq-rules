@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.trailing-comma-attribute
+  title: Trailing comma in attribute declaration detected
+  summary: >-
+    An `attr_reader`, `attr_writer`, or `attr_accessor` declaration has a
+    trailing comma after the last symbol. This does not cause a syntax error
+    but may indicate an incomplete declaration.
+  rationale: >-
+    A trailing comma in attribute declarations suggests the developer
+    intended to add more attributes but stopped prematurely or forgot to
+    complete the list.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1099
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.trailing-comma-attribute
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.90
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.trailing-comma-attribute`."
+  remediation:
+    summary: >-
+      Remove the trailing comma or add the intended attributes after it.

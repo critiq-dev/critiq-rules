@@ -11,6 +11,8 @@ metadata:
     Regex literals in Ruby are always truthy. Using `/pattern/` directly in
     an `if` or `unless` without `=~` or `.match?` means the condition is
     always true, which is likely a bug.
+  aliases:
+    - RB-LI1054
   detection:
     kind: pattern
   tags:

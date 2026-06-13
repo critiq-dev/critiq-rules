@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.unqualified-constant
+  title: Use qualified constant reference in module context
+  summary: >-
+    A bare constant reference is used where a qualified constant (prefixed with
+    the module namespace) may be expected. This may reference an unexpected
+    constant.
+  rationale: >-
+    Using bare constants in a module context can unintentionally reference
+    constants from the enclosing scope rather than the intended fully-qualified
+    constant. This is a common source of subtle bugs.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1085
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.unqualified-constant
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.5
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.unqualified-constant`."
+  remediation:
+    summary: >-
+      Prefix the constant with the module namespace to ensure the correct
+      constant is resolved.

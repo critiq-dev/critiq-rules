@@ -4,6 +4,6 @@ rescue StandardError
 end
 
 begin
-  parse(user_input)
+  risky_call
 rescue => e
 end

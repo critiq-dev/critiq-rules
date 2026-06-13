@@ -1,0 +1,42 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.prefer-struct-over-openstruct
+  title: Prefer `Struct` over `OpenStruct`
+  summary: >-
+    `OpenStruct.new` is significantly slower and more memory-intensive than
+    `Struct.new` for fixed-schema data objects.
+  rationale: >-
+    OpenStruct uses `define_method` dynamically and stores data in a hash,
+    making it slower to create and access. For fixed-schema objects, Struct
+    provides better performance and type safety.
+  aliases:
+    - RB-PR1013
+  tags:
+    - performance
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.performance.prefer-struct-over-openstruct
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - ruby
+  message:
+    title: Replace `OpenStruct` with `Struct` for fixed-schema data
+    summary: "`${captures.issue.text}` creates an OpenStruct which is slower and more memory-intensive than Struct."
+  remediation:
+    summary: >-
+      Replace `OpenStruct.new(...)` with `Struct.new(...)` or a dedicated
+      class definition for better performance and type safety.

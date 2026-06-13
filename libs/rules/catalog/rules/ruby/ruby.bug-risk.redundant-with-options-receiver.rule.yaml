@@ -1,0 +1,52 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.redundant-with-options-receiver
+  title: Redundant with_options receiver references
+  summary: >-
+    Inside a `with_options` block, use implicit method calls instead of
+    explicitly calling methods on the block variable.
+  rationale: >-
+    The `with_options` method yields a block variable that shadows the
+    receiver. Calling methods on the block variable (e.g. `assoc.has_many`)
+    instead of using implicit receiver (`has_many`) defeats the purpose
+    of `with_options` and is redundant.
+  aliases:
+    - RB-RL1043
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.redundant-with-options-receiver
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` uses redundant receiver inside with_options"
+    summary: >-
+      "`${captures.issue.text}` calls a method on the `with_options` block
+      variable. Call it implicitly instead."
+  remediation:
+    summary: >-
+      Remove the block variable receiver and call the method directly.
+      For example, replace `|assoc| assoc.has_many :x` with `do; has_many :x; end`.

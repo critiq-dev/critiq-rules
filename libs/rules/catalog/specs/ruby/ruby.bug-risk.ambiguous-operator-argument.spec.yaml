@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.ambiguous-operator-argument.rule.yaml
+fixtures:
+  - name: flags unary operator argument
+    sourcePath: ./fixtures/ruby.bug-risk.ambiguous-operator-argument/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.ambiguous-operator-argument
+        - ruby.bug-risk.ambiguous-operator-argument
+        - ruby.bug-risk.ambiguous-operator-argument
+  - name: accepts binary operator expression
+    sourcePath: ./fixtures/ruby.bug-risk.ambiguous-operator-argument/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

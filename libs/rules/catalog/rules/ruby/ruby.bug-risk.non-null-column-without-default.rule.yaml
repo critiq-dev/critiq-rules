@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.non-null-column-without-default
+  title: Non-null column should specify a default
+  summary: >-
+    Column definitions with `null: false` should also specify a `default` value
+    to avoid constraint failures when inserting records without the column.
+  rationale: >-
+    Adding a non-null column without a default causes existing records to fail
+    validation on save. Always provide a sensible default when adding or
+    changing a column to be non-nullable, or ensure all existing rows are
+    backfilled before deploying.
+  aliases:
+    - RB-RL1034
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.non-null-column-without-default
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - ruby
+  message:
+    title: Non-null column `${captures.issue.text}` is missing a default
+    summary: >-
+      "`${captures.issue.text}` declares `null: false` but no `default:`.
+      Existing rows will fail to save without the column."
+  remediation:
+    summary: >-
+      Add a `default:` option to the column definition, or backfill existing
+      rows and remove the constraint.

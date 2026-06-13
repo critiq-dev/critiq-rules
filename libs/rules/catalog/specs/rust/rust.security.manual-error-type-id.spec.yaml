@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.manual-error-type-id.rule.yaml
+fixtures:
+  - name: flags manual type_id override
+    sourcePath: ./fixtures/rust.security.manual-error-type-id/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.manual-error-type-id
+  - name: accepts Error impl without type_id
+    sourcePath: ./fixtures/rust.security.manual-error-type-id/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

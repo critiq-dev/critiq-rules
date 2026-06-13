@@ -1,0 +1,55 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.deprecated-find-by-dynamic
+  title: Use of deprecated dynamic finder methods
+  summary: >-
+    `find_by_*` dynamic finder methods (e.g. `find_by_email`) are deprecated in
+    Rails and will raise a deprecation warning.
+  rationale: >-
+    Rails 4.0 deprecated dynamic finder methods like `find_by_email`,
+    `find_by_name_and_email`, etc. in favor of `find_by(email: ...)` with hash
+    syntax. These dynamic methods are removed in Rails 5.1+ and will raise
+    `NoMethodError` when called.
+  aliases:
+    - RB-RL1017
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-record
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.deprecated-find-by-dynamic
+    bind: issue
+emit:
+  finding:
+    category: correctness.deprecation
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` uses a deprecated dynamic finder"
+    summary: >-
+      "`${captures.issue.text}` is a dynamic finder method. Replace it with
+      `find_by(column: value)` hash syntax."
+  remediation:
+    summary: >-
+      Replace `find_by_column_name(args)` with `find_by(column_name: args)`.
+      For example, replace `User.find_by_email("test")` with
+      `User.find_by(email: "test")`.

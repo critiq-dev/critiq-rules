@@ -10,8 +10,8 @@ fixtures:
         - ts.security.non-literal-fs-filename
         - ts.security.non-literal-fs-filename
       allSeverities:
-        - high
-        - high
+        - medium
+        - medium
   - name: ignores allowlisted file reads
     sourcePath: ./fixtures/filesystem-safety/file-reads.valid.ts
     expect:

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.non-null-column-without-default.rule.yaml
+fixtures:
+  - name: "flags add_column with null: false and no default"
+    sourcePath: ./fixtures/ruby.bug-risk.non-null-column-without-default/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.non-null-column-without-default
+  - name: "accepts column with default value"
+    sourcePath: ./fixtures/ruby.bug-risk.non-null-column-without-default/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

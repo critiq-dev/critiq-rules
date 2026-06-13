@@ -12,6 +12,8 @@ metadata:
     add cognitive overhead without benefit.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1050
   tags:
     - rules-catalog
     - ruby

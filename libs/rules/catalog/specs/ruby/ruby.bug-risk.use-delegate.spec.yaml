@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.use-delegate.rule.yaml
+fixtures:
+  - name: flags manual delegation
+    sourcePath: ./fixtures/ruby.bug-risk.use-delegate/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.use-delegate
+  - name: accepts proper delegate
+    sourcePath: ./fixtures/ruby.bug-risk.use-delegate/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

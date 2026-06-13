@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.security.express-nosql-injection
       allSeverities:
-        - critical
+        - high
   - name: ignores fixed model queries
     sourcePath: ./fixtures/public-security/headers-nosql.valid.ts
     expect:
@@ -22,9 +22,14 @@ fixtures:
       allRuleIds:
         - ts.security.express-nosql-injection
       allSeverities:
-        - critical
+        - high
   - name: ignores validated aggregation pipeline builders
     sourcePath: ./fixtures/public-security/nosql-aggregate.valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: ignores non-NoSQL database imports like OracleDB
+    sourcePath: ./fixtures/public-security/nosql-ignores-non-nosql-imports.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []

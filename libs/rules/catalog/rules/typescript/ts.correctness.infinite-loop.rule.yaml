@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.infinite-loop
-  title: Infinite Loop
-  summary: Detect obvious infinite loops
-  rationale: Detect obvious infinite loops:while (true) and for(;;) without break, return, or throw in the loop body.
+  title: Loop has no exit condition — add a break, return, or exit condition
+  summary: Detect obvious infinite loops that have no exit path via break, return, throw, or yield.
+  rationale: Loops with no exit condition (while(true), for(;;), do{}while(true)) without a break, return, throw, or yield in the body will run forever, freezing the event loop or exhausting resources. Even loops with a yield are considered potentially unbounded in non-generator contexts.
   aliases:
     - JS-0092
   tags:
@@ -16,6 +16,13 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/tests/fixtures/code-path-analysis/**"
+      - "**/types/**/*-tests.*"
+      - "**/types/**/*-tests.ts"
+      - "**/types/**/*-tests.tsx"
+      - "**/tests/fixtures/**"
 match:
   fact:
     kind: async.infinite-loop
@@ -23,12 +30,12 @@ match:
 emit:
   finding:
     category: correctness
-    severity: high
+    severity: medium
     confidence: 0.85
     tags:
       - correctness
   message:
-    title: Infinite Loop
-    summary: "`${captures.issue.text}` matches ts.correctness.infinite-loop."
+    title: Loop has no exit condition
+    summary: "`${captures.issue.text}` has no exit condition — the loop will run forever unless the body contains a break, return, throw, or yield statement."
   remediation:
-    summary: Detect obvious infinite loops:while (true) and for(;;) without break, return, or throw in the loop body.
+    summary: Add an exit condition — break, return, throw, or yield — to the loop body so it does not run forever.

@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.assert-not-usage
+  title: Use assert_not instead of assert with negation
+  summary: >-
+    Replace `assert !` with `assert_not` for clearer test assertions.
+  rationale: >-
+    `assert_not` provides a clearer intent than `assert !` and produces better
+    failure messages when the assertion fails.
+  aliases:
+    - RB-RL1009
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - testing
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.assert-not-usage
+    bind: issue
+emit:
+  finding:
+    category: correctness.testing
+    severity: low
+    confidence: 0.95
+    tags:
+      - ruby
+      - rails
+      - testing
+  message:
+    title: "`${captures.issue.text}` uses `assert !`"
+    summary: >-
+      "`${captures.issue.text}` negates with `!` instead of using `assert_not`.
+      Prefer `assert_not` for clearer test intent."
+  remediation:
+    summary: >-
+      Replace `assert !condition` with `assert_not condition`.

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.relative-date-as-constant.rule.yaml
+fixtures:
+  - name: flags constant with relative date
+    sourcePath: ./fixtures/ruby.bug-risk.relative-date-as-constant/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.relative-date-as-constant
+  - name: accepts constant with static value
+    sourcePath: ./fixtures/ruby.bug-risk.relative-date-as-constant/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

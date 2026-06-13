@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.non-preferred-assert-falseness.rule.yaml
+fixtures:
+  - name: flags refute usage
+    sourcePath: ./fixtures/ruby.bug-risk.non-preferred-assert-falseness/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.non-preferred-assert-falseness
+  - name: accepts assert_not usage
+    sourcePath: ./fixtures/ruby.bug-risk.non-preferred-assert-falseness/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

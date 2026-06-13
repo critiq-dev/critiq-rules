@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.range-cover-over-include
+  title: Prefer `cover?` over `include?` for range membership
+  summary: >-
+    `Range#include?` iterates the range to check membership, while
+    `Range#cover?` uses a simple comparison. For numeric ranges, `cover?`
+    is significantly faster.
+  rationale: >-
+    `include?` on a Range checks each element sequentially for contiguous
+    numeric ranges, while `cover?` simply compares against the endpoints.
+    `cover?` is O(1) versus O(n) for `include?` on large ranges.
+  aliases:
+    - RB-PR1014
+  tags:
+    - performance
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.performance.range-cover-over-include
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - ruby
+  message:
+    title: Use `cover?` instead of `include?` for range membership checks
+    summary: "`${captures.issue.text}` uses `include?` on a Range. Use `cover?` for O(1) comparison."
+  remediation:
+    summary: >-
+      Replace `range.include?(value)` with `range.cover?(value)` for
+      numeric or string ranges to use endpoint comparison instead of iteration.

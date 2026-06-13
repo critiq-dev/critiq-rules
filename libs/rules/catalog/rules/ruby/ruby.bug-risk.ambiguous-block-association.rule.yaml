@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.ambiguous-block-association
+  title: Ambiguous association of block with method
+  summary: >-
+    A block is attached to a method call that already has arguments, but the
+    intended receiver of the block is ambiguous. Add parentheses to clarify
+    whether the block belongs to the outer or inner method.
+  rationale: >-
+    Without parentheses, `foo bar { |x| x }` could mean `foo(bar) { |x| x }`
+    (block on outer method) or `foo(bar { |x| x })` (block on inner method).
+    Adding parentheses removes the ambiguity.
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.ambiguous-block-association
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.8
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.ambiguous-block-association`."
+  remediation:
+    summary: >-
+      Add parentheses to disambiguate the block binding, e.g.
+      `method(arg) { |x| x }` or `method(arg { |x| x })`.

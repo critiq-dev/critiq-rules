@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.enum-array-syntax
+  title: Enum detected with array syntax
+  summary: >-
+    Use of array syntax for enum declarations is brittle and can lead to
+    unexpected values when enum items are reordered.
+  rationale: >-
+    Rails enum declarations using array syntax (`enum :status, [:active,
+    :archived]`) assign implicit integer values starting from 0. Adding or
+    reordering values shifts existing database values. Prefer explicit hash
+    syntax to assign stable integer values.
+  aliases:
+    - RB-RL1018
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-record
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.enum-array-syntax
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` uses array-syntax enum"
+    summary: >-
+      "`${captures.issue.text}` declares an enum with array syntax. Use
+      explicit hash syntax instead."
+  remediation:
+    summary: >-
+      Replace `enum :name, [:a, :b]` with
+      `enum name: { a: 0, b: 1 }` to assign explicit integer values.

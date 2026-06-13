@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.callback-override
+  title: ActiveRecord callback being overridden
+  summary: >-
+    The same callback method name is used across multiple `after_commit` or
+    `after_*_commit` declarations. Only the last declaration takes effect.
+  rationale: >-
+    Unlike `before_save` and `after_save` (which stack), `after_commit` and its
+    aliases (`after_create_commit`, `after_update_commit`,
+    `after_destroy_commit`) only register one callback per method name. Later
+    declarations silently override earlier ones, causing the first callback to
+    never execute.
+  aliases:
+    - RB-LI1106
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.callback-override
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - ruby
+  message:
+    title: Callback `${captures.issue.text}` overrides a previous declaration
+    summary: >-
+      "`${captures.issue.text}` uses a method name already declared in the class.
+      The previous declaration will be silently overridden."
+  remediation:
+    summary: >-
+      Ensure each callback method name is used only once across after_commit and
+      its aliases (after_*_commit). Use distinct method names or consolidate
+      into a single callback.

@@ -25,6 +25,14 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/types/**/*-tests.*"
 match:
   fact:
     kind: ts.security.insecure-auth-cookie-flags
@@ -32,16 +40,16 @@ match:
 emit:
   finding:
     category: security.authentication
-    severity: high
+    severity: medium
     confidence: 0.9
     tags:
       - security
       - authentication
       - cookies
   message:
-    title: Harden `${captures.issue.text}` for auth cookies
-    summary: "`${captures.issue.text}` sets an auth-bearing cookie without the expected protections."
+    title: Auth cookie `${captures.issue.text}` missing security flags
+    summary: "`${captures.issue.text}` sets a cookie with an auth-signaling name without HttpOnly, Secure, or SameSite protections. Missing these flags makes the cookie vulnerable to session theft via XSS, MITM, or CSRF."
   remediation:
-    summary: Add `HttpOnly`, `Secure`, and an explicit `SameSite` policy before the cookie is used for session or auth state.
+    summary: "Add `HttpOnly`, `Secure`, and an explicit `SameSite` policy (preferably `Lax` or `Strict`) before the cookie is used for session or auth state. For example: `{ httpOnly: true, secure: true, sameSite: 'lax' }`."
 
 

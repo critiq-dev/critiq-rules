@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.invalid-rails-env-predicate.rule.yaml
+fixtures:
+  - name: "flags Rails.env.qa? which is invalid"
+    sourcePath: ./fixtures/ruby.bug-risk.invalid-rails-env-predicate/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.invalid-rails-env-predicate
+  - name: "accepts Rails.env.production? which is valid"
+    sourcePath: ./fixtures/ruby.bug-risk.invalid-rails-env-predicate/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

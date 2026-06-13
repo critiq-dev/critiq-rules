@@ -9,10 +9,16 @@ fixtures:
       allRuleIds:
         - ts.security.sensitive-data-written-to-file
       allSeverities:
-        - high
+        - medium
   - name: ignores nonsensitive file exports
     sourcePath: ./fixtures/public-security/auth-files.valid.ts
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: ignores build script file writes
+    sourcePath: ./fixtures/public-security/auth-files.build-script.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+
 

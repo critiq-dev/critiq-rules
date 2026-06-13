@@ -13,6 +13,8 @@ metadata:
     separator.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1027
   tags:
     - rules-catalog
     - ruby

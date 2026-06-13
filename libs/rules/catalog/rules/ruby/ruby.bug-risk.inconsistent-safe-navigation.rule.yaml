@@ -11,6 +11,8 @@ metadata:
     Mixing `user&.name` and `user.age` on the same receiver object is
     inconsistent. If the receiver can be nil, all accesses should use
     `&.` for consistency.
+  aliases:
+    - RB-LI1060
   detection:
     kind: pattern
   tags:

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.safe-navigation-with-blank.rule.yaml
+fixtures:
+  - name: flags &.blank? usage
+    sourcePath: ./fixtures/ruby.bug-risk.safe-navigation-with-blank/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.safe-navigation-with-blank
+  - name: accepts .blank? without safe navigation
+    sourcePath: ./fixtures/ruby.bug-risk.safe-navigation-with-blank/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.all-each-to-find-each.rule.yaml
+fixtures:
+  - name: flags Model.all.each
+    sourcePath: ./fixtures/ruby.bug-risk.all-each-to-find-each/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.all-each-to-find-each
+  - name: accepts find_each
+    sourcePath: ./fixtures/ruby.bug-risk.all-each-to-find-each/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,54 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.controller-base-subclass
+  title: Controllers should subclass ApplicationController
+  summary: >-
+    Controller class directly subclasses `ActionController::Base` instead of
+    `ApplicationController`.
+  rationale: >-
+    Rails 5+ generators create controllers that inherit from
+    `ApplicationController`. Directly subclassing `ActionController::Base`
+    bypasses shared behavior (error handling, authentication, logging) defined
+    in `ApplicationController`.
+  aliases:
+    - RB-RL1005
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - controllers
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.controller-base-subclass
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` should subclass ApplicationController"
+    summary: >-
+      "`${captures.issue.text}` subclasses `ActionController::Base` directly.
+      Inherit from `ApplicationController` instead to pick up shared behavior."
+  remediation:
+    summary: >-
+      Change `class SomeController < ActionController::Base` to
+      `class SomeController < ApplicationController`.

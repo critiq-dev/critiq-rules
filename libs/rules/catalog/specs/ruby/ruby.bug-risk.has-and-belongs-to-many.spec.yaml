@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.has-and-belongs-to-many.rule.yaml
+fixtures:
+  - name: flags has_and_belongs_to_many
+    sourcePath: ./fixtures/ruby.bug-risk.has-and-belongs-to-many/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.has-and-belongs-to-many
+  - name: accepts has_many :through
+    sourcePath: ./fixtures/ruby.bug-risk.has-and-belongs-to-many/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

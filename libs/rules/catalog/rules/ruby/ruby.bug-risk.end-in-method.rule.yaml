@@ -11,6 +11,8 @@ metadata:
     block inside a method is silently ignored and never executes.
   detection:
     kind: pattern
+  aliases:
+    - RB-LI1020
   tags:
     - rules-catalog
     - ruby

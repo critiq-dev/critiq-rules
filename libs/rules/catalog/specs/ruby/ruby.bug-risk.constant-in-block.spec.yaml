@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.constant-in-block.rule.yaml
+fixtures:
+  - name: flags constant inside method
+    sourcePath: ./fixtures/ruby.bug-risk.constant-in-block/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.constant-in-block
+  - name: accepts constant at class scope and local vars
+    sourcePath: ./fixtures/ruby.bug-risk.constant-in-block/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

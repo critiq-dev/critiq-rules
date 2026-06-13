@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.missing-inverse-of.rule.yaml
+fixtures:
+  - name: flags has_many without inverse_of
+    sourcePath: ./fixtures/ruby.bug-risk.missing-inverse-of/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.missing-inverse-of
+  - name: accepts has_many with inverse_of
+    sourcePath: ./fixtures/ruby.bug-risk.missing-inverse-of/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

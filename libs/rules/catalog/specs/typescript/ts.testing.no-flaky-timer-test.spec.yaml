@@ -13,3 +13,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: exempts performance.now, Date.now, and micro-delays
+    sourcePath: ./fixtures/ts.testing.no-flaky-timer-test/performance.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

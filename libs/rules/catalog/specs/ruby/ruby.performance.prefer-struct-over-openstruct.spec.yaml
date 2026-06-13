@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.performance.prefer-struct-over-openstruct.rule.yaml
+fixtures:
+  - name: flags OpenStruct.new
+    observationPath: ./fixtures/ruby.performance.prefer-struct-over-openstruct/invalid.observation.json
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.performance.prefer-struct-over-openstruct
+      allSeverities:
+        - medium
+  - name: ignores observations without matching facts
+    observationPath: ./fixtures/project-common/valid.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

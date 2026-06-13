@@ -1,9 +1,9 @@
-def lookup(key)
-  return nil
-  cache[key]
+def compute(value)
+  return 0
+  value * 2
 end
 
-def process(type)
-  raise "invalid type"
-  do_something
+def process
+  raise "error"
+  cleanup
 end

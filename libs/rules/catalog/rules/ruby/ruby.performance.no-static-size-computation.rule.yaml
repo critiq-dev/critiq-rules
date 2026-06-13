@@ -1,0 +1,43 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.performance.no-static-size-computation
+  title: Avoid computing size of static arrays and hashes
+  summary: >-
+    Calling `.count`, `.size`, or `.length` on a static array or hash literal
+    computes a value known at parse-time. Prefer assigning the literal to a
+    constant or using the literal directly.
+  rationale: >-
+    Static collections have a fixed size known at compile time. Calling
+    `.count`/`.size`/`.length` on them adds unnecessary runtime overhead
+    compared to using the known constant value.
+  aliases:
+    - RB-PR1010
+  tags:
+    - performance
+    - ruby
+    - rules-catalog
+  stability: experimental
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+match:
+  fact:
+    kind: ruby.performance.no-static-size-computation
+    bind: issue
+emit:
+  finding:
+    category: performance.allocation
+    severity: medium
+    confidence: 0.66
+    tags:
+      - performance
+      - ruby
+  message:
+    title: Avoid calling `.count`/`.size`/`.length` on static collection
+    summary: "`${captures.issue.text}` computes the size of a static collection at runtime."
+  remediation:
+    summary: >-
+      Replace the dynamic size computation with the known literal value, or
+      assign the collection to a constant and reference its size directly.

@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.rails-env-equality
+  title: Bad comparison of Rails.env value
+  summary: >-
+    `Rails.env` should be compared using predicate methods
+    (`Rails.env.production?`) instead of equality operators.
+  rationale: >-
+    Comparing `Rails.env` with `==`, `!=`, or `.eql?` is fragile and less
+    idiomatic than using the built-in predicate methods like
+    `Rails.env.production?`, `Rails.env.development?`, or
+    `Rails.env.test?`.
+  aliases:
+    - RB-RL1020
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.rails-env-equality
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "Use `Rails.env.{predicate}?` instead of `${captures.issue.text}`"
+    summary: >-
+      "`${captures.issue.text}` compares `Rails.env` with an operator. Use
+      the corresponding predicate method instead."
+  remediation:
+    summary: >-
+      Replace `Rails.env == "production"` with
+      `Rails.env.production?` and similar predicate forms for other envs.

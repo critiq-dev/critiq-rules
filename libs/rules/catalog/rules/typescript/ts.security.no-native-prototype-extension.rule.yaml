@@ -24,6 +24,18 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/e2e/**"
+      - "**/zone.js/**"
+      - "**/polyfill*/**"
+      - "**/shim*/**"
+      - "**/types/**/*-tests.ts"
 match:
   fact:
     kind: security.native-prototype-extension
@@ -31,7 +43,7 @@ match:
 emit:
   finding:
     category: security.language
-    severity: high
+    severity: low
     confidence: 0.96
     tags:
       - security

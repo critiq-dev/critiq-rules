@@ -13,3 +13,23 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: allows xit with descriptive name
+    sourcePath: ./fixtures/ts.testing.no-skipped-test-without-ticket/valid.xit-with-name.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows conditional skip with reason string
+    sourcePath: ./fixtures/ts.testing.no-skipped-test-without-ticket/valid.conditional-skip-with-reason.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows skip with meaningful reason
+    sourcePath: ./fixtures/ts.testing.no-skipped-test-without-ticket/valid.skip-with-meaningful-reason.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows skip with preceding comment
+    sourcePath: ./fixtures/ts.testing.no-skipped-test-without-ticket/valid.skip-with-comment.test.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/rust/rust.security.missing-regex-anchor.rule.yaml
+fixtures:
+  - name: flags unanchored regex pattern
+    sourcePath: ./fixtures/rust.security.missing-regex-anchor/invalid.rs
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - rust.security.missing-regex-anchor
+  - name: accepts anchored regex pattern
+    sourcePath: ./fixtures/rust.security.missing-regex-anchor/valid.rs
+    expect:
+      findingCount: 0
+      allRuleIds: []

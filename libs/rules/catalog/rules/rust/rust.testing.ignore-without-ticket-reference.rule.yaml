@@ -2,9 +2,12 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.testing.ignore-without-ticket-reference
-  title: "Rust #[ignore] tests should cite a ticket"
-  summary: Ignored tests without a nearby tracker comment are easy to lose.
-  rationale: Ignored tests should carry reviewable intent like skips in other ecosystems.
+  title: "Add a ticket reference to ignored Rust tests"
+  summary: "`#[ignore]` without a nearby ticket reference or reason makes the test easy to forget."
+  rationale: >
+    Ignored tests accumulate when their ignore reason is undocumented. A ticket
+    reference or suppression comment tells future maintainers why the test is
+    skipped and when it should be re-enabled.
   tags:
     - testing
     - rust
@@ -14,6 +17,11 @@ metadata:
 scope:
   languages:
     - rust
+  paths:
+    exclude:
+      - "**/compiler/*/tests/**"
+      - "**/src/tools/*/tests/**"
+      - "**/tests/ui/**"
 match:
   fact:
     kind: rust.testing.ignore-without-ticket-reference
@@ -27,7 +35,5 @@ emit:
       - testing
       - rust
   message:
-    title: Add a ticket comment near `${captures.issue.text}`
-    summary: "`#[ignore]` is present without a nearby issue key or accepted suppression comment."
-  remediation:
-    summary: Document the ignore with a tracker id or remove the attribute when the test is ready.
+    title: "Ignored test lacks a ticket reference"
+    summary: "`#[ignore]` was found without a nearby issue tracker id (e.g., `#123`, `JIRA-77`), suppression comment (`TODO(expires: YYYY-MM-DD)`), or same-line reason comment."

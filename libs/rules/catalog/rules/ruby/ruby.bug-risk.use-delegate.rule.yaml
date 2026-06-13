@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.use-delegate
+  title: Use delegate for simple delegation methods
+  summary: >-
+    Replace simple delegation methods with the `delegate` macro.
+  rationale: >-
+    Rails' `delegate` macro provides a declarative way to delegate method calls
+    to associated objects, reducing boilerplate and making the delegation
+    relationship explicit.
+  aliases:
+    - RB-RL1015
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.use-delegate
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: low
+    confidence: 0.7
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "Use `delegate` for `${captures.issue.text}`"
+    summary: >-
+      "Method `#{captures.issue.text}` simply delegates to another object.
+      Use `delegate :#{captures.issue.text}, to: :association` instead."
+  remediation:
+    summary: >-
+      Replace the delegation method with `delegate :method_name, to: :association`.

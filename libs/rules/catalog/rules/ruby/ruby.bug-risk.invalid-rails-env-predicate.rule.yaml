@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.invalid-rails-env-predicate
+  title: Rails.env predicate does not match any known environment
+  summary: >-
+    `Rails.env.<unknown>?` is called where `<unknown>` is not a known Rails
+    environment name. This likely indicates a typo or non-standard environment.
+  rationale: >-
+    Rails checks environment names via `Rails.env.<name>?` predicates. If the
+    environment name does not match one of the standard environments
+    (development, test, production, staging, local), it will always return
+    false. This is usually a typo or a predicate that will never match.
+  aliases:
+    - RB-RL1056
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.invalid-rails-env-predicate
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.95
+    tags:
+      - ruby
+  message:
+    title: "'Rails.env.${captures.issue.text}' is not a known environment predicate"
+    summary: "'${captures.issue.text}' checks a Rails environment name that does not match development, test, production, staging, or local."
+  remediation:
+    summary: >-
+      Use a known Rails environment predicate: development?, test?,
+      production?, staging?, or local?. If adding a custom environment,
+      ensure it is configured in `config/environments/`.

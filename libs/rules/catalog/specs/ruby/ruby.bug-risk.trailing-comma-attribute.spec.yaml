@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.trailing-comma-attribute.rule.yaml
+fixtures:
+  - name: flags trailing comma in attribute declarations
+    sourcePath: ./fixtures/ruby.bug-risk.trailing-comma-attribute/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.trailing-comma-attribute
+        - ruby.bug-risk.trailing-comma-attribute
+  - name: accepts proper attribute declarations
+    sourcePath: ./fixtures/ruby.bug-risk.trailing-comma-attribute/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

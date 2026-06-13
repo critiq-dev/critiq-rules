@@ -1,0 +1,57 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.irreversible-migration
+  title: Rails migration is not reversible
+  summary: >-
+    Migration uses irreversible operations in `change`, or defines one direction
+    method (`up` or `down`) without the other.
+  rationale: >-
+    ActiveRecord migrations should be reversible so they can be rolled back.
+    Using `drop_table`, `remove_column`, `change_column`, or similar
+    irreversible operations inside `def change` will cause rollback failures.
+    Migrations with only `up` or only `down` (and no `change` method) will
+    also fail on rollback. Use `reversible` blocks or implement both `up`
+    and `down` for irreversible operations.
+  aliases:
+    - RB-LI1107
+    - RB-RL1048
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/db/migrate/**"
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.irreversible-migration
+    bind: issue
+emit:
+  finding:
+    category: correctness.framework
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+  message:
+    title: Migration uses an irreversible operation — `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` is not reversible. Use `reversible` blocks or
+      implement `up`/`down` methods for irreversible operations."
+  remediation:
+    summary: >-
+      Wrap irreversible operations in a `reversible` block, or replace
+      `def change` with explicit `up` and `down` methods that handle
+      forward and rollback logic.

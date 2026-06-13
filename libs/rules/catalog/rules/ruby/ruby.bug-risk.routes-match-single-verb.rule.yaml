@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.routes-match-single-verb
+  title: Use of `match` in routes with single request type
+  summary: >-
+    `match` in Rails routes should be used only when multiple HTTP verbs are
+    handled. Prefer the specific verb helper (`get`, `post`, etc.) for single-verb
+    routes.
+  rationale: >-
+    Using `match` with a single verb is unnecessary and masks intent. The
+    specific helpers (`get`, `post`, `put`, `patch`, `delete`) are clearer and
+    avoid accidental verb exposure if the route is later modified.
+  aliases:
+    - RB-LI1104
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.routes-match-single-verb
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.75
+    tags:
+      - ruby
+  message:
+    title: Replace `match` with specific HTTP verb helper
+    summary: >-
+      "`${captures.issue.text}` uses `match` with a single request type. Replace
+      with `get`, `post`, `put`, `patch`, or `delete`."
+  remediation:
+    summary: >-
+      Replace `match` with the specific HTTP verb helper (`get`, `post`, etc.)
+      when only one request type is handled.

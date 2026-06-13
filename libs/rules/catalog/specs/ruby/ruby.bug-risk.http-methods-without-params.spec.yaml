@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.http-methods-without-params.rule.yaml
+fixtures:
+  - name: flags get without params
+    sourcePath: ./fixtures/ruby.bug-risk.http-methods-without-params/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.http-methods-without-params
+  - name: accepts get with params
+    sourcePath: ./fixtures/ruby.bug-risk.http-methods-without-params/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.useless-setter-call
+  title: Avoid useless setter call with same value
+  summary: >-
+    An attribute is assigned to its own current value (e.g., self.x = self.x or
+    @x = @x). This assignment has no effect.
+  rationale: >-
+    Assigning an attribute to its own value is redundant and indicates a likely
+    copy-paste error where the intended value was not updated.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1081
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.useless-setter-call
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.7
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.useless-setter-call`."
+  remediation:
+    summary: >-
+      Remove the redundant assignment or update the right-hand side to the
+      intended value.

@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.testing.no-flaky-timer-test
-  title: Prefer fake timers in unit tests
-  summary: Real timers, sleeps, or wall-clock reads in unit tests are flaky unless fake timers are enabled for the file.
-  rationale: Wall-clock based tests race CI load and parallelization; fake timers keep behavior deterministic.
+  title: Avoid timer-dependent assertions in unit tests
+  summary: Unit tests using real timers (setTimeout/setInterval with delays >50ms) without fake timers may produce flaky results under CI load.
+  rationale: Wall-clock-based tests race CI load and parallelization; fake timers keep behavior deterministic. Performance measurement (performance.now, Date.now) and sub-50ms micro-delays for event-loop yielding are exempt.
   tags:
     - testing
     - quality
@@ -27,12 +27,12 @@ emit:
   finding:
     category: quality.testing
     severity: low
-    confidence: 0.68
+    confidence: 0.55
     tags:
       - testing
       - timers
   message:
-    title: Stabilize timer usage in `${captures.issue.text}`
-    summary: "`${captures.issue.text}` uses real timers or wall-clock reads without `jest.useFakeTimers` / `vi.useFakeTimers` in the same file."
+    title: Timer-dependent assertion without fake timers in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` uses real timers with a delay >50ms without `jest.useFakeTimers` / `vi.useFakeTimers` in the same file. Micro-delays (<=50ms) and performance clocks (performance.now, Date.now) are not flagged."
   remediation:
-    summary: Enable fake timers for the suite, inject a clock abstraction, or move timing assertions behind a test double.
+    summary: Enable fake timers for the suite, inject a clock abstraction, or move timing-dependent assertions behind a test double. If the delay is intentional for testing a timeout path, consider using jest.advanceTimersByTime instead of real waits.

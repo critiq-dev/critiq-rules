@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.use-presence-over-explicit-check
+  title: Use of `present?` or `blank?` can be replaced with `presence`
+  summary: >-
+    Detects ternary expressions like `a.present? ? a : nil` or
+    `a.blank? ? nil : a` that can be simplified to `a.presence`.
+  rationale: >-
+    ActiveSupport's `presence` method returns the receiver if it is present,
+    or `nil` otherwise. Manually checking `present?`/`blank?` with a ternary
+    is verbose and less idiomatic.
+  aliases:
+    - RB-RL1038
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.use-presence-over-explicit-check
+    bind: issue
+emit:
+  finding:
+    category: maintainability
+    severity: medium
+    confidence: 0.85
+    tags:
+      - ruby
+  message:
+    title: Replace `${captures.issue.text}` with `.presence`
+    summary: >-
+      "This ternary can be simplified using ActiveSupport's
+      `presence` method."
+  remediation:
+    summary: >-
+      Replace the ternary with `expression.presence`.

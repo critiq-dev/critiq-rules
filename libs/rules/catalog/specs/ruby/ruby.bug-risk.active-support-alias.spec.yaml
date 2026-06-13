@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.active-support-alias.rule.yaml
+fixtures:
+  - name: flags ActiveSupport aliases
+    sourcePath: ./fixtures/ruby.bug-risk.active-support-alias/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.active-support-alias
+        - ruby.bug-risk.active-support-alias
+  - name: accepts core Ruby methods
+    sourcePath: ./fixtures/ruby.bug-risk.active-support-alias/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

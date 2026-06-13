@@ -10,6 +10,8 @@ metadata:
     When `with_object` is used with a single-argument block, the memo object
     is created but never used. Either use both arguments or use a plain
     iteration method.
+  aliases:
+    - RB-LI1053
   detection:
     kind: pattern
   tags:

@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.action-mailer-base-subclass
+  title: Rails 5+ mailers should subclass ApplicationMailer
+  summary: >-
+    Mailer class directly subclasses `ActionMailer::Base` instead of
+    `ApplicationMailer`.
+  rationale: >-
+    Rails 5+ generators create mailers that inherit from `ApplicationMailer`.
+    Directly subclassing `ActionMailer::Base` bypasses shared layout, default
+    from address, and other behavior defined in `ApplicationMailer`.
+  aliases:
+    - RB-RL1007
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - action-mailer
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.action-mailer-base-subclass
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` should subclass ApplicationMailer"
+    summary: >-
+      "`${captures.issue.text}` subclasses `ActionMailer::Base` directly.
+      Inherit from `ApplicationMailer` instead to pick up shared configuration."
+  remediation:
+    summary: >-
+      Change `class SomeMailer < ActionMailer::Base` to
+      `class SomeMailer < ApplicationMailer`.

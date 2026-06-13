@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.useless-setter-call.rule.yaml
+fixtures:
+  - name: flags useless setter call with same value
+    sourcePath: ./fixtures/ruby.bug-risk.useless-setter-call/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.useless-setter-call
+        - ruby.bug-risk.useless-setter-call
+  - name: accepts assignment with different value
+    sourcePath: ./fixtures/ruby.bug-risk.useless-setter-call/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

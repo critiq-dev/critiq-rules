@@ -25,6 +25,18 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/sandbox/**"
+      - "**/tests/setup/**"
+      - "**/tests/smoke/**"
+      - "**/e2e/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/spec/**"
 match:
   fact:
     kind: security.non-literal-fs-filename
@@ -32,7 +44,7 @@ match:
 emit:
   finding:
     category: security.filesystem
-    severity: high
+    severity: medium
     confidence: 0.9
     tags:
       - security

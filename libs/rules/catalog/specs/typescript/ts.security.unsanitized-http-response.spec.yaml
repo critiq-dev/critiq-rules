@@ -11,9 +11,9 @@ fixtures:
         - ts.security.unsanitized-http-response
         - ts.security.unsanitized-http-response
       allSeverities:
-        - high
-        - high
-        - high
+        - medium
+        - medium
+        - medium
   - name: ignores safe http responses
     sourcePath: ./fixtures/ts.security.unsanitized-http-response/valid.ts
     expect:

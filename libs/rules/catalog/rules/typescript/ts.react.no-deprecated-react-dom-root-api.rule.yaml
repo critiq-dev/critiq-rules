@@ -15,6 +15,11 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/types/react-dom/v15/**"
+      - "**/types/react-dom/v16/**"
+      - "**/embed-*/**"
 match:
   fact:
     kind: ui.react.deprecated-react-dom-root-api
@@ -29,6 +34,23 @@ emit:
       - ui
   message:
     title: Switch to createRoot or hydrateRoot
-    summary: "`${captures.issue.text}` calls a deprecated ReactDOM mounting API."
+    summary: "${captures.issue.text} calls a deprecated ReactDOM mounting API. In React 18+, use `createRoot` or `hydrateRoot` instead. Note that embed SDKs and packages targeting React 16/17 may intentionally use `ReactDOM.render` for cross-version compatibility."
   remediation:
-    summary: Import `createRoot` or `hydrateRoot` from `react-dom/client`, create a root once, and use `root.render` for updates instead of legacy `ReactDOM.render`.
+    summary: |-
+      Import `createRoot` or `hydrateRoot` from `react-dom/client`, create a root once, and use `root.render` for updates instead of legacy `ReactDOM.render`.
+
+      If this is an embed SDK or widget package that must support React 16/17 users, `ReactDOM.render` is intentionally used for cross-version compatibility. In that case, add a `// critiq-ignore` comment to suppress this finding.
+
+      ### React 18+ migration
+
+      ```typescript
+      import { createRoot } from 'react-dom/client';
+
+      const root = createRoot(document.getElementById('root')!);
+      root.render(<App />);
+      ```
+
+      ### References
+
+      - React 18 migration guide: https://react.dev/blog/2022/03/08/react-18-upgrade-guide
+      - CWE-477: Use of Obsolete Functions

@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.duplicate-elsif-block.rule.yaml
+fixtures:
+  - name: flags duplicate elsif conditions
+    sourcePath: ./fixtures/ruby.bug-risk.duplicate-elsif-block/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.duplicate-elsif-block
+        - ruby.bug-risk.duplicate-elsif-block
+  - name: accepts unique elsif conditions
+    sourcePath: ./fixtures/ruby.bug-risk.duplicate-elsif-block/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

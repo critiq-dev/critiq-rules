@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "totalRuleCount": 1153,
-  "lastUpdated": "2026-06-11T10:29:46.584Z",
+  "totalRuleCount": 1243,
+  "lastUpdated": "2026-06-12T23:07:14.568Z",
   "rulesByLanguage": {
     "typescript": {
       "count": 335,
@@ -10,6 +10,10 @@
     "java": {
       "count": 184,
       "label": "Java"
+    },
+    "ruby": {
+      "count": 174,
+      "label": "Ruby"
     },
     "cfn": {
       "count": 157,
@@ -20,16 +24,12 @@
       "label": "PHP"
     },
     "rust": {
-      "count": 101,
+      "count": 105,
       "label": "Rust"
     },
     "go": {
       "count": 95,
       "label": "Go"
-    },
-    "ruby": {
-      "count": 88,
-      "label": "Ruby"
     },
     "python": {
       "count": 61,

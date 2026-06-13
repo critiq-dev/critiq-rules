@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.unhandled-async-error
       allSeverities:
-        - high
+        - medium
   - name: ignores promise chains with terminal catch handling
     sourcePath: ./fixtures/ts.correctness.unhandled-async-error/valid.ts
     expect:

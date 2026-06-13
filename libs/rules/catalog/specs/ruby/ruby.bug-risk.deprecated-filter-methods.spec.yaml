@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.deprecated-filter-methods.rule.yaml
+fixtures:
+  - name: flags deprecated filter methods
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-filter-methods/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.deprecated-filter-methods
+        - ruby.bug-risk.deprecated-filter-methods
+        - ruby.bug-risk.deprecated-filter-methods
+  - name: accepts modern action methods
+    sourcePath: ./fixtures/ruby.bug-risk.deprecated-filter-methods/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

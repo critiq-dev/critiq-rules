@@ -1,0 +1,49 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.multiple-rescues-for-same-exception
+  title: Avoid multiple rescue clauses for the same exception
+  summary: >-
+    A begin-rescue block rescues the same exception class more than once. The
+    second rescue clause will never match since the first handles it first.
+  rationale: >-
+    Duplicate rescue clauses for the same exception class mean the second
+    rescue is unreachable. This is almost always a copy-paste error.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1091
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.multiple-rescues-for-same-exception
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.7
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.multiple-rescues-for-same-exception`."
+  remediation:
+    summary: >-
+      Remove the duplicate rescue clause or change it to handle a different
+      exception class.

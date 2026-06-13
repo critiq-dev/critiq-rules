@@ -1,0 +1,17 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.self-assignment.rule.yaml
+fixtures:
+  - name: flags self-assignment patterns
+    sourcePath: ./fixtures/ruby.bug-risk.self-assignment/invalid.rb
+    expect:
+      findingCount: 3
+      allRuleIds:
+        - ruby.bug-risk.self-assignment
+        - ruby.bug-risk.self-assignment
+        - ruby.bug-risk.self-assignment
+  - name: accepts non-self assignments
+    sourcePath: ./fixtures/ruby.bug-risk.self-assignment/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

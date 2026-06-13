@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.exit-in-app-code.rule.yaml
+fixtures:
+  - name: flags exit in method body
+    sourcePath: ./fixtures/ruby.bug-risk.exit-in-app-code/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.exit-in-app-code
+  - name: accepts method named exit
+    sourcePath: ./fixtures/ruby.bug-risk.exit-in-app-code/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

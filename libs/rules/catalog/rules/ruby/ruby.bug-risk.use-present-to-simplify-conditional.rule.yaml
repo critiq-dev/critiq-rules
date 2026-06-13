@@ -1,0 +1,48 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.use-present-to-simplify-conditional
+  title: present? can be used to simplify conditionals
+  summary: >-
+    Detects patterns like `x != nil && !x.empty?` that can be simplified to
+    `x.present?`.
+  rationale: >-
+    ActiveSupport's `present?` provides a concise way to check that a value is
+    both non-nil and non-empty. Explicitly combining `!= nil` with `!empty?`
+    is verbose and less readable.
+  aliases:
+    - RB-RL1039
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.use-present-to-simplify-conditional
+    bind: issue
+emit:
+  finding:
+    category: maintainability
+    severity: medium
+    confidence: 0.75
+    tags:
+      - ruby
+  message:
+    title: Simplify `${captures.issue.text}` with `.present?`
+    summary: >-
+      "This nil + empty check can be simplified to `expression.present?`."
+  remediation:
+    summary: >-
+      Replace the combined nil and empty check with `expression.present?`.

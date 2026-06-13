@@ -1,0 +1,16 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.active-record-alias.rule.yaml
+fixtures:
+  - name: flags deprecated update_attributes
+    sourcePath: ./fixtures/ruby.bug-risk.active-record-alias/invalid.rb
+    expect:
+      findingCount: 2
+      allRuleIds:
+        - ruby.bug-risk.active-record-alias
+        - ruby.bug-risk.active-record-alias
+  - name: accepts modern update method
+    sourcePath: ./fixtures/ruby.bug-risk.active-record-alias/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

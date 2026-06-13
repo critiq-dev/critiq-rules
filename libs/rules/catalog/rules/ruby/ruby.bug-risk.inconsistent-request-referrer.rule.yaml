@@ -1,0 +1,50 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.inconsistent-request-referrer
+  title: Typo — `referrer` should be `referer`
+  summary: >-
+    `request.referrer` is a common misspelling of `request.referer`.
+  rationale: >-
+    The HTTP header is spelled `Referer` (a historical misspelling in the
+    RFC). Rails follows the HTTP spec and uses `request.referer`.
+    Using `request.referrer` returns `nil` because that is not a valid
+    method on the request object.
+  aliases:
+    - RB-RL1047
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.inconsistent-request-referrer
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: low
+    confidence: 0.95
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` — use `request.referer` instead"
+    summary: >-
+      "`${captures.issue.text}` should be `request.referer` (single 'r').
+      The HTTP header is officially misspelled as `Referer`."
+  remediation:
+    summary: >-
+      Replace `request.referrer` with `request.referer`.

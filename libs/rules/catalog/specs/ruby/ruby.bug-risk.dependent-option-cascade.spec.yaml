@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.dependent-option-cascade.rule.yaml
+fixtures:
+  - name: flags has_many with dependent
+    sourcePath: ./fixtures/ruby.bug-risk.dependent-option-cascade/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.dependent-option-cascade
+  - name: accepts has_many without dependent
+    sourcePath: ./fixtures/ruby.bug-risk.dependent-option-cascade/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

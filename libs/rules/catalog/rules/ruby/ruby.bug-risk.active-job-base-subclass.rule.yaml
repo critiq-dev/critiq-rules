@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.active-job-base-subclass
+  title: Rails 5+ jobs should subclass ApplicationJob
+  summary: >-
+    Job class directly subclasses `ActiveJob::Base` instead of
+    `ApplicationJob`.
+  rationale: >-
+    Rails 5+ generators create jobs that inherit from `ApplicationJob`.
+    Directly subclassing `ActiveJob::Base` bypasses shared retry logic,
+    logging, and other behavior defined in `ApplicationJob`.
+  aliases:
+    - RB-RL1006
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-job
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.active-job-base-subclass
+    bind: issue
+emit:
+  finding:
+    category: correctness.convention
+    severity: medium
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "`${captures.issue.text}` should subclass ApplicationJob"
+    summary: >-
+      "`${captures.issue.text}` subclasses `ActiveJob::Base` directly.
+      Inherit from `ApplicationJob` instead to pick up shared configuration."
+  remediation:
+    summary: >-
+      Change `class SomeJob < ActiveJob::Base` to
+      `class SomeJob < ApplicationJob`.

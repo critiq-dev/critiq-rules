@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.incorrect-pluralization.rule.yaml
+fixtures:
+  - name: "flags 1.days"
+    sourcePath: ./fixtures/ruby.bug-risk.incorrect-pluralization/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.incorrect-pluralization
+  - name: "accepts 1.day"
+    sourcePath: ./fixtures/ruby.bug-risk.incorrect-pluralization/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

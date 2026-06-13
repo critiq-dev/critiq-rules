@@ -1,0 +1,53 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.enum-duplicate-values
+  title: Duplicate value detected in enum declarations
+  summary: >-
+    Two or more enum items share the same integer value, which will cause
+    mapping collisions.
+  rationale: >-
+    Each enum option should have a unique integer value. Duplicate values
+    cause `enum` mapping collisions where two states map to the same value,
+    leading to data corruption or unexpected behavior.
+  aliases:
+    - RB-RL1019
+  detection:
+    kind: pattern
+  tags:
+    - rules-catalog
+    - ruby
+    - rails
+    - active-record
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.enum-duplicate-values
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.9
+    tags:
+      - ruby
+      - rails
+  message:
+    title: "Duplicate enum value found in `${captures.issue.text}`"
+    summary: >-
+      "`${captures.issue.text}` has a duplicate integer value. Each enum
+      option must have a unique value."
+  remediation:
+    summary: >-
+      Assign unique integer values to each enum option. For example,
+      `enum status: { active: 0, archived: 1, pending: 2 }`.

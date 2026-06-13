@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.security.no-native-prototype-extension
       allSeverities:
-        - high
+        - low
   - name: ignores utility functions
     sourcePath: ./fixtures/ts.security.no-native-prototype-extension/valid.ts
     expect:

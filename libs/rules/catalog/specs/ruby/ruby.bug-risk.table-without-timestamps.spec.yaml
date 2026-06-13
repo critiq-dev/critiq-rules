@@ -1,0 +1,15 @@
+apiVersion: critiq.dev/v1alpha1
+kind: RuleSpec
+rulePath: ../../rules/ruby/ruby.bug-risk.table-without-timestamps.rule.yaml
+fixtures:
+  - name: flags missing timestamps
+    sourcePath: ./fixtures/ruby.bug-risk.table-without-timestamps/invalid.rb
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ruby.bug-risk.table-without-timestamps
+  - name: accepts table with timestamps
+    sourcePath: ./fixtures/ruby.bug-risk.table-without-timestamps/valid.rb
+    expect:
+      findingCount: 0
+      allRuleIds: []

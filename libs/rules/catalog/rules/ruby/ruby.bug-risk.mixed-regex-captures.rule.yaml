@@ -1,0 +1,51 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ruby.bug-risk.mixed-regex-captures
+  title: Avoid mixing named and numbered regex captures
+  summary: >-
+    A regex literal contains both named captures (?<name>) and numbered
+    captures (parenthesized groups without names). Mixing these is confusing
+    and can lead to errors.
+  rationale: >-
+    Mixing named captures (?<name>) and numbered captures (parenthesized
+    groups) in the same regex makes it unclear how match data should be
+    accessed. It is better to use one style consistently.
+  detection:
+    kind: pattern
+  aliases:
+    - RB-LI1084
+  tags:
+    - rules-catalog
+    - ruby
+  stability: experimental
+  appliesTo: function
+scope:
+  languages:
+    - ruby
+  paths:
+    include:
+      - "**/*.rb"
+    exclude:
+      - "**/vendor/**"
+      - "**/node_modules/**"
+match:
+  fact:
+    kind: ruby.bug-risk.mixed-regex-captures
+    bind: issue
+emit:
+  finding:
+    category: correctness.language
+    severity: high
+    confidence: 0.7
+    tags:
+      - ruby
+  message:
+    title: Review `${captures.issue.text}`
+    summary: >-
+      "`${captures.issue.text}` matches
+      `ruby.bug-risk.mixed-regex-captures`."
+  remediation:
+    summary: >-
+      Use only named captures or only numbered captures throughout the regex,
+      not both.
