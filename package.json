@@ -26,7 +26,8 @@
     "release:dry-run": "node scripts/publish-dry-run.mjs",
     "release:status": "changeset status",
     "release:verify": "npm run prepare-core-link && npm run build && npm run check:rule-count && npm run release:dry-run",
-    "version:packages": "changeset version"
+    "version:packages": "changeset version",
+    "changelog:backfill": "node scripts/backfill-changelog.mjs"
   },
   "workspaces": [
     "examples/*",

@@ -16,3 +16,15 @@ Example: `2026-05-09-python-framework-catalog-rules.md`.
 by default — **rename it** to the `yyyy-mm-dd-<slug>.md` form before committing.
 Date-prefixed filenames keep `.changeset/` sortable by authoring order and make
 it obvious at a glance which pending entries are stale.
+
+## Changelog
+
+`changelog` is enabled in `.changeset/config.json`. When you run
+`npm run version:packages`, Changesets appends consumed entries to
+`libs/rules/catalog/CHANGELOG.md`.
+
+To rebuild historical CHANGELOG content from git history (one-time backfill):
+
+```bash
+node scripts/backfill-changelog.mjs
+```
