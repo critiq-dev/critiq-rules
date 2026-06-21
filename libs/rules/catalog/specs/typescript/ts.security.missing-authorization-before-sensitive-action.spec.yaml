@@ -15,3 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: skips LSP server paths via scope.paths.exclude
+    observationPath: ./fixtures/ts.security.missing-authorization-before-sensitive-action/lsp-server.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

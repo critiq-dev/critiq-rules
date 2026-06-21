@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.missing-super-call
       allSeverities:
-        - high
+        - medium
   - name: allows valid pattern
     sourcePath: ./fixtures/ts.correctness.missing-super-call/valid.ts
     expect:

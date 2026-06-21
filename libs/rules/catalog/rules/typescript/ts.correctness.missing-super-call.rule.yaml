@@ -2,9 +2,13 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.missing-super-call
-  title: Missing super() in subclass constructor
-  summary: Subclass constructors must call super() before using this.
-  rationale: Derived classes must initialize the base class; omitting super() is a runtime error when this is accessed.
+  title: Missing super() call in subclass constructor or override
+  summary: Subclass constructors must call super() before using this, and method overrides extending base class behavior should call super.method().
+  rationale: |
+    Omitting super() in a constructor causes a runtime ReferenceError when this is accessed.
+    Omitting super.method() in overrides that extend base class behavior can silently break
+    base class invariants. However, some overrides intentionally replace rather than extend
+    base behavior — these are valid and should not be flagged.
   aliases:
     - JS-0226
   tags:
@@ -18,6 +22,11 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/tests/baselines/**"
+      - "**/test/baselines/**"
+      - "**/baselines/**"
 match:
   fact:
     kind: language.missing-super-call
@@ -25,13 +34,16 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: high
+    severity: medium
     confidence: 0.95
     tags:
       - correctness
       - language
   message:
-    title: Call super() in the subclass constructor
-    summary: "`${captures.issue.text}` extends a base class but never calls super()."
+    title: Missing super() call in subclass
+    summary: "`${captures.issue.text}` extends a base class but never calls super() or super.method()."
   remediation:
-    summary: Add `super(...)` as the first statement in the constructor (before using this).
+    summary: |
+      If the override is meant to extend base class behavior, add a `super.method(...)` call.
+      If the override is meant to completely replace base behavior (an intentional replacement),
+      omit super and add a comment explaining the intent.

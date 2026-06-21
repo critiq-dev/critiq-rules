@@ -30,6 +30,11 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: ignores insecure http in Go test files (path exclusion)
+    sourcePath: ./fixtures/security.insecure-http-transport/valid_test.go
+    expect:
+      findingCount: 0
+      allRuleIds: []
   - name: flags plain http outbound requests in Python
     sourcePath: ./fixtures/security.insecure-http-transport/invalid.py
     expect:

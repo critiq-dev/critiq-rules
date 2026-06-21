@@ -2,8 +2,8 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: security.no-sql-interpolation
-  title: Avoid raw or interpolated SQL
-  summary: Database query sinks must not receive request-driven or dynamically interpolated SQL text.
+  title: SQL query text should not be dynamically interpolated
+  summary: Database queries built with string interpolation risk SQL injection when values come from user input. Use parameterized queries instead.
   aliases:
     - PHP-A1002
   rationale: Raw or interpolated SQL can let attackers control query structure when values are not passed separately.
@@ -33,6 +33,10 @@ scope:
     - php
     - ruby
     - rust
+  paths:
+    exclude:
+      - "**/activerecord/**"
+      - "**/connection_adapters/**"
 match:
   fact:
     kind: security.sql-interpolation
@@ -40,15 +44,26 @@ match:
 emit:
   finding:
     category: security.injection
-    severity: high
+    severity: medium
     confidence: 0.95
     tags:
       - security
       - sql
       - injection
   message:
-    title: Avoid interpolated SQL in `${captures.queryCall.text}`
-    summary: "`${captures.queryCall.text}` builds or forwards SQL text directly into a raw query sink."
+    title: Dynamic SQL query text in `${captures.queryCall.text}`
+    summary: "`${captures.queryCall.text}` builds a SQL query using string interpolation. If any interpolated value comes from user input, an attacker can control the query structure."
   remediation:
-    summary: Use prepared statements, placeholder parameters, or a typed query builder instead of executing raw SQL text.
+    summary: |
+      Use prepared statements with placeholder parameters instead of string interpolation.
+
+      ```typescript
+      // Unsafe — interpolated user input
+      connection.execute("SELECT * FROM users WHERE email = '" + userInput + "'")
+
+      // Safe — parameterized query
+      connection.execute("SELECT * FROM users WHERE email = ?", [userInput])
+      ```
+
+      Most database drivers and ORMs support parameterized queries. For dynamic query construction (schema names, column names), use the database driver's identifier quoting API (e.g., `quote_table_name()`).
 

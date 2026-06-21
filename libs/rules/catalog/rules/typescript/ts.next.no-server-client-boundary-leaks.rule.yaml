@@ -15,6 +15,11 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/assets/javascripts/**"
+      - "**/assets/**"
+      - "**/vendor/**"
 match:
   fact:
     kind: framework.next-server-client-boundary-leak
@@ -22,15 +27,15 @@ match:
 emit:
   finding:
     category: correctness.framework
-    severity: high
+    severity: medium
     confidence: 0.8
     tags:
       - next
       - react
       - correctness
   message:
-    title: Add a client boundary before using browser-only APIs
-    summary: "`${captures.issue.text}` uses a browser-only API or client-only hook in a server file."
+    title: Add a client boundary before using browser-only APIs in Next.js server files
+    summary: After "`${captures.issue.text}`" is a browser-only API or Next.js client hook used outside a `'use client'` boundary in a Next.js component."
   remediation:
-    summary: Add `'use client'` or move the code into a client component or hook.
+    summary: Add `'use client'` at the top of the file, or extract the browser-specific code into a separate client component or hook. In Next.js, server components cannot use browser APIs like `window`, `document`, or client hooks like `usePathname()`.
 

@@ -9,9 +9,9 @@ fixtures:
       allRuleIds:
         - security.no-sql-interpolation
       allSeverities:
-        - high
+        - medium
       titleContains:
-        - Avoid interpolated SQL
+        - Dynamic SQL query text
   - name: ignores parameterized query
     sourcePath: ./fixtures/security.no-sql-interpolation/valid.ts
     expect:
@@ -24,7 +24,7 @@ fixtures:
       allRuleIds:
         - security.no-sql-interpolation
       allSeverities:
-        - high
+        - medium
   - name: ignores parameterized raw query helpers in TypeScript
     sourcePath: ./fixtures/security.no-sql-interpolation/valid-raw.ts
     expect:
@@ -37,7 +37,7 @@ fixtures:
       allRuleIds:
         - security.no-sql-interpolation
       allSeverities:
-        - high
+        - medium
   - name: ignores parameterized Go SQL queries
     sourcePath: ./fixtures/security.no-sql-interpolation/valid.go
     expect:
@@ -50,7 +50,7 @@ fixtures:
       allRuleIds:
         - security.no-sql-interpolation
       allSeverities:
-        - high
+        - medium
   - name: ignores parameterized Python SQL queries
     sourcePath: ./fixtures/security.no-sql-interpolation/valid.py
     expect:
@@ -63,7 +63,7 @@ fixtures:
       allRuleIds:
         - security.no-sql-interpolation
       allSeverities:
-        - high
+        - medium
   - name: ignores parameterized Java SQL queries
     sourcePath: ./fixtures/security.no-sql-interpolation/valid.java
     expect:
@@ -76,7 +76,7 @@ fixtures:
       allRuleIds:
         - security.no-sql-interpolation
       allSeverities:
-        - high
+        - medium
   - name: ignores parameterized PHP SQL queries
     sourcePath: ./fixtures/security.no-sql-interpolation/valid.php
     expect:
@@ -89,7 +89,7 @@ fixtures:
       allRuleIds:
         - security.no-sql-interpolation
       allSeverities:
-        - high
+        - medium
   - name: ignores parameterized Ruby SQL queries
     sourcePath: ./fixtures/security.no-sql-interpolation/valid.rb
     expect:
@@ -102,7 +102,7 @@ fixtures:
       allRuleIds:
         - security.no-sql-interpolation
       allSeverities:
-        - high
+        - medium
   - name: ignores parameterized Rust SQL queries
     sourcePath: ./fixtures/security.no-sql-interpolation/valid.rs
     expect:

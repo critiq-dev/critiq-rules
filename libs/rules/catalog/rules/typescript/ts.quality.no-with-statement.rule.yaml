@@ -1,0 +1,37 @@
+apiVersion: critiq.dev/v1alpha1
+kind: Rule
+metadata:
+  id: ts.quality.no-with-statement
+  title: Avoid `with` statements — deprecated language feature
+  summary: "`with` statements are a deprecated ES5 feature that make binding resolution unpredictable and are disallowed in strict mode."
+  rationale: The `with` statement introduces dynamic scope, making static analysis, optimization, and code review unreliable. It is a maintainability and quality concern, not a security vulnerability — modern codebases should avoid it entirely.
+  tags:
+    - quality
+    - maintainability
+    - rules-catalog
+  stability: stable
+  appliesTo: block
+scope:
+  languages:
+    - typescript
+    - javascript
+  paths:
+    exclude:
+      - "**/tests/baselines/**"
+match:
+  fact:
+    kind: security.with-statement
+    bind: issue
+emit:
+  finding:
+    category: quality.maintainability
+    severity: low
+    confidence: 0.98
+    tags:
+      - quality
+      - maintainability
+  message:
+    title: Avoid deprecated `with` statements
+    summary: "`${captures.issue.text}` uses a `with` statement, a deprecated ES5 feature that makes binding resolution unpredictable and is disallowed in strict mode."
+  remediation:
+    summary: Replace the `with` block with explicit property access on a named object. For example, replace `with (obj) { value = 1; }` with `obj['value'] = 1;` or `obj.value = 1;`.

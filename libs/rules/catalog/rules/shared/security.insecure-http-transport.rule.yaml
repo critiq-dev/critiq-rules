@@ -31,6 +31,17 @@ scope:
     - php
     - ruby
     - rust
+  paths:
+    exclude:
+      - "**/*_test.go"
+      - "**/*_test.rs"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/*_test.py"
+      - "**/spec/**"
 match:
   fact:
     kind: security.insecure-http-transport

@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.next.no-server-client-boundary-leaks
       allSeverities:
-        - high
+        - medium
   - name: ignores the same code after an explicit client boundary
     observationPath: ./fixtures/ts.next.no-server-client-boundary-leaks/valid.observation.json
     expect:

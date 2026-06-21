@@ -2,9 +2,9 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.no-floating-promise-in-function
-  title: No Floating Promise In Function
-  summary: Handle promise-returning calls explicitly
-  rationale: Handle promise-returning calls explicitly:statement-level promise calls should be awaited, voided, returned, or chained with rejection handling.
+  title: Floating promise not handled
+  summary: Promise-returning calls at statement level should be awaited, returned, voided, or rejection-handled.
+  rationale: Unhandled floating promises can lead to unhandled rejections, race conditions, and silent failures. In web servers (request handlers) this is almost always a bug; in CLI tools and installers, fire-and-forget patterns may be intentional but should still be reviewed.
   tags:
     - correctness
     - rules-catalog
@@ -14,6 +14,13 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/tests/baselines/**"
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
 match:
   fact:
     kind: async.floating-promise-in-function
@@ -21,12 +28,12 @@ match:
 emit:
   finding:
     category: correctness
-    severity: high
+    severity: medium
     confidence: 0.85
     tags:
       - correctness
   message:
-    title: No Floating Promise In Function
-    summary: "`${captures.issue.text}` matches ts.correctness.no-floating-promise-in-function."
+    title: Promise-returning call `${captures.issue.text}` is not handled
+    summary: "`${captures.issue.text}` returns a Promise but is not awaited, returned, voided, or chained with `.catch()`. Unhandled floating promises may cause silent failures, unhandled rejections, or race conditions."
   remediation:
-    summary: Handle promise-returning calls explicitly:statement-level promise calls should be awaited, voided, returned, or chained with rejection handling.
+    summary: "Handle promise-returning calls explicitly: either `await`, `return`, `void` (fire-and-forget), or chain with `.catch()` rejection handling."

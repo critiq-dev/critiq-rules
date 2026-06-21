@@ -1,0 +1,28 @@
+{
+  "path": "src/server/editorServices.ts",
+  "language": "typescript",
+  "text": "export function getCompletions(fileName: string) {\n  const file = getOrCreateScriptInfo(fileName);\n  return deleteUser();\n}\n",
+  "nodes": [],
+  "semantics": {
+    "controlFlow": {
+      "functions": [],
+      "blocks": [],
+      "edges": [],
+      "facts": [
+        {
+          "id": "fact-1",
+          "kind": "security.missing-authorization-before-sensitive-action",
+          "appliesTo": "function",
+          "range": {
+            "startLine": 1,
+            "startColumn": 1,
+            "endLine": 3,
+            "endColumn": 24
+          },
+          "text": "deleteUser()",
+          "props": {}
+        }
+      ]
+    }
+  }
+}

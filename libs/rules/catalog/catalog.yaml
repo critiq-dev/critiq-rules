@@ -1904,12 +1904,11 @@ rules:
       - recommended
       - strict
       - security
-  - id: ts.security.no-with-statement
-    rulePath: ./rules/typescript/ts.security.no-with-statement.rule.yaml
+  - id: ts.quality.no-with-statement
+    rulePath: ./rules/typescript/ts.quality.no-with-statement.rule.yaml
     presets:
       - recommended
       - strict
-      - security
   - id: ts.security.no-arguments-callee
     rulePath: ./rules/typescript/ts.security.no-arguments-callee.rule.yaml
     presets:

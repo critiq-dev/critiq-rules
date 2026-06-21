@@ -24,6 +24,14 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/harness/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
 match:
   fact:
     kind: security.dynamic-execution
@@ -31,14 +39,21 @@ match:
 emit:
   finding:
     category: security.execution
-    severity: low
-    confidence: 0.55
+    severity: high
+    confidence: 0.7
     tags:
       - security
       - execution
   message:
-    title: Avoid `${captures.issue.text}`
-    summary: "`${captures.issue.text}` executes dynamic code and should be replaced with a safer alternative."
+    title: Avoid dynamic code execution via `${captures.issue.text}`
+    summary: >
+      `${captures.issue.text}` executes arbitrary code at runtime,
+      widening the attack surface for code injection (CWE-94).
+      Test infrastructure and harness files are excluded — this
+      finding applies only to production code.
   remediation:
-    summary: Replace dynamic execution with explicit parsing, fixed dispatch tables, or normal function callbacks.
-
+    summary: >
+      Replace dynamic execution with a safer alternative:
+      explicit parsing, fixed dispatch tables, or normal
+      function callbacks. For test infrastructure, silence
+      this finding with an inline suppression comment.

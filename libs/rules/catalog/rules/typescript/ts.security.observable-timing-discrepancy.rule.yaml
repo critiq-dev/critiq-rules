@@ -39,9 +39,9 @@ emit:
       - cryptography
       - timing
   message:
-    title: Replace `${captures.issue.text}` with a constant-time comparison
-    summary: "`${captures.issue.text}` compares a likely secret value with ordinary equality."
+    title: Use a constant-time comparison for secret or token comparison
+    summary: "`${captures.issue.text}` compares a value that may be a secret or token using ordinary equality (`===`/`!==`), which can leak timing information that helps attackers guess cryptographic material."
   remediation:
-    summary: Use a constant-time comparison helper such as `crypto.timingSafeEqual` for secrets, tokens, and password hashes.
+    summary: Use a constant-time comparison helper such as `crypto.timingSafeEqual` for secrets, tokens, and password hashes. Ordinary equality should only be used for non-sensitive comparisons (type checks, input validation, enum matching).
 
 
