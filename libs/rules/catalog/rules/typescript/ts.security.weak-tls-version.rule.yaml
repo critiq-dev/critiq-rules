@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.weak-tls-version
+  version: v1
   title: Require modern TLS minimum versions
   summary: Transport clients should not explicitly allow SSLv3, TLS 1.0, or TLS 1.1.
   rationale: Legacy TLS protocol floors weaken transport security and keep obsolete downgrade-compatible settings alive in production code.

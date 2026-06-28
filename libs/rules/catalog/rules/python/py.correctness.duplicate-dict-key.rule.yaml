@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.correctness.duplicate-dict-key
+  version: v1
   title: Avoid duplicate keys in dict literals
   summary: Repeated keys in a dict literal overwrite earlier entries.
   rationale: Silent key replacement hides bugs and can invalidate intended configuration values.

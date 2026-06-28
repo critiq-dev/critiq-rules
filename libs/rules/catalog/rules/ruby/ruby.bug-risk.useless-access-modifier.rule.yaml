@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.useless-access-modifier
+  version: v1
   title: Useless access modifier detected
   summary: >-
     A `private`, `protected`, or `public` modifier is redundant (applied

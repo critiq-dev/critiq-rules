@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.arns-should-use-correctly-placed-pseudo-parameters
+  version: v1
   title: Arns should use correctly placed pseudo parameters
   summary: Arns should use correctly placed pseudo parameters
   rationale: cfn-lint reports I3042 when Arns should use correctly placed pseudo parameters.

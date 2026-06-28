@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.path-traversal-user-input
+  version: v1
   title: Avoid user-controlled filesystem path segments in Python
   summary: Python path construction and file delivery helpers should not consume request- or route-derived segments without validation.
   rationale: Building paths from external input enables traversal outside trusted storage roots before reads, writes, or downloads occur.

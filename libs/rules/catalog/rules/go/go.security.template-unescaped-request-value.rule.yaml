@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.template-unescaped-request-value
+  version: v1
   title: Avoid feeding request data into trusted template types
   summary: >-
     `template.HTML`, `template.JS`, and `template.CSS` should not wrap request-derived strings unless they were sanitized first.

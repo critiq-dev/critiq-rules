@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.snapstart-supports-the-configured-runtime
+  version: v1
   title: Snapstart supports the configured runtime
   summary: Snapstart supports the configured runtime
   rationale: cfn-lint reports E2530 when Snapstart supports the configured runtime.

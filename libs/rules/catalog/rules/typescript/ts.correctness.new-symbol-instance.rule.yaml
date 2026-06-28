@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.new-symbol-instance
+  version: v1
   title: new Symbol() instantiation
   summary: Found new operator used with the `Symbol` object.
   rationale: Symbol is not a constructor; calling `new Symbol()` throws a TypeError at runtime.

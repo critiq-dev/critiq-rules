@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.identical-binary-operands
+  version: v1
   title: Binary operation with identical operands
   summary: Identical expressions on both sides of an operator is likely a copy-paste error.
   rationale: >-

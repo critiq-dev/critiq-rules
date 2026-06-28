@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-dynamic-execution
+  version: v1
   title: Eval or dynamic code execution
   summary: Eval-like helpers, `vm` execution APIs, and string-evaluated timers should not execute dynamic code.
   rationale: Dynamic execution turns data into code and widens the attack surface. Without taint tracking, this rule fires on legitimate library and template code patterns where the input is fully controlled.

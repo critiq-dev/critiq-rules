@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.circular-argument-reference
+  version: v1
   title: Avoid circular argument references
   summary: >-
     Default argument values that reference themselves are circular and always nil.

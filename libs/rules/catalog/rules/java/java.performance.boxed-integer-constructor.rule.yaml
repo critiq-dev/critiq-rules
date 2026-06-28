@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.boxed-integer-constructor
+  version: v1
   title: "Integer/Long constructor is inefficient"
   summary: "`new Integer(value)` and `new Long(value)` create unnecessary objects; use `valueOf()` instead."
   rationale: "The `Integer(int)` and `Long(long)` constructors always create new object instances, while `valueOf()` uses a cached pool for commonly used values (-128 to 127). Since Java 9, these constructors have been deprecated in favor of `valueOf()`. Replace `new Integer(...)` / `new Long(...)` with `Integer.valueOf(...)` / `Long.valueOf(...)` or rely on autoboxing."

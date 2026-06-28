@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.optional-get-without-present-check
+  version: v1
   title: Optional values must be checked before being accessed
   summary: Calling Optional.get() without a preceding isPresent() check will throw NoSuchElementException when the Optional is empty.
   rationale: Optional.get() throws if no value is present. Always guard with isPresent() or use orElse(), orElseThrow(), or orElseGet() to safely handle empty Optionals.

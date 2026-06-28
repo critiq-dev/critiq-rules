@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.array-index-bounds
+  version: v1
   title: Array or list access with out-of-bounds index
   summary: An array, list, or string is accessed at length()/size(), which is always one past the last valid index.
   rationale: Array indices range from 0 to length-1. Accessing index `length` throws ArrayIndexOutOfBoundsException.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.overloaded-equals
+  version: v1
   title: equals method is overloaded but not overridden
   summary: A method named `equals` with a non-Object parameter type overloads rather than overrides equals.
   rationale: Using `equals(SomeType obj)` instead of `equals(Object obj)` overloads the equals method without overriding it, so collections and utility methods will use Object.equals (identity) instead of the intended comparison logic.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-fn-or-structure-for-validity
+  version: v1
   title: "Check fn::or structure for validity"
   summary: "Check fn::or structure for validity"
   rationale: "cfn-lint reports E8006 when Check fn::or structure for validity."

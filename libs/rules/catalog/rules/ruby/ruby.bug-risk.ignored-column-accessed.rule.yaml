@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.ignored-column-accessed
+  version: v1
   title: Ignored column accessed from ActiveRecord model
   summary: >-
     An ActiveRecord model references a column that has been declared in

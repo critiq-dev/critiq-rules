@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-type-cast
+  version: v1
   title: Use valid PHP cast types
   summary: Use valid PHP cast types
   rationale: Use valid PHP cast types

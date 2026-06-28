@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-return-typehint
+  version: v1
   title: Use valid function return typehints
   summary: Use valid function return typehints
   rationale: Use valid function return typehints

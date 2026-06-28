@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.unbounded-growth-memory-leak
+  version: v1
   title: Potential memory leak from unbounded growth
   summary: Shared collections that only grow should be reviewed for eviction or lifecycle boundaries.
   rationale: Appending to long-lived state without a cap can leak memory across requests or over process lifetime.

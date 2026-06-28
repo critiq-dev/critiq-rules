@@ -1,4 +1,3 @@
-export function decrement(count: number): number {
-  count =- 1;
-  return count;
+export function negate(values: readonly number[]): number[] {
+  return values.map((v) => (v =- v, v));
 }

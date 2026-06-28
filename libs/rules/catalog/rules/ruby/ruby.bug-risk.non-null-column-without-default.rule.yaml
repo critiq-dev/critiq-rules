@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.non-null-column-without-default
+  version: v1
   title: Non-null column should specify a default
   summary: >-
     Column definitions with `null: false` should also specify a `default` value

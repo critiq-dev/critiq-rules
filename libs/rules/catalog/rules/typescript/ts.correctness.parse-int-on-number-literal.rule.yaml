@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.parse-int-on-number-literal
+  version: v1
   title: parseInt on a number literal
   summary: Found `parseInt()` or `Number.parseInt()` called on a number literal.
   rationale: Passing a number literal to parseInt is always unnecessary since the value is already an integer or can be converted with Math methods.

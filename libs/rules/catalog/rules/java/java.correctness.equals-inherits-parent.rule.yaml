@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.equals-inherits-parent
+  version: v1
   title: equals method inherits parent without overriding
   summary: A class defines an overloaded `equals` but does not override `equals(Object)`, so the parent's equals semantics are silently inherited.
   rationale: When a subclass adds an `equals(SubType)` overload without overriding `equals(Object)`, collections and utility methods will use the parent's equals logic (often identity), which may differ from the subclass's intended comparison behavior.

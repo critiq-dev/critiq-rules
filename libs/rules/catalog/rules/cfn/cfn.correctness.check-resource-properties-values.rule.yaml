@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-resource-properties-values
+  version: v1
   title: Check resource properties values
   summary: Check resource properties values
   rationale: cfn-lint reports E3012 when Check resource properties values.

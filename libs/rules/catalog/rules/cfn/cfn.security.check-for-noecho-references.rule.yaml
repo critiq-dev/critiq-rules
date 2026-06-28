@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.security.check-for-noecho-references
+  version: v1
   title: Check for noecho references
   summary: Check for noecho references
   rationale: cfn-lint reports W4002 when Check for noecho references.

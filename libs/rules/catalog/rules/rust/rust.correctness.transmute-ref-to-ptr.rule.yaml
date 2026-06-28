@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.transmute-ref-to-ptr
+  version: v1
   title: "Attempting to transmute a reference to a raw pointer"
   summary: "Transmuting `&T` to `*const T` is unnecessary — use `as` casts instead."
   rationale: >-

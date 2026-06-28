@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: security.insecure-http-transport
+  version: v1
   title: Insecure HTTP transport
   summary: Outbound transport should not use plain HTTP for sensitive requests.
   rationale: Plain HTTP exposes traffic to interception and tampering.

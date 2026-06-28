@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-mixed-abstraction-level
+  version: v1
   title: Keep function abstraction levels consistent
   summary: Functions that mix transport, persistence, validation, and domain logic are hard to change safely.
   rationale: Mixed abstraction creates hidden coupling and complicates testing and review.

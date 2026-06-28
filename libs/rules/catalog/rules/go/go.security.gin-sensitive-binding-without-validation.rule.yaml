@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.gin-sensitive-binding-without-validation
+  version: v1
   title: Gin handlers should validate sensitive request bodies
   summary: >-
     Sensitive Gin binds should use `binding` or validator tags so authentication and mutation payloads cannot be silently empty.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.nan-comparison
+  version: v1
   title: "Comparison with NaN"
   summary: "Comparing a float value with NaN using `==` or `!=` is always false or true."
   rationale: >-

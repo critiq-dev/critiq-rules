@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.sub-is-required-if-a-variable-is-used-in-a-string
+  version: v1
   title: Sub is required if a variable is used in a string
   summary: Sub is required if a variable is used in a string
   rationale: cfn-lint reports E1029 when Sub is required if a variable is used in a string.

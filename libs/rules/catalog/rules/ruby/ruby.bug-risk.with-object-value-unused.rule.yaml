@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.with-object-value-unused
+  version: v1
   title: with_object called but object value unused
   summary: >-
     `with_object` or `each_with_object` is called but the block only receives

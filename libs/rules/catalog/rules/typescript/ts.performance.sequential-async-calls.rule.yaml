@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.sequential-async-calls
+  version: v1
   title: Parallelize independent async calls with Promise.all
   summary: Independent awaited calls in the same block should run concurrently. Skips test files, build scripts, and data-dependent chains.
   rationale: Awaiting unrelated async operations one by one stalls the event loop and adds unnecessary wall-clock time without improving correctness or error isolation.

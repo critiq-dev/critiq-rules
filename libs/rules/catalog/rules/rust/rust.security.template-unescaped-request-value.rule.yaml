@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.template-unescaped-request-value
+  version: v1
   title: Sanitize request data before unescaped template output in Rust
   summary: >-
     Tera, Maud, and similar engines should not insert request-sourced strings into contexts or `PreEscaped`/`raw` sinks without sanitization.

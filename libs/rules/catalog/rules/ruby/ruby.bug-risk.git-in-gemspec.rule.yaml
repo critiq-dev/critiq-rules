@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.git-in-gemspec
+  version: v1
   title: Avoid using 'git' to declare files in gemspec
   summary: >-
     Using backtick `git ls-files` inside a gemspec to list gem files couples

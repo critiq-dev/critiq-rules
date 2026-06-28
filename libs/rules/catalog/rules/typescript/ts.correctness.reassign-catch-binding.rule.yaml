@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.reassign-catch-binding
+  version: v1
   title: Reassignment of catch binding
   summary: The catch clause parameter is assigned or updated after it is bound.
   rationale: Catch bindings are immutable in strict mode and confusing in sloppy mode; reassignment usually indicates a mistaken mutation of the caught error.

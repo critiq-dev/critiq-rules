@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.shell-runtime-exec
+  version: v1
   title: Prefer Runtime.exec with an argument array
   summary: >-
     `Runtime.getRuntime().exec(...)` should not be invoked with a single `String` command argument; the array form (`exec(String[])`) avoids shell-style tokenization.

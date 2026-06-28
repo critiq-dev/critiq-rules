@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.iter-next-in-for-loop
+  version: v1
   title: "For loop over `.next()` iterates `Option`, not the iterator"
   summary: "Iterating over `.next()` in a for loop iterates over the Option result, not the remaining iterator elements."
   rationale: >-

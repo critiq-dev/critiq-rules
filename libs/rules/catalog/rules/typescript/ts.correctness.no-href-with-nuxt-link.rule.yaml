@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.no-href-with-nuxt-link
+  version: v1
   title: NuxtLink should use `to` instead of `href`
   summary: The `href` attribute on NuxtLink should be replaced with `to` for internal navigation.
   rationale: NuxtLink is a Vue Router component that uses the `to` prop for route navigation, not `href`. Using `href` bypasses Vue Router and may cause full page reloads.

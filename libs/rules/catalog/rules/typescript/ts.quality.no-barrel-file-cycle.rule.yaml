@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-barrel-file-cycle
+  version: v1
   title: Avoid barrel file cycles
   summary: Cycles involving barrel files obscure ownership and complicate module boundaries.
   rationale: Re-export cycles make import behavior less predictable and harder to review.

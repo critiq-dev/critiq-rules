@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.nested-switch
+  version: v1
   title: Avoid nested switch statements
   summary: Switch statements nested inside other switch statements are hard to follow.
   aliases:

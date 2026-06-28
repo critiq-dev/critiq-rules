@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.wildcard-subprocess-injection
+  version: v1
   aliases:
     - BAN-B603
   title: Avoid wildcard expansion in subprocess calls

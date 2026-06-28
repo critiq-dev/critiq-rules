@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-bind-in-jsx-props
+  version: v1
   title: Avoid inline functions and bind in JSX props
   summary: Creating `function` handlers or `.bind()` calls inside JSX forces new function identities every render and makes memoized children re-render unnecessarily.
   rationale: Stable handler references keep render work predictable and make dependency lists in memoized components meaningful.

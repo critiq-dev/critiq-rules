@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.suspicious-regex-pattern
+  version: v1
   title: Suspicious unescaped dot in regex pattern
   summary: An unescaped dot (`.`) in a regex pattern matches any character, not a literal dot.
   rationale: >-

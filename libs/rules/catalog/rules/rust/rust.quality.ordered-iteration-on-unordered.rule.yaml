@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.ordered-iteration-on-unordered
+  version: v1
   title: "Avoid `.sorted()` on unordered collections"
   summary: "Calling `.sorted()` on an unordered collection like HashMap or HashSet is misleading."
   rationale: >-

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.insecure-helmet-hardening-options
+  version: v1
   title: Avoid disabling core Helmet protections
   summary: Helmet should keep nosniff, HSTS, DNS prefetch control, Expect-CT, and referrer policy enabled unless another gateway enforces them.
   rationale: Turning off individual Helmet middlewares removes baseline HTTP hardening that is a high-signal misconfiguration risk.

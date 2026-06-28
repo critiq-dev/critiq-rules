@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: sql.style.unused-table-alias
+  version: v1
   aliases:
     - SQL-L025
   title: Unused table alias

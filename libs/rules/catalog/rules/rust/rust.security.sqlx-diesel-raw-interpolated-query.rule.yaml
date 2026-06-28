@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.sqlx-diesel-raw-interpolated-query
+  version: v1
   title: Avoid dynamic SQL built with format! for SQLx or Diesel
   summary: >-
     Do not pass `format!(...)` (or equivalent string concatenation) into `sqlx::query` or `diesel::sql_query` sinks.

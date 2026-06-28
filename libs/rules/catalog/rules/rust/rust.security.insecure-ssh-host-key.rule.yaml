@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.insecure-ssh-host-key
+  version: v1
   title: Verify SSH host keys before connecting
   summary: >-
     SSH clients must not disable host key verification.

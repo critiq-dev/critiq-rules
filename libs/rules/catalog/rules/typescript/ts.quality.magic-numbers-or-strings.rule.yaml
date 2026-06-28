@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.magic-numbers-or-strings
+  version: v1
   title: Magic numbers or magic strings
   summary: Non-trivial literals in logic should be named to explain their meaning.
   rationale: Bare literals hide domain meaning and make future changes riskier because intent is not captured in code.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.angularjs.no-deprecated-directive-replace
+  version: v1
   title: Avoid deprecated directive replace property
   summary: "The `replace` property in AngularJS directive definitions is deprecated and removed in AngularJS 1.7+."
   rationale: AngularJS removed the `replace` property from directive definition objects. It causes unexpected DOM behavior and is not compatible with component-based architecture.

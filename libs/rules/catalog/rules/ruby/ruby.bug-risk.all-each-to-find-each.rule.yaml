@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.all-each-to-find-each
+  version: v1
   title: Replace Model.all.each with find_each
   summary: >-
     `Model.all.each` loads all records into memory. Use `find_each` for

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.size-of-val-on-reference
+  version: v1
   title: "Avoid `size_of_val` on a reference"
   summary: "`std::mem::size_of_val(&ref)` returns the size of the reference itself, not the pointed-to value."
   rationale: >-

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-nosql-injection
+  version: v2
   title: Request-driven NoSQL query or aggregation pipeline
   summary: Express handlers should not pass raw request objects into NoSQL filters, query helpers, or aggregation pipelines to prevent injection attacks.
   rationale: Passing unvalidated request data directly into NoSQL model queries can allow attackers to manipulate query scope, bypass access controls, or extract unintended data from MongoDB and similar databases.
@@ -33,9 +34,12 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/types/**/*-tests.ts"
-      - "**/types/**/*.test.*"
-      - "**/types/**/*.spec.*"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/tests/**"
+      - "**/fixtures/**"
+      - "**/__fixtures__/**"
 match:
   fact:
     kind: security.express-nosql-injection

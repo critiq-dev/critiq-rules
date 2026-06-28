@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-unbounded-body-parser
+  version: v1
   title: Set explicit Express body parser and multer size limits
   summary: Express and Body Parser middleware plus Multer should declare explicit payload limits.
   rationale: Default limits drift across frameworks and deployments; explicit caps reduce oversized-request abuse.

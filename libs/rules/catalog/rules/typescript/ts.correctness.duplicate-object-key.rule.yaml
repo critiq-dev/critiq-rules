@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.duplicate-object-key
+  version: v1
   title: Duplicate keys in object literal
   summary: An object literal repeats the same static property name.
   aliases:

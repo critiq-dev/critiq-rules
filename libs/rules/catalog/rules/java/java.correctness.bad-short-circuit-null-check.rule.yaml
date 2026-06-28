@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.bad-short-circuit-null-check
+  version: v1
   title: Bad short-circuiting null check
   summary: Null check uses || instead of && causing a NullPointerException when the variable is null.
   rationale: In `x != null || x.method()`, if x is null, the first condition is false, so x.method() executes and throws NPE. Use && for null-guarded access.

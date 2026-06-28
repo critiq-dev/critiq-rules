@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.forget-join-handle
+  version: v1
   title: Do not forget spawned task handles
   summary: Forgetting a JoinHandle leaks the task and drops panic propagation.
   rationale: >-

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.duplicate-binary-argument
+  version: v1
   title: Duplicate arguments in binary expression
   summary: Same expression appears on both sides of a binary operator — likely a copy-paste bug.
   rationale: When both sides of a `||` or `&&` are identical, one branch is dead or the condition is incorrect.

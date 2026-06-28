@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.default-value-cannot-use-refs
+  version: v1
   title: Default value cannot use refs
   summary: Default value cannot use refs
   rationale: cfn-lint reports E2014 when Default value cannot use refs.

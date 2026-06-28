@@ -1,6 +1,6 @@
 {
-  "path": "src/sample.ts",
-  "language": "typescript",
+  "path": "src/sample.js",
+  "language": "javascript",
   "text": "export const bad = /* undeclared-variable */ 1;",
   "nodes": [],
   "semantics": {

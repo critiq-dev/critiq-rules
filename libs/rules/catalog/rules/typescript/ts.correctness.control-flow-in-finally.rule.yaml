@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.control-flow-in-finally
+  version: v1
   title: Control flow in finally block
   summary: Avoid return, throw, break, or continue inside finally blocks.
   rationale: Control-flow statements in finally override try/catch completion and can hide errors or skip cleanup intent.

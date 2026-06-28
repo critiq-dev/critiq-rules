@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-minimum-90-period-is-met-between-backupplan-cold-and-delete
+  version: v1
   title: Check minimum 90 period is met between backupplan cold and delete
   summary: Check minimum 90 period is met between backupplan cold and delete
   rationale: cfn-lint reports E3504 when Check minimum 90 period is met between backupplan cold and delete.

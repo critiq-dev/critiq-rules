@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.attributedefinitions-keyschemas-mismatch
+  version: v1
   title: Attributedefinitions / keyschemas mismatch
   summary: Attributedefinitions / keyschemas mismatch
   rationale: cfn-lint reports E3039 when Attributedefinitions / keyschemas mismatch.

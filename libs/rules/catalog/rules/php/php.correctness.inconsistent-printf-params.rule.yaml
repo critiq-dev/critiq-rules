@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.inconsistent-printf-params
+  version: v1
   title: Call with inconsistent number of printf-style parameters
   summary: The number of arguments passed to sprintf, sscanf, or fscanf does not match the number of format placeholders.
   aliases:

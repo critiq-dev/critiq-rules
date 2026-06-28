@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.echo-sensitive-binding-without-validation
+  version: v1
   title: Echo handlers should validate sensitive request bodies
   summary: >-
     Sensitive Echo binds should use struct tags or validators so mutations cannot accept empty or malformed credentials and roles.

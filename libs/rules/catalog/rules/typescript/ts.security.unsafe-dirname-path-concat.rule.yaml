@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.unsafe-dirname-path-concat
+  version: v1
   title: Avoid string-built paths from `__dirname` or `__filename`
   summary: Do not build filesystem paths by concatenating `__dirname` or `__filename` with strings or templates.
   rationale: String-built paths are easy to get wrong and can enable directory traversal when any segment is dynamic.

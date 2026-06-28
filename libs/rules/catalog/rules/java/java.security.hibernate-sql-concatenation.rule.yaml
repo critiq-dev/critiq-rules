@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.hibernate-sql-concatenation
+  version: v1
   title: Bind Hibernate query parameters instead of concatenating SQL
   summary: >-
     Hibernate `Session.createQuery`, `createNativeQuery`, and `createSQLQuery` calls must not build their query text from string concatenation or `String.format`.

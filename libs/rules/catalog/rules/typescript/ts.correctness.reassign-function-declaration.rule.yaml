@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.reassign-function-declaration
+  version: v1
   title: Reassignment of function declaration
   summary: A declared function name is later reassigned, which breaks hoisting expectations.
   rationale: Rebinding function declarations obscures call targets and often hides logic errors during refactors.

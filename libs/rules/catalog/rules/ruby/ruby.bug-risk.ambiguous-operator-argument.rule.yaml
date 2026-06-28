@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.ambiguous-operator-argument
+  version: v1
   title: Ambiguous operators in first arg of method invocation
   summary: >-
     The first argument to a method call starts with a unary operator, which

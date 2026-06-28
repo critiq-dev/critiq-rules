@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.unsynchronized-wait-notify
+  version: v1
   title: wait()/notify() called without synchronization
   summary: Object.wait(), notify(), or notifyAll() called outside a synchronized block.
   rationale: "Calling wait(), notify(), or notifyAll() without holding the object's monitor throws IllegalMonitorStateException and indicates a concurrency bug."

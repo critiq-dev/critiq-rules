@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.runtime.no-debugger-statement
+  version: v1
   title: Remove `debugger;`
   summary: Remove debugger statements before committing source files.
   rationale: Debugger statements interrupt runtime execution and should not ship.

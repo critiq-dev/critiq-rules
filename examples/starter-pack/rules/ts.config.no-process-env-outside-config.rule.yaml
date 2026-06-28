@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.config.no-process-env-outside-config
+  version: v1
   title: Avoid process.env outside config modules
   summary: Read environment variables from dedicated config modules.
   rationale: Centralized config keeps runtime settings auditable and testable.

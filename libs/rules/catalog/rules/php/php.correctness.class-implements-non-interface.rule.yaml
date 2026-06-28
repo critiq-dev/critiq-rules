@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.class-implements-non-interface
+  version: v1
   title: Classes can only implement interfaces
   summary: Classes can only implement interfaces
   rationale: Classes can only implement interfaces

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.bare-return
+  version: v1
   title: Use of bare return statements
   summary: Bare returns in named-return functions return the current values of return parameters, which can be surprising.
   rationale: >-

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.potentially-incomplete-ascii-range
+  version: v1
   title: "Do not use exclusive range for ASCII letter/number ranges"
   summary: "Exclusive range operator `..` between character literals like `'a'..'z'` excludes the upper bound."
   rationale: >-

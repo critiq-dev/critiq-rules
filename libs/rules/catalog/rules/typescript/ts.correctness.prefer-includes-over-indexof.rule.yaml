@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.prefer-includes-over-indexof
+  version: v1
   title: Prefer includes over indexOf comparison
   summary: Use `.includes()` instead of `.indexOf()` comparison for readability.
   rationale: Using `.includes()` is more readable and semantically clearer than comparing `.indexOf()` to -1 or 0.

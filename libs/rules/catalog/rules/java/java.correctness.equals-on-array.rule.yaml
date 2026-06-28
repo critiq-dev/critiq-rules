@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.equals-on-array
+  version: v1
   title: Compare arrays with Arrays.equals
   summary: Array.equals compares references, not contents.
   rationale: Reference equality on arrays is almost always a logic bug.

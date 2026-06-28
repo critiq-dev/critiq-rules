@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.unsanitized-http-response
+  version: v2
   title: Avoid raw response output driven by request input
   summary: Raw response sinks should not echo request data without escaping or sanitization. JSON.stringify and JSON responses are excluded — their output is not executable markup.
   rationale: Directly reflecting request data into HTML-capable response sinks creates reflected XSS and content injection risk.
@@ -36,6 +37,12 @@ scope:
       - "**/__tests__/**"
       - "**/test/**"
       - "**/tests/**"
+      - "**/*.d.ts"
+      - "**/__generated__/**"
+      - "**/generated/**"
+      - "**/__fixtures__/**"
+      - "**/fixtures/**"
+      - "**/*.example.*"
 match:
   fact:
     kind: security.unsanitized-http-response

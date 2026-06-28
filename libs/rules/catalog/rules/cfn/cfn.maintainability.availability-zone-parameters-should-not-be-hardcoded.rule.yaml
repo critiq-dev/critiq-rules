@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.availability-zone-parameters-should-not-be-hardcoded
+  version: v1
   title: Availability zone parameters should not be hardcoded
   summary: Availability zone parameters should not be hardcoded
   rationale: cfn-lint reports W3010 when Availability zone parameters should not be hardcoded.

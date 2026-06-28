@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.signedness-casting
+  version: v1
   title: Integer signedness lost through narrowing cast
   summary: >-
     Narrowing an integer type (e.g., `int8(x)`, `uint16(y)`) can lose

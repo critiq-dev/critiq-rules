@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.symfony-debug-exposure
+  version: v1
   title: Disable Symfony debug and profiler in production-like configs
   summary: >-
     Production-like Symfony configuration should not enable debug mode or web profiler surfaces.

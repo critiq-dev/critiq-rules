@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.hash-unit-value
+  version: v1
   title: "Attempting to hash a unit value"
   summary: "Hashing a unit value `()` via `Hash::hash` is a no-op — all unit values hash identically."
   rationale: >-

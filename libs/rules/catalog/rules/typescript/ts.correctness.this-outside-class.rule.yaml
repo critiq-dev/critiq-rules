@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.this-outside-class
+  version: v1
   title: Found `this` keyword outside of classes
   summary: Do not use the `this` keyword outside of a class body.
   rationale: Using `this` outside of a class typically refers to the global object (undefined in strict mode), which is rarely the intended behavior and can lead to subtle bugs.

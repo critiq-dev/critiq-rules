@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-json-parse-stringify-clone
+  version: v1
   title: Avoid JSON parse/stringify deep-clone
   summary: JSON stringify/parse cloning is expensive and loses type fidelity for rich objects.
   rationale: JSON stringify/parse cloning is expensive and loses type fidelity for rich objects.

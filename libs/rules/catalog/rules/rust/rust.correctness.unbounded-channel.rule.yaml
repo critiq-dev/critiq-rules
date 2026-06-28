@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.unbounded-channel
+  version: v1
   title: Avoid unbounded async channels
   summary: Unbounded channels can grow without backpressure and exhaust memory.
   rationale: >-

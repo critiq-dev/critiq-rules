@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.performance.avoid-string-index-alloc
+  version: v1
   title: Avoid string() conversion in strings.Index calls
   summary: Using `strings.Index(string(x), ...)` with a `[]byte` argument causes an unnecessary allocation.
   rationale: >-

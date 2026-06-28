@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.insecure-urllib-method
+  version: v1
   aliases:
     - BAN-B309
   title: Avoid insecure urllib URL fetching methods

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-cookie-missing-http-only
+  version: v1
   title: Set `HttpOnly` on Express session cookies
   summary: Express session and cookie-session configs should not disable the `HttpOnly` flag.
   rationale: Script-readable session cookies are easier to steal after an XSS bug.

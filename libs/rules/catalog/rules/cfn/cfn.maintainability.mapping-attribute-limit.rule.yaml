@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.mapping-attribute-limit
+  version: v1
   title: Mapping attribute limit
   summary: Mapping attribute limit
   rationale: cfn-lint reports I7012 when Mapping attribute limit.

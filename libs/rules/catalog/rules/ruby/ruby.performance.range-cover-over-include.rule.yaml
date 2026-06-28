@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.range-cover-over-include
+  version: v1
   title: Prefer `cover?` over `include?` for range membership
   summary: >-
     `Range#include?` iterates the range to check membership, while

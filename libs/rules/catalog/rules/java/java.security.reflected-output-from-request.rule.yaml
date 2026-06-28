@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.reflected-output-from-request
+  version: v1
   title: Avoid reflecting servlet request data through response writers
   summary: Servlet writers should not emit raw request parameters or headers without encoding or policy checks.
   rationale: Writing request-controlled strings directly into HTTP responses is a common reflected XSS vector for servlet stacks.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.property-is-required-based-on-another-properties-value
+  version: v1
   title: Property is required based on another properties value
   summary: Property is required based on another properties value
   rationale: cfn-lint reports E3017 when Property is required based on another properties value.

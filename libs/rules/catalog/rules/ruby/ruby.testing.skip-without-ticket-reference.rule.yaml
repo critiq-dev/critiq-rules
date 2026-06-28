@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.testing.skip-without-ticket-reference
+  version: v1
   title: RSpec skip should cite a ticket
   summary: skip(...) without a nearby tracker reference is hard to triage.
   rationale: Skips without traceability tend to linger.

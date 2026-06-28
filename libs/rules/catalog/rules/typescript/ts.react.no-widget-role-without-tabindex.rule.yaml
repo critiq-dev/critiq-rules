@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-widget-role-without-tabindex
+  version: v1
   title: Pair interactive roles with focus behavior
   summary: "Custom elements that declare widget roles need to enter the tab order unless they wrap a native focusable control."
   rationale: ARIA widget roles without `tabIndex` are inert to keyboard users because the browser never sends them focus events.

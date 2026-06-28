@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.testing.real-network-in-unit-test
+  version: v1
   title: Avoid live HTTP clients in Ruby unit tests
   summary: Net::HTTP, Faraday, or HTTParty usage in specs should be doubled or recorded.
   rationale: Live HTTP couples CI to the network.

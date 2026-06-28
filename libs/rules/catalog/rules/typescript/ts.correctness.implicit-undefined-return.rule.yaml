@@ -2,9 +2,16 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.implicit-undefined-return
+  version: v2
   title: Implicit undefined return in function
   summary: Functions that return a value on some paths must not fall through implicitly.
-  rationale: Mixed value-return and implicit-fallthrough paths are a common source of undefined behavior.
+  rationale: >-
+    A function that returns a value on some code paths but falls through on
+    others silently produces `undefined` for those paths. Callers expecting a
+    meaningful result receive `undefined` instead, causing TypeError at
+    runtime when the value is used as a string, number, or object. Every
+    reachable code path should return a value, or the function should be
+    annotated as `void` when no meaningful return is expected.
   aliases:
     - JS-0030
   tags:

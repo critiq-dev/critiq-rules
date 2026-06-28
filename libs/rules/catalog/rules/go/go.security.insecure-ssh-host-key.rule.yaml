@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.insecure-ssh-host-key
+  version: v1
   title: Verify SSH host keys instead of ignoring them
   summary: >-
     `ssh.InsecureIgnoreHostKey()` disables host key verification and exposes SSH clients to man-in-the-middle attacks.

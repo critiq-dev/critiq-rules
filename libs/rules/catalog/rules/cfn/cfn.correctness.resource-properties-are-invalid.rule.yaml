@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.resource-properties-are-invalid
+  version: v1
   title: Resource properties are invalid
   summary: Resource properties are invalid
   rationale: cfn-lint reports E3002 when Resource properties are invalid.

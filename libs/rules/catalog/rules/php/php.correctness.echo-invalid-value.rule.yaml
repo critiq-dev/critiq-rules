@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.echo-invalid-value
+  version: v1
   title: Do not echo non-string values
   summary: echo should only be called with string-convertible scalar values. Objects, arrays, and arrays using array() syntax cannot be meaningfully converted to strings by echo and may produce warnings.
   aliases:

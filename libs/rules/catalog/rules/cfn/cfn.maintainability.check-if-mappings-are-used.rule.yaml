@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.check-if-mappings-are-used
+  version: v1
   title: Check if mappings are used
   summary: Check if mappings are used
   rationale: cfn-lint reports W7001 when Check if mappings are used.

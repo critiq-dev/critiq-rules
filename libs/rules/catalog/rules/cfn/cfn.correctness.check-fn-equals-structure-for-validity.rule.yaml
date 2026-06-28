@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-fn-equals-structure-for-validity
+  version: v1
   title: "Check fn::equals structure for validity"
   summary: "Check fn::equals structure for validity"
   rationale: "cfn-lint reports E8003 when Check fn::equals structure for validity."

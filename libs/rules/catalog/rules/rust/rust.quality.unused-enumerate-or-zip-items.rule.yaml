@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.unused-enumerate-or-zip-items
+  version: v1
   title: "Avoid unused `.enumerate()` or `.zip()` items"
   summary: "One of the destructured variables from `.enumerate()` or `.zip()` is never used in the loop body."
   rationale: >-

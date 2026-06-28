@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.logging.no-console-error
+  version: v1
   title: Avoid console.error outside catch blocks
   summary: Route runtime error logging through the project logger.
   rationale: console.error should not leak into normal control flow.

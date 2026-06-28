@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-temporal-coupling
+  version: v1
   title: Avoid APIs with hidden call-order requirements
   summary: APIs that require callers to invoke methods in strict hidden order are fragile.
   rationale: Temporal coupling is a common source of runtime bugs and unclear contracts.

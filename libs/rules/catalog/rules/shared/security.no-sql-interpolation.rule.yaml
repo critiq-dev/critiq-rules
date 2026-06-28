@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: security.no-sql-interpolation
+  version: v1
   title: SQL query text should not be dynamically interpolated
   summary: Database queries built with string interpolation risk SQL injection when values come from user input. Use parameterized queries instead.
   aliases:

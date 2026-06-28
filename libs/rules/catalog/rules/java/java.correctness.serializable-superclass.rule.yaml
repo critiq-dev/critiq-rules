@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.serializable-superclass
+  version: v1
   title: Serializable class with non-serializable superclass and no default constructor
   summary: A Serializable class has a non-serializable superclass that may lack a no-arg constructor, which will cause deserialization to fail with InvalidClassException.
   rationale: During deserialization, the JVM instantiates the first non-serializable superclass using its no-arg constructor. If that constructor does not exist, deserialization fails. Every non-serializable superclass of a Serializable class must provide a no-arg constructor accessible to the subclass.

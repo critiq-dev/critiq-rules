@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.flask-debug-enabled
+  version: v1
   title: Disable Flask debug mode in runtime configuration
   summary: Flask applications should not enable debug mode through `app.run`, config assignment, or `FLASK_DEBUG`.
   rationale: Debug mode can expose interactive tracebacks and internal application state to external users.

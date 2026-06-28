@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-if-a-list-has-duplicate-values
+  version: v1
   title: Check if a list has duplicate values
   summary: Check if a list has duplicate values
   rationale: cfn-lint reports E3037 when Check if a list has duplicate values.

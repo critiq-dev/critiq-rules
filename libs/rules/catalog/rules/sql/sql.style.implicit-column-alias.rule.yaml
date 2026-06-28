@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: sql.style.implicit-column-alias
+  version: v1
   aliases:
     - SQL-L012
   title: Implicit aliasing of column detected

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.performance.fmt-fprint
+  version: v1
   title: Use `fmt.Fprint` instead of `Write` + `fmt.Sprint`
   summary: Prefer `fmt.Fprint(w, ...)` over `w.Write([]byte(fmt.Sprintf(...)))` for writing formatted output.
   rationale: >-

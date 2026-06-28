@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.user-controlled-regexp
+  version: v1
   title: Avoid user-controlled regular expression patterns
   summary: Regular expression construction should not consume request-derived pattern strings without validation.
   rationale: Attacker-controlled regex patterns can trigger catastrophic backtracking and block the Node.js event loop.

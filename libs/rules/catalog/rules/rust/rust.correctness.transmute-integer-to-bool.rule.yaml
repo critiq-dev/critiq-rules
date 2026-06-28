@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.transmute-integer-to-bool
+  version: v1
   title: "Found transmute between an integer and a `bool`"
   summary: "Transmuting an integer to bool can produce invalid boolean values."
   rationale: >-

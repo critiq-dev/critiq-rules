@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.bug-risk.redis-unimplemented-method
+  version: v1
   title: Unimplemented Redis method call would panic
   summary: >-
     `Sync(ctx)` and `Quit(ctx)` are listed in the go-redis interface but

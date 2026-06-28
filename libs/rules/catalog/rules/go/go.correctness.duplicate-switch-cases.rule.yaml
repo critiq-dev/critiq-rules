@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.duplicate-switch-cases
+  version: v1
   title: Duplicate case in switch statement
   summary: Duplicate case values mean the second case is unreachable.
   rationale: >-

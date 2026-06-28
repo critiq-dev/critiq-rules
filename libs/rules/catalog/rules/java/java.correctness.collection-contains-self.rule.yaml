@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.collection-contains-self
+  version: v1
   title: Collections should not contain themselves
   summary: A collection checks if it contains itself — likely a logic error.
   rationale: Self-containment checks on collections are almost always unintentional typos where the wrong variable was used.

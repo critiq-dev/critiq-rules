@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.performance.combine-append-calls
+  version: v1
   title: Combine multiple append calls into a single call
   summary: Consecutive `append` calls to the same slice can be combined into a single call.
   rationale: >-

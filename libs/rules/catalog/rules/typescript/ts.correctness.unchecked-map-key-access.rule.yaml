@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.unchecked-map-key-access
+  version: v1
   title: Unchecked map or dictionary key access
   summary: Lookups should verify key presence before reading from maps or keyed objects.
   rationale: Missing-key reads often flow undefined deeper into the function and fail far away from the original lookup.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-default-cookie-config
+  version: v1
   title: Override Express cookie defaults
   summary: Express session cookie settings should not omit explicit lifetime, scope, and transport attributes.
   rationale: Implicit cookie defaults vary by middleware and make auth state harder to audit consistently.

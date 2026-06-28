@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.array-compared-to-non-array
+  version: v1
   title: Array compared to non-array value
   summary: Comparing an array variable to a non-array value (string literal, number, boolean) is almost certainly a logic bug.
   rationale: "Comparing an array with `==` or `.equals()` to a non-array value like a string literal or number is almost always a programmer error. Arrays are objects; comparing them to primitives or strings with `==` will always be false, and `.equals()` will never match a non-array type."

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.for-in-on-array
+  version: v1
   title: for-in over array-like value
   summary: Prefer for-of or index loops instead of for-in on arrays.
   rationale: for-in enumerates keys (often as strings) and may include inherited properties; for-of iterates values safely.

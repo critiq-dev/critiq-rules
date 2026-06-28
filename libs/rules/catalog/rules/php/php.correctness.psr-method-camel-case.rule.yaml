@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.psr-method-camel-case
+  version: v1
   title: Use camelCase for class method names
   summary: Use camelCase for class method names
   rationale: Use camelCase for class method names

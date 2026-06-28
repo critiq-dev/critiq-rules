@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.routes-match-single-verb
+  version: v1
   title: Use of `match` in routes with single request type
   summary: >-
     `match` in Rails routes should be used only when multiple HTTP verbs are

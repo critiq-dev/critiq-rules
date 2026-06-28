@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.interface-extends-non-interface
+  version: v1
   title: Interfaces can only extend interfaces
   summary: Interfaces can only extend interfaces
   rationale: Interfaces can only extend interfaces

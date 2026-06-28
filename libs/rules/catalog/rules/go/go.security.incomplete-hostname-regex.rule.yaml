@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.incomplete-hostname-regex
+  version: v1
   title: Use a complete and anchored regular expression for hostname validation
   summary: >-
     Regex patterns used for hostname validation should use start (`^`) and end

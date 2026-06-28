@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.non-null-method-returns-null
+  version: v2
   title: Methods annotated as non-nullable should not return null values
   summary: Methods annotated @Nonnull, @NotNull, or @NonNull that contain explicit return null statements are buggy.
   rationale: Returning null from a non-null annotated method defeats the purpose of the annotation and will cause NullPointerException at call sites.

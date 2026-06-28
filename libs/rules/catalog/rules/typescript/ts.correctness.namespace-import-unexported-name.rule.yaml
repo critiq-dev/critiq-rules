@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.namespace-import-unexported-name
+  version: v1
   title: Avoid accessing unexported names through namespace imports
   summary: Namespace import member access should reference names exported by the target module.
   rationale: Accessing a name through a namespace import (import * as ns) that is not exported by the target module indicates a typo, a missing export, or a refactoring oversight. The expression will resolve to undefined at runtime without a compile error.

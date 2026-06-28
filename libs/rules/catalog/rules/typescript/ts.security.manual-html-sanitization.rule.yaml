@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.manual-html-sanitization
+  version: v1
   title: Avoid ad hoc HTML sanitization
   summary: Hand-rolled HTML escaping and sanitization should be replaced with vetted sanitizers or safe rendering paths.
   rationale: String replacement chains miss edge cases and are easy to bypass as rendering behavior evolves.

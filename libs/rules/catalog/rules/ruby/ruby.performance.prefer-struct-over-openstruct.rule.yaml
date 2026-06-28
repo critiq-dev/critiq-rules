@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.prefer-struct-over-openstruct
+  version: v1
   title: Prefer `Struct` over `OpenStruct`
   summary: >-
     `OpenStruct.new` is significantly slower and more memory-intensive than

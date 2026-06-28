@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.active-support-alias
+  version: v1
   title: Use of ActiveSupport alias instead of core Ruby method
   summary: >-
     An ActiveSupport alias method (`starts_with?`, `ends_with?`, `append`,

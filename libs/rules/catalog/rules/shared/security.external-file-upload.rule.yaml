@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: security.external-file-upload
+  version: v1
   title: Do not persist upload filenames directly
   summary: Upload handlers should not store attacker-controlled filenames without generating or validating a safe local name.
   rationale: Upload filenames can carry traversal payloads, collisions, or misleading extensions that break local containment.

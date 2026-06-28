@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.fn-ptr-to-non-pointer-cast
+  version: v1
   title: "Avoid casting function pointer to non-pointer type"
   summary: "Casting a function pointer to an integer type discards pointer metadata and is unsafe."
   rationale: >-

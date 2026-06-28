@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.correctness.dangerous-mutable-default
+  version: v1
   title: Avoid mutable default function arguments
   summary: Mutable defaults in function signatures retain state across calls.
   rationale: Reusing the same list, dict, or set instance can leak data between calls and produce non-deterministic behavior.

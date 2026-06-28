@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.kernel-open
+  version: v1
   title: Avoid Kernel.open pipe mode
   summary: >-
     Do not use `Kernel.open` with a leading pipe, which spawns a shell command.

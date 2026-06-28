@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.unused-import
+  version: v1
   title: Remove unused import statements
   summary: Remove unused import statements
   rationale: Remove unused import statements

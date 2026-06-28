@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.ref-getatt-to-resource-that-is-available-when-conditions-are-applied
+  version: v1
   title: Ref/getatt to resource that is available when conditions are applied
   summary: Ref/getatt to resource that is available when conditions are applied
   rationale: cfn-lint reports W1001 when Ref/getatt to resource that is available when conditions are applied.

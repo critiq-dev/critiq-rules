@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.doc.unmatched-parameter-tag
+  version: v1
   title: Unmatched @param tag in Javadoc
   summary: "@param tags must reference declared method parameters."
   rationale: "@param tags referencing non-existent parameters confuse readers. Remove or rename them to match the actual parameter list."

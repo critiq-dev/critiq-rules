@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-deprecated-is-mounted
+  version: v1
   title: Avoid deprecated isMounted method
   summary: isMounted is a legacy anti-pattern that leads to stale references and masks async lifecycle bugs.
   rationale: The isMounted pattern is removed in newer React versions and indicates a design where asynchronous work outlives the component. Use cancellation tokens or AbortController instead.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.pattern-compile-in-loop
+  version: v1
   title: "Pattern.compile() inside a loop"
   summary: "Calling `Pattern.compile()` inside a loop causes repeated regex compilation, leading to performance degradation."
   rationale: "Regex compilation is expensive. `Pattern.compile()` should be moved outside loops and reused with `matcher()` to avoid recompiling the same pattern on every iteration."

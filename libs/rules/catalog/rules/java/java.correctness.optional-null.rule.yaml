@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.optional-null
+  version: v1
   title: Optional variable or return value set to null
   summary: An Optional-typed variable is assigned null or a method returns null for an Optional return type.
   rationale: Optional is designed to represent absence without null. Assigning null to an Optional defeats its purpose and risks NullPointerException.

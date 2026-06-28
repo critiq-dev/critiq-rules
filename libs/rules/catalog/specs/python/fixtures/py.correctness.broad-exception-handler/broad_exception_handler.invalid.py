@@ -10,3 +10,18 @@ def load_config(raw):
         return raw.strip()
     except BaseException as error:
         raise RuntimeError("failed") from error
+
+
+def parse_altair(data):
+    try:
+        return data.to_dict()
+    except (TypeError, ValueError, Exception) as e:
+        return {"error": str(e)}
+
+
+def import_fft():
+    try:
+        import pyfftw
+        return pyfftw
+    except (ImportError, Exception):
+        return None

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-empty-function
+  version: v1
   title: No Empty Function
   summary: Avoid empty function bodies
   rationale: Avoid empty function bodies:empty implementations hide missing logic; use a comment, throw, or remove the stub.

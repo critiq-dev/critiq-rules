@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.large-payload-without-streaming
+  version: v1
   title: Large payload processing without streaming
   summary: Whole-payload reads of likely large content should be reviewed for streaming alternatives.
   rationale: Pulling large payloads into memory increases latency and memory pressure compared with streaming or chunked processing.

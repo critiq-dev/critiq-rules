@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-expensive-sort-in-render-path
+  version: v1
   title: Avoid expensive sort or transforms in render path
   summary: Sorting or heavy transforms in React render paths should be memoized or precomputed.
   rationale: Sorting or heavy transforms in React render paths should be memoized or precomputed.

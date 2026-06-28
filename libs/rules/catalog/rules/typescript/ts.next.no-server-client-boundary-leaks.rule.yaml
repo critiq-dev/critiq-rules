@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.next.no-server-client-boundary-leaks
+  version: v1
   title: Avoid server/client boundary leaks in Next.js
   summary: Server components should not use browser-only APIs or client-only hooks without an explicit client boundary.
   rationale: Browser globals and client-only hooks break server rendering boundaries and make component intent unclear.

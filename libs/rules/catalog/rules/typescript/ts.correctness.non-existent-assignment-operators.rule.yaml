@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.non-existent-assignment-operators
+  version: v2
   title: Found non-existent assignment operators
   summary: Detects patterns like `=+`, `=-`, `=!`, `=~` that suggest a typo in a compound assignment operator.
   rationale: "Writing `x =+ 1` is valid JS (meaning `x = +1`) but looks like a bug (intending `x += 1`). These patterns are common typos."
@@ -19,6 +20,17 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      # Build and compiled output
+      - "**/public/build/**"
+      - "**/dist/**"
+      - "**/build/**"
+      - "**/out/**"
+      # Static assets often contain minified third-party JS
+      - "**/_static/**"
+      # Third-party library directories
+      - "**/libraries/**"
 match:
   fact:
     kind: language.non-existent-assignment-operator
@@ -26,7 +38,7 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: high
+    severity: medium
     confidence: 0.85
     tags:
       - correctness

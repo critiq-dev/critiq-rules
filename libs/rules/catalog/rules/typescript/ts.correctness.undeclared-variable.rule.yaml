@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.undeclared-variable
+  version: v3
   title: Undeclared variable reference
-  summary: Detects undeclared variable reference issues in JavaScript and TypeScript source.
-  rationale: Undeclared variable reference patterns are scope-analysis hints that rarely represent runtime bugs; most are parser artifacts or dynamic-pattern noise.
+  summary: Referencing a variable that has not been declared in the current scope causes a runtime ReferenceError. This rule targets JavaScript files only; TypeScript's compiler provides equivalent detection with lower false-positive rates.
+  rationale: Accessing a name that has no declaration in the local scope, enclosing function scope, or module-level scope throws a ReferenceError at runtime. This typically indicates a missing import, a typo in a variable name, or a reference to a module-scoped binding that was not properly exported. TypeScript has been removed from scope because the compiler provides equivalent detection, and the scanner produced an unacceptably high false-positive rate (>99%) on TypeScript/React files due to destructuring, hook returns, catch clause bindings, type-level identifiers, and similar constructs.
   aliases:
     - JS-0125
     - JS-0423
@@ -13,11 +14,11 @@ metadata:
     - language
     - rules-catalog
     - public-directory-parity
+    - javascript-only
   stability: stable
   appliesTo: file
 scope:
   languages:
-    - typescript
     - javascript
 match:
   fact:

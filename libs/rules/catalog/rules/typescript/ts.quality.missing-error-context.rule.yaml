@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.missing-error-context
+  version: v1
   title: Missing error context or logging
   summary: Catch blocks should include the caught error when they log or rethrow.
   rationale: Logging or rethrowing without the original error strips the context needed to diagnose the failure.

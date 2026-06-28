@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.resource-dependencies-are-not-circular
+  version: v1
   title: Resource dependencies are not circular
   summary: Resource dependencies are not circular
   rationale: cfn-lint reports E3004 when Resource dependencies are not circular.

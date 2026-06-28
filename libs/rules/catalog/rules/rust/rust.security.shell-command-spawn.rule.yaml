@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.shell-command-spawn
+  version: v1
   title: Avoid shell invocation via Command
   summary: >-
     Spawning `/bin/sh` or `bash` with `-c` enables shell metacharacter injection.

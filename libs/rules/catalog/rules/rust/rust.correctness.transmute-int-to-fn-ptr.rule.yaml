@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.transmute-int-to-fn-ptr
+  version: v1
   title: "Transmute between integer literal and fn ptr"
   summary: "`transmute` used to convert an integer to a function pointer."
   rationale: >-

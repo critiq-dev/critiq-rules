@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.testing.no-test-only-code-in-production
-  title: Keep test-only modules and guards out of production paths
-  summary: Production modules should not import test doubles or gate behavior on test-only environment flags.
-  rationale: Test-only imports and NODE_ENV test branches can ship dead paths or accidental coupling to test harnesses.
+  version: v2
+  title: Production modules importing test-only code
+  summary: A production module imports a test-only module (spec, test, or mock file), introducing dead coupling to the test harness.
+  rationale: Importing test doubles, mock directories, or spec files from production code creates hidden dependencies on test infrastructure. These imports may pull test utilities into production bundles or cause unexpected behavior when test harnesses are not present.
   tags:
     - testing
     - quality
@@ -20,19 +21,16 @@ match:
     - fact:
         kind: testing.production-imports-test-code
         bind: issue
-    - fact:
-        kind: testing.test-only-env-branch-in-production
-        bind: issue
 emit:
   finding:
     category: quality.testing
-    severity: high
-    confidence: 0.8
+    severity: low
+    confidence: 0.85
     tags:
       - testing
       - boundaries
   message:
-    title: Remove test-only coupling in `${captures.issue.text}`
-    summary: "`${captures.issue.text}` imports a test-only module or compares runtime mode against `test` outside test paths."
+    title: Remove test-only import in `${captures.issue.text}`
+    summary: "`${captures.issue.text}` imports a test-only module (spec, test, or mock file). Move shared helpers into a neutral utility module to avoid coupling production code to the test harness."
   remediation:
-    summary: Move helpers into shared neutral modules, guard test utilities behind dev-only entrypoints, and keep production code free of `NODE_ENV === 'test'` branches.
+    summary: Move shared test helper logic into neutral utility modules under a non-test path. Keep test-specific setup and mocks confined to test files and `__mocks__` directories.

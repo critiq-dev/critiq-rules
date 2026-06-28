@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.case-insensitive-define
+  version: v1
   title: Avoid case-insensitive define calls
   summary: The third argument to define() for case-insensitive constants is deprecated.
   aliases:

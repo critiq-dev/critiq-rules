@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.dynamic-code-execution
+  version: v1
   title: Avoid dynamic code execution with eval or exec
   summary: Python services should not execute runtime-generated code via `eval` or `exec`.
   rationale: Dynamic code execution turns untrusted data into executable behavior and expands code-injection risk.

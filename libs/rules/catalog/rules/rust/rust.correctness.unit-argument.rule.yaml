@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.unit-argument
+  version: v1
   title: "Potential unit value passed as function argument"
   summary: "A value from a method that returns `()` may be unintentionally passed as a function argument."
   rationale: >-

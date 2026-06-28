@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.prefer-delete-suffix
+  version: v1
   title: Use delete_suffix instead of gsub with \z-anchored regex
   summary: >-
     Calling `gsub(/suffix\z/, '')` compiles and runs a regex to strip a literal

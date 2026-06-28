@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.metadata-interface-parameters-exist
+  version: v1
   title: Metadata interface parameters exist
   summary: Metadata interface parameters exist
   rationale: cfn-lint reports W4001 when Metadata interface parameters exist.

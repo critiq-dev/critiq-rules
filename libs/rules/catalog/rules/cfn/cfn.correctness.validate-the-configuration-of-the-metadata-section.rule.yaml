@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.validate-the-configuration-of-the-metadata-section
+  version: v1
   title: Validate the configuration of the metadata section
   summary: Validate the configuration of the metadata section
   rationale: cfn-lint reports E4002 when Validate the configuration of the metadata section.

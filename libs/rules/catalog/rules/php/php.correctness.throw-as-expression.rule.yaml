@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.throw-as-expression
+  version: v1
   title: Throw expressions require PHP 8.0+
   summary: Throw expressions require PHP 8.0+
   rationale: Throw expressions require PHP 8.0+

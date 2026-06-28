@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.unsafe-remove-dir-all
+  version: v1
   title: Avoid `std::fs::remove_dir_all` without TOCTOU mitigations
   summary: >-
     `remove_dir_all` is vulnerable to TOCTOU (time-of-check-time-of-use) races

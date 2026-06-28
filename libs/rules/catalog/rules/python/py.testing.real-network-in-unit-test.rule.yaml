@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.testing.real-network-in-unit-test
+  version: v1
   title: Avoid live HTTP clients in Python unit tests
   summary: requests/httpx/urllib calls in unit tests should be doubled or recorded.
   rationale: Live HTTP couples CI to the network and slows feedback.

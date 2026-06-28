@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.insecure-cipher-mode
+  version: v1
   title: Avoid insecure cipher transformations
   summary: "Java `Cipher.getInstance` should not request ECB mode or legacy algorithms like DES and RC4."
   rationale: ECB mode leaks structure across blocks, while DES and RC4 are broken or deprecated and unsuitable for confidentiality.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.assert-self-comparison
+  version: v1
   title: Objects should not be compared to themselves within assertions
   summary: Assertions comparing a value to itself always pass and indicate a testing bug where a different expected value should be used.
   rationale: Self-comparison in assertions (assertEquals(a, a), assertSame(a, a), assertTrue(a == a)) is a common copy-paste mistake. These assertions always pass and never validate actual behavior.

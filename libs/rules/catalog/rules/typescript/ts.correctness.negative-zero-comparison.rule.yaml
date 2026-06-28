@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.negative-zero-comparison
+  version: v1
   title: Comparison with negative zero
   summary: Detects comparison with negative zero issues in JavaScript and TypeScript source.
   rationale: Comparison with negative zero patterns are a common source of bugs and confusing runtime behavior.

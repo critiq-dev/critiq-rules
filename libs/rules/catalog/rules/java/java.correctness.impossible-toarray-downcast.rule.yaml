@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.impossible-toarray-downcast
+  version: v1
   title: Impossible downcast of toArray() result
   summary: Casting the result of no-arg toArray() to a specific array type will throw ClassCastException.
   rationale: Collection.toArray() returns Object[] and cannot be cast to a more specific array type. Use toArray(T[]) instead.

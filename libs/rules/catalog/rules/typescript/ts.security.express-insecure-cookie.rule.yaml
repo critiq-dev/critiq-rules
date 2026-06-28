@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-insecure-cookie
+  version: v1
   title: Set `Secure` on Express session cookies
   summary: Express session and cookie-session configs should not disable the `Secure` flag.
   rationale: Cookies sent over non-HTTPS transport are easier to intercept or replay.

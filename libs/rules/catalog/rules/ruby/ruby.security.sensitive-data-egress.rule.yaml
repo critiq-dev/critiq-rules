@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.sensitive-data-egress
+  version: v1
   title: Avoid relaying request-controlled data through outbound Ruby HTTP clients
   summary: >-
     Outbound HTTP helpers should not receive URLs or bodies directly from `params` or other tainted sources without validation.

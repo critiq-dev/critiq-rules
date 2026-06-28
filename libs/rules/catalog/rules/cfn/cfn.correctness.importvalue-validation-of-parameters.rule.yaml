@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.importvalue-validation-of-parameters
+  version: v1
   title: Importvalue validation of parameters
   summary: Importvalue validation of parameters
   rationale: cfn-lint reports E1016 when Importvalue validation of parameters.

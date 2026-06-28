@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.xxe-xml-input-factory
+  version: v1
   title: Disable DTD and external entities on XMLInputFactory
   summary: >-
     `XMLInputFactory.newInstance()` and `XMLInputFactory.newFactory()` should set `SUPPORT_DTD` and `IS_SUPPORTING_EXTERNAL_ENTITIES` to false before reading untrusted XML.

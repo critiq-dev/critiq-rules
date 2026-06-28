@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.self-assignment
+  version: v1
   title: Self assignment of local variable
   summary: A local variable is assigned to itself, which has no effect.
   rationale: "`x = x;` is a no-op and indicates either a typo or dead code. If the intent was to assign from a field, `this.x = x;` should be used."

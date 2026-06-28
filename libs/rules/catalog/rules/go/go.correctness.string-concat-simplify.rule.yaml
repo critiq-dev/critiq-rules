@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.string-concat-simplify
+  version: v1
   title: String concatenation can be simplified
   summary: String concatenation patterns like `strings.Join(parts, "")` or `fmt.Sprintf("%s%s", a, b)` can be simplified.
   rationale: >-

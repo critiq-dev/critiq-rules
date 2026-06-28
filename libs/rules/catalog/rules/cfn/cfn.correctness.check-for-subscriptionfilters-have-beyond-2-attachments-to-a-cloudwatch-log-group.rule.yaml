@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-for-subscriptionfilters-have-beyond-2-attachments-to-a-cloudwatch-log-group
+  version: v1
   title: Check for subscriptionfilters have beyond 2 attachments to a cloudwatch log group
   summary: Check for subscriptionfilters have beyond 2 attachments to a cloudwatch log group
   rationale: cfn-lint reports E2529 when Check for subscriptionfilters have beyond 2 attachments to a cloudwatch log group.

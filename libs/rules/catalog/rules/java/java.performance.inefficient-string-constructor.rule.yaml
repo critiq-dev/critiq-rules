@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.inefficient-string-constructor
+  version: v1
   title: "Inefficient use of String constructor"
   summary: "`new String(String)` creates an unnecessary copy; use the string literal directly."
   rationale: "The `String(String)` constructor creates a copy of the argument string, which is almost never needed. String literals are interned and can be used directly. Using `new String(\"literal\")` allocates an unnecessary object and should be replaced with the literal itself."

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.array-sort-without-compare
+  version: v1
   title: Array.sort without compare function
   summary: Provide a compare function when sorting non-string arrays.
   rationale: Default sort coerces elements to strings, which misorders numbers; however default sort is correct for string arrays and this is a code-style hint in most codebases.

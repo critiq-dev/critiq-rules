@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-unnecessary-fragment
+  version: v1
   title: Remove unnecessary React fragments
   summary: Fragments wrapping a single child add runtime overhead without structural benefit.
   rationale: A fragment with one element or text child can be replaced by the child itself, reducing render tree depth and making the component simpler.

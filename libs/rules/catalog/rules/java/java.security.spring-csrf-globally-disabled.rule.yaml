@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.spring-csrf-globally-disabled
+  version: v1
   title: Avoid disabling Spring CSRF protection without a stateless API hardening story
   summary: >-
     Disabling CSRF globally is unsafe for cookie-backed browser sessions unless the app is clearly hardened as a stateless API (for example OAuth2 resource server with stateless sessions).

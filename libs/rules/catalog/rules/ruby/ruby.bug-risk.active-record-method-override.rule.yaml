@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.active-record-method-override
+  version: v1
   title: Override of built-in ActiveRecord methods
   summary: >-
     An ActiveRecord model overrides a built-in ActiveRecord method such as

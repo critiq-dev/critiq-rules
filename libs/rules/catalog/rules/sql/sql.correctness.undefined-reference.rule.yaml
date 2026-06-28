@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: sql.correctness.undefined-reference
+  version: v1
   aliases:
     - SQL-L026
   title: Undefined table or alias reference

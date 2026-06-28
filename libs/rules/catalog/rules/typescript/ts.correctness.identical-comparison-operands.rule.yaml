@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.identical-comparison-operands
+  version: v1
   title: Identical comparison operands
   summary: Both sides of a comparison use the same source text.
   aliases:

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.duplicate-elsif-block
+  version: v1
   title: Avoid duplicate elsif conditions
   summary: >-
     An if-elsif chain has two consecutive elsif blocks with identical

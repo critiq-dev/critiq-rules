@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.redundant-final-method
+  version: v1
   title: Final methods are redundant in final classes
   summary: Final methods are redundant in final classes
   rationale: Final methods are redundant in final classes

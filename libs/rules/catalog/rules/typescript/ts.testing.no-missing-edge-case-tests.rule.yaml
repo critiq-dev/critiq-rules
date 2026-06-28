@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.testing.no-missing-edge-case-tests
+  version: v1
   title: Update tests when branch-heavy service logic changes
   summary: Diffs that touch many branches in critical service paths should update paired tests in the same change.
   rationale: Branch-heavy edits without test updates often miss boundary and failure behavior reviewers expect.

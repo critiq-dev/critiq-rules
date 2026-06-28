@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.used-before-definition
+  version: v1
   title: Variable used before definition
   summary: Detects variable used before definition issues in JavaScript and TypeScript source.
-  rationale: Variable used-before-definition patterns are mostly hoisting and TDZ analysis artifacts; they rarely indicate real bugs.
+  rationale: Variable used-before-definition patterns are mostly hoisting and TDZ analysis artifacts; they rarely indicate real bugs in well-structured codebases. However, they can flag genuine issues where a `const` or `let` binding is referenced before initialization in source order. References to outer-scope variables from inside nested functions (closures, callbacks, React event handlers) are intentionally not flagged, as those functions execute after the enclosing scope is fully initialized.
   aliases:
     - JS-0129
     - JS-0357
@@ -19,6 +20,16 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__mocks__/**"
+      - "**/*.generated.*"
+      - "**/generated/**"
 match:
   fact:
     kind: language.used-before-definition
@@ -32,7 +43,7 @@ emit:
       - correctness
       - language
   message:
-    title: Fix variable used before definition
-    summary: "`${captures.issue.text}` matches ts.correctness.used-before-definition."
+    title: Variable used before definition
+    summary: "`${captures.issue.text}` is referenced before its `let`/`const` declaration. Move the declaration before the first use, or restructure the code so the variable is initialized before it is referenced."
   remediation:
-    summary: Refactor the code to remove the variable used before definition pattern.
+    summary: Move the variable declaration before its first use, or restructure the code so that the variable is initialized before any code path that references it.

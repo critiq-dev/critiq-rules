@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.vue.emits-validator-return-boolean
+  version: v1
   title: Emits validators must return a boolean
   summary: "Emit event validators are expected to return a boolean value indicating whether the event payload is valid."
   rationale: Vue emits validators, like prop validators, are expected to return a boolean. Returning non-boolean values or omitting the return statement can lead to unexpected behavior. Validators that return nothing or return non-boolean values make the emit always appear valid.

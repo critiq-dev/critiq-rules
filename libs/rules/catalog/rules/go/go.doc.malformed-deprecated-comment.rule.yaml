@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.doc.malformed-deprecated-comment
+  version: v1
   title: Malformed deprecated doc comment
   summary: >-
     Go doc comment does not follow the `// Deprecated:` convention.

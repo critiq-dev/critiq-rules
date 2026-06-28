@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.android-world-readable-mode
+  version: v1
   title: Avoid Android world-readable or world-writable IO modes
   summary: Context files and shared preferences must not use MODE_WORLD_READABLE or MODE_WORLD_WRITABLE.
   rationale: Legacy Android modes expose application data to other packages on the device and break sandbox expectations for secrets.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-keyboard-interaction-without-widget-role
+  version: v1
   title: Declare a widget role when mixing click and key handlers
   summary: "Elements that handle both clicks and key events behave like custom controls and should advertise an appropriate ARIA role."
   rationale: Assistive technologies cannot infer widget behaviour from events alone; an explicit role pairs keyboard support with the correct accessibility tree semantics.

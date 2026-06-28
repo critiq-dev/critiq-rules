@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-string-ref
+  version: v1
   title: Avoid legacy React string refs
   summary: String refs rely on older React behavior that is harder to analyze and less reliable than callback or object refs.
   rationale: Legacy refs obscure ownership, do not compose cleanly, and complicate future migrations away from class-heavy React patterns.

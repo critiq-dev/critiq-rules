@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.deprecated-thread-methods
+  version: v2
   title: Avoid using deprecated Thread methods
-  summary: Calls to deprecated Thread instance methods stop(), suspend(), and resume() should be removed. These methods are inherently unsafe.
-  rationale: Thread.stop(), Thread.suspend(), and Thread.resume() are deprecated since JDK 1.2 because they are inherently unsafe. stop() can corrupt shared state, suspend() is deadlock-prone, and resume() is the counterpart to a dangerous method.
+  summary: Calls to deprecated Thread instance methods stop(), suspend(), and resume() on variables named like "thread" should be removed. These methods are inherently unsafe.
+  rationale: Thread.stop(), Thread.suspend(), and Thread.resume() are deprecated since JDK 1.2 because they are inherently unsafe. stop() can corrupt shared state by releasing all monitors and throwing a ThreadDeath exception at arbitrary points. suspend() is deadlock-prone because the suspended thread holds locks. resume() is the counterpart to suspend() and enables the same unsafe pattern. This rule flags calls to these methods on variables whose name contains "thread" (case-insensitive), which catches the common pattern while avoiding false positives from unrelated stop(), suspend(), or resume() calls on other objects like StopWatch, builders, or observability APIs.
   tags:
     - correctness
     - java

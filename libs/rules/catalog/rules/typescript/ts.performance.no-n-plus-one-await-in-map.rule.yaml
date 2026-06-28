@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-n-plus-one-await-in-map
+  version: v1
   title: Avoid N+1 await patterns in map flows
   summary: Per-item awaits inside map-like flows often create avoidable latency and fan-out bottlenecks.
   rationale: Per-item awaits inside map-like flows often create avoidable latency and fan-out bottlenecks.

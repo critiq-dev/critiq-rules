@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.default-value-is-within-parameter-constraints
+  version: v1
   title: Default value is within parameter constraints
   summary: Default value is within parameter constraints
   rationale: cfn-lint reports E2015 when Default value is within parameter constraints.

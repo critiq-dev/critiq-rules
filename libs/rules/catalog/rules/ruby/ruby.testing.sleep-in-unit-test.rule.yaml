@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.testing.sleep-in-unit-test
+  version: v1
   title: Avoid sleep in Ruby unit tests
   summary: sleep in specs slows CI and hides synchronization bugs.
   rationale: Prefer deterministic waits or travel_to style time helpers.

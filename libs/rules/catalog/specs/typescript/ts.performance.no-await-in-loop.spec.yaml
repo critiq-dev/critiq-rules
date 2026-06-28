@@ -2,14 +2,47 @@ apiVersion: critiq.dev/v1alpha1
 kind: RuleSpec
 rulePath: ../../rules/typescript/ts.performance.no-await-in-loop.rule.yaml
 fixtures:
-  - name: flags invalid pattern
+  - name: flags for-of await
     sourcePath: ./fixtures/ts.performance.no-await-in-loop/invalid.ts
     expect:
       findingCount: 1
       allRuleIds:
         - ts.performance.no-await-in-loop
-  - name: allows valid pattern
+  - name: flags for await
+    sourcePath: ./fixtures/ts.performance.no-await-in-loop/invalid-for.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.performance.no-await-in-loop
+  - name: flags while await
+    sourcePath: ./fixtures/ts.performance.no-await-in-loop/invalid-while.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.performance.no-await-in-loop
+  - name: flags do-while await
+    sourcePath: ./fixtures/ts.performance.no-await-in-loop/invalid-do-while.ts
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - ts.performance.no-await-in-loop
+  - name: allows Promise.all
     sourcePath: ./fixtures/ts.performance.no-await-in-loop/valid.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows retry with setTimeout sleep
+    sourcePath: ./fixtures/ts.performance.no-await-in-loop/valid-sleep.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows delay utility in loop
+    sourcePath: ./fixtures/ts.performance.no-await-in-loop/valid-delay.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows Promise.all wrapper in loop
+    sourcePath: ./fixtures/ts.performance.no-await-in-loop/valid-promise-all-in-loop.ts
     expect:
       findingCount: 0
       allRuleIds: []

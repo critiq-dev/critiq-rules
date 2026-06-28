@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.sparse-array-literal
+  version: v1
   title: Sparse array literal
   summary: An array literal contains empty slots that create a sparse array.
   rationale: Sparse arrays have surprising iteration semantics and often indicate typos or incomplete edits.

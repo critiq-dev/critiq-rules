@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-innerhtml-assignment
+  version: v1
   title: Avoid unsafe `innerHTML` assignment
   summary: "`innerHTML` assignments should only use fixed or explicitly sanitized HTML."
   rationale: Direct HTML injection can allow untrusted or weakly reviewed content to execute in the browser.

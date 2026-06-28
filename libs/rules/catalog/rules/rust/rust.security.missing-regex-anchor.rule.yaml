@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.missing-regex-anchor
+  version: v1
   title: Anchor regex patterns with `^` or `(?`
   summary: >-
     Regex patterns compiled with `Regex::new` should be anchored to avoid

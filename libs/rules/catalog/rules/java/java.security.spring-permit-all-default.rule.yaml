@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.spring-permit-all-default
+  version: v1
   title: Avoid Spring Security chains that leave every request anonymous by default
   summary: >-
     Production HTTP security chains should not end with a broad permit-all fallback such as `anyRequest().permitAll()` or `requestMatchers("/**").permitAll()`.

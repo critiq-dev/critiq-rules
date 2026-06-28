@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.unchecked-index
+  version: v1
   title: Prefer fallible slice access for variable indices
   summary: Direct indexing with a variable can panic when the index is out of bounds.
   rationale: >-

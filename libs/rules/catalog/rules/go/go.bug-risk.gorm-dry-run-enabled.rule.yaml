@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.bug-risk.gorm-dry-run-enabled
+  version: v1
   title: "GORM DryRun is enabled"
   summary: >-
     `DryRun` is set to `true` in gorm.Config. When DryRun is enabled, GORM

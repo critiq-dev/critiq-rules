@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-img-missing-alt-text
+  version: v1
   title: Add alt text to meaningful images
   summary: "JSX images need a meaningful `alt` value, or an explicit empty string when the image is decorative."
   rationale: Missing alternative text hides visual meaning from screen reader users and creates avoidable accessibility regressions.

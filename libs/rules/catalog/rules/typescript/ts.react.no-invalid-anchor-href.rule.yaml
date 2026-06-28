@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-invalid-anchor-href
+  version: v1
   title: Use real destinations for anchor elements
   summary: "Links need a concrete `href` so navigation, keyboard activation, and assistive technologies behave predictably."
   rationale: Placeholder anchors and `javascript:` URLs break expectations for links, harm accessibility, and often hide ad-hoc click handlers that should be buttons instead.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.join-validation-of-parameters
+  version: v1
   title: Join validation of parameters
   summary: Join validation of parameters
   rationale: cfn-lint reports E1022 when Join validation of parameters.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-if-a-number-is-between-min-and-max
+  version: v1
   title: Check if a number is between min and max
   summary: Check if a number is between min and max
   rationale: cfn-lint reports E3034 when Check if a number is between min and max.

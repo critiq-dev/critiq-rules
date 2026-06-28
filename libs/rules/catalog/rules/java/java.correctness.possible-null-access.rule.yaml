@@ -2,16 +2,17 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.possible-null-access
+  version: v2
   title: Avoid possible null access on collection or map lookups
-  summary: Chaining a method call on a `.get()`, `.poll()`, or `.peek()` result may throw a NullPointerException.
-  rationale: Collection and map lookups can return null for missing keys; dereferencing the result without a null check will throw a NullPointerException at runtime.
+  summary: Chaining a method call on a `.get()`, `.poll()`, `.peek()`, or `.element()` result may throw a NullPointerException.
+  rationale: Collection, map, and queue lookups can return null for missing keys or empty queues; dereferencing the result without a null check will throw a NullPointerException at runtime. This is a heuristic text-based detector that cannot see enclosing null guards or domain-specific non-null guarantees.
   aliases:
     - JAVA-E1083
   tags:
     - correctness
     - java
     - rules-catalog
-  stability: experimental
+  stability: stable
   appliesTo: block
 scope:
   languages:
@@ -23,6 +24,7 @@ scope:
       - "**/src/test/**"
       - "**/tests/**"
       - "**/*Test.java"
+      - "**/src/testFixtures/**"
 match:
   fact:
     kind: java.correctness.possible-null-access
@@ -30,13 +32,13 @@ match:
 emit:
   finding:
     category: correctness.null-safety
-    severity: critical
-    confidence: 0.72
+    severity: medium
+    confidence: 0.45
     tags:
       - correctness
       - java
   message:
     title: Possible null access from `${captures.issue.text}`
-    summary: "The result of a `.get()`, `.poll()`, or `.peek()` call is dereferenced without a null check, which may throw a NullPointerException."
+    summary: "The result of a `.get()`, `.poll()`, `.peek()`, or `.element()` call is dereferenced without a null check, which may throw a NullPointerException."
   remediation:
     summary: Assign the result to a local variable, check for null, and handle the absent case before dereferencing.

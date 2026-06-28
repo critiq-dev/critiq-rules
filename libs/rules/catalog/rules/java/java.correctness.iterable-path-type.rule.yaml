@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.iterable-path-type
+  version: v1
   title: "Iterable<Path> is errorprone and should be replaced with Collection<Path>"
   summary: "`Path` implements `Iterable<Path>`, so `Iterable<Path>` creates confusing APIs. Use `Collection<Path>` instead for clarity."
   rationale: "`java.nio.file.Path` extends `Iterable<Path>`, which means code treating a single `Path` as an `Iterable<Path>` compiles but produces surprising behavior (iterating over a single path's name elements instead of multiple paths). Using `Iterable<Path>` in method signatures is error-prone. Use `Collection<Path>` or `List<Path>` instead."

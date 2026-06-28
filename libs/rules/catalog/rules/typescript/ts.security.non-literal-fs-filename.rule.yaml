@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.non-literal-fs-filename
+  version: v1
   title: Avoid attacker-controlled filesystem read paths
   summary: Direct filesystem read APIs should not consume request- or upload-controlled filenames.
   rationale: Dynamic read paths can expose unintended local files or bypass expected file-selection constraints.

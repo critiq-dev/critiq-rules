@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.non-owned-rc-pointer-into-vec
+  version: v1
   title: "Insert owned Rc values into vectors instead of pointers to non-owned values"
   summary: "Pushing an `Rc::clone()` from an `Rc` defined outside a vector ties cleanup to the vector lifetime."
   rationale: >-

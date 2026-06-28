@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.unsafe-marked-version
+  version: v1
   title: Upgrade Markdown rendering dependency
   summary: Markdown renderers should stay on patched versions before rendering untrusted content.
   rationale: Older Markdown renderer versions can expose unsafe HTML handling and parser edge cases.

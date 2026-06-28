@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.insecure-ssl-context
+  version: v1
   title: Avoid deprecated TLS/SSL protocol versions
   summary: "`SSLContext.getInstance` should not request SSL, SSLv2, SSLv3, TLSv1.0, or TLSv1.1."
   rationale: Pre-TLSv1.2 protocols are deprecated and vulnerable to known attacks such as POODLE and BEAST.

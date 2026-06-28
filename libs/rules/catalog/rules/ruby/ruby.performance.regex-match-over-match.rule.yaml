@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.regex-match-over-match
+  version: v1
   title: Prefer `match?` over `match` for boolean checks
   summary: >-
     `.match(...)` used as a boolean condition allocates a MatchData object.

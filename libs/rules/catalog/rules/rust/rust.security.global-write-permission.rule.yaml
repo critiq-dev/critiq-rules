@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.global-write-permission
+  version: v1
   title: Setting global write permission on file
   summary: >-
     Using world-writable permissions (0o777, 0o666) on files or directories allows

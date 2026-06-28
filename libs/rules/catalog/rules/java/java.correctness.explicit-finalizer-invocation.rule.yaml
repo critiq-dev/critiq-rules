@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.explicit-finalizer-invocation
+  version: v1
   title: Finalizers must not be explicitly invoked
   summary: "Calling `.finalize()` explicitly is dangerous and deprecated."
   rationale: Explicit finalizer invocation can resurrect objects, cause resource leaks, and produce unpredictable behavior. The JVM manages finalization automatically.

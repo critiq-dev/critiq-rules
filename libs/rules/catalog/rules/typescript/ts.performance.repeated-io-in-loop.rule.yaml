@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.repeated-io-in-loop
+  version: v1
   title: Repeated IO call inside loop
   summary: Database or network calls inside loops can multiply latency and load.
   rationale: Per-item IO in loops often turns one operation into N round trips and is a common performance bottleneck.

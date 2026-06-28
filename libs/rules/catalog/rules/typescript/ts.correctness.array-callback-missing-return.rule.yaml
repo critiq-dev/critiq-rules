@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.array-callback-missing-return
+  version: v1
   title: Array callback missing return
   summary: Array iteration callbacks with block bodies should return a value when required.
   rationale: map, filter, reduce, every, and some expect callback return values; missing returns yield undefined elements or incorrect predicates.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.no-static-size-computation
+  version: v1
   title: Avoid computing size of static arrays and hashes
   summary: >-
     Calling `.count`, `.size`, or `.length` on a static array or hash literal

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.missing-request-timeout-or-retry
+  version: v1
   title: "[DEPRECATED] Use ts.correctness.missing-timeout-on-external-call instead"
   summary: "DEPRECATED: This rule is consolidated into ts.correctness.missing-timeout-on-external-call. External calls should define timeout, cancellation, or retry behavior."
   rationale: "DEPRECATED: Consolidated with the correctness variant. See ts.correctness.missing-timeout-on-external-call for the current rule."

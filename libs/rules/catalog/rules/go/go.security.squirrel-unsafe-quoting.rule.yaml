@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.squirrel-unsafe-quoting
+  version: v1
   title: Use safe parameterized queries with squirrel query builder
   summary: >-
     `squirrel.Expr` (or `sq.Expr`) with `fmt.Sprintf` interpolation constructs

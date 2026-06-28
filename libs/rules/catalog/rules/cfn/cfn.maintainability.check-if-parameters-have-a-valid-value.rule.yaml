@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.check-if-parameters-have-a-valid-value
+  version: v1
   title: Check if parameters have a valid value
   summary: Check if parameters have a valid value
   rationale: cfn-lint reports W2030 when Check if parameters have a valid value.

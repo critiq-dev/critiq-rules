@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.iter-nth-instead-of-get
+  version: v1
   title: "Use `.get()` instead of `.iter().nth()`"
   summary: "`.iter().nth(idx)` on collections supporting indexing is less performant than `.get(idx)`."
   rationale: >-

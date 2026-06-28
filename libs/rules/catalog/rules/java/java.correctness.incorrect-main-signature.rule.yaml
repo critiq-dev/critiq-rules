@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.incorrect-main-signature
+  version: v1
   title: Incorrect main method signature detected
   summary: A method named main does not match the required public static void main(String[]) or String... signature, so it will not be usable as a program entry point.
   rationale: The JVM requires main methods to have the exact signature public static void main(String[] args) or public static void main(String... args). Methods named main with wrong return types, missing static, or incorrect parameter types will not be recognized as entry points.

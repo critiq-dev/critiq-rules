@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.identical-binary-operands
+  version: v2
   title: Binary operator with identical operands detected
   summary: >-
     A binary expression uses the same variable for both the left and
@@ -9,10 +10,13 @@ metadata:
     predictable result that may not be intended.
   rationale: >-
     Expressions such as `a + a`, `a - a`, `a * a`, `a / a`, `a | a`,
-    `a & a`, `a ^ a`, or `a <=> a` with identical operands typically
-    indicate a bug where different values were meant to be used.
+    `a & a`, `a ^ a`, `a ** a`, or `a <=> a` with identical operands
+    typically indicate a bug where different values were meant to be
+    used. The detection covers local variables, instance variables
+    (`@var`), class variables (`@@var`), and global variables (`$var`).
     Logical operators (`||`, `&&`) are excluded as they follow idiomatic
-    patterns.
+    patterns. Matches inside string literals are excluded to avoid false
+    positives on hyphenated names and other quoted text.
   detection:
     kind: pattern
   aliases:

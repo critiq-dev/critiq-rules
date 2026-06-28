@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.axum-body-limit-disabled
+  version: v1
   title: Do not disable Axum default body limits for untrusted uploads
   summary: >-
     Axum apps should keep a finite `DefaultBodyLimit` (or equivalent) so request bodies cannot exhaust memory.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.string-concat-in-loop
+  version: v1
   title: "String concatenation using `+` inside a loop"
   summary: "String concatenation using `+=` or `= ... + ...` inside a loop creates many intermediate String objects, degrading performance."
   rationale: "In Java, String is immutable. Each `+=` or `+` concatenation creates a new String object, copying the previous content. Inside a loop, this results in O(n²) memory allocation and copying. Use `StringBuilder.append()` instead, which grows the buffer efficiently. Note: Java 9+ invokes dynamic string concatenation via `invokedynamic`, reducing object allocation, but the pattern remains suboptimal for many iterations."

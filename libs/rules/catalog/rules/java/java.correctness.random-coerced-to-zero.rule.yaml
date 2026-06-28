@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.random-coerced-to-zero
+  version: v1
   title: Casting Math.random() to int without scaling always returns zero
   summary: Casting Math.random() to int directly (without multiplying) always yields zero.
   rationale: "Math.random() returns a double in range [0.0, 1.0). Casting to int truncates to zero every time. Multiply by the desired range before casting."

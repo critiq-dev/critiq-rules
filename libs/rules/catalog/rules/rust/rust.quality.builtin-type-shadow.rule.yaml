@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.builtin-type-shadow
+  version: v1
   title: "Do not shadow built-in types with local variables"
   summary: "A local variable shadows a Rust built-in type name, which can confuse readers and hide type errors."
   rationale: >-

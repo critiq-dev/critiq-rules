@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.deprecated-big-decimal-new
+  version: v1
   title: Avoid deprecated BigDecimal.new
   summary: >-
     BigDecimal.new is deprecated since BigDecimal 1.3.3 and removed in 2.0.0.

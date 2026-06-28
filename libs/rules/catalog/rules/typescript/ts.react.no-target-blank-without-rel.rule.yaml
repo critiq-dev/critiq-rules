@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-target-blank-without-rel
+  version: v1
   title: Add rel=noopener to target=_blank links
   summary: Opening links in a new tab without rel=noopener lets the destination page access window.opener.
   rationale: Untrusted destinations can navigate or phish the opener tab unless noopener severs that relationship.

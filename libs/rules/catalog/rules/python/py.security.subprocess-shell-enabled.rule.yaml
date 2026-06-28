@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.subprocess-shell-enabled
+  version: v1
   title: Avoid enabling shell mode in subprocess calls
   summary: Python process execution should avoid `shell=True` unless shell interpretation is explicitly required and tightly controlled.
   rationale: Shell-enabled process execution introduces command parsing behavior that increases injection and execution risk.

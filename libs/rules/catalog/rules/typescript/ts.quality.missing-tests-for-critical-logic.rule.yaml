@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.missing-tests-for-critical-logic
+  version: v1
   title: Missing tests for critical logic
   summary: Critical auth, payment, or similar business logic should have a matching test file.
   rationale: Important business and security logic needs direct regression coverage to keep changes safe and reviewable.

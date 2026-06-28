@@ -1,7 +1,7 @@
 {
   "path": "src/services/checkout.ts",
   "language": "typescript",
-  "text": "export const x = 1;\n",
+  "text": "export {\n  runMigrations,\n} from 'src/test-utils/migration-test-bed';\n",
   "nodes": [],
   "semantics": {
     "controlFlow": {
@@ -10,16 +10,16 @@
       "edges": [],
       "facts": [
         {
-          "id": "fact-env",
-          "kind": "testing.test-only-env-branch-in-production",
+          "id": "fact-import",
+          "kind": "testing.production-imports-test-code",
           "appliesTo": "project",
           "range": {
             "startLine": 1,
             "startColumn": 1,
-            "endLine": 1,
-            "endColumn": 35
+            "endLine": 3,
+            "endColumn": 46
           },
-          "text": "process.env.NODE_ENV === 'test'",
+          "text": "export { runMigrations } from 'src/test-utils/migration-test-bed'",
           "props": {}
         }
       ]

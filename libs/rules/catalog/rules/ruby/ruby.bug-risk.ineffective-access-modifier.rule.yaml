@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.ineffective-access-modifier
+  version: v1
   title: Ineffective access modifier detected
   summary: >-
     A `private`, `protected`, or `public` modifier at top-level scope has no

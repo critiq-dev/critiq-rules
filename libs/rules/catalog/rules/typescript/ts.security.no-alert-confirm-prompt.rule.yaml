@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-alert-confirm-prompt
+  version: v1
   title: Avoid blocking dialog APIs
   summary: Do not call `alert`, `confirm`, or `prompt` in application code.
   rationale: Blocking dialogs freeze the UI thread, are easy to abuse for social engineering, and are inappropriate for production UX.

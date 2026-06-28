@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.bitwise-or-never-equal
+  version: v1
   title: Bitwise OR expression will never equal the comparison constant
   summary: A bitwise OR expression is compared with `==` to a constant but will never equal it.
   rationale: When using `(expr | C) == D`, if `C` has bits that `D` doesn't have, the expression always evaluates to false because OR adds bits.

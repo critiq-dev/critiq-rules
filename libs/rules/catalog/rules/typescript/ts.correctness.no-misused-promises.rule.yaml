@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.no-misused-promises
+  version: v1
   title: No Misused Promises
   summary: Do not pass async callbacks where sync is expected
   rationale: Do not pass async callbacks where sync is expected:array iteration methods expect synchronous predicates and should not receive async callbacks.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.transmute-t-to-ptr-ref
+  version: v1
   title: "Found transmute between a type `T` and `*T` or `&T`"
   summary: "Transmuting between a value type and its pointer/reference form is unsound."
   rationale: >-

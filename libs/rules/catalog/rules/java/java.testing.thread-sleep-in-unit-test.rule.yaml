@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.testing.thread-sleep-in-unit-test
+  version: v1
   title: Avoid Thread.sleep in Java unit tests
   summary: Sleeping in tests slows CI and hides synchronization bugs.
   rationale: Prefer Awaitility, latches, or deterministic test doubles.

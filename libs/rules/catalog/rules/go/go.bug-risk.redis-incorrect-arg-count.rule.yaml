@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.bug-risk.redis-incorrect-arg-count
+  version: v1
   title: Redis variadic function called with wrong argument count
   summary: >-
     Redis variadic methods such as `MemoryUsage`, `ZPopMax`, `ZPopMin`, and

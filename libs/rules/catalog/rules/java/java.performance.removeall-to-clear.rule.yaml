@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.removeall-to-clear
+  version: v1
   title: "removeAll should not be used to clear a collection"
   summary: "Calling `collection.removeAll(collection)` is equivalent to `collection.clear()` but performs unnecessary iteration and element comparisons."
   rationale: "`removeAll(collection)` on a collection with itself as the argument removes all elements that are contained in itself — effectively clearing the collection. However, this is O(n²) or worse depending on collection type, while `clear()` is O(1). Replace `collection.removeAll(collection)` with `collection.clear()`."

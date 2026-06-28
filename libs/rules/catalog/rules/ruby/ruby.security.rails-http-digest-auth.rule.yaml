@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.rails-http-digest-auth
+  version: v1
   title: Avoid Rails HTTP digest authentication helpers
   summary: >-
     authenticate_with_http_digest and authenticate_or_request_with_http_digest are vulnerable to denial-of-service attacks in affected Rails versions.

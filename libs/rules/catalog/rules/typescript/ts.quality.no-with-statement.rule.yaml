@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-with-statement
+  version: v1
   title: Avoid `with` statements — deprecated language feature
   summary: "`with` statements are a deprecated ES5 feature that make binding resolution unpredictable and are disallowed in strict mode."
   rationale: The `with` statement introduces dynamic scope, making static analysis, optimization, and code review unreliable. It is a maintainability and quality concern, not a security vulnerability — modern codebases should avoid it entirely.

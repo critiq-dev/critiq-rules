@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.plain-method-instead-of-proc
+  version: v1
   title: Use lambda/proc instead of a plain method call
   summary: >-
     A `method(:name)` call is passed directly to a block-accepting method.

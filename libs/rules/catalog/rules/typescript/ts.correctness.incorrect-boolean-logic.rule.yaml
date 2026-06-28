@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.incorrect-boolean-logic
+  version: v1
   title: Incorrect boolean logic (AND/OR misuse)
   summary: Comparison chains on the same value must use the boolean operator that matches the intended logic.
   rationale: Using `&&` for mutually exclusive equality checks or `||` for inequality chains produces conditions that can never behave as intended.

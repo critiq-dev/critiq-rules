@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.unused-closure-use-variable
+  version: v1
   title: Closure use variables must be referenced
   summary: Closure use variables must be referenced
   rationale: Closure use variables must be referenced

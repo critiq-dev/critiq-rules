@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.missing-type-annotation
+  version: v1
   title: Missing type annotation
   summary: Add explicit type annotations where TypeScript cannot infer the type.
   rationale: Explicit type annotations improve readability and catch type errors at declaration sites.

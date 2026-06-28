@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.non-local-exit-from-iterator
+  version: v1
   title: Non-local exit from iterator without return value
   summary: >-
     `return` inside an iterator block exits the enclosing method, not just the

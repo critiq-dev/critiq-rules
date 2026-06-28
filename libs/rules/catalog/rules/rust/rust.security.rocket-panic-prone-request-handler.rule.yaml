@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.rocket-panic-prone-request-handler
+  version: v1
   title: Avoid panicking on request-derived data in Rocket handlers
   summary: >-
     Rocket route handlers should not `unwrap`, `expect`, or otherwise panic on values derived from the HTTP request.

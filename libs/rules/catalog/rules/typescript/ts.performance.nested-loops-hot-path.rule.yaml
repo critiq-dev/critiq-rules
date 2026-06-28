@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.nested-loops-hot-path
+  version: v1
   title: Nested loops in hot path (O(n²) risk)
   summary: Nested loops in the same function should be reviewed for quadratic work on larger inputs.
   rationale: Nested iteration often becomes the dominant cost on hot paths and usually benefits from indexing or precomputation.

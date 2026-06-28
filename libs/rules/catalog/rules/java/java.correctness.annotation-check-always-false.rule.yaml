@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.annotation-check-always-false
+  version: v1
   title: Annotation retention prevents runtime check
   summary: Checking for an annotation at runtime that is retained only at SOURCE or CLASS level will always return false.
   rationale: The @Retention annotation controls whether an annotation is available at runtime via reflection. RetentionPolicy.SOURCE and RetentionPolicy.CLASS annotations are not preserved in the JVM, so isAnnotationPresent() will always return false. Only RetentionPolicy.RUNTIME annotations can be detected at runtime.

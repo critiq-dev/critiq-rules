@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.validationdomain-is-superdomain-of-domainname
+  version: v1
   title: Validationdomain is superdomain of domainname
   summary: Validationdomain is superdomain of domainname
   rationale: cfn-lint reports E3503 when Validationdomain is superdomain of domainname.

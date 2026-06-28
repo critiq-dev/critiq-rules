@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.parameters-have-appropriate-type
+  version: v1
   title: Parameters have appropriate type
   summary: Parameters have appropriate type
   rationale: cfn-lint reports E2002 when Parameters have appropriate type.

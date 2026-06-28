@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.vue.no-deprecated-listeners
+  version: v1
   title: Prefer $attrs over $listeners
   summary: "$listeners was deprecated in Vue 3. Use $attrs instead, which now includes both attributes and listeners."
   rationale: Vue 3 merges `$listeners` into `$attrs`, making the separate `$listeners` property obsolete. All event listeners passed to a component are now accessible via `$attrs.onXxx` or through the `inheritAttrs` mechanism.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.skip-filter-conditional
+  version: v1
   title: if used with only or except in skip_* filter
   summary: >-
     Combining `only:`/`except:` with `if:`/`unless:` on a skip filter

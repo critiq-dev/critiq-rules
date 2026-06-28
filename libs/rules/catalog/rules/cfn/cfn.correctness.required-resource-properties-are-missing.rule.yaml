@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.required-resource-properties-are-missing
+  version: v1
   title: Required resource properties are missing
   summary: Required resource properties are missing
   rationale: cfn-lint reports E3003 when Required resource properties are missing.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.pprof-exposed
+  version: v1
   title: Do not expose pprof endpoints on shared HTTP mux
   summary: >-
     Importing `net/http/pprof` or registering `/debug/pprof` handlers on the default mux exposes debugging endpoints to remote callers.

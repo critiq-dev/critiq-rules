@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.basic-cloudformation-template-configuration
+  version: v1
   title: Basic cloudformation template configuration
   summary: Basic cloudformation template configuration
   rationale: cfn-lint reports E1001 when Basic cloudformation template configuration.

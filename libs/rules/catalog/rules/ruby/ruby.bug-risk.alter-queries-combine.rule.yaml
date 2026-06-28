@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.alter-queries-combine
+  version: v1
   title: Combine alter queries in migrations
   summary: >-
     Prefer `change_table` with multiple column changes over repeated

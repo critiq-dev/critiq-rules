@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.predicate-method-without-parentheses
+  version: v1
   title: Predicate method called without parentheses
   summary: >-
     A predicate method ending in `?` is called with an argument but

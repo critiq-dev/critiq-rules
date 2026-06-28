@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-if-refing-to-a-iam-resource-with-path-set
+  version: v1
   title: Check if refing to a iam resource with path set
   summary: Check if refing to a iam resource with path set
   rationale: cfn-lint reports E3050 when Check if refing to a iam resource with path set.

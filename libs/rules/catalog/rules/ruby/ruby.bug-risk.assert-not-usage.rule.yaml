@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.assert-not-usage
+  version: v1
   title: Use assert_not instead of assert with negation
   summary: >-
     Replace `assert !` with `assert_not` for clearer test assertions.

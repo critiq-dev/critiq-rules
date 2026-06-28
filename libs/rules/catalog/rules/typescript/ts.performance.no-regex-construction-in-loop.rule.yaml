@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-regex-construction-in-loop
+  version: v1
   title: Avoid regex construction inside loops
   summary: Constructing regular expressions inside loops repeatedly allocates and reparses patterns.
   rationale: Constructing regular expressions inside loops repeatedly allocates and reparses patterns.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.illegal-monitor-state-caught
+  version: v1
   title: IllegalMonitorStateException should not be handled
   summary: IllegalMonitorStateException indicates a programming error; handling it masks the bug.
   rationale: This exception signals incorrect `wait()`/`notify()` usage. Fix the synchronization logic instead of catching it.

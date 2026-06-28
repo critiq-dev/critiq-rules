@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.todo-fixme-marker
+  version: v1
   title: Resolve TODO or FIXME markers
   summary: TODO, FIXME, XXX, and HACK comments mark unfinished or risky work.
   rationale: Tracked markers in production code often hide deferred fixes that should be ticketed or resolved before merge.

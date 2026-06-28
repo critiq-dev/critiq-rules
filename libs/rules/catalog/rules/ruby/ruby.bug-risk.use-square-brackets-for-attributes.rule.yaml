@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.use-square-brackets-for-attributes
+  version: v1
   title: Square brackets are preferred for accessing/writing attributes
   summary: >-
     Uses `read_attribute` or `write_attribute` instead of the shorter

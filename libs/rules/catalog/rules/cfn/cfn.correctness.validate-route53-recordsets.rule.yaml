@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.validate-route53-recordsets
+  version: v1
   title: Validate route53 recordsets
   summary: Validate route53 recordsets
   rationale: cfn-lint reports E3020 when Validate route53 recordsets.

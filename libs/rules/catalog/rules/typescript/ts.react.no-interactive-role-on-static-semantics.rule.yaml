@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-interactive-role-on-static-semantics
+  version: v1
   title: Keep interactive roles off static semantics
   summary: "Headings, captions, and phrasing content should not pretend to be buttons or tabs without restructuring the markup."
   rationale: Mixing document roles with widget roles confuses assistive technologies and usually signals a heading or label that should stay static while a real control sits nearby.

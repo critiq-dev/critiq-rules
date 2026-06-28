@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.testing.no-skipped-test-without-ticket
+  version: v1
   title: Skipped tests should cite a ticket or timed suppression
   summary: Skipped or disabled tests should reference a tracked issue, expiry, or accepted suppression comment.
   rationale: Silent skips decay into permanent holes in coverage unless they carry reviewable intent.

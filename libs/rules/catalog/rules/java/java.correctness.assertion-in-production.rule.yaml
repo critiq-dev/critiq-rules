@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.assertion-in-production
+  version: v1
   title: Assert statement in production code
   summary: "The `assert` keyword in Java is disabled at runtime. Do not use it for argument validation or precondition checks in production code."
   rationale: "Java assertions are disabled by default and throw `AssertionError` (not a typed exception) when enabled. They should not be used for input validation, precondition checks, or any logic that must execute. Use `IllegalArgumentException`, `Objects.requireNonNull`, or explicit condition checks instead."

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.testing.no-snapshot-without-intent
+  version: v1
   title: Snapshot assertions should name intent
   summary: Snapshot matchers without a snapshot name or preceding intent comment are hard to review in diffs.
   rationale: Anonymous snapshots churn without communicating what behavior reviewers should protect.

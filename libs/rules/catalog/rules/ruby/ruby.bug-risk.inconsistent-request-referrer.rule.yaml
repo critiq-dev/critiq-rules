@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.inconsistent-request-referrer
+  version: v1
   title: Typo — `referrer` should be `referer`
   summary: >-
     `request.referrer` is a common misspelling of `request.referer`.

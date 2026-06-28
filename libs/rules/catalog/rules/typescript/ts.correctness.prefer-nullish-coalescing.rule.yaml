@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.prefer-nullish-coalescing
+  version: v1
   title: Prefer nullish coalescing operator
   summary: Use the nullish coalescing operator `??` instead of `||` for null/undefined defaults.
   rationale: The `||` operator treats all falsy values (0, '', false) as absent. The `??` operator only treats null and undefined as absent, which is often the intended behavior.

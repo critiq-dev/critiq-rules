@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.weak-rsa-key-size
+  version: v1
   title: Use at least 2048-bit RSA keys
   summary: >-
     `rsa.GenerateKey` and `rsa.GenerateMultiPrimeKey` should request a key size of 2048 bits or higher.

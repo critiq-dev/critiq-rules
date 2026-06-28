@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.unused-append-result
+  version: v1
   title: Assign the result of append
   summary: append returns a new slice; dropping the result loses the appended element.
   rationale: >-

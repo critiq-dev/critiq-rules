@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.flag-pointer-immediate-deref
+  version: v1
   title: Immediate dereference of flag pointer
   summary: Dereferencing the flag pointer at the call site defeats the purpose of using a flag method.
   rationale: >-

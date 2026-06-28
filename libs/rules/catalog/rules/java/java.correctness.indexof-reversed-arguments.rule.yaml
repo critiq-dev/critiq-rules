@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.indexof-reversed-arguments
+  version: v1
   title: "Avoid reversed arguments to `String.indexOf()`"
   summary: "Calling `indexOf()` with an integer as the first argument and a string as the second likely has the arguments reversed."
   rationale: "`String.indexOf(int ch, int fromIndex)` takes a character code as the first argument and a starting position as the second. Passing `indexOf(0, \"str\")` compiles because `0` is a valid char code and `\"str\"` is treated as `fromIndex`. The developer likely meant `indexOf(\"str\")` or `indexOf(\"str\", 0)`."

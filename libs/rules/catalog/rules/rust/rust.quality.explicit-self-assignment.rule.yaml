@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.explicit-self-assignment
+  version: v1
   title: "Avoid explicit self-assignment"
   summary: "Assigning a value to itself is a no-op and likely indicates a copy-paste bug."
   rationale: >-

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-duplicate-jsx-attributes
+  version: v1
   title: Remove duplicate JSX attributes
   summary: Repeating the same prop on a JSX element makes the last value win silently and hides author intent.
   rationale: Duplicate attributes are usually copy-paste mistakes that change runtime behavior without type errors.

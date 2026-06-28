@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.spring-debug-exposure
+  version: v1
   title: Avoid Spring Boot debug and actuator exposure in shipped configuration
   summary: Spring Boot configuration should not force debug logging or wildcard actuator exposure.
   rationale: Debug modes and fully exposed actuator endpoints leak internals and expand remote attack surface when configs ship to production.

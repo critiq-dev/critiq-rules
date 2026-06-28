@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.angularjs.prefer-angular-is-string
+  version: v1
   title: Prefer angular.isString over typeof comparisons
   summary: "Use `angular.isString(value)` instead of `typeof value === 'string'` in AngularJS code."
   rationale: AngularJS provides `angular.isString()` as a type-check utility that is consistent with AngularJS's other type-check helpers and works correctly with cross-frame / cross-realm values where `typeof` may behave unexpectedly.

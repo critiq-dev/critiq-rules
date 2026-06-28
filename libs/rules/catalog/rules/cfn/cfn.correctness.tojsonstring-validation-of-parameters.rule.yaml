@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.tojsonstring-validation-of-parameters
+  version: v1
   title: Tojsonstring validation of parameters
   summary: Tojsonstring validation of parameters
   rationale: cfn-lint reports E1031 when Tojsonstring validation of parameters.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.rocket-unsafe-template-output
+  version: v1
   title: Avoid raw HTML built from Rocket route parameters
   summary: >-
     Do not wrap request-sourced strings in `RawHtml` (or similar) without escaping in Rocket handlers.

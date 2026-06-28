@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-dependson-values-for-resources
+  version: v1
   title: Check dependson values for resources
   summary: Check dependson values for resources
   rationale: cfn-lint reports E3005 when Check dependson values for resources.

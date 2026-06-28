@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.tar-path-traversal
+  version: v1
   title: Sanitize archive entry paths before writing to disk
   summary: >-
     Tar extraction must normalize `header.Name` with `filepath.Base` or `filepath.Clean` before opening destination files.

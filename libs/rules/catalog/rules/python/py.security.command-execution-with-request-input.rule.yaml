@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.command-execution-with-request-input
+  version: v1
   aliases:
     - BAN-B603
   title: Avoid command execution with request-controlled input

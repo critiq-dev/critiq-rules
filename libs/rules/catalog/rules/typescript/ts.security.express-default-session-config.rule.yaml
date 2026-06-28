@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-default-session-config
+  version: v1
   title: Override Express session defaults
   summary: Express session middleware should not rely on default session naming and configuration.
   rationale: Default session settings make applications easier to fingerprint and often skip explicit hardening choices.

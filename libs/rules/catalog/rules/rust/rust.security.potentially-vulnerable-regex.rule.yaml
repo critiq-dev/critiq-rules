@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.potentially-vulnerable-regex
+  version: v1
   title: Potentially vulnerable regex crate version usage
   summary: >-
     Usage of `regex::Regex::new` with patterns containing nested quantifiers may

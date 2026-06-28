@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-isset-argument
+  version: v1
   title: isset argument must be a variable reference
   summary: isset argument must be a variable reference
   rationale: isset argument must be a variable reference

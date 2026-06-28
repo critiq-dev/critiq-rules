@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.testing.pending-without-ticket-reference
+  version: v1
   title: pending examples should cite a ticket
   summary: pending without a tracker reference is easy to forget.
   rationale: Pending specs should carry reviewable intent like skips elsewhere.

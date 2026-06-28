@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: security.unsafe-deserialization
+  version: v1
   title: Protect deserialization trust boundaries
   summary: Deserializers should not consume untrusted payloads directly across a trust boundary.
   rationale: Deserializing untrusted payloads can let attacker-controlled data reshape parser state, object graphs, or downstream runtime behavior.

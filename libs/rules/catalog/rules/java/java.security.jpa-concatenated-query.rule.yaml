@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.jpa-concatenated-query
+  version: v1
   title: Do not build JPA or JDBC queries by concatenating user-controlled input
   summary: >-
     `createQuery`, `createNativeQuery`, `JdbcTemplate` calls, and string-based `@Query` values must not stitch SQL with request data using `+`, `String.format`, or similar.

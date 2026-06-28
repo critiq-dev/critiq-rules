@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.else-followed-by-expression
+  version: v1
   title: Avoid expressions on the same line as else
   summary: >-
     An expression follows else on the same line. This is almost always a typo

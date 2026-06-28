@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.vue.no-keycode-modifiers
+  version: v1
   title: Prefer key aliases over numeric keycodes
   summary: "Numeric keycode modifiers (e.g., @keyup.13) were deprecated in Vue 3. Use key alias modifiers instead."
   rationale: Vue 3 removes support for numeric keycode modifiers in template event bindings. Use the string key alias (e.g., `@keyup.enter`) instead. This rule provides limited JS-level detection as a proxy for template-only patterns.

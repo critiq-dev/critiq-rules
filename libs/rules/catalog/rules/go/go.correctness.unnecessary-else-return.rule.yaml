@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.unnecessary-else-return
+  version: v1
   title: Early return in if-then-else
   summary: When an if-body ends with a return/break/continue, the else branch is unnecessary.
   rationale: >-

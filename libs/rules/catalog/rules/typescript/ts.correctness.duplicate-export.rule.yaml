@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.duplicate-export
+  version: v1
   title: Avoid duplicate named exports
   summary: Module should not export the same name more than once.
   rationale: Duplicate exports are confusing and may cause unexpected behavior. The last duplicate wins at runtime, but the redundancy makes the module contract unclear and can hide real export conflicts.

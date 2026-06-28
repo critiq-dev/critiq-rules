@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.next.server-action-missing-local-auth
+  version: v1
   title: Authenticate Next.js Server Actions before mutations
   summary: Server Actions that mutate state must validate sessions locally before reaching privileged sinks.
   rationale: Server Actions behave like public POST endpoints and inherit the same authentication obligations as route handlers.

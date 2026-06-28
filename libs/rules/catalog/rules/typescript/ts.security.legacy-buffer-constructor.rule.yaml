@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.legacy-buffer-constructor
+  version: v1
   title: Replace legacy Buffer constructors
   summary: Use Buffer.from, Buffer.alloc, or Buffer.allocUnsafe instead of the deprecated Buffer constructor.
   rationale: Legacy constructors behave differently across Node versions and are harder to audit for safe allocation.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.checks-for-legacy-instance-type-generations
+  version: v1
   title: Checks for legacy instance type generations
   summary: Checks for legacy instance type generations
   rationale: cfn-lint reports I3100 when Checks for legacy instance type generations.

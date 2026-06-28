@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.testing.thread-sleep-in-unit-test
+  version: v1
   title: Avoid blocking std::thread::sleep with long duration in Rust unit tests
   summary: Long blocking sleeps (>100ms) in narrow unit tests slow CI and hide synchronization bugs.
   rationale: Use tokio::time::sleep (async-safe), deterministic synchronization, or tokio time advances instead of blocking the test thread.

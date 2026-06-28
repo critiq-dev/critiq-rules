@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.ssh-host-key-validation
+  version: v1
   aliases:
     - BAN-B507
   title: Ensure SSH host key validation is enabled

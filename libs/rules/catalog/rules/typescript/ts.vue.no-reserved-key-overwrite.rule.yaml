@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.vue.no-reserved-key-overwrite
+  version: v1
   title: Avoid overwriting reserved keys
   summary: Vue instance reserved keys ($el, $data, $props, etc.) should not be overwritten to prevent framework contract violations.
   rationale: Overwriting Vue-reserved properties such as $el, $data, $route, or $refs can break component lifecycle, reactivity, and routing. These keys are used internally by Vue and should be treated as read-only.

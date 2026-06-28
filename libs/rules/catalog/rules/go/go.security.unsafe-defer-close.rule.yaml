@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.unsafe-defer-close
+  version: v1
   title: Handle deferred Close errors explicitly
   summary: >-
     `defer f.Close()` silently discards the error returned by `Close()`. For writable files, this can mask data loss when buffered writes fail on close.

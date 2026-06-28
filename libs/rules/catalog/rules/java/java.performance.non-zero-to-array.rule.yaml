@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.non-zero-to-array
+  version: v1
   title: "Collection.toArray() with non-zero sized array argument"
   summary: "Passing a non-zero sized array to `Collection.toArray(T[])` is less efficient than passing a zero-sized array."
   rationale: "Passing a pre-sized array to `toArray()` incurs an unnecessary allocation and reflection overhead. In modern JVMs, `toArray(new T[0])` is faster because it avoids the need to resize the array and can use intrinsified code paths."

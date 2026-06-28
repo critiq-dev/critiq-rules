@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.inconsistent-safe-navigation
+  version: v1
   title: Inconsistent safe navigation usage
   summary: >-
     The same receiver is accessed with both `&.` and bare `.` in close

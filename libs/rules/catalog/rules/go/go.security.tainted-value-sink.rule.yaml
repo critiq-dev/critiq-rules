@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.tainted-value-sink
+  version: v1
   title: Avoid using tainted values in SQL and command sinks
   summary: >-
     User-controlled input (parameters named `input`, `data`, `body`, etc.) should not reach SQL execution or OS command sinks via `fmt.Sprintf` string interpolation.

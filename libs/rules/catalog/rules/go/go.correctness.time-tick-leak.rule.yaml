@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.time-tick-leak
+  version: v1
   title: Avoid time.Tick for stoppable timers
   summary: time.Tick leaks the underlying ticker because it cannot be stopped.
   rationale: >-

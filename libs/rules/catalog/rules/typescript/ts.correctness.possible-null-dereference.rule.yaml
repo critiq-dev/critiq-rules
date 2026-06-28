@@ -2,20 +2,37 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.possible-null-dereference
+  version: v1
   title: Possible null or undefined dereference
   summary: Nullable values should be guarded before property access or invocation to prevent runtime TypeError crashes.
-  rationale: "Dereferencing a value that can still be null or undefined causes avoidable runtime crashes (TypeError: cannot read property of null) on common unhappy paths. Unlike type-level warnings, this pattern detects actual nullable control-flow without relying on TypeScript strict mode."
+  rationale: "Dereferencing a value that can still be null or undefined causes avoidable runtime crashes (TypeError: cannot read property of null) on common unhappy paths. The data-flow analysis is deliberately conservative: it identifies values with nullable provenance but cannot always determine whether a guard exists before the dereference point. In practice, well-maintained TypeScript codebases routinely add guards (if-return, if-throw, short-circuit OR, optional chaining) that the analysis cannot see through, producing high noise relative to signal. This rule should be treated as a broad-minded lint that flags potentially risky dereferences for manual review, not as a definitive bug detector."
   tags:
     - correctness
     - "null"
     - rules-catalog
     - crq-cor-001
-  stability: stable
+  stability: experimental
   appliesTo: block
 scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/e2e/**"
+      - "**/*.stories.*"
+      - "**/*.generated.*"
+      - "**/generated/**"
+      - "**/__generated__/**"
+      - "**/vendor/**"
+      - "**/node_modules/**"
+      - "**/scripts/**"
+      - "**/fixtures/**"
 match:
   fact:
     kind: data-flow.possible-null-dereference
@@ -23,8 +40,8 @@ match:
 emit:
   finding:
     category: correctness.null
-    severity: medium
-    confidence: 0.85
+    severity: low
+    confidence: 0.40
     tags:
       - correctness
       - "null"

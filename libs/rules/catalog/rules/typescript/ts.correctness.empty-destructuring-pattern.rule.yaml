@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.empty-destructuring-pattern
+  version: v1
   title: Empty destructuring pattern
   summary: Detects empty destructuring pattern issues in JavaScript and TypeScript source.
   rationale: Empty destructuring pattern patterns are a common source of bugs and confusing runtime behavior.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.unintended-string-concatenation
+  version: v1
   title: Possible unintended string concatenation
   summary: >-
     Adjacent string literals without a comma or operator between them are

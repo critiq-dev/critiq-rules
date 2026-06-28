@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.predictable-token-generation
+  version: v1
   title: Avoid predictable token generation
   summary: Tokens, reset links, and session secrets should be generated from cryptographically strong randomness.
   rationale: Predictable token material makes it easier to guess reset links, invite codes, and session secrets.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.regexp-empty-character-class
+  version: v1
   title: Empty character class in regular expression
   summary: The regular expression pattern contains an empty character class that never matches.
   rationale: Empty `[]` classes are almost always accidental and make patterns silently fail to match.

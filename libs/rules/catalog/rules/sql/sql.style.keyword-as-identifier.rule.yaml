@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: sql.style.keyword-as-identifier
+  version: v1
   aliases:
     - SQL-L029
   title: Keyword used as identifier

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-wide-public-surface
+  version: v1
   title: Keep module public surface narrow
   summary: Modules exporting too many symbols become hard to evolve safely.
   rationale: Broad module APIs increase accidental coupling and long-term maintenance cost.

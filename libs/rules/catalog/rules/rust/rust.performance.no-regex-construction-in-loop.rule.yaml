@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.performance.no-regex-construction-in-loop
+  version: v1
   title: Avoid no regex construction in loop
   summary: Performance hygiene signal for rust sources.
   rationale: Performance hygiene signal for rust sources.

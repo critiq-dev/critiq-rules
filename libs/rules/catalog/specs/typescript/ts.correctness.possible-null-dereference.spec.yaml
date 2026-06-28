@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.possible-null-dereference
       allSeverities:
-        - medium
+        - low
   - name: ignores dereferences inside a positive null guard
     sourcePath: ./fixtures/ts.correctness.possible-null-dereference/valid.ts
     expect:

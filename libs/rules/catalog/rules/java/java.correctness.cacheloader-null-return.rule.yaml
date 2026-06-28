@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.cacheloader-null-return
+  version: v1
   title: CacheLoader load method should not return null
   summary: Returning null from a CacheLoader.load() method causes InvalidCacheLoadException at runtime. Guava caches do not support null values.
   rationale: CacheLoader.load() must never return null. Guava caches treat null returns as failures and throw InvalidCacheLoadException. The method should either return a non-null value or throw an exception.

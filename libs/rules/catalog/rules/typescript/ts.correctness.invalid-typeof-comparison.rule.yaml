@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.invalid-typeof-comparison
+  version: v1
   title: Invalid typeof comparison string
   summary: Compare typeof results only to known typeof strings.
   rationale: typeof returns a fixed set of strings; other comparisons are always false.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.shared-state-race
+  version: v1
   title: Race condition on shared state
   summary: Async functions that mutate shared state after an await boundary should be reviewed for races.
   rationale: Mutating outer-scope or instance state after suspension can interleave with concurrent callers and corrupt shared state.

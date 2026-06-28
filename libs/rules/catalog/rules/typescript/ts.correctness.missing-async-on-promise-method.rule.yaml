@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.missing-async-on-promise-method
+  version: v1
   title: Missing Async On Promise Method
   summary: Mark promise callbacks async when using await
   rationale: Mark promise callbacks async when using await:then/catch handlers that use await must be declared async.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.insecure-mail-or-file-transport
+  version: v1
   title: Avoid insecure PHP FTP/SMTP or plaintext transport patterns
   summary: >-
     Outbound mail/file transfer code should not rely on plaintext transport endpoints for sensitive traffic.

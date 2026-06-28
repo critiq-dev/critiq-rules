@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.invisible-unicode
+  version: v1
   title: Invisible Unicode character detected
   summary: >-
     Invisible Unicode characters such as zero-width spaces, bidi markers, and

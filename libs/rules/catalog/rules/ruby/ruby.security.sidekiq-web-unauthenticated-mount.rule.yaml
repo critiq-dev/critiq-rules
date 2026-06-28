@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.sidekiq-web-unauthenticated-mount
+  version: v1
   title: Protect Sidekiq::Web mounts with authentication
   summary: >-
     Sidekiq Web must not be exposed on public routes without an authentication or network guard.

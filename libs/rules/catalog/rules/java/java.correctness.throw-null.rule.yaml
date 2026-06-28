@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.throw-null
+  version: v1
   title: "Avoid throwing null"
   summary: "`throw null;` throws a `NullPointerException` at the throw site instead of communicating intent. Throw a proper exception instance."
   rationale: "Java allows `throw null;` because the JVM specification requires the operand to be a reference type, and null is a valid reference. However, this throws a `NullPointerException` rather than the intended exception type, making debugging harder and obscuring developer intent. Always throw a meaningful exception type."

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.no-unbounded-concurrency
+  version: v1
   title: Avoid no unbounded concurrency
   summary: Performance hygiene signal for ruby sources.
   rationale: Performance hygiene signal for ruby sources.

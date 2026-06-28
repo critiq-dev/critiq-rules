@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.performance.avoid-large-range-copy
+  version: v1
   title: Avoid copying large arrays in range loops
   summary: Ranging over a large fixed-size array copies the entire array value per iteration.
   rationale: >-

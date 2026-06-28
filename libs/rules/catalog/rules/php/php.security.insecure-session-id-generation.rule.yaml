@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.insecure-session-id-generation
+  version: v1
   title: Avoid predictable or user-supplied session IDs
   summary: >-
     session_id must not be set from weak hash helpers, uniqid, or request-derived values.

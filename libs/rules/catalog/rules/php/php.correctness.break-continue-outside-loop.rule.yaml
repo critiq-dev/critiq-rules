@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.break-continue-outside-loop
+  version: v1
   title: Use break and continue only inside loops or switch
   summary: "break and continue outside a loop or switch block are invalid control flow."
   aliases:

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.io-select-single-arg
+  version: v1
   title: IO.select with single argument detected
   summary: >-
     `IO.select` called with only one input/output array. This pattern is hard to

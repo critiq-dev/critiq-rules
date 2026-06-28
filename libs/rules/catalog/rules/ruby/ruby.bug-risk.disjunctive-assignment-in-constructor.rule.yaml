@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.disjunctive-assignment-in-constructor
+  version: v1
   title: Avoid unnecessary disjunctive assignment in constructors
   summary: >-
     Instance variables are nil until assigned, so `@var ||= value` in

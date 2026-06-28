@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.performance.expensive-loop-condition
+  version: v1
   title: Avoid expensive calls in loop conditions
   summary: Functions like count() and strlen() inside loop conditions run on every iteration.
   aliases:

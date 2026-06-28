@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.undefined-constant-reference
+  version: v1
   title: Reference only defined constants
   summary: Reference only defined constants
   rationale: Reference only defined constants

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-fs-readfile-sync-in-handler
+  version: v1
   title: Avoid synchronous file reads in HTTP handlers
   summary: Request handlers should not call `readFileSync` or equivalent blocking file APIs.
   rationale: Blocking disk I/O inside request handlers stalls the Node.js event loop and hurts availability under load.

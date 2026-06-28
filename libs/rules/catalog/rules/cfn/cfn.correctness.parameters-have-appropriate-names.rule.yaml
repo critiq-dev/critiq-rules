@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.parameters-have-appropriate-names
+  version: v1
   title: Parameters have appropriate names
   summary: Parameters have appropriate names
   rationale: cfn-lint reports E2003 when Parameters have appropriate names.

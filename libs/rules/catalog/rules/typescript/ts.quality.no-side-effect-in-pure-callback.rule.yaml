@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-side-effect-in-pure-callback
+  version: v1
   title: Avoid side effects in getters and pure callbacks
   summary: Getters and transformation callbacks (map/filter/reduce) should not produce side effects such as assignments or mutations.
   rationale: Side effects in getters violate the principle of least surprise and can cause hard-to-debug reactivity issues. Getters are expected to be idempotent and side-effect-free.

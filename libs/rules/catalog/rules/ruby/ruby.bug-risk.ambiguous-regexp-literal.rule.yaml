@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.ambiguous-regexp-literal
+  version: v1
   title: Ambiguous regular expression literal in method invocation
   summary: >-
     A regex literal `/pattern/` is used as a method argument without

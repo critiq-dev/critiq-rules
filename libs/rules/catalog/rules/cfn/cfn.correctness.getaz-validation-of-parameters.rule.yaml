@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.getaz-validation-of-parameters
+  version: v1
   title: Getaz validation of parameters
   summary: Getaz validation of parameters
   rationale: cfn-lint reports E1015 when Getaz validation of parameters.

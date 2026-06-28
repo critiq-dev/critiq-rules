@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.bind-to-all-interfaces
+  version: v1
   title: Avoid binding to all interfaces
   summary: Network-facing services should not explicitly bind to every interface unless public exposure is intentional and protected.
   rationale: Binding to `0.0.0.0` or `::` can expose a service beyond the expected trust boundary and widen the reachable attack surface.

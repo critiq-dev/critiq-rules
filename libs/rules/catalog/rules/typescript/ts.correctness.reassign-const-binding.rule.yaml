@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.reassign-const-binding
+  version: v1
   title: Reassigning const binding
   summary: Detects reassigning const binding issues in JavaScript and TypeScript source.
   rationale: Reassigning const binding patterns are a common source of bugs and confusing runtime behavior.

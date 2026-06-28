@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.attribute-on-property
+  version: v1
   title: Attribute class cannot be used with property
   summary: An attribute that does not target properties should not be applied to a property declaration.
   aliases:

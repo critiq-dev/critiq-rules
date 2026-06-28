@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.browser-token-storage
+  version: v1
   title: Avoid browser token storage
   summary: Access and session tokens should not be stored in long-lived browser storage.
   rationale: Long-lived browser storage exposes tokens to script access and increases the impact of XSS or device compromise.

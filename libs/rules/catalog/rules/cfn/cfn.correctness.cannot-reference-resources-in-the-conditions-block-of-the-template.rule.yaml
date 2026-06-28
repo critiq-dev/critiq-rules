@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.cannot-reference-resources-in-the-conditions-block-of-the-template
+  version: v1
   title: Cannot reference resources in the conditions block of the template
   summary: Cannot reference resources in the conditions block of the template
   rationale: cfn-lint reports E1026 when Cannot reference resources in the conditions block of the template.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.performance.iowriter-write-string
+  version: v1
   title: Use `(io.StringWriter).WriteString` for writing strings
   summary: Prefer `w.WriteString(s)` over `w.Write([]byte(s))` to avoid `[]byte` allocation, or over `io.WriteString(w, s)` which incurs dynamic dispatch.
   rationale: >-

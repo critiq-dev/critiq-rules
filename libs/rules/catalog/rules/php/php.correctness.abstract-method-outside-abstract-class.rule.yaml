@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.abstract-method-outside-abstract-class
+  version: v1
   title: Keep abstract methods inside abstract classes
   summary: Only abstract classes may declare abstract methods.
   aliases:

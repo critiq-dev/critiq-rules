@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.nestjs-missing-global-validation-pipe
+  version: v1
   title: Add a global Nest ValidationPipe
   summary: Nest bootstrap entries should register `ValidationPipe` globally when controllers parse bodies or DTOs.
   rationale: Without a validation pipe unexpected fields can reach controllers and weaken input hygiene.

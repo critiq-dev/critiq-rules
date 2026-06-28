@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.active-job-base-subclass
+  version: v1
   title: Rails 5+ jobs should subclass ApplicationJob
   summary: >-
     Job class directly subclasses `ActiveJob::Base` instead of

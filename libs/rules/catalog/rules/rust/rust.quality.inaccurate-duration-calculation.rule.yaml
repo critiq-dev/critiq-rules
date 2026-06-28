@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.inaccurate-duration-calculation
+  version: v1
   title: "Use Duration subsec methods instead of manual division"
   summary: "Manual division of `subsec_micros()` or `subsec_nanos()` can be inaccurate."
   rationale: >-

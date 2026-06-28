@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.argument-overwritten-before-use
+  version: v1
   title: Function argument overwritten before use
   summary: >-
     A method parameter is reassigned on the first line of the method body

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.insecure-session-or-cookie-config
+  version: v1
   title: Harden PHP session and cookie security flags
   summary: >-
     Session/cookie configuration should keep secure, httpOnly, and safe same-site posture for authenticated contexts.

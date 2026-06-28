@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.lost-increment-in-assignment
+  version: v1
   title: Increment/decrement lost during assignment to same variable
   summary: Assigning a post-incremented variable to itself (e.g., x = x++) discards the increment because the old value is assigned back.
   rationale: In x = x++, the post-increment returns the original value, which is then written over the incremented value, making the increment a no-op.

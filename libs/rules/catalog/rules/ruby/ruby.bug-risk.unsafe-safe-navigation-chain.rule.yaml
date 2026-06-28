@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.unsafe-safe-navigation-chain
+  version: v1
   title: Unsafe safe-navigation chain
   summary: >-
     A `&.` (safe navigation) call is followed by a non-safe method

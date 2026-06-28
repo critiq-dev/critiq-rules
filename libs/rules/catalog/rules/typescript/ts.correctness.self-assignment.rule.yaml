@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.self-assignment
+  version: v1
   title: Self assignment
   summary: An assignment uses the same expression on the left and right side.
   aliases:

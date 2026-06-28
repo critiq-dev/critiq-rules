@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.rails-output-unsafe
+  version: v1
   title: Avoid output-unsafe Rails helpers
   summary: >-
     Do not use html_safe, raw, or safe_concat to bypass escaping.

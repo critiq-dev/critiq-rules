@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.regexp-constructor-invalid-pattern
+  version: v1
   title: Invalid pattern string in RegExp constructor
   summary: A string literal passed to `RegExp` or `new RegExp` is not a valid regular expression.
   rationale: Invalid constructor patterns throw at runtime and are easy to miss when the pattern is built from a static string.

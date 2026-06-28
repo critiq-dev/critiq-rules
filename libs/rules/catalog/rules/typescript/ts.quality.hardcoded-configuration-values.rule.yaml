@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.hardcoded-configuration-values
+  version: v1
   title: Hardcoded configuration values
   summary: Config-like values should usually come from configuration sources rather than source literals.
   rationale: Hardcoded service URLs, timeouts, and regions make deployments harder to vary and review safely.

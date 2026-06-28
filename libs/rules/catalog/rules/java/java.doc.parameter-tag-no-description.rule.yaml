@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.doc.parameter-tag-no-description
+  version: v1
   title: Javadoc @param tag has no description
   summary: "@param tags must include a description of the parameter."
   rationale: "A @param tag with no description adds no value. Either describe the parameter or remove the tag."

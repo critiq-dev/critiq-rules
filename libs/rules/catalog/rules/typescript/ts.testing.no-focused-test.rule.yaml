@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.testing.no-focused-test
+  version: v1
   title: Remove focused or exclusive tests before merge
   summary: Focused tests such as it.only or describe.only should not ship because they silence the rest of the suite in CI.
   rationale: Exclusive tests hide failures in sibling cases and are a common accidental merge footgun.

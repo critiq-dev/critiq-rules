@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.fastify-public-bind-without-trust-proxy
+  version: v1
   title: Enable trust proxy for publicly bound Fastify servers
   summary: >-
     Fastify instances listening on all interfaces should enable trustProxy or terminate behind a reverse proxy you register in code.

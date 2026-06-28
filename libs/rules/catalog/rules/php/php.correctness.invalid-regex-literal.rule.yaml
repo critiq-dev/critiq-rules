@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-regex-literal
+  version: v1
   title: Fix invalid regular expression literals
   summary: preg_* calls must use a valid delimiter and closing pattern literal.
   rationale: Invalid regex literals fail at runtime and often hide copy-paste or escaping mistakes.

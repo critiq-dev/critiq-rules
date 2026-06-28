@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.dynamodb-query-injection
+  version: v1
   title: Avoid request-driven DynamoDB queries
   summary: DynamoDB query and scan inputs should not be built directly from request input.
   rationale: Raw request data in DynamoDB helpers can widen query scope or let attackers control expressions, filters, and key conditions.

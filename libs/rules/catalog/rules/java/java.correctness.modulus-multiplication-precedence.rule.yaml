@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.modulus-multiplication-precedence
+  version: v1
   title: The `%` operator has higher precedence than `*` — ambiguous expression
   summary: Mixing `%` and `*` without parentheses creates ambiguous precedence that may not match developer intent.
   rationale: In Java, `%` and `*` have the same precedence and are left-associative. `a % b * c` is parsed as `(a % b) * c` which may not be what the developer intended.

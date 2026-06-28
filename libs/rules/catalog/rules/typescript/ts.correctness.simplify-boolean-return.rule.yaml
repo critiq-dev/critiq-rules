@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.simplify-boolean-return
+  version: v1
   title: Complex boolean return
   summary: Return statements that explicitly return true/false based on a condition can be simplified.
   rationale: "`if (x) return true; else return false;` is equivalent to `return x;`. The complex form adds noise and makes the code harder to read."

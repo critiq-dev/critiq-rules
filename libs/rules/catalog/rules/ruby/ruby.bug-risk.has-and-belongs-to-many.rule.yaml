@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.has-and-belongs-to-many
+  version: v1
   title: Use of has_and_belongs_to_many detected
   summary: >-
     Use `has_many :through` instead of `has_and_belongs_to_many` for

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.django-csrf-exempt-state-changing
+  version: v1
   title: Avoid CSRF exemptions on state-changing Django views
   summary: Browser-facing Django views that change state should remain CSRF-protected unless they are explicitly token-authenticated APIs.
   rationale: >-

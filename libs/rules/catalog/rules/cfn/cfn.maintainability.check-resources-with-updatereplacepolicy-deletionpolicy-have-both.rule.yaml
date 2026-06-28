@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.check-resources-with-updatereplacepolicy-deletionpolicy-have-both
+  version: v1
   title: Check resources with updatereplacepolicy/deletionpolicy have both
   summary: Check resources with updatereplacepolicy/deletionpolicy have both
   rationale: cfn-lint reports W3011 when Check resources with updatereplacepolicy/deletionpolicy have both.

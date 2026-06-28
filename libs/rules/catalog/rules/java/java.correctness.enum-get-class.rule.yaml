@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.enum-get-class
+  version: v1
   title: getClass should not be used with enums whose members have custom bodies
   summary: Calling getClass() inside an enum body returns the anonymous subclass for constants with custom bodies, not the enum class itself. Prefer getDeclaringClass().
   rationale: When an enum constant has a custom body, getClass() returns the anonymous subclass rather than the enum class. The safe alternative getDeclaringClass() always returns the enum class regardless of custom bodies.

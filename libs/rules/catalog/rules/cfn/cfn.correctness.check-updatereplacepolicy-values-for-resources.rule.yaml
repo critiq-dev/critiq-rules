@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-updatereplacepolicy-values-for-resources
+  version: v1
   title: Check updatereplacepolicy values for resources
   summary: Check updatereplacepolicy values for resources
   rationale: cfn-lint reports E3036 when Check updatereplacepolicy values for resources.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.deprecated-belongs-to-required
+  version: v1
   title: Use optional instead of required in belongs_to
   summary: >-
     Replace `required: true` with `optional: false` in `belongs_to`

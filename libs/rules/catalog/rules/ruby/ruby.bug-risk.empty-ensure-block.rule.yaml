@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.empty-ensure-block
+  version: v1
   title: Avoid empty ensure blocks
   summary: >-
     An ensure block has no body. Either add cleanup code or remove the ensure

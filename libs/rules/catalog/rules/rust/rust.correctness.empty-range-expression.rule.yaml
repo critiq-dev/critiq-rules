@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.empty-range-expression
+  version: v1
   title: "Empty range expression with start greater than end"
   summary: "Range expression where start > end, producing an empty range or runtime panic."
   rationale: >-

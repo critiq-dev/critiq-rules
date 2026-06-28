@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.insecure-content-security-policy-literal
+  version: v1
   title: Avoid unsafe Content-Security-Policy literals
   summary: Static CSP header values should not rely on unsafe-inline, unsafe-eval, or unsafe-hashes without nonces.
   rationale: Permissive CSP keywords weaken XSS defenses for every response that carries the header.

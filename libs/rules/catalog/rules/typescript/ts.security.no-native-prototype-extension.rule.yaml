@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-native-prototype-extension
+  version: v1
   title: Do not extend native prototypes
   summary: Do not assign properties on built-in prototype objects such as `Array.prototype`.
   rationale: Mutating native prototypes affects every consumer of that type and can introduce subtle security bugs across the runtime.

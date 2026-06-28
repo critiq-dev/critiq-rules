@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.unterminated-assertion-chain
+  version: v2
   title: "Assertion chain methods must be terminated with an assertion"
-  summary: "Calls to `assertThat()` or `verify()` must include a chained assertion (e.g. `.isEqualTo()`, `.isGreaterThan()`) or the test assertion is silently ignored."
-  rationale: "Calling `assertThat(value)` or `verify(mock)` without a terminal assertion method creates an assertion object but never checks it, causing the test to silently pass regardless of the actual value. This is a common mistake when refactoring or writing assertions from scratch."
+  summary: "Calls to `assertThat()`, `verify()`, `assertThatThrownBy()`, `assertThatCode()`, `assertThatExceptionOfType()`, or `assertThatObject()` must include a chained terminal assertion (e.g. `.isEqualTo()`, `.isInstanceOf()`, `.doesNotThrowAnyException()`) or the assertion is silently ignored."
+  rationale: "Calling an assertion entry-point method without a terminal assertion creates an assertion object but never checks it, causing the test to silently pass regardless of the actual value. For example, `assertThat(value);` evaluates to an assertion object that is immediately discarded. This is a common mistake when refactoring or writing assertions from scratch and is especially easy to miss when arguments contain nested method calls such as `assertThat(map.get(\"key\"));`."
   aliases:
     - JAVA-E1109
   tags:
@@ -36,4 +37,4 @@ emit:
     title: "Unterminated assertion chain in `${captures.issue.text}`"
     summary: "The call to `assertThat()` or `verify()` is not followed by a terminal assertion method. The assertion is initialized but never checked. Add a terminal assertion like `.isEqualTo(expected)` or `.isTrue()` to complete the chain."
   remediation:
-    summary: "Terminate the assertion chain with a check method. For AssertJ: use `.isEqualTo()`, `.isGreaterThan()`, or any terminal assertion method. For Mockito: chain `.someMethod()` to specify what behavior to verify."
+    summary: "Terminate the assertion chain with a check method. For `assertThat()`: use `.isEqualTo()`, `.isGreaterThan()`, or any terminal assertion. For `verify()`: chain `.someMethod()` to specify the verified behavior. For `assertThatThrownBy()`: chain `.isInstanceOf()`. For `assertThatCode()`: chain `.doesNotThrowAnyException()`. For `assertThatExceptionOfType()`: chain `.isThrownBy()`."

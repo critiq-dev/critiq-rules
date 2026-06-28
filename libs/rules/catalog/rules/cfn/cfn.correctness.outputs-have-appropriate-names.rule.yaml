@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.outputs-have-appropriate-names
+  version: v1
   title: Outputs have appropriate names
   summary: Outputs have appropriate names
   rationale: cfn-lint reports E6004 when Outputs have appropriate names.

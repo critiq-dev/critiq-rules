@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.wait-on-condition
+  version: v1
   title: Monitor wait must not be used on a Condition
   summary: "Calling `.wait()` on a `java.util.concurrent.locks.Condition` object is incorrect. Use `condition.await()` instead."
   rationale: Condition objects do not support Object.wait(). Using `.wait()` on a Condition will throw an IllegalMonitorStateException at runtime. Use `await()` on the Condition object instead.

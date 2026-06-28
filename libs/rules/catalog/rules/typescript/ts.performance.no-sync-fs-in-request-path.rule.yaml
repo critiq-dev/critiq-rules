@@ -2,9 +2,15 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-sync-fs-in-request-path
+  version: v2
   title: Avoid sync filesystem calls in request paths
-  summary: Synchronous filesystem calls on request paths block the event loop and degrade latency.
-  rationale: Synchronous filesystem calls on request paths block the event loop and degrade latency.
+  summary: Calling fs.*Sync methods inside a request handler (e.g., readFileSync, existsSync) blocks the event loop and increases per-request latency under load.
+  rationale: >
+    Synchronous filesystem calls such as fs.readFileSync, fs.existsSync, and fs.writeFileSync halt the Node.js
+    event loop until the operation completes. Inside a request handler this prevents the server from processing
+    any other requests, causing cascading latency under concurrent load. Replace these calls with their
+    promise-based equivalents from node:fs/promises (e.g., readFile, writeFile) or use streaming patterns
+    for large files.
   tags:
     - performance
     - rules-catalog
@@ -29,4 +35,4 @@ emit:
     title: Avoid sync filesystem calls in request paths
     summary: "`${captures.issue.text}` matches ts.performance.no-sync-fs-in-request-path."
   remediation:
-    summary: Refactor this path to avoid repeated work in hot execution paths.
+    summary: Replace sync filesystem calls with their async counterparts (e.g., readFile, writeFile from node:fs/promises) to avoid blocking the event loop on every request.

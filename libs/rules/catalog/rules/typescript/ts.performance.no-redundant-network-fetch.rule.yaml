@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-redundant-network-fetch
+  version: v1
   title: Avoid redundant network fetches in one path
   summary: Repeated fetches for the same stable request identity waste network and CPU budget.
   rationale: Repeated fetches for the same stable request identity waste network and CPU budget.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.logic-change-without-test-updates
+  version: v1
   title: Logic change without corresponding test updates
   summary: Diffs that change critical logic should usually update the matching tests in the same change.
   rationale: Critical logic changes without test updates are easy to miss in review and increase regression risk.

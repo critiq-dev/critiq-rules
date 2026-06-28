@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.unsafe-include-with-user-input
+  version: v1
   title: Avoid include/require with user-controlled paths
   summary: >-
     Include and require statements must not load files from request-derived or tainted path values.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.sync-on-string-literal
+  version: v1
   title: Do not synchronize on string literals
   summary: String literals are interned and shared across the JVM.
   rationale: Synchronizing on interned strings can cause unexpected deadlocks.

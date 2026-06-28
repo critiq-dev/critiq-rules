@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.performance.utf8-decode-rune
+  version: v1
   title: Use `utf8.DecodeRuneInString` instead of `[]rune(string)[0]`
   summary: The `[]rune(str)[0]` pattern allocates a rune slice. Use `utf8.DecodeRuneInString(str)` for single-rune access.
   rationale: >-

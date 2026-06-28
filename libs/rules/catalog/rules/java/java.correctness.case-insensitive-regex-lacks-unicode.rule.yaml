@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.case-insensitive-regex-lacks-unicode
+  version: v1
   title: Case insensitive regex does not properly handle Unicode input
   summary: CASE_INSENSITIVE or (?i) without UNICODE_CASE or (?u) does not handle Unicode-aware case folding.
   rationale: Without UNICODE_CASE, case-insensitive matching only handles ASCII characters. Unicode characters (e.g., accented letters, non-Latin scripts) will not be matched case-insensitively, leading to text processing bugs in internationalized applications.

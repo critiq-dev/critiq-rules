@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.duplicate-if-else-condition
+  version: v1
   title: Duplicate if-else-if condition
   summary: Do not repeat the same test in an if-else-if chain.
   rationale: Duplicate conditions create unreachable branches and usually indicate a copy-paste defect.

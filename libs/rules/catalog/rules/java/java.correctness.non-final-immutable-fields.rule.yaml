@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.non-final-immutable-fields
+  version: v1
   title: Fields of immutable classes should be final
   summary: Fields in a class annotated with @Immutable or @Value should be declared final.
   rationale: An immutable class must guarantee that its state cannot change after construction. Non-final fields violate this contract even if the class is declared as immutable.

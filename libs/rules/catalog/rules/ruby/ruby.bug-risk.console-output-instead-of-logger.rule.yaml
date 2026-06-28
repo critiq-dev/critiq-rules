@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.console-output-instead-of-logger
+  version: v1
   title: Replace output statements with logger
   summary: >-
     Uses `puts`, `print`, `p`, or `pp` instead of a structured logger for

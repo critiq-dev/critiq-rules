@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-assign-mutable-export
+  version: v1
   title: Avoid mutable module exports
   summary: Shared module state should not be exported with `let`/`var` or reassigned after export.
   rationale: Mutable exports make it easy for unrelated modules to change shared security or configuration state at runtime.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-that-modules-resources-are-valid
+  version: v1
   title: Check that modules resources are valid
   summary: Check that modules resources are valid
   rationale: cfn-lint reports E5001 when Check that modules resources are valid.

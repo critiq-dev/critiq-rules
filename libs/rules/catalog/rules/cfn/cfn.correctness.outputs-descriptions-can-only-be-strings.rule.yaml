@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.outputs-descriptions-can-only-be-strings
+  version: v1
   title: Outputs descriptions can only be strings
   summary: Outputs descriptions can only be strings
   rationale: cfn-lint reports E6005 when Outputs descriptions can only be strings.

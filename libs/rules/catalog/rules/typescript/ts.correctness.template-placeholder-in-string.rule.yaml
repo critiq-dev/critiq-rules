@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.template-placeholder-in-string
+  version: v1
   title: Template placeholder in regular string
   summary: Detects template placeholder in regular string issues in JavaScript and TypeScript source.
   rationale: Template placeholder in regular string patterns are a common source of bugs and confusing runtime behavior.

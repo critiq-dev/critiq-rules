@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.validate-parameters-for-in-a-nested-stack
+  version: v1
   title: Validate parameters for in a nested stack
   summary: Validate parameters for in a nested stack
   rationale: cfn-lint reports E3043 when Validate parameters for in a nested stack.

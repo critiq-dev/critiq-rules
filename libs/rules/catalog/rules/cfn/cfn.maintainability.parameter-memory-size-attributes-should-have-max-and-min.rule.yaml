@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.parameter-memory-size-attributes-should-have-max-and-min
+  version: v1
   title: Parameter memory size attributes should have max and min
   summary: Parameter memory size attributes should have max and min
   rationale: cfn-lint reports W2510 when Parameter memory size attributes should have max and min.

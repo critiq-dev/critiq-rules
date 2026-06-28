@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.manual-error-type-id
+  version: v1
   title: Avoid overriding `Error::type_id` manually
   summary: >-
     Implementing `fn type_id` inside `impl Error for` blocks leaks internal type

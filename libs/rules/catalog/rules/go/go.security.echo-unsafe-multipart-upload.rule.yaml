@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.echo-unsafe-multipart-upload
+  version: v1
   title: Harden Echo multipart uploads
   summary: >-
     Multipart handlers should cap body size, sanitize filenames with `filepath.Base`, and avoid concatenating user filenames into destination paths.

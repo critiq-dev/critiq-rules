@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-arrow-function-typehint
+  version: v1
   title: Use valid arrow function typehints
   summary: Use valid arrow function typehints
   rationale: Use valid arrow function typehints

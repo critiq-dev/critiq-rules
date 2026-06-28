@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.mutable-data-exposed
+  version: v2
   title: Defensively copy mutable objects passed to constructors
   summary: Assigning a mutable object (collection or array) directly to a field without a defensive copy exposes internal state.
   rationale: When a constructor parameter references a mutable object and stores it directly, the caller can modify the field's state externally. This breaks encapsulation and can lead to unexpected behavior or security issues.
@@ -31,7 +32,7 @@ emit:
   finding:
     category: correctness.encapsulation
     severity: high
-    confidence: 0.70
+    confidence: 0.85
     tags:
       - correctness
       - java

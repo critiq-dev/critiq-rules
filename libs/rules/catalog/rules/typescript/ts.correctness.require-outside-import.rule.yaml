@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.require-outside-import
+  version: v1
   title: Require outside import statement
   summary: Use ES module `import` syntax instead of `require()` calls.
   rationale: Prefer ES module `import` syntax over CommonJS `require()` in JavaScript and TypeScript files.

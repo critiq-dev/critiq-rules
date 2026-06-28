@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.findinmap-keys-exist-in-the-map
+  version: v1
   title: Findinmap keys exist in the map
   summary: Findinmap keys exist in the map
   rationale: cfn-lint reports W1011 when Findinmap keys exist in the map.

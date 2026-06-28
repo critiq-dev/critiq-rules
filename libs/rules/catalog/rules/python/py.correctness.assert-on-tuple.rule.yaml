@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.correctness.assert-on-tuple
+  version: v1
   title: Avoid tuple expression in assert
   summary: Asserting a tuple literal-like expression is usually always truthy and can mask failing checks.
   rationale: A non-empty tuple evaluates to true, so tuple assertions often pass even when the intended condition is false.

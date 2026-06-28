@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.panic-in-async-handler
+  version: v1
   title: Avoid panic and unwrap in async handlers
   summary: >-
     Async request handlers should propagate errors instead of panicking or unwrapping Results.

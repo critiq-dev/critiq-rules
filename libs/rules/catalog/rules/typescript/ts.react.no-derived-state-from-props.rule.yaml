@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-derived-state-from-props
+  version: v1
   title: Avoid initializing state directly from props
   summary: Duplicating props into useState without an explicit sync strategy hides updates and confuses controlled versus uncontrolled boundaries.
   rationale: Props-driven initial state goes stale when props change unless you synchronize intentionally or lift state up.

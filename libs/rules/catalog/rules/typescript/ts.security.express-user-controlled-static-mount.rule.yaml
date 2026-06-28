@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-user-controlled-static-mount
+  version: v1
   title: Avoid request-controlled Express static mount paths
   summary: The path prefix for express.static should not be derived directly from request objects.
   rationale: User-controlled mount paths can collapse routing assumptions and expose unintended directories.

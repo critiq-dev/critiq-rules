@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.deprecated-find-by-dynamic
+  version: v1
   title: Use of deprecated dynamic finder methods
   summary: >-
     `find_by_*` dynamic finder methods (e.g. `find_by_email`) are deprecated in

@@ -2,13 +2,14 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.unused-variable
+  version: v1
   title: Unused variable
   summary: Detects unused variable issues in JavaScript and TypeScript source.
-  rationale: Unused variables represent dead code and cleanup opportunities; they rarely indicate correctness bugs.
+  rationale: Unused variables represent dead code and cleanup opportunities; they rarely indicate correctness bugs. Exported variables are not flagged as unused since they exit the module boundary.
   aliases:
     - JS-0128
   tags:
-    - correctness
+    - maintainability
     - language
     - rules-catalog
     - public-directory-parity
@@ -24,14 +25,14 @@ match:
     bind: issue
 emit:
   finding:
-    category: correctness.language
+    category: maintainability.language
     severity: low
-    confidence: 0.55
+    confidence: 0.75
     tags:
-      - correctness
+      - maintainability
       - language
   message:
     title: Fix unused variable
-    summary: "`${captures.issue.text}` matches ts.correctness.unused-variable."
+    summary: "`${captures.issue.text}` is declared but never used. Remove unused declarations to eliminate dead code."
   remediation:
-    summary: Refactor the code to remove the unused variable pattern.
+    summary: Remove the unused variable declaration. If the variable is intended for use in other modules, export it instead.

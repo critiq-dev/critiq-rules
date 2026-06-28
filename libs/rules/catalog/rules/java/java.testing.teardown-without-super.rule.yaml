@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.testing.teardown-without-super
+  version: v1
   title: tearDown method does not call super.tearDown
   summary: "JUnit 3 `tearDown()` methods in test classes extending `TestCase` should call `super.tearDown()` for base class cleanup."
   rationale: "When a test class overrides `tearDown()` from a superclass (including `TestCase`), the overridden method should call `super.tearDown()` to preserve the base class cleanup behavior. Failing to do so can leave test resources unclosed, leading to resource leaks or test pollution."

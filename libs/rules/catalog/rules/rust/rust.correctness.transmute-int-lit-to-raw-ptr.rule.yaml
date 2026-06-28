@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.transmute-int-lit-to-raw-ptr
+  version: v1
   title: "Transmute between literal and raw pointer"
   summary: "`transmute` used to convert an integer literal to a raw pointer."
   rationale: >-

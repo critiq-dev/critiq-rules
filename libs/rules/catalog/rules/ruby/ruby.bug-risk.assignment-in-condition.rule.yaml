@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.assignment-in-condition
+  version: v1
   title: Avoid assignment inside conditionals
   summary: >-
     Extract assignments from if, unless, while, and until conditions.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.correctness.global-statement
+  version: v1
   aliases:
     - PY-W0002
   title: Avoid global statements in Python

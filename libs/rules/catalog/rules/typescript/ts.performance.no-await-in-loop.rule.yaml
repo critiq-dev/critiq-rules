@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-await-in-loop
+  version: v1
   title: Sequential await in loop -- consider Promise.all() to parallelize
   summary: Using await inside a loop serializes async operations, multiplying total latency.
   rationale: Each await inside a loop pauses until the promise resolves before starting the next iteration. Collect promises into an array and await Promise.all instead.
@@ -14,6 +15,19 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/scripts/**"
+      - "**/migrations/**"
+      - "**/seed/**"
+      - "**/seeds/**"
+      - "**/seed.*"
+      - "**/seed-*.*"
+      - "**/e2e/**"
+      - "**/e2e-tests/**"
+      - "**/fixtures/**"
+      - "**/generated/**"
+      - "**/db/upgrade.*"
 match:
   fact:
     kind: performance.no-await-in-loop
@@ -22,7 +36,7 @@ emit:
   finding:
     category: performance
     severity: medium
-    confidence: 0.85
+    confidence: 0.80
     tags:
       - performance
   message:

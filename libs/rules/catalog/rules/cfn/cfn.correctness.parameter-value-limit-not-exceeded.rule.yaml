@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.parameter-value-limit-not-exceeded
+  version: v1
   title: Parameter value limit not exceeded
   summary: Parameter value limit not exceeded
   rationale: cfn-lint reports E2012 when Parameter value limit not exceeded.

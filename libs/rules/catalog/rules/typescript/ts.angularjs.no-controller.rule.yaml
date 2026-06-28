@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.angularjs.no-controller
+  version: v1
   title: Avoid .controller() in AngularJS
   summary: "`controller()` method on an AngularJS module is discouraged in favor of component-based architecture."
   rationale: AngularJS controller functions are a legacy pattern replaced by components. Components provide better encapsulation, lifecycle hooks, and bindings syntax that align with modern Angular conventions.

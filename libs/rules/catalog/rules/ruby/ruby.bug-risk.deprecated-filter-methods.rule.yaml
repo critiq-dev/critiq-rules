@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.deprecated-filter-methods
+  version: v1
   title: Use of deprecated *_filter methods
   summary: >-
     Rails controller uses `before_filter`, `after_filter`, `around_filter`,

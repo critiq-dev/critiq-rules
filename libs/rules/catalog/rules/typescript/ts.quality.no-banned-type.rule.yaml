@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-banned-type
+  version: v1
   title: Avoid `any` type
   summary: Using the `any` type defeats TypeScript's type safety guarantees.
   rationale: The `any` type disables all type checking for the affected expression, hiding potential type errors.

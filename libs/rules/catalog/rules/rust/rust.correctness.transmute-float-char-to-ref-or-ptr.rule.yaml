@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.transmute-float-char-to-ref-or-ptr
+  version: v1
   title: "Transmute from float or char to reference or pointer"
   summary: "`transmute` used to reinterpret a float or char value as a reference or pointer."
   rationale: >-

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-this-state-in-set-state
+  version: v1
   title: Avoid this.state inside setState()
   summary: Reading this.state inside setState() leads to stale state references because React batches updates asynchronously.
   rationale: setState updates are asynchronous and may be batched; reading this.state directly inside the updater bypasses the guaranteed-latest state provided by the updater function parameter.

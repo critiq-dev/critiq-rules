@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.template-description-limit
+  version: v1
   title: Template description limit
   summary: Template description limit
   rationale: cfn-lint reports E1003 when Template description limit.

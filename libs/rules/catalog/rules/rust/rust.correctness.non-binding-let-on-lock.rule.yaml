@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.non-binding-let-on-lock
+  version: v1
   title: "Non-binding `let` on a synchronization lock"
   summary: "`let _ = lock.lock()` immediately drops the lock guard instead of holding the lock."
   rationale: >-

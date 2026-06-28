@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.outer-variable-shadowed
+  version: v1
   title: Outer local variable is shadowed
   summary: >-
     A block parameter has the same name as a variable in the outer scope.

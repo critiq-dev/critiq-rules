@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.duplicate-function-parameter
+  version: v1
   title: Duplicate function parameter names
   summary: A function declares the same parameter name more than once.
   aliases:

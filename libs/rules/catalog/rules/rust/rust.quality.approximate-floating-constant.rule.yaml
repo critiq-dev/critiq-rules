@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.approximate-floating-constant
+  version: v1
   title: "Found manual approximation of known floating constant"
   summary: "Float literal approximates a known mathematical constant that should use `std::f64::consts::*` or `std::f32::consts::*`."
   rationale: >-

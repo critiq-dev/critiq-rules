@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.new-expression-with-require
+  version: v1
   title: Avoid `new` operator on `require()` calls
   summary: Do not use `new` with the result of `require()`. The `require()` return value is not a constructor and this pattern is almost always a bug.
   rationale: Using `new` on the return value of `require()` indicates confusion about module exports. Most modules export an object or function, not a constructor, making this pattern bug-prone.

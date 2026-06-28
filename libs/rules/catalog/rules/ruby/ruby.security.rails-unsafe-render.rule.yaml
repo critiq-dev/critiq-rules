@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.rails-unsafe-render
+  version: v1
   title: Avoid rendering raw HTML or bodies from request input
   summary: >-
     `render` options such as `html:`, `plain:`, or `inline:` must not consume unvalidated request data.

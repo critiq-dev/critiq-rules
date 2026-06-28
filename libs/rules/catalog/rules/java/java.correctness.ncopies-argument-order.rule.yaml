@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.ncopies-argument-order
+  version: v1
   title: "Avoid reversed arguments to `Collections.nCopies()`"
   summary: "Passing a string as the first argument to `Collections.nCopies()` likely has the arguments reversed."
   rationale: "`Collections.nCopies(int n, T o)` takes the count as the first argument and the object to copy as the second. Passing `nCopies(\"str\", count)` is a compile-time error when types don't match, but `nCopies(stringVar, count)` can compile with unexpected results if types align."

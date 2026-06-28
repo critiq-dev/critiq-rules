@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.apollo-server-introspection-exposure
+  version: v1
   title: Avoid unconditional GraphQL introspection
   summary: Apollo Server should not hard-enable introspection without environment guards.
   rationale: Introspection aids attackers in mapping schemas on production deployments.

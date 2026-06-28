@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.django-unsafe-production-settings
+  version: v1
   title: Avoid unsafe Django production settings
   summary: Production Django settings should disable debug mode, restrict hosts, protect secrets, and enable HTTPS-aligned cookie flags.
   rationale: Misconfigured Django defaults expose debug traces, enable host header attacks, leak secrets, and weaken cookie transport protections.

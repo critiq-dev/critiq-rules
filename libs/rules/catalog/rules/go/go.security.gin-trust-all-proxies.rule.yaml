@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.gin-trust-all-proxies
+  version: v1
   title: Avoid trust-all Gin reverse proxy settings
   summary: >-
     `SetTrustedProxies` should list real upstreams instead of `nil` or `0.0.0.0/0` style catch-alls that spoof `X-Forwarded-For`.

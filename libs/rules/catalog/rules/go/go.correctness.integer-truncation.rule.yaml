@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.integer-truncation
+  version: v1
   title: Potentially lossy integer truncation in comparison
   summary: Narrowing an integer type before comparison may lose precision.
   rationale: >-

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.wordpress-missing-nonce-or-capability
+  version: v1
   title: Require nonce and capability checks in sensitive WordPress mutation callbacks
   summary: >-
     WordPress admin/AJAX mutation callbacks should verify nonce tokens and enforce capability checks.

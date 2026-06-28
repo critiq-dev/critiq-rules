@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.wordpress-unprepared-sql
+  version: v1
   title: Use `$wpdb->prepare` for dynamic WordPress SQL
   summary: >-
     WordPress SQL calls should not interpolate request values directly into query strings.

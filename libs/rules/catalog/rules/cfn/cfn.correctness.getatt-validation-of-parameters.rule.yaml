@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.getatt-validation-of-parameters
+  version: v1
   title: Getatt validation of parameters
   summary: Getatt validation of parameters
   rationale: cfn-lint reports E1010 when Getatt validation of parameters.

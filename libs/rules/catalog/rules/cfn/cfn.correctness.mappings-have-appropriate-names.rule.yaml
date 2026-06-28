@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.mappings-have-appropriate-names
+  version: v1
   title: Mappings have appropriate names
   summary: Mappings have appropriate names
   rationale: cfn-lint reports E7002 when Mappings have appropriate names.

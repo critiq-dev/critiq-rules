@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.log-injection
+  version: v1
   title: Sanitize user-controlled values before they reach log messages
   summary: Logger calls in pino, winston, bunyan, and consola should not interpolate or concatenate request input directly into the message text.
   rationale: Unsanitized request data in log messages enables CRLF injection, control-character smuggling, and downstream log-parser confusion. Wrapping the value with a structured field, JSON encoder, or CRLF-stripping replace neutralizes the vector.

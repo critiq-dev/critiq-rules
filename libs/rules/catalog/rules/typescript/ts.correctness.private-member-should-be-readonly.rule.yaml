@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.private-member-should-be-readonly
+  version: v1
   title: Private members should be readonly
   summary: Class members declared `private` that are never reassigned should be marked `readonly`.
   rationale: Marking private members as `readonly` clarifies intent and prevents accidental mutation.
@@ -25,7 +26,7 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: medium
+    severity: low
     confidence: 0.85
     tags:
       - correctness

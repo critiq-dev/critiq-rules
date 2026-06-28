@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-arguments-callee
+  version: v1
   title: Avoid `arguments.callee` and `arguments.caller`
   summary: Do not read `arguments.callee` or `arguments.caller` in functions.
   rationale: These legacy properties break optimizations, leak stack details, and are restricted in strict mode.

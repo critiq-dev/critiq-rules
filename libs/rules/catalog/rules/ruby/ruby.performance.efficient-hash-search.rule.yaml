@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.efficient-hash-search
+  version: v1
   title: Prefer `key?` and `value?` over `.keys.include?` and `.values.include?`
   summary: >-
     `.keys.include?(...)` and `.values.include?(...)` allocate a new array

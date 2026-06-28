@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.conditions-have-appropriate-properties
+  version: v1
   title: Conditions have appropriate properties
   summary: Conditions have appropriate properties
   rationale: cfn-lint reports E8001 when Conditions have appropriate properties.

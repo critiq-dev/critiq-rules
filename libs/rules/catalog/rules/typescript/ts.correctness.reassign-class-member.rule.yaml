@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.reassign-class-member
+  version: v1
   title: Reassigning class member
-  summary: Detects reassigning class member issues in JavaScript and TypeScript source.
-  rationale: Reassigning class member patterns are a common source of bugs and confusing runtime behavior.
+  summary: Detects class field initializers that are overwritten in the constructor, making the initializer dead code.
+  rationale: When a class field has a value from a field initializer (e.g. `field = "default"`) but the constructor unconditionally reassigns it, the initializer is dead code — its value is never read before being replaced. Common in codebases where initializers are used as TypeScript strict-property-initialization workarounds.
   aliases:
     - JS-0228
   tags:
@@ -25,13 +26,13 @@ match:
 emit:
   finding:
     category: correctness.language
-    severity: high
-    confidence: 0.85
+    severity: medium
+    confidence: 0.65
     tags:
       - correctness
       - language
   message:
-    title: Fix reassigning class member
-    summary: "`${captures.issue.text}` matches ts.correctness.reassign-class-member."
+    title: Dead class field initializer overwritten by `${captures.issue.text}`
+    summary: "`${captures.issue.text}` overwrites a class field initializer in the constructor. The initializer value is dead code — it is never read before being replaced by the constructor body."
   remediation:
-    summary: Refactor the code to remove the reassigning class member pattern.
+    summary: "Remove the field initializer if the constructor always reassigns the field. For TypeScript strict-property-initialization workarounds, use a definite-assignment assertion (field! notation) instead of a dummy initializer."

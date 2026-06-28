@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.non-utf8-literal-in-from-utf8-unchecked
+  version: v1
   title: "Avoid non-UTF-8 literals in `str::from_utf8_unchecked`"
   summary: "Passing a byte string literal with non-UTF-8 sequences to `str::from_utf8_unchecked` creates invalid UTF-8 strings that violate Rust's safety assumptions about `&str`."
   rationale: >-

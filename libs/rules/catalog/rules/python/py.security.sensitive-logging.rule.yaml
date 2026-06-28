@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.sensitive-logging
+  version: v1
   aliases:
     - BAN-W101
   title: Prevent sensitive data in Python log statements

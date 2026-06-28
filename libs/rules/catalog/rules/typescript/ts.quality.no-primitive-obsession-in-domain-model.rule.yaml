@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-primitive-obsession-in-domain-model
+  version: v1
   title: Avoid primitive obsession in domain model APIs
   summary: Domain-facing APIs with many primitive parameters should use richer value objects.
   rationale: Grouping related primitives into value types improves readability and reduces argument-order bugs.

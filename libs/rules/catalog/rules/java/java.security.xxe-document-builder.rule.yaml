@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.xxe-document-builder
+  version: v1
   title: Disable external entities on Java XML parsers
   summary: >-
     `DocumentBuilderFactory`, `SAXParserFactory`, and `TransformerFactory` instances should enable secure processing and disable external entities before they parse untrusted XML.

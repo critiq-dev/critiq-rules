@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-reduce-fingerprint
+  version: v1
   title: Reduce Express fingerprinting
   summary: Express apps should disable `x-powered-by` or equivalent fingerprinting headers.
   rationale: Framework fingerprinting gives attackers unnecessary detail about the stack they are targeting.

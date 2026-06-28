@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.restricted-object-property
+  version: v1
   title: Restricted object property access
   summary: Detects restricted object property access issues in JavaScript and TypeScript source.
   rationale: Restricted object property access is a style and safety concern, not a security issue; most flagged properties are deliberate surface reductions.

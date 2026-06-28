@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.insecure-websocket-transport
+  version: v2
   title: Use secure WebSocket transport
   summary: WebSocket clients should not connect over cleartext `ws://` when sensitive application data is involved.
-  rationale: Cleartext WebSocket transport exposes application traffic to interception and manipulation.
+  rationale: Cleartext WebSocket transport exposes application traffic to interception and manipulation, including credential leaks, data tampering, and man-in-the-middle attacks.
   detection:
     kind: pattern
   references:

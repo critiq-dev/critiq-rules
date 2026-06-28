@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.open-redirect
+  version: v1
   title: Open redirect from possibly tainted source
   summary: >-
     URLs returned from redirect helpers that include user-controlled input may

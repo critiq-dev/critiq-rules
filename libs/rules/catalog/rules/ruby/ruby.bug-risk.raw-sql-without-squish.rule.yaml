@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.raw-sql-without-squish
+  version: v1
   title: Squish heredoc SQL passed to where
   summary: >-
     Normalize heredoc SQL with squish before passing to where or find_by_sql.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-properties-that-are-mutually-exclusive
+  version: v1
   title: Check properties that are mutually exclusive
   summary: Check properties that are mutually exclusive
   rationale: cfn-lint reports E2520 when Check properties that are mutually exclusive.

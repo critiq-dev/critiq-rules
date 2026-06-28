@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.weak-crypto-import
+  version: v1
   title: Avoid importing broken or deprecated crypto packages
   summary: >-
     Production Go code should not import `crypto/md5`, `crypto/sha1`, `crypto/des`, or `crypto/rc4` for security-sensitive purposes.

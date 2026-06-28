@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.double-checked-locking
+  version: v1
   title: Double-checked locking without volatile field
   summary: A double-checked locking pattern on a non-volatile field is unsafe.
   rationale: Without volatile, the JVM may reorder writes so that a thread sees a partially constructed object.

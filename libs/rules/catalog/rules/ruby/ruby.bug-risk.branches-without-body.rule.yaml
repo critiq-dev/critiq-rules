@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.branches-without-body
+  version: v1
   title: If/Elsif/Unless branches without a body detected
   summary: >-
     An `if`, `elsif`, or `unless` branch has no body expression. Add

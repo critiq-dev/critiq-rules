@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.prototype-builtin-called-directly
+  version: v1
   title: Object.prototype builtin called directly
   summary: A method from `Object.prototype` is invoked directly on a receiver object.
   rationale: Direct prototype calls break when objects null-prototype or shadow built-in methods; use `Object.hasOwn` or `Object.prototype.*.call` instead.

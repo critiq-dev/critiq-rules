@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.invalid-variable-usage
-  title: Invalid variable usage
-  summary: Detects invalid variable usage issues in JavaScript and TypeScript source.
-  rationale: Invalid variable usage patterns are a common source of bugs and confusing runtime behavior.
+  version: v2
+  title: Invalid this or arguments usage
+  summary: Referencing 'this' at the top-level or 'arguments' outside any function body causes a runtime ReferenceError in strict mode.
+  rationale: In ES modules and strict mode, 'this' at module scope is undefined and 'arguments' is not defined, causing a runtime ReferenceError when accessed. Inside a function, 'arguments' is a deprecated special object that should be replaced with rest parameters ('...args') for clarity, type safety, and modern engine compatibility.
   aliases:
     - JS-0043
   tags:

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-extends-target
+  version: v1
   title: Invalid extends target for declaration
   summary: Invalid extends target for declaration
   rationale: Invalid extends target for declaration

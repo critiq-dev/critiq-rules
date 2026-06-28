@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.math-max-min-swapped
+  version: v1
   title: Incorrect combination of Math.max and Math.min
   summary: "Using `Math.max(A, Math.min(A, ...))` or `Math.min(A, Math.max(A, ...))` with a repeated argument is suspicious."
   rationale: Nested Math.max/Math.min calls with a repeated first argument often indicate swapped arguments. The inner call's result is passed as the second arg, making the outer call pointless or incorrect.

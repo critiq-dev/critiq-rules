@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.performance.no-sync-fs-in-request-path
+  version: v1
   title: Avoid no sync fs in request path
   summary: Performance hygiene signal for php sources.
   rationale: Performance hygiene signal for php sources.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.confusing-multiline-expression
+  version: v1
   title: Confusing multiline expression
   summary: Detects confusing multiline expression issues in JavaScript and TypeScript source.
   rationale: Confusing multiline expression patterns are a common source of bugs and confusing runtime behavior.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.rails-detailed-exceptions-enabled
+  version: v1
   title: Keep production Rails exception disclosure minimal
   summary: >-
     Production environments should not enable local-style exception pages or verbose Action Dispatch exception rendering.

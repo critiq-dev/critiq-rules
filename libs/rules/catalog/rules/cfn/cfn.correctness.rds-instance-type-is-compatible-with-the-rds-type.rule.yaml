@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.rds-instance-type-is-compatible-with-the-rds-type
+  version: v1
   title: Rds instance type is compatible with the rds type
   summary: Rds instance type is compatible with the rds type
   rationale: cfn-lint reports E3025 when Rds instance type is compatible with the rds type.

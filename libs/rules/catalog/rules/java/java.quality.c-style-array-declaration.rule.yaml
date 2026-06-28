@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.quality.c-style-array-declaration
+  version: v1
   title: C-style array declaration must not be used
   summary: Array brackets should be placed with the type, not the variable name.
   rationale: Java-style `int[] arr` is clearer, consistent with the language convention, and avoids confusion between `int[] arr, values` (two arrays) and `int arr[], values` (one array, one int).

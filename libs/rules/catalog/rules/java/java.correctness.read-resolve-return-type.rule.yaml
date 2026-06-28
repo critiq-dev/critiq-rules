@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.read-resolve-return-type
+  version: v1
   title: readResolve must return Object
   summary: The readResolve method in a Serializable class must have a return type of Object. A non-Object return type will cause the method to be silently ignored during deserialization.
   rationale: Java's serialization mechanism uses readResolve to replace the deserialized object. Per the Java Object Serialization Specification (§3.6), readResolve must be declared as `ANY-ACCESS-MODIFIER Object readResolve() throws ObjectStreamException`. A covariant return type may work in some JVM implementations but is not guaranteed.

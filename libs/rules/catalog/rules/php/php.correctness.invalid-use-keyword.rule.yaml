@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-use-keyword
+  version: v1
   title: Invalid use of `use` keyword
   summary: The `use` keyword is used in a context where it does not apply — inside interfaces, anonymous classes, or referencing a non-trait class.
   aliases:

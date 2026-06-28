@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.bind-all-interfaces
+  version: v1
   title: Avoid binding Go services to all interfaces
   summary: >-
     Go network services should avoid explicit binds to `0.0.0.0`, `::`, or `[::]` unless public exposure is intentional and controlled.

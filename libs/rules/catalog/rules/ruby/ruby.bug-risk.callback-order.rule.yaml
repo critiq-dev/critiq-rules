@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.callback-order
+  version: v1
   title: Incorrect order of ActiveRecord callbacks
   summary: >-
     ActiveRecord lifecycle callbacks (before_validation, after_validation,

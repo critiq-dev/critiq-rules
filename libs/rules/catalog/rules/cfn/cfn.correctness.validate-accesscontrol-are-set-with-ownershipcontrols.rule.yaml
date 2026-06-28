@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.validate-accesscontrol-are-set-with-ownershipcontrols
+  version: v1
   title: Validate accesscontrol are set with ownershipcontrols
   summary: Validate accesscontrol are set with ownershipcontrols
   rationale: cfn-lint reports E3045 when Validate accesscontrol are set with ownershipcontrols.

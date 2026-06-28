@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.self-assignment
+  version: v1
   title: Remove self assignments
   summary: Assigning a variable to itself has no effect.
   aliases:

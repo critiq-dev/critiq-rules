@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.no-confusing-label-in-switch
+  version: v1
   title: Confusing label inside switch
   summary: Labeled statements inside switch blocks can be confused with case clauses.
   rationale: Labels nested inside switch cases are rarely intentional and create confusing control flow that is hard to distinguish from case/default clauses.

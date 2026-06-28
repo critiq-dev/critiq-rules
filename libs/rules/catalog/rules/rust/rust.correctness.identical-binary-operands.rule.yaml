@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.identical-binary-operands
+  version: v1
   title: "Binary operation with identical left and right operands"
   summary: "Binary operation where both sides are identical, likely a copy-paste error."
   rationale: >-

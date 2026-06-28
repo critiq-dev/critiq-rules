@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.stream-reuse
+  version: v1
   title: Stream consumed more than once
   summary: A Stream variable has multiple terminal operations invoked on it.
   rationale: Java Streams are single-use; after a terminal operation the stream is consumed and throws IllegalStateException on reuse.

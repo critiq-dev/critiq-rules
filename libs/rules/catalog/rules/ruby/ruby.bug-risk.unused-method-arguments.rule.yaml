@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.unused-method-arguments
+  version: v1
   title: Unused method arguments detected
   summary: >-
     A method argument prefixed with underscore is used in the method body,

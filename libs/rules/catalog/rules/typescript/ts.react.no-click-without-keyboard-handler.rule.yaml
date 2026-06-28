@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-click-without-keyboard-handler
+  version: v1
   title: Support keyboard interaction for click handlers
   summary: "Non-interactive JSX elements that respond to clicks also need an equivalent keyboard path."
   rationale: Mouse-only interaction blocks keyboard users and creates inaccessible custom controls that do not behave like native UI elements.

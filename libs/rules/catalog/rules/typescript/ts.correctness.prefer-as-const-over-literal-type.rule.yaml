@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.prefer-as-const-over-literal-type
+  version: v1
   title: Prefer as const over literal type annotation
   summary: Use `as const` assertion instead of an explicit literal type annotation.
   rationale: Using `as const` is more concise and idiomatic than declaring a literal type annotation.

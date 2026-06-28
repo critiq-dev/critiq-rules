@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-deprecated-create-factory
+  version: v1
   title: Avoid React.createFactory
   summary: "`createFactory` is a legacy helper for pre-JSX code and is removed from modern React typings and guidance."
   rationale: Function components and JSX provide clearer element construction without the indirection and weaker typing of factory helpers.

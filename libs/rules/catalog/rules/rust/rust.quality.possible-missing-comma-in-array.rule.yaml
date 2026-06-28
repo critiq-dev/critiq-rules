@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.possible-missing-comma-in-array
+  version: v1
   title: "Check for possibly missing comma in array expression"
   summary: "Two adjacent expressions in an array literal without a comma separator likely indicate a missing comma."
   rationale: >-

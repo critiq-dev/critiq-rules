@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.nestjs-helmet-after-route-mount
+  version: v1
   title: Register Helmet before Nest route mounts
   summary: Nest bootstrap files should apply Helmet before mounting path-bound routers.
   rationale: Middleware order determines whether framed routes inherit Helmet protections; mounting routers too early widens exposure.

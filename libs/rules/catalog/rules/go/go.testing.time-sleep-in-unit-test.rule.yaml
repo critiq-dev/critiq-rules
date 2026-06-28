@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.testing.time-sleep-in-unit-test
+  version: v1
   title: Avoid time.Sleep in Go unit tests
   summary: Sleeping in _test.go files slows CI and hides synchronization bugs.
   rationale: Prefer fake clocks, polling helpers, or integration suites for real delays.

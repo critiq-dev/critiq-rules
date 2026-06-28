@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.iframe-missing-sandbox-attribute
+  version: v1
   title: Iframe without sandbox attribute
   summary: Intrinsic iframe elements embedding untrusted third-party content should declare a sandbox attribute to reduce blast radius.
   rationale: |

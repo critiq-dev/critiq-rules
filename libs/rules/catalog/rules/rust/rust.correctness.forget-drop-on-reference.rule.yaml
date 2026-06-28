@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.forget-drop-on-reference
+  version: v1
   title: "Called `mem::forget` or `mem::drop` on a reference"
   summary: "`mem::forget` / `mem::drop` on a reference drops only the reference, not the underlying value."
   rationale: >-

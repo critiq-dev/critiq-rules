@@ -2,9 +2,13 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.correctness.broad-exception-handler
+  version: v2
   title: Avoid overly broad exception handlers
-  summary: Catching `Exception` or `BaseException` makes error handling too broad.
-  rationale: Broad handlers hide programming errors and can interfere with expected process-level exceptions.
+  summary: Catching `Exception` or `BaseException` (including inside a tuple) swallows programming errors like `NameError` or `AttributeError` and makes debugging difficult.
+  rationale: |
+    `Exception` is the base of almost all built-in exceptions; `BaseException` also covers `KeyboardInterrupt` and `SystemExit`, which are meant to terminate the process.
+    Broad handlers mask bugs such as misspelled variable names, missing imports, or incorrect attribute access that would otherwise surface immediately.
+    They also break intentional process signals — catching `BaseException` prevents `Ctrl+C` from working as expected.
   tags:
     - correctness
     - python
@@ -30,4 +34,4 @@ emit:
     title: Narrow exception scope `${captures.issue.text}`
     summary: "`${captures.issue.text}` catches a broad exception base type."
   remediation:
-    summary: Catch only the concrete exception classes this block can recover from.
+    summary: Catch only the concrete exception classes this block can recover from. If you must catch everything at a top-level boundary, log the full traceback before swallowing.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.jwt-insecure-signing-algorithm
+  version: v1
   title: Do not sign JWTs with the none algorithm
   summary: JSON Web Token signing options must not enable the none algorithm.
   rationale: The none algorithm allows tokens to be accepted without verification, defeating authentication.

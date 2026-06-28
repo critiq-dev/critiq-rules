@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-if-a-list-has-between-min-and-max-number-of-values-specified
+  version: v1
   title: Check if a list has between min and max number of values specified
   summary: Check if a list has between min and max number of values specified
   rationale: cfn-lint reports E3032 when Check if a list has between min and max number of values specified.

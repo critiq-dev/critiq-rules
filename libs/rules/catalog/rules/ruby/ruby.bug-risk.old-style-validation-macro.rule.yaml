@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.old-style-validation-macro
+  version: v1
   title: Old-style attribute validation macro detected
   summary: >-
     Uses the deprecated `validates_*_of` macro. Prefer the modern `validates`

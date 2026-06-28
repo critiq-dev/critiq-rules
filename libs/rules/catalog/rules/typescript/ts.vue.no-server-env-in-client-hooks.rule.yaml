@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.vue.no-server-env-in-client-hooks
+  version: v1
   title: Avoid Nuxt server-side flags in client-side hooks
   summary: Client-side lifecycle hooks should not reference process.server, process.client, or process.browser.
   rationale: Using process.server/process.client/process.browser in client-side hooks like mounted() or beforeMount() is unnecessary — these hooks only run on the client, so the conditional is always false or always true and indicates confusion about Nuxt's rendering model.

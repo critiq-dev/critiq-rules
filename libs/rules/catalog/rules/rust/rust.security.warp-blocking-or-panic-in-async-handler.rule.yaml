@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.warp-blocking-or-panic-in-async-handler
+  version: v1
   title: Avoid blocking I/O and infallible unwraps in async Warp handlers
   summary: >-
     Warp filters and handlers run on the async runtime; avoid `std::fs`, `thread::sleep`, and `unwrap` on request paths without `spawn_blocking` or proper errors.

@@ -5,11 +5,15 @@ fixtures:
   - name: flags broad exception handler
     sourcePath: ./fixtures/py.correctness.broad-exception-handler/broad_exception_handler.invalid.py
     expect:
-      findingCount: 2
+      findingCount: 4
       allRuleIds:
         - py.correctness.broad-exception-handler
         - py.correctness.broad-exception-handler
+        - py.correctness.broad-exception-handler
+        - py.correctness.broad-exception-handler
       allSeverities:
+        - high
+        - high
         - high
         - high
   - name: allows specific exception handler

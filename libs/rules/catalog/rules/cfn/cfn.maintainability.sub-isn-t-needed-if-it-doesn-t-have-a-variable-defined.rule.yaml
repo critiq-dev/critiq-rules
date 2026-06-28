@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.sub-isn-t-needed-if-it-doesn-t-have-a-variable-defined
+  version: v1
   title: "Sub isn't needed if it doesn't have a variable defined"
   summary: "Sub isn't needed if it doesn't have a variable defined"
   rationale: "cfn-lint reports W1020 when Sub isn't needed if it doesn't have a variable defined."

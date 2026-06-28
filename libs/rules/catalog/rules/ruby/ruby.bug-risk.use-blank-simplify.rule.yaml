@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.use-blank-simplify
+  version: v1
   title: Simplify conditional using Object#blank?
   summary: >-
     Replace `obj.nil? || obj.empty?` with `obj.blank?` for simpler code.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.string-format-arg-mismatch
+  version: v1
   title: Arguments to String.format must match the provided format string
   summary: The number of format specifiers in the format string does not match the number of arguments provided.
   rationale: A mismatch causes MissingFormatArgumentException (too few arguments) or silently ignored extra arguments (too many).

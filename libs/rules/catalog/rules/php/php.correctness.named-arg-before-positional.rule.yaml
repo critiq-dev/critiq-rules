@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.named-arg-before-positional
+  version: v1
   title: Positional arguments cannot follow named arguments
   summary: Positional arguments cannot follow named arguments
   rationale: Positional arguments cannot follow named arguments

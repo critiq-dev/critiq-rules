@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.repeated-expensive-computation
+  version: v1
   title: Repeated expensive computation
   summary: Repeating the same expensive computation in one block should usually be cached.
   rationale: Recomputing the same serialization, key projection, or formatter construction wastes CPU and obscures intent.

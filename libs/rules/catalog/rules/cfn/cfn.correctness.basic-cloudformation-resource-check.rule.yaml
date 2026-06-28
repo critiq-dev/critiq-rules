@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.basic-cloudformation-resource-check
+  version: v1
   title: Basic cloudformation resource check
   summary: Basic cloudformation resource check
   rationale: cfn-lint reports E3001 when Basic cloudformation resource check.

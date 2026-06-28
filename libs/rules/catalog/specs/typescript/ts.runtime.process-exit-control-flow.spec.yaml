@@ -10,8 +10,8 @@ fixtures:
         - ts.runtime.process-exit-control-flow
         - ts.runtime.process-exit-control-flow
       allSeverities:
-        - high
-        - high
+        - medium
+        - medium
   - name: allows process.exit after return and in CLI entrypoints
     sourcePath: ./fixtures/ts.runtime.process-exit-control-flow/valid.ts
     expect:

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.allow-blank-with-delegate
+  version: v1
   title: Avoid allow_blank with delegate
   summary: >-
     Use `allow_nil` instead of `allow_blank` in `delegate` declarations.

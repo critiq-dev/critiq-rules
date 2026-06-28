@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.flask-missing-upload-body-limit
+  version: v1
   title: Set Flask MAX_CONTENT_LENGTH for uploads
   summary: Flask apps handling uploads should configure `MAX_CONTENT_LENGTH` to bound request bodies.
   rationale: Missing upload limits enables trivial denial-of-service via oversized multipart payloads.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.incomplete-nil-check
+  version: v1
   title: Incomplete nil check on slice
   summary: Checking `xs != nil` before indexing a slice is not sufficient — a non-nil empty slice still panics on index access.
   rationale: >-

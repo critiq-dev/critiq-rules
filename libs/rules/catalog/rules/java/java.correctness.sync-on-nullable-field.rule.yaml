@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.sync-on-nullable-field
+  version: v1
   title: Possibly null fields synchronized on
   summary: Synchronizing on a field that may be null will throw NullPointerException at runtime.
   rationale: The field has no initializer and is used as a synchronization lock. If the field is null when synchronized is reached, a NullPointerException is thrown.

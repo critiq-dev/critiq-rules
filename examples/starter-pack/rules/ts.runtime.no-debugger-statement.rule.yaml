@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.runtime.no-debugger-statement
+  version: v1
   title: Remove debugger statements
   summary: Debugger statements should not ship in committed code.
   rationale: They interrupt execution and are easy to miss in review.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.syntax-error
+  version: v1
   title: "Syntax error in Rust source"
   summary: "Source contains invalid syntax such as multi-character char literals or unclosed strings."
   rationale: >-

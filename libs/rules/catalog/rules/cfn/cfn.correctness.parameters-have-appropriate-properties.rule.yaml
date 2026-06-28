@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.parameters-have-appropriate-properties
+  version: v1
   title: Parameters have appropriate properties
   summary: Parameters have appropriate properties
   rationale: cfn-lint reports E2001 when Parameters have appropriate properties.

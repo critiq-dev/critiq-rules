@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.empty-catch
+  version: v1
   title: Do not use empty catch blocks
   summary: Catch blocks should handle or rethrow exceptions.
   rationale: Empty catches hide failures and make debugging difficult.

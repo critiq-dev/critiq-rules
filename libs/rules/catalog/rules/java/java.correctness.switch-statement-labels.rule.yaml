@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.switch-statement-labels
+  version: v1
   title: Switch blocks must not contain statement labels
   summary: Statement labels inside switch blocks are confusing and likely unintended.
   rationale: Traditional Java switch blocks allow arbitrary statement labels, but they are error-prone and easily confused with case labels. Switch expressions and modern switch blocks do not permit them.

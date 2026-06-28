@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.missing-super-call
+  version: v1
   title: Missing super() call in subclass constructor or override
   summary: Subclass constructors must call super() before using this, and method overrides extending base class behavior should call super.method().
   rationale: |

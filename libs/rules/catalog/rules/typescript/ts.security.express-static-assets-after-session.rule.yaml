@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-static-assets-after-session
+  version: v1
   title: Serve static assets before session middleware
   summary: Static assets should be mounted before session middleware when they do not need session state.
   rationale: Serving public assets after session middleware broadens the session surface and adds unnecessary auth-state handling to static traffic.

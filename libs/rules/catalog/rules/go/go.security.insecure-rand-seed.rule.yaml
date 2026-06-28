@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.insecure-rand-seed
+  version: v1
   title: Do not seed math/rand for security-sensitive randomness
   summary: >-
     `rand.Seed` from `math/rand` produces predictable streams; security-sensitive code must use `crypto/rand`.

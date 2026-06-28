@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.sync-on-lock-primitive
+  version: v1
   title: Synchronization on a Lock/concurrency primitive
   summary: Synchronizing on a ReentrantLock or other lock primitive defeats the lock's purpose.
   rationale: "Lock objects (ReentrantLock, ReadWriteLock, StampedLock) are designed for lock-based concurrency, not intrinsic synchronization. Using `synchronized(lock)` on a Lock instance is incorrect and indicates a concurrency design flaw."

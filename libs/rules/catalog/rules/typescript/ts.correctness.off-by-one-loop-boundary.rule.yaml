@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.off-by-one-loop-boundary
+  version: v1
   title: Off-by-one error in loop boundaries
   summary: Index-based loops should not skip the first element or iterate one step past the collection boundary.
   rationale: Off-by-one loop conditions frequently cause undefined reads, missed work, or stale guard logic around array bounds.

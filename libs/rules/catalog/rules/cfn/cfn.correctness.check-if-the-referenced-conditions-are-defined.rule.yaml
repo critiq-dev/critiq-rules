@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-if-the-referenced-conditions-are-defined
+  version: v1
   title: Check if the referenced conditions are defined
   summary: Check if the referenced conditions are defined
   rationale: cfn-lint reports E8002 when Check if the referenced conditions are defined.

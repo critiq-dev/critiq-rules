@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.ssrf
+  version: v1
   title: Server-side request forgery
   summary: Outbound requests should not use attacker-controlled targets or private hosts.
   rationale: Request-controlled targets can force the server to call internal services, metadata endpoints, or attacker-controlled infrastructure.
@@ -33,7 +34,7 @@ emit:
   finding:
     category: security.transport
     severity: high
-    confidence: 0.85
+    confidence: 0.65
     tags:
       - security
       - network

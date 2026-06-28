@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.promise-reject-non-error
+  version: v1
   title: Reject or throw non-Error values
   summary: Promise rejections and async throws should use Error objects.
   rationale: Non-Error rejections lose stack traces and are harder to handle consistently in async code.

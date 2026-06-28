@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.trait-as-attribute
+  version: v1
   title: Traits cannot be used as attributes
   summary: Traits cannot be used as attributes
   rationale: Traits cannot be used as attributes

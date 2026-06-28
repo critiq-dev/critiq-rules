@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.http-nobody-nil
+  version: v1
   title: http.NoBody instead of nil
   summary: Use http.NoBody for HTTP requests with no body instead of nil.
   rationale: >-

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.use-delegate
+  version: v1
   title: Use delegate for simple delegation methods
   summary: >-
     Replace simple delegation methods with the `delegate` macro.

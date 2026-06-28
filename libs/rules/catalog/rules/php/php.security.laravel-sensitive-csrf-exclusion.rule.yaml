@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.laravel-sensitive-csrf-exclusion
+  version: v1
   title: Avoid broad Laravel CSRF exclusions on sensitive routes
   summary: >-
     Wildcard CSRF exclusions should not cover account, billing, admin, password, or profile endpoints.

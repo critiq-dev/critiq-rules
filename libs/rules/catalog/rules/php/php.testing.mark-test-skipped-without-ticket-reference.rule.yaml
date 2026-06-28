@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.testing.mark-test-skipped-without-ticket-reference
+  version: v1
   title: markTestSkipped should cite a ticket
   summary: Empty markTestSkipped() calls without a tracker note are hard to triage.
   rationale: Skips should carry reviewable intent.

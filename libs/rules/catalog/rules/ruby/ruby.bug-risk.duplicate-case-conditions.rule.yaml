@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.duplicate-case-conditions
+  version: v1
   title: Avoid duplicate conditions in case statements
   summary: >-
     A case statement has two identical when conditions. This is usually a

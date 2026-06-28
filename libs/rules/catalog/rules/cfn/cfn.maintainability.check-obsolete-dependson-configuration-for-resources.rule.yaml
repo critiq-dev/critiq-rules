@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.check-obsolete-dependson-configuration-for-resources
+  version: v1
   title: Check obsolete dependson configuration for resources
   summary: Check obsolete dependson configuration for resources
   rationale: cfn-lint reports W3005 when Check obsolete dependson configuration for resources.

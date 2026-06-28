@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.invalid-shebang
+  version: v1
   title: Invalid shebang placement
   summary: Shebang `#!` must appear on line 1 at column 0.
   rationale: Shebangs on later lines or indented positions are ignored by the OS loader and indicate a misplaced or malformed hashbang.

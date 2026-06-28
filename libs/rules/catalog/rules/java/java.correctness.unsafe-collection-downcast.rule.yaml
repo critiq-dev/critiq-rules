@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.unsafe-collection-downcast
+  version: v1
   title: Unsafe collection downcast to concrete type
   summary: Casting a collection interface reference to a concrete implementation type without an instanceof check may cause ClassCastException at runtime.
   rationale: Downcasting a collection-typed variable (List, Set, Map, etc.) to a concrete implementation without a prior instanceof check is unsafe. If the runtime type does not match, a ClassCastException is thrown. Always guard downcasts with an instanceof check.

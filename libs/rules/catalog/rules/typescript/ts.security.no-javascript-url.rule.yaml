@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-javascript-url
+  version: v1
   title: "Avoid `javascript:` URLs in href, src, or navigation attributes"
   summary: "`javascript:` URLs can execute arbitrary script when used as navigation targets in href, src, or action attributes."
   rationale: "`javascript:` URLs execute attacker-controlled code when used as navigation targets. Only flag when the URL appears in contexts that could reach a browser — test assertions, sanitizer inputs, and type-test files are intentionally excluded."

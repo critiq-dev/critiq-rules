@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.serialization-method-signature
+  version: v1
   title: Custom serialization method declared with incorrect signature
   summary: Serializable classes declaring writeObject, readObject, or readObjectNoData must use exactly the correct signatures expected by the serialization API.
   rationale: Java's serialization mechanism calls writeObject, readObject, and readObjectNoData by reflection using exact signature matching. If the access modifier, return type, or parameter types are wrong, the method is silently ignored and default serialization behavior applies.

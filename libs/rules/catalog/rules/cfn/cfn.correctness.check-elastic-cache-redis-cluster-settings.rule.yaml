@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-elastic-cache-redis-cluster-settings
+  version: v1
   title: Check elastic cache redis cluster settings
   summary: Check elastic cache redis cluster settings
   rationale: cfn-lint reports E3026 when Check elastic cache redis cluster settings.

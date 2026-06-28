@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.sensitive-data-in-exception
+  version: v2
   title: Avoid sensitive data in thrown errors
-  summary: Exceptions and rejection payloads should not include raw secrets or personal data.
-  rationale: Exception payloads often reach logs, APM tools, and client responses with less review than normal business data.
+  summary: Exception and rejection payloads constructed from dynamic sensitive values expose secrets or personal data to logs, APM tools, and client responses.
+  rationale: Exception payloads often reach logs, APM tools, and client responses with less review than normal business data. Interpolating variables such as user email, session tokens, or secret keys directly into error messages creates an unintended data leak. Plain string literals and static error constant references (e.g. ErrorCode enums, error class constructors) are not flagged because they describe error conditions rather than disclosing actual data values.
   detection:
     kind: pattern
   references:

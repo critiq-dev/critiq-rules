@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.deprecated-function-use
+  version: v1
   title: "Found use of deprecated function"
   summary: "Usage of a known deprecated Rust standard library function, constant, or type."
   rationale: >-

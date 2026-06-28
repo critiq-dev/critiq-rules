@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-if-refs-exist
+  version: v1
   title: Check if refs exist
   summary: Check if refs exist
   rationale: cfn-lint reports E1012 when Check if refs exist.

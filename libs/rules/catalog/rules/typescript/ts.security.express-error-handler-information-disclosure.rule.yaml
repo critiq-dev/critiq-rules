@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-error-handler-information-disclosure
+  version: v1
   title: Avoid returning raw errors from Express error middleware
   summary: Express error handlers should not send the err object directly to clients in production paths.
   rationale: Returning raw errors leaks stack traces, internal identifiers, and implementation details to attackers.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.duration-with-nanos-misuse
+  version: v1
   title: "Use `Duration.withNanos()` with caution"
   summary: "Calling `Duration.withNanos()` may produce unexpected results because it only sets the nanos-of-second component, not the total duration."
   rationale: "`Duration.withNanos(long nanos)` sets only the fractional second portion (0-999999999). Developers often expect it to set the total duration, but it does not change the seconds component. Use `Duration.ofNanos()`, `Duration.ofMillis()`, or `Duration.ofSeconds()` to create a duration with the intended total length."

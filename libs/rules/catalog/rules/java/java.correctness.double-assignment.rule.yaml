@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.double-assignment
+  version: v1
   title: Double assignment of variable detected
   summary: A local variable is assigned twice consecutively without being read between the assignments.
   rationale: The first assignment value is overwritten before being used, indicating dead code or a logic error.

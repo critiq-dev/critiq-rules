@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.runfinalizers-on-exit
+  version: v1
   title: System.runFinalizersOnExit/Runtime.runFinalizersOnExit is unsafe
   summary: Calling `System.runFinalizersOnExit()` or `Runtime.runFinalizersOnExit()` is inherently unsafe.
   rationale: These methods are deprecated and dangerous — they invoke finalizers on live objects during VM shutdown, potentially causing thread-safety issues and unpredictable behavior.

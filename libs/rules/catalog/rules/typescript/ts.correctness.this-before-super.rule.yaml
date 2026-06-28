@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.this-before-super
+  version: v1
   title: this used before super()
   summary: Do not use this or super members before calling super() in a subclass constructor.
   rationale: Accessing this before super() in a derived constructor throws at runtime.

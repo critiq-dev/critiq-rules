@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.use-sub-instead-of-join
+  version: v1
   title: Use sub instead of join
   summary: Use sub instead of join
   rationale: cfn-lint reports I1022 when Use sub instead of join.

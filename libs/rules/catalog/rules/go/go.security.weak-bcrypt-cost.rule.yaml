@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.weak-bcrypt-cost
+  version: v1
   title: Use a strong bcrypt cost factor
   summary: >-
     `bcrypt.GenerateFromPassword` (and similar helpers) must use a cost factor of at least `bcrypt.DefaultCost` (10).

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.noallocation-method-creates-object
+  version: v1
   title: '@NoAllocation method performs object allocation'
   summary: A method annotated @NoAllocation creates heap objects via `new`.
   rationale: "The @NoAllocation annotation promises zero heap allocation. Creating objects with `new` inside the method body violates that contract and may cause performance regressions or library contract violations."

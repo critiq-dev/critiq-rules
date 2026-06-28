@@ -8,8 +8,35 @@ fixtures:
       findingCount: 1
       allRuleIds:
         - java.correctness.equals-null-check
+  - name: flags equals with only this==o identity check
+    sourcePath: ./fixtures/java.correctness.equals-null-check/invalid-this-eq-only.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.equals-null-check
+  - name: flags equals with getClass dereference and no null check
+    sourcePath: ./fixtures/java.correctness.equals-null-check/invalid-getclass.java
+    expect:
+      findingCount: 1
+      allRuleIds:
+        - java.correctness.equals-null-check
   - name: allows equals with null guard
     sourcePath: ./fixtures/java.correctness.equals-null-check/valid.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows equals with Yoda null guard
+    sourcePath: ./fixtures/java.correctness.equals-null-check/valid-yoda.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows equals with instanceof guard
+    sourcePath: ./fixtures/java.correctness.equals-null-check/valid-instanceof.java
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows equals with Objects.equals safe call
+    sourcePath: ./fixtures/java.correctness.equals-null-check/valid-objects-equals.java
     expect:
       findingCount: 0
       allRuleIds: []

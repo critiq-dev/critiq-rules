@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.debugger-import
+  version: v1
   title: Remove debugger imports from production code
   summary: Production Python modules should not ship with interactive debugger imports.
   rationale: Debugger modules can expose introspection hooks and halt execution paths in deployed environments.

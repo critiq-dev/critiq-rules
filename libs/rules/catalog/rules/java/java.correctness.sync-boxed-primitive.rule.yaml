@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.sync-boxed-primitive
+  version: v1
   title: Do not synchronize on boxed primitives
   summary: Synchronizing on a boxed primitive (Integer, Long, Boolean, etc.) is unsafe due to interning and caching.
   rationale: Boxed primitive objects can be interned or cached by the JVM (e.g., Integer.valueOf(0) returns a cached instance). Synchronizing on such objects can cause unexpected contention and deadlocks across unrelated code paths that happen to use the same cached value.

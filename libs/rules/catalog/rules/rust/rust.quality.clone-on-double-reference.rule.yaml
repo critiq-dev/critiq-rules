@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.clone-on-double-reference
+  version: v1
   title: "Avoid `.clone()` on a double reference"
   summary: "Calling `.clone()` on `&&T` clones the inner `&T`, not the underlying `T`."
   rationale: >-

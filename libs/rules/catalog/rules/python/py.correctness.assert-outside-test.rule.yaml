@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.correctness.assert-outside-test
+  version: v1
   aliases:
     - BAN-B502
   title: Avoid assert statements in production code

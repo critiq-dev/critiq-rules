@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.resource-name-limit-not-exceeded
+  version: v1
   title: Resource name limit not exceeded
   summary: Resource name limit not exceeded
   rationale: cfn-lint reports E3011 when Resource name limit not exceeded.

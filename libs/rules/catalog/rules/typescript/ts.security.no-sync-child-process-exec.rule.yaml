@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-sync-child-process-exec
+  version: v1
   title: Avoid synchronous child process execution with dynamic commands
   summary: execSync and spawnSync should not run commands built from variables or template strings.
   rationale: Synchronous shell execution blocks the event loop and dynamic command strings are a common command-injection surface.

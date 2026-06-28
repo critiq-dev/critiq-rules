@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.testing.no-network-call-in-unit-test
+  version: v1
   title: Avoid real network calls in unit tests
   summary: Unit tests should not open real sockets; prefer doubles, recordings, or local fakes.
   rationale: Real network calls make tests flaky, slow, and unsafe against live systems.

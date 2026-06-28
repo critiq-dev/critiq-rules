@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.hashcode-on-array
+  version: v1
   title: hashCode() called on an array
   summary: Calling hashCode() directly on an array uses Object's identity-based hashCode rather than a content-based hash code.
   rationale: Arrays inherit Object.hashCode(), which returns the identity hash code, not a hash derived from array contents. This means two arrays with identical elements will have different hash codes. Use Arrays.hashCode() instead.

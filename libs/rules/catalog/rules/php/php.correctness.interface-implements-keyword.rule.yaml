@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.interface-implements-keyword
+  version: v1
   title: Interfaces cannot use implements
   summary: Interfaces cannot use implements
   rationale: Interfaces cannot use implements

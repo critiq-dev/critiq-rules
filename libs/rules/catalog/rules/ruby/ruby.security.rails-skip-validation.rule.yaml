@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.rails-skip-validation
+  version: v1
   title: Avoid ActiveRecord updates that skip validations
   summary: >-
     Methods such as update_column and touch persist data without running model validations.

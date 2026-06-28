@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.boolean-literal-in-expression
+  version: v1
   title: Boolean literals in logic expressions
   summary: Expressions like `flag == true` or `flag != false` can be simplified to the bare boolean value or its negation.
   rationale: >-

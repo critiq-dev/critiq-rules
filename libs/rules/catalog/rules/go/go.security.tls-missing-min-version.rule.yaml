@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.tls-missing-min-version
+  version: v1
   title: Set a TLS minimum version on `tls.Config`
   summary: >-
     `tls.Config` literals should set `MinVersion` to a modern protocol (`tls.VersionTLS12` or newer) to avoid downgrade attacks.

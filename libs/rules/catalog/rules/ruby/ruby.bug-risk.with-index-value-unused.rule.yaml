@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.with-index-value-unused
+  version: v1
   title: with_index called but index value unused
   summary: >-
     `with_index` or `each_with_index` is called but the block only receives

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.unsafe-jackson-deserialization
+  version: v1
   title: Avoid enabling Jackson polymorphic deserialization
   summary: >-
     Jackson `ObjectMapper` should not call `enableDefaultTyping` or `activateDefaultTyping`, and `@JsonTypeInfo(use = Id.CLASS|MINIMAL_CLASS)` should not be applied without an allowlist.

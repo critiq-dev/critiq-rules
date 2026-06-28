@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.block-on-in-async
+  version: v1
   title: Avoid block_on inside async functions
   summary: Calling block_on from async code can deadlock the runtime.
   rationale: >-

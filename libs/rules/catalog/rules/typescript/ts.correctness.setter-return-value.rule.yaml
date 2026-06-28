@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.setter-return-value
+  version: v1
   title: Return value from setter
   summary: Detects return value from setter issues in JavaScript and TypeScript source.
   rationale: Return value from setter patterns are a common source of bugs and confusing runtime behavior.

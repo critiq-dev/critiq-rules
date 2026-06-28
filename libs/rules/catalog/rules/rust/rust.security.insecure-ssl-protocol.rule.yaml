@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.insecure-ssl-protocol
+  version: v1
   title: Reject deprecated SSL/TLS protocol versions
   summary: >-
     Rust code must not enable SSLv3, TLS 1.0, or TLS 1.1 in TLS configuration.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.abstract-method-with-body
+  version: v1
   title: Abstract methods must not have a body
   summary: Abstract methods must not have a body
   rationale: Abstract methods must not have a body

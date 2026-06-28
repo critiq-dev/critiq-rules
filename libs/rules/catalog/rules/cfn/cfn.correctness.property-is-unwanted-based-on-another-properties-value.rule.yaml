@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.property-is-unwanted-based-on-another-properties-value
+  version: v1
   title: Property is unwanted based on another properties value
   summary: Property is unwanted based on another properties value
   rationale: cfn-lint reports E3018 when Property is unwanted based on another properties value.

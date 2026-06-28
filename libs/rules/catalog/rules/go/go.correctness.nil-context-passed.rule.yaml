@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.nil-context-passed
+  version: v1
   title: Pass a real context.Context
   summary: Context-accepting calls should not receive a literal `nil` as their first argument.
   rationale: >-

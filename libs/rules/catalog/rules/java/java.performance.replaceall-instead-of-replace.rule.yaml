@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.replaceall-instead-of-replace
+  version: v1
   title: "String.replaceAll() with literal string argument"
   summary: "Using `String.replaceAll()` with a literal (non-regex) string argument is less efficient than `String.replace()`."
   rationale: "`replaceAll()` interprets its first argument as a regex pattern, incurring unnecessary compilation overhead even when the argument contains no special regex characters. `String.replace()` treats the first argument as a literal character sequence and has optimized intrinsic implementations."

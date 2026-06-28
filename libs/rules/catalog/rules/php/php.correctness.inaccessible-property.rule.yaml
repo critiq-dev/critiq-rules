@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.inaccessible-property
+  version: v1
   title: Inaccessible property
   summary: Accessing a property that is not visible from the current scope will cause a runtime error.
   aliases:

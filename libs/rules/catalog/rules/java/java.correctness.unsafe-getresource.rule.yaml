@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.unsafe-getresource
+  version: v1
   title: Unsafe usage of getResource with relative path
   summary: Using `getClass().getResource()` with a relative path may fail in subclasses.
   rationale: "`getResource()` on a Class instance resolves relative to that class's package. Use absolute paths or `ClassLoader.getResource()`."

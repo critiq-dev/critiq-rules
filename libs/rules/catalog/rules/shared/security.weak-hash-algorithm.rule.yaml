@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: security.weak-hash-algorithm
+  version: v1
   title: Avoid weak hash algorithms
   summary: Cryptographic hashing should use modern, collision-resistant algorithms.
   aliases:

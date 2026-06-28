@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.redundant-foreign-key
+  version: v1
   title: Redundant `foreign_key` in ActiveRecord association
   summary: >-
     Explicit `foreign_key` matches the Rails default convention

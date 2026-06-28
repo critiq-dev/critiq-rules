@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.inefficient-data-structure-usage
+  version: v1
   title: Inefficient data structure usage
   summary: Linear membership checks or key projections should be reviewed for more suitable lookup structures.
   rationale: Repeated array scans or `Object.keys(...).includes(...)` patterns are often avoidable with `Set`, `Map`, or direct key checks.

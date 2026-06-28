@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.unknown-magic-method
+  version: v1
   title: Use only supported magic methods
   summary: PHP recognizes a fixed set of double-underscore magic methods.
   aliases:

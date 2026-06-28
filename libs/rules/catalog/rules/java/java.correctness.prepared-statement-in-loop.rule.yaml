@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.prepared-statement-in-loop
+  version: v1
   title: PreparedStatement creation inside a loop
   summary: Creating PreparedStatement or CallableStatement inside a loop causes repeated database parsing and compilation, leading to performance degradation and potential resource exhaustion.
   rationale: PreparedStatements should be created outside loops and reused with different parameters to avoid repeated SQL parsing and compilation. Creating them inside loops can also exhaust the database statement cache.

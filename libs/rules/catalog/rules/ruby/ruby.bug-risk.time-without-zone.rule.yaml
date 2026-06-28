@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.time-without-zone
+  version: v2
   title: Time should be used with zone in Rails apps
   summary: >-
     `Time.now`, `Time.parse`, `Time.current`, `Time.at`, or `Time.new` is used
@@ -30,6 +31,10 @@ scope:
     exclude:
       - "**/vendor/**"
       - "**/node_modules/**"
+      - "**/scripts/perf/**"
+      - "**/perf/**"
+      - "**/benchmark/**"
+      - "**/bench/**"
 match:
   fact:
     kind: ruby.bug-risk.time-without-zone
@@ -43,9 +48,13 @@ emit:
       - ruby
   message:
     title: "Use `Time.zone` instead of bare `Time`"
-    summary: "'${captures.issue.text}' uses bare `Time` without zone. Use `Time.zone.now` or similar zone-aware alternatives."
+    summary: >-
+      '${captures.issue.text}' uses bare `Time` without zone. Use
+      `Time.zone.now`, `Time.zone.parse`, `Time.zone.at`, or
+      `Time.zone.local` to respect the configured time zone.
   remediation:
     summary: >-
       Replace `Time.now` with `Time.zone.now`, `Time.parse(...)` with
-      `Time.zone.parse(...)`, and similar patterns to respect the application's
-      configured time zone.
+      `Time.zone.parse(...)`, `Time.at(...)` with `Time.zone.at(...)`,
+      and `Time.new(...)` with `Time.zone.local(...)` to respect the
+      application's configured time zone.

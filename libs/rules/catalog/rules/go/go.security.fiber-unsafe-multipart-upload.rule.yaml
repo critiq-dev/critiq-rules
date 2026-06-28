@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.fiber-unsafe-multipart-upload
+  version: v1
   title: Harden Fiber multipart uploads
   summary: >-
     Fiber upload helpers should enforce size limits and never persist client-controlled filenames without normalization.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.performance.reorder-operands
+  version: v1
   title: Reorder boolean expression operands for short-circuit optimization
   summary: Boolean `&&`/`||` expressions should place cheap operands on the left so expensive calls are skipped when possible.
   rationale: >-

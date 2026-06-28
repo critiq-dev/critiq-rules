@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.isize-usize-overflow
+  version: v1
   title: "Avoid overflowing enumeration with isize::MAX or usize::MAX"
   summary: "Using `isize::MAX` or `usize::MAX` in a range expression can cause overflow."
   rationale: >-

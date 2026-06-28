@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-legacy-lifecycle
+  version: v1
   title: Avoid legacy React lifecycle methods
   summary: Legacy class lifecycle hooks are brittle in strict mode and block migration toward modern React patterns.
   rationale: Deprecated lifecycle methods are easy to misuse during async rendering and create noisy upgrade work across older React codebases.

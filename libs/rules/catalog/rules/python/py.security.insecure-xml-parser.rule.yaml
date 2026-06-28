@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.insecure-xml-parser
+  version: v1
   aliases:
     - BAN-B409
   title: Avoid insecure XML parsers

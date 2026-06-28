@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.regexp-pattern-unusual-control-character
+  version: v2
   title: Unusual ASCII control characters in regexp pattern
   summary: The regular expression pattern embeds low ASCII control characters outside common whitespace.
   rationale: Literal control characters in patterns are hard to read, easy to corrupt in editors, and often indicate copy-paste or encoding mistakes.

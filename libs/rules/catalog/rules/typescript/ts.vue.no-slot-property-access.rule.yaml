@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.vue.no-slot-property-access
+  version: v1
   title: Call $slots entries as functions
   summary: "In Vue 3, $slots entries are functions. Access them by calling `$slots.slotName()`, not by treating them as values."
   rationale: Vue 3 changed `$slots` to return functions for scoped slot content. Accessing `this.$slots.default[0]` or using `this.$slots.default` as a value without calling it will not work as expected. Always invoke slot functions to render content.

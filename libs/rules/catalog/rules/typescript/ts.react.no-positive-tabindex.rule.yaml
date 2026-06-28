@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-positive-tabindex
+  version: v1
   title: Avoid positive tabIndex values
   summary: "Positive `tabIndex` values create a custom keyboard order that is fragile and usually less accessible than DOM order."
   rationale: Manual focus sequencing is easy to break as layouts evolve and makes keyboard navigation less predictable for assistive-technology users.

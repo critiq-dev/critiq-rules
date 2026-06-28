@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.bug-risk.compound-assignment-misuse
+  version: v1
   title: "Audit: Possibly odd compound assignment operators '+=' or '-='"
   summary: >-
     The expression uses the same variable on both sides of a compound

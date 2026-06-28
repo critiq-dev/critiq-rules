@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.undefined-action-filter
+  version: v1
   title: Action filter is not defined in the scope it is used in
   summary: >-
     A `before_action` references a method that is not defined in the

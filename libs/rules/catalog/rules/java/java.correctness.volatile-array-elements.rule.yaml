@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.volatile-array-elements
+  version: v1
   title: Elements accessed from volatile reference to an array are not volatile
   summary: Declaring an array reference as volatile does not make array element accesses volatile.
   rationale: Only the array reference itself is volatile, not the elements. Each element access still goes through normal memory.

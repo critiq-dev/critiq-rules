@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.testing.useless-assertion
+  version: v1
   title: Useless assertion testing a constant value
   summary: Assertions that compare a static primitive literal against itself will never fail.
   rationale: "`expect(true).toBe(true)` or similar tautological assertions always pass regardless of code behavior. They indicate leftover debug code or a mistaken test."

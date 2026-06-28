@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.undefined-function
+  version: v1
   title: Undefined function call detected
   summary: Calling a function that is not defined in the current file and is not a known PHP built-in function will cause a runtime fatal error.
   aliases:

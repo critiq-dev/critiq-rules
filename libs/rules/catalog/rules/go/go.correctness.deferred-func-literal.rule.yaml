@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.deferred-func-literal
+  version: v1
   title: Deferred function literal can be simplified
   summary: A `defer func() { bar() }()` wrapping a single call can be simplified to `defer bar()`.
   rationale: >-

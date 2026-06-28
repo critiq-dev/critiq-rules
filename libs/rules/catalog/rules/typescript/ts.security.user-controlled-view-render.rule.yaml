@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.user-controlled-view-render
+  version: v1
   title: Constrain `res.render()` trust boundaries
   summary: Express view names should not cross into server-side rendering from untrusted input.
   rationale: Untrusted template names can expose internal views, bypass intended route behavior, or widen a server-side template boundary.

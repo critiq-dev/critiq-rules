@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.multiple-rescues-for-same-exception
+  version: v1
   title: Avoid multiple rescue clauses for the same exception
   summary: >-
     A begin-rescue block rescues the same exception class more than once. The

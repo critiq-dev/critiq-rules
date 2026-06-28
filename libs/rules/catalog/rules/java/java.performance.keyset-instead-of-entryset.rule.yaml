@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.keyset-instead-of-entryset
+  version: v1
   title: "Inefficient Map iteration with keySet() and get()"
   summary: "Iterating over `Map.keySet()` and calling `Map.get(key)` for each key performs redundant hash lookups."
   rationale: "Using `keySet()` + `get()` iterates the map keys and performs a separate hash lookup for each element. This is O(2n) instead of O(n). Use `entrySet()` to access both key and value directly without the extra lookup."

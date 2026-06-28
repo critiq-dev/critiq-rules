@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.correctness.private-member-should-be-readonly
       allSeverities:
-        - medium
+        - low
   - name: allows private member mutated in methods
     sourcePath: ./fixtures/ts.correctness.private-member-should-be-readonly/valid.ts
     expect:

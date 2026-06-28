@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.constructor-starts-thread
+  version: v1
   title: Constructor of non-final class starts a thread
   summary: Starting a thread in a constructor of a non-final class may expose a partially constructed object.
   rationale: "When a constructor starts a thread, the new thread may access the object before it is fully initialized. Subclasses can also override methods called by the thread before construction completes, leading to unpredictable behavior."

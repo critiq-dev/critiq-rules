@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.ignored-future-value
+  version: v1
   title: Do not drop futures without awaiting
   summary: An async function was called without awaiting or storing its returned Future.
   rationale: >-

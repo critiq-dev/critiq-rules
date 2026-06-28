@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.interface-any-preferred
+  version: v1
   title: Use `any` instead of `interface{}`
   summary: Go 1.18 introduced `any` as an alias for `interface{}`. Prefer `any` for brevity.
   rationale: >-

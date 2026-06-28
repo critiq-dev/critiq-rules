@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.config.no-process-env-outside-config
+  version: v1
   title: Avoid direct `process.env` access outside config
   summary: Keep environment variable access inside config modules.
   rationale: Centralized config makes environment handling predictable and testable.

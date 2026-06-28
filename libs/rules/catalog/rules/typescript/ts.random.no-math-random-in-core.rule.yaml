@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.random.no-math-random-in-core
+  version: v1
   title: Avoid `Math.random()` in core code
   summary: Core code should not depend on nondeterministic random generation.
   rationale: Randomness in core logic makes behavior hard to test and reason about.

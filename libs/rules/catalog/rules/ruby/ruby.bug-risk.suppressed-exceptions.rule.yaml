@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.suppressed-exceptions
+  version: v1
   title: Suppressed exceptions detected
   summary: >-
     A rescue block has no body, silently swallowing all exceptions. Every

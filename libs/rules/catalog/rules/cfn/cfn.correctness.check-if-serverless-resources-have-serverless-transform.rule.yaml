@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-if-serverless-resources-have-serverless-transform
+  version: v1
   title: Check if serverless resources have serverless transform
   summary: Check if serverless resources have serverless transform
   rationale: cfn-lint reports E3038 when Check if serverless resources have serverless transform.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.django-mark-safe
+  version: v1
   title: Avoid Django mark_safe for dynamic content
   summary: "Django responses should avoid `mark_safe` when content can include untrusted input."
   rationale: "`mark_safe` bypasses Django escaping and can introduce cross-site scripting when values are not strictly trusted."

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.redundant-string-cast-concat
+  version: v1
   title: Remove redundant string casts before concatenation
   summary: Casting to string immediately before concatenation is usually redundant in PHP.
   aliases:

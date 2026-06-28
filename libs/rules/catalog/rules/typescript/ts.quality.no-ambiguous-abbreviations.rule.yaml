@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-ambiguous-abbreviations
+  version: v1
   title: Avoid ambiguous abbreviations in public APIs
   summary: Ambiguous abbreviated names in exported APIs reduce readability and onboarding speed.
   rationale: Public API names are long-lived and should optimize for clarity over brevity.

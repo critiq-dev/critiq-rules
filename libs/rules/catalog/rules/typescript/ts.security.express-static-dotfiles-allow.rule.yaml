@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-static-dotfiles-allow
+  version: v1
   title: Do not allow dotfiles in Express static middleware
   summary: express.static should not serve dotfiles from disk unless explicitly required and reviewed.
   rationale: Allowing dotfiles can expose hidden configuration and secrets through the static file middleware.

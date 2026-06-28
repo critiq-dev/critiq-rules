@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.impossible-interface-nil-check
+  version: v1
   title: "Impossible interface nil check"
   summary: >-
     Interface value compared to nil when the underlying concrete type is always

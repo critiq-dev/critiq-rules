@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.testing.focused-example
+  version: v1
   title: Remove focused RSpec examples before merge
   summary: fit and fdescribe skip the rest of the suite and should not ship.
   rationale: Focused examples hide failures in sibling specs.

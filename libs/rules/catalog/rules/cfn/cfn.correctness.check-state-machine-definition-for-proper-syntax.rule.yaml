@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-state-machine-definition-for-proper-syntax
+  version: v1
   title: Check state machine definition for proper syntax
   summary: Check state machine definition for proper syntax
   rationale: cfn-lint reports E2532 when Check state machine definition for proper syntax.

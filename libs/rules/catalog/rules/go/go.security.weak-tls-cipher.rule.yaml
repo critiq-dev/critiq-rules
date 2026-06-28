@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.weak-tls-cipher
+  version: v1
   title: Remove weak TLS cipher suites
   summary: >-
     `tls.Config.CipherSuites` should not include RC4, DES, 3DES, NULL, or export-grade cipher constants.

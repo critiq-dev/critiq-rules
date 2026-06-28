@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.testing.disabled-without-ticket-reference
+  version: v1
   title: JUnit @Disabled should cite a ticket
   summary: Disabled tests without a reason string or nearby tracker note are hard to triage.
   rationale: Disabled tests should carry reviewable intent.

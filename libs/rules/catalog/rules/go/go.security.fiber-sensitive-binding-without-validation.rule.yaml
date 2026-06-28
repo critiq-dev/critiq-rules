@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.fiber-sensitive-binding-without-validation
+  version: v1
   title: Fiber handlers should validate sensitive request bodies
   summary: >-
     Sensitive Fiber parsers should pair structs with validator tags or explicit validation so roles and secrets cannot be silently omitted.

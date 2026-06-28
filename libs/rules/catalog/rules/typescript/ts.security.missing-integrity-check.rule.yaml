@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.missing-integrity-check
+  version: v1
   title: Use authenticated encryption for secrets and tokens
   summary: Session, cookie, and token encryption should provide integrity protection in the same helper.
   rationale: Confidentiality-only encryption leaves secret-bearing values vulnerable to tampering unless the code also applies an integrity check or uses an authenticated mode.

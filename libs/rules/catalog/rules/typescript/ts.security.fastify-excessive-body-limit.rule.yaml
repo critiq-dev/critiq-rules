@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.fastify-excessive-body-limit
+  version: v1
   title: Avoid excessive Fastify body limits
   summary: Fastify applications should not disable body limits or configure unusually large defaults without compensating controls.
   rationale: Oversized bodies amplify denial-of-service risk on services without upstream buffering limits.

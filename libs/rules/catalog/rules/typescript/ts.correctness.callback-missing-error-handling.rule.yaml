@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.callback-missing-error-handling
+  version: v1
   title: Callback missing error handling
   summary: Require error handling in callbacks.
   rationale: Callbacks that accept an error parameter but never reference it may silently swallow failures, making debugging difficult.

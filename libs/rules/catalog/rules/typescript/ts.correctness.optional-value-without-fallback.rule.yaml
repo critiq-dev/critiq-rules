@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.optional-value-without-fallback
+  version: v1
   title: Optional value used without fallback
   summary: Optional values should be normalized before arithmetic, concatenation, or other direct use.
   rationale: Using maybe-undefined values in ordinary expressions bakes uncertainty into the result and can fail or stringify unexpectedly at runtime.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.security.controlling-access-to-an-s3-bucket-should-be-done-with-bucket-policies
+  version: v1
   title: Controlling access to an s3 bucket should be done with bucket policies
   summary: Controlling access to an s3 bucket should be done with bucket policies
   rationale: cfn-lint reports W3045 when Controlling access to an s3 bucket should be done with bucket policies.

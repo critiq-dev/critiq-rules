@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.insecure-json-load
+  version: v1
   title: Avoid insecure JSON load helpers
   summary: >-
     Prefer `JSON.parse` over `JSON.load`, `JSON.restore`, or permissive Oj/MultiJson loaders.

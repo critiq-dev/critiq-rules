@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-cookie-options
+  version: v1
   title: Use valid cookie option keys
   summary: setcookie and setrawcookie option arrays only accept documented keys.
   aliases:

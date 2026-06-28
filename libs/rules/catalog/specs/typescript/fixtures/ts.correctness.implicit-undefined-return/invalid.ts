@@ -1,4 +1,4 @@
-export function maybeValue(flag: boolean): string | undefined {
+export function maybeValue(flag: boolean) {
   if (flag) {
     return 'ready';
   }

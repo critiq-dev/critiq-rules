@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-properties-that-need-at-least-one-of-a-list-of-properties
+  version: v1
   title: Check properties that need at least one of a list of properties
   summary: Check properties that need at least one of a list of properties
   rationale: cfn-lint reports E2522 when Check properties that need at least one of a list of properties.

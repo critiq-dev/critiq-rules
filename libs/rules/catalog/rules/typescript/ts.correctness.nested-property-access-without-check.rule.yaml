@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.nested-property-access-without-check
+  version: v1
   title: Nested property access without existence check
   summary: Deep property chains derived from external input should verify intermediate values before access.
   rationale: Multi-hop access into request or payload objects is brittle when any segment can be absent, renamed, or malformed.

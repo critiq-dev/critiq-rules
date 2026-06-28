@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-set-state-in-component-did-mount
+  version: v1
   title: Avoid setState in componentDidMount
   summary: Synchronous state updates during mount trigger an extra render before the browser paints the initial tree.
   rationale: Initial state belongs in the constructor or class field initializers so the first render already reflects the mounted view.

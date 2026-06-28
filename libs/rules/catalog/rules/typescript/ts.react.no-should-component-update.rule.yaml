@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-should-component-update
+  version: v1
   title: Avoid shouldComponentUpdate
   summary: Manual shouldComponentUpdate overrides increase maintenance cost and are rarely needed with modern React.
   rationale: PureComponent and React.memo provide shallow comparison out of the box. Hand-rolling shouldComponentUpdate is error-prone and duplicates built-in optimizations.

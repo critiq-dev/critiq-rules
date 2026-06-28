@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.redundant-type-declaration
+  version: v1
   title: Redundant type in variable declaration
   summary: The explicit type in `var count int = 10` is unnecessary — Go can infer it from the RHS literal.
   rationale: >-

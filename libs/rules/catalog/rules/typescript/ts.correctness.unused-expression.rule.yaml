@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.unused-expression
+  version: v1
   title: Unused expressions found
   summary: Expression statement has no side effects and its result is discarded.
   rationale: Expressions without side effects whose results are discarded indicate dead code or a programming mistake (e.g., `a && b` instead of `if (a) b()`).

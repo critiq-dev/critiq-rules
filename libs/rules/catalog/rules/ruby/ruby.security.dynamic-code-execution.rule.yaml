@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.dynamic-code-execution
+  version: v1
   title: Avoid dynamic Ruby code execution
   summary: >-
     Do not execute runtime-generated Ruby via eval, exec, or *_eval helpers.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.unsafe-deserialization
+  version: v1
   aliases:
     - BAN-B301
   title: Avoid unsafe deserialization with pickle

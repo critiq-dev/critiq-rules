@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.symfony-csrf-disabled
+  version: v1
   title: Keep Symfony CSRF enabled on state-changing form flows
   summary: >-
     Symfony forms and controllers handling state changes should not disable CSRF protection without a clear API token boundary.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.check-if-parameters-have-a-valid-value-based-on-an-allowed-pattern
+  version: v1
   title: Check if parameters have a valid value based on an allowed pattern
   summary: Check if parameters have a valid value based on an allowed pattern
   rationale: cfn-lint reports W2031 when Check if parameters have a valid value based on an allowed pattern.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.for-loop-mismatched-increment
+  version: v1
   title: For loop checks one variable but increments another
   summary: The loop condition checks one variable but a different variable is being incremented.
   rationale: "A for-loop that checks variable `i` in its condition but increments variable `j` is likely a bug. The loop may never terminate or may terminate early."

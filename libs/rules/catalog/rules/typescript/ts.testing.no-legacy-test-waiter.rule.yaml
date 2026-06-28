@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.testing.no-legacy-test-waiter
+  version: v1
   title: Avoid legacy test waiters
   summary: Deprecated test waiting APIs like wait(), waitForElement(), and waitForDomChange() should be replaced with waitFor().
   rationale: These APIs were removed in React Testing Library v13+ and create brittle, timing-dependent tests. The modern waitFor() API provides a more reliable and consistent approach to waiting for asynchronous DOM changes.

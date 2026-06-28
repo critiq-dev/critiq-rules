@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.getter-setter-sync-mismatch
+  version: v1
   title: Getter and setter method synchronization does not match
   summary: One of a getter/setter pair is synchronized and the other is not.
   rationale: When one accessor is synchronized and the other is not, concurrent access is not properly guarded, leading to potential data races and visibility issues.

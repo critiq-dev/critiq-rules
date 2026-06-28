@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-static-method
+  version: v1
   title: Static call to instance method
   summary: "Calling self::method() or static::method() when the method is not declared as static will produce a deprecation notice in PHP 8.2+ and an error in future versions."
   aliases:

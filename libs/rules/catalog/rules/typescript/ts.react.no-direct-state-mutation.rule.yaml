@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-direct-state-mutation
+  version: v2
   title: Do not mutate React state directly
-  summary: Assigning to `this.state` bypasses React change detection and produces stale UI.
-  rationale: State updates must flow through setState or hooks so React can schedule renders and enforce immutability guarantees.
+  summary: Direct assignment to `this.state` or its properties bypasses React change detection, leaving the UI out of sync with the underlying data.
+  rationale: State mutations must flow through `setState` or hook updaters so React can schedule renders and enforce immutability guarantees. Assigning directly to `this.state` or its properties circumvents the component lifecycle, preventing React from detecting the change and re-rendering. This causes bugs where the UI silently diverges from the component's actual data state.
   aliases:
     - JS-0444
   tags:

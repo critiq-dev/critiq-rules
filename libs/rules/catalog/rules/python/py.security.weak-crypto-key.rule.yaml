@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.weak-crypto-key
+  version: v1
   aliases:
     - BAN-B505
   title: Avoid weak cryptographic key sizes

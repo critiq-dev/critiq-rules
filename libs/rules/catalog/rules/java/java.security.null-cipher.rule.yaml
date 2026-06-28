@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.null-cipher
+  version: v1
   title: Do not use NullCipher
   summary: "Constructing `new NullCipher()` or `Cipher.getInstance(\"Null\")` performs no encryption."
   rationale: NullCipher returns plaintext unchanged, providing no confidentiality and often disguising an intentional bypass of crypto.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.invalid-percent-string-literal
+  version: v1
   title: Invalid construction of percent string literal
   summary: >-
     `%q` and `%Q` string literals use non-alphanumeric delimiters. An unmatched

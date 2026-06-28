@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.single-char-string-indexof
+  version: v1
   title: "Single-character string literal in indexOf/lastIndexOf/contains"
   summary: "Using a single-character `String` literal in `indexOf()`, `lastIndexOf()`, or `contains()` is less efficient than using a `char` literal."
   rationale: "When searching for a single character, using the char overload (e.g., `s.indexOf('.')`) avoids creating a temporary String object and can use optimized intrinsic implementations. The String overload creates unnecessary garbage and performs worse."

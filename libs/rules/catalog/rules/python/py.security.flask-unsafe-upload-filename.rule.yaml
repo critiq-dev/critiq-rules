@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.flask-unsafe-upload-filename
+  version: v1
   title: Sanitize Flask upload filenames before saving
   summary: Flask upload handlers should pass filenames through `secure_filename` (or equivalent) before persisting to disk.
   rationale: Attacker-controlled filenames enable traversal sequences, extension spoofing, and collisions when saved verbatim.

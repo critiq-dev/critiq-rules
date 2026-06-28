@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-properties-that-are-required-together
+  version: v1
   title: Check properties that are required together
   summary: Check properties that are required together
   rationale: cfn-lint reports E2521 when Check properties that are required together.

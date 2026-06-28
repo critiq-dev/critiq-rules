@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.insecure-network-protocol
+  version: v1
   title: Avoid plaintext or legacy network protocols
   summary: "URL/URI literals should not use `ftp://`, `telnet://`, or `jar:http://`."
   rationale: These schemes transmit credentials and payloads in cleartext or load remote archives without integrity checks.

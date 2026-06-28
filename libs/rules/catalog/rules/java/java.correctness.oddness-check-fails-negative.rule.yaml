@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.oddness-check-fails-negative
+  version: v1
   title: Oddness check using x % 2 == 1 will not work for negative numbers
   summary: Using `x % 2 == 1` to check parity fails for negative values because Java's modulo preserves sign.
   rationale: In Java, -3 % 2 == -1, so the comparison == 1 fails for negative odd numbers. Use x % 2 != 0 instead.

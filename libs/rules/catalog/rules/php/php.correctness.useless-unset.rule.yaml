@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.useless-unset
+  version: v1
   title: Remove useless unset calls
   summary: Calling unset on literals or non-variables has no effect.
   aliases:

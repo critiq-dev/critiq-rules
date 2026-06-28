@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.missing-authorization-before-sensitive-action
+  version: v1
   title: Missing authorization before sensitive action
   summary: Sensitive backend actions should be guarded by an authorization or permission check.
   rationale: Calling destructive or privileged actions without an authorization guard increases the risk of broken access control.

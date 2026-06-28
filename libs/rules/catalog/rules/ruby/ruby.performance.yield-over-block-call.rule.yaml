@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.yield-over-block-call
+  version: v1
   title: Prefer `yield` over explicit `block.call`
   summary: >-
     Methods that accept a block with `&block` and call it via `block.call`

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.insecure-crypto-import
+  version: v1
   aliases:
     - BAN-B413
   title: Avoid low-level crypto library imports

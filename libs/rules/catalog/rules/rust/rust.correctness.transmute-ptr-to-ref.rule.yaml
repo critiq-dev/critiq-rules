@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.transmute-ptr-to-ref
+  version: v1
   title: "Attempting to transmute a raw pointer to a reference"
   summary: "Transmuting `*const T` to `&T` creates a reference with no lifetime guarantees."
   rationale: >-

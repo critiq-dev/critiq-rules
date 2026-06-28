@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.validate-that-snapstart-is-configured-for-java11-runtimes
+  version: v1
   title: "Validate that snapstart is configured for >= java11 runtimes"
   summary: "Validate that snapstart is configured for >= java11 runtimes"
   rationale: "cfn-lint reports I2530 when Validate that snapstart is configured for >= java11 runtimes."

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.laravel-unsafe-mass-assignment
+  version: v1
   title: Avoid mass-assigning full Laravel request payloads
   summary: >-
     Eloquent writes should not use `$request->all()` or fully unguarded models for sensitive records.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.duplicate-constant-assignment
+  version: v1
   title: Duplicate assignments for a constant
   summary: >-
     Multiple assignments to the same constant were found. The previous value is

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.uninitialized-typed-property
+  version: v1
   title: Initialize typed properties
   summary: Typed class properties without a default value should be initialized in the constructor.
   aliases:

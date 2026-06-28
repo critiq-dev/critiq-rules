@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-set-state-in-component-did-update
+  version: v1
   title: Guard setState in componentDidUpdate
   summary: Unconditional setState in componentDidUpdate can recurse through renders when props or state change on every pass.
   rationale: Updates should compare against prevProps or prevState so the component only re-renders when inputs actually changed.

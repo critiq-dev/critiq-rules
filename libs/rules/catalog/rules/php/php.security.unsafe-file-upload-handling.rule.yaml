@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.unsafe-file-upload-handling
+  version: v1
   title: Validate uploaded filenames and content before storing files
   summary: >-
     PHP upload handlers should not persist raw `$_FILES` names without validation and normalization.

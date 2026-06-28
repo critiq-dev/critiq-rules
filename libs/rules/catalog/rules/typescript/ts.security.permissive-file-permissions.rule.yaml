@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.permissive-file-permissions
-  title: Avoid permissive file modes
-  summary: Files that can carry user or security data should not be created with world-accessible modes.
-  rationale: Broad file permissions expose application data to local users or processes that should not read or modify it.
+  version: v2
+  title: Avoid world-writable file modes
+  summary: World-writable file modes let any local user or process modify files, risking unauthorized data tampering or privilege escalation.
+  rationale: Granting write permission to "other" (modes containing 0o002) lets any local user or process alter the file. This is always dangerous — unlike world-readable modes such as 0o644 or 0o755, which are standard for public resources like TLS certificates, configuration files, and directories.
   detection:
     kind: pattern
   references:
@@ -40,7 +41,7 @@ emit:
       - permissions
   message:
     title: Tighten the mode used by `${captures.issue.text}`
-    summary: "`${captures.issue.text}` sets a file mode that grants world access."
+    summary: "`${captures.issue.text}` sets a world-writable file mode."
   remediation:
     summary: Use the minimum required file mode and remove world-readable or world-writable bits.
 

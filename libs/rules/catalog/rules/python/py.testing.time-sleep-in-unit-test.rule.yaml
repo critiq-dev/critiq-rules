@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.testing.time-sleep-in-unit-test
+  version: v1
   title: Avoid time.sleep in Python unit tests
   summary: Sleeping in tests slows suites and hides synchronization bugs.
   rationale: Prefer deterministic waits, polling helpers, or clock fakes.

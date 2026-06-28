@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.resource-schema
+  version: v1
   title: Resource schema
   summary: Resource schema
   rationale: cfn-lint reports E3000 when Resource schema.

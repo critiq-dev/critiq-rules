@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.datadog-browser-track-user-interactions
+  version: v1
   title: Review Datadog RUM user interaction capture
   summary: Datadog Browser RUM should not enable broad user interaction capture without a privacy review.
   rationale: Automatic interaction capture can leak sensitive page content or element labels to third-party telemetry.

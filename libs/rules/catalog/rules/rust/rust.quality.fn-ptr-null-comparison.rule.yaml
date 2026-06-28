@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.fn-ptr-null-comparison
+  version: v1
   title: "Avoid comparing function pointer to null"
   summary: "Comparing a function pointer to null after casting to an integer is error-prone and unnecessary."
   rationale: >-

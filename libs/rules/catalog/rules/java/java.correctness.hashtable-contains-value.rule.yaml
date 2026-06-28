@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.hashtable-contains-value
+  version: v1
   title: "Hashtable/ConcurrentHashMap.contains() checks for values, not keys"
   summary: "`.contains()` on `Hashtable` and `ConcurrentHashMap` checks for value existence. Use `.containsKey()` to check for key existence."
   rationale: "In `Hashtable` and `ConcurrentHashMap`, `.contains(Object)` checks whether a **value** exists in the map, not a key. This differs from `Map.containsKey()` which checks for keys. Developers migrating from `Map` or from other collection types may mistakenly use `.contains()` thinking it checks keys. Use `.containsKey()` for key lookup and `.containsValue()` for value lookup."

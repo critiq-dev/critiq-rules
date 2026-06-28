@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-if-property-values-adhere-to-a-specific-pattern
+  version: v1
   title: Check if property values adhere to a specific pattern
   summary: Check if property values adhere to a specific pattern
   rationale: cfn-lint reports E3031 when Check if property values adhere to a specific pattern.

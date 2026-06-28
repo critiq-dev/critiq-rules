@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.check-stateful-resources-have-a-set-updatereplacepolicy-deletionpolicy
+  version: v1
   title: Check stateful resources have a set updatereplacepolicy/deletionpolicy
   summary: Check stateful resources have a set updatereplacepolicy/deletionpolicy
   rationale: cfn-lint reports I3011 when Check stateful resources have a set updatereplacepolicy/deletionpolicy.

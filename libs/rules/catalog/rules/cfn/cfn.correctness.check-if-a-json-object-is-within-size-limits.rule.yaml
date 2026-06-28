@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-if-a-json-object-is-within-size-limits
+  version: v1
   title: Check if a json object is within size limits
   summary: Check if a json object is within size limits
   rationale: cfn-lint reports E3502 when Check if a json object is within size limits.

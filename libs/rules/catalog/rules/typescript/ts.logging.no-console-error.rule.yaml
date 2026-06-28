@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.logging.no-console-error
+  version: v1
   title: Avoid console.error
   summary: Route error logs through the project logger.
   rationale: Console error calls bypass the shared logging pipeline.
@@ -11,6 +12,23 @@ metadata:
 scope:
   languages:
     - typescript
+  paths:
+    exclude:
+      # Standard test exclusions
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      # E2E and integration test directories
+      - "**/e2e/**"
+      - "**/e2e-tests/**"
+      # Storybook and demo files
+      - "**/*.stories.*"
+      # Test fixtures and harnesses
+      - "**/fixtures/**"
+      # Database seeding scripts
+      - "**/seed*/**"
 match:
   node:
     kind: CallExpression

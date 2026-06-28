@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.nestjs-validation-pipe-without-whitelist
+  version: v1
   title: Harden Nest ValidationPipe with whitelist mode
   summary: Global ValidationPipe instances should enable whitelist-style stripping for unexpected fields.
   rationale: Allowing undeclared fields preserves attack surface for mass-assignment style bugs.

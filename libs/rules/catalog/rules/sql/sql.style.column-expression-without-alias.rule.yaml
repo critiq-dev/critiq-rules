@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: sql.style.column-expression-without-alias
+  version: v1
   aliases:
     - SQL-L013
   title: Column expression without alias detected

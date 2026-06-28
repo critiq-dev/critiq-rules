@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.raw-slice-to-ptr
+  version: v1
   title: Raw pointer obtained from slice reference
   summary: >-
     Creating a raw pointer from a slice reference using `as *const` or `as *mut`

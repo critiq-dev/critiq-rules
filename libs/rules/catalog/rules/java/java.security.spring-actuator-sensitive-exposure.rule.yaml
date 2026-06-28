@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.spring-actuator-sensitive-exposure
+  version: v1
   title: Restrict Spring Boot actuator web exposure to non-sensitive endpoints
   summary: >-
     Actuator `management.endpoints.web.exposure.include` should not expose wildcards or high-risk endpoints (such as `env`, `beans`, or `heapdump`) without deliberate access control.

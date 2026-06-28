@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.closeable-provides-injection
+  version: v1
   title: Closeable values should not be injected via @Provides annotated methods
   summary: "@Provides/@Inject methods returning Closeable types can cause resource management problems."
   rationale: DI frameworks may hold Closeable resources longer than intended, preventing proper cleanup. Scope the resource or use a factory that manages lifecycle.

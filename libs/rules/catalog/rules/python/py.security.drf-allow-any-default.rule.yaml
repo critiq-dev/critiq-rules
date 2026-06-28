@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.drf-allow-any-default
+  version: v1
   title: Avoid AllowAny as DRF default permission
   summary: Django REST Framework APIs should default to authenticated permission classes instead of `AllowAny`.
   rationale: Default `AllowAny` exposes mutation-heavy APIs unless every view overrides permissions explicitly.

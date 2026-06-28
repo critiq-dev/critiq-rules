@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.extraneous-import
+  version: v1
   title: Extraneous import
   summary: Detected import declarations which import extraneous modules.
   rationale: Importing modules whose bindings are never used makes the module graph larger and can confuse readers about actual dependencies.
@@ -19,6 +20,18 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/__mocks__/**"
+      - "**/tests/**"
+      - "**/test/**"
+      - "**/e2e/**"
+      - "**/*.stories.*"
+      - "**/*.config.*"
+      - "**/*.d.ts"
 match:
   fact:
     kind: language.extraneous-import
@@ -27,7 +40,7 @@ emit:
   finding:
     category: correctness.modules
     severity: medium
-    confidence: 0.85
+    confidence: 0.95
     tags:
       - correctness
       - modules

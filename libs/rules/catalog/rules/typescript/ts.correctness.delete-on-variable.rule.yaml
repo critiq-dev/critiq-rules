@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.delete-on-variable
+  version: v1
   title: Delete operator on variable
   summary: Detects delete operator on variable issues in JavaScript and TypeScript source.
   rationale: Delete operator on variable patterns are a common source of bugs and confusing runtime behavior.

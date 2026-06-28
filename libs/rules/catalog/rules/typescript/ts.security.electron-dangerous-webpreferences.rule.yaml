@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.electron-dangerous-webpreferences
+  version: v1
   title: Harden Electron webPreferences
   summary: Electron renderers should not run with unsafe webPreferences that weaken isolation or transport protection.
   rationale: Options such as nodeIntegration, contextIsolation, and webSecurity directly control whether renderer compromise becomes host compromise.

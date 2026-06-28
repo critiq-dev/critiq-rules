@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.deprecated-unset-cast
+  version: v1
   title: Remove deprecated (unset) casts
   summary: "The `(unset)` cast is deprecated and should not be used in modern PHP code."
   aliases:

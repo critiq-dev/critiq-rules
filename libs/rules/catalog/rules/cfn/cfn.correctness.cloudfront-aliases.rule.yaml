@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.cloudfront-aliases
+  version: v1
   title: Cloudfront aliases
   summary: Cloudfront aliases
   rationale: cfn-lint reports E3013 when Cloudfront aliases.

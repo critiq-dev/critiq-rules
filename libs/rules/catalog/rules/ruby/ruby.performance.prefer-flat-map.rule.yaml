@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.prefer-flat-map
+  version: v1
   title: Prefer `flat_map` over `map { ... }.flatten`
   summary: >-
     `.map { ... }.flatten` iterates the collection and then flattens the result

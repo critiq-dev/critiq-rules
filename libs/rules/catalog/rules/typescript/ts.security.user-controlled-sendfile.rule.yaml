@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.user-controlled-sendfile
+  version: v1
   title: Constrain `res.sendFile` to a trusted root
   summary: "`res.sendFile()` should not resolve filenames or options from request input without a trusted root."
   rationale: Request-controlled file responses are a common path to path traversal and unintended local file disclosure.

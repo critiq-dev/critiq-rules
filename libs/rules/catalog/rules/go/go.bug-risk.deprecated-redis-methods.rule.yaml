@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.bug-risk.deprecated-redis-methods
+  version: v1
   title: "Use of deprecated Redis methods"
   summary: >-
     Call to deprecated go-redis method (XTrim, XTrimApprox, ZAddCh, ZAddNXCh,

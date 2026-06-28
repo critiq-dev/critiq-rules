@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.wait-notify-on-thread
+  version: v1
   title: Wait/notify must not be called on a Thread object
   summary: Calling wait(), notify(), or notifyAll() on a Thread instance interferes with the JVM's internal thread lifecycle signaling.
   rationale: The JVM uses wait/notify on Thread objects internally (e.g., for Thread.join()). User code calling these methods can cause spurious wakeups, missed signals, or deadlocks.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.callback-not-error-first
+  version: v1
   title: Non-error-first callback pattern
   summary: Ensure Node.js-style error-first callback pattern is followed.
   rationale: Node.js conventions place the error as the first parameter; breaking this convention signals a potential bug or misunderstanding.

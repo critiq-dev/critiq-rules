@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.else-without-rescue
+  version: v1
   title: Avoid else without rescue in begin block
   summary: >-
     A begin block contains an else clause but no rescue clause. In Ruby, else

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-cascaded-effect-fetches
+  version: v1
   title: Avoid cascaded fetches inside React effects
   summary: React effects should not serialize independent fetches that can run in parallel or move server-side.
   rationale: Waterfall-style fetches delay rendering and hide data-loading cost inside client effects.

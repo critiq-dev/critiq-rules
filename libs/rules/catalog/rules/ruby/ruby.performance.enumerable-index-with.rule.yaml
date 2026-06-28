@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.enumerable-index-with
+  version: v1
   title: Use index_with instead of map+to_h to create a hash from an enumerable
   summary: >-
     Uses `.map { |e| [e, e.value] }.to_h` which can be replaced with

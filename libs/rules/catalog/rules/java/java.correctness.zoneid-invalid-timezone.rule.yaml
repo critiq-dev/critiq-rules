@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.zoneid-invalid-timezone
-  title: "ZoneId.of() should be passed a valid timezone identifier"
-  summary: "Calling `ZoneId.of()` with a hardcoded string that may not be a valid IANA timezone ID will throw `ZoneRulesException` at runtime."
-  rationale: "`ZoneId.of()` expects a valid IANA timezone ID (e.g., America/New_York, Europe/London). Passing an arbitrary string compiles but throws `ZoneRulesException` at runtime. Use `ZoneId.of()` only with known-valid identifiers or use `ZoneId.of(tz, ZoneId.SHORT_IDS)` for short IDs."
+  version: v2
+  title: "ZoneId.of() called with a hardcoded timezone string"
+  summary: "Passing an unverified hardcoded string to `ZoneId.of()` compiles but throws `ZoneRulesException` at runtime if the string is not a valid IANA timezone ID."
+  rationale: "`ZoneId.of(zoneId)` requires the argument to be a valid IANA timezone ID (e.g., `America/New_York`, `Europe/London`), a fixed offset (e.g., `+08:00`, `GMT+05:00`), or a built-in short ID like `UTC` or `GMT`. Arbitrary strings such as user-provided abbreviations, misspelled region names, or custom identifiers compile without error but cause a `ZoneRulesException` at runtime. Prefer `ZoneId.systemDefault()` when the system timezone is sufficient, or validate the string against `ZoneId.getAvailableZoneIds()` before calling `ZoneId.of()`. For short timezone abbreviations, use the two-argument form `ZoneId.of(tz, ZoneId.SHORT_IDS)` which maps known abbreviations to their IANA equivalents."
   aliases:
     - JAVA-E1092
   tags:
@@ -20,9 +21,15 @@ scope:
     include:
       - "**/*.java"
     exclude:
+      # Exclude test code where intentional invalid timezone IDs may be used
       - "**/src/test/**"
       - "**/tests/**"
       - "**/*Test.java"
+      # Exclude generated and build output directories
+      - "**/target/**"
+      - "**/build/**"
+      - "**/generated/**"
+      - "**/generated-sources/**"
 match:
   fact:
     kind: java.correctness.zoneid-invalid-timezone
@@ -37,6 +44,6 @@ emit:
       - java
   message:
     title: "ZoneId.of() is called with a hardcoded string in `${captures.issue.text}`"
-    summary: "Verify the timezone ID passed to `ZoneId.of()`. Invalid IDs throw `ZoneRulesException` at runtime."
+    summary: "Hardcoded strings passed to `ZoneId.of()` cause a runtime `ZoneRulesException` if the identifier is not a valid IANA timezone ID, offset, or built-in short ID."
   remediation:
-    summary: "Use a known-valid IANA timezone ID (e.g., `America/New_York`), or use `ZoneId.SHORT_IDS` for short timezone names."
+    summary: "Verify the identifier against `ZoneId.getAvailableZoneIds()`, use `ZoneId.systemDefault()` for the system timezone, or pass short abbreviations with `ZoneId.of(tz, ZoneId.SHORT_IDS)`."

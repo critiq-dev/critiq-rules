@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.predictable-securerandom
+  version: v1
   title: Avoid seeding SecureRandom with predictable values
   summary: >-
     `new SecureRandom(byte[])` should not be initialized with literal byte arrays, short fixed buffers, or string-derived seeds.

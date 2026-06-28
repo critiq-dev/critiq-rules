@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.compareto-min-value
+  version: v1
   title: compareTo returns Integer.MIN_VALUE
   summary: Returning Integer.MIN_VALUE from compareTo() can break comparison contracts and cause subtle ordering bugs.
   rationale: When compareTo() returns Integer.MIN_VALUE, the sign flip from negation (e.g. -Integer.MIN_VALUE == Integer.MIN_VALUE due to overflow) violates the contract that compareTo must be consistent with equals. Use Integer.compare() or explicit comparison logic instead.

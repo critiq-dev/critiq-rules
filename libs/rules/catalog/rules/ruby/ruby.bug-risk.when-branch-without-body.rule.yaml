@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.when-branch-without-body
+  version: v1
   title: Avoid when branches without a body
   summary: >-
     A when clause has no body expression. Add the intended behavior or remove

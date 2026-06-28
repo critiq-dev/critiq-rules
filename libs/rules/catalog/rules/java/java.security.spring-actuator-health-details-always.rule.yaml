@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.spring-actuator-health-details-always
+  version: v1
   title: Avoid always-on Spring Boot health details in external profiles
   summary: >-
     `management.endpoint.health.show-details=always` (or YAML equivalent) publishes detailed health payloads to any caller, which often leaks dependency and infrastructure facts.

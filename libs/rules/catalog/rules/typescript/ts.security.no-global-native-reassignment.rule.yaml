@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-global-native-reassignment
+  version: v1
   title: Do not reassign global native bindings
   summary: Do not reassign global native bindings such as `Object`, `Array`, or `undefined`.
   rationale: Reassigning global natives breaks language invariants, can disable security checks that rely on them, and may facilitate prototype pollution or sandbox escape attacks.

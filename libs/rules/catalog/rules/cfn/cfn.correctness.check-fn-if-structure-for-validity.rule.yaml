@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-fn-if-structure-for-validity
+  version: v1
   title: "Check fn::if structure for validity"
   summary: "Check fn::if structure for validity"
   rationale: "cfn-lint reports E1028 when Check fn::if structure for validity."

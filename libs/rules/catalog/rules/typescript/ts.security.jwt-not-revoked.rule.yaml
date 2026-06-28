@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.jwt-not-revoked
+  version: v1
   title: Add a JWT revocation hook
   summary: Express JWT middleware should check revocation state when bearer tokens can be invalidated early.
   rationale: Signature validation alone does not handle logout, compromise, or forced token invalidation.

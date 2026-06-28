@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.transmute-integer-to-char
+  version: v1
   title: "Transmute from integer type to char"
   summary: "`transmute` used to convert an integer to a `char`."
   rationale: >-

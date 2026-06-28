@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.runtime.process-exit-control-flow
+  version: v2
   title: process.exit() in control flow
-  summary: "Avoid `process.exit()` in finally blocks or followed by reachable code."
-  rationale: "`process.exit()` in a finally block runs even after errors, and reachable code after exit creates dead code and logic errors."
+  summary: "Calling `process.exit()` inside a finally block or with reachable code following it causes unexpected termination or dead code."
+  rationale: "`process.exit()` in a finally block executes even after errors, bypassing normal cleanup and error propagation. Reachable code after `process.exit()` misleads readers into thinking the process continues; the exit is asynchronous and subsequent code still executes briefly, but the intent is always final — the code after is dead. Catch-block exits with cleanup after the `try/catch` are similarly problematic because the catch handler may fire after failures that should bubble up."
   detection:
     kind: pattern
   references:
@@ -27,14 +28,32 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/scripts/**"
+      - "**/cli/**"
+      - "**/bin/**"
+      - "**/db/**"
+      - "**/prisma/**"
+      - "**/fixtures/**"
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/e2e/**"
+      - "**/healthcheck*"
+      - "**/setup-*"
+      - "**/vendor/**"
+      - "**/unpack-*"
 match:
   fact:
     kind: runtime.process-exit-control-flow
     bind: issue
 emit:
   finding:
-    category: security.reliability
-    severity: high
+    category: correctness.control-flow
+    severity: medium
     confidence: 0.85
     tags:
       - runtime
@@ -43,4 +62,4 @@ emit:
     title: Review process.exit() placement
     summary: "`${captures.issue.text}` may terminate the process in an unexpected control flow context."
   remediation:
-    summary: Use structured error handling (throw/try-catch) instead of process.exit() in finally blocks. Remove dead code after process.exit().
+    summary: Use structured error handling (throw/try-catch) instead of process.exit() in finally or catch blocks. Remove or refactor dead code appearing after process.exit().

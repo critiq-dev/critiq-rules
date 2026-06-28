@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.mako-insecure-templates
+  version: v1
   aliases:
     - BAN-B702
   title: Avoid insecure Mako template configuration

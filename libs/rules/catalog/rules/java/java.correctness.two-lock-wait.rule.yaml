@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.two-lock-wait
+  version: v1
   title: wait() called while holding two locks
   summary: Calling `wait()` while holding multiple locks can cause confusing monitor state and hard-to-diagnose deadlocks.
   rationale: When `wait()` is called inside nested synchronized blocks, it releases only the lock associated with the object being waited on, keeping the outer lock held. The thread resumes with both locks re-acquired, increasing deadlock risk and making the locking protocol harder to reason about.

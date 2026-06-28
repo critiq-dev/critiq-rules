@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.angularjs.no-jquery-wrapping-angular-element
+  version: v1
   title: Avoid wrapping angular.element with jQuery/$
   summary: "Wrapping `angular.element()` objects with jQuery or `$()` is unnecessary and can cause issues."
   rationale: The `angular.element()` function already returns a jqLite object with jQuery-like methods. Wrapping it again with `$()` or `jQuery()` is redundant and may cause interoperability issues between jqLite and jQuery.

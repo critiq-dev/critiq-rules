@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.regexp-useless-backreference
+  version: v1
   title: Useless regex backreference
   summary: Detects useless regex backreference issues in JavaScript and TypeScript source.
   rationale: Useless regex backreference patterns are a common source of bugs and confusing runtime behavior.

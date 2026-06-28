@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.testing.no-flaky-timer-test
+  version: v1
   title: Avoid timer-dependent assertions in unit tests
   summary: Unit tests using real timers (setTimeout/setInterval with delays >50ms) without fake timers may produce flaky results under CI load.
   rationale: Wall-clock-based tests race CI load and parallelization; fake timers keep behavior deterministic. Performance measurement (performance.now, Date.now) and sub-50ms micro-delays for event-loop yielding are exempt.

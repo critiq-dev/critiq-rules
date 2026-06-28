@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.nil-error-returned
+  version: v1
   title: Returning nil value with nil error
   summary: Returning nil, nil may indicate a missing result or an error that should be returned instead.
   rationale: >-

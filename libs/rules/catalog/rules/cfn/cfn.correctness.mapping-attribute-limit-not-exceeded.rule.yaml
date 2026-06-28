@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.mapping-attribute-limit-not-exceeded
+  version: v1
   title: Mapping attribute limit not exceeded
   summary: Mapping attribute limit not exceeded
   rationale: cfn-lint reports E7012 when Mapping attribute limit not exceeded.

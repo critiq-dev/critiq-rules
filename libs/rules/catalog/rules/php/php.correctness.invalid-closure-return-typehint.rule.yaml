@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-closure-return-typehint
+  version: v1
   title: Use valid closure return typehints
   summary: Use valid closure return typehints
   rationale: Use valid closure return typehints

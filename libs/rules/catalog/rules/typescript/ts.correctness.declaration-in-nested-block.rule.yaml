@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.declaration-in-nested-block
+  version: v1
   title: Function or var declaration in nested block
   summary: A `function` or `var` declaration appears inside a nested block instead of the enclosing scope top level.
   rationale: Nested function and `var` declarations have confusing hoisting semantics and differ across engines in non-strict legacy code.

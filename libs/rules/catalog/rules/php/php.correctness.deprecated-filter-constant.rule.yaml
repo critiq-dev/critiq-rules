@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.deprecated-filter-constant
+  version: v1
   title: Replace deprecated filter constants
   summary: Several FILTER_* constants are deprecated and should not be used in new code.
   aliases:

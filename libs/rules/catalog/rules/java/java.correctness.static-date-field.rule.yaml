@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.static-date-field
+  version: v1
   title: Public or protected static date/time formatter field
   summary: A non-thread-safe date/time formatter or calendar is declared as a public/protected static field.
   rationale: SimpleDateFormat, DateFormat, and Calendar are not thread-safe. Shared mutable access from multiple threads can cause erratic behavior or exceptions.

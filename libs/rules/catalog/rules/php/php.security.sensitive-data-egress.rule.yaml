@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.security.sensitive-data-egress
+  version: v1
   title: Avoid relaying request-derived sensitive data in outbound PHP HTTP calls
   summary: >-
     Outbound HTTP clients should not forward tainted request/session material without validation or redaction.

@@ -1,7 +1,7 @@
 {
   "path": "src/sample.ts",
   "language": "typescript",
-  "text": "export const bad = /* unused-variable */ 1;",
+  "text": "const bad = 1;",
   "nodes": [],
   "semantics": {
     "controlFlow": {
@@ -17,10 +17,10 @@
             "startLine": 1,
             "startColumn": 1,
             "endLine": 1,
-            "endColumn": 43
+            "endColumn": 15
           },
-          "text": "export const bad = /* unused-variable */ 1;",
-          "props": {}
+          "text": "const bad = 1;",
+          "props": { "binding": "bad" }
         }
       ]
     }

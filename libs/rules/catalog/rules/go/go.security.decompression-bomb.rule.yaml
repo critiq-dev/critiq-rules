@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.decompression-bomb
+  version: v1
   title: Guard against decompression bomb denial-of-service
   summary: >-
     `io.Copy` or `io.CopyBuffer` with an uncompressed reader from a decompressor (`gzip.NewReader`, `zlib.NewReader`, etc.) without a size limit can exhaust memory or disk in a decompression bomb attack.

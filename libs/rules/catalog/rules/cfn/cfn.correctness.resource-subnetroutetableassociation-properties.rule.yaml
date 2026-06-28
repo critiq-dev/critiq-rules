@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.resource-subnetroutetableassociation-properties
+  version: v1
   title: Resource subnetroutetableassociation properties
   summary: Resource subnetroutetableassociation properties
   rationale: cfn-lint reports E3022 when Resource subnetroutetableassociation properties.

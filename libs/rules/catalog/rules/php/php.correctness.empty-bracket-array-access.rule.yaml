@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.empty-bracket-array-access
+  version: v1
   title: Avoid empty bracket array reads
   summary: "Reading from an array with `$value[]` appends null and returns the new element."
   aliases:

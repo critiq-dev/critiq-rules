@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.unreachable-statement
+  version: v1
   title: Unreachable code after return or throw
   summary: Statements after terminal exits should be removed or moved before the exit.
   rationale: Dead statements obscure intent and often indicate a refactor that left stale logic behind.

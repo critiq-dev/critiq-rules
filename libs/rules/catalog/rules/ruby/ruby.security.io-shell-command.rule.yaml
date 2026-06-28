@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.io-shell-command
+  version: v1
   title: Avoid IO class reads that may invoke shell commands
   summary: >-
     IO.read and related IO class methods can spawn subprocesses when the path starts with a pipe.

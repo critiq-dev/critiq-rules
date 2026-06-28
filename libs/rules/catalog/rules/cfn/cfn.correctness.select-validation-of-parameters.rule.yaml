@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.select-validation-of-parameters
+  version: v1
   title: Select validation of parameters
   summary: Select validation of parameters
   rationale: cfn-lint reports E1017 when Select validation of parameters.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.invalid-regex-literal
+  version: v1
   title: Invalid regex syntax must not be used
   summary: The regex pattern string contains invalid syntax (e.g. unmatched brackets, reversed character range, or invalid escape).
   rationale: Invalid regex patterns will throw PatternSyntaxException at runtime.

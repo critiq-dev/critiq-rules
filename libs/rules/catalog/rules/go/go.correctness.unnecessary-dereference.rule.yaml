@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.unnecessary-dereference
+  version: v1
   title: Unnecessary dereference expressions
   summary: Unnecessary pointer dereference when accessing struct fields or indexing — Go auto-dereferences pointers in these contexts.
   rationale: >-

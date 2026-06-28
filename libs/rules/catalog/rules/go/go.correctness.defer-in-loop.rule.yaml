@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.defer-in-loop
+  version: v1
   title: Avoid defer inside loops
   summary: defer inside a loop holds resources until the surrounding function returns.
   rationale: >-

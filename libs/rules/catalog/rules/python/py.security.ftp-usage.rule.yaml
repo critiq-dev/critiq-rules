@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.ftp-usage
+  version: v1
   aliases:
     - BAN-B321
   title: Avoid cleartext FTP protocol

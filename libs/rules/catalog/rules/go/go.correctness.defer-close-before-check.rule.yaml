@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.defer-close-before-check
+  version: v1
   title: Check error before deferring Close
   summary: A deferred Close runs even when the open call failed and returned a nil handle.
   rationale: >-

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.rails-open-redirect
+  version: v1
   title: Avoid open redirects from request-controlled targets
   summary: >-
     Redirect helpers must not send users to hosts or paths derived directly from request input without validation.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.debug-statement-in-source
+  version: v1
   title: "Remove leftover `console.trace` calls from production paths"
   summary: "`console.trace()` calls should not ship in production code outside an explicit dev-only branch."
   rationale: "`console.trace` dumps a stack trace to stdout/stderr and is almost always leftover developer instrumentation. Stack traces in shipped output disclose internal call structure and inflate logs."

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.url-in-collection
+  version: v1
   title: "Maps and Sets of URLs can be performance hogs"
   summary: "`java.net.URL` performs DNS resolution on `equals()` and `hashCode()`, making Map and Set operations unexpectedly expensive."
   rationale: "The `URL` class resolves the hostname to an IP address during `equals()` and `hashCode()` calls (CWE-400). This means every Map lookup, insertion, or Set membership test involving URLs performs a potentially blocking network call. Use `URI` or `String` instead of `URL` as collection key types to avoid DNS resolution overhead."

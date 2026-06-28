@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-fargate-service-scheduling-strategy
+  version: v1
   title: Check fargate service scheduling strategy
   summary: Check fargate service scheduling strategy
   rationale: cfn-lint reports E3044 when Check fargate service scheduling strategy.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.where-first-over-find-by
+  version: v1
   title: Consider using where.first instead of find_by
   summary: >-
     `find_by` is not incorrect, but `where(...).first` is more explicit and

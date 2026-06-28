@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-deletionpolicy-values-for-resources
+  version: v1
   title: Check deletionpolicy values for resources
   summary: Check deletionpolicy values for resources
   rationale: cfn-lint reports E3035 when Check deletionpolicy values for resources.

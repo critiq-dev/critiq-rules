@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.exposed-directory-listing
+  version: v1
   title: Avoid exposed directory listings
   summary: Directory listing middleware should not be enabled on public paths without a deliberate review.
   rationale: Directory listings expose internal file names and make unintended resources easier to discover and fetch.

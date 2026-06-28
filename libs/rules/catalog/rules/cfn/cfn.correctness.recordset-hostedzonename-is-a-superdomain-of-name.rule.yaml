@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.recordset-hostedzonename-is-a-superdomain-of-name
+  version: v1
   title: Recordset hostedzonename is a superdomain of name
   summary: Recordset hostedzonename is a superdomain of name
   rationale: cfn-lint reports E3041 when Recordset hostedzonename is a superdomain of name.

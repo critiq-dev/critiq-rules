@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.check-required-properties-for-lambda-if-the-deployment-package-is-a-zip-file
+  version: v1
   title: Check required properties for lambda if the deployment package is a .zip file
   summary: Check required properties for lambda if the deployment package is a .zip file
   rationale: cfn-lint reports W2533 when Check required properties for lambda if the deployment package is a .zip file.

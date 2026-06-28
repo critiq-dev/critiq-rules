@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.compound-assignment-with-await
+  version: v1
   title: Compound assignment with await
   summary: Detects compound assignment with await issues in JavaScript and TypeScript source.
   rationale: Compound assignment with await patterns are a common source of bugs and confusing runtime behavior.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-children-prop
+  version: v1
   title: Prefer nested JSX children over the children prop
   summary: Passing `children` as a named prop is harder to read than composing elements between opening and closing tags.
   rationale: Nested children match React composition idioms and keep component APIs consistent across the tree.

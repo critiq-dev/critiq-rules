@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.weak-rsa-key-size
+  version: v1
   title: Use RSA keys of at least 2048 bits
   summary: >-
     RSA key generation must use at least 2048 bits.

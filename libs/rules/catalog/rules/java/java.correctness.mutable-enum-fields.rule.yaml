@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.mutable-enum-fields
+  version: v1
   title: Enum fields should be final
   summary: Enum fields that are not declared final create mutable state in a shared singleton instance.
   rationale: "Enum constants are singletons by definition. Non-final fields make their state mutable across callers, leading to unpredictable behavior in multi-threaded environments. Declare fields as `final` and initialize them in the constructor."

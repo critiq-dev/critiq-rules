@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.prepared-statement-index-zero
+  version: v1
   title: PreparedStatement parameter set with index 0
   summary: JDBC PreparedStatement parameters use 1-based indexing; index 0 is invalid.
   rationale: Setting a parameter at index 0 will always throw SQLException. JDBC parameter indices start at 1.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.duplicate-if-else-condition
+  version: v1
   title: "if and else condition are the same"
   summary: >-
     The same boolean expression appears on both an `if` and the following

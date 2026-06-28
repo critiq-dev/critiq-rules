@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-boolean-parameter-trap
+  version: v1
   title: Avoid boolean parameter trap in public APIs
   summary: Public APIs with multiple boolean flags reduce readability and increase change risk.
   rationale: Boolean-heavy signatures hide intent and make call-sites brittle.

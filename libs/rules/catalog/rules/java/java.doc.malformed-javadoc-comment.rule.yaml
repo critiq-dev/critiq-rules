@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.doc.malformed-javadoc-comment
+  version: v1
   title: Malformed Javadoc comment
   summary: "Javadoc comments must use valid tag syntax without double @ symbols."
   rationale: "Malformed tags like @@param can raise errors during Javadoc generation."

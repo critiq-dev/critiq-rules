@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.jwt-without-verification
+  version: v1
   title: Verify JWT signatures before trusting claims
   summary: >-
     JWT parsing must use a verification key and must not disable signature validation.

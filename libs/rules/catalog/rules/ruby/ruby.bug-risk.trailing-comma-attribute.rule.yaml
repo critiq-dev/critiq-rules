@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.trailing-comma-attribute
+  version: v1
   title: Trailing comma in attribute declaration detected
   summary: >-
     An `attr_reader`, `attr_writer`, or `attr_accessor` declaration has a

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.flawed-string-comparison
+  version: v1
   title: Flawed string comparison
   summary: String comparison using identical operands or locale-sensitive operators may indicate a bug.
   rationale: Comparing two identical string literals always yields the same result and suggests a copy-paste error. Relational operators on strings produce locale-sensitive results and may behave unexpectedly.

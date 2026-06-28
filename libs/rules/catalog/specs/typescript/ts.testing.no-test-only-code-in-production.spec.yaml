@@ -9,7 +9,7 @@ fixtures:
       allRuleIds:
         - ts.testing.no-test-only-code-in-production
       allSeverities:
-        - high
+        - low
   - name: flags NODE_ENV test branch
     observationPath: ./fixtures/ts.testing.no-test-only-code-in-production/invalid-env.observation.json
     expect:

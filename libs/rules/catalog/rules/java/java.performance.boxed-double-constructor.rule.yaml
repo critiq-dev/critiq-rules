@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.boxed-double-constructor
+  version: v1
   title: "Float/Double constructor is inefficient"
   summary: "`new Float(value)` and `new Double(value)` create unnecessary objects; use `valueOf()` instead."
   rationale: "The `Float(float)` and `Double(double)` constructors always create new object instances, while `valueOf()` can return cached instances. Since Java 9, these constructors have been deprecated in favor of `valueOf()`. Replace `new Float(...)` / `new Double(...)` with `Float.valueOf(...)` / `Double.valueOf(...)` or rely on autoboxing."

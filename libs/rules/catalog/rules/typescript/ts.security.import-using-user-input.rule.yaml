@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.import-using-user-input
+  version: v1
   title: Constrain module-loading to trusted allowlists
   summary: "`require()` and dynamic `import()` should not resolve modules from untrusted input."
   rationale: Untrusted module paths let attackers steer module-loading boundaries toward unintended files, packages, or plugins. Only flag when the module path is derived from request or event data — static string literals and allowlist-validated paths are intentionally excluded. Test, bundled, and tutorial files are excluded because they contain static or intentionally simplified imports.

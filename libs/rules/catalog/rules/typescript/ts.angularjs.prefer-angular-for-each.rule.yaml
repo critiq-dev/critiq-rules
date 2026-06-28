@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.angularjs.prefer-angular-for-each
+  version: v1
   title: Prefer angular.forEach over native Array.forEach
   summary: "Use `angular.forEach` instead of native `Array.prototype.forEach` in AngularJS contexts."
   rationale: AngularJS's `angular.forEach` provides consistent iteration behavior, works on both arrays and objects, and ensures proper AngularJS digest cycle compatibility.

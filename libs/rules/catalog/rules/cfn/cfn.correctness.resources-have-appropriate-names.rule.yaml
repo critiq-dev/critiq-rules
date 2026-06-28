@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.resources-have-appropriate-names
+  version: v1
   title: Resources have appropriate names
   summary: Resources have appropriate names
   rationale: cfn-lint reports E3006 when Resources have appropriate names.

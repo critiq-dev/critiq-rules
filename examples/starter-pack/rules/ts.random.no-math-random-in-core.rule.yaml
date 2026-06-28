@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.random.no-math-random-in-core
+  version: v1
   title: Avoid Math.random in core code
   summary: Core code should use the deterministic random provider.
   rationale: Deterministic randomness keeps core workflows testable.

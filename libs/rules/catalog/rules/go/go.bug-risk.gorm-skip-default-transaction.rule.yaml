@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.bug-risk.gorm-skip-default-transaction
+  version: v1
   title: "GORM SkipDefaultTransaction set to false"
   summary: >-
     Setting `SkipDefaultTransaction` to `false` in gorm.Config causes GORM to

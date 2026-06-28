@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.assignment-to-exports
+  version: v1
   title: Assignment to exports
   summary: Detected direct assignment to the `exports` variable.
   rationale: In CommonJS modules, reassigning `exports` breaks the `module.exports` reference, making all subsequent exports unreachable.

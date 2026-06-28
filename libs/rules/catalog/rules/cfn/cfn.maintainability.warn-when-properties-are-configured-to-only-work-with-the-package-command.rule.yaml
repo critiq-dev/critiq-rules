@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.warn-when-properties-are-configured-to-only-work-with-the-package-command
+  version: v1
   title: Warn when properties are configured to only work with the package command
   summary: Warn when properties are configured to only work with the package command
   rationale: cfn-lint reports W3002 when Warn when properties are configured to only work with the package command.

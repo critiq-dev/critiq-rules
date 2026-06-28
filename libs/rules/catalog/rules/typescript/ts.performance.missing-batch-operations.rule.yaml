@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.missing-batch-operations
+  version: v1
   title: Missing batching of operations
   summary: Repeated one-by-one operations inside loops should prefer available batch-style helpers.
   rationale: Batch APIs usually reduce round trips, contention, and request overhead compared with item-at-a-time loops.

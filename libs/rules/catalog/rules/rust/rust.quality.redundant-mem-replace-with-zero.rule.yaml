@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.redundant-mem-replace-with-zero
+  version: v1
   title: "Use `mem::take()` instead of `mem::replace` with zero value"
   summary: "`mem::replace(&mut val, 0/false/\"\")` can be replaced with `mem::take(&mut val)`."
   rationale: >-

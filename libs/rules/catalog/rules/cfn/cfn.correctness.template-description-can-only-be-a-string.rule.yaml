@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.template-description-can-only-be-a-string
+  version: v1
   title: Template description can only be a string
   summary: Template description can only be a string
   rationale: cfn-lint reports E1004 when Template description can only be a string.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.debug-mode-enabled
+  version: v1
   title: Do not expose debug routes or middleware in production
   summary: Debug handlers, stack-showing middleware, and diagnostic endpoints should stay behind explicit development-only guards.
   rationale: Debug endpoints and stack-showing middleware can disclose internal topology, environment details, and request data with very little attacker effort.

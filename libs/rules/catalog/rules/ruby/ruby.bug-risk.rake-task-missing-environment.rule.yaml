@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.rake-task-missing-environment
+  version: v1
   title: Rake task found without `:environment` task dependency
   summary: >-
     Rake tasks that load application code should declare `:environment` as a

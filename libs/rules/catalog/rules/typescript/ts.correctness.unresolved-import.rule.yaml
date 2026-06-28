@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.unresolved-import
+  version: v1
   title: Avoid unresolved module imports
   summary: Import declarations should reference modules that exist on disk or in node_modules.
   rationale: Importing a module that cannot be resolved will cause a build or runtime error. This typically happens after refactoring, file renames, or incorrect module paths.

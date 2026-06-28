@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.switch-case-fallthrough
+  version: v1
   title: Switch case fallthrough
   summary: Detects switch case fallthrough issues in JavaScript and TypeScript source.
   rationale: Switch case fallthrough patterns are a common source of bugs and confusing runtime behavior.

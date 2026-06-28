@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.no-floating-promise-in-function
+  version: v1
   title: Floating promise not handled
   summary: Promise-returning calls at statement level should be awaited, returned, voided, or rejection-handled.
   rationale: Unhandled floating promises can lead to unhandled rejections, race conditions, and silent failures. In web servers (request handlers) this is almost always a bug; in CLI tools and installers, fire-and-forget patterns may be intentional but should still be reviewed.

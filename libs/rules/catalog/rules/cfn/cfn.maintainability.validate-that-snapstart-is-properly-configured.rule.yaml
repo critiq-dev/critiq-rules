@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.validate-that-snapstart-is-properly-configured
+  version: v1
   title: Validate that snapstart is properly configured
   summary: Validate that snapstart is properly configured
   rationale: cfn-lint reports W2530 when Validate that snapstart is properly configured.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.instant-unsupported-temporal-unit
+  version: v1
   title: "Instant should not be passed unsupported temporal unit types"
   summary: "`Instant.plus()`, `Instant.minus()`, and `Instant.until()` throw `UnsupportedTemporalTypeException` when called with date-based units such as WEEKS, MONTHS, or YEARS."
   rationale: "`Instant` represents an instantaneous point on the time-line and does not support date-based fields. Using `ChronoUnit.WEEKS`, `MONTHS`, `YEARS`, `DECADES`, `CENTURIES`, `MILLENNIA`, `ERAS`, or `FOREVER` with `Instant.plus()`, `minus()`, or `until()` throws `UnsupportedTemporalTypeException`. Use `ChronoUnit.DAYS`, `HOURS`, `MINUTES`, `SECONDS`, `NANOS`, etc. instead."

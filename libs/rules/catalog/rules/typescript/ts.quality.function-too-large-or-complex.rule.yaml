@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.function-too-large-or-complex
+  version: v1
   title: Function too large or too complex
   summary: Oversized or overly complex functions should be split into smaller units.
   rationale: Large functions are harder to test, review, and change safely because behavior and branching accumulate in one place.

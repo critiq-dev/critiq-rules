@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.jump-in-finally
+  version: v1
   title: Jump statements must not be used within finally blocks
   summary: Using return, throw, or break in a finally block overrides any exception or return value from the try block.
   rationale: Control flow statements (return, throw) in finally blocks suppress exceptions thrown in the corresponding try block and obscure the normal return path, leading to subtle bugs.

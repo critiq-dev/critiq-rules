@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.weak-key-strength
+  version: v1
   title: Avoid weak key-generation strength
   summary: Key-generation helpers should use current minimum strengths for RSA, AES, and HMAC keys.
   rationale: Weak modulus or key lengths make brute-force and cryptanalytic attacks more practical, even when the API itself is correct.

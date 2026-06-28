@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-deprecated-react-dom-root-api
+  version: v1
   title: Migrate off legacy ReactDOM render entrypoints
   summary: "`render`, `hydrate`, and `unmountComponentAtNode` from `react-dom` are legacy APIs replaced by the `createRoot` and `hydrateRoot` clients."
   rationale: The concurrent renderer expects roots created through the client API; legacy entrypoints block adoption of React 18 streaming and suspense features.

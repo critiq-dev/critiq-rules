@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.bad-rescue-ordering
+  version: v1
   title: Bad ordering of exception rescue detected
   summary: >-
     A more general exception class is rescued after a more specific one.

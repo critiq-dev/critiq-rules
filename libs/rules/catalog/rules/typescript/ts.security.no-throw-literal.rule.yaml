@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-throw-literal
+  version: v1
   title: Throw `Error` objects instead of literals
   summary: Only throw `Error` instances (or subclasses), not strings, numbers, or plain objects.
-  rationale: Throwing literals loses stack traces and makes error handling inconsistent across callers.
+  rationale: Throwing literals loses stack traces and makes error handling inconsistent across callers. Framework patterns like `throw new Response()` (Remix/Next.js SSR) and `throw redirect()` are excluded, as are constructor calls where the class name includes `Error` (e.g. `new CustomError()`).
   detection:
     kind: pattern
   references:
@@ -40,5 +41,5 @@ emit:
     title: Throw an `Error` instead of a literal
     summary: "`${captures.issue.text}` throws a non-`Error` value that is harder to inspect and handle safely."
   remediation:
-    summary: Throw `new Error(...)` or a typed error subclass with a clear message.
+    summary: Throw `new Error(...)` or a typed error subclass with a clear message. If the thrown value extends `Error`, name the class with an `Error` suffix to avoid false positives.
 

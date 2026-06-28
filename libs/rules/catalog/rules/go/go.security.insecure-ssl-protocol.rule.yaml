@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.insecure-ssl-protocol
+  version: v1
   title: Reject SSLv2 and SSLv3 protocols
   summary: >-
     `tls.VersionSSL30`, SSLv2, or SSLv3 string literals indicate use of broken legacy protocols.

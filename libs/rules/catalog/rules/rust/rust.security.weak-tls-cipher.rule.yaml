@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.weak-tls-cipher
+  version: v1
   title: Avoid weak TLS cipher suites
   summary: >-
     Rust TLS configuration must not include cipher suites using RC4, 3DES, NULL, or EXPORT algorithms.

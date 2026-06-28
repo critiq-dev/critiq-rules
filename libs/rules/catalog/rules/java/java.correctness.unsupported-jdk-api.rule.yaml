@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.unsupported-jdk-api
+  version: v1
   title: Unsupported JDK-internal APIs should not be used
   summary: Importing or using sun.* or com.sun.* internal APIs introduces portability issues and risks breakage across JDK versions.
   rationale: Internal JDK APIs (sun.*, com.sun.* packages) are undocumented, unsupported, and may change or be removed without notice. Java 9 introduced module system restrictions that prevent access to many of these APIs. Use public replacement APIs instead.

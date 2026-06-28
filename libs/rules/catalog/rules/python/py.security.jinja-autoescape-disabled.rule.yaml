@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.jinja-autoescape-disabled
+  version: v1
   title: Avoid disabling Jinja autoescape
   summary: Jinja2 environments should keep autoescaping enabled for HTML rendering contexts.
   rationale: Disabling autoescape can allow untrusted template data to render as executable markup in browser clients.

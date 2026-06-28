@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.servlet-insecure-cookie
+  version: v1
   title: Harden servlet session and auth cookies
   summary: Session-like cookies must not disable HttpOnly or Secure, and explicit insecure builder flags should be removed.
   rationale: Missing HttpOnly and Secure flags expose cookies to XSS and network interception; disabling them makes theft materially easier.

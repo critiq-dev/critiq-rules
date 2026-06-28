@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.clone-without-super
+  version: v1
   title: Clone method does not call super.clone()
   summary: "`clone()` methods should call `super.clone()` to create the correct object."
   rationale: "Without `super.clone()`, the cloned object may not be properly initialized. `super.clone()` copies the object's internal state."

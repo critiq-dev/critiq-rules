@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.vue.require-transition-conditional
+  version: v1
   title: Use conditional rendering with Transition
   summary: "The `<Transition>` component should be used with conditional rendering to control enter/leave animations."
   rationale: Vue's `<Transition>` component provides enter/leave animations for elements rendered conditionally with `v-if`, `v-show`, or dynamic components. Using `<Transition>` without a conditional pattern means no animation will trigger. This rule provides limited JS-level detection as a proxy for template-only patterns.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.unvalidated-external-input
+  version: v1
   title: Validate untrusted input before parser construction
   summary: Untrusted input should be validated before it is used to construct sensitive parsers or runtime objects.
   rationale: Passing untrusted text across regex or URL construction boundaries increases the risk of parser abuse, denial of service, and downstream policy bypass.

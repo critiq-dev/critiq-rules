@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.output-limit-not-exceeded
+  version: v1
   title: Output limit not exceeded
   summary: Output limit not exceeded
   rationale: cfn-lint reports E6010 when Output limit not exceeded.

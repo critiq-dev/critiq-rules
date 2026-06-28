@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.helper-instance-variables
+  version: v1
   title: Use of helper instance variables detected
   summary: >-
     Avoid instance variables in view helpers. Pass data explicitly as

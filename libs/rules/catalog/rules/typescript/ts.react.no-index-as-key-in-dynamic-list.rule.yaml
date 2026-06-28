@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-index-as-key-in-dynamic-list
+  version: v1
   title: Avoid array index keys in dynamic lists
   summary: Using the map index as a React key breaks reconciliation when lists reorder, filter, or insert items.
   rationale: Stable keys help React preserve component state and reduce subtle UI bugs when list membership changes.

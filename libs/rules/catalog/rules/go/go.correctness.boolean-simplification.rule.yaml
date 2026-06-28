@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.boolean-simplification
+  version: v1
   title: Boolean expression can be simplified
   summary: Complex boolean expressions like `x > y - 1` or `x < y || x == y` can be written more concisely.
   rationale: >-

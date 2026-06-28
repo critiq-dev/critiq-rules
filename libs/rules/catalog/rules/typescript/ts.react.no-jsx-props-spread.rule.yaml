@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-jsx-props-spread
+  version: v1
   title: Avoid spreading props onto JSX elements
   summary: Unfiltered prop spreads hide which attributes reach the DOM and defeat static analysis of event handlers and accessibility props.
   rationale: Explicit prop forwarding documents the component contract and avoids accidentally passing invalid or sensitive attributes downstream.
@@ -16,6 +17,19 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/*.stories.*"
+      - "**/*.story.*"
+      # UI primitive wrappers (shadcn/ui style) intentionally forward all
+      # HTML attributes to underlying DOM elements — the spread is the
+      # documented component contract.
+      - "**/components/ui/**"
+      - "**/primitives/**"
+      - "**/ui/primitives/**"
 match:
   fact:
     kind: ui.react.jsx-props-spread
@@ -24,7 +38,7 @@ emit:
   finding:
     category: maintainability.ui
     severity: low
-    confidence: 0.75
+    confidence: 0.50
     tags:
       - react
       - ui

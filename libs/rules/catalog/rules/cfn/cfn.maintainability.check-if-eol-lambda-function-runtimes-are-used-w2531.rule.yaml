@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.check-if-eol-lambda-function-runtimes-are-used-w2531
+  version: v1
   title: Check if eol lambda function runtimes are used
   summary: Check if eol lambda function runtimes are used
   rationale: cfn-lint reports W2531 when Check if eol lambda function runtimes are used.

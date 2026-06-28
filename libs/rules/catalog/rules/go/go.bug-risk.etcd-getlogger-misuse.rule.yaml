@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.bug-risk.etcd-getlogger-misuse
+  version: v1
   title: "etcd client GetLogger used as general-purpose logger"
   summary: >-
     GetLogger is an internal method on etcd's client type. Using it as a

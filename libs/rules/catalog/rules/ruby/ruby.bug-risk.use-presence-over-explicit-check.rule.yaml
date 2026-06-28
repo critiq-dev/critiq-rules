@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.use-presence-over-explicit-check
+  version: v1
   title: Use of `present?` or `blank?` can be replaced with `presence`
   summary: >-
     Detects ternary expressions like `a.present? ? a : nil` or

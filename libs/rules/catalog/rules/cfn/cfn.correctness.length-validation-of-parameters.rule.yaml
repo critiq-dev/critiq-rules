@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.length-validation-of-parameters
+  version: v1
   title: Length validation of parameters
   summary: Length validation of parameters
   rationale: cfn-lint reports E1030 when Length validation of parameters.

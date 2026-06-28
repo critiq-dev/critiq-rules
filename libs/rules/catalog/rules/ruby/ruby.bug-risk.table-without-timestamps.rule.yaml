@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.table-without-timestamps
+  version: v1
   title: Tables should be created with timestamps
   summary: >-
     Add `t.timestamps` to `create_table` blocks to include `created_at` and

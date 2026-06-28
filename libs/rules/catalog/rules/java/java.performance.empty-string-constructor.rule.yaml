@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.empty-string-constructor
+  version: v1
   title: "Use \"\" instead of new String() to create empty strings"
   summary: "`new String()` creates an unnecessary object; use the empty string literal `\"\"` instead."
   rationale: "The no-argument `String()` constructor creates a new empty String object. The empty string literal `\"\"` is interned and more efficient. Replace `new String()` with `\"\"` to avoid unnecessary allocations."

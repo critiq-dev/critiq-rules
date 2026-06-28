@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-hidden-side-effect-import
+  version: v1
   title: Avoid hidden side-effect imports
   summary: Bare side-effect imports outside setup files make module behavior implicit.
   rationale: Hidden side effects are difficult to reason about and can create order-dependent bugs.
@@ -25,3 +26,7 @@ emit:
     summary: "`${captures.issue.text}` is a side-effect-only import outside allowlisted setup files."
   remediation:
     summary: Use explicit setup modules or import named symbols instead of hidden side effects.
+  # Exclusions applied in the TypeScript adapter fact detector (typescript-quality-maintainability.ts):
+  #   - CSS/SCSS/SASS/Less stylesheet imports (.css, .scss, .sass, .less extensions)
+  #   - tailwindcss package entry point (import "tailwindcss")
+  #   - Storybook preview/config files (paths containing .storybook/)

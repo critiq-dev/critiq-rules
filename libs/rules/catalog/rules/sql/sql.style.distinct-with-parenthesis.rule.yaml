@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: sql.style.distinct-with-parenthesis
+  version: v1
   aliases:
     - SQL-L015
   title: DISTINCT with parenthesis

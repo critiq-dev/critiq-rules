@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.testing.t-skip-without-ticket-reference
+  version: v1
   title: t.Skip should cite a ticket or suppression
   summary: Go tests that call t.Skip without a nearby tracker reference are easy to forget.
   rationale: Skips without traceability tend to linger and hide regressions.

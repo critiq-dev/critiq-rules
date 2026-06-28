@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.void-match-arm
+  version: v1
   title: Match arms must return a value
   summary: Match arms must return a value
   rationale: Match arms must return a value

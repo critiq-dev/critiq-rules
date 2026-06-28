@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.unsafe-dompurify-version
+  version: v1
   title: Upgrade DOM sanitization dependency
   summary: DOM sanitization libraries should stay on patched versions before they are trusted for untrusted HTML.
   rationale: Older sanitizer versions can miss browser parsing edge cases and leave XSS protections incomplete.

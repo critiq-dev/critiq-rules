@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.performance.avoid-large-param-copy
+  version: v1
   title: Avoid passing large arrays by value as function parameters
   summary: Function parameters that are large fixed-size arrays (>80 bytes) cause excessive copying when passed by value.
   rationale: >-

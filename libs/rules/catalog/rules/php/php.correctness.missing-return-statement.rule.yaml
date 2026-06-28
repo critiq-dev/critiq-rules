@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.missing-return-statement
+  version: v1
   title: Add missing return statement
   summary: Functions and methods with non-void return types should contain at least one return statement.
   aliases:

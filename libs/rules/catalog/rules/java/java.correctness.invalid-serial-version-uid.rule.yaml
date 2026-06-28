@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.invalid-serial-version-uid
+  version: v1
   title: serialVersionUID must be static final long
   summary: The serialVersionUID field must be declared as static final long to serve as a valid serialization identifier.
   rationale: Java's serialization mechanism requires serialVersionUID to be a static final long field. If it is declared with a different type (e.g., int), missing static or final modifiers, the serialization runtime will not recognize it as the version identifier, potentially leading to InvalidClassException during deserialization.

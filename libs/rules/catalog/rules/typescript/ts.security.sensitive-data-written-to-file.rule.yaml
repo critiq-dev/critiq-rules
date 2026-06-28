@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.sensitive-data-written-to-file
+  version: v1
   title: Sensitive data written to file
   summary: File writes that persist fields like passwords, tokens, secrets, credentials, or PII (email, SSN, phone) risk data exposure.
   rationale: Static files, exports, backups, and logs are easy to copy or retain beyond their intended lifetime. Sensitive fields should be redacted or excluded before writing.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.security.tls-verification-disabled
+  version: v1
   aliases:
     - BAN-B501
   title: Do not disable TLS certificate verification

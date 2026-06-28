@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.angularjs.inject-function-assignments-only
+  version: v1
   title: Inject functions should only contain assignments
   summary: "AngularJS `inject` callbacks should only contain variable assignments for injected dependencies."
   rationale: Putting control flow, function calls, or assertions inside `inject()` callbacks mixes test setup with test logic. Inject callbacks should only assign injected services to scoped variables. Move logic to `beforeEach` or individual test blocks.

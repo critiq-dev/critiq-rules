@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.ambiguous-block-association
+  version: v1
   title: Ambiguous association of block with method
   summary: >-
     A block is attached to a method call that already has arguments, but the

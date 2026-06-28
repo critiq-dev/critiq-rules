@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.nan-comparison
+  version: v1
   title: Double/Float comparison with NaN always returns false
   summary: Comparing a floating-point value to Double.NaN or Float.NaN using == or != always yields false (or true for !=) because NaN is not equal to any value, including itself.
   rationale: Per the IEEE 754 standard and Java Language Specification (§4.2.3, §15.21.1), NaN is unordered — it is not equal to, less than, or greater than any value, including itself. Use Double.isNaN() or Float.isNaN() instead of equality checks.

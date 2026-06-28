@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.testing.setup-teardown-annotation
+  version: v1
   title: setUp/tearDown methods must be properly annotated
   summary: JUnit 3-style setUp/tearDown methods are silently ignored in JUnit 4/5 without @Before/@After or @BeforeEach/@AfterEach annotations.
   rationale: Methods named setUp or tearDown that lack the correct JUnit 4/5 annotations will not be invoked during test execution, leading to silent test failures or incorrect test state.

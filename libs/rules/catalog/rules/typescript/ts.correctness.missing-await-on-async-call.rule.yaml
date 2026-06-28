@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.missing-await-on-async-call
+  version: v1
   title: Missing await on async call
   summary: Async functions should not drop direct async calls without awaiting them.
   rationale: Unawaited async work in an async function often indicates a missed dependency or a promise that can reject outside the intended control flow.

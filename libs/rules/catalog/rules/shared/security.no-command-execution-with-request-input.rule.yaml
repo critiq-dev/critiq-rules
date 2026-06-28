@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: security.no-command-execution-with-request-input
+  version: v1
   title: Command execution using untrusted input
   summary: Process execution helpers must not receive request-controlled executables or shell-interpreted arguments.
   aliases:

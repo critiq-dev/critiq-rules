@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.tight-module-coupling
+  version: v1
   title: Tight coupling between modules
   summary: Direct import cycles between modules increase coupling and make change boundaries harder to maintain.
   rationale: Cyclic dependencies complicate initialization order, testing, and architecture boundaries.

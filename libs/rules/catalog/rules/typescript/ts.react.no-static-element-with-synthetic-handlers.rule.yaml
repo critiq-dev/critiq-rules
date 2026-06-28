@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-static-element-with-synthetic-handlers
+  version: v1
   title: Avoid dangling pointer or key handlers on static elements
   summary: "Non-interactive elements that listen for pointer or key events without a widget role usually hide custom interaction that needs explicit semantics."
   rationale: Drag handles, menus, and listboxes should expose roles and focus models; otherwise assistive technologies treat the region as inert content.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.nullsafe-returned-by-reference
+  version: v1
   title: Do not return nullsafe access by reference
   summary: By-reference arrow functions cannot safely return nullsafe property access.
   aliases:

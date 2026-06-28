@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.missing-ownership-validation
+  version: v1
   title: Missing ownership validation
   summary: Resource identifiers from request input should be checked against the caller before sensitive actions run.
   rationale: Authorization alone is not enough when handlers act on caller-provided resource ids that may belong to someone else.

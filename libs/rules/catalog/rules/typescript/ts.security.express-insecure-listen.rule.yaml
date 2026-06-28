@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-insecure-listen
+  version: v1
   title: Avoid insecure HTTP server bootstrap in production entrypoints
   summary: Application servers should terminate TLS locally or document trusted edge termination before exposing plain HTTP listeners.
   rationale: Bootstrapping Express, Fastify, Nest, or raw HTTP servers without HTTPS exposes traffic to interception and downgrade attacks when no compensating TLS layer exists.

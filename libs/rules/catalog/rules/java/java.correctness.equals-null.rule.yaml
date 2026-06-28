@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.equals-null
+  version: v1
   title: Avoid using equals() to compare against null
   summary: "Calling `.equals(null)` always returns false and may throw NullPointerException."
   rationale: "If the receiver is null, a NullPointerException is thrown. Use `== null` for null checks."

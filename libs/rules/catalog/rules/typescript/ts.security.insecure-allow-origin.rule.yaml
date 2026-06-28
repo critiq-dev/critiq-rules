@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.insecure-allow-origin
+  version: v1
   title: Do not reflect request origin into CORS policy
   summary: "`Access-Control-Allow-Origin` should not be set from request-controlled input."
   rationale: Reflecting the request origin into a CORS allowlist turns origin validation into a no-op.

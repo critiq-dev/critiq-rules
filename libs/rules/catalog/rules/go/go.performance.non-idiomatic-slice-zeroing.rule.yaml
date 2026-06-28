@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.performance.non-idiomatic-slice-zeroing
+  version: v1
   title: Use `for i := range` for slice zeroing instead of three-clause for loop
   summary: A three-clause `for i := 0; i < len(s); i++ { s[i] = <zero> }` is slower and less idiomatic than `for i := range s { s[i] = <zero> }`.
   rationale: >-

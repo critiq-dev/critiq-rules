@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.bad-date-usage
+  version: v1
   title: Use zone-aware date methods instead of Date/DateTime
   summary: >-
     Prefer `Time.zone` or `Date.current` over `Date.today`, `Date.parse`,

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: security.archive-path-traversal
+  version: v1
   title: Sanitize archive entry paths before writing
   summary: Archive extraction should not write entry names directly to the filesystem.
   rationale: Archive entries can contain traversal paths that overwrite files outside the intended extraction directory.

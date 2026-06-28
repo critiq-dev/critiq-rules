@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.default-package-spring-scan
+  version: v1
   title: '@SpringBootApplication or @ComponentScan must not be used in the default package'
   summary: Spring Boot applications in the default package cannot be scanned properly and will fail at runtime.
   rationale: Spring Boot's component scanning relies on package declarations to locate beans, configurations, and auto-configuration. Classes in the default package are not scanned, silently causing missing beans.

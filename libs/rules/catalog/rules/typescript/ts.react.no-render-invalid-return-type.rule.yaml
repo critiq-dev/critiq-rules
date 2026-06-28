@@ -2,9 +2,11 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-render-invalid-return-type
+  version: v2
   title: Render must return valid React element
-  summary: A render method that returns a number, boolean, or plain object will produce an empty or broken UI.
-  rationale: React render methods must return JSX, fragments, strings, null, or boolean values. Numeric literals and plain objects are not valid React children.
+  summary: A class component render method returns a value that React cannot render as a child, such as a plain object, causing a runtime error or blank UI.
+  rationale: |
+    React class component render methods must return a valid React node. Acceptable return values include JSX elements, fragments, strings, numbers, booleans, null, arrays of valid nodes, and template literals. Returning a plain object, function, symbol, or undefined (via bare return) causes React to throw "Objects are not valid as a React child." Other non-renderable values silently produce empty output. The check also follows logical operators (&&, ||) and ternary expressions.
   aliases:
     - JS-0467
   tags:

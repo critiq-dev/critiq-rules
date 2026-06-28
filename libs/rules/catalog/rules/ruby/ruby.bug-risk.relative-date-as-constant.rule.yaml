@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.relative-date-as-constant
+  version: v1
   title: Relative date/time assigned to a constant
   summary: >-
     Constants should not be assigned relative date/time expressions

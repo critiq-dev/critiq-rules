@@ -2,9 +2,13 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.file-generation
-  title: Constrain local file generation paths
-  summary: Local file writes should not derive their destination path from request or upload input.
-  rationale: Attacker-controlled write paths can overwrite local state, escape intended directories, or create files in sensitive locations.
+  version: v2
+  title: File writes using request-derived destination paths
+  summary: File write functions such as writeFileSync receive a destination path derived from request or upload input, allowing attackers to control where files are created on disk.
+  rationale: |-
+    When a file write operation uses a destination path derived from user input such as request body fields, query parameters, or uploaded file metadata, an attacker can control where content is written on disk.
+    This enables path traversal out of intended directories, overwriting of configuration or system files, and creation of malicious files in sensitive locations.
+    Always generate destination filenames on the server using trusted sources like crypto.randomUUID() or constrain writes to an allowlisted directory and filename set.
   detection:
     kind: pattern
   references:

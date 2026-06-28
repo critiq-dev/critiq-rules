@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.mutex-held-across-await
+  version: v1
   title: Do not hold a Mutex guard across await
   summary: Holding a std::sync::Mutex guard across an await point can deadlock the async executor.
   rationale: >-

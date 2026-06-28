@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-missing-error-boundary
+  version: v1
   title: Add a route-level error boundary for Next.js App Router segments
   summary: Next.js route segments should declare an error.tsx handler so async and client failures surface safely.
   rationale: Without a segment error boundary, failures in pages or layouts can crash the entire subtree without recovery UI.

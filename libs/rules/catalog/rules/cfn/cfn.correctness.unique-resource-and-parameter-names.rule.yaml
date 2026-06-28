@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.unique-resource-and-parameter-names
+  version: v1
   title: Unique resource and parameter names
   summary: Unique resource and parameter names
   rationale: cfn-lint reports E3007 when Unique resource and parameter names.

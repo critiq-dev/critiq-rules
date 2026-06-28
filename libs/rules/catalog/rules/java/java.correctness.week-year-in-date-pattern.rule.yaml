@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.week-year-in-date-pattern
+  version: v1
   title: Using week year (YYYY) in place of year (yyyy)
   summary: YYYY represents the ISO week year, not the calendar year, which can cause dates around year boundaries to be off by one year.
   rationale: SimpleDateFormat and DateTimeFormatter interpret YYYY as the week year, which differs from the calendar year near the start and end of each year. This produces incorrect dates for the last/first week of the year.

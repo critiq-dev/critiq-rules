@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-dead-export
+  version: v1
   title: Remove dead exports
   summary: Exported symbols with no known consumers increase maintenance overhead.
   rationale: Dead exports are accidental API surface that should be removed or documented.

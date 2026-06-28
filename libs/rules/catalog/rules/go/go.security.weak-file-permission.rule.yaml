@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.weak-file-permission
+  version: v1
   title: Avoid overly permissive file permissions
   summary: >-
     `os.WriteFile` or `os.OpenFile` with permission bits above `0600` (owner read/write) may expose sensitive data to other users on the system.

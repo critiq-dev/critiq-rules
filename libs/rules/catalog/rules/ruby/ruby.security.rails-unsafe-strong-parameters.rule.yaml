@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.rails-unsafe-strong-parameters
+  version: v1
   title: Avoid unsafe Rails strong parameters and mass assignment
   summary: >-
     Application controllers should not accept unfiltered request hashes or privileged attributes via strong parameters and mass assignment sinks.

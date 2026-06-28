@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.resource-ec2-security-group-ingress-properties
+  version: v1
   title: Resource ec2 security group ingress properties
   summary: Resource ec2 security group ingress properties
   rationale: cfn-lint reports E2506 when Resource ec2 security group ingress properties.

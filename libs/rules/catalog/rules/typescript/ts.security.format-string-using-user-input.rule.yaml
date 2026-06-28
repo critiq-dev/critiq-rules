@@ -2,9 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.format-string-using-user-input
+  version: v2
   title: Avoid request-controlled format strings
   summary: Logging and formatting helpers should not take request input as the format string itself.
-  rationale: Request-controlled format strings can corrupt logs, leak structure, or produce unexpected formatting behavior.
+  rationale: Passing user-controlled data as the format string in printf-style helpers (console.log, util.format, etc.) allows format-specifier injection. An attacker can include format specifiers (%s, %d, %j, %o) in the input to manipulate log output or leak internal state from subsequent arguments. Structured logging objects (logger.info({...})) are excluded — they are passed as data, not format templates.
   detection:
     kind: pattern
   references:

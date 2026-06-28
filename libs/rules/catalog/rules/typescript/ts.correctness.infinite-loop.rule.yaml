@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.infinite-loop
+  version: v1
   title: Loop has no exit condition — add a break, return, or exit condition
   summary: Detect obvious infinite loops that have no exit path via break, return, throw, or yield.
   rationale: Loops with no exit condition (while(true), for(;;), do{}while(true)) without a break, return, throw, or yield in the body will run forever, freezing the event loop or exhausting resources. Even loops with a yield are considered potentially unbounded in non-generator contexts.

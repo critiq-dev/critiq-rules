@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.stringbuilder-char-ctor
+  version: v1
   title: StringBuilder or StringBuffer constructed with a char literal
   summary: StringBuilder/StringBuffer constructed with a single char argument behaves as a capacity argument, not a string value.
   rationale: In Java, StringBuilder(char) calls StringBuilder(int) via char-to-int widening, creating a builder with capacity equal to the char's numeric value instead of containing the character.

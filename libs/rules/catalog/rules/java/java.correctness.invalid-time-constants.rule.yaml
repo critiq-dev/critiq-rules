@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.invalid-time-constants
+  version: v1
   title: Invalid values for java.time constants will always throw a DateTimeException
   summary: Calls to java.time factory methods with literal arguments outside valid ranges (month > 12, day > 31, hour >= 24, minute/seconds >= 60) will always throw DateTimeException at runtime.
   rationale: The java.time API throws DateTimeException for out-of-range values. Using literal constants that are out of range is always a bug and should be caught at development time.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.correctness.waitgroup-add-in-goroutine
+  version: v1
   title: Call WaitGroup.Add before launching the goroutine
   summary: WaitGroup.Add called inside the goroutine races with Wait.
   rationale: >-

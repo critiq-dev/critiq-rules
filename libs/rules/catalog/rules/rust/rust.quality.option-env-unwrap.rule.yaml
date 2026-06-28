@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.quality.option-env-unwrap
+  version: v1
   title: "Avoid `unwrap()` on `option_env!()`"
   summary: "Calling `.unwrap()` on `option_env!()` panics at compile-time if the environment variable is unset."
   rationale: >-

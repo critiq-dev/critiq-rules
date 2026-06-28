@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.self-not-self-type
+  version: v1
   title: "Replace lowercase `self` with `Self` in type position"
   summary: "`self` used in return type or type position where uppercase `Self` is expected."
   rationale: >-

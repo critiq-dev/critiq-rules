@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: sql.style.inconsistent-keyword-case
+  version: v1
   aliases:
     - SQL-L010
   title: Inconsistent capitalisation of keywords

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.invalid-string-interpolation-type
+  version: v1
   title: Avoid using non-scalar types in string interpolation
   summary: String interpolation with objects, arrays, or array literals using `${...}` syntax produces unexpected results. The resulting string will contain "Object" or "Array" rather than a meaningful representation.
   aliases:

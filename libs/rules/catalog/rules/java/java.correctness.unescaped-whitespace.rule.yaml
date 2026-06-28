@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.unescaped-whitespace
+  version: v1
   title: Whitespace escape sequences should be properly escaped in regex patterns
   summary: Whitespace escape sequences like \n, \t, \r, \f, \b in Pattern.compile or String.matches arguments should be double-escaped (\\n, \\t, etc.) to be interpreted as regex escapes rather than Java string escapes.
   rationale: In Java string literals, \n, \t, \r, \f, and \b are interpreted as actual whitespace characters. When these are passed to regex methods, the regex engine receives the literal character, not the expected escape sequence. Double-escaped sequences (\\n, \\t) pass the regex engine the intended escape.

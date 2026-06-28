@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.symbol-boolean-name
+  version: v1
   title: Avoid :true and :false symbols
   summary: >-
     `:true` and `:false` symbols are usually typos for boolean literals.

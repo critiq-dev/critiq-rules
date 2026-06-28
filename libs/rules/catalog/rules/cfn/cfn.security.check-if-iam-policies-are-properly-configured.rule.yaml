@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.security.check-if-iam-policies-are-properly-configured
+  version: v1
   title: Check if iam policies are properly configured
   summary: Check if iam policies are properly configured
   rationale: cfn-lint reports E2507 when Check if iam policies are properly configured.

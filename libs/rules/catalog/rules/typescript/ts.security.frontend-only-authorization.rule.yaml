@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.frontend-only-authorization
+  version: v1
   title: Authorization enforced only on frontend
   summary: Backend routes should enforce authorization directly instead of relying on frontend gating alone.
   rationale: Frontend checks are easy to bypass, so sensitive routes need server-side authorization on the backend path itself.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-cache-miss-from-unstable-key
+  version: v1
   title: Avoid unstable cache-key construction
   summary: Cache keys built from unstable values cause low hit rates and repeated recomputation.
   rationale: Cache keys built from unstable values cause low hit rates and repeated recomputation.

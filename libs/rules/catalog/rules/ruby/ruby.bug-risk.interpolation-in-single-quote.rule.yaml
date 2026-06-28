@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.interpolation-in-single-quote
+  version: v1
   title: Interpolation in a single-quoted string
   summary: >-
     Single-quoted strings do not support interpolation. `#{expr}` inside a

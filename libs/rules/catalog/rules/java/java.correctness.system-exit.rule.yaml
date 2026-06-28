@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.system-exit
+  version: v1
   title: "System.exit() should only be invoked within application entry points"
   summary: "Calling `System.exit()` outside of `main()` or framework entry points makes code hard to test and may terminate the JVM unexpectedly."
   rationale: "`System.exit()` terminates the JVM immediately. When called from libraries, utility methods, or non-entry-point code it prevents cleanup, makes unit testing impossible (tests exit prematurely), and couples callers to a specific runtime behavior. Consider throwing a meaningful exception or returning a status code instead."

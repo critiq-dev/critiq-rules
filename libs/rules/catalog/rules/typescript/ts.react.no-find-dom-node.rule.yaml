@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-find-dom-node
+  version: v1
   title: Avoid ReactDOM.findDOMNode
   summary: "`findDOMNode` reaches through component boundaries with a deprecated escape hatch that breaks strict mode migrations."
   rationale: Direct DOM lookups make React trees harder to refactor and fail to model multi-node or fragment-based rendering safely.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.boxed-boolean-conditional
+  version: v1
   title: Boxed Boolean in conditional expressions
   summary: Using a boxed Boolean directly in a conditional can throw NullPointerException if the value is null.
   rationale: Auto-unboxing a null Boolean in if/while/ternary expressions throws NullPointerException at runtime.

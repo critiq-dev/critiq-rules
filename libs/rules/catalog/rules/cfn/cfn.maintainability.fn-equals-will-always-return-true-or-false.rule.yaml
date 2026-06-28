@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.fn-equals-will-always-return-true-or-false
+  version: v1
   title: "Fn::equals will always return true or false"
   summary: "Fn::equals will always return true or false"
   rationale: "cfn-lint reports W8003 when Fn::equals will always return true or false."

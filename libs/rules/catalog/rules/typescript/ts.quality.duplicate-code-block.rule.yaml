@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.duplicate-code-block
+  version: v1
   title: Duplicate code block
   summary: Large duplicated function bodies across files make behavior harder to maintain safely.
   rationale: Duplicated logic often diverges over time and increases the cost of fixes, testing, and future changes.

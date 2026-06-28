@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.const-to-mut-ptr
+  version: v1
   title: Conversion of const pointer to mutable pointer
   summary: >-
     Converting a `*const T` to `*mut T` violates Rust's aliasing guarantees and can

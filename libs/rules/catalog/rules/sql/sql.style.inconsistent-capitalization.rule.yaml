@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: sql.style.inconsistent-capitalization
+  version: v1
   aliases:
     - SQL-L014
   title: Inconsistent capitalization detected

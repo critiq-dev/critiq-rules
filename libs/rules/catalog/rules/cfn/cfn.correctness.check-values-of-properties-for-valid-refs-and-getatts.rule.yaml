@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-values-of-properties-for-valid-refs-and-getatts
+  version: v1
   title: Check values of properties for valid refs and getatts
   summary: Check values of properties for valid refs and getatts
   rationale: cfn-lint reports E3008 when Check values of properties for valid refs and getatts.

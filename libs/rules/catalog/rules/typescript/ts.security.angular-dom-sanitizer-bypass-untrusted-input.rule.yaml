@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.angular-dom-sanitizer-bypass-untrusted-input
+  version: v1
   title: Avoid trusting unsanitized Angular bypass sinks
   summary: DomSanitizer bypass helpers should not receive route, storage, or request-derived values without validation.
   rationale: Bypass helpers disable Angular templating protections and turn downstream sinks into XSS execution points.

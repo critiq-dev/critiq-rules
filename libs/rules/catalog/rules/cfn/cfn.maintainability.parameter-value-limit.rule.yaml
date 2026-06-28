@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.parameter-value-limit
+  version: v1
   title: Parameter value limit
   summary: Parameter value limit
   rationale: cfn-lint reports I2012 when Parameter value limit.

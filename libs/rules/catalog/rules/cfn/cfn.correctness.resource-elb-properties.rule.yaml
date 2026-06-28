@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.resource-elb-properties
+  version: v1
   title: Resource elb properties
   summary: Resource elb properties
   rationale: cfn-lint reports E2503 when Resource elb properties.

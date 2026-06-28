@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.duplicate-hash-keys
+  version: v1
   title: Avoid duplicate keys in hash literals
   summary: >-
     Remove duplicate symbol or string keys in the same hash literal.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.blocking-call-in-async-flow
+  version: v1
   title: Blocking call inside async flow
   summary: Async functions should not call synchronous blocking APIs on the hot path.
   rationale: Blocking sync APIs stall the event loop and erase the throughput benefits of async control flow.

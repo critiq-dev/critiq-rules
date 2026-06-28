@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.ref-validation-of-value
+  version: v1
   title: Ref validation of value
   summary: Ref validation of value
   rationale: cfn-lint reports E1020 when Ref validation of value.

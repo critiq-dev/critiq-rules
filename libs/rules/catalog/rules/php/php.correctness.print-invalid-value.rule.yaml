@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.print-invalid-value
+  version: v1
   title: Do not print non-string values
   summary: print should only be used with strings. Objects, arrays, and array() expressions cannot be meaningfully converted to strings by print.
   aliases:

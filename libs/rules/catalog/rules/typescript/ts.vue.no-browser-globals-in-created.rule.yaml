@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.vue.no-browser-globals-in-created
+  version: v1
   title: Avoid browser globals in server-side lifecycle hooks
   summary: The created and beforeCreate hooks may run on the server during SSR; accessing window or document there causes errors.
   rationale: In Nuxt and other SSR Vue frameworks, the created and beforeCreate hooks execute on both server and client. Accessing browser-only globals like window or document in these hooks will throw ReferenceError during SSR. Move browser access to mounted() or use client-side guards.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.mistyped-suffix
+  version: v1
   title: "Possibly mistyped integer suffix"
   summary: "Integer literal suffix like `_32` or `_64` may be a typo for `_u32` or `_i64`."
   rationale: >-

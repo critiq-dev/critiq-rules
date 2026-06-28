@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.async-promise-executor
+  version: v1
   title: Async Promise executor function
   summary: The executor passed to `new Promise` is declared `async`.
   aliases:

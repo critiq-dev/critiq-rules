@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.invalid-rails-env-predicate
+  version: v1
   title: Rails.env predicate does not match any known environment
   summary: >-
     `Rails.env.<unknown>?` is called where `<unknown>` is not a known Rails

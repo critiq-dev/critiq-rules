@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.unreachable-loop
+  version: v1
   title: Avoid unconditional exit as first statement in loop
   summary: >-
     A loop body starts with an unconditional return, break, or raise. This

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.security.jwt-without-verification
+  version: v1
   title: Verify JWT signatures before trusting claims
   summary: >-
     Parsing JWTs with `jwt.Parse` and a nil keyfunc, `jwt.ParseUnverified`, or `jwt.Decode` skips signature verification and lets attackers forge tokens.

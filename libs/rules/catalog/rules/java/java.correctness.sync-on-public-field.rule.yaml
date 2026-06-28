@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.sync-on-public-field
+  version: v1
   title: Public fields synchronized on
   summary: Synchronizing on a public field allows external code to interfere with synchronization.
   rationale: A public field used as a lock is visible to all code, which can synchronize on the same object and cause deadlock or interfere with locking contracts.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.bug-risk.gorm-updates-zero-values
+  version: v1
   title: GORM Updates with struct silently excludes zero-value fields
   summary: >-
     `db.Updates(Struct{...})` or `db.Model(...).Updates(Struct{...})`

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.performance.string-to-string
+  version: v1
   title: "toString invoked on a string value is useless"
   summary: "Calling `toString()` on a string literal or string variable creates an unnecessary identity copy."
   rationale: "Invoking `toString()` on a `String` value is a no-op — it simply returns `this`. The call is unnecessary and may indicate confusion about the runtime type of a value. Remove the `.toString()` call to clarify intent and avoid misleading readers."

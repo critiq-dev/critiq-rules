@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.correctness.erasing-operation
+  version: v1
   title: "Operation trivially evaluates to zero"
   summary: "An arithmetic or bitwise operation that always evaluates to zero."
   rationale: >-

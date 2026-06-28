@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.use-present-to-simplify-conditional
+  version: v1
   title: present? can be used to simplify conditionals
   summary: >-
     Detects patterns like `x != nil && !x.empty?` that can be simplified to

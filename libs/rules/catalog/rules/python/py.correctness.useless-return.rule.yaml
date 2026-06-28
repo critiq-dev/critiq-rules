@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.correctness.useless-return
+  version: v1
   aliases:
     - PY-W0004
   title: Avoid bare return at end of function body

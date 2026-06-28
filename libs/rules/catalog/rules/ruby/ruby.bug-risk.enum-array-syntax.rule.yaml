@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.enum-array-syntax
+  version: v1
   title: Enum detected with array syntax
   summary: >-
     Use of array syntax for enum declarations is brittle and can lead to

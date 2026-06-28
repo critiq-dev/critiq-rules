@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.heredoc-method-order
+  version: v1
   title: Avoid chaining methods on heredoc without parentheses
   summary: >-
     `<<-SQL.squish` parses as calling `.squish` on the delimiter string

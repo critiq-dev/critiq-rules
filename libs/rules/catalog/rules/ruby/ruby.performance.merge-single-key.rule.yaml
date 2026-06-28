@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.performance.merge-single-key
+  version: v1
   title: Prefer direct assignment over `merge!` with a single key
   summary: >-
     `.merge!({key: value})` for a single key creates an intermediate hash.

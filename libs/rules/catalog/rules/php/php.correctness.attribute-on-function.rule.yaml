@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: php.correctness.attribute-on-function
+  version: v1
   title: Attributes are not valid on functions
   summary: Attributes are not valid on functions
   rationale: Attributes are not valid on functions

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.check-events-rule-targets-are-less-than-or-equal-to-5
+  version: v1
   title: Check events rule targets are less than or equal to 5
   summary: Check events rule targets are less than or equal to 5
   rationale: cfn-lint reports E3021 when Check events rule targets are less than or equal to 5.

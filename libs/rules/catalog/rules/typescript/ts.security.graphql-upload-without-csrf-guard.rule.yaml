@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.graphql-upload-without-csrf-guard
+  version: v1
   title: Pair GraphQL multipart uploads with CSRF-safe server posture
   summary: Legacy GraphQL multipart upload helpers should not run alongside Apollo Server configurations that disable CSRF protections.
   rationale: Multipart GraphQL requests complicate browser CSRF defenses; when Apollo CSRF prevention is explicitly disabled, upload middleware is a high-risk combination for cross-site writes.

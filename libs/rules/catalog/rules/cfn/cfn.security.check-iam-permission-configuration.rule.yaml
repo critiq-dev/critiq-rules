@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.security.check-iam-permission-configuration
+  version: v1
   title: Check iam permission configuration
   summary: Check iam permission configuration
   rationale: cfn-lint reports W3037 when Check iam permission configuration.

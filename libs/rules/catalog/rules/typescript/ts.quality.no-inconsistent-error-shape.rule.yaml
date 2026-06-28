@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.no-inconsistent-error-shape
+  version: v1
   title: Keep error payload shape consistent
   summary: Inconsistent thrown or rejected error shapes make error handling brittle.
   rationale: Standardized error construction simplifies observability, retries, and user-safe handling.

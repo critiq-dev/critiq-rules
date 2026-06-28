@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: rust.security.insecure-temp-file
+  version: v1
   title: Avoid predictable or permissionless temporary files
   summary: >-
     Temporary file creation should use secure helpers with random suffixes and restrictive permissions.

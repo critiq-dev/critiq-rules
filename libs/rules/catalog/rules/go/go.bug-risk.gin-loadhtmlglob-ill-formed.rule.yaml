@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: go.bug-risk.gin-loadhtmlglob-ill-formed
+  version: v1
   title: gin.LoadHTMLGlob with ill-formed pattern may panic
   summary: >-
     `gin.LoadHTMLGlob()` with an ill-formed glob pattern silently matches zero

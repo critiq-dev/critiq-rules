@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.findinmap-validation-of-configuration
+  version: v1
   title: Findinmap validation of configuration
   summary: Findinmap validation of configuration
   rationale: cfn-lint reports E1011 when Findinmap validation of configuration.

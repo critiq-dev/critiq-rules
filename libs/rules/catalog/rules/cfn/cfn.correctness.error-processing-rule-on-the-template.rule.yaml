@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.correctness.error-processing-rule-on-the-template
+  version: v1
   title: Error processing rule on the template
   summary: Error processing rule on the template
   rationale: cfn-lint reports E0002 when Error processing rule on the template.

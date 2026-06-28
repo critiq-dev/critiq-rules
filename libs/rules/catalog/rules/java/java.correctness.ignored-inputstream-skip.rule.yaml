@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.ignored-inputstream-skip
+  version: v1
   title: Return value of InputStream.skip ignored
   summary: Calling `skip()` on an InputStream without using the return value discards data.
   rationale: "InputStream.skip() returns the actual number of bytes skipped, which may be less than requested. Ignoring this value can lead to incorrect stream positioning."

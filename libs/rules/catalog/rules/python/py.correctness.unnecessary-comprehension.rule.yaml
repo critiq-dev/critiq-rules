@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.correctness.unnecessary-comprehension
+  version: v1
   aliases:
     - PY-W0005
   title: Avoid unnecessary comprehension wrapped in list() or set()

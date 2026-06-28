@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: cfn.maintainability.sub-validation-of-parameters-w1019
+  version: v1
   title: Sub validation of parameters
   summary: Sub validation of parameters
   rationale: cfn-lint reports W1019 when Sub validation of parameters.

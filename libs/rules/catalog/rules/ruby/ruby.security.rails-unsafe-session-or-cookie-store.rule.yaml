@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.rails-unsafe-session-or-cookie-store
+  version: v1
   title: Do not store raw request params in session or cookies
   summary: >-
     Session and signed cookie stores should not persist raw `params` blobs that attackers can influence.

@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.bug-risk.enum-duplicate-values
+  version: v1
   title: Duplicate value detected in enum declarations
   summary: >-
     Two or more enum items share the same integer value, which will cause

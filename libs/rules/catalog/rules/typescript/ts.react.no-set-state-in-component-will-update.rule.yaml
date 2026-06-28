@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-set-state-in-component-will-update
+  version: v1
   title: Avoid setState in componentWillUpdate
   summary: Synchronous state updates during the legacy will-update lifecycle can cause infinite re-rendering loops.
   rationale: componentWillUpdate is deprecated and setState inside it may trigger additional render cycles. Migrate to componentDidUpdate with a guard or getDerivedStateFromProps.

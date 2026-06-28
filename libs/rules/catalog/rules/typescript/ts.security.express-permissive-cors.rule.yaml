@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.express-permissive-cors
+  version: v1
   title: Do not combine permissive CORS origins with credentials
   summary: CORS middleware must not reflect every origin or use a wildcard while `credentials` is enabled.
   rationale: Allowing credentials with wildcard or reflected origins lets untrusted sites read authenticated browser responses.

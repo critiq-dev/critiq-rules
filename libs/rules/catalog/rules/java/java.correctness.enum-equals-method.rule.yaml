@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.correctness.enum-equals-method
+  version: v1
   title: equals method defined for enumeration
   summary: "An enum should not define an `equals()` method — enum equality is determined by identity."
   rationale: The JVM guarantees that each enum constant is a singleton. Defining `equals()` in an enum is unnecessary and can break the contract if not implemented carefully.

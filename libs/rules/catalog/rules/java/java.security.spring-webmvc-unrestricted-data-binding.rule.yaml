@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: java.security.spring-webmvc-unrestricted-data-binding
+  version: v1
   title: Constrain Spring MVC data binding for domain objects
   summary: >-
     Binding request parameters directly into entity-like models without `setAllowedFields` / `@InitBinder` controls risks mass-assignment privilege escalation.

@@ -2,15 +2,44 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.logging.no-console-log
-  title: Avoid console.log
-  summary: Use the project logger instead of console.log.
-  rationale: Console logging bypasses the shared logger pipeline.
+  version: v1
+  title: Avoid console logging methods
+  summary: Use the project logger instead of console logging methods (log, warn, info, debug, trace).
+  rationale: Console logging bypasses the shared logger pipeline and cannot be properly filtered, throttled, or redirected in production.
   tags:
     - logging
     - rules-catalog
 scope:
   languages:
     - typescript
+  paths:
+    exclude:
+      # Standard test exclusions
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      # E2E and integration test directories
+      - "**/e2e/**"
+      - "**/e2e-tests/**"
+      # Storybook and demo files
+      - "**/*.stories.*"
+      # Test fixtures and harnesses
+      - "**/fixtures/**"
+      # Database seeding scripts
+      - "**/seed*/**"
+      # Operational and utility scripts
+      - "**/scripts/**"
+      # Build tooling scripts
+      - "**/build/**"
+      # CLI tools and entry points (console.log is the user-facing output mechanism)
+      - "**/cli.*"
+      - "**/cli-*/**"
+      # Logger implementations (these ARE the project logger using console as transport)
+      - "**/logger.ts"
+      - "**/*Logger.ts"
+      - "**/*logger.ts"
 match:
   node:
     kind: CallExpression
@@ -19,7 +48,12 @@ match:
       - path: callee.object.text
         equals: console
       - path: callee.property.text
-        equals: log
+        in:
+          - log
+          - warn
+          - info
+          - debug
+          - trace
 emit:
   finding:
     category: maintainability

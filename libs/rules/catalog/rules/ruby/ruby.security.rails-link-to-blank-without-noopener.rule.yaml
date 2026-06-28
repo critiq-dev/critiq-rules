@@ -2,6 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ruby.security.rails-link-to-blank-without-noopener
+  version: v1
   title: Add rel noopener to link_to with target _blank
   summary: >-
     External links opened in a new tab should set rel noopener or noreferrer.
