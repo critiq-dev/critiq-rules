@@ -33,18 +33,8 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/e2e/**"
-      - "**/fixtures/**"
-      - "**/benchmark/**"
-      - "**/benchmarks/**"
-      - "**/perf/**"
       - "**/node_modules/**"
-      - "**/dist/**"
-      - "**/build/**"
-      - "**/.next/**"
-      - "**/mocks/**"
       - "**/vendor/**"
-      - "**/generated/**"
 match:
   fact:
     kind: resilience.missing-timeout-on-external-call

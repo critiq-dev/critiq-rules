@@ -29,18 +29,6 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/e2e/**"
-      - "**/fixtures/**"
-      - "**/benchmark/**"
-      - "**/benchmarks/**"
-      - "**/microbenchmarks/**"
-      - "**/perf/**"
-      # JS-engine conformance/stress suites use non-standard dir names not
-      # caught by the generic test globs above (WebKit's JSTests, plus the
-      # shared test262/mjsunit corpora vendored by many engine repos).
-      - "**/JSTests/**"
-      - "**/test262/**"
-      - "**/mjsunit/**"
 match:
   all:
     - fact:

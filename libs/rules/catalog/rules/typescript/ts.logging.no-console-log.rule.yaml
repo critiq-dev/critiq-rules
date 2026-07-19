@@ -20,26 +20,6 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      # E2E and integration test directories
-      - "**/e2e/**"
-      - "**/e2e-tests/**"
-      # Storybook and demo files
-      - "**/*.stories.*"
-      # Test fixtures and harnesses
-      - "**/fixtures/**"
-      # Database seeding scripts
-      - "**/seed*/**"
-      # Operational and utility scripts
-      - "**/scripts/**"
-      # Build tooling scripts
-      - "**/build/**"
-      # CLI tools and entry points (console.log is the user-facing output mechanism)
-      - "**/cli.*"
-      - "**/cli-*/**"
-      # Logger implementations (these ARE the project logger using console as transport)
-      - "**/logger.ts"
-      - "**/*Logger.ts"
-      - "**/*logger.ts"
 match:
   node:
     kind: CallExpression

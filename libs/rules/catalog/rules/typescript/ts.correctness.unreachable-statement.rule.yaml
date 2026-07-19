@@ -26,7 +26,6 @@ scope:
       - "**/tests/**"
       - "**/__mocks__/**"
       - "**/*.generated.*"
-      - "**/generated/**"
 match:
   fact:
     kind: control-flow.unreachable-statement

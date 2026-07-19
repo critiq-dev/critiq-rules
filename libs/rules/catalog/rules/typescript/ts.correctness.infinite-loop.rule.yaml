@@ -17,13 +17,6 @@ scope:
   languages:
     - typescript
     - javascript
-  paths:
-    exclude:
-      - "**/tests/fixtures/code-path-analysis/**"
-      - "**/types/**/*-tests.*"
-      - "**/types/**/*-tests.ts"
-      - "**/types/**/*-tests.tsx"
-      - "**/tests/fixtures/**"
 match:
   fact:
     kind: async.infinite-loop

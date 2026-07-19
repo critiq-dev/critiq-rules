@@ -18,8 +18,6 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/assets/javascripts/**"
-      - "**/assets/**"
       - "**/vendor/**"
 match:
   fact:

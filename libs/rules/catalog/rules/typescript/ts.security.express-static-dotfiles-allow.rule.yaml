@@ -34,7 +34,6 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/lib/**"
       - "**/node_modules/**"
       - "**/vendor/**"
 match:

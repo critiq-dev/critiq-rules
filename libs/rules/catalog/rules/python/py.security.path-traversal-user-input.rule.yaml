@@ -26,11 +26,6 @@ metadata:
 scope:
   languages:
     - python
-  paths:
-    exclude:
-      - "**/build/**"
-      - "**/scripts/**"
-      - "**/docs/**"
 match:
   fact:
     kind: python.security.path-traversal-user-input

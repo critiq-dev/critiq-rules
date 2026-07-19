@@ -28,8 +28,6 @@ scope:
       - "**/__mocks__/**"
       - "**/tests/**"
       - "**/test/**"
-      - "**/e2e/**"
-      - "**/*.stories.*"
       - "**/*.config.*"
       - "**/*.d.ts"
 match:

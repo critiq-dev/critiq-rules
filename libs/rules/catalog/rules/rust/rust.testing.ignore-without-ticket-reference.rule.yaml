@@ -18,11 +18,6 @@ metadata:
 scope:
   languages:
     - rust
-  paths:
-    exclude:
-      - "**/compiler/*/tests/**"
-      - "**/src/tools/*/tests/**"
-      - "**/tests/ui/**"
 match:
   fact:
     kind: rust.testing.ignore-without-ticket-reference

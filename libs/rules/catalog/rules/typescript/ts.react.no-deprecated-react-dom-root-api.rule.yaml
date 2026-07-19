@@ -16,11 +16,6 @@ scope:
   languages:
     - typescript
     - javascript
-  paths:
-    exclude:
-      - "**/types/react-dom/v15/**"
-      - "**/types/react-dom/v16/**"
-      - "**/embed-*/**"
 match:
   fact:
     kind: ui.react.deprecated-react-dom-root-api

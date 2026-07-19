@@ -25,19 +25,9 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/e2e/**"
-      - "**/e2e-tests/**"
-      - "**/fixtures/**"
-      - "**/examples/**"
-      - "**/tutorials/**"
-      - "**/*.stories.*"
       # Generated, vendored, and minified output where hand-tuning does not apply.
       - "**/*.min.*"
-      - "**/*.bundle.*"
-      - "**/dist/**"
-      - "**/build/**"
       - "**/vendor/**"
-      - "**/generated/**"
       - "**/*.generated.*"
 match:
   fact:

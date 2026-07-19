@@ -17,17 +17,8 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/scripts/**"
       - "**/migrations/**"
-      - "**/seed/**"
       - "**/seeds/**"
-      - "**/seed.*"
-      - "**/seed-*.*"
-      - "**/e2e/**"
-      - "**/e2e-tests/**"
-      - "**/fixtures/**"
-      - "**/generated/**"
-      - "**/db/upgrade.*"
 match:
   fact:
     kind: performance.no-await-in-loop

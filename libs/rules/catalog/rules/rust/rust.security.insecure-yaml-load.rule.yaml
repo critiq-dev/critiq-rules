@@ -34,7 +34,6 @@ scope:
     exclude:
       - "**/tests/**"
       - "**/*_test.rs"
-      - "**/examples/**"
 match:
   fact:
     kind: rust.security.insecure-yaml-load

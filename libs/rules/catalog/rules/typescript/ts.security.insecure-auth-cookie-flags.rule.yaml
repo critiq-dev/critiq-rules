@@ -33,7 +33,6 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/types/**/*-tests.*"
 match:
   fact:
     kind: ts.security.insecure-auth-cookie-flags

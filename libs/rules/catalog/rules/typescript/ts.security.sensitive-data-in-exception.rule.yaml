@@ -37,14 +37,7 @@ scope:
       - "**/tests/**"
       - "**/__tests__/**"
       - "**/__mocks__/**"
-      - "**/testdata/**"
-      - "**/fixtures/**"
-      - "**/examples/**"
-      - "**/example/**"
-      - "**/docs/**"
       - "**/vendor/**"
-      - "**/dist/**"
-      - "**/build/**"
       - "**/*.min.js"
 match:
   fact:

@@ -28,11 +28,7 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/build/**"
-      - "**/scripts/**"
-      - "**/docs/**"
       - "**/vendor/**"
-      - "**/lib/**"
 match:
   fact:
     kind: security.user-controlled-regexp

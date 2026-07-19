@@ -24,8 +24,6 @@ scope:
       - "**/__tests__/**"
       - "**/test/**"
       - "**/tests/**"
-      - "**/testdata/**"
-      - "**/fixtures/**"
 match:
   fact:
     kind: data-flow.optional-value-without-fallback

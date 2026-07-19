@@ -30,7 +30,6 @@ scope:
       - "**/test/**"
       - "**/tests/**"
       - "**/__tests__/**"
-      - "**/harness/**"
       - "**/*.test.*"
       - "**/*.spec.*"
 match:

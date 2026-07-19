@@ -35,7 +35,6 @@ scope:
       - "**/*.go"
     exclude:
       - "**/*_test.go"
-      - "**/testdata/**"
       - "**/vendor/**"
 match:
   fact:

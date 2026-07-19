@@ -31,7 +31,6 @@ scope:
     - python
   paths:
     exclude:
-      - "**/lib/**"
       - "**/node_modules/**"
       - "**/vendor/**"
 match:

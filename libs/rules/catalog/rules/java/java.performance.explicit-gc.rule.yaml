@@ -22,7 +22,6 @@ scope:
     include:
       - "**/*.java"
     exclude:
-      - "**/src/test/**"
       - "**/tests/**"
       - "**/*Test.java"
 match:

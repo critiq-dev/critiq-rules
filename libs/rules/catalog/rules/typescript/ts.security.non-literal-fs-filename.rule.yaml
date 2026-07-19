@@ -28,10 +28,6 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/sandbox/**"
-      - "**/tests/setup/**"
-      - "**/tests/smoke/**"
-      - "**/e2e/**"
       - "**/*.test.*"
       - "**/*.spec.*"
       - "**/__tests__/**"

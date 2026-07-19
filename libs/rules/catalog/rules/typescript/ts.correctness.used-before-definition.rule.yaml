@@ -29,7 +29,6 @@ scope:
       - "**/tests/**"
       - "**/__mocks__/**"
       - "**/*.generated.*"
-      - "**/generated/**"
 match:
   fact:
     kind: language.used-before-definition

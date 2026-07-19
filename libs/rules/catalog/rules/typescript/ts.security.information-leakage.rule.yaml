@@ -35,35 +35,8 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      # E2E and integration test directories
-      - "**/e2e/**"
-      - "**/e2e-tests/**"
-      # Storybook and demo files
-      - "**/*.stories.*"
-      # Test fixtures and harnesses
-      - "**/fixtures/**"
-      # Database seed scripts — one-off utilities where console logging is expected
-      - "**/seed/**"
-      - "**/seed*/**"
       - "**/*.seed.*"
-      # Build and utility scripts
-      - "**/scripts/**"
-      # Example and demo apps — diagnostic logging to stdout is expected here
-      - "**/example/**"
-      - "**/examples/**"
-      - "**/demo/**"
-      - "**/demos/**"
-      # Benchmark harnesses — verbose diagnostic output is intentional
-      - "**/benchmark/**"
-      - "**/benchmarks/**"
-      - "**/bench/**"
-      # Mocks and playgrounds — non-production scaffolding
-      - "**/mocks/**"
       - "**/__mocks__/**"
-      - "**/playground/**"
-      - "**/sandbox/**"
-      # Archived or deprecated code paths no longer shipped to production
-      - "**/archive/**"
 match:
   fact:
     kind: security.information-leakage

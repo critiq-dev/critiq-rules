@@ -28,9 +28,6 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/build/**"
-      - "**/scripts/**"
-      - "**/docs/**"
       - "**/*.spec.*"
       - "**/*.test.*"
 match:

@@ -26,28 +26,10 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/e2e/**"
-      - "**/e2e-tests/**"
-      - "**/*-tests/**"
       # Mocks and fixtures (setup data, not runtime hot paths)
       - "**/__mocks__/**"
-      - "**/mocks/**"
       - "**/__fixtures__/**"
-      - "**/fixtures/**"
-      # Storybook, examples, demos, and playgrounds
-      - "**/*.stories.*"
-      - "**/examples/**"
-      - "**/demo/**"
-      - "**/demos/**"
-      - "**/playground/**"
-      # Database seeding scripts (one-time setup loops)
-      - "**/seed*/**"
       - "**/seeds/**"
-      # Build tooling, scripts, and infra (not shipped runtime paths)
-      - "**/scripts/**"
-      - "**/build/**"
-      - "**/infra/**"
-      - "**/tools/**"
 match:
   fact:
     kind: performance.no-large-object-spread-in-loop

@@ -31,10 +31,6 @@ scope:
     exclude:
       - "**/vendor/**"
       - "**/node_modules/**"
-      - "**/scripts/perf/**"
-      - "**/perf/**"
-      - "**/benchmark/**"
-      - "**/bench/**"
 match:
   fact:
     kind: ruby.bug-risk.time-without-zone

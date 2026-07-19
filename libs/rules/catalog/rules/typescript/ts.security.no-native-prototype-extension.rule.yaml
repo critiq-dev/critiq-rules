@@ -32,11 +32,6 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/e2e/**"
-      - "**/zone.js/**"
-      - "**/polyfill*/**"
-      - "**/shim*/**"
-      - "**/types/**/*-tests.ts"
 match:
   fact:
     kind: security.native-prototype-extension

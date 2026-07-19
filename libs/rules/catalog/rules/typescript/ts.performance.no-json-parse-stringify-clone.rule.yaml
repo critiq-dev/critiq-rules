@@ -22,7 +22,6 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/examples/**"
 match:
   fact:
     kind: performance.no-json-parse-stringify-clone

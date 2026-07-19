@@ -27,7 +27,6 @@ scope:
       - "**/__mocks__/**"
       - "**/tests/**"
       - "**/test/**"
-      - "**/e2e/**"
       - "**/*.d.ts"
 match:
   fact:

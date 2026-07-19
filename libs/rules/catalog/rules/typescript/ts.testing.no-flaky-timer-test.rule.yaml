@@ -18,7 +18,6 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/e2e/**"
       - "**/*.integration.test.*"
 match:
   fact:

@@ -23,11 +23,6 @@ scope:
   languages:
     - typescript
     - javascript
-  paths:
-    exclude:
-      - "**/tests/baselines/**"
-      - "**/test/baselines/**"
-      - "**/baselines/**"
 match:
   fact:
     kind: language.missing-super-call

@@ -38,7 +38,6 @@ scope:
       - "**/*.spec.*"
       - "**/__tests__/**"
       - "**/tests/**"
-      - "**/fixtures/**"
       - "**/__fixtures__/**"
 match:
   fact:

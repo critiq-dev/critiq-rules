@@ -30,22 +30,12 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/scripts/**"
-      - "**/cli/**"
-      - "**/bin/**"
-      - "**/db/**"
-      - "**/prisma/**"
-      - "**/fixtures/**"
       - "**/test/**"
       - "**/tests/**"
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/e2e/**"
-      - "**/healthcheck*"
-      - "**/setup-*"
       - "**/vendor/**"
-      - "**/unpack-*"
 match:
   fact:
     kind: runtime.process-exit-control-flow

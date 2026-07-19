@@ -34,16 +34,7 @@ scope:
       - "**/__mocks__/**"
       - "**/tests/**"
       - "**/test/**"
-      - "**/e2e/**"
-      - "**/integration-tests/**"
-      - "**/.yarn/releases/**"
-      - "**/*-bundle.*"
       - "**/*.min.*"
-      - "**/tutorials/**"
-      - "**/content/tutorials/**"
-      - "**/types/**/*-tests.*"
-      - "**/types/**/*.test.*"
-      - "**/types/**/*.spec.*"
 match:
   fact:
     kind: security.import-using-user-input

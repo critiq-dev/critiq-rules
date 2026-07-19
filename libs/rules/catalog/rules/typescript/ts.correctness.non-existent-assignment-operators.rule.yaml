@@ -20,17 +20,6 @@ scope:
   languages:
     - typescript
     - javascript
-  paths:
-    exclude:
-      # Build and compiled output
-      - "**/public/build/**"
-      - "**/dist/**"
-      - "**/build/**"
-      - "**/out/**"
-      # Static assets often contain minified third-party JS
-      - "**/_static/**"
-      # Third-party library directories
-      - "**/libraries/**"
 match:
   fact:
     kind: language.non-existent-assignment-operator

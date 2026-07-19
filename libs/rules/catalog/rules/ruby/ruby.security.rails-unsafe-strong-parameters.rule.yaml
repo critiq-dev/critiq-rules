@@ -39,8 +39,6 @@ scope:
     exclude:
       - "**/vendor/**"
       - "**/node_modules/**"
-      - "**/actionpack/**"
-      - "**/action_dispatch/**"
 match:
   fact:
     kind: ruby.security.rails-unsafe-strong-parameters

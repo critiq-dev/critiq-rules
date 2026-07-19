@@ -26,11 +26,6 @@ scope:
   languages:
     - typescript
     - javascript
-  paths:
-    exclude:
-      - "**/src/server/**"
-      - "**/cli/**"
-      - "**/bin/**"
 match:
   fact:
     kind: security.missing-authorization-before-sensitive-action

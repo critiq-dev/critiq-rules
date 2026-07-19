@@ -24,14 +24,7 @@ scope:
     # Build-time, seed, and tooling code runs once and is not a production hot
     # path, so unbounded concurrency there does not exhaust runtime capacity.
     exclude:
-      - "**/build/**"
-      - "**/scripts/**"
-      - "**/script/**"
-      - "**/infra/**"
-      - "**/tools/**"
-      - "**/seed/**"
       - "**/seeds/**"
-      - "**/docs/**"
       - "**/*.config.js"
       - "**/*.config.ts"
       - "**/*.config.mjs"
@@ -46,8 +39,6 @@ scope:
       - "**/*.spec.tsx"
       - "**/*.spec.js"
       - "**/*.spec.jsx"
-      - "**/e2e/**"
-      - "**/fixtures/**"
 match:
   fact:
     kind: performance.no-unbounded-concurrency

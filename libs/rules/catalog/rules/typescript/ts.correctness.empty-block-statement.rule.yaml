@@ -29,16 +29,7 @@ scope:
     exclude:
       - "**/*Tests/**"
       - "**/*Test/**"
-      - "**/benchmark/**"
-      - "**/benchmarks/**"
-      - "**/microbenchmarks/**"
-      - "**/slowMicrobenchmarks/**"
-      - "**/*.bench.js"
-      - "**/*.bench.ts"
-      - "**/test262/**"
-      - "**/fixtures/**"
       - "**/__fixtures__/**"
-      - "**/testdata/**"
       - "**/*.min.js"
 match:
   fact:

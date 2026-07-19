@@ -17,38 +17,12 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/tests/baselines/**"
       - "**/tests/**"
       - "**/test/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      # JS-engine conformance and stress suites: statement-level promise calls
-      # (e.g. `Promise.all(array);`, `shouldBeAsync(...)`) are deliberate test
-      # scaffolding, not application bugs.
-      - "**/JSTests/**"
-      - "**/test262/**"
-      - "**/mjsunit/**"
-      # Benchmark harnesses fire promises without handling by design.
-      - "**/microbenchmark/**"
-      - "**/microbenchmarks/**"
-      - "**/benchmark/**"
-      - "**/benchmarks/**"
-      # Build tooling and CLI entry scripts where top-level fire-and-forget
-      # `main()` / `run()` is the idiomatic module bootstrap.
-      - "**/scripts/**"
-      - "**/script/**"
-      - "**/build/**"
       - "**/*.config.*"
-      - "**/*.esbuild.*"
-      - "**/postinstall.*"
-      # Mock data, fixtures, examples, and demos are throwaway scaffolding.
-      - "**/mocks/**"
       - "**/mock/**"
-      - "**/fixtures/**"
-      - "**/examples/**"
-      - "**/example/**"
-      - "**/demo/**"
-      - "**/demos/**"
 match:
   fact:
     kind: async.floating-promise-in-function

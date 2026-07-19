@@ -21,15 +21,8 @@ scope:
     include:
       - "**/*.java"
     exclude:
-      # Exclude test code where intentional invalid timezone IDs may be used
-      - "**/src/test/**"
       - "**/tests/**"
       - "**/*Test.java"
-      # Exclude generated and build output directories
-      - "**/target/**"
-      - "**/build/**"
-      - "**/generated/**"
-      - "**/generated-sources/**"
 match:
   fact:
     kind: java.correctness.zoneid-invalid-timezone

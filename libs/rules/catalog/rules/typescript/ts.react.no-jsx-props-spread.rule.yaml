@@ -22,14 +22,6 @@ scope:
       - "**/*.test.*"
       - "**/*.spec.*"
       - "**/__tests__/**"
-      - "**/*.stories.*"
-      - "**/*.story.*"
-      # UI primitive wrappers (shadcn/ui style) intentionally forward all
-      # HTML attributes to underlying DOM elements — the spread is the
-      # documented component contract.
-      - "**/components/ui/**"
-      - "**/primitives/**"
-      - "**/ui/primitives/**"
 match:
   fact:
     kind: ui.react.jsx-props-spread

@@ -32,10 +32,6 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/e2e/**"
-      - "**/polyfill*/**"
-      - "**/shim*/**"
-      - "**/zone.js/**"
 match:
   fact:
     kind: security.global-native-reassignment

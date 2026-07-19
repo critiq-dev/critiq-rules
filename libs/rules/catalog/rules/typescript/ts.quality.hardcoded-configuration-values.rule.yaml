@@ -28,20 +28,6 @@ scope:
       - "**/__mocks__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/e2e/**"
-      - "**/fixtures/**"
-      - "**/mocks/**"
-      - "**/*.mock.*"
-      - "**/*.stories.*"
-      - "**/benchmark/**"
-      - "**/benchmarks/**"
-      - "**/microbenchmarks/**"
-      # JS-engine conformance/stress suites use non-standard dir names not
-      # caught by the generic test globs above (e.g. WebKit's JSTests).
-      - "**/JSTests/**"
-      # Help/documentation text modules embed long descriptive strings that
-      # trip the config-name heuristic without being real configuration.
-      - "**/*.help.ts"
 match:
   fact:
     kind: quality.hardcoded-configuration-values

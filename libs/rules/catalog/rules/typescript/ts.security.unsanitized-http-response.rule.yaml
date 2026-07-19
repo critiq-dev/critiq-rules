@@ -28,10 +28,6 @@ scope:
     - javascript
   paths:
     exclude:
-      - "**/sandbox/**"
-      - "**/tests/setup/**"
-      - "**/tests/smoke/**"
-      - "**/e2e/**"
       - "**/*.test.*"
       - "**/*.spec.*"
       - "**/__tests__/**"
@@ -39,9 +35,7 @@ scope:
       - "**/tests/**"
       - "**/*.d.ts"
       - "**/__generated__/**"
-      - "**/generated/**"
       - "**/__fixtures__/**"
-      - "**/fixtures/**"
       - "**/*.example.*"
 match:
   fact:

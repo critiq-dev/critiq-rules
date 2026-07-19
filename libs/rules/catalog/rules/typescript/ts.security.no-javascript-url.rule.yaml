@@ -35,8 +35,6 @@ scope:
       - "**/__mocks__/**"
       - "**/tests/**"
       - "**/test/**"
-      - "**/.github/actions/**"
-      - "**/types/**/*-tests.*"
 match:
   fact:
     kind: security.javascript-url

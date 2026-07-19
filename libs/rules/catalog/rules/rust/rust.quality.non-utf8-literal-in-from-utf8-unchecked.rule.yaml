@@ -31,9 +31,6 @@ scope:
     exclude:
       - "**/tests/**"
       - "**/test/**"
-      - "**/testdata/**"
-      - "**/examples/**"
-      - "**/benches/**"
       - "**/*_test.rs"
       - "**/*.spec.rs"
 match:

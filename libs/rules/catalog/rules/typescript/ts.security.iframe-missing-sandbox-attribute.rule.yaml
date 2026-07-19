@@ -34,10 +34,6 @@ scope:
   languages:
     - typescript
     - javascript
-  paths:
-    exclude:
-      - "**/DefinitelyTyped/**"
-      - "**/types/**/*-tests.*"
 match:
   fact:
     kind: security.iframe-missing-sandbox-attribute

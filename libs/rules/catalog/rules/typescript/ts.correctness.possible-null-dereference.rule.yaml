@@ -24,15 +24,10 @@ scope:
       - "**/__tests__/**"
       - "**/tests/**"
       - "**/test/**"
-      - "**/e2e/**"
-      - "**/*.stories.*"
       - "**/*.generated.*"
-      - "**/generated/**"
       - "**/__generated__/**"
       - "**/vendor/**"
       - "**/node_modules/**"
-      - "**/scripts/**"
-      - "**/fixtures/**"
 match:
   fact:
     kind: data-flow.possible-null-dereference

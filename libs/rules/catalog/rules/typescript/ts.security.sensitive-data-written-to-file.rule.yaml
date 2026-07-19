@@ -33,9 +33,6 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      - "**/scripts/**"
-      - "**/deprecated-packages/**"
-      - "**/benchmarks/**"
 match:
   fact:
     kind: security.sensitive-data-written-to-file

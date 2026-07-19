@@ -24,31 +24,14 @@ scope:
       - "**/__tests__/**"
       - "**/tests/**"
       - "**/test/**"
-      - "**/e2e/**"
       - "**/*.integration.test.*"
       - "**/*.browser.test.*"
       - "**/*.e2e.test.*"
-      # CLI tools, scripts, build tooling, and one-shot setup code run as
-      # short-lived processes with no served request/event-loop hot path.
-      # Synchronous fs/exec calls there are idiomatic and stall nothing that
-      # serves concurrent traffic, so they are the dominant false-positive class.
-      - "**/scripts/**"
-      - "**/script/**"
-      - "**/bin/**"
-      - "**/cli/**"
-      - "**/cli.*"
       - "**/*-cli.*"
       - "**/*.cli.*"
-      - "**/tools/**"
-      - "**/build/**"
       - "**/*.config.*"
-      - "**/seed/**"
       - "**/seeds/**"
-      - "**/seed.*"
-      - "**/seed-*.*"
       - "**/migrations/**"
-      - "**/install.*"
-      - "**/create-*/**"
 match:
   fact:
     kind: async.blocking-call-in-async-flow

@@ -31,7 +31,6 @@ scope:
       - "**/node_modules/**"
       - "**/spec/**"
       - "**/test/**"
-      - "**/features/**"
 match:
   fact:
     kind: ruby.bug-risk.console-output-instead-of-logger

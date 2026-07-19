@@ -41,8 +41,6 @@ scope:
     exclude:
       - "**/tests/**"
       - "**/*_test.rs"
-      - "**/examples/**"
-      - "**/benches/**"
 match:
   fact:
     kind: rust.security.open-redirect

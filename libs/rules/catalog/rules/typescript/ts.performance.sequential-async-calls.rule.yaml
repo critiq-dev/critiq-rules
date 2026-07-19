@@ -24,8 +24,6 @@ scope:
       - "**/__tests__/**"
       - "**/tests/**"
       - "**/test/**"
-      - "**/docs/**"
-      - "**/scripts/**"
 match:
   fact:
     kind: performance.sequential-async-calls

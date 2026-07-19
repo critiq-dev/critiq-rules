@@ -20,15 +20,6 @@ scope:
       - "**/__tests__/**"
       - "**/*.test.*"
       - "**/*.spec.*"
-      # E2E and integration test directories
-      - "**/e2e/**"
-      - "**/e2e-tests/**"
-      # Storybook and demo files
-      - "**/*.stories.*"
-      # Test fixtures and harnesses
-      - "**/fixtures/**"
-      # Database seeding scripts
-      - "**/seed*/**"
 match:
   node:
     kind: CallExpression

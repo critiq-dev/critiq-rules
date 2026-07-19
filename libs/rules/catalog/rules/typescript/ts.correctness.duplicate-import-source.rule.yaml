@@ -23,9 +23,7 @@ scope:
   paths:
     exclude:
       - "**/*.generated.*"
-      - "**/generated/**"
       - "**/__generated__/**"
-      - "**/gen/**"
 match:
   fact:
     kind: language.duplicate-import-source

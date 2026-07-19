@@ -21,10 +21,8 @@ scope:
     include:
       - "**/*.java"
     exclude:
-      - "**/src/test/**"
       - "**/tests/**"
       - "**/*Test.java"
-      - "**/src/testFixtures/**"
 match:
   fact:
     kind: java.correctness.possible-null-access

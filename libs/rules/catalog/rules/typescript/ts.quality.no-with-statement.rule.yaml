@@ -16,9 +16,6 @@ scope:
   languages:
     - typescript
     - javascript
-  paths:
-    exclude:
-      - "**/tests/baselines/**"
 match:
   fact:
     kind: security.with-statement
