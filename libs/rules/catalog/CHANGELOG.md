@@ -1,5 +1,31 @@
 # @critiq/rules
 
+## 0.4.1
+
+### Patch Changes
+
+- 8f4bd4d: Lower `ts.correctness.no-floating-promise-in-function` severity from `high` to `medium`
+
+  Floating promises are a correctness concern (unhandled rejections, race conditions)
+  not a security vulnerability. `high` severity was disproportionate per the severity
+  calibration guide.
+
+  Changes:
+  - Severity: `high` → `medium`
+  - Path exclusions: added `scope.paths.exclude` for `**/tests/baselines/**`, `**/tests/**`, `**/test/**`, `**/*.test.*`, `**/*.spec.*`
+  - Message: improved title, summary, and remediation with actionable guidance (await, return, void, or .catch())
+
+- 8f4bd4d: Lower `ts.performance.unbounded-growth-memory-leak` severity from `high` to `medium`
+
+  Performance/reliability concerns should not be `high` severity per the severity
+  calibration guide. The rule correctly identifies unbounded collection growth but
+  the impact is memory pressure over time, not an active security vulnerability.
+
+  Changes:
+  - Severity: `high` → `medium`
+  - Message: expanded title, summary, and help text with when-to-fix guidance
+  - Spec: updated allSeverities expectation from `high` to `medium`
+
 ## 0.4.0
 
 ### Minor Changes
