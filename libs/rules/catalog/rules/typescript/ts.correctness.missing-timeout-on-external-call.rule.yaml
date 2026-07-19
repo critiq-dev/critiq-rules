@@ -2,10 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.missing-timeout-on-external-call
-  version: v1
+  version: v2
   title: Missing timeout or retry on external call
-  summary: External calls should declare timeout, cancellation, or retry behavior.
-  rationale: Network calls without explicit timeouts can hang indefinitely and make retry or fallback behavior unreliable. Adding retry protection further improves resilience against transient failures.
+  summary: Network calls without timeout, cancellation, or retry configuration may hang indefinitely.
+  rationale: Without an explicit timeout, a network call can block indefinitely until the underlying TCP timeout fires, exhausting connection pools and blocking the event loop in single-threaded runtimes. In serverless environments this can consume billing time until the function hard-timeout is reached. Transient errors without retry logic can cascade into upstream failures under load.
   references:
     - kind: cwe
       id: CWE-16
@@ -24,6 +24,27 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    include:
+      - "**/*.{ts,tsx,js,jsx,mjs,cjs}"
+    exclude:
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/e2e/**"
+      - "**/fixtures/**"
+      - "**/benchmark/**"
+      - "**/benchmarks/**"
+      - "**/perf/**"
+      - "**/node_modules/**"
+      - "**/dist/**"
+      - "**/build/**"
+      - "**/.next/**"
+      - "**/mocks/**"
+      - "**/vendor/**"
+      - "**/generated/**"
 match:
   fact:
     kind: resilience.missing-timeout-on-external-call
@@ -40,4 +61,4 @@ emit:
     title: Configure timeouts and retry protection on external calls
     summary: "`${captures.issue.text}` performs an external call without explicit timeout, cancellation, or retry settings."
   remediation:
-    summary: Add a timeout-bearing config object (e.g., `signal` for `fetch` or `timeout` for axios) and consider wrapping with a retry library (e.g., `p-retry` or `retry`) to handle transient failures.
+    summary: "Pass a timeout-bearing option such as `signal: AbortSignal.timeout(5000)` for `fetch` or `{ timeout: 5000 }` for axios. For Node.js, consider configuring a global dispatcher timeout via `undici.setGlobalDispatcher`. Wrap critical calls with a retry library like `p-retry` or `async-retry` using exponential backoff and jitter."

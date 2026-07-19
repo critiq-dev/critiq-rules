@@ -810,7 +810,6 @@ rules:
   - id: ts.performance.no-large-object-spread-in-loop
     rulePath: ./rules/typescript/ts.performance.no-large-object-spread-in-loop.rule.yaml
     presets:
-      - recommended
       - strict
   - id: ts.performance.no-n-plus-one-await-in-map
     rulePath: ./rules/typescript/ts.performance.no-n-plus-one-await-in-map.rule.yaml

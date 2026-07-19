@@ -2,10 +2,16 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.constructor-return-value
-  version: v1
+  version: v2
   title: Return value in constructor
-  summary: Detects return value in constructor issues in JavaScript and TypeScript source.
-  rationale: Return value in constructor patterns are a common source of bugs and confusing runtime behavior.
+  summary: A `return` with a value inside a class constructor overrides the newly created instance when the value is an object and is silently discarded for primitives, usually signaling a bug.
+  rationale: >-
+    A `return` statement carrying a value inside a class constructor is either
+    silently ignored (for primitive values) or replaces the freshly constructed
+    instance entirely (for object values), overriding `this`. Both outcomes are
+    surprising and typically indicate a mistake, such as logic copied from a
+    factory function or a misplaced early return. Constructors should initialize
+    `this` and let the runtime return the instance.
   aliases:
     - JS-0109
   tags:
@@ -20,6 +26,10 @@ scope:
     - typescript
     - javascript
 match:
+  # The language.constructor-return-value fact is emitted only for return
+  # statements in the constructor's own function scope; returns inside nested
+  # callbacks or arrow functions passed to super()/this._register(...) are not
+  # matched (see critiq-core typescript adapter walkFunctionScope).
   fact:
     kind: language.constructor-return-value
     bind: issue
@@ -32,7 +42,7 @@ emit:
       - correctness
       - language
   message:
-    title: Fix return value in constructor
-    summary: "`${captures.issue.text}` matches ts.correctness.constructor-return-value."
+    title: Return value in constructor
+    summary: "Returning `${captures.issue.text}` from a constructor overrides the newly created instance for object values and is discarded for primitives; this is almost always unintentional."
   remediation:
-    summary: Refactor the code to remove the return value in constructor pattern.
+    summary: Remove the `return` statement and assign to `this` instead, or move object-producing logic into a static factory method.

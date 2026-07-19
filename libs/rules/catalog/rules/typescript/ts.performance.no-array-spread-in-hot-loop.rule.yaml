@@ -2,10 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-array-spread-in-hot-loop
-  version: v1
-  title: Avoid array spread inside hot loops
-  summary: Array spread or repeated concat in loops allocates per iteration and scales poorly.
-  rationale: Array spread or repeated concat in loops allocates per iteration and scales poorly.
+  version: v2
+  title: Array spread or concat inside a loop
+  summary: Spreading an array or calling `.concat()` inside a loop allocates and copies a new array on every iteration, which degrades to quadratic time when the result is accumulated across iterations.
+  rationale: Reassigning a growing array with spread or `.concat()` inside a loop (for example `acc = [...acc, item]` or `acc = acc.concat(item)`) copies every previously collected element on each pass, turning an O(n) traversal into O(n^2). Prefer mutating a single array with `push` or building the result once after the loop.
   tags:
     - performance
     - rules-catalog
@@ -15,6 +15,30 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    # The underlying detector excludes these paths for object-spread but not for
+    # array-spread; excluding them here keeps the two facts consistent and removes
+    # a systematic false-positive class where allocation cost is irrelevant.
+    exclude:
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/e2e/**"
+      - "**/e2e-tests/**"
+      - "**/fixtures/**"
+      - "**/examples/**"
+      - "**/tutorials/**"
+      - "**/*.stories.*"
+      # Generated, vendored, and minified output where hand-tuning does not apply.
+      - "**/*.min.*"
+      - "**/*.bundle.*"
+      - "**/dist/**"
+      - "**/build/**"
+      - "**/vendor/**"
+      - "**/generated/**"
+      - "**/*.generated.*"
 match:
   fact:
     kind: performance.no-array-spread-in-hot-loop
@@ -22,12 +46,18 @@ match:
 emit:
   finding:
     category: performance.allocation
-    severity: high
-    confidence: 0.8
+    # Downgraded high -> medium: corpus review shows most matches are bounded
+    # setup loops, one-time loop-header iterables, or small per-iteration arrays
+    # rather than genuine hot paths. The impactful case (accumulator reassignment)
+    # is real but not consistently high severity.
+    severity: medium
+    # Lowered 0.8 -> 0.7: the detector also flags spreads in the loop header
+    # iterable (evaluated once), which is a known false-positive class.
+    confidence: 0.7
     tags:
       - performance
   message:
-    title: Avoid array spread inside hot loops
-    summary: "`${captures.issue.text}` matches ts.performance.no-array-spread-in-hot-loop."
+    title: Array spread or concat inside a loop
+    summary: "`${captures.issue.text}` spreads or concatenates an array inside a loop, allocating a new array on every iteration."
   remediation:
-    summary: Refactor this path to avoid repeated work in hot execution paths.
+    summary: Push items onto a single array (or build the array once after the loop) instead of spreading or calling `.concat()` on each iteration; if the spread is in the loop's iterable expression, hoist it to a variable outside the loop.

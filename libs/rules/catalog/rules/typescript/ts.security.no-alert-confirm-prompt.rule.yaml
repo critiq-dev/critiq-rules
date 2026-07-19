@@ -2,10 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.no-alert-confirm-prompt
-  version: v1
+  version: v2
   title: Avoid blocking dialog APIs
-  summary: Do not call `alert`, `confirm`, or `prompt` in application code.
-  rationale: Blocking dialogs freeze the UI thread, are easy to abuse for social engineering, and are inappropriate for production UX.
+  summary: Calls to `alert`, `confirm`, or `prompt` as bare functions or on `window`/`globalThis` should not ship in application code.
+  rationale: Blocking dialogs freeze the UI thread and are easy to abuse for social engineering. They are inappropriate for production UX and should be replaced with in-app UI components. Only bare calls and explicit `window.*` / `globalThis.*` references are flagged — method names like `service.confirm()` or `inquirer.prompt()` on custom objects are excluded since they are application-level APIs, not browser dialogs.
   detection:
     kind: pattern
   references:
@@ -25,15 +25,62 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      # Test files — alert/confirm/prompt in test harnesses is benign
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/e2e/**"
+      - "**/e2e-tests/**"
+      # Test fixtures, benchmarks, and harnesses
+      - "**/fixtures/**"
+      - "**/harness/**"
+      - "**/microbenchmarks/**"
+      - "**/JSTests/**"
+      # CLI entrypoints and scripts — inquirer.prompt and similar CLI tools are not browser dialogs
+      - "**/cli/**"
+      - "**/src/commands/**"
+      - "**/scripts/**"
+      - "**/bin/**"
+      # Build tooling and generated code
+      - "**/build/**"
+      - "**/generated/**"
+      - "**/__generated__/**"
+      - "**/*.generated.*"
+      - "**/vendor/**"
+      - "**/node_modules/**"
+      # Legacy bundled/minified assets
+      - "**/assets/js/*-src.js"
+      - "**/dist/**"
+      # Storybook stories
+      - "**/*.stories.*"
 match:
   fact:
     kind: security.alert-confirm-prompt
     bind: issue
+    where:
+      - path: callee
+        in:
+          # Bare global calls
+          - alert
+          - confirm
+          - prompt
+          # Explicit window references
+          - window.alert
+          - window.confirm
+          - window.prompt
+          # Explicit globalThis references
+          - globalThis.alert
+          - globalThis.confirm
+          - globalThis.prompt
 emit:
   finding:
     category: security.ux
-    severity: medium
-    confidence: 0.93
+    severity: low
+    confidence: 0.88
     tags:
       - security
       - ux
@@ -41,5 +88,4 @@ emit:
     title: Avoid blocking dialog APIs
     summary: "`${captures.issue.text}` uses a blocking browser dialog that should not ship in application code."
   remediation:
-    summary: Replace blocking dialogs with in-app UI components or structured notifications.
-
+    summary: Replace `${captures.issue.text}` with an in-app UI component, toast notification, or structured dialog element. If the call is intentional (e.g., debug logging), suppress this finding with an inline comment.

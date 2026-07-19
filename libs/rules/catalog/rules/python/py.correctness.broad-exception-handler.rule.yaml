@@ -2,7 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: py.correctness.broad-exception-handler
-  version: v2
+  version: v3
   title: Avoid overly broad exception handlers
   summary: Catching `Exception` or `BaseException` (including inside a tuple) swallows programming errors like `NameError` or `AttributeError` and makes debugging difficult.
   rationale: |
@@ -26,7 +26,7 @@ emit:
   finding:
     category: correctness.control-flow
     severity: high
-    confidence: 0.95
+    confidence: 0.70
     tags:
       - correctness
       - python

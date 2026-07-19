@@ -2,7 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.unreachable-statement
-  version: v1
+  version: v2
   title: Unreachable code after return or throw
   summary: Statements after terminal exits should be removed or moved before the exit.
   rationale: Dead statements obscure intent and often indicate a refactor that left stale logic behind.
@@ -17,6 +17,16 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__mocks__/**"
+      - "**/*.generated.*"
+      - "**/generated/**"
 match:
   fact:
     kind: control-flow.unreachable-statement
@@ -26,6 +36,14 @@ match:
         in:
           - after-return
           - after-throw
+      # Function declarations are hoisted to the top of their scope, so a
+      # `function foo() {}` appearing after a return/throw is still reachable
+      # and is not dead code. These were 100% false positives across the
+      # corpus (marimo, spinnaker, Baileys, PandaWiki), so exclude any
+      # statement whose text begins with a function declaration. Class
+      # declarations are not hoisted and remain flagged.
+      - path: text
+        matches: '^(?!\s*(?:export\s+)?(?:default\s+)?(?:async\s+)?function\b)'
 emit:
   finding:
     category: correctness.control-flow

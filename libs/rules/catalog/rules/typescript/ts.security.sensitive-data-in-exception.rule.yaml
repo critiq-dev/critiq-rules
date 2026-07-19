@@ -2,7 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.sensitive-data-in-exception
-  version: v2
+  version: v3
   title: Avoid sensitive data in thrown errors
   summary: Exception and rejection payloads constructed from dynamic sensitive values expose secrets or personal data to logs, APM tools, and client responses.
   rationale: Exception payloads often reach logs, APM tools, and client responses with less review than normal business data. Interpolating variables such as user email, session tokens, or secret keys directly into error messages creates an unintended data leak. Plain string literals and static error constant references (e.g. ErrorCode enums, error class constructors) are not flagged because they describe error conditions rather than disclosing actual data values.
@@ -20,21 +20,65 @@ metadata:
     - privacy
     - errors
     - rules-catalog
-  stability: stable
+  stability: experimental
   appliesTo: block
 scope:
   languages:
     - typescript
     - javascript
+  # Test suites, fixtures, examples, docs and generated/vendored bundles throw
+  # with sensitive-sounding literals and identifier names that are never real
+  # data leaks. Excluding them removes a large class of false positives.
+  paths:
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/__mocks__/**"
+      - "**/testdata/**"
+      - "**/fixtures/**"
+      - "**/examples/**"
+      - "**/example/**"
+      - "**/docs/**"
+      - "**/vendor/**"
+      - "**/dist/**"
+      - "**/build/**"
+      - "**/*.min.js"
 match:
   fact:
     kind: security.sensitive-data-in-exception
     bind: issue
+    # The detector emits `sensitiveSignals` sorted by category priority, so the
+    # first element is the strongest signal in the payload. Requiring that
+    # strongest signal to be a concrete data category (PII or a credential/secret
+    # value) suppresses payloads whose only signal is a weak authorization/metadata
+    # word (`auth`, `billing`, `profile`, `support`). In the corpus those weak-only
+    # matches are almost entirely error-class names (e.g. `AuthenticationError`),
+    # OAuth `scope` arguments, config flags, and error constants -- not real value
+    # leaks. Genuine leaks retain a concrete category (`token`, `password`, `email`,
+    # ...) as their strongest signal and are still matched.
+    where:
+      - path: sensitiveSignals.0
+        in:
+          - email
+          - phone
+          - address
+          - dob
+          - ssn
+          - token
+          - jwt
+          - secret
+          - password
+          - session
+          - cookie
+          - card
 emit:
   finding:
     category: security.privacy
-    severity: high
-    confidence: 0.9
+    severity: low
+    confidence: 0.3
     tags:
       - security
       - privacy

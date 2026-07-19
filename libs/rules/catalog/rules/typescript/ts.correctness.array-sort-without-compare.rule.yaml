@@ -2,7 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.array-sort-without-compare
-  version: v1
+  version: v2
   title: Array.sort without compare function
   summary: Provide a compare function when sorting non-string arrays.
   rationale: Default sort coerces elements to strings, which misorders numbers; however default sort is correct for string arrays and this is a code-style hint in most codebases.
@@ -19,10 +19,44 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      # Sort-without-compare is a low-severity code-style hint; sort calls in
+      # test suites, fixtures, and micro-benchmarks are noise (engine test
+      # corpora deliberately exercise `.sort()` behavior).
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/e2e/**"
+      - "**/fixtures/**"
+      - "**/benchmark/**"
+      - "**/benchmarks/**"
+      - "**/microbenchmarks/**"
+      - "**/perf/**"
+      # JS-engine conformance/stress suites use non-standard dir names not
+      # caught by the generic test globs above (WebKit's JSTests, plus the
+      # shared test262/mjsunit corpora vendored by many engine repos).
+      - "**/JSTests/**"
+      - "**/test262/**"
+      - "**/mjsunit/**"
 match:
-  fact:
-    kind: language.array-sort-without-compare
-    bind: issue
+  all:
+    - fact:
+        kind: language.array-sort-without-compare
+        bind: issue
+    # Default sort is correct for string arrays. The detector's type inference
+    # only recognizes explicit `string[]` types and string-literal arrays, so
+    # it misses well-known string-key enumerations (`Object.keys`,
+    # `Object.getOwnPropertyNames`, `Reflect.ownKeys`) whose results are always
+    # strings. Suppress those per-fact to avoid flagging correct sorts.
+    - not:
+        fact:
+          kind: language.array-sort-without-compare
+          where:
+            - path: text
+              matches: 'Object\.keys\(|Object\.getOwnPropertyNames\(|Reflect\.ownKeys\('
 emit:
   finding:
     category: correctness.language

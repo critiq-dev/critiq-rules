@@ -9,9 +9,14 @@ fixtures:
       allRuleIds:
         - ts.react.no-direct-state-mutation
       allSeverities:
-        - high
+        - medium
   - name: allows setState updates
     sourcePath: ./fixtures/ts.react.no-direct-state-mutation/valid.tsx
+    expect:
+      findingCount: 0
+      allRuleIds: []
+  - name: allows constructor state initialization
+    sourcePath: ./fixtures/ts.react.no-direct-state-mutation/valid-constructor-init.tsx
     expect:
       findingCount: 0
       allRuleIds: []

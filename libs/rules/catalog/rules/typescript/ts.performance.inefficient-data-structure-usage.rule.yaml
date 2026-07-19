@@ -2,7 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.inefficient-data-structure-usage
-  version: v1
+  version: v2
   title: Inefficient data structure usage
   summary: Linear membership checks or key projections should be reviewed for more suitable lookup structures.
   rationale: Repeated array scans or `Object.keys(...).includes(...)` patterns are often avoidable with `Set`, `Map`, or direct key checks.
@@ -18,14 +18,40 @@ scope:
     - typescript
     - javascript
 match:
-  fact:
-    kind: performance.inefficient-data-structure-usage
-    bind: issue
+  all:
+    # Base signal: a linear `.includes()`/`.indexOf()` lookup or an
+    # `Object.keys/values/entries(...)` key projection flagged by the adapter.
+    - fact:
+        kind: performance.inefficient-data-structure-usage
+        bind: issue
+    # Precision filter. The adapter cannot distinguish `String.prototype.includes`
+    # (a substring search, e.g. `message.includes('Co-authored-by: ')`) from
+    # `Array.prototype.includes` (a real linear scan). A membership/search test
+    # against a hardcoded string or template literal is almost always either a
+    # string substring search (no better structure exists) or a check against a
+    # tiny constant array (negligible cost) -- neither is improved by a Set/Map.
+    # Keep such a finding only when it is a key-projection antipattern
+    # (`Object.keys/values/entries(...)`), which is genuinely improvable even
+    # with a literal argument. Membership tests with a dynamic (non-literal)
+    # argument -- the cases where swapping to a `Set`/`Map` actually helps --
+    # are always retained.
+    - any:
+        - not:
+            fact:
+              kind: performance.inefficient-data-structure-usage
+              where:
+                - path: text
+                  matches: "\\.(includes|indexOf)\\(\\s*[\"'`]"
+        - fact:
+            kind: performance.inefficient-data-structure-usage
+            where:
+              - path: text
+                matches: "Object\\.(keys|values|entries)"
 emit:
   finding:
     category: performance.algorithmic
-    severity: medium
-    confidence: 0.8
+    severity: low
+    confidence: 0.7
     tags:
       - performance
       - algorithmic

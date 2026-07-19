@@ -2,10 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-large-object-spread-in-loop
-  version: v1
+  version: v2
   title: Avoid object spread inside loops
-  summary: Object spread inside loops creates repeated allocations and can degrade throughput in hot paths.
-  rationale: Object spread inside loops creates repeated allocations and can degrade throughput in hot paths.
+  summary: Spreading an object into a new literal on every loop iteration allocates and copies a fresh object each pass, adding garbage-collection pressure in hot paths.
+  rationale: Each `{ ...obj }` inside a loop body allocates a new object and shallow-copies its source on every iteration. In tight, frequently executed loops this repeated allocation and copying increases garbage-collection pressure and can dominate runtime. Hoisting the invariant parts of the object out of the loop, or updating a single accumulator in place, removes the per-iteration churn.
   tags:
     - performance
     - rules-catalog
@@ -15,6 +15,39 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    # This rule targets hot-path runtime allocation. Object spread is common and
+    # harmless in code that is not on a hot path, so exclude non-runtime and
+    # non-shipped code where the pattern is systematically low value.
+    exclude:
+      # Tests, specs, and integration/e2e suites
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/e2e/**"
+      - "**/e2e-tests/**"
+      - "**/*-tests/**"
+      # Mocks and fixtures (setup data, not runtime hot paths)
+      - "**/__mocks__/**"
+      - "**/mocks/**"
+      - "**/__fixtures__/**"
+      - "**/fixtures/**"
+      # Storybook, examples, demos, and playgrounds
+      - "**/*.stories.*"
+      - "**/examples/**"
+      - "**/demo/**"
+      - "**/demos/**"
+      - "**/playground/**"
+      # Database seeding scripts (one-time setup loops)
+      - "**/seed*/**"
+      - "**/seeds/**"
+      # Build tooling, scripts, and infra (not shipped runtime paths)
+      - "**/scripts/**"
+      - "**/build/**"
+      - "**/infra/**"
+      - "**/tools/**"
 match:
   fact:
     kind: performance.no-large-object-spread-in-loop
@@ -23,11 +56,11 @@ emit:
   finding:
     category: performance.allocation
     severity: low
-    confidence: 0.8
+    confidence: 0.5
     tags:
       - performance
   message:
     title: Avoid object spread inside loops
-    summary: "`${captures.issue.text}` matches ts.performance.no-large-object-spread-in-loop."
+    summary: This object spread runs on every loop iteration, allocating and copying a new object each pass.
   remediation:
-    summary: Refactor this path to avoid repeated work in hot execution paths.
+    summary: Hoist the invariant parts of the object out of the loop, or update a single object in place instead of spreading a new copy on each iteration.

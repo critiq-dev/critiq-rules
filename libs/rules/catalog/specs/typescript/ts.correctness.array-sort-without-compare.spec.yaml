@@ -15,3 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: allows sorting string-key enumerations
+    sourcePath: ./fixtures/ts.correctness.array-sort-without-compare/valid-string-keys.ts
+    expect:
+      findingCount: 0
+      allRuleIds: []

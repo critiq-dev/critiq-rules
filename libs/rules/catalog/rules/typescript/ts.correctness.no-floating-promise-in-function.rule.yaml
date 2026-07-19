@@ -2,7 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.no-floating-promise-in-function
-  version: v1
+  version: v2
   title: Floating promise not handled
   summary: Promise-returning calls at statement level should be awaited, returned, voided, or rejection-handled.
   rationale: Unhandled floating promises can lead to unhandled rejections, race conditions, and silent failures. In web servers (request handlers) this is almost always a bug; in CLI tools and installers, fire-and-forget patterns may be intentional but should still be reviewed.
@@ -22,6 +22,33 @@ scope:
       - "**/test/**"
       - "**/*.test.*"
       - "**/*.spec.*"
+      # JS-engine conformance and stress suites: statement-level promise calls
+      # (e.g. `Promise.all(array);`, `shouldBeAsync(...)`) are deliberate test
+      # scaffolding, not application bugs.
+      - "**/JSTests/**"
+      - "**/test262/**"
+      - "**/mjsunit/**"
+      # Benchmark harnesses fire promises without handling by design.
+      - "**/microbenchmark/**"
+      - "**/microbenchmarks/**"
+      - "**/benchmark/**"
+      - "**/benchmarks/**"
+      # Build tooling and CLI entry scripts where top-level fire-and-forget
+      # `main()` / `run()` is the idiomatic module bootstrap.
+      - "**/scripts/**"
+      - "**/script/**"
+      - "**/build/**"
+      - "**/*.config.*"
+      - "**/*.esbuild.*"
+      - "**/postinstall.*"
+      # Mock data, fixtures, examples, and demos are throwaway scaffolding.
+      - "**/mocks/**"
+      - "**/mock/**"
+      - "**/fixtures/**"
+      - "**/examples/**"
+      - "**/example/**"
+      - "**/demo/**"
+      - "**/demos/**"
 match:
   fact:
     kind: async.floating-promise-in-function
@@ -29,8 +56,8 @@ match:
 emit:
   finding:
     category: correctness
-    severity: medium
-    confidence: 0.85
+    severity: low
+    confidence: 0.6
     tags:
       - correctness
   message:

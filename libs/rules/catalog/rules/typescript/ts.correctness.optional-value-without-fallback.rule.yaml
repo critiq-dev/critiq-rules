@@ -2,10 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.optional-value-without-fallback
-  version: v1
+  version: v2
   title: Optional value used without fallback
-  summary: Optional values should be normalized before arithmetic, concatenation, or other direct use.
-  rationale: Using maybe-undefined values in ordinary expressions bakes uncertainty into the result and can fail or stringify unexpectedly at runtime.
+  summary: An expression uses a value that may be undefined without a guard or nullish coalescing fallback, risking NaN or unexpected stringification at runtime.
+  rationale: Using maybe-undefined values in arithmetic, concatenation, or relational comparisons propagates uncertainty into the result. Arithmetic produces NaN, string concatenation yields "undefined" literals, and relational comparisons return false — each silently diverging from developer intent.
   tags:
     - correctness
     - "null"
@@ -17,6 +17,15 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/__tests__/**"
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/testdata/**"
+      - "**/fixtures/**"
 match:
   fact:
     kind: data-flow.optional-value-without-fallback
@@ -24,13 +33,14 @@ match:
 emit:
   finding:
     category: correctness.null
-    severity: medium
-    confidence: 0.8
+    severity: low
+    confidence: 0.55
     tags:
       - correctness
       - "null"
   message:
     title: Normalize optional values before using them
-    summary: "`${captures.issue.text}` uses a maybe-missing value without a fallback."
+    summary: "`${captures.issue.text}` uses a maybe-missing value. Verify that a null guard or fallback is in place."
   remediation:
-    summary: Add `??`, `||`, or an explicit guard so the expression always receives a defined value.
+    summary: Add `??`, `||`, or an explicit guard so the expression always receives a defined value. This check operates per-expression and may not detect guards in sibling expressions.
+

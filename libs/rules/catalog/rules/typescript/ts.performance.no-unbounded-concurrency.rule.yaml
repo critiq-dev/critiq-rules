@@ -2,10 +2,15 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.performance.no-unbounded-concurrency
-  version: v1
+  version: v2
   title: Avoid unbounded concurrency fan-out
-  summary: Unbounded Promise fan-out over unknown input can exhaust downstream capacity.
-  rationale: Unbounded Promise fan-out over unknown input can exhaust downstream capacity.
+  summary: Passing a mapped collection to `Promise.all` starts one async task per element with no concurrency limit, which can exhaust downstream capacity when the collection is large.
+  rationale: >-
+    `Promise.all(collection.map(async ...))` launches every async operation at
+    once. When the collection is large or externally sized, this can open
+    hundreds of database connections, sockets, or file handles simultaneously
+    and overwhelm the downstream service. Bounding concurrency with a limiter or
+    by processing in batches keeps resource usage predictable.
   tags:
     - performance
     - rules-catalog
@@ -15,6 +20,34 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    # Build-time, seed, and tooling code runs once and is not a production hot
+    # path, so unbounded concurrency there does not exhaust runtime capacity.
+    exclude:
+      - "**/build/**"
+      - "**/scripts/**"
+      - "**/script/**"
+      - "**/infra/**"
+      - "**/tools/**"
+      - "**/seed/**"
+      - "**/seeds/**"
+      - "**/docs/**"
+      - "**/*.config.js"
+      - "**/*.config.ts"
+      - "**/*.config.mjs"
+      - "**/*.config.cjs"
+      # Test and fixture code is not a production execution path.
+      - "**/__tests__/**"
+      - "**/*.test.ts"
+      - "**/*.test.tsx"
+      - "**/*.test.js"
+      - "**/*.test.jsx"
+      - "**/*.spec.ts"
+      - "**/*.spec.tsx"
+      - "**/*.spec.js"
+      - "**/*.spec.jsx"
+      - "**/e2e/**"
+      - "**/fixtures/**"
 match:
   fact:
     kind: performance.no-unbounded-concurrency
@@ -22,12 +55,17 @@ match:
 emit:
   finding:
     category: performance.async
-    severity: high
-    confidence: 0.8
+    # Downgraded from high: unbounded Promise.all fan-out is a real scaling
+    # concern but degrades latency/throughput rather than causing crashes, data
+    # loss, or security issues, and many flagged instances iterate bounded or
+    # in-memory collections. Confidence lowered because the detector cannot
+    # verify that the collection is unbounded or that each task performs I/O.
+    severity: medium
+    confidence: 0.6
     tags:
       - performance
   message:
-    title: Avoid unbounded concurrency fan-out
-    summary: "`${captures.issue.text}` matches ts.performance.no-unbounded-concurrency."
+    title: Unbounded `Promise.all` fan-out over a mapped collection
+    summary: "`${captures.issue.text}` launches one async operation per element with no concurrency limit; a large or externally-sized collection can exhaust database connections, sockets, or file handles."
   remediation:
-    summary: Refactor this path to avoid repeated work in hot execution paths.
+    summary: Bound concurrency with a limiter such as `p-limit`, or process the collection in fixed-size batches, instead of awaiting one task per element simultaneously.

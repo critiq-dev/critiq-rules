@@ -11,9 +11,9 @@ fixtures:
         - ts.security.information-leakage
         - ts.security.information-leakage
       allSeverities:
-        - high
-        - high
-        - high
+        - medium
+        - medium
+        - medium
   - name: ignores redacted or explicitly dev-only disclosure helpers
     sourcePath: ./fixtures/public-security/information-leakage.valid.ts
     expect:

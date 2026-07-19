@@ -15,3 +15,8 @@ fixtures:
     expect:
       findingCount: 0
       allRuleIds: []
+  - name: ignores plain assignment with await
+    observationPath: ./fixtures/ts.correctness.compound-assignment-with-await/simple-assignment.observation.json
+    expect:
+      findingCount: 0
+      allRuleIds: []

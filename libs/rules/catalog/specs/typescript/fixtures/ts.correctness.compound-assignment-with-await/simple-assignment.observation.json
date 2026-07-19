@@ -1,7 +1,7 @@
 {
   "path": "src/sample.ts",
   "language": "typescript",
-  "text": "export const bad = /* compound-assignment-with-await */ 1;",
+  "text": "json = await response.json();",
   "nodes": [],
   "semantics": {
     "controlFlow": {
@@ -17,11 +17,11 @@
             "startLine": 1,
             "startColumn": 1,
             "endLine": 1,
-            "endColumn": 58
+            "endColumn": 30
           },
-          "text": "total += await next();",
+          "text": "json = await response.json()",
           "props": {
-            "operator": "+="
+            "operator": "="
           }
         }
       ]

@@ -2,7 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.security.information-leakage
-  version: v1
+  version: v2
   title: Avoid leaking sensitive or diagnostic state
   summary: Logs, stdout or stderr, and direct response sinks should not expose sensitive fields or internal diagnostic detail.
   rationale: Stack traces, request metadata, auth or session objects, and environment state are often leaked through "temporary" debugging output that later reaches production paths.
@@ -48,6 +48,22 @@ scope:
       - "**/*.seed.*"
       # Build and utility scripts
       - "**/scripts/**"
+      # Example and demo apps — diagnostic logging to stdout is expected here
+      - "**/example/**"
+      - "**/examples/**"
+      - "**/demo/**"
+      - "**/demos/**"
+      # Benchmark harnesses — verbose diagnostic output is intentional
+      - "**/benchmark/**"
+      - "**/benchmarks/**"
+      - "**/bench/**"
+      # Mocks and playgrounds — non-production scaffolding
+      - "**/mocks/**"
+      - "**/__mocks__/**"
+      - "**/playground/**"
+      - "**/sandbox/**"
+      # Archived or deprecated code paths no longer shipped to production
+      - "**/archive/**"
 match:
   fact:
     kind: security.information-leakage
@@ -55,8 +71,8 @@ match:
 emit:
   finding:
     category: security.privacy
-    severity: high
-    confidence: 0.9
+    severity: medium
+    confidence: 0.6
     tags:
       - security
       - privacy

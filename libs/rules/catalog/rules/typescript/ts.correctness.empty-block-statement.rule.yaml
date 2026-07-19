@@ -2,7 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.empty-block-statement
-  version: v2
+  version: v3
   title: Empty block statement
   summary: A control-flow or try/catch branch uses an empty `{}` block with no explanatory comment.
   rationale: Empty blocks without a comment hide missing logic, swallowed errors, or incomplete refactors. An explanatory comment signals intent and distinguishes deliberate no-ops from accidental omissions. Empty function bodies such as `() => {}` are excluded since they are common stub patterns.
@@ -19,6 +19,27 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    # Empty blocks inside test corpora, conformance suites, and benchmarks are
+    # overwhelmingly intentional (expected-throw `try/catch`, empty timing loops)
+    # rather than swallowed errors or missing logic. The runtime already ignores
+    # lowercase test dirs (test/, tests/, spec/, __tests__/); these excludes cover
+    # the PascalCase/camelCase test-corpus and benchmark conventions it misses
+    # (e.g. WebKit's JSTests/, engine LayoutTests/, benchmark harnesses).
+    exclude:
+      - "**/*Tests/**"
+      - "**/*Test/**"
+      - "**/benchmark/**"
+      - "**/benchmarks/**"
+      - "**/microbenchmarks/**"
+      - "**/slowMicrobenchmarks/**"
+      - "**/*.bench.js"
+      - "**/*.bench.ts"
+      - "**/test262/**"
+      - "**/fixtures/**"
+      - "**/__fixtures__/**"
+      - "**/testdata/**"
+      - "**/*.min.js"
 match:
   fact:
     kind: language.empty-block-statement

@@ -2,10 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.react.no-direct-state-mutation
-  version: v2
-  title: Do not mutate React state directly
-  summary: Direct assignment to `this.state` or its properties bypasses React change detection, leaving the UI out of sync with the underlying data.
-  rationale: State mutations must flow through `setState` or hook updaters so React can schedule renders and enforce immutability guarantees. Assigning directly to `this.state` or its properties circumvents the component lifecycle, preventing React from detecting the change and re-rendering. This causes bugs where the UI silently diverges from the component's actual data state.
+  version: v3
+  title: Direct React state property mutation
+  summary: Assigning to a `this.state` property bypasses React change detection, leaving the rendered UI out of sync with the component's data.
+  rationale: React tracks state changes through `setState` and hook updaters so it can schedule re-renders. Assigning directly to a property of `this.state` updates the underlying data without notifying React, so the component keeps rendering stale values until an unrelated update happens to flush the change. This produces bugs where the UI silently diverges from the component's actual state. Initialize state immutably and route every subsequent change through `setState`.
   aliases:
     - JS-0444
   tags:
@@ -22,16 +22,23 @@ match:
   fact:
     kind: ui.react.direct-state-mutation
     bind: issue
+    # Only flag property mutations (`this.state.x = ...`). Whole-object
+    # assignments (`this.state = {...}`) are the standard, correct way to
+    # initialize state in a class constructor and were 100% false positives
+    # across the corpus, so they are excluded here.
+    where:
+      - path: text
+        matches: '^this\.state\.'
 emit:
   finding:
     category: correctness.ui
-    severity: high
-    confidence: 0.88
+    severity: medium
+    confidence: 0.9
     tags:
       - react
       - ui
   message:
-    title: Update React state with setState
-    summary: "`${captures.issue.text}` mutates state directly."
+    title: Update state with setState
+    summary: "`${captures.issue.text}` mutates a state property directly."
   remediation:
-    summary: Call setState with the next value or replace the state object immutably instead of assigning into this.state.
+    summary: Call this.setState with the next value (or a hook updater) instead of assigning into this.state.

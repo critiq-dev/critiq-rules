@@ -2,10 +2,10 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.correctness.compound-assignment-with-await
-  version: v1
-  title: Compound assignment with await
-  summary: Detects compound assignment with await issues in JavaScript and TypeScript source.
-  rationale: Compound assignment with await patterns are a common source of bugs and confusing runtime behavior.
+  version: v2
+  title: Compound assignment awaiting its value
+  summary: A compound assignment (`+=`, `??=`, ...) whose right-hand side awaits reads the target before suspension and writes it after, so concurrent updates during the await can be lost.
+  rationale: "Operators like `total += await next()` perform a read-modify-write: the current value is captured, execution suspends at the await, and the sum is written back when it resumes. If another task mutates the same variable during suspension, that update is silently overwritten. Compute the awaited value into a temporary first, then apply the compound operation."
   aliases:
     - JS-0040
   tags:
@@ -23,16 +23,41 @@ match:
   fact:
     kind: language.compound-assignment-with-await
     bind: issue
+    # Restrict to genuinely compound assignment operators. The core adapter also
+    # emits this fact for plain `=` self-referencing assignments, where the
+    # detected "self reference" is frequently just a member/property name that
+    # happens to match the target variable (e.g. `json = await response.json()`,
+    # `session = await prisma.session.update(...)`, `x = (await f()).x`). Those
+    # are false positives. A compound operator is an unambiguous
+    # read-modify-write across the await boundary.
+    where:
+      - path: operator
+        in:
+          - "+="
+          - "-="
+          - "*="
+          - "/="
+          - "%="
+          - "**="
+          - "<<="
+          - ">>="
+          - ">>>="
+          - "&="
+          - "|="
+          - "^="
+          - "&&="
+          - "||="
+          - "??="
 emit:
   finding:
     category: correctness.language
-    severity: high
+    severity: medium
     confidence: 0.85
     tags:
       - correctness
       - language
   message:
-    title: Fix compound assignment with await
-    summary: "`${captures.issue.text}` matches ts.correctness.compound-assignment-with-await."
+    title: Avoid read-modify-write across an await boundary
+    summary: "`${captures.issue.text}` reads the target, suspends at the await, then writes back, so a concurrent update can be lost."
   remediation:
-    summary: Refactor the code to remove the compound assignment with await pattern.
+    summary: Await the right-hand side into a temporary variable first, then apply the compound assignment using that value.

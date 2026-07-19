@@ -2,7 +2,7 @@ apiVersion: critiq.dev/v1alpha1
 kind: Rule
 metadata:
   id: ts.quality.hardcoded-configuration-values
-  version: v1
+  version: v2
   title: Hardcoded configuration values
   summary: Config-like values should usually come from configuration sources rather than source literals.
   rationale: Hardcoded service URLs, timeouts, and regions make deployments harder to vary and review safely.
@@ -17,10 +17,45 @@ scope:
   languages:
     - typescript
     - javascript
+  paths:
+    exclude:
+      # The detector keys off config-like identifier names, so literals in test
+      # suites, mock/seed data, fixtures, stories, benchmarks, and help/i18n
+      # text are noise rather than real deployment configuration.
+      - "**/test/**"
+      - "**/tests/**"
+      - "**/__tests__/**"
+      - "**/__mocks__/**"
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/e2e/**"
+      - "**/fixtures/**"
+      - "**/mocks/**"
+      - "**/*.mock.*"
+      - "**/*.stories.*"
+      - "**/benchmark/**"
+      - "**/benchmarks/**"
+      - "**/microbenchmarks/**"
+      # JS-engine conformance/stress suites use non-standard dir names not
+      # caught by the generic test globs above (e.g. WebKit's JSTests).
+      - "**/JSTests/**"
+      # Help/documentation text modules embed long descriptive strings that
+      # trip the config-name heuristic without being real configuration.
+      - "**/*.help.ts"
 match:
   fact:
     kind: quality.hardcoded-configuration-values
     bind: issue
+    # The underlying detector flags any top-level literal whose binding name
+    # contains a config-like token (url, port, service, host, region, ...).
+    # That over-matches action-type constants, i18n keys, DI service names,
+    # type-name constants, and generic magic numbers. Restrict emission to
+    # values that actually look like externalizable deployment configuration:
+    # URIs (any scheme), IPv4 addresses, localhost, www hosts, cloud regions,
+    # and bare network hostnames ending in a common public/internal TLD.
+    where:
+      - path: text
+        matches: '([a-zA-Z][a-zA-Z0-9+.-]*://)|(\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b)|(\blocalhost\b)|(\bwww\.)|(\b(us|eu|ap|sa|ca|me|af)-(east|west|north|south|central|northeast|southeast|southwest|northwest)-\d\b)|((?:[a-z0-9-]+\.)+(com|net|org|io|dev|cloud|ai|sh|app|co|edu|gov|info|cn|uk|eu|internal|local)(?![A-Za-z0-9-]))'
 emit:
   finding:
     category: quality.configuration
